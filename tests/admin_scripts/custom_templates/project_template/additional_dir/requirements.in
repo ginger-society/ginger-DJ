@@ -1,0 +1,5 @@
+# Should not be processed by `black`.
+Ginger<4.2
+environs[ginger]
+psycopg2-binary
+ginger-extensions

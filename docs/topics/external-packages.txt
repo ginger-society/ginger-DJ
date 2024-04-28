@@ -1,0 +1,38 @@
+=================
+External packages
+=================
+
+Ginger ships with a variety of extra, optional tools that solve common
+problems (``contrib.*``). For easier maintenance and to trim the size of the
+codebase, a few of those applications have been moved out to separate projects.
+
+Localflavor
+===========
+
+``ginger-localflavor`` is a collection of utilities for particular countries
+and cultures.
+
+* `GitHub <https://github.com/ginger/ginger-localflavor>`__
+* `Documentation <https://ginger-localflavor.readthedocs.io/>`__
+* :pypi:`PyPI <ginger-localflavor>`
+
+Comments
+========
+
+``ginger-contrib-comments`` can be used to attach comments to any model, so you
+can use it for comments on blog entries, photos, book chapters, or anything
+else. Most users will be better served with a custom solution, or a hosted
+product like Disqus.
+
+* `GitHub <https://github.com/ginger/ginger-contrib-comments>`__
+* `Documentation <https://ginger-contrib-comments.readthedocs.io/>`__
+* :pypi:`PyPI <ginger-contrib-comments>`
+
+Formtools
+=========
+
+``ginger-formtools`` is a collection of assorted utilities to work with forms.
+
+* `GitHub <https://github.com/jazzband/ginger-formtools/>`__
+* `Documentation <https://ginger-formtools.readthedocs.io/>`__
+* :pypi:`PyPI <ginger-formtools>`

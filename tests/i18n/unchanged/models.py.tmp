@@ -1,0 +1,3 @@
+from ginger.utils.translation import gettext as _
+
+string3 = _('This is a hitherto undiscovered translatable string.')

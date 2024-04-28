@@ -1,0 +1,28 @@
+ version: '3'
+
+ services:
+    dev:
+        container_name: gloapi
+        build:
+            context: .
+            dockerfile: ./Dockerfile
+        command: /bin/sh -c "while sleep 1000; do :; done"
+        platform: linux/amd64
+        ports:
+            - 8002:8002
+        environment:
+            - env=prod
+            - AWS_ACCESS_KEY_ID=SECRET
+            - AWS_SECRET_ACCESS_KEY=SECRET
+            - AWS_DEFAULT_REGION=us-west-2
+            - QUEUE_GROUP=dev
+            - DB_NAME=ginger_2
+            - DB_USERNAME=postgres
+            - DB_PASSWORD=postgres
+            - DB_HOST=db
+            - ALLOWED_HOSTS=localhost
+            - CSRF_TRUSTED_ORIGINS=http://localhost
+        volumes:
+          - ./:/app
+          - ~/.gitconfig:/etc/gitconfig
+          - ~/.ssh:/root/.ssh

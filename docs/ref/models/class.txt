@@ -1,0 +1,64 @@
+=====================
+Model class reference
+=====================
+
+.. currentmodule:: ginger.db.models
+
+This document covers features of the :class:`~ginger.db.models.Model` class.
+For more information about models, see :doc:`the complete list of Model
+reference guides </ref/models/index>`.
+
+Attributes
+==========
+
+``DoesNotExist``
+----------------
+
+.. exception:: Model.DoesNotExist
+
+    This exception is raised by the ORM when an expected object is not found.
+    For example, :meth:`.QuerySet.get` will raise it when no object is found
+    for the given lookups.
+
+    Ginger provides a ``DoesNotExist`` exception as an attribute of each model
+    class to identify the class of object that could not be found, allowing you
+    to catch exceptions for a particular model class. The exception is a
+    subclass of :exc:`ginger.core.exceptions.ObjectDoesNotExist`.
+
+``MultipleObjectsReturned``
+---------------------------
+
+.. exception:: Model.MultipleObjectsReturned
+
+    This exception is raised by :meth:`.QuerySet.get` when multiple objects are
+    found for the given lookups.
+
+    Ginger provides a ``MultipleObjectsReturned`` exception as an attribute of
+    each model class to identify the class of object for which multiple objects
+    were found, allowing you to catch exceptions for a particular model class.
+    The exception is a subclass of
+    :exc:`ginger.core.exceptions.MultipleObjectsReturned`.
+
+``objects``
+-----------
+
+.. attribute:: Model.objects
+
+    Each non-abstract :class:`~ginger.db.models.Model` class must have a
+    :class:`~ginger.db.models.Manager` instance added to it.
+    Ginger ensures that in your model class you have  at least a
+    default ``Manager`` specified. If you don't add your own ``Manager``,
+    Ginger will add an attribute ``objects`` containing default
+    :class:`~ginger.db.models.Manager` instance. If you add your own
+    :class:`~ginger.db.models.Manager` instance attribute, the default one does
+    not appear. Consider the following example::
+
+        from ginger.db import models
+
+
+        class Person(models.Model):
+            # Add manager with another name
+            people = models.Manager()
+
+    For more details on model managers see :doc:`Managers </topics/db/managers>`
+    and :ref:`Retrieving objects <retrieving-objects>`.

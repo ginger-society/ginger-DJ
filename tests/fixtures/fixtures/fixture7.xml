@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ginger-objects version="1.0">
+    <object pk="2" model="fixtures.tag">
+        <field type="CharField" name="name">legal</field>
+        <field type="PositiveIntegerField" name="tagged_id">3</field>
+    </object>
+    <object pk="3" model="fixtures.tag">
+        <field type="CharField" name="name">ginger</field>
+        <field type="PositiveIntegerField" name="tagged_id">4</field>
+    </object>
+    <object pk="4" model="fixtures.tag">
+        <field type="CharField" name="name">world domination</field>
+        <field type="PositiveIntegerField" name="tagged_id">4</field>
+    </object>
+</ginger-objects>

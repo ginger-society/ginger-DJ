@@ -1,0 +1,18 @@
+================
+Ginger internals
+================
+
+Documentation for people hacking on Ginger itself. This is the place to go if
+you'd like to help improve Ginger or learn about how Ginger is managed.
+
+.. toctree::
+   :maxdepth: 2
+
+   contributing/index
+   mailing-lists
+   organization
+   security
+   release-process
+   deprecation
+   git
+   howto-release-ginger
