@@ -1,12 +1,3 @@
-"""
-A set of request processors that return dictionaries to be merged into a
-template context. Each function takes the request object as its only parameter
-and returns a dictionary to add to the context.
-
-These are referenced from the 'context_processors' option of the configuration
-of a GingerTemplates backend and used by RequestContext.
-"""
-
 import itertools
 
 from ginger.conf import settings
@@ -55,7 +46,7 @@ def debug(request):
     return context_extras
 
 
-def i18n(request):
+def i18n():
     from ginger.utils import translation
 
     return {
@@ -65,7 +56,7 @@ def i18n(request):
     }
 
 
-def tz(request):
+def tz():
     """
     Timezone context processor.
     """
@@ -74,7 +65,7 @@ def tz(request):
     return {"TIME_ZONE": timezone.get_current_timezone_name()}
 
 
-def static(request):
+def static():
     """
     Add static-related context variables to the context.
     """

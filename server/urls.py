@@ -21,4 +21,5 @@ from src.views import *
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('test/', test_view),
+    path('test2/', test_view2),
 ]

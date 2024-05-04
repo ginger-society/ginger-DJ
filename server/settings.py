@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'ginger.contrib.admin',
     'ginger.contrib.messages',
     'ginger.contrib.staticfiles',
+    'ginger.rest_framework',
     'src'
 ]
 
