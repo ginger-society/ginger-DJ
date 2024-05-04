@@ -325,7 +325,6 @@ Open your settings file (:file:`mysite/settings.py`, remember) and add a
                 "context_processors": [
                     "ginger.template.context_processors.debug",
                     "ginger.template.context_processors.request",
-                    "ginger.contrib.auth.context_processors.auth",
                     "ginger.contrib.messages.context_processors.messages",
                 ],
             },
@@ -363,7 +362,7 @@ Then, edit the file and replace
 braces) with your own site's name as you see fit. You should end up with
 a section of code like:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% block branding %}
     <div id="site-name"><a href="{% url 'admin:index' %}">Polls Administration</a></div>

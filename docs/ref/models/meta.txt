@@ -46,11 +46,11 @@ Retrieving a single field instance of a model by name
 
     .. code-block:: pycon
 
-        >>> from ginger.contrib.auth.models import User
+        >>> from app.models import Model
 
         # A field on the model
-        >>> User._meta.get_field("username")
-        <ginger.db.models.fields.CharField: username>
+        >>> Model._meta.get_field("field")
+        <app.models.Model: field>
 
         # A field from another model that has a relation with the current model
         >>> User._meta.get_field("logentry")
@@ -81,28 +81,9 @@ Retrieving all field instances of a model
         ``False`` by default. If set to ``True``, ``get_fields()`` will include
         :attr:`hidden fields <ginger.db.models.Field.hidden>`.
 
-    .. code-block:: pycon
-
-        >>> from ginger.contrib.auth.models import User
-        >>> User._meta.get_fields()
-        (<ManyToOneRel: admin.logentry>,
-         <ginger.db.models.fields.AutoField: id>,
-         <ginger.db.models.fields.CharField: password>,
-         <ginger.db.models.fields.DateTimeField: last_login>,
-         <ginger.db.models.fields.BooleanField: is_superuser>,
-         <ginger.db.models.fields.CharField: username>,
-         <ginger.db.models.fields.CharField: first_name>,
-         <ginger.db.models.fields.CharField: last_name>,
-         <ginger.db.models.fields.EmailField: email>,
-         <ginger.db.models.fields.BooleanField: is_staff>,
-         <ginger.db.models.fields.BooleanField: is_active>,
-         <ginger.db.models.fields.DateTimeField: date_joined>,
-         <ginger.db.models.fields.related.ManyToManyField: groups>,
-         <ginger.db.models.fields.related.ManyToManyField: user_permissions>)
-
         # Also include hidden fields.
         >>> User._meta.get_fields(include_hidden=True)
-        (<ManyToOneRel: auth.user_groups>,
+         (<ManyToOneRel: auth.user_groups>,
          <ManyToOneRel: auth.user_user_permissions>,
          <ManyToOneRel: admin.logentry>,
          <ginger.db.models.fields.AutoField: id>,

@@ -43,7 +43,7 @@ template is evaluated, and **tags**, which control the logic of the template.
 Below is a minimal template that illustrates a few basics. Each element will be
 explained later in this document.
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% extends "base_generic.html" %}
 
@@ -100,7 +100,7 @@ Use a dot (``.``) to access attributes of a variable.
     override dictionary lookup. For example, consider the following code snippet
     that attempts to loop over a ``collections.defaultdict``:
 
-    .. code-block:: html+ginger
+    .. code-block:: html+django
 
         {% for k, v in defaultdict.items %}
             Do something with k and v here...
@@ -153,7 +153,7 @@ used template filters:
     If a variable is false or empty, use given default. Otherwise, use the
     value of the variable. For example:
 
-    .. code-block:: html+ginger
+    .. code-block:: html+django
 
         {{ value|default:"nothing" }}
 
@@ -164,7 +164,7 @@ used template filters:
     Returns the length of the value. This works for both strings and lists.
     For example:
 
-    .. code-block:: html+ginger
+    .. code-block:: html+django
 
         {{ value|length }}
 
@@ -174,7 +174,7 @@ used template filters:
     Formats the value like a "human-readable" file size (i.e. ``'13 KB'``,
     ``'4.1 MB'``, ``'102 bytes'``, etc.). For example:
 
-    .. code-block:: html+ginger
+    .. code-block:: html+django
 
         {{ value|filesizeformat }}
 
@@ -211,7 +211,7 @@ tags:
     Loop over each item in an array.  For example, to display a list of athletes
     provided in ``athlete_list``:
 
-    .. code-block:: html+ginger
+    .. code-block:: html+django
 
         <ul>
         {% for athlete in athlete_list %}
@@ -223,7 +223,7 @@ tags:
     Evaluates a variable, and if that variable is "true" the contents of the
     block are displayed:
 
-    .. code-block:: html+ginger
+    .. code-block:: html+django
 
         {% if athlete_list %}
             Number of athletes: {{ athlete_list|length }}
@@ -241,7 +241,7 @@ tags:
 
     You can also use filters and various operators in the :ttag:`if` tag:
 
-    .. code-block:: html+ginger
+    .. code-block:: html+django
 
         {% if athlete_list|length > 1 %}
            Team: {% for athlete in athlete_list %} ... {% endfor %}
@@ -278,13 +278,13 @@ To comment-out part of a line in a template, use the comment syntax: ``{# #}``.
 
 For example, this template would render as ``'hello'``:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {# greeting #}hello
 
 A comment can contain any template code, invalid or not. For example:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {# {% if foo %}bar{% else %} #}
 
@@ -304,7 +304,7 @@ defines **blocks** that child templates can override.
 
 Let's look at template inheritance by starting with an example:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     <!DOCTYPE html>
     <html lang="en">
@@ -339,7 +339,7 @@ engine that a child template may override those portions of the template.
 
 A child template might look like this:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% extends "base.html" %}
 
@@ -361,7 +361,7 @@ in ``base.html`` and replace those blocks with the contents of the child
 template. Depending on the value of ``blog_entries``, the output might look
 like:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     <!DOCTYPE html>
     <html lang="en">
@@ -440,7 +440,7 @@ Here are some tips for working with inheritance:
   tag ``as`` syntax can't be used inside the block. For example, this template
   doesn't render anything:
 
-  .. code-block:: html+ginger
+  .. code-block:: html+django
 
       {% translate "Title" as title %}
       {% block content %}{{ title }}{% endblock %}
@@ -448,7 +448,7 @@ Here are some tips for working with inheritance:
 * For extra readability, you can optionally give a *name* to your
   ``{% endblock %}`` tag. For example:
 
-  .. code-block:: html+ginger
+  .. code-block:: html+django
 
       {% block content %}
       ...
@@ -462,7 +462,7 @@ Here are some tips for working with inheritance:
   tags. For example, this template will *always* override the content of the
   ``title`` block:
 
-  .. code-block:: html+ginger
+  .. code-block:: html+django
 
       {% if change_title %}
           {% block title %}Hello!{% endblock title %}
@@ -485,20 +485,20 @@ When generating HTML from templates, there's always a risk that a variable will
 include characters that affect the resulting HTML. For example, consider this
 template fragment:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     Hello, {{ name }}
 
 At first, this seems like a harmless way to display a user's name, but consider
 what would happen if the user entered their name as this:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     <script>alert('hello')</script>
 
 With this name value, the template would be rendered as:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     Hello, <script>alert('hello')</script>
 
@@ -512,7 +512,7 @@ Similarly, what if the name contained a ``'<'`` symbol, like this?
 
 That would result in a rendered template like this:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     Hello, <b>username
 
@@ -569,7 +569,7 @@ For individual variables
 To disable auto-escaping for an individual variable, use the :tfilter:`safe`
 filter:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     This will be escaped: {{ data }}
     This will not be escaped: {{ data|safe }}
@@ -578,7 +578,7 @@ Think of *safe* as shorthand for *safe from further escaping* or *can be
 safely interpreted as HTML*. In this example, if ``data`` contains ``'<b>'``,
 the output will be:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     This will be escaped: &lt;b&gt;
     This will not be escaped: <b>
@@ -589,7 +589,7 @@ For template blocks
 To control auto-escaping for a template, wrap the template (or a particular
 section of the template) in the :ttag:`autoescape` tag, like so:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% autoescape off %}
         Hello {{ name }}
@@ -599,7 +599,7 @@ The :ttag:`autoescape` tag takes either ``on`` or ``off`` as its argument. At
 times, you might want to force auto-escaping when it would otherwise be
 disabled. Here is an example template:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     Auto-escaping is on by default. Hello {{ name }}
 
@@ -616,7 +616,7 @@ The auto-escaping tag passes its effect onto templates that extend the
 current one as well as templates included via the :ttag:`include` tag,
 just like all block tags. For example:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
     :caption: ``base.html``
 
     {% autoescape off %}
@@ -625,7 +625,7 @@ just like all block tags. For example:
     {% endblock %}
     {% endautoescape %}
 
-.. code-block:: html+ginger
+.. code-block:: html+django
     :caption: ``child.html``
 
     {% extends "base.html" %}
@@ -636,7 +636,7 @@ Because auto-escaping is turned off in the base template, it will also be
 turned off in the child template, resulting in the following rendered
 HTML when the ``greeting`` variable contains the string ``<b>Hello!</b>``:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     <h1>This &amp; that</h1>
     <b>Hello!</b>
@@ -662,7 +662,7 @@ String literals and automatic escaping
 
 As we mentioned earlier, filter arguments can be strings:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {{ data|default:"This is a string literal." }}
 
@@ -674,13 +674,13 @@ escaped when the template is written.
 
 This means you would write :
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {{ data|default:"3 &lt; 2" }}
 
 ...rather than:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {{ data|default:"3 < 2" }}  {# Bad! Don't do this. #}
 
@@ -701,7 +701,7 @@ finding a collection of objects related on a foreign key. Therefore, given
 a model called "comment" with a foreign key relationship to a model called
 "task" you can loop through all comments attached to a given task like this:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% for comment in task.comment_set.all %}
         {{ comment }}
@@ -711,7 +711,7 @@ Similarly, :doc:`QuerySets</ref/models/querysets>` provide a ``count()`` method
 to count the number of objects they contain. Therefore, you can obtain a count
 of all comments related to the current task with:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {{ task.comment_set.all.count }}
 
@@ -724,7 +724,7 @@ You can also access methods you've explicitly defined on your own models:
         def foo(self):
             return "bar"
 
-.. code-block:: html+ginger
+.. code-block:: html+django
     :caption: ``template.html``
 
     {{ task.foo }}
@@ -744,7 +744,7 @@ a template, ensure the application is in :setting:`INSTALLED_APPS` (we'd add
 ``'ginger.contrib.humanize'`` for this example), and then use the :ttag:`load`
 tag in a template:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% load humanize %}
 
@@ -758,7 +758,7 @@ admin to find the list of custom libraries in your installation.
 The :ttag:`load` tag can take multiple library names, separated by spaces.
 Example:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% load humanize i18n %}
 

@@ -73,10 +73,6 @@ come with Ginger:
 
 * :mod:`ginger.contrib.admin` -- The admin site. You'll use it shortly.
 
-* :mod:`ginger.contrib.auth` -- An authentication system.
-
-* :mod:`ginger.contrib.contenttypes` -- A framework for content types.
-
 * :mod:`ginger.contrib.sessions` -- A session framework.
 
 * :mod:`ginger.contrib.messages` -- A messaging framework.
@@ -222,7 +218,6 @@ this:
     INSTALLED_APPS = [
         "polls.apps.PollsConfig",
         "ginger.contrib.admin",
-        "ginger.contrib.auth",
         "ginger.contrib.contenttypes",
         "ginger.contrib.sessions",
         "ginger.contrib.messages",
@@ -637,10 +632,6 @@ You should see the Ginger admin index page:
 
 .. image:: _images/admin02.png
    :alt: Ginger admin index page
-
-You should see a few types of editable content: groups and users. They are
-provided by :mod:`ginger.contrib.auth`, the authentication framework shipped
-by Ginger.
 
 Make the poll app modifiable in the admin
 -----------------------------------------

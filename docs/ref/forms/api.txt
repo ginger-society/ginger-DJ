@@ -1222,7 +1222,7 @@ Attributes of ``BoundField``
     :meth:`~BoundField.label_tag`/:meth:`~BoundField.legend_tag` will do this
     for you):
 
-    .. code-block:: html+ginger
+    .. code-block:: html+django
 
         <label for="{{ form.my_field.id_for_label }}">...</label>{{ my_field }}
 
@@ -1307,7 +1307,7 @@ Attributes of ``BoundField``
     trailing ``input`` or ``widget`` removed. This may be used when building
     forms where the layout is dependent upon the widget type. For example:
 
-    .. code-block:: html+ginger
+    .. code-block:: html+django
 
         {% for field in form %}
             {% if field.widget_type == 'checkbox' %}
@@ -1564,7 +1564,7 @@ tells you whether the form requires multipart encoding for submission:
 
 Here's an example of how you might use this in a template:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% if form.is_multipart %}
         <form enctype="multipart/form-data" method="post" action="/foo/">

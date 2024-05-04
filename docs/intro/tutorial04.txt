@@ -17,7 +17,7 @@ Write a minimal form
 Let's update our poll detail template ("polls/detail.html") from the last
 tutorial, so that the template contains an HTML ``<form>`` element:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
     :caption: ``polls/templates/polls/detail.html``
 
     <form action="{% url 'polls:vote' question.id %}" method="post">
@@ -177,7 +177,7 @@ redundancy later.
 
 Now, create a ``polls/results.html`` template:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
     :caption: ``polls/templates/polls/results.html``
 
     <h1>{{ question.question_text }}</h1>

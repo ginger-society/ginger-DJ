@@ -10,8 +10,6 @@ using the :meth:`~ginger.dispatch.Signal.send` method.
     See the documentation on the :doc:`signal dispatcher </topics/signals>` for
     information regarding how to register for and receive signals.
 
-    The :doc:`authentication framework </topics/auth/index>` sends :ref:`signals when
-    a user is logged in / out <topics-auth-signals>`.
 
 Model signals
 =============
@@ -446,9 +444,6 @@ Arguments sent with this signal:
     things on the command line. If ``interactive`` is ``False``, functions
     which listen for this signal should not try to prompt for anything.
 
-    For example, the :mod:`ginger.contrib.auth` app only prompts to create a
-    superuser when ``interactive`` is ``True``.
-
 ``stdout``
     A stream-like object where verbose output should be redirected.
 
@@ -502,9 +497,6 @@ Arguments sent with this signal:
     If ``interactive`` is ``True``, it's safe to prompt the user to input
     things on the command line. If ``interactive`` is ``False``, functions
     which listen for this signal should not try to prompt for anything.
-
-    For example, the :mod:`ginger.contrib.auth` app only prompts to create a
-    superuser when ``interactive`` is ``True``.
 
 ``stdout``
     A stream-like object where verbose output should be redirected.

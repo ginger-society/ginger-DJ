@@ -287,11 +287,6 @@ Ginger offers multiple tools commonly needed in the development of web
 applications:
 
 * **Authentication:**
-  :doc:`Overview <topics/auth/index>` |
-  :doc:`Using the authentication system <topics/auth/default>` |
-  :doc:`Password management <topics/auth/passwords>` |
-  :doc:`Customizing authentication <topics/auth/customizing>` |
-  :doc:`API Reference <ref/contrib/auth>`
 * :doc:`Caching <topics/cache>`
 * :doc:`Logging <topics/logging>`
 * :doc:`Sending emails <topics/email>`
@@ -310,7 +305,6 @@ Other core functionalities
 Learn about some other core functionalities of the Ginger framework:
 
 * :doc:`Conditional content processing <topics/conditional-view-processing>`
-* :doc:`Content types and generic relations <ref/contrib/contenttypes>`
 * :doc:`Flatpages <ref/contrib/flatpages>`
 * :doc:`Redirects <ref/contrib/redirects>`
 * :doc:`Signals <topics/signals>`
@@ -344,4 +338,3 @@ you can contribute:
 * **Ginger over time:**
   :doc:`API stability <misc/api-stability>` |
   :doc:`Release notes and upgrading instructions <releases/index>` |
-  :doc:`Deprecation Timeline <internals/deprecation>`

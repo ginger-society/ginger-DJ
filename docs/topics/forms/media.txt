@@ -117,7 +117,7 @@ requirements::
 
 If this last CSS definition were to be rendered, it would become the following HTML:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     <link href="https://static.example.com/pretty.css" media="screen" rel="stylesheet">
     <link href="https://static.example.com/lo_res.css" media="tv,projector" rel="stylesheet">

@@ -23,7 +23,7 @@ inside the block. The block is closed with an ``endautoescape`` ending tag.
 
 Sample usage:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% autoescape on %}
         {{ body }}
@@ -43,7 +43,7 @@ Within the scope of disabled auto-escaping, chaining filters, including
 :tfilter:`escape`, may cause unexpected (but documented) results such as the
 following:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% autoescape off %}
         {{ my_list|join:", "|escape }}
@@ -59,7 +59,7 @@ escaping.
 In order to properly escape every element in a sequence, use the
 :tfilter:`escapeseq` filter:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% autoescape off %}
         {{ my_list|escapeseq|join:", " }}
@@ -84,7 +84,7 @@ useful when commenting out code for documenting why the code was disabled.
 
 Sample usage:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     <p>Rendered text with {{ pub_date|date:"c" }}</p>
     {% comment "Optional note" %}
@@ -113,7 +113,7 @@ the first argument and produces it again.
 
 This tag is particularly useful in a loop:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% for o in some_list %}
         <tr class="{% cycle 'row1' 'row2' %}">
@@ -129,7 +129,7 @@ You can use variables, too. For example, if you have two template variables,
 ``rowvalue1`` and ``rowvalue2``, you can alternate between their values like
 this:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% for o in some_list %}
         <tr class="{% cycle rowvalue1 rowvalue2 %}">
@@ -140,7 +140,7 @@ this:
 Variables included in the cycle will be escaped.  You can disable auto-escaping
 with:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% for o in some_list %}
         <tr class="{% autoescape off %}{% cycle rowvalue1 rowvalue2 %}{% endautoescape %}">
@@ -150,7 +150,7 @@ with:
 
 You can mix variables and strings:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% for o in some_list %}
         <tr class="{% cycle 'row1' rowvalue2 'row3' %}">
@@ -162,7 +162,7 @@ In some cases you might want to refer to the current value of a cycle
 without advancing to the next value. To do this,
 give the ``{% cycle %}`` tag a name, using "as", like this:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% cycle 'row1' 'row2' as rowcolors %}
 
@@ -172,7 +172,7 @@ want to move the cycle to the next value independently of the original
 ``cycle`` tag, you can use another ``cycle`` tag and specify the name of the
 variable. So, the following template:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     <tr>
         <td class="{% cycle 'row1' 'row2' as rowcolors %}">...</td>
@@ -185,7 +185,7 @@ variable. So, the following template:
 
 would output:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     <tr>
         <td class="row1">...</td>
@@ -208,7 +208,7 @@ use the value in a nested loop or an included template. If you only want
 to declare the cycle but not produce the first value, you can add a
 ``silent`` keyword as the last keyword in the tag. For example:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% for obj in some_list %}
         {% cycle 'row1' 'row2' as rowcolors silent %}
@@ -227,7 +227,7 @@ automatically applies to all subsequent uses of that specific cycle tag.
 The following template would output *nothing*, even though the second
 call to ``{% cycle %}`` doesn't specify ``silent``:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% cycle 'row1' 'row2' as rowcolors silent %}
     {% cycle rowcolors %}
@@ -278,7 +278,7 @@ For example, assume the following directory structure:
 
 In ``template.html``, the following paths would be valid:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% extends "./base2.html" %}
     {% extends "../base1.html" %}
@@ -298,7 +298,7 @@ Note that the block includes *all* the text between the ``filter`` and
 
 Sample usage:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% filter force_escape|lower %}
         This text will be HTML-escaped, and will appear in all lowercase.
@@ -321,13 +321,13 @@ nothing if all the passed variables are "false".
 
 Sample usage:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% firstof var1 var2 var3 %}
 
 This is equivalent to:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% if var1 %}
         {{ var1 }}
@@ -340,13 +340,13 @@ This is equivalent to:
 You can also use a literal string as a fallback value in case all
 passed variables are False:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% firstof var1 var2 var3 "fallback value" %}
 
 This tag auto-escapes variable values. You can disable auto-escaping with:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% autoescape off %}
         {% firstof var1 var2 var3 "<strong>fallback value</strong>" %}
@@ -354,7 +354,7 @@ This tag auto-escapes variable values. You can disable auto-escaping with:
 
 Or if only some variables should be escaped, you can use:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% firstof var1 var2|safe var3 "<strong>fallback value</strong>"|safe %}
 
@@ -370,7 +370,7 @@ Loops over each item in an array, making the item available in a context
 variable. For example, to display a list of athletes provided in
 ``athlete_list``:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     <ul>
     {% for athlete in athlete_list %}
@@ -386,7 +386,7 @@ in each sublist into individual variables. For example, if your context
 contains a list of (x,y) coordinates called ``points``, you could use the
 following to output the list of points:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% for x, y in points %}
         There is a point at {{ x }},{{ y }}
@@ -396,7 +396,7 @@ This can also be useful if you need to access the items in a dictionary.
 For example, if your context contained a dictionary ``data``, the following
 would display the keys and values of the dictionary:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% for key, value in data.items %}
         {{ key }}: {{ value }}
@@ -433,7 +433,7 @@ Variable                    Description
 The ``for`` tag can take an optional ``{% empty %}`` clause whose text is
 displayed if the given array is empty or could not be found:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     <ul>
     {% for athlete in athlete_list %}
@@ -446,7 +446,7 @@ displayed if the given array is empty or could not be found:
 The above is equivalent to -- but shorter, cleaner, and possibly faster
 than -- the following:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     <ul>
       {% if athlete_list %}
@@ -467,7 +467,7 @@ The ``{% if %}`` tag evaluates a variable, and if that variable is "true" (i.e.
 exists, is not empty, and is not a false boolean value) the contents of the
 block are output:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% if athlete_list %}
         Number of athletes: {{ athlete_list|length }}
@@ -490,7 +490,7 @@ Boolean operators
 :ttag:`if` tags may use ``and``, ``or`` or ``not`` to test a number of
 variables or to negate a given variable:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% if athlete_list and coach_list %}
         Both athletes and coaches are available.
@@ -515,7 +515,7 @@ variables or to negate a given variable:
 Use of both ``and`` and ``or`` clauses within the same tag is allowed, with
 ``and`` having higher precedence than ``or`` e.g.:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% if athlete_list and coach_list or cheerleader_list %}
 
@@ -536,7 +536,7 @@ follows:
 
 Equality. Example:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% if somevar == "x" %}
       This appears if variable somevar equals the string "x"
@@ -547,7 +547,7 @@ Equality. Example:
 
 Inequality. Example:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% if somevar != "x" %}
       This appears if variable somevar does not equal the string "x",
@@ -559,7 +559,7 @@ Inequality. Example:
 
 Less than. Example:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% if somevar < 100 %}
       This appears if variable somevar is less than 100.
@@ -570,7 +570,7 @@ Less than. Example:
 
 Greater than. Example:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% if somevar > 0 %}
       This appears if variable somevar is greater than 0.
@@ -581,7 +581,7 @@ Greater than. Example:
 
 Less than or equal to. Example:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% if somevar <= 100 %}
       This appears if variable somevar is less than 100 or equal to 100.
@@ -592,7 +592,7 @@ Less than or equal to. Example:
 
 Greater than or equal to. Example:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% if somevar >= 1 %}
       This appears if variable somevar is greater than 1 or equal to 1.
@@ -605,7 +605,7 @@ Contained within. This operator is supported by many Python containers to test
 whether the given value is in the container. The following are some examples
 of how ``x in y`` will be interpreted:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% if "bc" in "abcdef" %}
       This appears since "bc" is a substring of "abcdef"
@@ -631,7 +631,7 @@ Not contained within. This is the negation of the ``in`` operator.
 
 Object identity. Tests if two values are the same object. Example:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% if somevar is True %}
       This appears if and only if somevar is True.
@@ -647,7 +647,7 @@ Object identity. Tests if two values are the same object. Example:
 Negated object identity. Tests if two values are not the same object. This is
 the negation of the ``is`` operator. Example:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% if somevar is not True %}
       This appears if somevar is not True, or if somevar is not found in the
@@ -663,7 +663,7 @@ Filters
 
 You can also use filters in the :ttag:`if` expression. For example:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% if messages|length >= 100 %}
        You have lots of messages today!
@@ -686,7 +686,7 @@ operators, from lowest to highest, is as follows:
 (This follows Python exactly). So, for example, the following complex
 :ttag:`if` tag:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% if a == b or c == d and e %}
 
@@ -703,13 +703,13 @@ know the precedence rules.
 The comparison operators cannot be 'chained' like in Python or in mathematical
 notation. For example, instead of using:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% if a > b > c %}  (WRONG)
 
 you should use:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% if a > b and b > c %}
 
@@ -727,7 +727,7 @@ uses.
    displays the content if it has changed. For example, this displays a list of
    days, only displaying the month if it changes:
 
-   .. code-block:: html+ginger
+   .. code-block:: html+django
 
         <h1>Archive for {{ year }}</h1>
 
@@ -740,7 +740,7 @@ uses.
    For example, the following shows the date every time it changes, while
    showing the hour if either the hour or the date has changed:
 
-   .. code-block:: html+ginger
+   .. code-block:: html+django
 
         {% for date in days %}
             {% ifchanged date.date %} {{ date.date }} {% endifchanged %}
@@ -752,7 +752,7 @@ uses.
 The ``ifchanged`` tag can also take an optional ``{% else %}`` clause that
 will be displayed if the value has not changed:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
         {% for match in matches %}
             <div style="background-color:
@@ -777,7 +777,7 @@ in either single or double quotes.
 
 This example includes the contents of the template ``"foo/bar.html"``:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% include "foo/bar.html" %}
 
@@ -788,7 +788,7 @@ as described in the :ttag:`extends` tag.
 This example includes the contents of the template whose name is contained in
 the variable ``template_name``:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% include template_name %}
 
@@ -807,19 +807,19 @@ includes it. This example produces the output ``"Hello, John!"``:
 
 * Template:
 
-  .. code-block:: html+ginger
+  .. code-block:: html+django
 
     {% include "name_snippet.html" %}
 
 * The ``name_snippet.html`` template:
 
-  .. code-block:: html+ginger
+  .. code-block:: html+django
 
     {{ greeting }}, {{ person|default:"friend" }}!
 
 You can pass additional context to the template using keyword arguments:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% include "name_snippet.html" with person="Jane" greeting="Hello" %}
 
@@ -827,7 +827,7 @@ If you want to render the context only with the variables provided (or even
 no variables at all), use the ``only`` option. No other variables are
 available to the included template:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% include "name_snippet.html" with greeting="Hi" only %}
 
@@ -854,7 +854,7 @@ For example, the following template would load all the tags and filters
 registered in ``somelibrary`` and ``otherlibrary`` located in package
 ``package``:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% load somelibrary package.otherlibrary %}
 
@@ -862,7 +862,7 @@ You can also selectively load individual filters or tags from a library, using
 the ``from`` argument. In this example, the template tags/filters named ``foo``
 and ``bar`` will be loaded from ``somelibrary``:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% load foo bar from somelibrary %}
 
@@ -879,7 +879,7 @@ data in templates.
 
 Usage:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% lorem [count] [method] [random] %}
 
@@ -916,7 +916,7 @@ in the :tfilter:`date` filter section.
 
 Example:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     It is {% now "jS F Y H:i" %}
 
@@ -925,7 +925,7 @@ Note that you can backslash-escape a format string if you want to use the
 otherwise each is a format string that displays the year and the time,
 respectively:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     It is the {% now "jS \o\f F" %}
 
@@ -939,7 +939,7 @@ This would display as "It is the 4th of September".
     The predefined formats may vary depending on the current locale and
     if :doc:`/topics/i18n/formatting` is enabled, e.g.:
 
-    .. code-block:: html+ginger
+    .. code-block:: html+django
 
         It is {% now "SHORT_DATETIME_FORMAT" %}
 
@@ -947,7 +947,7 @@ You can also use the syntax ``{% now "Y" as current_year %}`` to store the
 output (as a string) inside a variable. This is useful if you want to use
 ``{% now %}`` inside a template tag like :ttag:`blocktranslate` for example:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% now "Y" as current_year %}
     {% blocktranslate %}Copyright {{ current_year }}{% endblocktranslate %}
@@ -973,14 +973,14 @@ The following example outputs the current query string verbatim. So if the
 query string is ``?color=green&size=M``, the output would be
 ``?color=green&size=M``:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% query_string %}
 
 You can also pass in a custom ``QueryDict`` that will be used instead of
 ``request.GET``:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% query_string my_query_dict %}
 
@@ -988,14 +988,14 @@ Each keyword argument will be added to the query string, replacing any existing
 value for that key. With the query string ``?color=blue``, the following would
 result in ``?color=red&size=S``:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% query_string color="red" size="S" %}
 
 It is possible to remove parameters by passing ``None`` as a value. With the
 query string ``?color=blue&size=M``, the following would result in ``?size=M``:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% query_string color=None %}
 
@@ -1003,7 +1003,7 @@ If the given parameter is a list, the value will remain as a list. For example,
 if ``my_list`` is set to ``["red", "blue"]``, the following would result in
 ``?color=red&color=blue``:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% query_string color=my_list %}
 
@@ -1013,14 +1013,14 @@ pages of results. For example, if the paginator is currently on page 3, and
 the current query string is ``?color=blue&size=M&page=3``, the following code
 would output ``?color=blue&size=M&page=4``:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% query_string page=page.next_page_number %}
 
 You can also store the value in a variable, for example, if you need multiple
 links to the same page with syntax such as:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% query_string page=page.next_page_number as next_page %}
 
@@ -1065,7 +1065,7 @@ like this:
 You can use the ``{% regroup %}`` tag to group the list of cities by country.
 The following snippet of template code would accomplish this:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% regroup cities by country as country_list %}
 
@@ -1098,7 +1098,7 @@ attribute and calling the result ``country_list``.
 Because ``{% regroup %}`` produces :py:func:`~collections.namedtuple` objects,
 you can also write the previous example as:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% regroup cities by country as country_list %}
 
@@ -1160,7 +1160,7 @@ data is ordered according to how you want to display it.
 Another solution is to sort the data in the template using the
 :tfilter:`dictsort` filter, if your data is in a list of dictionaries:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% regroup cities|dictsort:"country" by country as country_list %}
 
@@ -1172,7 +1172,7 @@ tag, including methods, attributes, dictionary keys and list items. For
 example, if the "country" field is a foreign key to a class with
 an attribute "description," you could use:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% regroup cities by country.description as country_list %}
 
@@ -1181,7 +1181,7 @@ Or, if ``country`` is a field with ``choices``, it will have a
 attribute, allowing  you to group on the display string rather than the
 ``choices`` key:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% regroup cities by get_country_display as country_list %}
 
@@ -1199,7 +1199,7 @@ encounter. Without arguments, ``{% resetcycle %}`` will reset the last
 
 Example usage:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% for coach in coach_list %}
         <h1>{{ coach.name }}</h1>
@@ -1228,7 +1228,7 @@ would start with ``class="even"``.
 
 You can also reset named cycle tags:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% for item in list %}
         <p class="{% cycle 'odd' 'even' as stripe %} {% cycle 'major' 'minor' 'minor' 'minor' 'minor' as tick %}">
@@ -1253,7 +1253,7 @@ characters and newlines.
 
 Example usage:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% spaceless %}
         <p>
@@ -1263,14 +1263,14 @@ Example usage:
 
 This example would return this HTML:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     <p><a href="foo/">Foo</a></p>
 
 Only space between *tags* is removed -- not space between tags and text. In
 this example, the space around ``Hello`` won't be stripped:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% spaceless %}
         <strong>
@@ -1306,7 +1306,7 @@ Argument            Outputs
 
 Sample usage:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     The {% templatetag openblock %} characters open a block.
 
@@ -1325,7 +1325,7 @@ path will be encoded using :func:`~ginger.utils.encoding.iri_to_uri`.
 This is a way to output links without violating the DRY principle by having to
 hard-code URLs in your templates:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% url 'some-url-name' v1 v2 %}
 
@@ -1335,7 +1335,7 @@ optional and should be space-separated values that will be used as arguments in
 the URL. The example above shows passing positional arguments. Alternatively
 you may use keyword syntax:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% url 'some-url-name' arg1=v1 arg2=v2 %}
 
@@ -1359,7 +1359,7 @@ such as this:
 
 ...then, in a template, you can create a link to this view like this:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% url 'app-views-client' client.id %}
 
@@ -1372,7 +1372,7 @@ site to display an error page.
 If you'd like to retrieve a URL without displaying it, you can use a slightly
 different call:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% url 'some-url-name' arg arg2 as the_url %}
 
@@ -1384,7 +1384,7 @@ The scope of the variable created by the  ``as var`` syntax is the
 This ``{% url ... as var %}`` syntax will *not* cause an error if the view is
 missing. In practice you'll use this to link to views that are optional:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% url 'some-url-name' as the_url %}
     {% if the_url %}
@@ -1393,7 +1393,7 @@ missing. In practice you'll use this to link to views that are optional:
 
 If you'd like to retrieve a namespaced URL, specify the fully qualified name:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% url 'myapp:view-name' %}
 
@@ -1416,7 +1416,7 @@ Stops the template engine from rendering the contents of this block tag.
 A common use is to allow a JavaScript template layer that collides with
 Ginger's syntax. For example:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% verbatim %}
         {{if dying}}Still alive.{{/if}}
@@ -1425,7 +1425,7 @@ Ginger's syntax. For example:
 You can also designate a specific closing tag, allowing the use of
 ``{% endverbatim %}`` as part of the unrendered contents:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% verbatim myblock %}
         Avoid template rendering via the {% verbatim %}{% endverbatim %} block.
@@ -1441,7 +1441,7 @@ value to a maximum value, and then applies that ratio to a constant.
 
 For example:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     <img src="bar.png" alt="Bar"
          height="10" width="{% widthratio this_value max_value max_width %}">
@@ -1453,7 +1453,7 @@ image in the above example will be 88 pixels wide
 In some cases you might want to capture the result of ``widthratio`` in a
 variable. It can be useful, for instance, in a :ttag:`blocktranslate` like this:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% widthratio this_value max_value max_width as width %}
     {% blocktranslate %}The width is: {{ width }}{% endblocktranslate %}
@@ -1468,7 +1468,7 @@ an "expensive" method (e.g., one that hits the database) multiple times.
 
 For example:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% with total=business.employees.count %}
         {{ total }} employee{{ total|pluralize }}
@@ -1479,7 +1479,7 @@ between the ``{% with %}`` and ``{% endwith %}`` tags.
 
 You can assign more than one context variable:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% with alpha=1 beta=2 %}
         ...
@@ -1502,7 +1502,7 @@ Adds the argument to the value.
 
 For example:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {{ value|add:"2" }}
 
@@ -1515,7 +1515,7 @@ be an empty string.
 
 For example, if we have:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {{ first|add:second }}
 
@@ -1536,7 +1536,7 @@ Adds slashes before quotes. Useful for escaping strings in CSV, for example.
 
 For example:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {{ value|addslashes }}
 
@@ -1553,7 +1553,7 @@ a letter, this filter has no effect.
 
 For example:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {{ value|capfirst }}
 
@@ -1568,7 +1568,7 @@ Centers the value in a field of a given width.
 
 For example:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     "{{ value|center:"15" }}"
 
@@ -1583,7 +1583,7 @@ Removes all values of arg from the given string.
 
 For example:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {{ value|cut:" " }}
 
@@ -1696,7 +1696,7 @@ Format character  Description                               Example output
 
 For example:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {{ value|date:"D d M Y" }}
 
@@ -1712,7 +1712,7 @@ depending on the current locale.
 
 Assuming that :setting:`LANGUAGE_CODE` is, for example, ``"es"``, then for:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {{ value|date:"SHORT_DATE_FORMAT" }}
 
@@ -1722,7 +1722,7 @@ format specifier for the ``es`` locale as shipped with Ginger is ``"d/m/Y"``).
 When used without a format string, the ``DATE_FORMAT`` format specifier is
 used. Assuming the same settings as the previous example:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {{ value|date }}
 
@@ -1734,7 +1734,7 @@ day and the timezone name, respectively.
 You can combine ``date`` with the :tfilter:`time` filter to render a full
 representation of a ``datetime`` value. E.g.:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {{ value|date:"D d M Y" }} {{ value|time:"H:i" }}
 
@@ -1748,7 +1748,7 @@ value.
 
 For example:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {{ value|default:"nothing" }}
 
@@ -1767,7 +1767,7 @@ Use the :tfilter:`default` filter if you want to fallback for empty strings.
 
 For example:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {{ value|default_if_none:"nothing" }}
 
@@ -1783,7 +1783,7 @@ the argument.
 
 For example:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {{ value|dictsort:"name" }}
 
@@ -1809,7 +1809,7 @@ then the output would be:
 
 You can also do more complicated things like:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% for book in books|dictsort:"author.age" %}
         * {{ book.title }} ({{ book.author.name }})
@@ -1827,7 +1827,7 @@ If ``books`` is:
 
 then the output would be:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     * Alice (Lewis)
     * 1984 (George)
@@ -1836,7 +1836,7 @@ then the output would be:
 ``dictsort`` can also order a list of lists (or any other object implementing
 ``__getitem__()``) by elements at specified index. For example:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {{ value|dictsort:0 }}
 
@@ -1863,7 +1863,7 @@ then the output would be:
 You must pass the index as an integer rather than a string. The following
 produce empty output:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {{ values|dictsort:"0" }}
 
@@ -1887,7 +1887,7 @@ Returns ``True`` if the value is divisible by the argument.
 
 For example:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {{ value|divisibleby:"3" }}
 
@@ -1913,7 +1913,7 @@ multiple escaping passes to be applied, use the :tfilter:`force_escape` filter.
 
 For example, you can apply ``escape`` to fields when :ttag:`autoescape` is off:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% autoescape off %}
         {{ title|escape }}
@@ -1947,7 +1947,7 @@ filter, rather than in embedded JavaScript.
 
 For example:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     <script>
     let myValue = '{{ value|escapejs }}'
@@ -1963,7 +1963,7 @@ Applies the :tfilter:`escape` filter to each element of a sequence. Useful in
 conjunction with other filters that operate on sequences, such as
 :tfilter:`join`. For example:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% autoescape off %}
         {{ my_list|escapeseq|join:", " }}
@@ -1979,7 +1979,7 @@ Formats the value like a 'human-readable' file size (i.e. ``'13 KB'``,
 
 For example:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {{ value|filesizeformat }}
 
@@ -2002,7 +2002,7 @@ Returns the first item in a list.
 
 For example:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {{ value|first }}
 
@@ -2099,7 +2099,7 @@ the :tfilter:`escape` filter.
 For example, if you want to catch the ``<p>`` HTML elements created by
 the :tfilter:`linebreaks` filter:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% autoescape off %}
         {{ body|linebreaks|force_escape }}
@@ -2117,7 +2117,7 @@ than 1). Otherwise, output is always an integer.
 
 For example:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {{ value|get_digit:"2" }}
 
@@ -2137,7 +2137,7 @@ It's safe to use this filter on a string that has already gone through the
 
 For example:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {{ value|iriencode }}
 
@@ -2153,7 +2153,7 @@ Joins a list with a string, like Python's ``str.join(list)``
 
 For example:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {{ value|join:" // " }}
 
@@ -2172,7 +2172,7 @@ for use with JavaScript.
 
 For example:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {{ value|json_script:"hello-data" }}
 
@@ -2208,7 +2208,7 @@ Returns the last item in a list.
 
 For example:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {{ value|last }}
 
@@ -2224,7 +2224,7 @@ Returns the length of the value. This works for both strings and lists.
 
 For example:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {{ value|length }}
 
@@ -2244,7 +2244,7 @@ followed by a blank line becomes a paragraph break (``</p>``).
 
 For example:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {{ value|linebreaks }}
 
@@ -2261,7 +2261,7 @@ Converts all newlines in a piece of plain text to HTML line breaks
 
 For example:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {{ value|linebreaksbr }}
 
@@ -2277,13 +2277,13 @@ Displays text with line numbers.
 
 For example:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {{ value|linenumbers }}
 
 If ``value`` is:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     one
     two
@@ -2291,7 +2291,7 @@ If ``value`` is:
 
 the output will be:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     1. one
     2. two
@@ -2308,7 +2308,7 @@ Left-aligns the value in a field of a given width.
 
 For example:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     "{{ value|ljust:"10" }}"
 
@@ -2323,7 +2323,7 @@ Converts a string into all lowercase.
 
 For example:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {{ value|lower }}
 
@@ -2340,7 +2340,7 @@ For an integer, the argument is cast to a string before creating a list.
 
 For example:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {{ value|make_list }}
 
@@ -2361,7 +2361,7 @@ any string.
 
 For example:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {{ value|phone2numeric }}
 
@@ -2377,7 +2377,7 @@ length 1. By default, this suffix is ``'s'``.
 
 Example:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     You have {{ num_messages }} message{{ num_messages|pluralize }}.
 
@@ -2389,7 +2389,7 @@ suffix as a parameter to the filter.
 
 Example:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     You have {{ num_walruses }} walrus{{ num_walruses|pluralize:"es" }}.
 
@@ -2398,7 +2398,7 @@ singular and plural suffix, separated by a comma.
 
 Example:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     You have {{ num_cherries }} cherr{{ num_cherries|pluralize:"y,ies" }}.
 
@@ -2420,7 +2420,7 @@ Returns a random item from the given list.
 
 For example:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {{ value|random }}
 
@@ -2437,7 +2437,7 @@ Right-aligns the value in a field of a given width.
 
 For example:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     "{{ value|rjust:"10" }}"
 
@@ -2457,7 +2457,7 @@ autoescaping is off, this filter has no effect.
     make the contents unsafe again. For example, the following code
     prints the variable as is, unescaped:
 
-    .. code-block:: html+ginger
+    .. code-block:: html+django
 
         {{ var|safe|escape }}
 
@@ -2470,7 +2470,7 @@ Applies the :tfilter:`safe` filter to each element of a sequence. Useful in
 conjunction with other filters that operate on sequences, such as
 :tfilter:`join`. For example:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {{ some_list|safeseq|join:", " }}
 
@@ -2491,7 +2491,7 @@ introduction.
 
 Example:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {{ some_list|slice:":2" }}
 
@@ -2508,7 +2508,7 @@ leading and trailing whitespace.
 
 For example:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {{ value|slugify }}
 
@@ -2525,7 +2525,7 @@ that the leading "%" is dropped.
 
 For example:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {{ value|stringformat:"E" }}
 
@@ -2540,7 +2540,7 @@ Makes all possible efforts to strip all [X]HTML tags.
 
 For example:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {{ value|striptags }}
 
@@ -2567,7 +2567,7 @@ is locale-dependent.
 
 For example:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {{ value|time:"H:i" }}
 
@@ -2579,7 +2579,7 @@ Note that you can backslash-escape a format string if you want to use the
 otherwise each is a format string that displays the hour and the month,
 respectively:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {{ value|time:"H\h i\m" }}
 
@@ -2589,7 +2589,7 @@ Another example:
 
 Assuming that :setting:`LANGUAGE_CODE` is, for example, ``"de"``, then for:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {{ value|time:"TIME_FORMAT" }}
 
@@ -2610,13 +2610,13 @@ accept the timezone-related :ref:`format specifiers
 When used without a format string, the ``TIME_FORMAT`` format specifier is
 used:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {{ value|time }}
 
 is the same as:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {{ value|time:"TIME_FORMAT" }}
 
@@ -2633,7 +2633,7 @@ For example, if ``blog_date`` is a date instance representing midnight on 1
 June 2006, and ``comment_date`` is a date instance for 08:00 on 1 June 2006,
 then the following would return "8 hours":
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {{ blog_date|timesince:comment_date }}
 
@@ -2656,7 +2656,7 @@ Takes an optional argument that is a variable containing the date to use as
 the comparison point (instead of *now*). If ``from_date`` contains 22 June
 2006, then the following will return "1 week":
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {{ conference_date|timeuntil:from_date }}
 
@@ -2676,7 +2676,7 @@ keep "trivial words" in lowercase.
 
 For example:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {{ value|title }}
 
@@ -2694,7 +2694,7 @@ Truncated strings will end with a translatable ellipsis character ("…").
 
 For example:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {{ value|truncatechars:7 }}
 
@@ -2711,7 +2711,7 @@ are closed immediately after the truncation.
 
 For example:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {{ value|truncatechars_html:7 }}
 
@@ -2741,7 +2741,7 @@ Truncates a string after a certain number of words.
 
 For example:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {{ value|truncatewords:2 }}
 
@@ -2763,7 +2763,7 @@ when it is being passed HTML text.
 
 For example:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {{ value|truncatewords_html:2 }}
 
@@ -2794,7 +2794,7 @@ The list is assumed to be in the proper format. For example, if ``var``
 contains ``['States', ['Kansas', ['Lawrence', 'Topeka'], 'Illinois']]``, then
 ``{{ var|unordered_list }}`` would return:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     <li>States
     <ul>
@@ -2817,7 +2817,7 @@ Converts a string into all uppercase.
 
 For example:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {{ value|upper }}
 
@@ -2832,7 +2832,7 @@ Escapes a value for use in a URL.
 
 For example:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {{ value|urlencode }}
 
@@ -2845,7 +2845,7 @@ be provided.
 If not provided, the '/' character is assumed safe. An empty string can be
 provided when *all* characters should be escaped. For example:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {{ value|urlencode:"" }}
 
@@ -2875,7 +2875,7 @@ to them.
 
 For example:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {{ value|urlize }}
 
@@ -2912,7 +2912,7 @@ including the ellipsis that's added if truncation is necessary.
 
 For example:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {{ value|urlizetrunc:15 }}
 
@@ -2931,7 +2931,7 @@ Returns the number of words.
 
 For example:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {{ value|wordcount }}
 
@@ -2948,13 +2948,13 @@ Wraps words at specified line length.
 
 For example:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {{ value|wordwrap:5 }}
 
 If ``value`` is ``Joel is a slug``, the output would be:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     Joel
     is a
@@ -2971,7 +2971,7 @@ returns one of those strings according to the value:
 
 For example:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {{ value|yesno:"yeah,no,maybe" }}
 
@@ -3046,7 +3046,7 @@ with a :ttag:`static` template tag. If the :mod:`ginger.contrib.staticfiles`
 app is installed, the tag will serve files using ``url()`` method of the
 storage specified by ``staticfiles`` in :setting:`STORAGES`. For example:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% load static %}
     <img src="{% static 'images/hi.jpg' %}" alt="Hi!">
@@ -3054,7 +3054,7 @@ storage specified by ``staticfiles`` in :setting:`STORAGES`. For example:
 It is also able to consume standard context variables, e.g. assuming a
 ``user_stylesheet`` variable is passed to the template:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% load static %}
     <link rel="stylesheet" href="{% static user_stylesheet %}" media="screen">
@@ -3062,7 +3062,7 @@ It is also able to consume standard context variables, e.g. assuming a
 If you'd like to retrieve a static URL without displaying it, you can use a
 slightly different call:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% load static %}
     {% static "images/hi.jpg" as myphoto %}
@@ -3082,7 +3082,7 @@ You should prefer the :ttag:`static` template tag, but if you need more control
 over exactly where and how :setting:`STATIC_URL` is injected into the template,
 you can use the :ttag:`get_static_prefix` template tag:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% load static %}
     <img src="{% get_static_prefix %}images/hi.jpg" alt="Hi!">
@@ -3090,7 +3090,7 @@ you can use the :ttag:`get_static_prefix` template tag:
 There's also a second form you can use to avoid extra processing if you need
 the value multiple times:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% load static %}
     {% get_static_prefix as STATIC_PREFIX %}
@@ -3106,7 +3106,7 @@ the value multiple times:
 Similar to the :ttag:`get_static_prefix`, ``get_media_prefix`` populates a
 template variable with the media prefix :setting:`MEDIA_URL`, e.g.:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% load static %}
     <body data-media-url="{% get_media_prefix %}">

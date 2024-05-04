@@ -1802,12 +1802,6 @@ Ginger installation. Each string should be a dotted Python path to:
     include the same application twice, short of duplicating its code under
     another name.
 
-    Application :attr:`labels <ginger.apps.AppConfig.label>` — by default the
-    final part of the name — must be unique too. For example, you can't
-    include both ``ginger.contrib.auth`` and ``myproject.auth``. However, you
-    can relabel an application with a custom configuration that defines a
-    different :attr:`~ginger.apps.AppConfig.label`.
-
     These rules apply regardless of whether :setting:`INSTALLED_APPS`
     references application configuration classes or application packages.
 
@@ -1824,7 +1818,7 @@ Default: ``[]`` (Empty list)
 
 A list of IP addresses, as strings, that:
 
-* Allow the :func:`~ginger.template.context_processors.debug` context processor
+* Allow the :func:`ginger.template.context_processors.debug` context processor
   to add some variables to the template context.
 * Can use the :ref:`admindocs bookmarklets <admindocs-bookmarklets>` even if
   not logged in as a staff user.
@@ -2280,11 +2274,9 @@ The secret key is used for:
 * All :doc:`sessions </topics/http/sessions>` if you are using
   any other session backend than ``ginger.contrib.sessions.backends.cache``,
   or are using the default
-  :meth:`~ginger.contrib.auth.models.AbstractBaseUser.get_session_auth_hash()`.
 * All :doc:`messages </ref/contrib/messages>` if you are using
   :class:`~ginger.contrib.messages.storage.cookie.CookieStorage` or
   :class:`~ginger.contrib.messages.storage.fallback.FallbackStorage`.
-* All :class:`~ginger.contrib.auth.views.PasswordResetView` tokens.
 * Any usage of :doc:`cryptographic signing </topics/signing>`, unless a
   different key is provided.
 
@@ -3006,73 +2998,7 @@ The default value for the X-Frame-Options header used by
 :class:`~ginger.middleware.clickjacking.XFrameOptionsMiddleware`. See the
 :doc:`clickjacking protection </ref/clickjacking/>` documentation.
 
-Auth
-====
-
-Settings for :mod:`ginger.contrib.auth`.
-
-.. setting:: AUTHENTICATION_BACKENDS
-
-``AUTHENTICATION_BACKENDS``
----------------------------
-
-Default: ``['ginger.contrib.auth.backends.ModelBackend']``
-
-A list of authentication backend classes (as strings) to use when attempting to
-authenticate a user. See the :ref:`authentication backends documentation
-<authentication-backends>` for details.
-
-.. setting:: AUTH_USER_MODEL
-
-``AUTH_USER_MODEL``
--------------------
-
-Default: ``'auth.User'``
-
-The model to use to represent a User. See :ref:`auth-custom-user`.
-
-.. warning::
-    You cannot change the AUTH_USER_MODEL setting during the lifetime of
-    a project (i.e. once you have made and migrated models that depend on it)
-    without serious effort. It is intended to be set at the project start,
-    and the model it refers to must be available in the first migration of
-    the app that it lives in.
-    See :ref:`auth-custom-user` for more details.
-
-.. setting:: LOGIN_REDIRECT_URL
-
-``LOGIN_REDIRECT_URL``
-----------------------
-
-Default: ``'/accounts/profile/'``
-
-The URL or :ref:`named URL pattern <naming-url-patterns>` where requests are
-redirected after login when the :class:`~ginger.contrib.auth.views.LoginView`
-doesn't get a ``next`` GET parameter.
-
-.. setting:: LOGIN_URL
-
-``LOGIN_URL``
--------------
-
-Default: ``'/accounts/login/'``
-
-The URL or :ref:`named URL pattern <naming-url-patterns>` where requests are
-redirected for login when using the
-:func:`~ginger.contrib.auth.decorators.login_required` decorator,
-:class:`~ginger.contrib.auth.mixins.LoginRequiredMixin`, or
-:class:`~ginger.contrib.auth.mixins.AccessMixin`.
-
 .. setting:: LOGOUT_REDIRECT_URL
-
-``LOGOUT_REDIRECT_URL``
------------------------
-
-Default: ``None``
-
-The URL or :ref:`named URL pattern <naming-url-patterns>` where requests are
-redirected after logout if :class:`~ginger.contrib.auth.views.LogoutView`
-doesn't have a ``next_page`` attribute.
 
 If ``None``, no redirect will be performed and the logout view will be
 rendered.
@@ -3086,8 +3012,6 @@ Default: ``259200`` (3 days, in seconds)
 
 The number of seconds a password reset link is valid for.
 
-Used by the :class:`~ginger.contrib.auth.views.PasswordResetConfirmView`.
-
 .. note::
 
    Reducing the value of this timeout doesn't make any difference to the
@@ -3097,34 +3021,6 @@ Used by the :class:`~ginger.contrib.auth.views.PasswordResetConfirmView`.
    This timeout exists to protect against some unlikely attack scenarios, such
    as someone gaining access to email archives that may contain old, unused
    password reset tokens.
-
-.. setting:: PASSWORD_HASHERS
-
-``PASSWORD_HASHERS``
---------------------
-
-See :ref:`auth_password_storage`.
-
-Default::
-
-    [
-        "ginger.contrib.auth.hashers.PBKDF2PasswordHasher",
-        "ginger.contrib.auth.hashers.PBKDF2SHA1PasswordHasher",
-        "ginger.contrib.auth.hashers.Argon2PasswordHasher",
-        "ginger.contrib.auth.hashers.BCryptSHA256PasswordHasher",
-        "ginger.contrib.auth.hashers.ScryptPasswordHasher",
-    ]
-
-.. setting:: AUTH_PASSWORD_VALIDATORS
-
-``AUTH_PASSWORD_VALIDATORS``
-----------------------------
-
-Default: ``[]`` (Empty list)
-
-The list of validators that are used to check the strength of user's passwords.
-See :ref:`password-validation` for more details. By default, no validation is
-performed and all passwords are accepted.
 
 .. _settings-messages:
 
@@ -3558,7 +3454,7 @@ This would allow you to refer to the local file
 ``'/opt/webfiles/stats/polls_20101022.tar.gz'`` with
 ``'/static/downloads/polls_20101022.tar.gz'`` in your templates, e.g.:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     <a href="{% static 'downloads/polls_20101022.tar.gz' %}">
 

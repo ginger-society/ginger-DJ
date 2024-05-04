@@ -6,10 +6,7 @@ Middleware is a framework of hooks into Ginger's request/response processing.
 It's a light, low-level "plugin" system for globally altering Ginger's input
 or output.
 
-Each middleware component is responsible for doing some specific function. For
-example, Ginger includes a middleware component,
-:class:`~ginger.contrib.auth.middleware.AuthenticationMiddleware`, that
-associates users with requests using sessions.
+Each middleware component is responsible for doing some specific function.
 
 This document explains how middleware works, how you activate middleware, and
 how to write your own middleware. Ginger ships with some built-in middleware
@@ -112,10 +109,8 @@ startproject <startproject>`::
 
     MIDDLEWARE = [
         "ginger.middleware.security.SecurityMiddleware",
-        "ginger.contrib.sessions.middleware.SessionMiddleware",
         "ginger.middleware.common.CommonMiddleware",
         "ginger.middleware.csrf.CsrfViewMiddleware",
-        "ginger.contrib.auth.middleware.AuthenticationMiddleware",
         "ginger.contrib.messages.middleware.MessageMiddleware",
         "ginger.middleware.clickjacking.XFrameOptionsMiddleware",
     ]
@@ -125,12 +120,7 @@ can be empty, if you'd like — but it's strongly suggested that you at least us
 :class:`~ginger.middleware.common.CommonMiddleware`.
 
 The order in :setting:`MIDDLEWARE` matters because a middleware can depend on
-other middleware. For instance,
-:class:`~ginger.contrib.auth.middleware.AuthenticationMiddleware` stores the
-authenticated user in the session; therefore, it must run after
-:class:`~ginger.contrib.sessions.middleware.SessionMiddleware`. See
-:ref:`middleware-ordering` for some common hints about ordering of Ginger
-middleware classes.
+other middleware.
 
 Middleware order and layering
 =============================

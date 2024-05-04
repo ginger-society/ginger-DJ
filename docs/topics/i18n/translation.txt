@@ -576,7 +576,7 @@ have already loaded the ``i18n`` tag.
 The ``{% translate %}`` template tag translates either a constant string
 (enclosed in single or double quotes) or variable content:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     <title>{% translate "This is the title." %}</title>
     <title>{% translate myvar %}</title>
@@ -585,7 +585,7 @@ If the ``noop`` option is present, variable lookup still takes place but the
 translation is skipped. This is useful when "stubbing out" content that will
 require translation in the future:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     <title>{% translate "myvar" noop %}</title>
 
@@ -603,7 +603,7 @@ It's not possible to mix a template variable inside a string within
 If you'd like to retrieve a translated string without displaying it, you can
 use the following syntax:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% translate "This is the title" as the_title %}
 
@@ -614,7 +614,7 @@ In practice you'll use this to get a string you can use in multiple places in a
 template or so you can use the output as an argument for other template tags or
 filters:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% translate "starting point" as start %}
     {% translate "end point" as end %}
@@ -632,7 +632,7 @@ filters:
 ``{% translate %}`` also supports :ref:`contextual markers<contextual-markers>`
 using the ``context`` keyword:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% translate "May" context "month name" %}
 
@@ -646,7 +646,7 @@ Contrarily to the :ttag:`translate` tag, the ``blocktranslate`` tag allows you
 to mark complex sentences consisting of literals and variable content for
 translation by making use of placeholders:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% blocktranslate %}This string will have {{ value }} inside.{% endblocktranslate %}
 
@@ -654,7 +654,7 @@ To translate a template expression -- say, accessing object attributes or
 using template filters -- you need to bind the expression to a local variable
 for use within the translation block. Examples:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% blocktranslate with amount=article.price %}
     That will cost $ {{ amount }}.
@@ -666,7 +666,7 @@ for use within the translation block. Examples:
 
 You can use multiple expressions inside a single ``blocktranslate`` tag:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% blocktranslate with book_t=book|title author_t=author|title %}
     This is {{ book_t }} by {{ author_t }}
@@ -694,7 +694,7 @@ This tag also provides for pluralization. To use it:
 
 An example:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% blocktranslate count counter=list|length %}
     There is only one {{ name }} object.
@@ -704,7 +704,7 @@ An example:
 
 A more complex example:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% blocktranslate with amount=article.price count years=i.length %}
     That will cost $ {{ amount }} per year.
@@ -721,7 +721,7 @@ apply.
 Reverse URL lookups cannot be carried out within the ``blocktranslate`` and
 should be retrieved (and stored) beforehand:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% url 'path.to.view' arg arg2 as the_url %}
     {% blocktranslate %}
@@ -731,7 +731,7 @@ should be retrieved (and stored) beforehand:
 If you'd like to retrieve a translated string without displaying it, you can
 use the following syntax:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% blocktranslate asvar the_title %}The title is {{ title }}.{% endblocktranslate %}
     <title>{{ the_title }}</title>
@@ -744,7 +744,7 @@ filters.
 ``{% blocktranslate %}`` also supports :ref:`contextual
 markers<contextual-markers>` using the ``context`` keyword:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% blocktranslate with name=user.username context "greeting" %}Hi {{ name }}{% endblocktranslate %}
 
@@ -759,7 +759,7 @@ process easier.
 
 For instance, the following ``{% blocktranslate %}`` tag:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% blocktranslate trimmed %}
       First sentence.
@@ -776,7 +776,7 @@ String literals passed to tags and filters
 You can translate string literals passed as arguments to tags and filters
 by using the familiar ``_()`` syntax:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% some_tag _("Page not found") value|yesno:_("yes,no") %}
 
@@ -800,7 +800,7 @@ Just like with :ref:`Python code <translator-comments>`, these notes for
 translators can be specified using comments, either with the :ttag:`comment`
 tag:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% comment %}Translators: View verb{% endcomment %}
     {% translate "View" %}
@@ -811,7 +811,7 @@ tag:
 
 or with the ``{#`` ... ``#}`` :ref:`one-line comment constructs <template-comments>`:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {# Translators: Label of a button that triggers search #}
     <button type="submit">{% translate "Go" %}</button>
@@ -856,7 +856,7 @@ Switching language in templates
 If you want to select a language within a template, you can use the
 ``language`` template tag:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% load i18n %}
 
@@ -926,14 +926,14 @@ You can also retrieve information about any of the available languages using
 provided template tags and filters. To get information about a single language,
 use the ``{% get_language_info %}`` tag:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% get_language_info for LANGUAGE_CODE as lang %}
     {% get_language_info for "pl" as lang %}
 
 You can then access the information:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     Language code: {{ lang.code }}<br>
     Name of language: {{ lang.name_local }}<br>
@@ -963,7 +963,7 @@ If you do this in your view:
 
 you can iterate over those languages in the template:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
   {% get_language_info_list for available_languages as langs %}
   {% for lang in langs %} ... {% endfor %}
@@ -1075,7 +1075,7 @@ Using the JavaScript translation catalog
 
 To use the catalog, pull in the dynamically generated script like this:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     <script src="{% url 'javascript-catalog' %}"></script>
 
@@ -1508,7 +1508,7 @@ If localized URLs get reversed in templates they always use the current
 language. To link to a URL in another language use the :ttag:`language`
 template tag. It enables the given language in the enclosed template section:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% load i18n %}
 
@@ -1886,7 +1886,7 @@ set, to ``/``, depending on the nature of the request:
 
 Here's example HTML template code:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% load i18n %}
 

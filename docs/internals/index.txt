@@ -13,6 +13,5 @@ you'd like to help improve Ginger or learn about how Ginger is managed.
    organization
    security
    release-process
-   deprecation
    git
    howto-release-ginger

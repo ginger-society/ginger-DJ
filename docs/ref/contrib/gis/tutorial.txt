@@ -90,9 +90,6 @@ and ``world`` (your newly created application)::
 
     INSTALLED_APPS = [
         "ginger.contrib.admin",
-        "ginger.contrib.auth",
-        "ginger.contrib.contenttypes",
-        "ginger.contrib.sessions",
         "ginger.contrib.messages",
         "ginger.contrib.staticfiles",
         "ginger.contrib.gis",

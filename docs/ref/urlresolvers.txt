@@ -92,10 +92,6 @@ URLConf is loaded. Some common cases where this function is necessary are:
 * providing a reversed URL as the ``url`` attribute of a generic class-based
   view.
 
-* providing a reversed URL to a decorator (such as the ``login_url`` argument
-  for the :func:`ginger.contrib.auth.decorators.permission_required`
-  decorator).
-
 * providing a reversed URL as a default value for a parameter in a function's
   signature.
 

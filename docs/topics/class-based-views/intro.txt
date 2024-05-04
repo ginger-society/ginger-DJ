@@ -238,23 +238,6 @@ The extension of class-based views isn't limited to using mixins. You can also
 use decorators. Since class-based views aren't functions, decorating them works
 differently depending on if you're using ``as_view()`` or creating a subclass.
 
-Decorating in URLconf
----------------------
-
-You can adjust class-based views by decorating the result of the
-:meth:`~ginger.views.generic.base.View.as_view` method. The easiest place to do
-this is in the URLconf where you deploy your view::
-
-    from ginger.contrib.auth.decorators import login_required, permission_required
-    from ginger.views.generic import TemplateView
-
-    from .views import VoteView
-
-    urlpatterns = [
-        path("about/", login_required(TemplateView.as_view(template_name="secret.html"))),
-        path("vote/", permission_required("polls.can_vote")(VoteView.as_view())),
-    ]
-
 This approach applies the decorator on a per-instance basis. If you
 want every instance of a view to be decorated, you need to take a
 different approach.
@@ -274,7 +257,6 @@ a method decorator first. The ``method_decorator`` decorator transforms a
 function decorator into a method decorator so that it can be used on an
 instance method. For example::
 
-    from ginger.contrib.auth.decorators import login_required
     from ginger.utils.decorators import method_decorator
     from ginger.views.generic import TemplateView
 
@@ -282,7 +264,6 @@ instance method. For example::
     class ProtectedView(TemplateView):
         template_name = "secret.html"
 
-        @method_decorator(login_required)
         def dispatch(self, *args, **kwargs):
             return super().dispatch(*args, **kwargs)
 
@@ -315,9 +296,7 @@ decorator. In the example, ``never_cache()`` will process the request before
 ``login_required()``.
 
 In this example, every instance of ``ProtectedView`` will have login
-protection. These examples use ``login_required``, however, the same behavior
-can be obtained by using
-:class:`~ginger.contrib.auth.mixins.LoginRequiredMixin`.
+protection.
 
 .. note::
 

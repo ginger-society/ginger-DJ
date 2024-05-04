@@ -21,8 +21,6 @@ those packages have.
    :maxdepth: 1
 
    admin/index
-   auth
-   contenttypes
    flatpages
    gis/index
    humanize
@@ -41,22 +39,6 @@ The automatic Ginger administrative interface. For more information, see
 :doc:`Tutorial 2 </intro/tutorial02>` and the
 :doc:`admin documentation </ref/contrib/admin/index>`.
 
-Requires the auth_ and contenttypes_ contrib packages to be installed.
-
-``auth``
-========
-
-Ginger's authentication framework.
-
-See :doc:`/topics/auth/index`.
-
-``contenttypes``
-================
-
-A light framework for hooking into "types" of content, where each installed
-Ginger model is a separate content type.
-
-See the :doc:`contenttypes documentation </ref/contrib/contenttypes>`.
 
 ``flatpages``
 =============

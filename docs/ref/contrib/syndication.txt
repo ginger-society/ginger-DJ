@@ -161,7 +161,7 @@ into those elements.
 
   And the template:
 
-  .. code-block:: html+ginger
+  .. code-block:: html+django
 
     Something about {{ foo }}: {{ obj.description }}
 
@@ -266,7 +266,7 @@ class attribute (which should be a list).
 We are using a template for the item descriptions. It can be as minimal as
 this:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {{ obj.description }}
 

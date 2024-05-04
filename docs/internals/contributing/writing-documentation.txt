@@ -272,22 +272,10 @@ documentation:
 * The main thing to keep in mind as you write and edit docs is that the
   more semantic markup you can add the better. So:
 
-  .. code-block:: rst
-
-      Add ``ginger.contrib.auth`` to your ``INSTALLED_APPS``...
-
   Isn't nearly as helpful as:
-
-  .. code-block:: rst
-
-      Add :mod:`ginger.contrib.auth` to your :setting:`INSTALLED_APPS`...
 
   This is because Sphinx will generate proper links for the latter, which
   greatly helps readers.
-
-  You can prefix the target with a ``~`` (that's a tilde) to get only the
-  "last bit" of that path. So ``:mod:`~ginger.contrib.auth``` will
-  display a link with the title "auth".
 
 * All Python code blocks should be formatted using the :pypi:`blacken-docs`
   auto-formatter. This will be run by ``pre-commit`` if that is configured.

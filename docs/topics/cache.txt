@@ -759,7 +759,7 @@ and the name to give the cache fragment. The fragment is cached forever if
 timeout is ``None``. The name will be taken as is, do not use a variable. For
 example:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% load cache %}
     {% cache 500 sidebar %}
@@ -773,7 +773,7 @@ of your site. Do this by passing one or more additional arguments, which may be
 variables with or without filters, to the ``{% cache %}`` template tag to
 uniquely identify the cache fragment:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% load cache %}
     {% cache 500 sidebar request.user.username %}
@@ -786,7 +786,7 @@ tag you could use one of the
 :ref:`translation-specific variables<template-translation-vars>` available in
 templates to achieve the same result:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% load i18n %}
     {% load cache %}
@@ -802,7 +802,7 @@ resolves to an integer value. For example, if the template variable
 ``my_timeout`` is set to the value ``600``, then the following two examples are
 equivalent:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% cache 600 sidebar %} ... {% endcache %}
     {% cache my_timeout sidebar %} ... {% endcache %}
@@ -815,7 +815,7 @@ If no such cache exists, it will fall back to using the default cache. You may
 select an alternate cache backend to use with the ``using`` keyword argument,
 which must be the last argument to the tag.
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% cache 300 local-thing ...  using="localcache" %}
 

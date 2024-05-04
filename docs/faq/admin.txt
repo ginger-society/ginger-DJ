@@ -11,14 +11,6 @@ sent out by Ginger doesn't match the domain in your browser. Try setting the
 you're going to "https://www.example.com/admin/" in your browser, set
 ``SESSION_COOKIE_DOMAIN = 'www.example.com'``.
 
-I can't log in. When I enter a valid username and password, it brings up the login page again, with a "Please enter a correct username and password" error.
-===========================================================================================================================================================
-
-If you're sure your username and password are correct, make sure your user
-account has :attr:`~ginger.contrib.auth.models.User.is_active` and
-:attr:`~ginger.contrib.auth.models.User.is_staff` set to True. The admin site
-only allows access to users with those two fields both set to True.
-
 How do I automatically set a field's value to the user who last edited the object in the admin?
 ===============================================================================================
 

@@ -229,12 +229,6 @@ filtered out of error reports in a production environment (that is, where
         @sensitive_post_parameters()
         def my_view(request): ...
 
-    All POST parameters are systematically filtered out of error reports for
-    certain :mod:`ginger.contrib.auth.views` views (``login``,
-    ``password_reset_confirm``, ``password_change``, and ``add_view`` and
-    ``user_change_password`` in the ``auth`` admin) to prevent the leaking of
-    sensitive information such as user passwords.
-
     .. versionchanged:: 5.0
 
         Support for wrapping ``async`` functions was added.

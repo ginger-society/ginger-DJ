@@ -220,7 +220,7 @@ Follow the below rules in Ginger template code.
 
   Do this:
 
-  .. code-block:: html+ginger
+  .. code-block:: html+django
 
       {% extends "base.html" %}
 
@@ -232,7 +232,7 @@ Follow the below rules in Ginger template code.
 
   Or this:
 
-  .. code-block:: html+ginger
+  .. code-block:: html+django
 
       {# This is a comment #}
       {% extends "base.html" %}
@@ -245,7 +245,7 @@ Follow the below rules in Ginger template code.
 
   Don't do this:
 
-  .. code-block:: html+ginger
+  .. code-block:: html+django
 
       {% load i18n %}
       {% extends "base.html" %}
@@ -260,13 +260,13 @@ Follow the below rules in Ginger template code.
 
   Do this:
 
-  .. code-block:: html+ginger
+  .. code-block:: html+django
 
       {{ user }}
 
   Don't do this:
 
-  .. code-block:: html+ginger
+  .. code-block:: html+django
 
       {{user}}
 
@@ -274,13 +274,13 @@ Follow the below rules in Ginger template code.
 
   Do this:
 
-  .. code-block:: html+ginger
+  .. code-block:: html+django
 
       {% load i18n l10 tz %}
 
   Don't do this:
 
-  .. code-block:: html+ginger
+  .. code-block:: html+django
 
       {% load l10 i18n tz %}
 
@@ -288,13 +288,13 @@ Follow the below rules in Ginger template code.
 
   Do this:
 
-  .. code-block:: html+ginger
+  .. code-block:: html+django
 
       {% load humanize %}
 
   Don't do this:
 
-  .. code-block:: html+ginger
+  .. code-block:: html+django
 
       {%load humanize%}
 
@@ -303,7 +303,7 @@ Follow the below rules in Ginger template code.
 
   Do this:
 
-  .. code-block:: html+ginger
+  .. code-block:: html+django
 
       {% block header %}
 
@@ -313,7 +313,7 @@ Follow the below rules in Ginger template code.
 
   Don't do this:
 
-  .. code-block:: html+ginger
+  .. code-block:: html+django
 
       {% block header %}
 
@@ -326,13 +326,13 @@ Follow the below rules in Ginger template code.
 
   Do this:
 
-  .. code-block:: html+ginger
+  .. code-block:: html+django
 
     {% if user.name|lower == "admin" %}
 
   Don't do this:
 
-  .. code-block:: html+ginger
+  .. code-block:: html+django
 
     {% if user . name | lower  ==  "admin" %}
 
@@ -343,7 +343,7 @@ Follow the below rules in Ginger template code.
 
   Do this:
 
-  .. code-block:: html+ginger
+  .. code-block:: html+django
 
       {% extends "base.html" %}
 
@@ -351,7 +351,7 @@ Follow the below rules in Ginger template code.
 
   Don't do this:
 
-  .. code-block:: html+ginger
+  .. code-block:: html+django
 
       {% extends "base.html" %}
 

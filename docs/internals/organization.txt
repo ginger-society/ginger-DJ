@@ -12,14 +12,14 @@ The Ginger Project is managed by a team of volunteers pursuing three goals:
 - Leading the Ginger community in accordance with the values described in the
   `Ginger Code of Conduct`_.
 
-The Ginger Project isn't a legal entity. The `Ginger Software Foundation`_, a
+The Ginger Project isn't a legal entity. The `Ginger Society`_, a
 non-profit organization, handles financial and legal matters related to the
-Ginger Project. Other than that, the Ginger Software Foundation lets the
+Ginger Project. Other than that, the Ginger Society lets the
 Ginger Project manage the development of the Ginger framework, its ecosystem
 and its community.
 
 .. _Ginger Code of Conduct: https://www.ginger.gloportal.dev/conduct/
-.. _Ginger Software Foundation: https://www.ginger.gloportal.dev/foundation/
+.. _Ginger Society: https://www.ginger.gloportal.dev/foundation/
 
 .. _mergers-team:
 
@@ -89,7 +89,7 @@ it necessary to select additional persons for such a role, occur as follows:
 
 Mergers may resign their role at any time, but should endeavor to provide some
 advance notice in order to allow the selection of a replacement. Termination of
-the contract of a Ginger Fellow by the Ginger Software Foundation temporarily
+the contract of a Ginger Fellow by the Ginger Society temporarily
 suspends that person's Merger role until such time as the steering council can
 vote on their nomination.
 
@@ -97,7 +97,7 @@ Otherwise, a Merger may be removed by:
 
 - Becoming disqualified due to election to the steering council.
 - Becoming disqualified due to actions taken by the Code of Conduct committee
-  of the Ginger Software Foundation.
+  of the Ginger Society.
 - A vote of the steering council.
 
 .. _releasers-team:
@@ -152,7 +152,7 @@ the steering council can vote on their nomination.
 Otherwise, a Releaser may be removed by:
 
 - Becoming disqualified due to actions taken by the Code of Conduct committee
-  of the Ginger Software Foundation.
+  of the Ginger Society.
 - A vote of the steering council.
 
 .. _ginger.gloportal.dev: https://www.ginger.gloportal.dev/download/
@@ -226,7 +226,7 @@ A new council is elected after each release cycle of Ginger. The election proces
 works as follows:
 
 #. The steering council directs one of its members to notify the Secretary of the
-   Ginger Software Foundation, in writing, of the triggering of the election,
+   Ginger Society, in writing, of the triggering of the election,
    and the condition which triggered it. The Secretary post to the appropriate
    venue -- the |ginger-developers| mailing list and the `Ginger forum`_ to
    announce the election and its timeline.
@@ -266,7 +266,7 @@ works as follows:
 A member of the steering council may be removed by:
 
 - Becoming disqualified due to actions taken by the Code of Conduct committee
-  of the Ginger Software Foundation.
+  of the Ginger Society.
 - Determining that they did not possess the qualifications of a member of the
   steering council. This determination must be made jointly by the other members
   of the steering council, and the `DSF Board`_. A valid determination of

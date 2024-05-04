@@ -518,12 +518,6 @@ need to be done by the releaser.
    the previous feature release version or copy the contents from the previous
    feature version and delete most of the contents leaving only the headings.
 
-#. Increase the default PBKDF2 iterations in
-   ``ginger.contrib.auth.hashers.PBKDF2PasswordHasher`` by about 20%
-   (pick a round number). Run the tests, and update the 3 failing
-   hasher tests with the new values. Make sure this gets noted in the
-   release notes (see the 4.1 release notes for an example).
-
 #. Remove features that have reached the end of their deprecation cycle. Each
    removal should be done in a separate commit for clarity. In the commit
    message, add a "refs #XXXX" to the original ticket where the deprecation

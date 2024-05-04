@@ -184,7 +184,7 @@ The work that needs to be done
 Suppose you want to create a simple form on your website, in order to obtain
 the user's name. You'd need something like this in your template:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     <form action="/your-name/" method="post">
         <label for="your_name">Your name: </label>
@@ -257,7 +257,7 @@ fields contain valid data, it will:
 
 The whole form, when rendered for the first time, will look like:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     <label for="your_name">Your name: </label>
     <input id="your_name" type="text" name="your_name" maxlength="100" required>
@@ -330,7 +330,7 @@ The template
 
 We don't need to do much in our ``name.html`` template:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     <form action="/your-name/" method="post">
         {% csrf_token %}
@@ -515,7 +515,7 @@ the ``form_snippet.html`` template.
 
 In your templates:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     # In your template:
     {{ form }}
@@ -575,7 +575,7 @@ text.
 This allows generic templates to be written that arrange fields elements in the
 required layout. For example:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {{ form.non_field_errors }}
     <div class="fieldWrapper">
@@ -627,7 +627,7 @@ will be in a custom field template, to allow the template to be written once
 and reused for each field. However, it can also be directly accessed from the
 field attribute on the form. For example:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {{ form.non_field_errors }}
     <div class="fieldWrapper">
@@ -654,7 +654,7 @@ field attribute on the form. For example:
 Complete ``<label>`` elements can also be generated using the
 :meth:`~ginger.forms.BoundField.label_tag`. For example:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     <div class="fieldWrapper">
         {{ form.subject.errors }}
@@ -675,7 +675,7 @@ the top of the form and the template lookup for errors on each field.
 Using ``{{ form.name_of_field.errors }}`` displays a list of form errors,
 rendered as an unordered list. This might look like:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     <ul class="errorlist">
         <li>Sender is required.</li>
@@ -685,7 +685,7 @@ The list has a CSS class of ``errorlist`` to allow you to style its appearance.
 If you wish to further customize the display of errors you can do so by looping
 over them:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% if form.subject.errors %}
         <ol>
@@ -700,7 +700,7 @@ the form when using helpers like ``form.as_p()``) will be rendered with an
 additional class of ``nonfield`` to help distinguish them from field-specific
 errors. For example, ``{{ form.non_field_errors }}`` would look like:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     <ul class="errorlist nonfield">
         <li>Generic validation error</li>
@@ -716,7 +716,7 @@ If you're using the same HTML for each of your form fields, you can reduce
 duplicate code by looping through each field in turn using a ``{% for %}``
 loop:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% for field in form %}
         <div class="fieldWrapper">
@@ -762,7 +762,7 @@ Useful attributes on ``{{ field }}`` include:
     ``False`` otherwise. It's not particularly useful as a template
     variable, but could be useful in conditional tests such as:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% if field.is_hidden %}
        {# Do something special #}
@@ -776,7 +776,7 @@ Useful attributes on ``{{ field }}`` include:
     includes the form's :attr:`~ginger.forms.Form.label_suffix`. For example,
     the default ``label_suffix`` is a colon:
 
-    .. code-block:: html+ginger
+    .. code-block:: html+django
 
         <label for="id_email">Email address:</label>
 
@@ -789,7 +789,7 @@ Useful attributes on ``{{ field }}`` include:
     inputs that should be semantically grouped in a ``<fieldset>`` with a
     ``<legend>`` to improve accessibility. An example use in a template:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% if field.use_fieldset %}
       <fieldset>
@@ -823,7 +823,7 @@ and visible fields independently: ``hidden_fields()`` and
 ``visible_fields()``. Here's a modification of an earlier example that uses
 these two methods:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {# Include the hidden fields #}
     {% for hidden in form.hidden_fields %}

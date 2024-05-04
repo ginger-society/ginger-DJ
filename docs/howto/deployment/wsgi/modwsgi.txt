@@ -221,10 +221,3 @@ other approaches:
 
 3. Copy the admin static files so that they live within your Apache
    document root.
-
-Authenticating against Ginger's user database from Apache
-=========================================================
-
-Ginger provides a handler to allow Apache to authenticate users directly
-against Ginger's authentication backends. See the :doc:`mod_wsgi authentication
-documentation </howto/deployment/wsgi/apache-auth>`.

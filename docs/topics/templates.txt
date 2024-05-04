@@ -75,21 +75,21 @@ mapping keys to values.
 
 Variables are surrounded by ``{{`` and ``}}`` like this:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     My first name is {{ first_name }}. My last name is {{ last_name }}.
 
 With a context of ``{'first_name': 'John', 'last_name': 'Doe'}``, this template
 renders to:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     My first name is John. My last name is Doe.
 
 Dictionary lookup, attribute lookup and list-index lookups are implemented with
 a dot notation:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {{ my_dict.key }}
     {{ my_object.attribute }}
@@ -109,19 +109,19 @@ content from a database, or even enable access to other template tags.
 
 Tags are surrounded by ``{%`` and ``%}`` like this:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% csrf_token %}
 
 Most tags accept arguments:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% cycle 'odd' 'even' %}
 
 Some tags require beginning and ending tags:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% if user.is_authenticated %}Hello, {{ user.username }}.{% endif %}
 
@@ -136,20 +136,20 @@ Filters transform the values of variables and tag arguments.
 
 They look like this:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
      {{ ginger|title }}
 
 With a context of ``{'ginger': 'the web framework for perfectionists with
 deadlines'}``, this template renders to:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     The Web Framework For Perfectionists With Deadlines
 
 Some filters take an argument:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {{ my_date|date:"Y-m-d" }}
 
@@ -162,7 +162,7 @@ Comments
 
 Comments look like this:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {# this won't be rendered #}
 

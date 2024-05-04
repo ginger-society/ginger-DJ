@@ -253,7 +253,7 @@ which is the flatpage object.
 
 Here's a sample :file:`flatpages/default.html` template:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     <!DOCTYPE html>
     <html>
@@ -282,7 +282,7 @@ tag library <loading-custom-template-libraries>` before you can use
 it. After loading the library, you can retrieve all current flatpages
 via the :ttag:`get_flatpages` tag:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% load flatpages %}
     {% get_flatpages as flatpages %}
@@ -304,7 +304,7 @@ an authenticated user using a ``for`` clause.
 
 For example:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% get_flatpages for someuser as about_pages %}
 
@@ -322,7 +322,7 @@ from the context.
 
 For example:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% get_flatpages '/about/' as about_pages %}
     {% get_flatpages about_prefix as about_pages %}

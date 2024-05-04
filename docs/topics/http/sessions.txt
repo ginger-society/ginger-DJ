@@ -290,8 +290,7 @@ You can edit it multiple times.
 
       Deletes the current session data from the session and deletes the session
       cookie. This is used if you want to ensure that the previous session data
-      can't be accessed again from the user's browser (for example, the
-      :func:`ginger.contrib.auth.logout()` function calls it).
+      can't be accessed again from the user's browser
 
       .. versionchanged:: 5.1
 
@@ -454,8 +453,6 @@ You can edit it multiple times.
       *Asynchronous version*: ``acycle_key()``
 
       Creates a new session key while retaining the current session data.
-      :func:`ginger.contrib.auth.login()` calls this method to mitigate against
-      session fixation.
 
       .. versionchanged:: 5.1
 
@@ -576,12 +573,6 @@ This simplistic view logs in a "member" of the site::
         except KeyError:
             pass
         return HttpResponse("You're logged out.")
-
-The standard :meth:`ginger.contrib.auth.logout` function actually does a bit
-more than this to prevent inadvertent data leakage. It calls the
-:meth:`~backends.base.SessionBase.flush` method of ``request.session``.
-We are using this example as a demonstration of how to work with session
-objects, not as a full ``logout()`` implementation.
 
 Setting test cookies
 ====================

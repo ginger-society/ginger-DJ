@@ -440,7 +440,7 @@ foundation for custom widgets.
 
         These can be looped over in the widget template:
 
-        .. code-block:: html+ginger
+        .. code-block:: html+django
 
             {% for subwidget in widget.subwidgets %}
                 {% include subwidget.template_name with widget=subwidget %}
@@ -746,7 +746,7 @@ that specifies the template used to render each choice. For example, for the
     radio buttons in the template. Assuming a form ``myform`` with a field
     ``beatles`` that uses a ``RadioSelect`` as its widget:
 
-    .. code-block:: html+ginger
+    .. code-block:: html+django
 
         <fieldset>
             <legend>{{ myform.beatles.label }}</legend>
@@ -781,7 +781,7 @@ that specifies the template used to render each choice. For example, for the
     radio button's ``tag``, ``choice_label`` and ``id_for_label`` attributes.
     For example, this template...
 
-    .. code-block:: html+ginger
+    .. code-block:: html+django
 
         <fieldset>
             <legend>{{ myform.beatles.label }}</legend>

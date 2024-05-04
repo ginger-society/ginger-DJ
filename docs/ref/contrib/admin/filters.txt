@@ -195,11 +195,6 @@ the separator::
         def expected_parameters(self):
             return [self.lookup_kwarg]
 
-.. note::
-
-    The :class:`~ginger.contrib.contenttypes.fields.GenericForeignKey` field is
-    not supported.
-
 List filters typically appear only if the filter has more than one choice. A
 filter's ``has_output()`` method controls whether or not it appears.
 

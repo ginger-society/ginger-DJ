@@ -65,7 +65,7 @@ many projects they are typically the most commonly used views.
 
     **Example myapp/article_detail.html**:
 
-    .. code-block:: html+ginger
+    .. code-block:: html+django
 
         <h1>{{ object.headline }}</h1>
         <p>{{ object.content }}</p>
@@ -155,7 +155,7 @@ many projects they are typically the most commonly used views.
 
     **Example myapp/article_list.html**:
 
-    .. code-block:: html+ginger
+    .. code-block:: html+django
 
         <h1>Articles</h1>
         <ul>

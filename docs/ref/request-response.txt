@@ -204,7 +204,7 @@ All attributes should be considered read-only, unless stated otherwise.
     For use in, for example, Ginger templates, headers can also be looked up
     using underscores in place of hyphens:
 
-    .. code-block:: html+ginger
+    .. code-block:: html+django
 
         {{ request.headers.user_agent }}
 
@@ -267,36 +267,8 @@ middleware class is listed in :setting:`MIDDLEWARE`.
     :func:`~ginger.contrib.sites.shortcuts.get_current_site()`
     representing the current site.
 
-.. attribute:: HttpRequest.user
-
-    From the :class:`~ginger.contrib.auth.middleware.AuthenticationMiddleware`:
-    An instance of :setting:`AUTH_USER_MODEL` representing the currently
-    logged-in user. If the user isn't currently logged in, ``user`` will be set
-    to an instance of :class:`~ginger.contrib.auth.models.AnonymousUser`. You
-    can tell them apart with
-    :attr:`~ginger.contrib.auth.models.User.is_authenticated`, like so::
-
-        if request.user.is_authenticated:
-            ...  # Do something for logged-in users.
-        else:
-            ...  # Do something for anonymous users.
-
-    The :meth:`auser` method does the same thing but can be used from async
-    contexts.
-
 Methods
 -------
-
-.. method:: HttpRequest.auser()
-
-    .. versionadded:: 5.0
-
-    From the :class:`~ginger.contrib.auth.middleware.AuthenticationMiddleware`:
-    Coroutine. Returns an instance of :setting:`AUTH_USER_MODEL` representing
-    the currently logged-in user. If the user isn't currently logged in,
-    ``auser`` will return an instance of
-    :class:`~ginger.contrib.auth.models.AnonymousUser`. This is similar to the
-    :attr:`user` attribute but it works in async contexts.
 
 .. method:: HttpRequest.get_host()
 

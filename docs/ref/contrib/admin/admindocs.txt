@@ -145,5 +145,4 @@ Documentation for this page
 
 Using this bookmarklet requires that ``XViewMiddleware`` is installed and that
 you are logged into the :mod:`Ginger admin <ginger.contrib.admin>` as a
-:class:`~ginger.contrib.auth.models.User` with
-:attr:`~ginger.contrib.auth.models.User.is_staff` set to ``True``.
+

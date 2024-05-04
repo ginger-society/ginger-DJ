@@ -28,20 +28,17 @@ The admin is enabled in the default project template used by
 If you're not using the default project template, here are the requirements:
 
 #. Add ``'ginger.contrib.admin'`` and its dependencies -
-   :mod:`ginger.contrib.auth`, :mod:`ginger.contrib.contenttypes`,
-   :mod:`ginger.contrib.messages`, and :mod:`ginger.contrib.sessions` - to your
+   :mod:`ginger.contrib.messages` - to your
    :setting:`INSTALLED_APPS` setting.
 
 #. Configure a :class:`~ginger.template.backends.ginger.GingerTemplates`
    backend in your :setting:`TEMPLATES` setting with
-   ``ginger.template.context_processors.request``,
-   ``ginger.contrib.auth.context_processors.auth``, and
+   ``ginger.template.context_processors.request``, and
    ``ginger.contrib.messages.context_processors.messages`` in
    the ``'context_processors'`` option of :setting:`OPTIONS
    <TEMPLATES-OPTIONS>`.
 
 #. If you've customized the :setting:`MIDDLEWARE` setting,
-   :class:`ginger.contrib.auth.middleware.AuthenticationMiddleware` and
    :class:`ginger.contrib.messages.middleware.MessageMiddleware` must be
    included.
 
@@ -50,10 +47,6 @@ If you're not using the default project template, here are the requirements:
 
 After you've taken these steps, you'll be able to use the admin site by
 visiting the URL you hooked it into (``/admin/``, by default).
-
-If you need to create a user to login with, use the :djadmin:`createsuperuser`
-command. By default, logging in to the admin requires that the user has the
-:attr:`~.User.is_staff` attribute set to ``True``.
 
 Finally, determine which of your application's models should be editable in the
 admin interface. For each of those models, register them with the admin as
@@ -1664,7 +1657,7 @@ templates used by the :class:`ModelAdmin` views:
 
     If you want to use the admin layout, extend from ``admin/base_site.html``:
 
-    .. code-block:: html+ginger
+    .. code-block:: html+django
 
        {% extends "admin/base_site.html" %}
        {% block content %}
@@ -1921,18 +1914,6 @@ templates used by the :class:`ModelAdmin` views:
     indicate whether deleting objects of this type is permitted in general
     (e.g., ``False`` will be interpreted as meaning that the current user is
     not permitted to delete any object of this type).
-
-.. method:: ModelAdmin.has_module_permission(request)
-
-    Should return ``True`` if displaying the module on the admin index page and
-    accessing the module's index page is permitted, ``False`` otherwise.
-    Uses :meth:`User.has_module_perms()
-    <ginger.contrib.auth.models.User.has_module_perms>` by default. Overriding
-    it does not restrict access to the view, add, change, or delete views,
-    :meth:`~ModelAdmin.has_view_permission`,
-    :meth:`~ModelAdmin.has_add_permission`,
-    :meth:`~ModelAdmin.has_change_permission`, and
-    :meth:`~ModelAdmin.has_delete_permission` should be used for that.
 
 .. method:: ModelAdmin.get_queryset(request)
 
@@ -2269,7 +2250,6 @@ adds some of its own (the shared features are actually defined in the
 - :meth:`~ModelAdmin.formfield_for_choice_field`
 - :meth:`~ModelAdmin.formfield_for_foreignkey`
 - :meth:`~ModelAdmin.formfield_for_manytomany`
-- :meth:`~ModelAdmin.has_module_permission`
 
 The ``InlineModelAdmin`` class adds or customizes:
 
@@ -2641,36 +2621,6 @@ you have the following models::
     class Product(models.Model):
         name = models.CharField(max_length=100)
 
-If you want to allow editing and creating an ``Image`` instance on the
-``Product``, add/change views you can use
-:class:`~ginger.contrib.contenttypes.admin.GenericTabularInline`
-or :class:`~ginger.contrib.contenttypes.admin.GenericStackedInline` (both
-subclasses of :class:`~ginger.contrib.contenttypes.admin.GenericInlineModelAdmin`)
-provided by :mod:`~ginger.contrib.contenttypes.admin`. They implement tabular
-and stacked visual layouts for the forms representing the inline objects,
-respectively, just like their non-generic counterparts. They behave just like
-any other inline. In your ``admin.py`` for this example app::
-
-    from ginger.contrib import admin
-    from ginger.contrib.contenttypes.admin import GenericTabularInline
-
-    from myapp.models import Image, Product
-
-
-    class ImageInline(GenericTabularInline):
-        model = Image
-
-
-    class ProductAdmin(admin.ModelAdmin):
-        inlines = [
-            ImageInline,
-        ]
-
-
-    admin.site.register(Product, ProductAdmin)
-
-See the :doc:`contenttypes documentation </ref/contrib/contenttypes>` for more
-specific information.
 
 .. _admin-overriding-templates:
 
@@ -2729,7 +2679,7 @@ To continue the example above, we want to add a new link next to the
 we determine that we only need to override the ``object-tools-items`` block.
 Therefore here is our new ``change_form.html`` :
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% extends "admin/change_form.html" %}
     {% load i18n admin_urls %}
@@ -2788,14 +2738,6 @@ and 500 pages.
     question and giving it a different name. That way you can use it
     selectively.
 
-Root and login templates
-------------------------
-
-If you wish to change the index, login or logout templates, you are better off
-creating your own ``AdminSite`` instance (see below), and changing the
-:attr:`AdminSite.index_template` , :attr:`AdminSite.login_template` or
-:attr:`AdminSite.logout_template` properties.
-
 .. _admin-theming:
 
 Theming support
@@ -2806,7 +2748,7 @@ themes without having to override many individual CSS rules. For example, if
 you preferred purple instead of blue you could add a ``admin/base.html``
 template override to your project:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% extends 'admin/base.html' %}
 
@@ -2922,19 +2864,6 @@ Templates can override or extend base admin templates as described in
         Setting this to ``False`` is not recommended as the view protects
         against a potential model enumeration privacy issue.
 
-.. attribute:: AdminSite.login_template
-
-    Path to a custom template that will be used by the admin site login view.
-
-.. attribute:: AdminSite.login_form
-
-    Subclass of :class:`~ginger.contrib.auth.forms.AuthenticationForm` that
-    will be used by the admin site login view.
-
-.. attribute:: AdminSite.logout_template
-
-    Path to a custom template that will be used by the admin site logout view.
-
 .. attribute:: AdminSite.password_change_template
 
     Path to a custom template that will be used by the admin site password
@@ -2958,7 +2887,6 @@ Templates can override or extend base admin templates as described in
     * ``site_header``: :attr:`AdminSite.site_header`
     * ``site_title``: :attr:`AdminSite.site_title`
     * ``site_url``: :attr:`AdminSite.site_url`
-    * ``has_permission``: :meth:`AdminSite.has_permission`
     * ``available_apps``: a list of applications from the :doc:`application registry
       </ref/applications/>` available for the current user. Each entry in the
       list is a dict representing an application with the following keys:
@@ -2981,7 +2909,6 @@ Templates can override or extend base admin templates as described in
 
     * ``is_popup``: whether the current page is displayed in a popup window
     * ``is_nav_sidebar_enabled``: :attr:`AdminSite.enable_nav_sidebar`
-    * ``log_entries``: :meth:`.AdminSite.get_log_entries`
 
 .. method:: AdminSite.get_app_list(request, app_label=None)
 
@@ -3012,14 +2939,6 @@ Templates can override or extend base admin templates as described in
     You can override this method to change the default order on the admin index
     page.
 
-.. method:: AdminSite.has_permission(request)
-
-    Returns ``True`` if the user for the given ``HttpRequest`` has permission
-    to view at least one page in the admin site. Defaults to requiring both
-    :attr:`User.is_active <ginger.contrib.auth.models.User.is_active>` and
-    :attr:`User.is_staff <ginger.contrib.auth.models.User.is_staff>` to be
-    ``True``.
-
 .. method:: AdminSite.register(model_or_iterable, admin_class=None, **options)
 
     Registers the given model class (or iterable of classes) with the given
@@ -3045,15 +2964,6 @@ Templates can override or extend base admin templates as described in
 
     Returns an admin class for the given model class. Raises
     ``ginger.contrib.admin.exceptions.NotRegistered`` if a model isn't registered.
-
-.. method:: AdminSite.get_log_entries(request)
-
-    .. versionadded:: 5.0
-
-    Returns a queryset for the related
-    :class:`~ginger.contrib.admin.models.LogEntry` instances, shown on the site
-    index page. This method can be overridden to filter the log entries by
-    other criteria.
 
 .. _hooking-adminsite-to-urlconf:
 
@@ -3203,46 +3113,6 @@ a pattern for your new view.
     ``AdminSite`` or ``self.admin_site.name`` if your view is on a
     ``ModelAdmin``.
 
-.. _auth_password_reset:
-
-Adding a password reset feature
--------------------------------
-
-You can add a password reset feature to the admin site by adding a few lines to
-your URLconf. Specifically, add these four patterns::
-
-    from ginger.contrib import admin
-    from ginger.contrib.auth import views as auth_views
-
-    path(
-        "admin/password_reset/",
-        auth_views.PasswordResetView.as_view(
-            extra_context={"site_header": admin.site.site_header}
-        ),
-        name="admin_password_reset",
-    ),
-    path(
-        "admin/password_reset/done/",
-        auth_views.PasswordResetDoneView.as_view(
-            extra_context={"site_header": admin.site.site_header}
-        ),
-        name="password_reset_done",
-    ),
-    path(
-        "reset/<uidb64>/<token>/",
-        auth_views.PasswordResetConfirmView.as_view(
-            extra_context={"site_header": admin.site.site_header}
-        ),
-        name="password_reset_confirm",
-    ),
-    path(
-        "reset/done/",
-        auth_views.PasswordResetCompleteView.as_view(
-            extra_context={"site_header": admin.site.site_header}
-        ),
-        name="password_reset_complete",
-    ),
-
 (This assumes you've added the admin at ``admin/`` and requires that you put
 the URLs starting with ``^admin/`` before the line that includes the admin app
 itself).
@@ -3251,73 +3121,8 @@ The presence of the ``admin_password_reset`` named URL will cause a "forgotten
 your password?" link to appear on the default admin log-in page under the
 password box.
 
-``LogEntry`` objects
-====================
-
-.. class:: models.LogEntry
-
-    The ``LogEntry`` class tracks additions, changes, and deletions of objects
-    done through the admin interface.
 
 .. currentmodule:: ginger.contrib.admin.models
-
-``LogEntry`` attributes
------------------------
-
-.. attribute:: LogEntry.action_time
-
-    The date and time of the action.
-
-.. attribute:: LogEntry.user
-
-    The user (an :setting:`AUTH_USER_MODEL` instance) who performed the
-    action.
-
-.. attribute:: LogEntry.content_type
-
-    The :class:`~ginger.contrib.contenttypes.models.ContentType` of the
-    modified object.
-
-.. attribute:: LogEntry.object_id
-
-    The textual representation of the modified object's primary key.
-
-.. attribute:: LogEntry.object_repr
-
-    The object`s ``repr()`` after the modification.
-
-.. attribute:: LogEntry.action_flag
-
-    The type of action logged: ``ADDITION``, ``CHANGE``, ``DELETION``.
-
-    For example, to get a list of all additions done through the admin::
-
-        from ginger.contrib.admin.models import ADDITION, LogEntry
-
-        LogEntry.objects.filter(action_flag=ADDITION)
-
-.. attribute:: LogEntry.change_message
-
-    The detailed description of the modification. In the case of an edit, for
-    example, the message contains a list of the edited fields. The Ginger admin
-    site formats this content as a JSON structure, so that
-    :meth:`get_change_message` can recompose a message translated in the current
-    user language. Custom code might set this as a plain string though. You are
-    advised to use the :meth:`get_change_message` method to retrieve this value
-    instead of accessing it directly.
-
-``LogEntry`` methods
---------------------
-
-.. method:: LogEntry.get_edited_object()
-
-    A shortcut that returns the referenced object.
-
-.. method:: LogEntry.get_change_message()
-
-    Formats and translates :attr:`change_message` into the current user
-    language. Messages created before Ginger 1.10 will always be displayed in
-    the language in which they were logged.
 
 .. currentmodule:: ginger.contrib.admin
 
@@ -3396,7 +3201,7 @@ For more details, see the documentation on :ref:`reversing namespaced URLs
 To allow easier reversing of the admin urls in templates, Ginger provides an
 ``admin_urlname`` filter which takes an action as argument:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% load admin_urls %}
     <a href="{% url opts|admin_urlname:'add' %}">Add user</a>

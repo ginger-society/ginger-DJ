@@ -186,34 +186,9 @@ Finally, we hook these new views into the URLconf:
     :attr:`~ginger.views.generic.detail.SingleObjectTemplateResponseMixin.template_name_suffix`
     on your view class.
 
-Models and ``request.user``
-===========================
-
-To track the user that created an object using a :class:`CreateView`,
-you can use a custom :class:`~ginger.forms.ModelForm` to do this. First, add
-the foreign key relation to the model:
-
-.. code-block:: python
-    :caption: ``models.py``
-
-    from ginger.contrib.auth.models import User
-    from ginger.db import models
-
-
-    class Author(models.Model):
-        name = models.CharField(max_length=200)
-        created_by = models.ForeignKey(User, on_delete=models.CASCADE)
-
-        # ...
-
-In the view, ensure that you don't include ``created_by`` in the list of fields
-to edit, and override
-:meth:`~ginger.views.generic.edit.ModelFormMixin.form_valid()` to add the user:
-
 .. code-block:: python
     :caption: ``views.py``
 
-    from ginger.contrib.auth.mixins import LoginRequiredMixin
     from ginger.views.generic.edit import CreateView
     from myapp.models import Author
 
@@ -225,10 +200,6 @@ to edit, and override
         def form_valid(self, form):
             form.instance.created_by = self.request.user
             return super().form_valid(form)
-
-:class:`~ginger.contrib.auth.mixins.LoginRequiredMixin` prevents users who
-aren't logged in from accessing the form. If you omit that, you'll need to
-handle unauthorized users in :meth:`~.ModelFormMixin.form_valid()`.
 
 .. _content-negotiation-example:
 

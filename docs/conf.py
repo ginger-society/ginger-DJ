@@ -103,7 +103,7 @@ toc_object_entries = False
 
 # General substitutions.
 project = "Ginger"
-copyright = "Ginger Software Foundation and contributors"
+copyright = "Ginger Society and contributors"
 
 
 # The version info for the project you're documenting, acts as replacement for
@@ -192,7 +192,7 @@ suppress_warnings = ["app.add_directive"]
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
-html_theme = "gingerdocs"
+html_theme = "furo"
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
@@ -305,7 +305,7 @@ latex_documents = [
         "contents",
         "ginger.tex",
         "Ginger Documentation",
-        "Ginger Software Foundation",
+        "Ginger Society",
         "manual",
     ),
 ]
@@ -340,7 +340,7 @@ man_pages = [
         "ref/ginger-admin",
         "ginger-admin",
         "Utility script for the Ginger web framework",
-        ["Ginger Software Foundation"],
+        ["Ginger Society"],
         1,
     )
 ]
@@ -368,8 +368,8 @@ texinfo_documents = [
 
 # Bibliographic Dublin Core info.
 epub_title = project
-epub_author = "Ginger Software Foundation"
-epub_publisher = "Ginger Software Foundation"
+epub_author = "Ginger Society"
+epub_publisher = "Ginger Society"
 epub_copyright = copyright
 
 # The basename for the epub file. It defaults to the project name.

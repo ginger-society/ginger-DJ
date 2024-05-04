@@ -872,14 +872,14 @@ URL, you should define ``get_absolute_url()``.
 It's good practice to use ``get_absolute_url()`` in templates, instead of
 hard-coding your objects' URLs. For example, this template code is bad:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     <!-- BAD template code. Avoid! -->
     <a href="/people/{{ object.id }}/">{{ object.name }}</a>
 
 This template code is much better:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     <a href="{{ object.get_absolute_url }}">{{ object.name }}</a>
 

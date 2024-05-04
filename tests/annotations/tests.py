@@ -234,7 +234,7 @@ class NonAggregateAnnotationTestCase(TestCase):
         )
 
     def test_chaining_transforms(self):
-        Company.objects.create(name=" Ginger Software Foundation  ")
+        Company.objects.create(name=" Ginger Society  ")
         Company.objects.create(name="Yahoo")
         with register_lookup(CharField, Trim), register_lookup(CharField, Length):
             for expr in [Length("name__trim"), F("name__trim__length")]:
@@ -242,7 +242,7 @@ class NonAggregateAnnotationTestCase(TestCase):
                     self.assertCountEqual(
                         Company.objects.annotate(length=expr).values("name", "length"),
                         [
-                            {"name": " Ginger Software Foundation  ", "length": 26},
+                            {"name": " Ginger Society  ", "length": 26},
                             {"name": "Yahoo", "length": 5},
                         ],
                     )
@@ -821,7 +821,7 @@ class NonAggregateAnnotationTestCase(TestCase):
             description="Beautiful Devices",
         ).save()
         Company(
-            name="Ginger Software Foundation",
+            name="Ginger Society",
             motto=None,
             ticker_name=None,
             description=None,
@@ -850,7 +850,7 @@ class NonAggregateAnnotationTestCase(TestCase):
             qs,
             [
                 ("Apple", "APPL"),
-                ("Ginger Software Foundation", "No Tag"),
+                ("Ginger Society", "No Tag"),
                 ("Google", "Do No Evil"),
                 ("Yahoo", "Internet Company"),
             ],
@@ -865,7 +865,7 @@ class NonAggregateAnnotationTestCase(TestCase):
             description="Beautiful Devices",
         ).save()
         Company(
-            name="Ginger Software Foundation",
+            name="Ginger Society",
             motto=None,
             ticker_name=None,
             description=None,
@@ -906,7 +906,7 @@ class NonAggregateAnnotationTestCase(TestCase):
             qs,
             [
                 ("Apple", "APPL".lower()),
-                ("Ginger Software Foundation", "No Tag".lower()),
+                ("Ginger Society", "No Tag".lower()),
                 ("Google", "Do No Evil".lower()),
                 ("Yahoo", "Internet Company".lower()),
             ],

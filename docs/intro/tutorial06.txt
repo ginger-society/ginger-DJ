@@ -69,7 +69,7 @@ Put the following code in that stylesheet (``polls/static/polls/style.css``):
 
 Next, add the following at the top of ``polls/templates/polls/index.html``:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
     :caption: ``polls/templates/polls/index.html``
 
     {% load static %}

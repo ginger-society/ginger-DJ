@@ -77,7 +77,7 @@ contained block.
 
 To activate or deactivate localization for a template block, use:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% load l10n %}
 
@@ -104,7 +104,7 @@ Forces localization of a single value.
 
 For example:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% load l10n %}
 
@@ -123,7 +123,7 @@ Forces a single value to be printed without localization.
 
 For example:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% load l10n %}
 

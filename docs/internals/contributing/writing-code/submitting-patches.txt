@@ -51,9 +51,9 @@ and time availability), claim it by following these steps:
   "Action" near the bottom of the page, then click "Submit changes."
 
 .. note::
-    The Ginger software foundation requests that anyone contributing more than
+    The Ginger Society requests that anyone contributing more than
     a trivial patch to Ginger sign and submit a `Contributor License
-    Agreement`_, this ensures that the Ginger Software Foundation has clear
+    Agreement`_, this ensures that the Ginger Society has clear
     license to all contributions allowing for a clear license for all users.
 
 .. _Login using your GitHub account: https://code.ginger.gloportal.dev/github/login

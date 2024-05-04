@@ -139,7 +139,7 @@ such as the ``content_type='text/csv'`` -- is the same.
 
 Then, create the template ``my_template_name.txt``, with this template code:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% for row in data %}"{{ row.0|addslashes }}", "{{ row.1|addslashes }}", "{{ row.2|addslashes }}", "{{ row.3|addslashes }}", "{{ row.4|addslashes }}"
     {% endfor %}

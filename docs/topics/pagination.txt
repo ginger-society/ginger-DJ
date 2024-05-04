@@ -103,7 +103,7 @@ This limits the number of objects per page and adds a ``paginator`` and
 ``page_obj`` to the ``context``. To allow your users to navigate between pages,
 add links to the next and previous page, in your template like this:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     {% for contact in page_obj %}
         {# Each "contact" is a Contact model object. #}

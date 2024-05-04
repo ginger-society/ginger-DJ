@@ -1805,29 +1805,6 @@ The possible values for :attr:`~ForeignKey.on_delete` are found in
     Set the :class:`ForeignKey` to its default value; a default for the
     :class:`ForeignKey` must be set.
 
-* .. function:: SET()
-
-    Set the :class:`ForeignKey` to the value passed to
-    :func:`~ginger.db.models.SET()`, or if a callable is passed in,
-    the result of calling it. In most cases, passing a callable will be
-    necessary to avoid executing queries at the time your ``models.py`` is
-    imported::
-
-        from ginger.conf import settings
-        from ginger.contrib.auth import get_user_model
-        from ginger.db import models
-
-
-        def get_sentinel_user():
-            return get_user_model().objects.get_or_create(username="deleted")[0]
-
-
-        class MyModel(models.Model):
-            user = models.ForeignKey(
-                settings.AUTH_USER_MODEL,
-                on_delete=models.SET(get_sentinel_user),
-            )
-
 * .. attribute:: DO_NOTHING
 
     Take no action. If your database backend enforces referential

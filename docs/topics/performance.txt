@@ -120,7 +120,7 @@ do them faster than the template language can::
     # of the Python objects
     len(my_bicycles)
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     <!--
     Ginger template filter

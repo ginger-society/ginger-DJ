@@ -16,7 +16,6 @@ Introductions to all the key parts of Ginger you'll need to know:
    migrations
    files
    testing/index
-   auth/index
    cache
    conditional-view-processing
    signing

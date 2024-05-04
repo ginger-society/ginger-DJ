@@ -409,7 +409,7 @@ Non-form errors will be rendered with an additional class of ``nonform`` to
 help distinguish them from form-specific errors. For example,
 ``{{ formset.non_form_errors }}`` would look like:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     <ul class="errorlist nonform">
         <li>Articles in a set must have distinct titles.</li>
@@ -983,7 +983,7 @@ use the management form inside the template. Let's look at a sample view::
 
 The ``manage_articles.html`` template might look like this:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     <form method="post">
         {{ formset.management_form }}
@@ -997,7 +997,7 @@ The ``manage_articles.html`` template might look like this:
 However there's a slight shortcut for the above by letting the formset itself
 deal with the management form:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     <form method="post">
         <table>
@@ -1021,7 +1021,7 @@ Manually rendered ``can_delete`` and ``can_order``
 If you manually render fields in the template, you can render
 ``can_delete`` parameter with ``{{ form.DELETE }}``:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     <form method="post">
         {{ formset.management_form }}

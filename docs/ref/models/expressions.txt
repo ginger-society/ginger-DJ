@@ -1290,7 +1290,7 @@ Let's see how it works:
     Google: Do No Evil
     Apple: AAPL
     Yahoo: Internet Company
-    Ginger Software Foundation: No Tagline
+    Ginger Society: No Tagline
 
 .. _avoiding-sql-injection-in-query-expressions:
 

@@ -19,7 +19,6 @@ Ginger includes getting-started documentation for the following WSGI servers:
    gunicorn
    uwsgi
    modwsgi
-   apache-auth
 
 The ``application`` object
 ==========================

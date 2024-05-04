@@ -336,7 +336,7 @@ straight lookups. Here are some things to keep in mind:
   each Ginger model object. The template system shouldn't be allowed to do
   something like this:
 
-  .. code-block:: html+ginger
+  .. code-block:: html+django
 
       I will now delete this valuable data. {{ data.delete }}
 
@@ -415,7 +415,7 @@ parser looks for the first occurrence of ``%}`` after a ``{%``. This prevents
 the use of ``"%}"`` as a string literal. For example, a ``TemplateSyntaxError``
 will be raised for the following expressions:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
   {% include "template.html" tvar="Some string literal with %} in it." %}
 
@@ -424,7 +424,7 @@ will be raised for the following expressions:
 The same issue can be triggered by using a reserved sequence in filter
 arguments:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
   {{ some.variable|default:"}}" }}
 
@@ -637,7 +637,6 @@ processors::
     [
         "ginger.template.context_processors.debug",
         "ginger.template.context_processors.request",
-        "ginger.contrib.auth.context_processors.auth",
         "ginger.contrib.messages.context_processors.messages",
     ]
 
@@ -701,29 +700,6 @@ Built-in template context processors
 ------------------------------------
 
 Here's what each of the built-in processors does:
-
-.. currentmodule:: ginger.contrib.auth.context_processors
-
-``ginger.contrib.auth.context_processors.auth``
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. function:: auth(request)
-
-If this processor is enabled, every ``RequestContext`` will contain these
-variables:
-
-* ``user`` -- An ``auth.User`` instance representing the currently
-  logged-in user (or an ``AnonymousUser`` instance, if the client isn't
-  logged in).
-
-* ``perms`` -- An instance of
-  ``ginger.contrib.auth.context_processors.PermWrapper``, representing the
-  permissions that the currently logged-in user has.
-
-.. currentmodule:: ginger.template.context_processors
-
-``ginger.template.context_processors.debug``
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. function:: debug(request)
 

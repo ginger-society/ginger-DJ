@@ -563,7 +563,7 @@ Sitemap's :attr:`~Sitemap.items()` would return a list of items with
 ``publication_data`` and a ``tags`` field something like this would
 generate a Google News compatible sitemap:
 
-.. code-block:: xml+ginger
+.. code-block:: xml+django
 
     <?xml version="1.0" encoding="UTF-8"?>
     <urlset

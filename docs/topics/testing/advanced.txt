@@ -41,7 +41,7 @@ Example
 
 The following is a unit test using the request factory::
 
-    from ginger.contrib.auth.models import AnonymousUser, User
+    from app.models import AnonymousUser, User
     from ginger.test import RequestFactory, TestCase
 
     from .views import MyView, my_view

@@ -24,7 +24,7 @@ Configuring static files
 
    .. _staticfiles-in-templates:
 
-   .. code-block:: html+ginger
+   .. code-block:: html+django
 
         {% load static %}
         <img src="{% static 'my_app/example.jpg' %}" alt="My image">

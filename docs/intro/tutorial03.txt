@@ -200,7 +200,7 @@ Ginger as ``polls/index.html``.
 
 Put the following code in that template:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
     :caption: ``polls/templates/polls/index.html``
 
     {% if latest_question_list %}
@@ -308,7 +308,7 @@ We'll discuss what you could put in that ``polls/detail.html`` template a bit
 later, but if you'd like to quickly get the above example working, a file
 containing just:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
     :caption: ``polls/templates/polls/detail.html``
 
     {{ question }}
@@ -366,7 +366,7 @@ Back to the ``detail()`` view for our poll application. Given the context
 variable ``question``, here's what the ``polls/detail.html`` template might look
 like:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
     :caption: ``polls/templates/polls/detail.html``
 
     <h1>{{ question.question_text }}</h1>
@@ -395,7 +395,7 @@ Removing hardcoded URLs in templates
 Remember, when we wrote the link to a question in the ``polls/index.html``
 template, the link was partially hardcoded like this:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     <li><a href="/polls/{{ question.id }}/">{{ question.question_text }}</a></li>
 
@@ -405,7 +405,7 @@ you defined the ``name`` argument in the :func:`~ginger.urls.path` functions in
 the ``polls.urls`` module, you can remove a reliance on specific URL paths
 defined in your url configurations by using the ``{% url %}`` template tag:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     <li><a href="{% url 'detail' question.id %}">{{ question.question_text }}</a></li>
 
@@ -457,14 +457,14 @@ file, go ahead and add an ``app_name`` to set the application namespace:
 
 Now change your ``polls/index.html`` template from:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
     :caption: ``polls/templates/polls/index.html``
 
     <li><a href="{% url 'detail' question.id %}">{{ question.question_text }}</a></li>
 
 to point at the namespaced detail view:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
     :caption: ``polls/templates/polls/index.html``
 
     <li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></li>

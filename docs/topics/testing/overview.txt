@@ -358,19 +358,6 @@ Running tests in parallel
 As long as your tests are properly isolated, you can run them in parallel to
 gain a speed up on multi-core hardware. See :option:`test --parallel`.
 
-Password hashing
-~~~~~~~~~~~~~~~~
-
-The default password hasher is rather slow by design. If you're authenticating
-many users in your tests, you may want to use a custom settings file and set
-the :setting:`PASSWORD_HASHERS` setting to a faster hashing algorithm::
-
-    PASSWORD_HASHERS = [
-        "ginger.contrib.auth.hashers.MD5PasswordHasher",
-    ]
-
-Don't forget to also include in :setting:`PASSWORD_HASHERS` any hashing
-algorithm used in fixtures, if any.
 
 Preserving the test database
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~

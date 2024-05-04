@@ -391,8 +391,7 @@ Application registry
     :ref:`while the app registry is being populated <app-loading-process>`,
     specifically during the second phase where it imports models. Then
     ``get_model()`` has the same effect as importing the model. The main use
-    case is to configure model classes with settings, such as
-    :setting:`AUTH_USER_MODEL`.
+    case is to configure model classes with settings
 
     When ``require_ready`` is ``False``, ``get_model()`` returns a model class
     that may not be fully functional (reverse accessors may be missing, for

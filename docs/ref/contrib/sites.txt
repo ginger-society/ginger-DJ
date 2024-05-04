@@ -444,11 +444,6 @@ Here's how Ginger uses the sites framework:
   the current :class:`~ginger.contrib.sites.models.Site` object if you don't
   specify a fully-qualified domain.
 
-* In the :mod:`authentication framework <ginger.contrib.auth>`,
-  :class:`ginger.contrib.auth.views.LoginView` passes the current
-  :class:`~ginger.contrib.sites.models.Site` name to the template as
-  ``{{ site_name }}``.
-
 * The shortcut view (``ginger.contrib.contenttypes.views.shortcut``)
   uses the domain of the current
   :class:`~ginger.contrib.sites.models.Site` object when calculating

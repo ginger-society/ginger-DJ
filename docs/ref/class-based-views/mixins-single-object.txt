@@ -120,10 +120,6 @@ Single object mixins
             context variables from :ref:`context processors
             <subclassing-context-requestcontext>`. For example, if your view
             sets the :attr:`model` attribute to
-            :class:`~ginger.contrib.auth.models.User`, the default context
-            object name of ``user`` would override the ``user`` variable from
-            the :func:`ginger.contrib.auth.context_processors.auth` context
-            processor. Use :meth:`get_context_object_name` to avoid a clash.
 
     .. method:: get_slug_field()
 

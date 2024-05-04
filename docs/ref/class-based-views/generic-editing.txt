@@ -81,7 +81,7 @@ editing content:
 
     **Example myapp/contact.html**:
 
-    .. code-block:: html+ginger
+    .. code-block:: html+django
 
         <form method="post">{% csrf_token %}
             {{ form.as_p }}
@@ -151,7 +151,7 @@ editing content:
 
     **Example myapp/author_form.html**:
 
-    .. code-block:: html+ginger
+    .. code-block:: html+django
 
         <form method="post">{% csrf_token %}
             {{ form.as_p }}
@@ -232,7 +232,7 @@ editing content:
 
     **Example myapp/author_update_form.html**:
 
-    .. code-block:: html+ginger
+    .. code-block:: html+django
 
         <form method="post">{% csrf_token %}
             {{ form.as_p }}
@@ -319,7 +319,7 @@ editing content:
 
     **Example myapp/author_confirm_delete.html**:
 
-    .. code-block:: html+ginger
+    .. code-block:: html+django
 
         <form method="post">{% csrf_token %}
             <p>Are you sure you want to delete "{{ object }}"?</p>

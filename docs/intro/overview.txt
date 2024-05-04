@@ -264,7 +264,7 @@ in the first directory, it checks the second, and so on.
 Let's say the ``news/year_archive.html`` template was found. Here's what that
 might look like:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
     :caption: ``mysite/news/templates/news/year_archive.html``
 
     {% extends "base.html" %}
@@ -305,7 +305,7 @@ in templates: each template has to define only what's unique to that template.
 Here's what the "base.html" template, including the use of :doc:`static files
 </howto/static-files/index>`, might look like:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
     :caption: ``mysite/templates/base.html``
 
     {% load static %}

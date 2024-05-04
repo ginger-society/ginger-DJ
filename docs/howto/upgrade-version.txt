@@ -27,8 +27,6 @@ the new Ginger version(s):
 * Read the :doc:`release notes </releases/index>` for each 'final' release from
   the one after your current Ginger version, up to and including the version to
   which you plan to upgrade.
-* Look at the :doc:`deprecation timeline</internals/deprecation>` for the
-  relevant versions.
 
 Pay particular attention to backwards incompatible changes to get a clear idea
 of what will be needed for a successful upgrade.

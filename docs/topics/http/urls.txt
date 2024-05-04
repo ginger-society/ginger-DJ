@@ -620,7 +620,7 @@ is ``/articles/<nnnn>/``.
 
 You can obtain these in template code by using:
 
-.. code-block:: html+ginger
+.. code-block:: html+django
 
     <a href="{% url 'news-year-archive' 2012 %}">2012 Archive</a>
     {# Or with the year in a template context variable: #}
@@ -669,15 +669,6 @@ your project's ``urlpatterns`` list.
 Putting a prefix on your URL names, perhaps derived from the application
 name (such as ``myapp-comment`` instead of ``comment``), decreases the chance
 of collision.
-
-You can deliberately choose the *same URL name* as another application if you
-want to override a view. For example, a common use case is to override the
-:class:`~ginger.contrib.auth.views.LoginView`. Parts of Ginger and most
-third-party apps assume that this view has a URL pattern with the name
-``login``. If you have a custom login view and give its URL the name ``login``,
-:func:`~ginger.urls.reverse()` will find your custom view as long as it's in
-``urlpatterns`` after ``ginger.contrib.auth.urls`` is included (if that's
-included at all).
 
 You may also use the same name for multiple URL patterns if they differ in
 their arguments. In addition to the URL name, :func:`~ginger.urls.reverse()`
@@ -819,7 +810,7 @@ Using this setup, the following lookups are possible:
 
   and in the template:
 
-  .. code-block:: html+ginger
+  .. code-block:: html+django
 
     {% url 'polls:index' %}
 

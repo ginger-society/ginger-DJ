@@ -176,11 +176,6 @@ branches whose code eventually became part of Ginger itself:
   public APIs of Ginger's object-relational mapper. This has been part
   of Ginger since the 0.95 release.
 
-* ``multi-auth``: A refactoring of :doc:`Ginger's bundled
-  authentication framework </topics/auth/index>` which added support for
-  :ref:`authentication backends <authentication-backends>`. This has
-  been part of Ginger since the 0.95 release.
-
 * ``new-admin``: A refactoring of :doc:`Ginger's bundled
   administrative application </ref/contrib/admin/index>`. This became part of
   Ginger as of the 0.91 release, but was superseded by another

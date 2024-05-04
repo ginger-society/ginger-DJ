@@ -79,7 +79,7 @@ views for displaying drilldown pages for date-based data.
 
     **Example myapp/article_archive.html**:
 
-    .. code-block:: html+ginger
+    .. code-block:: html+django
 
         <ul>
             {% for article in latest %}
@@ -176,7 +176,7 @@ views for displaying drilldown pages for date-based data.
 
     **Example myapp/article_archive_year.html**:
 
-    .. code-block:: html+ginger
+    .. code-block:: html+django
 
         <ul>
             {% for date in date_list %}
@@ -278,7 +278,7 @@ views for displaying drilldown pages for date-based data.
 
     **Example myapp/article_archive_month.html**:
 
-    .. code-block:: html+ginger
+    .. code-block:: html+django
 
         <ul>
             {% for article in object_list %}
@@ -381,7 +381,7 @@ views for displaying drilldown pages for date-based data.
 
     **Example myapp/article_archive_week.html**:
 
-    .. code-block:: html+ginger
+    .. code-block:: html+django
 
         <h1>Week {{ week|date:'W' }}</h1>
 
@@ -496,7 +496,7 @@ views for displaying drilldown pages for date-based data.
 
     **Example myapp/article_archive_day.html**:
 
-    .. code-block:: html+ginger
+    .. code-block:: html+django
 
         <h1>{{ day }}</h1>
 
@@ -618,7 +618,7 @@ views for displaying drilldown pages for date-based data.
 
     **Example myapp/article_detail.html**:
 
-    .. code-block:: html+ginger
+    .. code-block:: html+django
 
         <h1>{{ object.title }}</h1>
 

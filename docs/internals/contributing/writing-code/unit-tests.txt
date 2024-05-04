@@ -393,15 +393,6 @@ settings file  defines ``coverage_html`` as the output directory for the report
 and also excludes several directories not relevant to the results
 (test code or external code included in Ginger).
 
-.. _contrib-apps:
-
-Contrib apps
-============
-
-Tests for contrib apps can be found in the :source:`tests/` directory, typically
-under ``<app_name>_tests``. For example, tests for ``contrib.auth`` are located
-in :source:`tests/auth_tests`.
-
 .. _troubleshooting-unit-tests:
 
 Troubleshooting

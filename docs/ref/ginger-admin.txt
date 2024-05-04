@@ -355,9 +355,6 @@ Specifies the database from which data will be dumped. Defaults to ``default``.
 
 .. ginger-admin-option:: --natural-foreign
 
-Uses the ``natural_key()`` model method to serialize any foreign key and
-many-to-many relationship to objects of the type that defines the method. If
-you're dumping ``contrib.auth`` ``Permission`` objects or
 ``contrib.contenttypes`` ``ContentType`` objects, you should probably use this
 flag. See the :ref:`natural keys <topics-serialization-natural-keys>`
 documentation for more details on this and the next option.
@@ -1640,16 +1637,11 @@ Some commands are only available when the ``ginger.contrib`` application that
 :setting:`enabled <INSTALLED_APPS>`. This section describes them grouped by
 their application.
 
-``ginger.contrib.auth``
------------------------
 
 ``changepassword``
 ~~~~~~~~~~~~~~~~~~
 
 .. ginger-admin:: changepassword [<username>]
-
-This command is only available if Ginger's :doc:`authentication system
-</topics/auth/index>` (``ginger.contrib.auth``) is installed.
 
 Allows changing a user's password. It prompts you to enter a new password twice
 for the given user. If the entries are identical, this immediately becomes the
@@ -1673,9 +1665,6 @@ Example usage:
 
 .. envvar:: GINGER_SUPERUSER_PASSWORD
 
-This command is only available if Ginger's :doc:`authentication system
-</topics/auth/index>` (``ginger.contrib.auth``) is installed.
-
 Creates a superuser account (a user who has all permissions). This is
 useful if you need to create an initial superuser account or if you need to
 programmatically generate superuser accounts for your site(s).
@@ -1685,14 +1674,6 @@ the new superuser account. When run non-interactively, you can provide
 a password by setting the :envvar:`GINGER_SUPERUSER_PASSWORD` environment
 variable. Otherwise, no password will be set, and the superuser account will
 not be able to log in until a password has been manually set for it.
-
-In non-interactive mode, the
-:attr:`~ginger.contrib.auth.models.CustomUser.USERNAME_FIELD` and required
-fields (listed in
-:attr:`~ginger.contrib.auth.models.CustomUser.REQUIRED_FIELDS`) fall back to
-``GINGER_SUPERUSER_<uppercase_field_name>`` environment variables, unless they
-are overridden by a command line argument. For example, to provide an ``email``
-field, you can use ``GINGER_SUPERUSER_EMAIL`` environment variable.
 
 .. ginger-admin-option:: --noinput, --no-input
 
@@ -1715,25 +1696,6 @@ You can subclass the management command and override ``get_input_data()`` if you
 want to customize data input and validation. Consult the source code for
 details on the existing implementation and the method's parameters. For example,
 it could be useful if you have a ``ForeignKey`` in
-:attr:`~ginger.contrib.auth.models.CustomUser.REQUIRED_FIELDS` and want to
-allow creating an instance instead of entering the primary key of an existing
-instance.
-
-``ginger.contrib.contenttypes``
--------------------------------
-
-``remove_stale_contenttypes``
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. ginger-admin:: remove_stale_contenttypes
-
-This command is only available if Ginger's :doc:`contenttypes app
-</ref/contrib/contenttypes>` (:mod:`ginger.contrib.contenttypes`) is installed.
-
-Deletes stale content types (from deleted models) in your database. Any objects
-that depend on the deleted content types will also be deleted. A list of
-deleted objects will be displayed before you confirm it's okay to proceed with
-the deletion.
 
 .. ginger-admin-option:: --database DATABASE
 

@@ -358,16 +358,14 @@ This strategy works well for most objects, but it can cause difficulty in some
 circumstances.
 
 Consider the case of a list of objects that have a foreign key referencing
-:class:`~ginger.contrib.contenttypes.models.ContentType`. If you're going to
+ContentType. If you're going to
 serialize an object that refers to a content type, then you need to have a way
 to refer to that content type to begin with. Since ``ContentType`` objects are
 automatically created by Ginger during the database synchronization process,
 the primary key of a given content type isn't easy to predict; it will
 depend on how and when :djadmin:`migrate` was executed. This is true for all
-models which automatically generate objects, notably including
-:class:`~ginger.contrib.auth.models.Permission`,
-:class:`~ginger.contrib.auth.models.Group`, and
-:class:`~ginger.contrib.auth.models.User`.
+models which automatically generate objects, notably including django migrations
+
 
 .. warning::
 

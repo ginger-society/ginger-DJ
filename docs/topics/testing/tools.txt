@@ -453,21 +453,9 @@ Use the ``ginger.test.Client`` class to make requests.
 
         *Asynchronous version*: ``alogin()``
 
-        If your site uses Ginger's :doc:`authentication system</topics/auth/index>`
-        and you deal with logging in users, you can use the test client's
-        ``login()`` method to simulate the effect of a user logging into the
-        site.
-
         After you call this method, the test client will have all the cookies
         and session data required to pass any login-based tests that may form
         part of a view.
-
-        The format of the ``credentials`` argument depends on which
-        :ref:`authentication backend <authentication-backends>` you're using
-        (which is configured by your :setting:`AUTHENTICATION_BACKENDS`
-        setting). If you're using the standard authentication backend provided
-        by Ginger (``ModelBackend``), ``credentials`` should be the user's
-        username and password, provided as keyword arguments:
 
         .. code-block:: pycon
 
@@ -492,58 +480,13 @@ Use the ``ginger.test.Client`` class to make requests.
         fixture. Remember that if you want your test user to have a password,
         you can't set the user's password by setting the password attribute
         directly -- you must use the
-        :meth:`~ginger.contrib.auth.models.User.set_password()` function to
-        store a correctly hashed password. Alternatively, you can use the
-        :meth:`~ginger.contrib.auth.models.UserManager.create_user` helper
-        method to create a new user with a correctly hashed password.
 
         .. versionchanged:: 5.0
 
             ``alogin()`` method was added.
 
-    .. method:: Client.force_login(user, backend=None)
-    .. method:: Client.aforce_login(user, backend=None)
-
-        *Asynchronous version*: ``aforce_login()``
-
-        If your site uses Ginger's :doc:`authentication
-        system</topics/auth/index>`, you can use the ``force_login()`` method
-        to simulate the effect of a user logging into the site. Use this method
-        instead of :meth:`login` when a test requires a user be logged in and
-        the details of how a user logged in aren't important.
-
-        Unlike ``login()``, this method skips the authentication and
-        verification steps: inactive users (:attr:`is_active=False
-        <ginger.contrib.auth.models.User.is_active>`) are permitted to login
-        and the user's credentials don't need to be provided.
-
-        The user will have its ``backend`` attribute set to the value of the
-        ``backend`` argument (which should be a dotted Python path string), or
-        to ``settings.AUTHENTICATION_BACKENDS[0]`` if a value isn't provided.
-        The :func:`~ginger.contrib.auth.authenticate` function called by
-        :meth:`login` normally annotates the user like this.
-
-        This method is faster than ``login()`` since the expensive
-        password hashing algorithms are bypassed. Also, you can speed up
-        ``login()`` by :ref:`using a weaker hasher while testing
-        <speeding-up-tests-auth-hashers>`.
-
-        .. versionchanged:: 5.0
-
-            ``aforce_login()`` method was added.
-
     .. method:: Client.logout()
     .. method:: Client.alogout()
-
-        *Asynchronous version*: ``alogout()``
-
-        If your site uses Ginger's :doc:`authentication system</topics/auth/index>`,
-        the ``logout()`` method can be used to simulate the effect of a user
-        logging out of your site.
-
-        After you call this method, the test client will have all the cookies
-        and session data cleared to defaults. Subsequent requests will appear
-        to come from an :class:`~ginger.contrib.auth.models.AnonymousUser`.
 
         .. versionchanged:: 5.0
 
@@ -1396,11 +1339,11 @@ Ginger provides a standard Python context manager (see :pep:`343`) called
             self.assertRedirects(response, "/accounts/login/?next=/sekrit/")
 
             # Then override the LOGIN_URL setting
-            with self.settings(LOGIN_URL="/other/login/"):
+            with self.settings(VAR_NAME="/other/route/"):
                 response = self.client.get("/sekrit/")
                 self.assertRedirects(response, "/other/login/?next=/sekrit/")
 
-This example will override the :setting:`LOGIN_URL` setting for the code
+This example will override the  setting for the code
 in the ``with`` block and reset its value to the previous state afterward.
 
 .. method:: SimpleTestCase.modify_settings()
@@ -1420,8 +1363,6 @@ settings changes::
                     "append": "ginger.middleware.cache.FetchFromCacheMiddleware",
                     "prepend": "ginger.middleware.cache.UpdateCacheMiddleware",
                     "remove": [
-                        "ginger.contrib.sessions.middleware.SessionMiddleware",
-                        "ginger.contrib.auth.middleware.AuthenticationMiddleware",
                         "ginger.contrib.messages.middleware.MessageMiddleware",
                     ],
                 }
