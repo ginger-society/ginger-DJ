@@ -58,10 +58,10 @@ linkcheck_ignore = [
     r"^https?://(?:[^/.]+\.)*(?:example|invalid|localhost|test)(?::\d+)?/",
     # Pages that are inaccessible because they require authentication.
     r"^https://github\.com/[^/]+/[^/]+/fork",
-    r"^https://code\.gingerproject\.com/github/login",
-    r"^https://code\.gingerproject\.com/newticket",
-    r"^https://(?:code|www)\.gingerproject\.com/admin/",
-    r"^https://www\.gingerproject\.com/community/add/blogs/",
+    r"^https://code\.gingersociety\.org/github/login",
+    r"^https://code\.gingersociety\.org/newticket",
+    r"^https://(?:code|www)\.gingersociety\.org/admin/",
+    r"^https://www\.gingersociety\.org/community/add/blogs/",
     r"^https://www\.google\.com/webmasters/tools/ping",
     r"^https://search\.google\.com/search-console/welcome",
     # Fragments used to dynamically switch content or populate fields.
@@ -102,7 +102,7 @@ root_doc = "contents"
 toc_object_entries = False
 
 # General substitutions.
-project = "Ginger"
+project = "Ginger - DJ"
 copyright = "Ginger Society and contributors"
 
 

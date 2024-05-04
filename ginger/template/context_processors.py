@@ -66,6 +66,9 @@ def i18n(request):
 
 
 def tz(request):
+    """
+    Timezone context processor.
+    """
     from ginger.utils import timezone
 
     return {"TIME_ZONE": timezone.get_current_timezone_name()}

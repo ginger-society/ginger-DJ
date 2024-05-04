@@ -15,7 +15,7 @@ Reporting security issues
 =========================
 
 **Short version: please report security issues by emailing
-security@ginger.gloportal.dev**.
+security@gingersociety.org**.
 
 Most normal bugs in Ginger are reported to `our public Trac instance`_, but
 due to the sensitive nature of security issues, we ask that they **not** be
@@ -23,7 +23,7 @@ publicly reported in this fashion.
 
 Instead, if you believe you've found something in Ginger which has security
 implications, please send a description of the issue via email to
-``security@ginger.gloportal.dev``. Mail sent to that address reaches the `security
+``security@gingersociety.org``. Mail sent to that address reaches the `security
 team <https://www.ginger.gloportal.dev/foundation/teams/#security-team>`_.
 
 Once you've submitted an issue via email, you should receive an acknowledgment
@@ -33,7 +33,7 @@ action to be taken, you may receive further followup emails.
 .. admonition:: Sending encrypted reports
 
     If you want to send an encrypted email (*optional*), the public key ID for
-    ``security@ginger.gloportal.dev`` is ``0xfcb84b8d1d17f80b``, and this public
+    ``security@gingersociety.org`` is ``0xfcb84b8d1d17f80b``, and this public
     key is available from most commonly-used keyservers.
 
 .. _our public Trac instance: https://code.ginger.gloportal.dev/query
@@ -202,7 +202,7 @@ Requesting notifications
 If you believe that you, or an organization you are authorized to
 represent, fall into one of the groups listed above, you can ask to be
 added to Ginger's notification list by emailing
-``security@ginger.gloportal.dev``. Please use the subject line "Security
+``security@gingersociety.org``. Please use the subject line "Security
 notification request".
 
 Your request **must** include the following information:

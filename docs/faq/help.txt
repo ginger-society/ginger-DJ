@@ -82,7 +82,7 @@ I think I've found a security problem! What should I do?
 ========================================================
 
 If you think you've found a security problem with Ginger, please send a message
-to security@ginger.gloportal.dev. This is a private list only open to long-time,
+to security@gingersociety.org. This is a private list only open to long-time,
 highly trusted Ginger developers, and its archives are not publicly readable.
 
 Due to the sensitive nature of security issues, we ask that if you think you
