@@ -15,7 +15,12 @@ from ginger.rest_framework import exceptions
 from ginger.rest_framework.request import clone_request
 from ginger.rest_framework.settings import api_settings
 from ginger.rest_framework.utils.model_meta import _get_pk
-
+from ginger.contrib.admin_docs_utils import (
+    remove_non_capturing_groups,
+    replace_metacharacters,
+    replace_named_groups,
+    replace_unnamed_groups,
+)
 
 def simplify_regex(pattern):
     r"""
