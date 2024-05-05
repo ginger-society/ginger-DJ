@@ -73,16 +73,16 @@ WSGI_APPLICATION = 'server.wsgi.application'
 # Database
 # https://docs.ginger.gloportal.dev/en/4.2/ref/settings/#databases
 
-DATABASES = {  # pragma: no cover
-        "default": {
-            "ENGINE": "ginger.db.backends.postgresql_psycopg2",
-            "NAME": 'test3',
-            "USER": 'postgres',
-            "PASSWORD": 'postgres',
-            "HOST": 'localhost',
-            "PORT": "5432",
-        }
-    }
+# DATABASES = {  # pragma: no cover
+#         "default": {
+#             "ENGINE": "ginger.db.backends.postgresql_psycopg2",
+#             "NAME": 'test3',
+#             "USER": 'postgres',
+#             "PASSWORD": 'postgres',
+#             "HOST": 'localhost',
+#             "PORT": "5432",
+#         }
+#     }
 
 
 DATABASES = {
@@ -91,6 +91,13 @@ DATABASES = {
         "NAME": "db.sqlite3",
     }
 }
+
+CACHES = {
+        "default": {
+            "BACKEND": "ginger.core.cache.backends.redis.RedisCache",
+            "LOCATION": "redis://redis:6379",
+        }
+    }
 
 # Internationalization
 # https://docs.ginger.gloportal.dev/en/4.2/topics/i18n/

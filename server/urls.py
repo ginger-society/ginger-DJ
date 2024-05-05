@@ -40,5 +40,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('test/', test_view),
     path('test2/', test_view2),
+    path("health-check", health_check_view),
     path("", include("ginger.prometheus.urls")),
 ]

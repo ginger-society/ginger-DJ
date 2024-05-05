@@ -26,3 +26,18 @@
           - ./:/app
           - ~/.gitconfig:/etc/gitconfig
           - ~/.ssh:/root/.ssh
+
+
+    redis:
+        image: bitnami/redis:6.2.5
+        hostname: "ginger-dj-redis"
+        restart: always
+        environment:
+            ALLOW_EMPTY_PASSWORD: "yes"
+        healthcheck:
+            test: redis-cli ping
+            interval: 1s
+            timeout: 3s
+            retries: 50
+        ports:
+            - 6379:6379

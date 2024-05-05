@@ -6,6 +6,8 @@ from ginger.drf_yasg.utils import swagger_auto_schema
 from ginger.rest_framework import serializers
 from ginger.drf_yasg import openapi
 from prometheus_client import Counter
+from ginger.views.decorators.cache import cache_page
+from datetime import datetime
 
 # Create your views here.
 
@@ -35,7 +37,15 @@ class TestReponseSerializer(serializers.Serializer):
 @api_view(["GET"])
 def test_view2(request):
     """Test view"""
-    requests_total.labels(endpoint="Health check", method=test_view2, user=None).inc()
+    requests_total.labels(endpoint="Test view 2", method=test_view2, user=None).inc()
     return JsonResponse({"text": "Just rendering some JSON :)"})
 
+
+
+@cache_page(10)
+def health_check_view(request):
+    """Server health check request handler"""
+    requests_total.labels(endpoint="Health check", method=health_check_view, user=None).inc()
+    now = datetime.now()
+    return JsonResponse({"status": "ok", "server_time": now.strftime("%d/%m/%Y, %H:%M:%S")})
 
