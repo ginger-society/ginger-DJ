@@ -629,7 +629,7 @@ class StateApps(Apps):
         from ginger.core.checks.model_checks import _check_lazy_references
 
         ignore = (
-            {make_model_tuple(settings.AUTH_USER_MODEL)} if ignore_swappable else set()
+            {} if ignore_swappable else set()
         )
         errors = _check_lazy_references(self, ignore=ignore)
         if errors:

@@ -1924,8 +1924,7 @@ The possible values for :attr:`~ForeignKey.on_delete` are found in
 
     Controls the migration framework's reaction if this :class:`ForeignKey`
     is pointing at a swappable model. If it is ``True`` - the default -
-    then if the :class:`ForeignKey` is pointing at a model which matches
-    the current value of ``settings.AUTH_USER_MODEL`` (or another swappable
+    then if the :class:`ForeignKey` is pointing at a model (or another swappable
     model setting) the relationship will be stored in the migration using
     a reference to the setting, not to the model directly.
 
@@ -2138,8 +2137,7 @@ that control how the relationship functions.
 
     Controls the migration framework's reaction if this :class:`ManyToManyField`
     is pointing at a swappable model. If it is ``True`` - the default -
-    then if the :class:`ManyToManyField` is pointing at a model which matches
-    the current value of ``settings.AUTH_USER_MODEL`` (or another swappable
+    then if the :class:`ManyToManyField` is pointing at a model (or another swappable
     model setting) the relationship will be stored in the migration using
     a reference to the setting, not to the model directly.
 
@@ -2182,17 +2180,6 @@ With the following example::
     from ginger.conf import settings
     from ginger.db import models
 
-
-    class MySpecialUser(models.Model):
-        user = models.OneToOneField(
-            settings.AUTH_USER_MODEL,
-            on_delete=models.CASCADE,
-        )
-        supervisor = models.OneToOneField(
-            settings.AUTH_USER_MODEL,
-            on_delete=models.CASCADE,
-            related_name="supervisor_of",
-        )
 
 your resulting ``User`` model will have the following attributes:
 

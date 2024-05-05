@@ -150,10 +150,7 @@ class Command(BaseCommand):
             operations.extend(smigration.operations)
             for dependency in smigration.dependencies:
                 if isinstance(dependency, SwappableTuple):
-                    if settings.AUTH_USER_MODEL == dependency.setting:
-                        dependencies.add(("__setting__", "AUTH_USER_MODEL"))
-                    else:
-                        dependencies.add(dependency)
+                    dependencies.add(dependency)
                 elif dependency[0] != smigration.app_label or first_migration:
                     dependencies.add(dependency)
             first_migration = False

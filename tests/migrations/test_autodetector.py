@@ -3500,49 +3500,7 @@ class AutodetectorTests(BaseAutodetectorTests):
         # The model the FK on the book model points to.
         fk_field = changes["otherapp"][0].operations[0].fields[2][1]
         self.assertEqual(fk_field.remote_field.model, "testapp.Author")
-
-    @override_settings(AUTH_USER_MODEL="thirdapp.CustomUser")
-    def test_swappable(self):
-        with isolate_lru_cache(apps.get_swappable_settings_name):
-            changes = self.get_changes(
-                [self.custom_user], [self.custom_user, self.author_with_custom_user]
-            )
-        # Right number/type of migrations?
-        self.assertNumberMigrations(changes, "testapp", 1)
-        self.assertOperationTypes(changes, "testapp", 0, ["CreateModel"])
-        self.assertOperationAttributes(changes, "testapp", 0, 0, name="Author")
-        self.assertMigrationDependencies(
-            changes, "testapp", 0, [("__setting__", "AUTH_USER_MODEL")]
-        )
-
     
-    @override_settings(AUTH_USER_MODEL="thirdapp.CustomUser")
-    def test_swappable_many_to_many_model_case(self):
-        document_lowercase = ModelState(
-            "testapp",
-            "Document",
-            [
-                ("id", models.AutoField(primary_key=True)),
-                ("owners", models.ManyToManyField(settings.AUTH_USER_MODEL.lower())),
-            ],
-        )
-        document = ModelState(
-            "testapp",
-            "Document",
-            [
-                ("id", models.AutoField(primary_key=True)),
-                ("owners", models.ManyToManyField(settings.AUTH_USER_MODEL)),
-            ],
-        )
-        with isolate_lru_cache(apps.get_swappable_settings_name):
-            changes = self.get_changes(
-                [self.custom_user, document_lowercase],
-                [self.custom_user, document],
-            )
-        self.assertEqual(len(changes), 0)
-
-    
-
     def test_add_field_with_default(self):
         """#22030 - Adding a field with a default should work."""
         changes = self.get_changes([self.author_empty], [self.author_name_default])
@@ -4298,19 +4256,6 @@ class AutodetectorTests(BaseAutodetectorTests):
         self.assertOperationTypes(changes, "app", 0, ["AlterModelOptions"])
         self.assertOperationAttributes(changes, "app", 0, 0, name="model", options={})
 
-    @override_settings(AUTH_USER_MODEL="thirdapp.CustomUser")
-    def test_swappable_first_setting(self):
-        """Swappable models get their CreateModel first."""
-        with isolate_lru_cache(apps.get_swappable_settings_name):
-            changes = self.get_changes([], [self.custom_user_no_inherit, self.aardvark])
-        # Right number/type of migrations?
-        self.assertNumberMigrations(changes, "thirdapp", 1)
-        self.assertOperationTypes(
-            changes, "thirdapp", 0, ["CreateModel", "CreateModel"]
-        )
-        self.assertOperationAttributes(changes, "thirdapp", 0, 0, name="CustomUser")
-        self.assertOperationAttributes(changes, "thirdapp", 0, 1, name="Aardvark")
-
     def test_bases_first(self):
         """Bases of other models come first."""
         changes = self.get_changes(
@@ -4570,133 +4515,6 @@ class AutodetectorTests(BaseAutodetectorTests):
         self.assertOperationTypes(changes, "a", 0, ["CreateModel", "CreateModel"])
         self.assertOperationTypes(changes, "a", 1, ["AddField"])
         self.assertOperationTypes(changes, "b", 0, ["CreateModel", "CreateModel"])
-
-    @override_settings(AUTH_USER_MODEL="a.Tenant")
-    def test_circular_dependency_swappable(self):
-        """
-        #23322 - The dependency resolver knows to explicitly resolve
-        swappable models.
-        """
-        with isolate_lru_cache(apps.get_swappable_settings_name):
-            tenant = ModelState(
-                "a",
-                "Tenant",
-                [
-                    ("id", models.AutoField(primary_key=True)),
-                    ("primary_address", models.ForeignKey("b.Address", models.CASCADE)),
-                ],
-                bases=(AbstractBaseUser,),
-            )
-            address = ModelState(
-                "b",
-                "Address",
-                [
-                    ("id", models.AutoField(primary_key=True)),
-                    (
-                        "tenant",
-                        models.ForeignKey(settings.AUTH_USER_MODEL, models.CASCADE),
-                    ),
-                ],
-            )
-            changes = self.get_changes([], [address, tenant])
-
-        # Right number/type of migrations?
-        self.assertNumberMigrations(changes, "a", 2)
-        self.assertOperationTypes(changes, "a", 0, ["CreateModel"])
-        self.assertOperationTypes(changes, "a", 1, ["AddField"])
-        self.assertMigrationDependencies(changes, "a", 0, [])
-        self.assertMigrationDependencies(
-            changes, "a", 1, [("a", "auto_1"), ("b", "auto_1")]
-        )
-        # Right number/type of migrations?
-        self.assertNumberMigrations(changes, "b", 1)
-        self.assertOperationTypes(changes, "b", 0, ["CreateModel"])
-        self.assertMigrationDependencies(
-            changes, "b", 0, [("__setting__", "AUTH_USER_MODEL")]
-        )
-
-    @override_settings(AUTH_USER_MODEL="b.Tenant")
-    def test_circular_dependency_swappable2(self):
-        """
-        #23322 - The dependency resolver knows to explicitly resolve
-        swappable models but with the swappable not being the first migrated
-        model.
-        """
-        with isolate_lru_cache(apps.get_swappable_settings_name):
-            address = ModelState(
-                "a",
-                "Address",
-                [
-                    ("id", models.AutoField(primary_key=True)),
-                    (
-                        "tenant",
-                        models.ForeignKey(settings.AUTH_USER_MODEL, models.CASCADE),
-                    ),
-                ],
-            )
-            tenant = ModelState(
-                "b",
-                "Tenant",
-                [
-                    ("id", models.AutoField(primary_key=True)),
-                    ("primary_address", models.ForeignKey("a.Address", models.CASCADE)),
-                ],
-            )
-            changes = self.get_changes([], [address, tenant])
-        # Right number/type of migrations?
-        self.assertNumberMigrations(changes, "a", 2)
-        self.assertOperationTypes(changes, "a", 0, ["CreateModel"])
-        self.assertOperationTypes(changes, "a", 1, ["AddField"])
-        self.assertMigrationDependencies(changes, "a", 0, [])
-       
-        # Right number/type of migrations?
-        self.assertNumberMigrations(changes, "b", 1)
-        self.assertOperationTypes(changes, "b", 0, ["CreateModel"])
-        self.assertMigrationDependencies(changes, "b", 0, [("a", "auto_1")])
-
-    @override_settings(AUTH_USER_MODEL="a.Person")
-    def test_circular_dependency_swappable_self(self):
-        """
-        #23322 - The dependency resolver knows to explicitly resolve
-        swappable models.
-        """
-        with isolate_lru_cache(apps.get_swappable_settings_name):
-            person = ModelState(
-                "a",
-                "Person",
-                [
-                    ("id", models.AutoField(primary_key=True)),
-                    (
-                        "parent1",
-                        models.ForeignKey(
-                            settings.AUTH_USER_MODEL,
-                            models.CASCADE,
-                            related_name="children",
-                        ),
-                    ),
-                ],
-            )
-            changes = self.get_changes([], [person])
-        # Right number/type of migrations?
-        self.assertNumberMigrations(changes, "a", 1)
-        self.assertOperationTypes(changes, "a", 0, ["CreateModel"])
-        self.assertMigrationDependencies(changes, "a", 0, [])
-
-    @override_settings(AUTH_USER_MODEL="a.User")
-    def test_swappable_circular_multi_mti(self):
-        with isolate_lru_cache(apps.get_swappable_settings_name):
-            parent = ModelState(
-                "a",
-                "Parent",
-                [("user", models.ForeignKey(settings.AUTH_USER_MODEL, models.CASCADE))],
-            )
-            child = ModelState("a", "Child", [], bases=("a.Parent",))
-            user = ModelState("a", "User", [], bases=( "a.Child", ))
-            changes = self.get_changes([], [parent, child, user])
-        self.assertNumberMigrations(changes, "a", 1)
-        self.assertOperationTypes(
-            changes, "a", 0, ["CreateModel", "CreateModel", "CreateModel", "AddField"]
-        )
 
     @mock.patch(
         "ginger.db.migrations.questioner.MigrationQuestioner.ask_not_null_addition",

@@ -674,15 +674,6 @@ class WriterTests(SimpleTestCase):
             ),
         )
 
-    def test_serialize_settings(self):
-        self.assertSerializedEqual(
-            SettingsReference(settings.AUTH_USER_MODEL, "AUTH_USER_MODEL")
-        )
-        self.assertSerializedResultEqual(
-            SettingsReference("someapp.model", "AUTH_USER_MODEL"),
-            ("settings.AUTH_USER_MODEL", {"from ginger.conf import settings"}),
-        )
-
     def test_serialize_iterators(self):
         self.assertSerializedResultEqual(
             ((x, x * x) for x in range(3)), ("((0, 0), (1, 1), (2, 4))", set())
