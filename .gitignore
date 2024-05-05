@@ -19,6 +19,6 @@ tests/report/
 tests/screenshots/
 htmlcov
 .coverage
-Ginger-*
+Ginger_DJ-*
 cache
 
