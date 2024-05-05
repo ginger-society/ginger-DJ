@@ -15,7 +15,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from ginger.contrib import admin
-from ginger.urls import path
+from ginger.urls import path, include
 from src.views import *
 from ginger.drf_yasg import openapi
 from ginger.drf_yasg.views import get_schema_view
@@ -40,4 +40,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('test/', test_view),
     path('test2/', test_view2),
+    path("", include("ginger.prometheus.urls")),
 ]

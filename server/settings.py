@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'ginger.contrib.staticfiles',
     'ginger.rest_framework',
     'ginger.drf_yasg',
+    'ginger.prometheus',
     'src'
 ]
 
