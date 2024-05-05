@@ -2,12 +2,12 @@
 
  services:
     dev:
-        container_name: gloapi
+        container_name: ginger_dj
         build:
             context: .
             dockerfile: ./Dockerfile
         command: /bin/sh -c "while sleep 1000; do :; done"
-        platform: linux/amd64
+        # platform: linux/amd64
         ports:
             - 8002:8002
         environment:

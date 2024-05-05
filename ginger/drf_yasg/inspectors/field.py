@@ -22,8 +22,8 @@ from ..errors import SwaggerGenerationError
 from ..utils import (
     decimal_as_float, field_value_to_representation, filter_none, get_serializer_class, get_serializer_ref_name
 )
+from ginger.rest_framework import VERSION as drf_version
 
-drf_version = pkg_resources.get_distribution("djangorestframework").version
 
 logger = logging.getLogger(__name__)
 

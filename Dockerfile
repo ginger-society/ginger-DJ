@@ -2,8 +2,6 @@ FROM python:3.12.0-bullseye
 ENV PYTHONUNBUFFERED 1
 ENV env dev
 WORKDIR /app
-RUN wget -q https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-RUN apt install -y ./google-chrome-stable_current_amd64.deb
 ADD . /app
 COPY requirements.txt /app/requirements.txt
 EXPOSE 80
@@ -21,4 +19,4 @@ RUN apt update && apt install yarn
 
 RUN apt install libmemcached-dev -y
 RUN pip install -r tests/requirements/py3.txt
-RUN npx puppeteer browsers install chrome
+# RUN npx puppeteer browsers install chrome
