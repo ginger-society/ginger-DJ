@@ -20,4 +20,5 @@ tests/screenshots/
 htmlcov
 .coverage
 Ginger-*
+cache
 
