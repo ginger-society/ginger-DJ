@@ -388,7 +388,6 @@ class AdminSite:
                     )
                 except NoReverseMatch:
                     pass
-            print("app_label" , app_label)
             if app_label in app_dict:
                 app_dict[app_label]["models"].append(model_dict)
             else:
@@ -403,7 +402,6 @@ class AdminSite:
                     "has_module_perms": True,
                     "models": [model_dict],
                 }
-        print(app_dict)
         return app_dict
 
     def get_app_list(self, request, app_label=None):
