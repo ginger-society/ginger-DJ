@@ -48,10 +48,10 @@ class SafeStringTest(SimpleTestCase):
         self.assertIsInstance(str(safe_s), SafeData)
 
     def test_mark_safe_lazy_i18n(self):
-        s = mark_safe(gettext_lazy("name"))
+        s = mark_safe(gettext_lazy("log entries"))
         tpl = Template("{{ s }}")
         with translation.override("fr"):
-            self.assertEqual(tpl.render(Context({"s": s})), "nom")
+            self.assertEqual(tpl.render(Context({"s": s})), "entrées d’historique")
 
     def test_mark_safe_object_implementing_dunder_str(self):
         class Obj:

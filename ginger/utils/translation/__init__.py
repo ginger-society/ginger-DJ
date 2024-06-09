@@ -62,7 +62,6 @@ class Trans:
 
     def __getattr__(self, real_name):
         from ginger.conf import settings
-
         if settings.USE_I18N:
             from ginger.utils.translation import trans_real as trans
             from ginger.utils.translation.reloader import (
