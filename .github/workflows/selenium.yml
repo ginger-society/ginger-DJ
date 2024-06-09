@@ -1,8 +1,9 @@
 name: Selenium Tests
 
 on:
-  pull_request:
-    types: [labeled, synchronize, opened, reopened]
+  push:
+    branches:
+      - main
     paths-ignore:
       - 'docs/**'
 
@@ -15,7 +16,7 @@ permissions:
 
 jobs:
   selenium-sqlite:
-    if: contains(github.event.pull_request.labels.*.name, 'selenium')
+    # if: contains(github.event.pull_request.labels.*.name, 'selenium')
     runs-on: ubuntu-latest
     name: SQLite
     steps:
@@ -38,7 +39,7 @@ jobs:
           python -Wall runtests.py --verbosity 2 --noinput --selenium=chrome --headless --settings=test_sqlite --parallel 2
 
   selenium-postgresql:
-    if: contains(github.event.pull_request.labels.*.name, 'selenium')
+    # if: contains(github.event.pull_request.labels.*.name, 'selenium')
     runs-on: ubuntu-latest
     name: PostgreSQL
     services:
