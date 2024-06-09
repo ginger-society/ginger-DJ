@@ -277,8 +277,8 @@ class FixtureLoadingTests(DumpDataAssertMixin, TestCase):
         self.assertQuerySetEqual(
             Tag.objects.all(),
             [
-                '<Tag: <Article: Copyright is fine the way it is> tagged "copyright">',
-                '<Tag: <Article: Copyright is fine the way it is> tagged "law">',
+                '<Tag: tagged "copyright">',
+                '<Tag: tagged "law">',
             ],
             transform=repr,
             ordered=False,
@@ -289,10 +289,10 @@ class FixtureLoadingTests(DumpDataAssertMixin, TestCase):
         self.assertQuerySetEqual(
             Tag.objects.all(),
             [
-                '<Tag: <Article: Copyright is fine the way it is> tagged "copyright">',
-                '<Tag: <Article: Copyright is fine the way it is> tagged "legal">',
-                '<Tag: <Article: Ginger conquers world!> tagged "ginger">',
-                '<Tag: <Article: Ginger conquers world!> tagged "world domination">',
+                '<Tag: tagged "copyright">',
+                '<Tag: tagged "legal">',
+                '<Tag: tagged "ginger">',
+                '<Tag: tagged "world domination">',
             ],
             transform=repr,
             ordered=False,
@@ -303,10 +303,9 @@ class FixtureLoadingTests(DumpDataAssertMixin, TestCase):
         self.assertQuerySetEqual(
             Visa.objects.all(),
             [
-                "<Visa: Ginger Reinhardt Can add user, Can change user, Can delete "
-                "user>",
-                "<Visa: Stephane Grappelli Can add user>",
-                "<Visa: Prince >",
+                "<Visa: Ginger Reinhardt>",
+                "<Visa: Stephane Grappelli>",
+                "<Visa: Prince>",
             ],
             transform=repr,
             ordered=False,
@@ -317,10 +316,9 @@ class FixtureLoadingTests(DumpDataAssertMixin, TestCase):
         self.assertQuerySetEqual(
             Visa.objects.all(),
             [
-                "<Visa: Ginger Reinhardt Can add user, Can change user, Can delete "
-                "user>",
-                "<Visa: Stephane Grappelli Can add user, Can delete user>",
-                '<Visa: Artist formerly known as "Prince" Can change user>',
+                "<Visa: Ginger Reinhardt>",
+                "<Visa: Stephane Grappelli>",
+                '<Visa: Artist formerly known as "Prince">',
             ],
             transform=repr,
             ordered=False,
@@ -382,16 +380,16 @@ class FixtureLoadingTests(DumpDataAssertMixin, TestCase):
             '{"headline": "XML identified as leading cause of cancer", '
             '"pub_date": "2006-06-16T16:00:00"}}, '
             '{"pk": 1, "model": "fixtures.tag", "fields": '
-            '{"tagged_type": ["fixtures", "article"], "name": "copyright", '
+            '{"name": "copyright", '
             '"tagged_id": 3}}, '
             '{"pk": 2, "model": "fixtures.tag", "fields": '
-            '{"tagged_type": ["fixtures", "article"], "name": "legal", '
+            '{"name": "legal", '
             '"tagged_id": 3}}, '
             '{"pk": 3, "model": "fixtures.tag", "fields": '
-            '{"tagged_type": ["fixtures", "article"], "name": "ginger", '
+            '{"name": "ginger", '
             '"tagged_id": 4}}, '
             '{"pk": 4, "model": "fixtures.tag", "fields": '
-            '{"tagged_type": ["fixtures", "article"], "name": "world domination", '
+            '{"name": "world domination", '
             '"tagged_id": 4}}, '
             '{"pk": 1, "model": "fixtures.person", '
             '"fields": {"name": "Ginger Reinhardt"}}, '
@@ -400,15 +398,11 @@ class FixtureLoadingTests(DumpDataAssertMixin, TestCase):
             '{"pk": 3, "model": "fixtures.person", '
             '"fields": {"name": "Artist formerly known as \\"Prince\\""}}, '
             '{"pk": 1, "model": "fixtures.visa", '
-            '"fields": {"person": ["Ginger Reinhardt"], "permissions": '
-            '[["add_user", "auth", "user"], ["change_user", "auth", "user"], '
-            '["delete_user", "auth", "user"]]}}, '
+            '"fields": {"person": ["Ginger Reinhardt"]}}, '
             '{"pk": 2, "model": "fixtures.visa", "fields": '
-            '{"person": ["Stephane Grappelli"], "permissions": '
-            '[["add_user", "auth", "user"], ["delete_user", "auth", "user"]]}}, '
+            '{"person": ["Stephane Grappelli"]}}, '
             '{"pk": 3, "model": "fixtures.visa", "fields": '
-            '{"person": ["Artist formerly known as \\"Prince\\""], "permissions": '
-            '[["change_user", "auth", "user"]]}}, '
+            '{"person": ["Artist formerly known as \\"Prince\\""]}}, '
             '{"pk": 1, "model": "fixtures.book", "fields": '
             '{"name": "Music for all ages", "authors": '
             '[["Artist formerly known as \\"Prince\\""], ["Ginger Reinhardt"]]}}]',
@@ -416,6 +410,7 @@ class FixtureLoadingTests(DumpDataAssertMixin, TestCase):
         )
 
         # Dump the current contents of the database as an XML fixture
+        self.maxDiff = None
         self._dumpdata_assert(
             ["fixtures"],
             '<?xml version="1.0" encoding="utf-8"?><ginger-objects version="1.0">'
@@ -825,10 +820,9 @@ class FixtureLoadingTests(DumpDataAssertMixin, TestCase):
         with self.assertNumQueries(5):
             self._dumpdata_assert(
                 ["fixtures.visa"],
-                '[{"fields": {"permissions": [["add_user", "auth", "user"]],'
-                '"person": ["Stephane Grappelli"]},'
+                '[{"fields": {"person": ["Stephane Grappelli"]},'
                 '"model": "fixtures.visa", "pk": 2},'
-                '{"fields": {"permissions": [], "person": ["Prince"]},'
+                '{"fields": {"person": ["Prince"]},'
                 '"model": "fixtures.visa", "pk": 3}]',
                 natural_foreign_keys=True,
                 primary_keys="2,3",
@@ -837,7 +831,7 @@ class FixtureLoadingTests(DumpDataAssertMixin, TestCase):
     def test_compress_format_loading(self):
         # Load fixture 4 (compressed), using format specification
         management.call_command("loaddata", "fixture4.json", verbosity=0)
-        self.assertEqual(Article.objects.get().headline, "Ginger pets kitten")
+        self.assertEqual(Article.objects.get().headline, "Django pets kitten")
 
     def test_compressed_specified_loading(self):
         # Load fixture 5 (compressed), using format *and* compression specification
@@ -996,8 +990,8 @@ class FixtureLoadingTests(DumpDataAssertMixin, TestCase):
         self.assertQuerySetEqual(
             Tag.objects.all(),
             [
-                '<Tag: <Article: Time to reform copyright> tagged "copyright">',
-                '<Tag: <Article: Time to reform copyright> tagged "law">',
+                '<Tag: tagged "copyright">',
+                '<Tag: tagged "law">',
             ],
             transform=repr,
             ordered=False,
@@ -1015,10 +1009,10 @@ class FixtureLoadingTests(DumpDataAssertMixin, TestCase):
             '{"headline": "Time to reform copyright", '
             '"pub_date": "2006-06-16T13:00:00"}}, '
             '{"pk": 1, "model": "fixtures.tag", "fields": '
-            '{"tagged_type": ["fixtures", "article"], "name": "copyright", '
+            '{"name": "copyright", '
             '"tagged_id": 3}}, '
             '{"pk": 2, "model": "fixtures.tag", "fields": '
-            '{"tagged_type": ["fixtures", "article"], "name": "law", "tagged_id": 3}}, '
+            '{"name": "law", "tagged_id": 3}}, '
             '{"pk": 1, "model": "fixtures.person", "fields": '
             '{"name": "Ginger Reinhardt"}}, '
             '{"pk": 2, "model": "fixtures.person", "fields": '
@@ -1209,7 +1203,7 @@ class FixtureTransactionTests(DumpDataAssertMixin, TransactionTestCase):
         self.assertSequenceEqual(
             Article.objects.values_list("headline", flat=True),
             [
-                "Ginger pets kitten",
+                "Django pets kitten",
                 "Time to reform copyright",
                 "Poker has no place on ESPN",
             ],

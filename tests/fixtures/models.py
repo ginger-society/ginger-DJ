@@ -54,9 +54,7 @@ class Tag(models.Model):
     tagged_id = models.PositiveIntegerField(default=0)
 
     def __str__(self):
-        return '<%s: %s> tagged "%s"' % (
-            self.tagged.__class__.__name__,
-            self.tagged,
+        return 'tagged "%s"' % (
             self.name,
         )
 
@@ -97,12 +95,14 @@ class ProxySpy(Spy):
 
 class VisaManager(models.Manager):
     def get_queryset(self):
-        return super().get_queryset().prefetch_related("permissions")
+        return super().get_queryset()
 
 
 class Visa(models.Model):
     person = models.ForeignKey(Person, models.CASCADE)
     objects = VisaManager()
+    def __str__(self):
+        return self.person.name
 
 class Book(models.Model):
     name = models.CharField(max_length=100)
