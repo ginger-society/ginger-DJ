@@ -1,7 +1,7 @@
 from ginger.contrib import admin
 from ginger.core.paginator import Paginator
 
-from .models import Band, Child, Event, GrandChild, Parent, ProxyUser, Swallow
+from .models import Band, Child, Event, GrandChild, Parent, Swallow
 
 site = admin.AdminSite(name="admin")
 
