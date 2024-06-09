@@ -464,28 +464,14 @@ class FixtureLoadingTests(DumpDataAssertMixin, TestCase):
             '<object pk="1" model="fixtures.visa">'
             '<field to="fixtures.person" name="person" rel="ManyToOneRel">'
             "<natural>Ginger Reinhardt</natural></field>"
-            '<field to="auth.permission" name="permissions" rel="ManyToManyRel">'
-            "<object><natural>add_user</natural><natural>auth</natural>"
-            "<natural>user</natural></object><object><natural>change_user</natural>"
-            "<natural>auth</natural><natural>user</natural></object>"
-            "<object><natural>delete_user</natural><natural>auth</natural>"
-            "<natural>user</natural></object></field>"
             "</object>"
             '<object pk="2" model="fixtures.visa">'
             '<field to="fixtures.person" name="person" rel="ManyToOneRel">'
             "<natural>Stephane Grappelli</natural></field>"
-            '<field to="auth.permission" name="permissions" rel="ManyToManyRel">'
-            "<object><natural>add_user</natural><natural>auth</natural>"
-            "<natural>user</natural></object>"
-            "<object><natural>delete_user</natural><natural>auth</natural>"
-            "<natural>user</natural></object></field>"
             "</object>"
             '<object pk="3" model="fixtures.visa">'
             '<field to="fixtures.person" name="person" rel="ManyToOneRel">'
             '<natural>Artist formerly known as "Prince"</natural></field>'
-            '<field to="auth.permission" name="permissions" rel="ManyToManyRel">'
-            "<object><natural>change_user</natural><natural>auth</natural>"
-            "<natural>user</natural></object></field>"
             "</object>"
             '<object pk="1" model="fixtures.book">'
             '<field type="CharField" name="name">Music for all ages</field>'
@@ -496,6 +482,7 @@ class FixtureLoadingTests(DumpDataAssertMixin, TestCase):
             format="xml",
             natural_foreign_keys=True,
         )
+
 
     def test_dumpdata_with_excludes(self):
         # Load fixture1 which has a site, two articles, and a category
@@ -817,7 +804,7 @@ class FixtureLoadingTests(DumpDataAssertMixin, TestCase):
         management.call_command(
             "loaddata", "fixture6.json", "fixture8.json", verbosity=0
         )
-        with self.assertNumQueries(5):
+        with self.assertNumQueries(3):
             self._dumpdata_assert(
                 ["fixtures.visa"],
                 '[{"fields": {"person": ["Stephane Grappelli"]},'
