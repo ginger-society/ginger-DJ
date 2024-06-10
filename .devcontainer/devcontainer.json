@@ -1,5 +1,5 @@
 {
-	"name": "staffe::gloapi",
+	"name": "staffe::ginger-DJ",
 	"dockerComposeFile": "../docker-compose.yml",
 	"service": "dev",
 	"workspaceFolder": "/app",
