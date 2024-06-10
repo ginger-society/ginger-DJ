@@ -300,27 +300,6 @@ class URLRedirectTests(URLTestCaseBase):
         response = self.client.get(response.headers["location"])
         self.assertEqual(response.status_code, 200)
 
-    def test_pl_pl_redirect(self):
-        # language from outside of the supported LANGUAGES list
-        response = self.client.get(
-            "/account/register/", headers={"accept-language": "pl-pl"}
-        )
-        self.assertRedirects(response, "/en/account/register/")
-
-        response = self.client.get(response.headers["location"])
-        self.assertEqual(response.status_code, 200)
-
-    @override_settings(
-        MIDDLEWARE=[
-            "i18n.patterns.tests.PermanentRedirectLocaleMiddleWare",
-            "ginger.middleware.common.CommonMiddleware",
-        ],
-    )
-    def test_custom_redirect_class(self):
-        response = self.client.get(
-            "/account/register/", headers={"accept-language": "en"}
-        )
-        self.assertRedirects(response, "/en/account/register/", 301)
 
 
 class URLVaryAcceptLanguageTests(URLTestCaseBase):

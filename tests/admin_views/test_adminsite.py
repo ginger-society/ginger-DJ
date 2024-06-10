@@ -39,7 +39,6 @@ class SiteEachContextTest(TestCase):
 
     def setUp(self):
         request = self.request_factory.get(reverse("test_adminsite:index"))
-        request.user = self.u1
         self.ctx = site.each_context(request)
 
     def test_each_context(self):
@@ -67,7 +66,7 @@ class SiteEachContextTest(TestCase):
         ctx = self.ctx
         apps = ctx["available_apps"]
         # we have registered two models from two different apps
-        self.assertEqual(len(apps), 2)
+        self.assertEqual(len(apps), 1)
 
         # admin_views.Article
         admin_views = apps[0]

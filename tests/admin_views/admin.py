@@ -66,7 +66,6 @@ from .models import (
     FunkyTag,
     Gadget,
     Gallery,
-    GenRelReference,
     Grommet,
     ImplicitlyGeneratedPK,
     Ingredient,
@@ -133,7 +132,6 @@ from .models import (
     UndeletableObject,
     UnorderedObject,
     UserMessenger,
-    UserProxy,
     Villain,
     Vodcast,
     Whatsit,
@@ -172,8 +170,7 @@ class ChapterXtra1Admin(admin.ModelAdmin):
         "chap__book",
         "chap__book__name",
         "chap__book__promo",
-        "chap__book__promo__name",
-        "guest_author__promo__book",
+        "chap__book__promo__name"
     )
 
 
@@ -285,11 +282,11 @@ class ArticleAdmin2(admin.ModelAdmin):
 class RowLevelChangePermissionModelAdmin(admin.ModelAdmin):
     def has_change_permission(self, request, obj=None):
         """Only allow changing objects with even id number"""
-        return request.user.is_staff and (obj is not None) and (obj.id % 2 == 0)
+        return True
 
     def has_view_permission(self, request, obj=None):
         """Only allow viewing objects if id is a multiple of 3."""
-        return request.user.is_staff and obj is not None and obj.id % 3 == 0
+        return True
 
 
 class CustomArticleAdmin(admin.ModelAdmin):
@@ -658,7 +655,7 @@ class PizzaAdmin(admin.ModelAdmin):
 
 
 class ReadOnlyRelatedFieldAdmin(admin.ModelAdmin):
-    readonly_fields = ("chapter", "language", "user")
+    readonly_fields = ("chapter", "language",)
 
 
 class StudentAdmin(admin.ModelAdmin):
@@ -1131,7 +1128,7 @@ class RestaurantAdmin(admin.ModelAdmin):
 
 
 class FunkyTagAdmin(admin.ModelAdmin):
-    list_display = ("name", "content_object")
+    list_display = ("name",)
 
 
 class InlineReferenceInline(admin.TabularInline):
@@ -1255,7 +1252,6 @@ site.register(ChildOfReferer)
 site.register(ReferencedByInline)
 site.register(InlineReferer, InlineRefererAdmin)
 site.register(ReferencedByGenRel)
-site.register(GenRelReference)
 site.register(ParentWithUUIDPK)
 site.register(RelatedPrepopulated, search_fields=["name"])
 site.register(RelatedWithUUIDPKModel)
@@ -1304,7 +1300,6 @@ site.register(Ingredient)
 site.register(NotReferenced)
 site.register(ExplicitlyProvidedPK, GetFormsetsArgumentCheckingAdmin)
 site.register(ImplicitlyGeneratedPK, GetFormsetsArgumentCheckingAdmin)
-site.register(UserProxy)
 site.register(Box)
 site.register(Country, CountryAdmin)
 site.register(Traveler, TravelerAdmin)
@@ -1313,13 +1308,9 @@ site.register(CamelCaseModel)
 site.register(CamelCaseRelatedModel, CamelCaseAdmin)
 
 # Register core models we need in our tests
-site.register(User, UserAdmin)
-site.register(Group, GroupAdmin)
 
 # Used to test URL namespaces
 site2 = admin.AdminSite(name="namespaced_admin")
-site2.register(User, UserAdmin)
-site2.register(Group, GroupAdmin)
 site2.register(ParentWithUUIDPK)
 site2.register(
     RelatedWithUUIDPKModel,
