@@ -1,6 +1,6 @@
 from ginger.utils.version import get_version
 
-VERSION = (5, 3, 2, "final", 0)
+VERSION = (5, 3, 3, "final", 0)
 
 __version__ = get_version(VERSION)
 
