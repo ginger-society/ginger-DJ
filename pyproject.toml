@@ -1,3 +1,9 @@
+
+description = "microservices framework based on django"
+name = "ginger-dj"
+organization = "ginger-society"
+version = "5.3.13"
+
 [build-system]
 build-backend = 'setuptools.build_meta'
 requires = ['setuptools>=40.8.0']
@@ -10,9 +16,3 @@ target-version = ['py310']
 default_section = 'THIRDPARTY'
 known_first_party = 'ginger'
 profile = 'black'
-
-# [project]
-# description = "microservices framework based on django"
-# name = "ginger-dj"
-# organization = "ginger-society"
-# version = "5.3.10"
