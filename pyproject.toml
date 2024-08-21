@@ -15,4 +15,4 @@ profile = 'black'
 description = "microservices framework based on django"
 name = "ginger-dj"
 organization = "ginger-society"
-version = "0.0.0"
+version = "5.3.10"
