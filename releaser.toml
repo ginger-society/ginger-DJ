@@ -1,0 +1,11 @@
+references = []
+
+[version]
+channel = "Final"
+major = 5
+minor = 3
+patch = 6
+revision = 0
+
+[settings]
+git_url_prefix = "https://github.com/ginger-society/ginger-DJ"

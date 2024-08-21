@@ -1,0 +1,9 @@
+dir = "."
+lang = "Rust"
+spec_url = "/openapi.json"
+
+[services]
+
+[portals_refs]
+
+[urls]
