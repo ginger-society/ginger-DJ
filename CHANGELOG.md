@@ -2,7 +2,21 @@
 feat:
  - [ffbc397e9b](https://github.com/ginger-society/ginger-DJffbc397e9b5f48753cbfadbfb367e2de9d1e5c5b) (Ginger Society Admin) feat: added releaser
 	
+chore:
+ - [2d69d0821d](https://github.com/ginger-society/ginger-DJ2d69d0821d54c931c64af0c6963e993599dcb1d8) (Ginger Society Admin) chore: version bump to 5.3.7
+	
 ## 5.3.5 - 2024-08-21
+fix:
+ - [7913088ccc](https://github.com/ginger-society/ginger-DJ7913088ccca3caecbc1cd99975218a2b64010a0a) (Ginger Society Admin) fix: fixed test cases
+	
+ - [6e7ca5edde](https://github.com/ginger-society/ginger-DJ6e7ca5eddea87e816df5dddb2f0161eea0876f27) (Ginger Society Admin) fix: removed references to AUTH_USER_MODEL
+	
+ - [c7322b574e](https://github.com/ginger-society/ginger-DJc7322b574eb8b057b06408a821f85892b5893939) (Ginger Society Admin) fix: added redis as cache
+	
+ - [1e51c92ac1](https://github.com/ginger-society/ginger-DJ1e51c92ac19896be5e490b4a0d3cccdb98e883b9) (Ginger Society Admin) fix: devcontainer dependencies update
+	
+ - [0b56519d0e](https://github.com/ginger-society/ginger-DJ0b56519d0ee64cd61683f8779c5aa6dfe74a26f8) (Ginger Society Admin) fix: docs warning fixes
+	
 feat:
  - [b9a9d58447](https://github.com/ginger-society/ginger-DJb9a9d58447b11e73aaa81ca9b1319bc138a85f7d) (Ginger Society Admin) feat: updated project meta data
 	
@@ -29,17 +43,6 @@ feat:
  - [8701d8e818](https://github.com/ginger-society/ginger-DJ8701d8e81820c254aaf5a90db1463e1d6d626c59) (Ginger Society Admin) feat: added drf_yagr
 	
  - [4ba34d3615](https://github.com/ginger-society/ginger-DJ4ba34d3615ff69ce663efb4d7724bda003a1f82c) (Ginger Society Admin) feat: added rest_framework
-	
-fix:
- - [7913088ccc](https://github.com/ginger-society/ginger-DJ7913088ccca3caecbc1cd99975218a2b64010a0a) (Ginger Society Admin) fix: fixed test cases
-	
- - [6e7ca5edde](https://github.com/ginger-society/ginger-DJ6e7ca5eddea87e816df5dddb2f0161eea0876f27) (Ginger Society Admin) fix: removed references to AUTH_USER_MODEL
-	
- - [c7322b574e](https://github.com/ginger-society/ginger-DJc7322b574eb8b057b06408a821f85892b5893939) (Ginger Society Admin) fix: added redis as cache
-	
- - [1e51c92ac1](https://github.com/ginger-society/ginger-DJ1e51c92ac19896be5e490b4a0d3cccdb98e883b9) (Ginger Society Admin) fix: devcontainer dependencies update
-	
- - [0b56519d0e](https://github.com/ginger-society/ginger-DJ0b56519d0ee64cd61683f8779c5aa6dfe74a26f8) (Ginger Society Admin) fix: docs warning fixes
 	
 chore:
  - [1b420fa189](https://github.com/ginger-society/ginger-DJ1b420fa1892090e66d55e4bd26f786e7f12a2c65) (Ginger Society Admin) chore: version bump to 5.3.5

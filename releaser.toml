@@ -1,11 +1,14 @@
-references = []
-
 [version]
 channel = "Final"
 major = 5
 minor = 3
-patch = 7
+patch = 8
 revision = 0
+
+[[references]]
+file_name = "ginger/__init__.py"
+output_type = "Tuple"
+variable = "__version__"
 
 [settings]
 git_url_prefix = "https://github.com/ginger-society/ginger-DJ"
