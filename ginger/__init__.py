@@ -1,8 +1,8 @@
 from ginger.utils.version import get_version
 
-VERSION = (5, 3, 11, "final", 0)
+VERSION = (5, 3, 12, "final", 0)
 
-__version__ = (5, 3, 11, "final", 0)
+__version__ = get_version(VERSION)
 
 
 def setup(set_prefix=True):

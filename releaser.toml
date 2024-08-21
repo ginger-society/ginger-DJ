@@ -2,13 +2,8 @@
 channel = "Final"
 major = 5
 minor = 3
-patch = 11
+patch = 12
 revision = 0
-
-[[references]]
-file_name = "ginger/__init__.py"
-output_type = "Tuple"
-variable = "__version__"
 
 [[references]]
 file_name = "ginger/__init__.py"
