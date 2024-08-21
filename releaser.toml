@@ -4,7 +4,7 @@ references = []
 channel = "Final"
 major = 5
 minor = 3
-patch = 6
+patch = 7
 revision = 0
 
 [settings]
