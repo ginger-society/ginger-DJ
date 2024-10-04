@@ -1,5 +1,5 @@
 dir = "."
-lang = "Rust"
+lang = "Python"
 organization_id = "ginger-society"
 spec_url = "/openapi.json"
 

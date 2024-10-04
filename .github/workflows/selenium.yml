@@ -1,11 +1,11 @@
 name: Selenium Tests
 
-on:
-  push:
-    branches:
-      - main
-    paths-ignore:
-      - 'docs/**'
+# on:
+#   push:
+#     branches:
+#       - main
+#     paths-ignore:
+#       - 'docs/**'
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}

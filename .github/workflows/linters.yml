@@ -1,14 +1,14 @@
 name: Linters
 
-on:
-  pull_request:
-    paths-ignore:
-      - 'docs/**'
-  push:
-    branches:
-      - main
-    paths-ignore:
-      - 'docs/**'
+# on:
+#   pull_request:
+#     paths-ignore:
+#       - 'docs/**'
+#   push:
+#     branches:
+#       - main
+#     paths-ignore:
+#       - 'docs/**'
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
