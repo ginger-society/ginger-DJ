@@ -1,2 +1,20 @@
 lang = "Python"
 package_type = "library"
+
+[[links]]
+icon = "FaCodeBranch"
+internal = true
+label = "Pull Requests"
+link = "https://github.com/ginger-society/ginger-DJ/pulls"
+
+[[links]]
+icon = "FaRegPlayCircle"
+internal = true
+label = "Pipelines"
+link = "https://github.com/ginger-society/ginger-DJ/actions"
+
+[[links]]
+icon = "FaGithub"
+internal = true
+label = "Browse Repo"
+link = "https://github.com/ginger-society/ginger-DJ"
