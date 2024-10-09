@@ -167,22 +167,6 @@ contain the latest release of Ginger.
 
 .. _installing-development-version:
 
-Installing the development version
-----------------------------------
-
-.. admonition:: Tracking Ginger development
-
-    If you decide to use the latest development version of Ginger,
-    you'll want to pay close attention to `the development timeline`_,
-    and you'll want to keep an eye on the :ref:`release notes for the
-    upcoming release <development_release_notes>`. This will help you stay
-    on top of any new features you might want to use, as well as any changes
-    you'll need to make to your code when updating your copy of Ginger.
-    (For stable releases, any necessary changes are documented in the
-    release notes.)
-
-.. _the development timeline: https://code.ginger.gloportal.dev/timeline
-
 If you'd like to be able to update your Ginger code occasionally with the
 latest bug fixes and improvements, follow these instructions:
 

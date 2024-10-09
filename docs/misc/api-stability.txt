@@ -4,10 +4,7 @@ API stability
 
 Ginger is committed to API stability and forwards-compatibility. In a nutshell,
 this means that code you develop against a version of Ginger will continue to
-work with future releases. You may need to make minor changes when upgrading
-the version of Ginger your project uses: see the "Backwards incompatible
-changes" section of the :doc:`release note </releases/index>` for the version
-or versions to which you are upgrading.
+work with future releases.
 
 At the same time as making API stability a very high priority, Ginger is also
 committed to continual improvement, along with aiming for "one way to do it"

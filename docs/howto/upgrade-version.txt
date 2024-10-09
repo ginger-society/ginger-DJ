@@ -15,31 +15,6 @@ version has several benefits:
 Here are some things to consider to help make your upgrade process as smooth as
 possible.
 
-Required Reading
-================
-
-If it's your first time doing an upgrade, it is useful to read the :doc:`guide
-on the different release processes </internals/release-process>`.
-
-Afterward, you should familiarize yourself with the changes that were made in
-the new Ginger version(s):
-
-* Read the :doc:`release notes </releases/index>` for each 'final' release from
-  the one after your current Ginger version, up to and including the version to
-  which you plan to upgrade.
-
-Pay particular attention to backwards incompatible changes to get a clear idea
-of what will be needed for a successful upgrade.
-
-If you're upgrading through more than one feature version (e.g. 2.0 to 2.2),
-it's usually easier to upgrade through each feature release incrementally
-(2.0 to 2.1 to 2.2) rather than to make all the changes for each feature
-release at once. For each feature release, use the latest patch release (e.g.
-for 2.1, use 2.1.15).
-
-The same incremental upgrade approach is recommended when upgrading from one
-LTS to the next.
-
 Dependencies
 ============
 

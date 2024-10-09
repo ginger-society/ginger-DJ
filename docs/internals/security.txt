@@ -147,9 +147,6 @@ may privately contact and discuss those issues with the appropriate
 maintainers, and coordinate our own disclosure and resolution with
 theirs.
 
-The Ginger team also maintains an :doc:`archive of security issues
-disclosed in Ginger</releases/security>`.
-
 .. _Ginger's release team: https://www.ginger.gloportal.dev/foundation/teams/#releasers-team
 
 .. _security-notifications:

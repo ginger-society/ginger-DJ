@@ -14,4 +14,3 @@ you'd like to help improve Ginger or learn about how Ginger is managed.
    security
    release-process
    git
-   howto-release-ginger

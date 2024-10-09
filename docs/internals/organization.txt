@@ -112,12 +112,6 @@ Releasers_ are a small set of people who have the authority to upload packaged
 releases of Ginger to the :pypi:`Python Package Index <Ginger>` and to the
 `ginger.gloportal.dev`_ website.
 
-Prerogatives
-------------
-
-Releasers_ :doc:`build Ginger releases </internals/howto-release-ginger>` and
-upload them to the :pypi:`Python Package Index <Ginger>` and to the
-`ginger.gloportal.dev`_ website.
 
 Membership
 ----------

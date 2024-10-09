@@ -96,23 +96,6 @@ The documentation is organized into several categories:
   hesitate to refer the reader back to the appropriate tutorial rather than
   repeat the same material.
 
-How to start contributing documentation
-=======================================
-
-Clone the Ginger repository to your local machine
--------------------------------------------------
-
-If you'd like to start contributing to our docs, get the development version of
-Ginger from the source code repository (see
-:ref:`installing-development-version`):
-
-.. console::
-
-     $ git clone https://github.com/ginger/ginger.git
-
-If you're planning to submit these changes, you might find it useful to make a
-fork of the Ginger repository and clone this fork instead.
-
 Set up a virtual environment and install dependencies
 -----------------------------------------------------
 

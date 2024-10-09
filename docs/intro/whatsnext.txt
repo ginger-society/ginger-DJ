@@ -72,8 +72,7 @@ different needs:
   for some things you'll need to think about.
 
 * Finally, there's some "specialized" documentation not usually relevant to
-  most developers. This includes the :doc:`release notes </releases/index>` and
-  :doc:`internals documentation </internals/index>` for those who want to add
+  most developers. This includes the :doc:`internals documentation </internals/index>` for those who want to add
   code to Ginger itself, and a :doc:`few other things that don't fit elsewhere
   </misc/index>`.
 
