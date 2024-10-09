@@ -315,7 +315,7 @@ You can get the name of the current time zone using the
     {% get_current_timezone as TIME_ZONE %}
 
 Alternatively, you can activate the
-:func:`~ginger.template.context_processors.tz` context processor and
+:func:`ginger.template.tz` context processor and
 use the ``TIME_ZONE`` context variable.
 
 Template filters

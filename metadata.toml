@@ -2,6 +2,12 @@ lang = "Python"
 package_type = "library"
 
 [[links]]
+icon = "FaPython"
+internal = true
+label = "View on PyPi"
+link = "https://pypi.org/project/ginger-dj/"
+
+[[links]]
 icon = "FaCodeBranch"
 internal = true
 label = "Pull Requests"

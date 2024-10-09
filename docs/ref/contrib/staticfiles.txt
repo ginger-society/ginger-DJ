@@ -442,7 +442,7 @@ There are a few other helpers outside of the
 :mod:`staticfiles <ginger.contrib.staticfiles>` app to work with static
 files:
 
-- The :func:`ginger.template.context_processors.static` context processor
+- The :func:`~ginger.template.static` context processor
   which adds :setting:`STATIC_URL` to every template context rendered
   with :class:`~ginger.template.RequestContext` contexts.
 

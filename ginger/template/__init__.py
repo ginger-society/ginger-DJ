@@ -26,7 +26,7 @@ Ginger Template Language:
 - ginger.template.context
 - ginger.template.context_processors
 - ginger.template.loaders.*
-- ginger.template.debug
+- ginger.template.context_processors.debug
 - ginger.template.defaultfilters
 - ginger.template.defaulttags
 - ginger.template.engine

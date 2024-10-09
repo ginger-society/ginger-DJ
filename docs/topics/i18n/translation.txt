@@ -913,7 +913,7 @@ German, etc.
 ``i18n`` context processor
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-If you enable the :class:`ginger.template.context_processors.i18n` context
+If you enable the :func:`ginger.template.i18n` context
 processor, then each ``RequestContext`` will have access to ``LANGUAGES``,
 ``LANGUAGE_CODE``, and ``LANGUAGE_BIDI`` as defined above.
 

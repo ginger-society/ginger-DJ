@@ -5,6 +5,7 @@ Settings
 .. contents::
     :local:
     :depth: 1
+    :class: this-will-duplicate-information-and-it-is-still-useful-here
 
 .. warning::
 
@@ -1818,7 +1819,7 @@ Default: ``[]`` (Empty list)
 
 A list of IP addresses, as strings, that:
 
-* Allow the :func:`ginger.template.context_processors.debug` context processor
+* Allow the :func:`~ginger.template.debug` context processor
   to add some variables to the template context.
 * Can use the :ref:`admindocs bookmarklets <admindocs-bookmarklets>` even if
   not logged in as a staff user.

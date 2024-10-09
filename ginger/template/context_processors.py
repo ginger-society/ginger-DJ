@@ -1,3 +1,5 @@
+"""Provides the context processors in templates."""
+
 import itertools
 
 from ginger.conf import settings
@@ -47,6 +49,9 @@ def debug(request):
 
 
 def i18n():
+    """
+    i18 support in context processor.
+    """
     from ginger.utils import translation
 
     return {
