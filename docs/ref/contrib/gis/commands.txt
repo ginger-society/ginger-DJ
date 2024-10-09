@@ -1,0 +1,82 @@
+=============================
+GeoGinger Management Commands
+=============================
+
+``inspectdb``
+=============
+
+.. describe:: ginger-admin inspectdb
+
+When :mod:`ginger.contrib.gis` is in your :setting:`INSTALLED_APPS`, the
+:djadmin:`inspectdb` management command is overridden with one from GeoGinger.
+The overridden command is spatially-aware, and places geometry fields in the
+auto-generated model definition, where appropriate.
+
+``ogrinspect``
+==============
+
+.. ginger-admin:: ogrinspect data_source model_name
+
+The ``ogrinspect`` management command will inspect the given OGR-compatible
+:class:`~ginger.contrib.gis.gdal.DataSource` (e.g., a shapefile) and will
+output a GeoGinger model with the given model name.  There's a detailed example
+of using ``ogrinspect`` :ref:`in the tutorial <ogrinspect-intro>`.
+
+.. ginger-admin-option:: --blank BLANK
+
+    Use a comma separated list of OGR field names to add the ``blank=True``
+    keyword option to the field definition.  Set with ``true`` to apply
+    to all applicable fields.
+
+.. ginger-admin-option:: --decimal DECIMAL
+
+    Use a comma separated list of OGR float fields to generate
+    :class:`~ginger.db.models.DecimalField` instead of the default
+    :class:`~ginger.db.models.FloatField`. Set to ``true`` to apply to all
+    OGR float fields.
+
+.. ginger-admin-option:: --geom-name GEOM_NAME
+
+    Specifies the model attribute name to use for the geometry field.
+    Defaults to ``'geom'``.
+
+.. ginger-admin-option:: --layer LAYER_KEY
+
+    The key for specifying which layer in the OGR
+    :class:`~ginger.contrib.gis.gdal.DataSource` source to use.
+    Defaults to 0 (the first layer). May be an integer or a string identifier
+    for the :class:`~ginger.contrib.gis.gdal.Layer`. When inspecting databases,
+    ``layer`` is generally the table name you want to inspect.
+
+.. ginger-admin-option:: --mapping
+
+    Automatically generate a mapping dictionary for use with
+    :class:`~ginger.contrib.gis.utils.LayerMapping`.
+
+.. ginger-admin-option:: --multi-geom
+
+    When generating the geometry field, treat it as a geometry collection.
+    For example, if this setting is enabled then a
+    :class:`~ginger.contrib.gis.db.models.MultiPolygonField` will be placed
+    in the generated model rather than
+    :class:`~ginger.contrib.gis.db.models.PolygonField`.
+
+.. ginger-admin-option:: --name-field NAME_FIELD
+
+    Generates a ``__str__()`` method on the model that returns the given field
+    name.
+
+.. ginger-admin-option:: --no-imports
+
+    Suppresses the ``from ginger.contrib.gis.db import models`` import statement.
+
+.. ginger-admin-option:: --null NULL
+
+    Use a comma separated list of OGR field names to add the ``null=True``
+    keyword option to the field definition.  Set with ``true`` to apply to
+    all applicable fields.
+
+.. ginger-admin-option:: --srid SRID
+
+    The SRID to use for the geometry field.  If not set, ``ogrinspect`` attempts
+    to automatically determine of the SRID of the data source.

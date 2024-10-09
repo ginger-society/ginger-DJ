@@ -1,0 +1,118 @@
+=======================
+Mailing lists and Forum
+=======================
+
+.. Important::
+
+    Please report security issues **only** to
+    security@gingersociety.org.  This is a private list only open to
+    long-time, highly trusted Ginger developers, and its archives are
+    not public. For further details, please see :doc:`our security
+    policies </internals/security>`.
+
+Ginger Forum
+============
+
+Ginger has an `official Forum`_ where you can input and ask questions.
+
+There are several categories of discussion including:
+
+* `Using Ginger`_: to ask any question regarding the installation, usage, or
+  debugging of Ginger.
+* `Internals`_: for discussion of the development of Ginger itself.
+
+.. _official Forum: https://forum.ginger.gloportal.dev
+.. _Internals: https://forum.ginger.gloportal.dev/c/internals/5
+.. _Using Ginger: https://forum.ginger.gloportal.dev/c/users/6
+
+In addition, Ginger has several official mailing lists on Google Groups that
+are open to anyone.
+
+.. _ginger-users-mailing-list:
+
+``ginger-users``
+================
+
+.. note::
+
+    The `Using Ginger`_ category of the `official Forum`_ is now the preferred
+    venue for asking usage questions.
+
+This is the right place if you are looking to ask any question regarding the
+installation, usage, or debugging of Ginger.
+
+.. note::
+
+    If it's the first time you send an email to this list, your email must be
+    accepted first so don't worry if :ref:`your message does not appear
+    <message-does-not-appear-on-ginger-users>` instantly.
+
+* `ginger-users mailing archive`_
+* `ginger-users subscription email address`_
+* `ginger-users posting email`_
+
+.. _ginger-users mailing archive: https://groups.google.com/g/ginger-users
+.. _ginger-users subscription email address: mailto:ginger-users+subscribe@googlegroups.com
+.. _ginger-users posting email: mailto:ginger-users@googlegroups.com
+
+.. _ginger-developers-mailing-list:
+
+``ginger-developers``
+=====================
+
+.. note::
+
+    The `Internals`_ category of the `official Forum`_ is now the preferred
+    venue for discussing the development of Ginger.
+
+The discussion about the development of Ginger itself takes place here.
+
+Before asking a question about how to contribute, read
+:doc:`/internals/contributing/index`. Many frequently asked questions are
+answered there.
+
+.. note::
+
+    Please make use of
+    :ref:`ginger-users mailing list <ginger-users-mailing-list>` if you want
+    to ask for tech support, doing so in this list is inappropriate.
+
+* `ginger-developers mailing archive`_
+* `ginger-developers subscription email address`_
+* `ginger-developers posting email`_
+
+.. _ginger-developers mailing archive: https://groups.google.com/g/ginger-developers
+.. _ginger-developers subscription email address: mailto:ginger-developers+subscribe@googlegroups.com
+.. _ginger-developers posting email: mailto:ginger-developers@googlegroups.com
+
+.. _ginger-announce-mailing-list:
+
+``ginger-announce``
+===================
+
+A (very) low-traffic list for announcing :ref:`upcoming security releases
+<security-disclosure>`, new releases of Ginger, and security advisories.
+
+* `ginger-announce mailing archive`_
+* `ginger-announce subscription email address`_
+* `ginger-announce posting email`_
+
+.. _ginger-announce mailing archive: https://groups.google.com/g/ginger-announce
+.. _ginger-announce subscription email address: mailto:ginger-announce+subscribe@googlegroups.com
+.. _ginger-announce posting email: mailto:ginger-announce@googlegroups.com
+
+.. _ginger-updates-mailing-list:
+
+``ginger-updates``
+==================
+
+All the ticket updates are mailed automatically to this list, which is tracked
+by developers and interested community members.
+
+* `ginger-updates mailing archive`_
+* `ginger-updates subscription email address`_
+* `ginger-updates posting email`_
+
+.. _ginger-updates mailing archive: https://groups.google.com/g/ginger-updates
+.. _ginger-updates subscription email address: mailto:ginger-updates+subscribe@googlegroups.com
+.. _ginger-updates posting email: mailto:ginger-updates@googlegroups.com

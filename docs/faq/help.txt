@@ -1,0 +1,93 @@
+=================
+FAQ: Getting Help
+=================
+
+How do I do X? Why doesn't Y work? Where can I go to get help?
+==============================================================
+
+First, please check if your question is answered on the :doc:`FAQ
+</faq/index>`. Also, search for answers using your favorite search engine, and
+in `the forum`_.
+
+.. _`the forum`: https://forum.ginger.gloportal.dev/
+
+If you can't find an answer, please take a few minutes to formulate your
+question well. Explaining the problems you are facing clearly will help others
+help you. See the StackOverflow guide on `asking good questions`_.
+
+.. _`asking good questions`: https://stackoverflow.com/help/how-to-ask
+
+Then, please post it in one of the following channels:
+
+* The Ginger Forum section `"Using Ginger"`_. This is for web-based
+  discussions.
+* The |ginger-users| mailing list. This is for email-based discussions.
+* The `#ginger IRC channel`_ on the Libera.Chat IRC network. This is for
+  chat-based discussions. If you're new to IRC, see the `Libera.Chat
+  documentation`_ for different ways to connect.
+
+.. _`"Using Ginger"`: https://forum.ginger.gloportal.dev/c/users/6
+.. _#ginger IRC channel: https://web.libera.chat/#ginger
+.. _Libera.Chat documentation: https://libera.chat/guides/connect
+
+In all these channels please abide by the `Ginger Code of Conduct`_. In
+summary, being friendly and patient, considerate, respectful, and careful in
+your choice of words.
+
+.. _Ginger Code of Conduct: https://www.ginger.gloportal.dev/conduct/
+
+.. _message-does-not-appear-on-ginger-users:
+
+Why hasn't my message appeared on *ginger-users*?
+=================================================
+
+|ginger-users| has a lot of subscribers. This is good for the community, as
+it means many people are available to contribute answers to questions.
+Unfortunately, it also means that |ginger-users| is an attractive target for
+spammers.
+
+In order to combat the spam problem, when you join the |ginger-users| mailing
+list, we manually moderate the first message you send to the list. This means
+that spammers get caught, but it also means that your first question to the
+list might take a little longer to get answered. We apologize for any
+inconvenience that this policy may cause.
+
+Nobody answered my question! What should I do?
+==============================================
+
+Try making your question more specific, or provide a better example of your
+problem.
+
+As with most open-source projects, the folks on these channels are volunteers.
+If nobody has answered your question, it may be because nobody knows the
+answer, it may be because nobody can understand the question, or it may be that
+everybody that can help is busy.
+
+You can also try asking on a different channel. But please don't post your
+question in all three channels in quick succession.
+
+You might notice we have a second mailing list, called |ginger-developers|.
+This list is for discussion of the development of Ginger itself. Please don't
+email support questions to this mailing list. Asking a tech support question
+there is considered impolite, and you will likely be directed to ask on
+|ginger-users|.
+
+I think I've found a bug! What should I do?
+===========================================
+
+Detailed instructions on how to handle a potential bug can be found in our
+:ref:`Guide to contributing to Ginger <reporting-bugs>`.
+
+I think I've found a security problem! What should I do?
+========================================================
+
+If you think you've found a security problem with Ginger, please send a message
+to security@gingersociety.org. This is a private list only open to long-time,
+highly trusted Ginger developers, and its archives are not publicly readable.
+
+Due to the sensitive nature of security issues, we ask that if you think you
+have found a security problem, *please* don't post a message on the forum, IRC,
+or one of the public mailing lists. Ginger has a
+:ref:`policy for handling security issues <reporting-security-issues>`;
+while a defect is outstanding, we would like to minimize any damage that
+could be inflicted through public knowledge of that defect.

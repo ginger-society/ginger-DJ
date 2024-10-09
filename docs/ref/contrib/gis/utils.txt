@@ -1,0 +1,16 @@
+===================
+GeoGinger Utilities
+===================
+
+.. module:: ginger.contrib.gis.utils
+    :synopsis: GeoGinger's collection of utilities.
+
+The :mod:`ginger.contrib.gis.utils` module contains various utilities that are
+useful in creating geospatial web applications.
+
+.. toctree::
+    :maxdepth: 2
+
+    layermapping
+    ogrinspect
+    serializers
