@@ -1,13 +1,25 @@
+## 5.5.2 - 2024-10-09
+feat:
+ - [4f0a34669e](https://github.com/ginger-society/ginger-DJ4f0a34669e3a6757cca031b874a575a0f49a2dc9) (Ginger Society Admin) feat: fixed documentations
+	
+Revert
+ - [67f659b1b9](https://github.com/ginger-society/ginger-DJ67f659b1b9ba44e9028bd709b248e964a99594e3) (Ginger Society Admin) Revert "chore: removed docs from the project."
+	
+	This reverts commit 2ef95fe57dc17276abc0f18c40cc33d4de3736be.
+	
 ## 5.5.1 - 2024-10-07
 feat:
  - [d0c77ad42a](https://github.com/ginger-society/ginger-DJd0c77ad42a21fa1a24e8392911a2ec79d7ce0060) (Ginger Society Admin) feat: renamed publish to CI
 	
-## 5.5.0 - 2024-10-04
-feat:
- - [a922a5d844](https://github.com/ginger-society/ginger-DJa922a5d8446725b80547e26e5a3883820ffb5aff) (Ginger Society Admin) feat: updated metadata and disabled all pipeline script except the publish one
+chore:
+ - [596aee152c](https://github.com/ginger-society/ginger-DJ596aee152c39e24ec7979b3ab277206684e86b06) (Ginger Society Admin) chore: version bump to 5.5.1
 	
+## 5.5.0 - 2024-10-04
 chore:
  - [f1061e4dad](https://github.com/ginger-society/ginger-DJf1061e4dad2edf75fa74667226d210f585dfb7a8) (Ginger Society Admin) chore: version bump to 5.5.0
+	
+feat:
+ - [a922a5d844](https://github.com/ginger-society/ginger-DJa922a5d8446725b80547e26e5a3883820ffb5aff) (Ginger Society Admin) feat: updated metadata and disabled all pipeline script except the publish one
 	
 ## 5.4.0 - 2024-10-04
 feat:
@@ -41,11 +53,11 @@ chore:
  - [5545fd436f](https://github.com/ginger-society/ginger-DJ5545fd436f94b129a0ff9bdfbfa6f3c8011b0f43) (Ginger Society Admin) chore: version bump to 5.3.8
 	
 ## 5.3.7 - 2024-08-21
-chore:
- - [2d69d0821d](https://github.com/ginger-society/ginger-DJ2d69d0821d54c931c64af0c6963e993599dcb1d8) (Ginger Society Admin) chore: version bump to 5.3.7
-	
 feat:
  - [ffbc397e9b](https://github.com/ginger-society/ginger-DJffbc397e9b5f48753cbfadbfb367e2de9d1e5c5b) (Ginger Society Admin) feat: added releaser
+	
+chore:
+ - [2d69d0821d](https://github.com/ginger-society/ginger-DJ2d69d0821d54c931c64af0c6963e993599dcb1d8) (Ginger Society Admin) chore: version bump to 5.3.7
 	
 ## 5.3.5 - 2024-08-21
 chore:
