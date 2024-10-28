@@ -1,5 +1,5 @@
 from gingerdj.core.checks import Error
-from gingerdj.core.checks.compatibility.ginger_4_0 import check_csrf_trusted_origins
+from gingerdj.core.checks.compatibility.gingerdj_4_0 import check_csrf_trusted_origins
 from gingerdj.test import SimpleTestCase
 from gingerdj.test.utils import override_settings
 

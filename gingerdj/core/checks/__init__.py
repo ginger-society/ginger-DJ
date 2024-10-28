@@ -16,7 +16,7 @@ from .registry import Tags, register, run_checks, tag_exists
 # Import these to force registration of checks
 import gingerdj.core.checks.async_checks  # NOQA isort:skip
 import gingerdj.core.checks.caches  # NOQA isort:skip
-import gingerdj.core.checks.compatibility.ginger_4_0  # NOQA isort:skip
+import gingerdj.core.checks.compatibility.gingerdj_4_0  # NOQA isort:skip
 import gingerdj.core.checks.database  # NOQA isort:skip
 import gingerdj.core.checks.files  # NOQA isort:skip
 import gingerdj.core.checks.model_checks  # NOQA isort:skip
