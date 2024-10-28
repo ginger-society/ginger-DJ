@@ -1,6 +1,6 @@
-from ginger.db import models
-from ginger.db.models.fields.related import ForwardManyToOneDescriptor
-from ginger.utils.translation import get_language
+from gingerdj.db import models
+from gingerdj.db.models.fields.related import ForwardManyToOneDescriptor
+from gingerdj.utils.translation import get_language
 
 
 class ArticleTranslationDescriptor(ForwardManyToOneDescriptor):

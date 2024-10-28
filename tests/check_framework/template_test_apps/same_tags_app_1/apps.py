@@ -1,4 +1,4 @@
-from ginger.apps import AppConfig
+from gingerdj.apps import AppConfig
 
 
 class SameTagsApp1AppConfig(AppConfig):

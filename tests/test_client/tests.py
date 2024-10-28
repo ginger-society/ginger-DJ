@@ -25,9 +25,9 @@ import itertools
 import tempfile
 from unittest import mock
 
-from ginger.core import mail
-from ginger.http import HttpResponse, HttpResponseNotAllowed
-from ginger.test import (
+from gingerdj.core import mail
+from gingerdj.http import HttpResponse, HttpResponseNotAllowed
+from gingerdj.test import (
     AsyncRequestFactory,
     Client,
     RequestFactory,
@@ -36,9 +36,9 @@ from ginger.test import (
     modify_settings,
     override_settings,
 )
-from ginger.urls import reverse_lazy
-from ginger.utils.decorators import async_only_middleware
-from ginger.views.generic import RedirectView
+from gingerdj.urls import reverse_lazy
+from gingerdj.utils.decorators import async_only_middleware
+from gingerdj.views.generic import RedirectView
 
 from .views import TwoArgException, get_view, post_view, trace_view
 
@@ -680,7 +680,7 @@ class ClientTest(TestCase):
 
 
 @override_settings(
-    MIDDLEWARE=["ginger.middleware.csrf.CsrfViewMiddleware"],
+    MIDDLEWARE=["gingerdj.middleware.csrf.CsrfViewMiddleware"],
     ROOT_URLCONF="test_client.urls",
 )
 class CSRFEnabledClientTests(SimpleTestCase):

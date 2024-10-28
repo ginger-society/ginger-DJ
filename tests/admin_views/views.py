@@ -1,4 +1,4 @@
-from ginger.http import HttpResponse
+from gingerdj.http import HttpResponse
 
 
 def secure_view(request):

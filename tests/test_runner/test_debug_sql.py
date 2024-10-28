@@ -1,10 +1,10 @@
 import unittest
 from io import StringIO
 
-from ginger.db import connection
-from ginger.test import TestCase
-from ginger.test.runner import DiscoverRunner
-from ginger.utils.version import PY311
+from gingerdj.db import connection
+from gingerdj.test import TestCase
+from gingerdj.test.runner import DiscoverRunner
+from gingerdj.utils.version import PY311
 
 from .models import Person
 

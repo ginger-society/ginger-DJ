@@ -1,9 +1,9 @@
 from unittest import mock
 
-from ginger.contrib import admin
-from ginger.http import HttpResponse
-from ginger.test import TestCase, override_settings
-from ginger.urls import path, reverse
+from gingerdj.contrib import admin
+from gingerdj.http import HttpResponse
+from gingerdj.test import TestCase, override_settings
+from gingerdj.urls import path, reverse
 
 from .models import Book
 
@@ -54,7 +54,7 @@ class MultiDatabaseTests(TestCase):
             b.save(using=db)
             cls.test_book_ids[db] = b.id
 
-    @mock.patch("ginger.contrib.admin.options.transaction")
+    @mock.patch("gingerdj.contrib.admin.options.transaction")
     def test_add_view(self, mock):
         for db in self.databases:
             with self.subTest(db=db):
@@ -66,7 +66,7 @@ class MultiDatabaseTests(TestCase):
                 )
                 mock.atomic.assert_called_with(using=db)
 
-    @mock.patch("ginger.contrib.admin.options.transaction")
+    @mock.patch("gingerdj.contrib.admin.options.transaction")
     def test_change_view(self, mock):
         for db in self.databases:
             with self.subTest(db=db):
@@ -81,7 +81,7 @@ class MultiDatabaseTests(TestCase):
                 )
                 mock.atomic.assert_called_with(using=db)
 
-    @mock.patch("ginger.contrib.admin.options.transaction")
+    @mock.patch("gingerdj.contrib.admin.options.transaction")
     def test_delete_view(self, mock):
         for db in self.databases:
             with self.subTest(db=db):
@@ -97,15 +97,14 @@ class MultiDatabaseTests(TestCase):
                 mock.atomic.assert_called_with(using=db)
 
 
-
 @override_settings(ROOT_URLCONF=__name__, DATABASE_ROUTERS=[ViewOnSiteRouter()])
 class ViewOnSiteTests(TestCase):
     databases = {"default", "other"}
 
     def test_contenttype_in_separate_db(self):
         book = Book.objects.using("other").create(name="other book")
-       
-        shortcut_url = reverse("admin:view_on_site", args=( book.id))
+
+        shortcut_url = reverse("admin:view_on_site", args=(book.id))
         response = self.client.get(shortcut_url, follow=False)
         self.assertEqual(response.status_code, 302)
         self.assertRegex(

@@ -1,15 +1,15 @@
 ===================================
-Writing your first patch for Ginger
+Writing your first patch for GingerDJ
 ===================================
 
 Introduction
 ============
 
 Interested in giving back to the community a little? Maybe you've found a bug
-in Ginger that you'd like to see fixed, or maybe there's a small feature you
+in GingerDJ that you'd like to see fixed, or maybe there's a small feature you
 want added.
 
-Contributing back to Ginger itself is the best way to see your own concerns
+Contributing back to GingerDJ itself is the best way to see your own concerns
 addressed. This may seem daunting at first, but it's a well-traveled path with
 documentation, tooling, and a community to support you. We'll walk you through
 the entire process, so you can learn by example.
@@ -24,8 +24,8 @@ Who's this tutorial for?
     documentation.
 
 For this tutorial, we expect that you have at least a basic understanding of
-how Ginger works. This means you should be comfortable going through the
-existing tutorials on :doc:`writing your first Ginger app</intro/tutorial01>`.
+how GingerDJ works. This means you should be comfortable going through the
+existing tutorials on :doc:`writing your first GingerDJ app</intro/tutorial01>`.
 In addition, you should have a good understanding of Python itself. But if you
 don't, `Dive Into Python`_ is a fantastic (and free) online book for beginning
 Python programmers.
@@ -33,7 +33,7 @@ Python programmers.
 Those of you who are unfamiliar with version control systems and Trac will find
 that this tutorial and its links include just enough information to get started.
 However, you'll probably want to read some more about these different tools if
-you plan on contributing to Ginger regularly.
+you plan on contributing to GingerDJ regularly.
 
 For the most part though, this tutorial tries to explain as much as possible,
 so that it can be of use to the widest audience.
@@ -41,24 +41,24 @@ so that it can be of use to the widest audience.
 .. admonition:: Where to get help:
 
     If you're having trouble going through this tutorial, please post a message
-    on the `Ginger Forum`_, |ginger-developers|, or drop by
-    `#ginger-dev on irc.libera.chat`__ to chat with other Ginger users who
+    on the `GingerDJ Forum`_, |gingerdj-developers|, or drop by
+    `#gingerdj-dev on irc.libera.chat`__ to chat with other GingerDJ users who
     might be able to help.
 
-__ https://web.libera.chat/#ginger-dev
+__ https://web.libera.chat/#gingerdj-dev
 .. _Dive Into Python: https://diveintopython3.net/
-.. _Ginger Forum: https://forum.ginger.gloportal.dev/
+.. _Ginger Forum: https://forum.gingerdj.gloportal.dev/
 
 What does this tutorial cover?
 ------------------------------
 
-We'll be walking you through contributing a patch to Ginger for the first time.
+We'll be walking you through contributing a patch to GingerDJ for the first time.
 By the end of this tutorial, you should have a basic understanding of both the
 tools and the processes involved. Specifically, we'll be covering the following:
 
 * Installing Git.
-* Downloading a copy of Ginger's development version.
-* Running Ginger's test suite.
+* Downloading a copy of GingerDJ's development version.
+* Running GingerDJ's test suite.
 * Writing a test for your patch.
 * Writing the code for your patch.
 * Testing your patch.
@@ -66,14 +66,14 @@ tools and the processes involved. Specifically, we'll be covering the following:
 * Where to look for more information.
 
 Once you're done with the tutorial, you can look through the rest of
-:doc:`Ginger's documentation on contributing</internals/contributing/index>`.
+:doc:`GingerDJ's documentation on contributing</internals/contributing/index>`.
 It contains lots of great information and is a must read for anyone who'd like
-to become a regular contributor to Ginger. If you've got questions, it's
+to become a regular contributor to GingerDJ. If you've got questions, it's
 probably got the answers.
 
 .. admonition:: Python 3 required!
 
-    The current version of Ginger doesn't support Python 2.7. Get Python 3 at
+    The current version of GingerDJ doesn't support Python 2.7. Get Python 3 at
     `Python's download page <https://www.python.org/downloads/>`_ or with your
     operating system's package manager.
 
@@ -84,14 +84,14 @@ probably got the answers.
 Code of Conduct
 ===============
 
-As a contributor, you can help us keep the Ginger community open and inclusive.
-Please read and follow our `Code of Conduct <https://www.ginger.gloportal.dev/conduct/>`_.
+As a contributor, you can help us keep the GingerDJ community open and inclusive.
+Please read and follow our `Code of Conduct <https://www.gingerdj.gloportal.dev/conduct/>`_.
 
 Installing Git
 ==============
 
 For this tutorial, you'll need Git installed to download the current
-development version of Ginger and to generate patch files for the changes you
+development version of GingerDJ and to generate patch files for the changes you
 make.
 
 To check whether or not you have Git installed, enter ``git`` into the command
@@ -103,27 +103,27 @@ commands (once it's installed) by typing ``git help`` into the command line.
 
 __ https://git-scm.com/download
 
-Getting a copy of Ginger's development version
+Getting a copy of GingerDJ's development version
 ==============================================
 
-The first step to contributing to Ginger is to get a copy of the source code.
-First, `fork Ginger on GitHub <https://github.com/ginger/ginger/fork>`__. Then,
+The first step to contributing to GingerDJ is to get a copy of the source code.
+First, `fork GingerDJ on GitHub <https://github.com/gingerdj/gingerdj/fork>`__. Then,
 from the command line, use the ``cd`` command to navigate to the directory
-where you'll want your local copy of Ginger to live.
+where you'll want your local copy of GingerDJ to live.
 
-Download the Ginger source code repository using the following command:
+Download the GingerDJ source code repository using the following command:
 
 .. console::
 
-    $ git clone https://github.com/YourGitHubName/ginger.git
+    $ git clone https://github.com/YourGitHubName/gingerdj.git
 
 .. admonition:: Low bandwidth connection?
 
     You can add the ``--depth 1`` argument to ``git clone`` to skip downloading
-    all of Ginger's commit history, which reduces data transfer from  ~250 MB
+    all of GingerDJ's commit history, which reduces data transfer from  ~250 MB
     to ~70 MB.
 
-Now that you have a local copy of Ginger, you can install it just like you would
+Now that you have a local copy of GingerDJ, you can install it just like you would
 install any package using ``pip``. The most convenient way to do so is by using
 a *virtual environment*, which is a feature built into Python that allows you
 to keep a separate directory of installed packages for each of your projects so
@@ -170,42 +170,42 @@ virtual environment, isolated from other environments and system-wide packages.
 
 .. _intro-contributing-install-local-copy:
 
-Go ahead and install the previously cloned copy of Ginger:
+Go ahead and install the previously cloned copy of GingerDJ:
 
 .. console::
 
-    $ python -m pip install -e /path/to/your/local/clone/ginger/
+    $ python -m pip install -e /path/to/your/local/clone/gingerdj/
 
-The installed version of Ginger is now pointing at your local copy by installing
+The installed version of GingerDJ is now pointing at your local copy by installing
 in editable mode. You will immediately see any changes you make to it, which is
 of great help when writing your first patch.
 
-Creating projects with a local copy of Ginger
+Creating projects with a local copy of GingerDJ
 ---------------------------------------------
 
-It may be helpful to test your local changes with a Ginger project. First you
+It may be helpful to test your local changes with a GingerDJ project. First you
 have to create a new virtual environment, :ref:`install the previously cloned
-local copy of Ginger in editable mode <intro-contributing-install-local-copy>`,
-and create a new Ginger project outside of your local copy of Ginger. You will
-immediately see any changes you make to Ginger in your new project, which is
+local copy of GingerDJ in editable mode <intro-contributing-install-local-copy>`,
+and create a new GingerDJ project outside of your local copy of GingerDJ. You will
+immediately see any changes you make to GingerDJ in your new project, which is
 of great help when writing your first patch, especially if testing any changes
 to the UI.
 
 You can follow the :doc:`tutorial</intro/tutorial01>` for help in creating a
-Ginger project.
+GingerDJ project.
 
-Running Ginger's test suite for the first time
+Running GingerDJ's test suite for the first time
 ==============================================
 
-When contributing to Ginger it's very important that your code changes don't
-introduce bugs into other areas of Ginger. One way to check that Ginger still
-works after you make your changes is by running Ginger's test suite. If all
+When contributing to GingerDJ it's very important that your code changes don't
+introduce bugs into other areas of GingerDJ. One way to check that GingerDJ still
+works after you make your changes is by running GingerDJ's test suite. If all
 the tests still pass, then you can be reasonably sure that your changes
-work and haven't broken other parts of Ginger. If you've never run Ginger's test
+work and haven't broken other parts of GingerDJ. If you've never run GingerDJ's test
 suite before, it's a good idea to run it once beforehand to get familiar with
 its output.
 
-Before running the test suite, enter the Ginger ``tests/`` directory using the
+Before running the test suite, enter the GingerDJ ``tests/`` directory using the
 ``cd tests`` command, and install test dependencies by running:
 
 .. console::
@@ -224,11 +224,11 @@ some other flavor of Unix, run:
 
     $ ./runtests.py
 
-Now sit back and relax. Ginger's entire test suite has thousands of tests, and
+Now sit back and relax. GingerDJ's entire test suite has thousands of tests, and
 it takes at least a few minutes to run, depending on the speed of your
 computer.
 
-While Ginger's test suite is running, you'll see a stream of characters
+While GingerDJ's test suite is running, you'll see a stream of characters
 representing the status of each test as it completes. ``E`` indicates that an
 error was raised during a test, and ``F`` indicates that a test's assertions
 failed. Both of these are considered to be test failures. Meanwhile, ``x`` and
@@ -245,14 +245,14 @@ different backend, see :ref:`running-unit-tests-settings`.
 
 Once the tests complete, you should be greeted with a message informing you
 whether the test suite passed or failed. Since you haven't yet made any changes
-to Ginger's code, the entire test suite **should** pass. If you get failures or
+to GingerDJ's code, the entire test suite **should** pass. If you get failures or
 errors make sure you've followed all of the previous steps properly. See
 :ref:`running-unit-tests` for more information.
 
-Note that the latest Ginger "main" branch may not always be stable. When
-developing against "main", you can check `Ginger's continuous integration
+Note that the latest GingerDJ "main" branch may not always be stable. When
+developing against "main", you can check `GingerDJ's continuous integration
 builds`__ to determine if the failures are specific to your machine or if they
-are also present in Ginger's official builds. If you click to view a particular
+are also present in GingerDJ's official builds. If you click to view a particular
 build, you can view the "Configuration Matrix" which shows failures broken down
 by Python version and database backend.
 
@@ -274,7 +274,7 @@ imaginary details:
 
 .. admonition:: Ticket #99999 -- Allow making toast
 
-    Ginger should provide a function ``ginger.shortcuts.make_toast()`` that
+    GingerDJ should provide a function ``gingerdj.shortcuts.make_toast()`` that
     returns ``'toast'``.
 
 We'll now implement this feature and associated tests.
@@ -295,9 +295,9 @@ won't affect the main copy of the code that we cloned earlier.
 Writing some tests for your ticket
 ==================================
 
-In most cases, for a patch to be accepted into Ginger it has to include tests.
+In most cases, for a patch to be accepted into GingerDJ it has to include tests.
 For bug fix patches, this means writing a regression test to ensure that the
-bug is never reintroduced into Ginger later on. A regression test should be
+bug is never reintroduced into GingerDJ later on. A regression test should be
 written in such a way that it will fail while the bug still exists and pass
 once the bug has been fixed. For patches containing new features, you'll need
 to include tests which ensure that the new features are working correctly.
@@ -321,14 +321,14 @@ Writing a test for ticket #99999
 --------------------------------
 
 In order to resolve this ticket, we'll add a ``make_toast()`` function to the
-``ginger.shortcuts`` module. First we are going to write a test that tries to
+``gingerdj.shortcuts`` module. First we are going to write a test that tries to
 use the function and check that its output looks correct.
 
-Navigate to Ginger's ``tests/shortcuts/`` folder and create a new file
+Navigate to GingerDJ's ``tests/shortcuts/`` folder and create a new file
 ``test_make_toast.py``. Add the following code::
 
-    from ginger.shortcuts import make_toast
-    from ginger.test import SimpleTestCase
+    from gingerdj.shortcuts import make_toast
+    from gingerdj.test import SimpleTestCase
 
 
     class MakeToastTests(SimpleTestCase):
@@ -343,7 +343,7 @@ This test checks that the ``make_toast()`` returns ``'toast'``.
     to write at first glance. Fortunately, testing is a *very* big subject in
     computer programming, so there's lots of information out there:
 
-    * A good first look at writing tests for Ginger can be found in the
+    * A good first look at writing tests for GingerDJ can be found in the
       documentation on :doc:`/topics/testing/overview`.
     * Dive Into Python (a free online book for beginning Python developers)
       includes a great `introduction to Unit Testing`__.
@@ -355,9 +355,9 @@ __ https://diveintopython3.net/unit-testing.html
 Running your new test
 ---------------------
 
-Since we haven't made any modifications to ``ginger.shortcuts`` yet, our test
+Since we haven't made any modifications to ``gingerdj.shortcuts`` yet, our test
 should fail. Let's run all the tests in the ``shortcuts`` folder to make sure
-that's really what happens. ``cd`` to the Ginger ``tests/`` directory and run:
+that's really what happens. ``cd`` to the GingerDJ ``tests/`` directory and run:
 
 .. console::
 
@@ -368,7 +368,7 @@ method we added, with this error:
 
 .. code-block:: pytb
 
-    ImportError: cannot import name 'make_toast' from 'ginger.shortcuts'
+    ImportError: cannot import name 'make_toast' from 'gingerdj.shortcuts'
 
 If all of the tests passed, then you'll want to make sure that you added the
 new test shown above to the appropriate folder and file name.
@@ -378,14 +378,14 @@ Writing the code for your ticket
 
 Next we'll be adding the ``make_toast()`` function.
 
-Navigate to the ``ginger/`` folder and open the ``shortcuts.py`` file. At the
+Navigate to the ``gingerdj/`` folder and open the ``shortcuts.py`` file. At the
 bottom, add::
 
     def make_toast():
         return "toast"
 
 Now we need to make sure that the test we wrote earlier passes, so we can see
-whether the code we added is working correctly. Again, navigate to the Ginger
+whether the code we added is working correctly. Again, navigate to the GingerDJ
 ``tests/`` directory and run:
 
 .. console::
@@ -395,16 +395,16 @@ whether the code we added is working correctly. Again, navigate to the Ginger
 Everything should pass. If it doesn't, make sure you correctly added the
 function to the correct file.
 
-Running Ginger's test suite for the second time
+Running GingerDJ's test suite for the second time
 ===============================================
 
 Once you've verified that your patch and your test are working correctly, it's
-a good idea to run the entire Ginger test suite to verify that your change
-hasn't introduced any bugs into other areas of Ginger. While successfully
+a good idea to run the entire GingerDJ test suite to verify that your change
+hasn't introduced any bugs into other areas of GingerDJ. While successfully
 passing the entire test suite doesn't guarantee your code is bug free, it does
 help identify many bugs and regressions that might otherwise go unnoticed.
 
-To run the entire Ginger test suite, ``cd`` into the Ginger ``tests/``
+To run the entire GingerDJ test suite, ``cd`` into the GingerDJ ``tests/``
 directory and run:
 
 .. console::
@@ -430,16 +430,16 @@ file:
     Returns ``'toast'``.
 
 Since this new feature will be in an upcoming release it is also added to the
-release notes for the next version of Ginger. Open the release notes for the
+release notes for the next version of GingerDJ. Open the release notes for the
 latest version in ``docs/releases/``, which at time of writing is ``2.2.txt``.
 Add a note under the "Minor Features" header:
 
 .. code-block:: rst
 
-    :mod:`ginger.shortcuts`
+    :mod:`gingerdj.shortcuts`
     ~~~~~~~~~~~~~~~~~~~~~~~
 
-    * The new :func:`ginger.shortcuts.make_toast` function returns ``'toast'``.
+    * The new :func:`gingerdj.shortcuts.make_toast` function returns ``'toast'``.
 
 For more information on writing documentation, including an explanation of what
 the ``versionadded`` bit is all about, see
@@ -457,7 +457,7 @@ changes ready for commit, run:
 
     $ git add --all
 
-Then display the differences between your current copy of Ginger (with your
+Then display the differences between your current copy of GingerDJ (with your
 changes) and the revision that you initially checked out earlier in the
 tutorial with:
 
@@ -469,10 +469,10 @@ Use the arrow keys to move up and down.
 
 .. code-block:: diff
 
-    diff --git a/ginger/shortcuts.py b/ginger/shortcuts.py
+    diff --git a/gingerdj/shortcuts.py b/gingerdj/shortcuts.py
     index 7ab1df0e9d..8dde9e28d9 100644
-    --- a/ginger/shortcuts.py
-    +++ b/ginger/shortcuts.py
+    --- a/gingerdj/shortcuts.py
+    +++ b/gingerdj/shortcuts.py
     @@ -156,3 +156,7 @@ def resolve_url(to, *args, **kwargs):
 
          # Finally, fall back and assume it's a URL
@@ -489,12 +489,12 @@ Use the arrow keys to move up and down.
      Minor features
      --------------
 
-    +:mod:`ginger.shortcuts`
+    +:mod:`gingerdj.shortcuts`
     +~~~~~~~~~~~~~~~~~~~~~~~
     +
-    +* The new :func:`ginger.shortcuts.make_toast` function returns ``'toast'``.
+    +* The new :func:`gingerdj.shortcuts.make_toast` function returns ``'toast'``.
     +
-     :mod:`ginger.contrib.admin`
+     :mod:`gingerdj.contrib.admin`
      ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     diff --git a/docs/topics/http/shortcuts.txt b/docs/topics/http/shortcuts.txt
@@ -520,8 +520,8 @@ Use the arrow keys to move up and down.
     --- /dev/null
     +++ b/tests/shortcuts/test_make_toast.py
     @@ -0,0 +1,7 @@
-    +from ginger.shortcuts import make_toast
-    +from ginger.test import SimpleTestCase
+    +from gingerdj.shortcuts import make_toast
+    +from gingerdj.test import SimpleTestCase
     +
     +
     +class MakeToastTests(SimpleTestCase):
@@ -558,8 +558,8 @@ After committing the patch, send it to your fork on GitHub (substitute
 
     $ git push origin ticket_99999
 
-You can create a pull request by visiting the `Ginger GitHub page
-<https://github.com/ginger/ginger/>`_. You'll see your branch under "Your
+You can create a pull request by visiting the `GingerDJ GitHub page
+<https://github.com/gingerdj/gingerdj/>`_. You'll see your branch under "Your
 recently pushed branches". Click "Compare & pull request" next to it.
 
 Please don't do it for this tutorial, but on the next page that displays a
@@ -568,31 +568,31 @@ preview of the patch, you would click "Create pull request".
 Next steps
 ==========
 
-Congratulations, you've learned how to make a pull request to Ginger! Details
+Congratulations, you've learned how to make a pull request to GingerDJ! Details
 of more advanced techniques you may need are in
 :doc:`/internals/contributing/writing-code/working-with-git`.
 
-Now you can put those skills to good use by helping to improve Ginger's
+Now you can put those skills to good use by helping to improve GingerDJ's
 codebase.
 
 More information for new contributors
 -------------------------------------
 
-Before you get too into writing patches for Ginger, there's a little more
+Before you get too into writing patches for GingerDJ, there's a little more
 information on contributing that you should probably take a look at:
 
-* You should make sure to read Ginger's documentation on
+* You should make sure to read GingerDJ's documentation on
   :doc:`claiming tickets and submitting patches
   </internals/contributing/writing-code/submitting-patches>`.
   It covers Trac etiquette, how to claim tickets for yourself, expected
   coding style for patches, and many other important details.
-* First time contributors should also read Ginger's :doc:`documentation
+* First time contributors should also read GingerDJ's :doc:`documentation
   for first time contributors</internals/contributing/new-contributors/>`.
   It has lots of good advice for those of us who are new to helping out
-  with Ginger.
+  with GingerDJ.
 * After those, if you're still hungry for more information about
   contributing, you can always browse through the rest of
-  :doc:`Ginger's documentation on contributing</internals/contributing/index>`.
+  :doc:`GingerDJ's documentation on contributing</internals/contributing/index>`.
   It contains a ton of useful information and should be your first source
   for answering any questions you might have.
 
@@ -603,7 +603,7 @@ Once you've looked through some of that information, you'll be ready to go out
 and find a ticket of your own to write a patch for. Pay special attention to
 tickets with the "easy pickings" criterion. These tickets are often much
 simpler in nature and are great for first time contributors. Once you're
-familiar with contributing to Ginger, you can move on to writing patches for
+familiar with contributing to GingerDJ, you can move on to writing patches for
 more difficult and complicated tickets.
 
 If you just want to get started already (and nobody would blame you!), try
@@ -611,13 +611,13 @@ taking a look at the list of `easy tickets that need patches`__ and the
 `easy tickets that have patches which need improvement`__. If you're familiar
 with writing tests, you can also look at the list of
 `easy tickets that need tests`__. Remember to follow the guidelines about
-claiming tickets that were mentioned in the link to Ginger's documentation on
+claiming tickets that were mentioned in the link to GingerDJ's documentation on
 :doc:`claiming tickets and submitting patches
 </internals/contributing/writing-code/submitting-patches>`.
 
-__ https://code.ginger.gloportal.dev/query?status=new&status=reopened&has_patch=0&easy=1&col=id&col=summary&col=status&col=owner&col=type&col=milestone&order=priority
-__ https://code.ginger.gloportal.dev/query?status=new&status=reopened&needs_better_patch=1&easy=1&col=id&col=summary&col=status&col=owner&col=type&col=milestone&order=priority
-__ https://code.ginger.gloportal.dev/query?status=new&status=reopened&needs_tests=1&easy=1&col=id&col=summary&col=status&col=owner&col=type&col=milestone&order=priority
+__ https://code.gingerdj.gloportal.dev/query?status=new&status=reopened&has_patch=0&easy=1&col=id&col=summary&col=status&col=owner&col=type&col=milestone&order=priority
+__ https://code.gingerdj.gloportal.dev/query?status=new&status=reopened&needs_better_patch=1&easy=1&col=id&col=summary&col=status&col=owner&col=type&col=milestone&order=priority
+__ https://code.gingerdj.gloportal.dev/query?status=new&status=reopened&needs_tests=1&easy=1&col=id&col=summary&col=status&col=owner&col=type&col=milestone&order=priority
 
 What's next after creating a pull request?
 ------------------------------------------

@@ -4,14 +4,14 @@ import tempfile
 from contextlib import contextmanager
 from importlib import import_module
 
-from ginger.apps import apps
-from ginger.db import connection, connections, migrations, models
-from ginger.db.migrations.migration import Migration
-from ginger.db.migrations.recorder import MigrationRecorder
-from ginger.db.migrations.state import ProjectState
-from ginger.test import TransactionTestCase
-from ginger.test.utils import extend_sys_path
-from ginger.utils.module_loading import module_dir
+from gingerdj.apps import apps
+from gingerdj.db import connection, connections, migrations, models
+from gingerdj.db.migrations.migration import Migration
+from gingerdj.db.migrations.recorder import MigrationRecorder
+from gingerdj.db.migrations.state import ProjectState
+from gingerdj.test import TransactionTestCase
+from gingerdj.test.utils import extend_sys_path
+from gingerdj.utils.module_loading import module_dir
 
 
 class MigrationTestBase(TransactionTestCase):

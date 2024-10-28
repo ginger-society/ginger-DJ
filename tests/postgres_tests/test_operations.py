@@ -2,19 +2,19 @@ import unittest
 
 from migrations.test_base import OperationTestBase
 
-from ginger.db import IntegrityError, NotSupportedError, connection, transaction
-from ginger.db.migrations.state import ProjectState
-from ginger.db.migrations.writer import OperationWriter
-from ginger.db.models import CheckConstraint, Index, Q, UniqueConstraint
-from ginger.db.utils import ProgrammingError
-from ginger.test import modify_settings, override_settings
-from ginger.test.utils import CaptureQueriesContext
+from gingerdj.db import IntegrityError, NotSupportedError, connection, transaction
+from gingerdj.db.migrations.state import ProjectState
+from gingerdj.db.migrations.writer import OperationWriter
+from gingerdj.db.models import CheckConstraint, Index, Q, UniqueConstraint
+from gingerdj.db.utils import ProgrammingError
+from gingerdj.test import modify_settings, override_settings
+from gingerdj.test.utils import CaptureQueriesContext
 
 from . import PostgreSQLTestCase
 
 try:
-    from ginger.contrib.postgres.indexes import BrinIndex, BTreeIndex
-    from ginger.contrib.postgres.operations import (
+    from gingerdj.contrib.postgres.indexes import BrinIndex, BTreeIndex
+    from gingerdj.contrib.postgres.operations import (
         AddConstraintNotValid,
         AddIndexConcurrently,
         BloomExtension,
@@ -402,10 +402,10 @@ class CreateCollationTests(PostgreSQLTestCase):
             deterministic=False,
         )
         buff, imports = OperationWriter(operation, indentation=0).serialize()
-        self.assertEqual(imports, {"import ginger.contrib.postgres.operations"})
+        self.assertEqual(imports, {"import gingerdj.contrib.postgres.operations"})
         self.assertEqual(
             buff,
-            "ginger.contrib.postgres.operations.CreateCollation(\n"
+            "gingerdj.contrib.postgres.operations.CreateCollation(\n"
             "    name='sample_collation',\n"
             "    locale='und-u-ks-level2',\n"
             "    provider='icu',\n"

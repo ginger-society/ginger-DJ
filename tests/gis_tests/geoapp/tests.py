@@ -1,8 +1,8 @@
 from io import StringIO
 
-from ginger.contrib.gis import gdal
-from ginger.contrib.gis.db.models import Extent, MakeLine, Union, functions
-from ginger.contrib.gis.geos import (
+from gingerdj.contrib.gis import gdal
+from gingerdj.contrib.gis.db.models import Extent, MakeLine, Union, functions
+from gingerdj.contrib.gis.geos import (
     GeometryCollection,
     GEOSGeometry,
     LinearRing,
@@ -14,12 +14,12 @@ from ginger.contrib.gis.geos import (
     Polygon,
     fromstr,
 )
-from ginger.core.files.temp import NamedTemporaryFile
-from ginger.core.management import call_command
-from ginger.db import DatabaseError, NotSupportedError, connection
-from ginger.db.models import F, OuterRef, Subquery
-from ginger.test import TestCase, skipUnlessDBFeature
-from ginger.test.utils import CaptureQueriesContext
+from gingerdj.core.files.temp import NamedTemporaryFile
+from gingerdj.core.management import call_command
+from gingerdj.db import DatabaseError, NotSupportedError, connection
+from gingerdj.db.models import F, OuterRef, Subquery
+from gingerdj.test import TestCase, skipUnlessDBFeature
+from gingerdj.test.utils import CaptureQueriesContext
 
 from ..utils import skipUnlessGISLookup
 from .models import (
@@ -493,7 +493,7 @@ class GeoLookupTest(TestCase):
 
     def test_wkt_string_in_lookup(self):
         # Valid WKT strings don't emit error logs.
-        with self.assertNoLogs("ginger.contrib.gis", "ERROR"):
+        with self.assertNoLogs("gingerdj.contrib.gis", "ERROR"):
             State.objects.filter(poly__intersects="LINESTRING(0 0, 1 1, 5 5)")
 
     @skipUnlessDBFeature("supports_relate_lookup")

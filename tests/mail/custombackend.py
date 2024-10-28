@@ -1,6 +1,6 @@
 """A custom backend for testing."""
 
-from ginger.core.mail.backends.base import BaseEmailBackend
+from gingerdj.core.mail.backends.base import BaseEmailBackend
 
 
 class EmailBackend(BaseEmailBackend):

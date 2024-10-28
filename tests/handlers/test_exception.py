@@ -1,6 +1,6 @@
-from ginger.core.handlers.wsgi import WSGIHandler
-from ginger.test import SimpleTestCase, override_settings
-from ginger.test.client import (
+from gingerdj.core.handlers.wsgi import WSGIHandler
+from gingerdj.test import SimpleTestCase, override_settings
+from gingerdj.test.client import (
     BOUNDARY,
     MULTIPART_CONTENT,
     FakePayload,
@@ -37,7 +37,7 @@ class ExceptionHandlerTests(SimpleTestCase):
                 BOUNDARY,
                 {
                     "a.txt": "Hello World!",
-                    "b.txt": "Hello Ginger!",
+                    "b.txt": "Hello GingerDJ!",
                     "c.txt": "Hello Python!",
                 },
             )

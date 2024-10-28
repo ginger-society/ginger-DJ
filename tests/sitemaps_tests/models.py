@@ -1,5 +1,5 @@
-from ginger.db import models
-from ginger.urls import reverse
+from gingerdj.db import models
+from gingerdj.urls import reverse
 
 
 class TestModel(models.Model):

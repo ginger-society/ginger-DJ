@@ -1,6 +1,6 @@
-from ginger.http import HttpResponse
-from ginger.urls import path
-from ginger.views import View
+from gingerdj.http import HttpResponse
+from gingerdj.urls import path
+from gingerdj.views import View
 
 
 class EmptyCBV(View):

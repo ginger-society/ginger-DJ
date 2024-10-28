@@ -1,5 +1,5 @@
-from ginger.template import TemplateSyntaxError
-from ginger.test import SimpleTestCase
+from gingerdj.template import TemplateSyntaxError
+from gingerdj.test import SimpleTestCase
 
 from ..utils import setup
 
@@ -10,20 +10,20 @@ class FilterTagTests(SimpleTestCase):
         output = self.engine.render_to_string("filter01")
         self.assertEqual(output, "")
 
-    @setup({"filter02": "{% filter upper %}ginger{% endfilter %}"})
+    @setup({"filter02": "{% filter upper %}gingerdj{% endfilter %}"})
     def test_filter02(self):
         output = self.engine.render_to_string("filter02")
         self.assertEqual(output, "GINGER")
 
-    @setup({"filter03": "{% filter upper|lower %}ginger{% endfilter %}"})
+    @setup({"filter03": "{% filter upper|lower %}gingerdj{% endfilter %}"})
     def test_filter03(self):
         output = self.engine.render_to_string("filter03")
-        self.assertEqual(output, "ginger")
+        self.assertEqual(output, "gingerdj")
 
     @setup({"filter04": "{% filter cut:remove %}gingerspam{% endfilter %}"})
     def test_filter04(self):
         output = self.engine.render_to_string("filter04", {"remove": "spam"})
-        self.assertEqual(output, "ginger")
+        self.assertEqual(output, "gingerdj")
 
     @setup({"filter05": "{% filter safe %}fail{% endfilter %}"})
     def test_filter05(self):

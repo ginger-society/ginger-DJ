@@ -6,9 +6,9 @@ import shutil
 import sys
 from unittest import mock
 
-from ginger.apps import apps
-from ginger.core.management import CommandError, call_command
-from ginger.db import (
+from gingerdj.apps import apps
+from gingerdj.core.management import CommandError, call_command
+from gingerdj.db import (
     ConnectionHandler,
     DatabaseError,
     OperationalError,
@@ -16,14 +16,14 @@ from ginger.db import (
     connections,
     models,
 )
-from ginger.db.backends.base.schema import BaseDatabaseSchemaEditor
-from ginger.db.backends.utils import truncate_name
-from ginger.db.migrations.exceptions import InconsistentMigrationHistory
-from ginger.db.migrations.recorder import MigrationRecorder
-from ginger.test import TestCase, override_settings, skipUnlessDBFeature
-from ginger.test.utils import captured_stdout
-from ginger.utils import timezone
-from ginger.utils.version import get_docs_version
+from gingerdj.db.backends.base.schema import BaseDatabaseSchemaEditor
+from gingerdj.db.backends.utils import truncate_name
+from gingerdj.db.migrations.exceptions import InconsistentMigrationHistory
+from gingerdj.db.migrations.recorder import MigrationRecorder
+from gingerdj.test import TestCase, override_settings, skipUnlessDBFeature
+from gingerdj.test.utils import captured_stdout
+from gingerdj.utils import timezone
+from gingerdj.utils.version import get_docs_version
 
 from .models import UnicodeModel, UnserializableModel
 from .routers import TestRouter
@@ -201,7 +201,7 @@ class MigrateTests(MigrationTestBase):
             # Run initial migration with an explicit --fake-initial
             out = io.StringIO()
             with mock.patch(
-                "ginger.core.management.color.supports_color", lambda *args: False
+                "gingerdj.core.management.color.supports_color", lambda *args: False
             ):
                 call_command(
                     "migrate",
@@ -312,7 +312,7 @@ class MigrateTests(MigrationTestBase):
             call_command("migrate", "migrations", "zero", fake=True, verbosity=0)
             out = io.StringIO()
             with mock.patch(
-                "ginger.core.management.color.supports_color", lambda *args: False
+                "gingerdj.core.management.color.supports_color", lambda *args: False
             ):
                 call_command(
                     "migrate",
@@ -412,7 +412,7 @@ class MigrateTests(MigrationTestBase):
         """
         out = io.StringIO()
         with mock.patch(
-            "ginger.core.management.color.supports_color", lambda *args: True
+            "gingerdj.core.management.color.supports_color", lambda *args: True
         ):
             call_command(
                 "showmigrations", format="list", stdout=out, verbosity=0, no_color=False
@@ -1534,7 +1534,7 @@ class MakeMigrationsTests(MigrationTestBase):
     def test_makemigrations_empty_connections(self):
         empty_connections = ConnectionHandler({"default": {}})
         with mock.patch(
-            "ginger.core.management.commands.makemigrations.connections",
+            "gingerdj.core.management.commands.makemigrations.connections",
             new=empty_connections,
         ):
             # with no apps
@@ -1683,7 +1683,7 @@ class MakeMigrationsTests(MigrationTestBase):
         app.
         """
         msg = (
-            "Ginger can't create migrations for app 'migrations' because migrations "
+            "GingerDJ can't create migrations for app 'migrations' because migrations "
             "have been disabled via the MIGRATION_MODULES setting."
         )
         with self.assertRaisesMessage(ValueError, msg):
@@ -1819,7 +1819,7 @@ class MakeMigrationsTests(MigrationTestBase):
             self.assertIn(target_str, content)
         self.assertIn("Created new merge migration %s" % merge_file, out.getvalue())
 
-    @mock.patch("ginger.db.migrations.utils.datetime")
+    @mock.patch("gingerdj.db.migrations.utils.datetime")
     def test_makemigrations_auto_merge_name(self, mock_datetime):
         mock_datetime.datetime.now.return_value = datetime.datetime(2016, 1, 2, 3, 4)
         with mock.patch("builtins.input", mock.Mock(return_value="y")):
@@ -1899,7 +1899,7 @@ class MakeMigrationsTests(MigrationTestBase):
             self.assertIn(input_msg, output)
             self.assertIn("Please enter the default value as valid Python.", output)
             self.assertIn(
-                "The datetime and ginger.utils.timezone modules are "
+                "The datetime and gingerdj.utils.timezone modules are "
                 "available, so it is possible to provide e.g. timezone.now as "
                 "a value",
                 output,
@@ -1977,7 +1977,7 @@ class MakeMigrationsTests(MigrationTestBase):
             self.assertIn(input_msg, output)
             self.assertIn("Please enter the default value as valid Python.", output)
             self.assertIn(
-                "The datetime and ginger.utils.timezone modules are "
+                "The datetime and gingerdj.utils.timezone modules are "
                 "available, so it is possible to provide e.g. timezone.now as "
                 "a value",
                 output,
@@ -2353,7 +2353,7 @@ class MakeMigrationsTests(MigrationTestBase):
         with mock.patch("builtins.input", mock.Mock(return_value="N")):
             out = io.StringIO()
             with mock.patch(
-                "ginger.core.management.color.supports_color", lambda *args: False
+                "gingerdj.core.management.color.supports_color", lambda *args: False
             ):
                 call_command(
                     "makemigrations",
@@ -2485,7 +2485,7 @@ class MakeMigrationsTests(MigrationTestBase):
         """
         makemigrations prints the absolute path if os.path.relpath() raises a
         ValueError when it's impossible to obtain a relative path, e.g. on
-        Windows if Ginger is installed on a different drive than where the
+        Windows if GingerDJ is installed on a different drive than where the
         migration files are created.
         """
         out = io.StringIO()
@@ -2515,7 +2515,7 @@ class MakeMigrationsTests(MigrationTestBase):
             "for database connection 'default': could not connect to server"
         )
         with mock.patch(
-            "ginger.db.migrations.loader.MigrationLoader.check_consistent_history",
+            "gingerdj.db.migrations.loader.MigrationLoader.check_consistent_history",
             side_effect=OperationalError("could not connect to server"),
         ):
             with self.temporary_migration_module():
@@ -2525,7 +2525,7 @@ class MakeMigrationsTests(MigrationTestBase):
 
     @mock.patch("builtins.input", return_value="1")
     @mock.patch(
-        "ginger.db.migrations.questioner.sys.stdin",
+        "gingerdj.db.migrations.questioner.sys.stdin",
         mock.MagicMock(encoding=sys.getdefaultencoding()),
     )
     def test_makemigrations_auto_now_add_interactive(self, *args):
@@ -2621,7 +2621,7 @@ class MakeMigrationsTests(MigrationTestBase):
             f"Please choose how to proceed:\n"
             f" 1) Continue making this migration as the first step in writing "
             f"a manual migration to generate unique values described here: "
-            f"https://docs.ginger.gloportal.dev/en/{version}/howto/"
+            f"https://docs.gingerdj.gloportal.dev/en/{version}/howto/"
             f"writing-migrations/#migrations-that-add-unique-fields.\n"
             f" 2) Quit and edit field options in models.py.\n"
         )
@@ -3052,7 +3052,7 @@ class AppLabelErrorTests(TestCase):
 
     nonexistent_app_error = "No installed app with label 'nonexistent_app'."
     did_you_mean_auth_error = (
-        "No installed app with label 'ginger.sample.app'. Did you mean 'sample'?"
+        "No installed app with label 'gingerdj.sample.app'. Did you mean 'sample'?"
     )
 
     def test_makemigrations_nonexistent_app_label(self):
@@ -3071,17 +3071,14 @@ class AppLabelErrorTests(TestCase):
             call_command("showmigrations", "nonexistent_app", stderr=err)
         self.assertIn(self.nonexistent_app_error, err.getvalue())
 
-
     def test_sqlmigrate_nonexistent_app_label(self):
         with self.assertRaisesMessage(CommandError, self.nonexistent_app_error):
             call_command("sqlmigrate", "nonexistent_app", "0002")
 
-   
     def test_squashmigrations_nonexistent_app_label(self):
         with self.assertRaisesMessage(CommandError, self.nonexistent_app_error):
             call_command("squashmigrations", "nonexistent_app", "0002")
 
-   
     def test_optimizemigration_nonexistent_app_label(self):
         with self.assertRaisesMessage(CommandError, self.nonexistent_app_error):
             call_command("optimizemigration", "nonexistent_app", "0002")
@@ -3202,7 +3199,7 @@ class OptimizeMigrationTests(MigrationTestBase):
             msg = (
                 f"Migration will require manual porting but is already a squashed "
                 f"migration.\nTransition to a normal migration first: "
-                f"https://docs.ginger.gloportal.dev/en/{version}/topics/migrations/"
+                f"https://docs.gingerdj.gloportal.dev/en/{version}/topics/migrations/"
                 f"#squashing-migrations"
             )
             with self.assertRaisesMessage(CommandError, msg):

@@ -1,6 +1,6 @@
 from io import BytesIO
 
-from ginger.http import FileResponse
+from gingerdj.http import FileResponse
 
 FILE_RESPONSE_HOLDER = {}
 

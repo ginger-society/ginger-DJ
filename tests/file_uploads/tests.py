@@ -9,19 +9,19 @@ from io import BytesIO, StringIO
 from unittest import mock
 from urllib.parse import quote
 
-from ginger.conf import DEFAULT_STORAGE_ALIAS
-from ginger.core.exceptions import SuspiciousFileOperation
-from ginger.core.files import temp as tempfile
-from ginger.core.files.storage import default_storage
-from ginger.core.files.uploadedfile import SimpleUploadedFile, UploadedFile
-from ginger.http.multipartparser import (
+from gingerdj.conf import DEFAULT_STORAGE_ALIAS
+from gingerdj.core.exceptions import SuspiciousFileOperation
+from gingerdj.core.files import temp as tempfile
+from gingerdj.core.files.storage import default_storage
+from gingerdj.core.files.uploadedfile import SimpleUploadedFile, UploadedFile
+from gingerdj.http.multipartparser import (
     FILE,
     MAX_TOTAL_HEADER_SIZE,
     MultiPartParser,
     MultiPartParserError,
     Parser,
 )
-from ginger.test import SimpleTestCase, TestCase, client, override_settings
+from gingerdj.test import SimpleTestCase, TestCase, client, override_settings
 
 from . import uploadhandler
 from .models import FileModel
@@ -596,7 +596,7 @@ class FileUploadTests(TestCase):
             temp_file.write(b"a")
             temp_file.seek(0)
             with mock.patch(
-                "ginger.http.multipartparser.Parser",
+                "gingerdj.http.multipartparser.Parser",
                 MockedParser,
             ):
                 response = self.client.post(
@@ -739,7 +739,7 @@ class FileUploadTests(TestCase):
                 return ret
 
         # Maybe this is a little more complicated that it needs to be; but if
-        # the ginger.test.client.FakePayload.read() implementation changes then
+        # the gingerdj.test.client.FakePayload.read() implementation changes then
         # this test would fail.  So we need to know exactly what kind of error
         # it raises when there is an attempt to read more than the available bytes:
         try:
@@ -774,7 +774,7 @@ class FileUploadTests(TestCase):
         uploaded.
         """
         # Synthesize the contents of a file upload with a mixed case filename
-        # so we don't have to carry such a file in the Ginger tests source code
+        # so we don't have to carry such a file in the GingerDJ tests source code
         # tree.
         vars = {"boundary": "oUrBoUnDaRyStRiNg"}
         post_data = [
@@ -863,7 +863,7 @@ class DirectoryCreationTests(SimpleTestCase):
     @override_settings(
         STORAGES={
             DEFAULT_STORAGE_ALIAS: {
-                "BACKEND": "ginger.core.files.storage.FileSystemStorage",
+                "BACKEND": "gingerdj.core.files.storage.FileSystemStorage",
             }
         }
     )

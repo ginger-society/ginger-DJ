@@ -1,9 +1,9 @@
-# Unit tests for typecast functions in ginger.db.backends.util
+# Unit tests for typecast functions in gingerdj.db.backends.util
 
 import datetime
 import unittest
 
-from ginger.db.backends import utils as typecasts
+from gingerdj.db.backends import utils as typecasts
 
 TEST_CASES = {
     "typecast_date": (

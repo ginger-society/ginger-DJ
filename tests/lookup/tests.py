@@ -4,9 +4,9 @@ from math import ceil
 from operator import attrgetter
 from unittest import skipUnless
 
-from ginger.core.exceptions import FieldError
-from ginger.db import connection, models
-from ginger.db.models import (
+from gingerdj.core.exceptions import FieldError
+from gingerdj.db import connection, models
+from gingerdj.db.models import (
     BooleanField,
     Case,
     Exists,
@@ -19,8 +19,8 @@ from ginger.db.models import (
     Value,
     When,
 )
-from ginger.db.models.functions import Abs, Cast, Length, Substr
-from ginger.db.models.lookups import (
+from gingerdj.db.models.functions import Abs, Cast, Length, Substr
+from gingerdj.db.models.lookups import (
     Exact,
     GreaterThan,
     GreaterThanOrEqual,
@@ -28,8 +28,8 @@ from ginger.db.models.lookups import (
     LessThan,
     LessThanOrEqual,
 )
-from ginger.test import TestCase, skipUnlessDBFeature
-from ginger.test.utils import isolate_apps, register_lookup
+from gingerdj.test import TestCase, skipUnlessDBFeature
+from gingerdj.test.utils import isolate_apps, register_lookup
 
 from .models import (
     Article,
@@ -658,7 +658,7 @@ class LookupTests(TestCase):
 
     def test_escaping(self):
         # Underscores, percent signs and backslashes have special meaning in the
-        # underlying SQL code, but Ginger handles the quoting of them automatically.
+        # underlying SQL code, but GingerDJ handles the quoting of them automatically.
         a8 = Article.objects.create(
             headline="Article_ with underscore", pub_date=datetime(2005, 11, 20)
         )

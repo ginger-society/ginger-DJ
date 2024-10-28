@@ -1,11 +1,11 @@
-from ginger.core.exceptions import ImproperlyConfigured
-from ginger.core.servers.basehttp import get_internal_wsgi_application
-from ginger.core.signals import request_started
-from ginger.core.wsgi import get_wsgi_application
-from ginger.db import close_old_connections
-from ginger.http import FileResponse
-from ginger.test import SimpleTestCase, override_settings
-from ginger.test.client import RequestFactory
+from gingerdj.core.exceptions import ImproperlyConfigured
+from gingerdj.core.servers.basehttp import get_internal_wsgi_application
+from gingerdj.core.signals import request_started
+from gingerdj.core.wsgi import get_wsgi_application
+from gingerdj.db import close_old_connections
+from gingerdj.http import FileResponse
+from gingerdj.test import SimpleTestCase, override_settings
+from gingerdj.test.client import RequestFactory
 
 
 @override_settings(ROOT_URLCONF="wsgi.urls")
@@ -102,7 +102,7 @@ class GetInternalWSGIApplicationTest(SimpleTestCase):
         def mock_get_wsgi_app():
             return fake_app
 
-        from ginger.core.servers import basehttp
+        from gingerdj.core.servers import basehttp
 
         _orig_get_wsgi_app = basehttp.get_wsgi_application
         basehttp.get_wsgi_application = mock_get_wsgi_app

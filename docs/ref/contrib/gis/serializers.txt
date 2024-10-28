@@ -2,7 +2,7 @@
 ``GeoJSON`` Serializer
 ======================
 
-.. module:: ginger.contrib.gis.serializers.geojson
+.. module:: gingerdj.contrib.gis.serializers.geojson
     :synopsis: Serialization of GeoGinger models in the GeoJSON format.
 
 GeoGinger provides a specific serializer for the `GeoJSON`__ format. See
@@ -37,7 +37,7 @@ serializers.
 
 Example::
 
-    from ginger.core.serializers import serialize
+    from gingerdj.core.serializers import serialize
     from my_app.models import City
 
     serialize("geojson", City.objects.all(), geometry_field="point", fields=["name"])

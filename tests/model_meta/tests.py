@@ -1,8 +1,8 @@
-from ginger.apps import apps
-from ginger.core.exceptions import FieldDoesNotExist
-from ginger.db.models import CharField, Field, ForeignObjectRel, ManyToManyField
-from ginger.db.models.options import EMPTY_RELATION_TREE, IMMUTABLE_WARNING
-from ginger.test import SimpleTestCase
+from gingerdj.apps import apps
+from gingerdj.core.exceptions import FieldDoesNotExist
+from gingerdj.db.models import CharField, Field, ForeignObjectRel, ManyToManyField
+from gingerdj.db.models.options import EMPTY_RELATION_TREE, IMMUTABLE_WARNING
+from gingerdj.test import SimpleTestCase
 
 from .models import (
     AbstractPerson,

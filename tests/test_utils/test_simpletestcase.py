@@ -3,7 +3,7 @@ from io import StringIO
 from unittest import mock
 from unittest.suite import _DebugResult
 
-from ginger.test import SimpleTestCase
+from gingerdj.test import SimpleTestCase
 
 
 class ErrorTestCase(SimpleTestCase):

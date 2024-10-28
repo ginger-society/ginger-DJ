@@ -1,6 +1,6 @@
-from ginger.core.exceptions import ValidationError
-from ginger.forms import CharField, HiddenInput, PasswordInput, Textarea, TextInput
-from ginger.test import SimpleTestCase
+from gingerdj.core.exceptions import ValidationError
+from gingerdj.forms import CharField, HiddenInput, PasswordInput, Textarea, TextInput
+from gingerdj.test import SimpleTestCase
 
 from . import FormFieldAssertionsMixin
 

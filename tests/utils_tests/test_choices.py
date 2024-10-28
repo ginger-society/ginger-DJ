@@ -1,15 +1,15 @@
 import collections.abc
 from unittest import mock
 
-from ginger.db.models import TextChoices
-from ginger.test import SimpleTestCase
-from ginger.utils.choices import (
+from gingerdj.db.models import TextChoices
+from gingerdj.test import SimpleTestCase
+from gingerdj.utils.choices import (
     BaseChoiceIterator,
     CallableChoiceIterator,
     flatten_choices,
     normalize_choices,
 )
-from ginger.utils.translation import gettext_lazy as _
+from gingerdj.utils.translation import gettext_lazy as _
 
 
 class SimpleChoiceIterator(BaseChoiceIterator):

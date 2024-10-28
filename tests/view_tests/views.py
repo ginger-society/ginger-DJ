@@ -4,18 +4,21 @@ import logging
 import sys
 from pathlib import Path
 
-from ginger.core.exceptions import BadRequest, PermissionDenied, SuspiciousOperation
-from ginger.http import Http404, HttpResponse, JsonResponse
-from ginger.shortcuts import render
-from ginger.template import Context, Template, TemplateDoesNotExist
-from ginger.urls import get_resolver
-from ginger.views import View
-from ginger.views.debug import (
+from gingerdj.core.exceptions import BadRequest, PermissionDenied, SuspiciousOperation
+from gingerdj.http import Http404, HttpResponse, JsonResponse
+from gingerdj.shortcuts import render
+from gingerdj.template import Context, Template, TemplateDoesNotExist
+from gingerdj.urls import get_resolver
+from gingerdj.views import View
+from gingerdj.views.debug import (
     ExceptionReporter,
     SafeExceptionReporterFilter,
     technical_500_response,
 )
-from ginger.views.decorators.debug import sensitive_post_parameters, sensitive_variables
+from gingerdj.views.decorators.debug import (
+    sensitive_post_parameters,
+    sensitive_variables,
+)
 
 TEMPLATES_PATH = Path(__file__).resolve().parent / "templates"
 
@@ -124,7 +127,7 @@ def render_no_template(request):
 
 
 def send_log(request, exc_info):
-    logger = logging.getLogger("ginger")
+    logger = logging.getLogger("gingerdj")
     # The default logging config has a logging filter to ensure admin emails are
     # only sent with DEBUG=False, but since someone might choose to remove that
     # filter, we still want to be able to test the behavior of error emails

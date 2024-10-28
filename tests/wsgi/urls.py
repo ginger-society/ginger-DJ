@@ -1,5 +1,5 @@
-from ginger.http import FileResponse, HttpResponse
-from ginger.urls import path
+from gingerdj.http import FileResponse, HttpResponse
+from gingerdj.urls import path
 
 
 def helloworld(request):

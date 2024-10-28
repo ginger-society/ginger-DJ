@@ -1,7 +1,7 @@
 from datetime import datetime
 
-from ginger.forms import CharField, DateTimeInput, Form
-from ginger.utils import translation
+from gingerdj.forms import CharField, DateTimeInput, Form
+from gingerdj.utils import translation
 
 from .base import WidgetTest
 

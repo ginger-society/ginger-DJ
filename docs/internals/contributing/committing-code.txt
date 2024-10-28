@@ -3,15 +3,15 @@ Committing code
 ===============
 
 This section is addressed to the mergers and to anyone interested in knowing
-how code gets committed into Ginger. If you're a community member who wants to
-contribute code to Ginger, look at :doc:`writing-code/working-with-git` instead.
+how code gets committed into GingerDJ. If you're a community member who wants to
+contribute code to GingerDJ, look at :doc:`writing-code/working-with-git` instead.
 
 .. _handling-pull-requests:
 
 Handling pull requests
 ======================
 
-Since Ginger is hosted on GitHub, patches are provided in the form of pull
+Since GingerDJ is hosted on GitHub, patches are provided in the form of pull
 requests.
 
 When committing a pull request, make sure each individual commit matches the
@@ -24,7 +24,7 @@ You may want to have Jenkins or GitHub actions test the pull request with one
 of the pull request builders that doesn't run automatically, such as Oracle or
 Selenium. See the `CI wiki page`_ for instructions.
 
-.. _CI wiki page: https://code.ginger.gloportal.dev/wiki/CI
+.. _CI wiki page: https://code.gingerdj.gloportal.dev/wiki/CI
 
 If you find yourself checking out pull requests locally more often, this git
 alias will be helpful:
@@ -34,7 +34,7 @@ alias will be helpful:
     [alias]
         pr = !sh -c \"git fetch upstream pull/${1}/head:pr/${1} && git checkout pr/${1}\"
 
-Add it to your ``~/.gitconfig``, and set ``upstream`` to be ``ginger/ginger``.
+Add it to your ``~/.gitconfig``, and set ``upstream`` to be ``gingerdj/gingerdj``.
 Then you can run ``git pr ####`` to checkout the corresponding pull request.
 
 At this point, you can work on the code. Use ``git rebase -i`` and ``git
@@ -72,7 +72,7 @@ the pull request number that's automatically appended to the message's first
 line.
 
 When rewriting the commit history of a pull request, the goal is to make
-Ginger's commit history as usable as possible:
+GingerDJ's commit history as usable as possible:
 
 * If a patch contains back-and-forth commits, then rewrite those into one.
   For example, if a commit adds some code and a second commit fixes stylistic
@@ -102,15 +102,15 @@ Committing guidelines
 =====================
 
 In addition, please follow the following guidelines when committing code to
-Ginger's Git repository:
+GingerDJ's Git repository:
 
-* Never change the published history of ``ginger/ginger`` branches by force
+* Never change the published history of ``gingerdj/gingerdj`` branches by force
   pushing. If you absolutely must (for security reasons for example), first
   discuss the situation with the team.
 
 * For any medium-to-big changes, where "medium-to-big" is according to
-  your judgment, please bring things up on the `Ginger Forum`_ or
-  |ginger-developers| mailing list before making the change.
+  your judgment, please bring things up on the `GingerDJ Forum`_ or
+  |gingerdj-developers| mailing list before making the change.
 
   If you bring something up and nobody responds, please don't take that
   to mean your idea is great and should be implemented immediately because
@@ -133,7 +133,7 @@ Ginger's Git repository:
 
       Fixed #18307 -- Added git workflow guidelines.
 
-      Refactored the Ginger's documentation to remove mentions of SVN
+      Refactored the GingerDJ's documentation to remove mentions of SVN
       specific tasks. Added guidelines of how to use Git, GitHub, and
       how to use pull request together with Trac instead.
 
@@ -154,7 +154,7 @@ Ginger's Git repository:
 * Separate bug fixes from feature changes. Bugfixes may need to be backported
   to the stable branch, according to :ref:`supported-versions-policy`.
 
-* If your commit closes a ticket in the Ginger `ticket tracker`_, begin
+* If your commit closes a ticket in the GingerDJ `ticket tracker`_, begin
   your commit message with the text "Fixed #xxxxx", where "xxxxx" is the
   number of the ticket your commit fixes. Example: "Fixed #123 -- Added
   whizbang feature.". We've rigged Trac so that any commit message in that
@@ -172,7 +172,7 @@ Ginger's Git repository:
 
 .. _Trac plugin: https://github.com/trac-hacks/trac-github
 
-* If your commit references a ticket in the Ginger `ticket tracker`_ but
+* If your commit references a ticket in the GingerDJ `ticket tracker`_ but
   does *not* close the ticket, include the phrase "Refs #xxxxx", where "xxxxx"
   is the number of the ticket your commit references. This will automatically
   post a comment to the appropriate ticket.
@@ -181,7 +181,7 @@ Ginger's Git repository:
 
   .. code-block:: none
 
-    [<Ginger version>] Fixed <ticket> -- <description>
+    [<GingerDJ version>] Fixed <ticket> -- <description>
 
     Backport of <revision> from <branch>.
 
@@ -194,7 +194,7 @@ Ginger's Git repository:
     Backport of 80c0cbf1c97047daed2c5b41b296bbc56fe1d7e3 from main.
 
   There's a `script on the wiki
-  <https://code.ginger.gloportal.dev/wiki/MergerTips#AutomatingBackports>`_ to
+  <https://code.gingerdj.gloportal.dev/wiki/MergerTips#AutomatingBackports>`_ to
   automate this.
 
   If the commit fixes a regression, include this in the commit message:
@@ -227,14 +227,14 @@ When a mistaken commit is discovered, please follow these guidelines:
 
 * If the original author can't be reached (within a reasonable amount
   of time -- a day or so) and the problem is severe -- crashing bug,
-  major test failures, etc. -- then ask for objections on the `Ginger Forum`_
-  or |ginger-developers| mailing list then revert if there are none.
+  major test failures, etc. -- then ask for objections on the `GingerDJ Forum`_
+  or |gingerdj-developers| mailing list then revert if there are none.
 
 * If the problem is small (a feature commit after feature freeze,
   say), wait it out.
 
 * If there's a disagreement between the merger and the reverter-to-be then try
-  to work it out on the `Ginger Forum`_ or |ginger-developers| mailing list. If
+  to work it out on the `GingerDJ Forum`_ or |gingerdj-developers| mailing list. If
   an agreement can't be reached then it should be put to a vote.
 
 * If the commit introduced a confirmed, disclosed security
@@ -244,9 +244,9 @@ When a mistaken commit is discovered, please follow these guidelines:
 * The release branch maintainer may back out commits to the release
   branch without permission if the commit breaks the release branch.
 
-* If you mistakenly push a topic branch to ``ginger/ginger``, delete it.
+* If you mistakenly push a topic branch to ``gingerdj/gingerdj``, delete it.
   For instance, if you did: ``git push upstream feature_antigravity``,
   do a reverse push: ``git push upstream :feature_antigravity``.
 
-.. _ticket tracker: https://code.ginger.gloportal.dev/
-.. _Ginger Forum: https://forum.ginger.gloportal.dev/
+.. _ticket tracker: https://code.gingerdj.gloportal.dev/
+.. _Ginger Forum: https://forum.gingerdj.gloportal.dev/

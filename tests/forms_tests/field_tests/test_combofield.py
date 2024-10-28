@@ -1,6 +1,6 @@
-from ginger.core.exceptions import ValidationError
-from ginger.forms import CharField, ComboField, EmailField
-from ginger.test import SimpleTestCase
+from gingerdj.core.exceptions import ValidationError
+from gingerdj.forms import CharField, ComboField, EmailField
+from gingerdj.test import SimpleTestCase
 
 
 class ComboFieldTest(SimpleTestCase):

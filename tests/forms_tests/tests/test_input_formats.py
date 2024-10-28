@@ -1,9 +1,9 @@
 from datetime import date, datetime, time
 
-from ginger import forms
-from ginger.core.exceptions import ValidationError
-from ginger.test import SimpleTestCase, override_settings
-from ginger.utils import translation
+from gingerdj import forms
+from gingerdj.core.exceptions import ValidationError
+from gingerdj.test import SimpleTestCase, override_settings
+from gingerdj.utils import translation
 
 
 class LocalizedTimeTests(SimpleTestCase):

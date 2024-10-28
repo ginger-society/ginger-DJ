@@ -1,9 +1,9 @@
 from datetime import date, datetime, timezone
 
-from ginger.core.exceptions import ValidationError
-from ginger.forms import DateTimeField
-from ginger.test import SimpleTestCase
-from ginger.utils.timezone import get_fixed_timezone
+from gingerdj.core.exceptions import ValidationError
+from gingerdj.forms import DateTimeField
+from gingerdj.test import SimpleTestCase
+from gingerdj.utils.timezone import get_fixed_timezone
 
 
 class DateTimeFieldTest(SimpleTestCase):

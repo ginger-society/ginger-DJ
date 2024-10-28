@@ -1,8 +1,8 @@
 import os
 
-from ginger.template import Context, Template
-from ginger.test import SimpleTestCase, override_settings
-from ginger.utils.translation import activate, get_language, trans_real
+from gingerdj.template import Context, Template
+from gingerdj.test import SimpleTestCase, override_settings
+from gingerdj.utils.translation import activate, get_language, trans_real
 
 from .utils import POFileAssertionMixin
 
@@ -16,7 +16,7 @@ SAMPLEPROJECT_LOCALE = os.path.join(SAMPLEPROJECT_DIR, "locale")
 class FrenchTestCase(SimpleTestCase):
     """Tests using the French translations of the sampleproject."""
 
-    PO_FILE = os.path.join(SAMPLEPROJECT_LOCALE, "fr", "LC_MESSAGES", "ginger.po")
+    PO_FILE = os.path.join(SAMPLEPROJECT_LOCALE, "fr", "LC_MESSAGES", "gingerdj.po")
 
     def setUp(self):
         self._language = get_language()
@@ -187,6 +187,6 @@ class RenderingTemplatesWithPercentSigns(FrenchTestCase):
             "2 percent signs %%{% endblocktranslate %}"
         )
         self.assertEqual(
-            block_tpl.render(Context({"name": "Ginger"})),
-            "Ginger dit: 1 pour cent signe %, deux signes de pourcentage %%",
+            block_tpl.render(Context({"name": "GingerDJ"})),
+            "GingerDJ dit: 1 pour cent signe %, deux signes de pourcentage %%",
         )

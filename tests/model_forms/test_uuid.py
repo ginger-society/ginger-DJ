@@ -1,6 +1,6 @@
-from ginger import forms
-from ginger.core.exceptions import ValidationError
-from ginger.test import TestCase
+from gingerdj import forms
+from gingerdj.core.exceptions import ValidationError
+from gingerdj.test import TestCase
 
 from .models import UUIDPK
 

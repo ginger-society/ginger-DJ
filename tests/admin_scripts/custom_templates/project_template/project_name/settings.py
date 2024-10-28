@@ -1,1 +1,1 @@
-# Ginger settings for {{ project_name }} test project.
+# GingerDJ settings for {{ project_name }} test project.

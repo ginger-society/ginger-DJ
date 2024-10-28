@@ -1,7 +1,7 @@
-from ginger import forms
-from ginger.core.exceptions import ValidationError
-from ginger.db import IntegrityError, models, transaction
-from ginger.test import SimpleTestCase, TestCase
+from gingerdj import forms
+from gingerdj.core.exceptions import ValidationError
+from gingerdj.db import IntegrityError, models, transaction
+from gingerdj.test import SimpleTestCase, TestCase
 
 from .models import BooleanModel, FksToBooleans, NullBooleanModel
 

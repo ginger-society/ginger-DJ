@@ -1,12 +1,12 @@
 import datetime
 from unittest import mock
 
-from ginger.contrib import admin
-from ginger.contrib.admin.models import LogEntry
-from ginger.contrib.admin.options import IncorrectLookupParameters
-from ginger.contrib.admin.templatetags.admin_list import pagination
-from ginger.contrib.admin.tests import AdminSeleniumTestCase
-from ginger.contrib.admin.views.main import (
+from gingerdj.contrib import admin
+from gingerdj.contrib.admin.models import LogEntry
+from gingerdj.contrib.admin.options import IncorrectLookupParameters
+from gingerdj.contrib.admin.templatetags.admin_list import pagination
+from gingerdj.contrib.admin.tests import AdminSeleniumTestCase
+from gingerdj.contrib.admin.views.main import (
     ALL_VAR,
     IS_FACETS_VAR,
     IS_POPUP_VAR,
@@ -15,17 +15,17 @@ from ginger.contrib.admin.views.main import (
     SEARCH_VAR,
     TO_FIELD_VAR,
 )
-from ginger.contrib.messages.storage.cookie import CookieStorage
-from ginger.db import DatabaseError, connection, models
-from ginger.db.models import F, Field, IntegerField
-from ginger.db.models.functions import Upper
-from ginger.db.models.lookups import Contains, Exact
-from ginger.template import Context, Template, TemplateSyntaxError
-from ginger.test import TestCase, override_settings, skipUnlessDBFeature
-from ginger.test.client import RequestFactory
-from ginger.test.utils import CaptureQueriesContext, isolate_apps, register_lookup
-from ginger.urls import reverse
-from ginger.utils import formats
+from gingerdj.contrib.messages.storage.cookie import CookieStorage
+from gingerdj.db import DatabaseError, connection, models
+from gingerdj.db.models import F, Field, IntegerField
+from gingerdj.db.models.functions import Upper
+from gingerdj.db.models.lookups import Contains, Exact
+from gingerdj.template import Context, Template, TemplateSyntaxError
+from gingerdj.test import TestCase, override_settings, skipUnlessDBFeature
+from gingerdj.test.client import RequestFactory
+from gingerdj.test.utils import CaptureQueriesContext, isolate_apps, register_lookup
+from gingerdj.urls import reverse
+from gingerdj.utils import formats
 
 from .admin import (
     BandAdmin,
@@ -93,7 +93,6 @@ class ChangeListTests(TestCase):
     @classmethod
     def setUpTestData(cls):
         pass
-
 
     def _mocked_authenticated_request(self, url, user):
         request = self.factory.get(url)
@@ -444,7 +443,7 @@ class ChangeListTests(TestCase):
             "_save": "Save",
         }
         with mock.patch(
-            "ginger.contrib.admin.ModelAdmin.log_change", side_effect=DatabaseError
+            "gingerdj.contrib.admin.ModelAdmin.log_change", side_effect=DatabaseError
         ):
             with self.assertRaises(DatabaseError):
                 self.client.post(changelist_url, data)
@@ -457,7 +456,7 @@ class ChangeListTests(TestCase):
         self.assertEqual(b.speed, 2)
 
         with mock.patch(
-            "ginger.contrib.admin.ModelAdmin.log_change",
+            "gingerdj.contrib.admin.ModelAdmin.log_change",
             side_effect=[None, DatabaseError],
         ):
             with self.assertRaises(DatabaseError):
@@ -1703,7 +1702,6 @@ class GetAdminLogTests(TestCase):
         )
         # This template tag just logs.
         self.assertEqual(template.render(context), "")
-
 
     def test_missing_args(self):
         msg = "'get_admin_log' statements require two arguments"

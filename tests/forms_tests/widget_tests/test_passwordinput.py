@@ -1,4 +1,4 @@
-from ginger.forms import CharField, Form, PasswordInput
+from gingerdj.forms import CharField, Form, PasswordInput
 
 from .base import WidgetTest
 

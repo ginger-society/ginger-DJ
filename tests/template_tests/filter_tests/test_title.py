@@ -1,5 +1,5 @@
-from ginger.template.defaultfilters import title
-from ginger.test import SimpleTestCase
+from gingerdj.template.defaultfilters import title
+from gingerdj.test import SimpleTestCase
 
 from ..utils import setup
 

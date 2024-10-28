@@ -1,6 +1,6 @@
-from ginger.db import models
-from ginger.test import SimpleTestCase
-from ginger.test.utils import isolate_apps
+from gingerdj.db import models
+from gingerdj.test import SimpleTestCase
+from gingerdj.test.utils import isolate_apps
 
 
 @isolate_apps("absolute_url_overrides")

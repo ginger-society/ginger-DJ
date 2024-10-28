@@ -2,19 +2,19 @@
 Model field reference
 =====================
 
-.. module:: ginger.db.models.fields
+.. module:: gingerdj.db.models.fields
    :synopsis: Built-in field types.
 
-.. currentmodule:: ginger.db.models
+.. currentmodule:: gingerdj.db.models
 
 This document contains all the API references of :class:`Field` including the
-`field options`_ and `field types`_ Ginger offers.
+`field options`_ and `field types`_ GingerDJ offers.
 
 .. seealso::
 
-    If the built-in fields don't do the trick, you can try `ginger-localflavor
-    <https://github.com/ginger/ginger-localflavor>`_ (`documentation
-    <https://ginger-localflavor.readthedocs.io/>`_), which contains assorted
+    If the built-in fields don't do the trick, you can try `gingerdj-localflavor
+    <https://github.com/gingerdj/gingerdj-localflavor>`_ (`documentation
+    <https://gingerdj-localflavor.readthedocs.io/>`_), which contains assorted
     pieces of code that are useful for particular countries and cultures.
 
     Also, you can easily :doc:`write your own custom model fields
@@ -22,9 +22,9 @@ This document contains all the API references of :class:`Field` including the
 
 .. note::
 
-    Technically, these models are defined in :mod:`ginger.db.models.fields`, but
-    for convenience they're imported into :mod:`ginger.db.models`; the standard
-    convention is to use ``from ginger.db import models`` and refer to fields as
+    Technically, these models are defined in :mod:`gingerdj.db.models.fields`, but
+    for convenience they're imported into :mod:`gingerdj.db.models`; the standard
+    convention is to use ``from gingerdj.db import models`` and refer to fields as
     ``models.<Foo>Field``.
 
 .. _common-model-field-options:
@@ -39,14 +39,14 @@ The following arguments are available to all field types. All are optional.
 
 .. attribute:: Field.null
 
-If ``True``, Ginger will store empty values as ``NULL`` in the database. Default
+If ``True``, GingerDJ will store empty values as ``NULL`` in the database. Default
 is ``False``.
 
 Avoid using :attr:`~Field.null` on string-based fields such as
 :class:`CharField` and :class:`TextField`. If a string-based field has
 ``null=True``, that means it has two possible values for "no data": ``NULL``,
 and the empty string. In most cases, it's redundant to have two possible values
-for "no data;" the Ginger convention is to use the empty string, not
+for "no data;" the GingerDJ convention is to use the empty string, not
 ``NULL``. One exception is when a :class:`CharField` has both ``unique=True``
 and ``blank=True`` set. In this situation, ``null=True`` is required to avoid
 unique constraint violations when saving multiple objects with blank values.
@@ -76,7 +76,7 @@ If a field has ``blank=False``, the field will be required.
 .. admonition:: Supplying missing values
 
     ``blank=True`` can be used with fields having ``null=False``, but this will
-    require implementing :meth:`~ginger.db.models.Model.clean` on the model in
+    require implementing :meth:`~gingerdj.db.models.Model.clean` on the model in
     order to programmatically supply any missing values.
 
 .. _field-choices:
@@ -145,7 +145,7 @@ the choices are:
 Generally, it's best to define choices inside a model class, and to
 define a suitably-named constant for each value::
 
-    from ginger.db import models
+    from gingerdj.db import models
 
 
     class Student(models.Model):
@@ -227,10 +227,10 @@ meant for static data that doesn't change much, if ever.
 .. note::
     A new migration is created each time the order of ``choices`` changes.
 
-For each model field that has :attr:`~Field.choices` set, Ginger will normalize
+For each model field that has :attr:`~Field.choices` set, GingerDJ will normalize
 the choices to a list of 2-tuples and add a method to retrieve the
 human-readable name for the field's current value. See
-:meth:`~ginger.db.models.Model.get_FOO_display` in the database API
+:meth:`~gingerdj.db.models.Model.get_FOO_display` in the database API
 documentation.
 
 .. _field-choices-blank-label:
@@ -240,17 +240,17 @@ Unless :attr:`blank=False<Field.blank>` is set on the field along with a
 with the select box. To override this behavior, add a tuple to ``choices``
 containing ``None``; e.g. ``(None, 'Your String For Display')``.
 Alternatively, you can use an empty string instead of ``None`` where this makes
-sense - such as on a :class:`~ginger.db.models.CharField`.
+sense - such as on a :class:`~gingerdj.db.models.CharField`.
 
 .. _field-choices-enum-types:
 
 Enumeration types
 ~~~~~~~~~~~~~~~~~
 
-In addition, Ginger provides enumeration types that you can subclass to define
+In addition, GingerDJ provides enumeration types that you can subclass to define
 choices in a concise way::
 
-    from ginger.utils.translation import gettext_lazy as _
+    from gingerdj.utils.translation import gettext_lazy as _
 
 
     class Student(models.Model):
@@ -277,7 +277,7 @@ These work similar to :mod:`enum` from Python's standard library, but with some
 modifications:
 
 * Enum member values are a tuple of arguments to use when constructing the
-  concrete data type. Ginger supports adding an extra string value to the end
+  concrete data type. GingerDJ supports adding an extra string value to the end
   of this tuple to be used as the human-readable name, or ``label``. The
   ``label`` can be a lazy translatable string. Thus, in most cases, the member
   value will be a ``(value, label)`` 2-tuple. See below for :ref:`an example
@@ -319,7 +319,7 @@ title-case):
     'Jet Ski'
 
 Since the case where the enum values need to be integers is extremely common,
-Ginger provides an ``IntegerChoices`` class. For example::
+GingerDJ provides an ``IntegerChoices`` class. For example::
 
     class Card(models.Model):
         class Suit(models.IntegerChoices):
@@ -347,7 +347,7 @@ that labels are automatically generated as highlighted above:
 
 If you require support for a concrete data type other than ``int`` or ``str``,
 you can subclass ``Choices`` and the required concrete data type, e.g.
-:class:`~datetime.date` for use with :class:`~ginger.db.models.DateField`::
+:class:`~datetime.date` for use with :class:`~gingerdj.db.models.DateField`::
 
     class MoonLandings(datetime.date, models.Choices):
         APOLLO_11 = 1969, 7, 20, "Apollo 11 (Eagle)"
@@ -382,11 +382,11 @@ There are some additional caveats to be aware of:
 .. attribute:: Field.db_column
 
 The name of the database column to use for this field. If this isn't given,
-Ginger will use the field's name.
+GingerDJ will use the field's name.
 
 If your database column name is an SQL reserved word, or contains
 characters that aren't allowed in Python variable names -- notably, the
-hyphen -- that's OK. Ginger quotes column and table names behind the
+hyphen -- that's OK. GingerDJ quotes column and table names behind the
 scenes.
 
 ``db_comment``
@@ -396,7 +396,7 @@ scenes.
 
 The comment on the database column to use for this field. It is useful for
 documenting fields for individuals with direct database access who may not be
-looking at your Ginger code. For example::
+looking at your GingerDJ code. For example::
 
     pub_date = models.DateTimeField(
         db_comment="Date and time when the article was published",
@@ -410,7 +410,7 @@ looking at your Ginger code. For example::
 .. attribute:: Field.db_default
 
 The database-computed default value for this field. This can be a literal value
-or a database function, such as :class:`~ginger.db.models.functions.Now`::
+or a database function, such as :class:`~gingerdj.db.models.functions.Now`::
 
     created = models.DateTimeField(db_default=Now())
 
@@ -471,7 +471,7 @@ The default can't be a mutable object (model instance, ``list``, ``set``, etc.),
 as a reference to the same instance of that object would be used as the default
 value in all new model instances. Instead, wrap the desired default in a
 callable. For example, if you want to specify a default ``dict`` for
-:class:`~ginger.db.models.JSONField`, use a function::
+:class:`~gingerdj.db.models.JSONField`, use a function::
 
     def contact_default():
         return {"email": "to1@example.com"}
@@ -500,7 +500,7 @@ The default value can also be set at the database level with
 .. attribute:: Field.editable
 
 If ``False``, the field will not be displayed in the admin or any other
-:class:`~ginger.forms.ModelForm`. They are also skipped during :ref:`model
+:class:`~gingerdj.forms.ModelForm`. They are also skipped during :ref:`model
 validation <validating-objects>`. Default is ``True``.
 
 ``error_messages``
@@ -534,7 +534,7 @@ desire. For example::
     help_text = "Please use the following format: <em>YYYY-MM-DD</em>."
 
 Alternatively you can use plain text and
-:func:`ginger.utils.html.escape` to escape any HTML special characters. Ensure
+:func:`gingerdj.utils.html.escape` to escape any HTML special characters. Ensure
 that you escape any help text that may come from untrusted users to avoid a
 cross-site scripting attack.
 
@@ -545,12 +545,12 @@ cross-site scripting attack.
 
 If ``True``, this field is the primary key for the model.
 
-If you don't specify ``primary_key=True`` for any field in your model, Ginger
+If you don't specify ``primary_key=True`` for any field in your model, GingerDJ
 will automatically add a field to hold the primary key, so you don't need to
 set ``primary_key=True`` on any of your fields unless you want to override the
 default primary-key behavior. The type of auto-created primary key fields can
 be specified per app in :attr:`AppConfig.default_auto_field
-<ginger.apps.AppConfig.default_auto_field>` or globally in the
+<gingerdj.apps.AppConfig.default_auto_field>` or globally in the
 :setting:`DEFAULT_AUTO_FIELD` setting. For more, see
 :ref:`automatic-primary-key-fields`.
 
@@ -563,7 +563,7 @@ key on an existing object and then save it, a new object will be created
 alongside the old one.
 
 The primary key field is set to ``None`` when
-:meth:`deleting <ginger.db.models.Model.delete>` an object.
+:meth:`deleting <gingerdj.db.models.Model.delete>` an object.
 
 ``unique``
 ----------
@@ -574,8 +574,8 @@ If ``True``, this field must be unique throughout the table.
 
 This is enforced at the database level and by model validation. If
 you try to save a model with a duplicate value in a :attr:`~Field.unique`
-field, a :exc:`ginger.db.IntegrityError` will be raised by the model's
-:meth:`~ginger.db.models.Model.save` method.
+field, a :exc:`gingerdj.db.IntegrityError` will be raised by the model's
+:meth:`~gingerdj.db.models.Model.save` method.
 
 This option is valid on all field types except :class:`ManyToManyField` and
 :class:`OneToOneField`.
@@ -592,7 +592,7 @@ Set this to the name of a :class:`DateField` or :class:`DateTimeField` to
 require that this field be unique for the value of the date field.
 
 For example, if you have a field ``title`` that has
-``unique_for_date="pub_date"``, then Ginger wouldn't allow the entry of two
+``unique_for_date="pub_date"``, then GingerDJ wouldn't allow the entry of two
 records with the same ``title`` and ``pub_date``.
 
 Note that if you set this to point to a :class:`DateTimeField`, only the date
@@ -602,7 +602,7 @@ portion of the field will be considered. Besides, when :setting:`USE_TZ` is
 
 This is enforced by :meth:`Model.validate_unique()` during model validation
 but not at the database level. If any :attr:`~Field.unique_for_date` constraint
-involves fields that are not part of a :class:`~ginger.forms.ModelForm` (for
+involves fields that are not part of a :class:`~gingerdj.forms.ModelForm` (for
 example, if one of the fields is listed in ``exclude`` or has
 :attr:`editable=False<Field.editable>`), :meth:`Model.validate_unique()` will
 skip validation for that particular constraint.
@@ -627,7 +627,7 @@ Like :attr:`~Field.unique_for_date` and :attr:`~Field.unique_for_month`.
 
 .. attribute:: Field.verbose_name
 
-A human-readable name for the field. If the verbose name isn't given, Ginger
+A human-readable name for the field. If the verbose name isn't given, GingerDJ
 will automatically create it using the field's attribute name, converting
 underscores to spaces. See :ref:`Verbose field names <verbose-field-names>`.
 
@@ -644,7 +644,7 @@ documentation </ref/validators>` for more information.
 Field types
 ===========
 
-.. currentmodule:: ginger.db.models
+.. currentmodule:: gingerdj.db.models
 
 ``AutoField``
 -------------
@@ -672,7 +672,7 @@ guaranteed to fit numbers from ``1`` to ``9223372036854775807``.
 A 64-bit integer, much like an :class:`IntegerField` except that it is
 guaranteed to fit numbers from ``-9223372036854775808`` to
 ``9223372036854775807``. The default form widget for this field is a
-:class:`~ginger.forms.NumberInput`.
+:class:`~gingerdj.forms.NumberInput`.
 
 ``BinaryField``
 ---------------
@@ -683,13 +683,13 @@ A field to store raw binary data. It can be assigned :class:`bytes`,
 :class:`bytearray`, or :class:`memoryview`.
 
 By default, ``BinaryField`` sets :attr:`~Field.editable` to ``False``, in which
-case it can't be included in a :class:`~ginger.forms.ModelForm`.
+case it can't be included in a :class:`~gingerdj.forms.ModelForm`.
 
 .. attribute:: BinaryField.max_length
 
     Optional. The maximum length (in bytes) of the field. The maximum length is
-    enforced in Ginger's validation using
-    :class:`~ginger.core.validators.MaxLengthValidator`.
+    enforced in GingerDJ's validation using
+    :class:`~gingerdj.core.validators.MaxLengthValidator`.
 
 .. admonition:: Abusing ``BinaryField``
 
@@ -704,8 +704,8 @@ case it can't be included in a :class:`~ginger.forms.ModelForm`.
 
 A true/false field.
 
-The default form widget for this field is :class:`~ginger.forms.CheckboxInput`,
-or :class:`~ginger.forms.NullBooleanSelect` if :attr:`null=True <Field.null>`.
+The default form widget for this field is :class:`~gingerdj.forms.CheckboxInput`,
+or :class:`~gingerdj.forms.NullBooleanSelect` if :attr:`null=True <Field.null>`.
 
 The default value of ``BooleanField`` is ``None`` when :attr:`Field.default`
 isn't defined.
@@ -717,18 +717,18 @@ isn't defined.
 
 A string field, for small- to large-sized strings.
 
-For large amounts of text, use :class:`~ginger.db.models.TextField`.
+For large amounts of text, use :class:`~gingerdj.db.models.TextField`.
 
-The default form widget for this field is a :class:`~ginger.forms.TextInput`.
+The default form widget for this field is a :class:`~gingerdj.forms.TextInput`.
 
 :class:`CharField` has the following extra arguments:
 
 .. attribute:: CharField.max_length
 
     The maximum length (in characters) of the field. The ``max_length``
-    is enforced at the database level and in Ginger's validation using
-    :class:`~ginger.core.validators.MaxLengthValidator`. It's required for all
-    database backends included with Ginger except PostgreSQL, which supports
+    is enforced at the database level and in GingerDJ's validation using
+    :class:`~gingerdj.core.validators.MaxLengthValidator`. It's required for all
+    database backends included with GingerDJ except PostgreSQL, which supports
     unlimited ``VARCHAR`` columns.
 
     .. note::
@@ -767,9 +767,9 @@ optional arguments:
     used; it's not just a default value that you can override.
 
     The field is only automatically updated when calling :meth:`Model.save()
-    <ginger.db.models.Model.save>`. The field isn't updated when making updates
+    <gingerdj.db.models.Model.save>`. The field isn't updated when making updates
     to other fields in other ways such as :meth:`QuerySet.update()
-    <ginger.db.models.query.QuerySet.update>`, though you can specify a custom
+    <gingerdj.db.models.query.QuerySet.update>`, though you can specify a custom
     value for the field in an update like that.
 
 .. attribute:: DateField.auto_now_add
@@ -784,10 +784,10 @@ optional arguments:
     * For :class:`DateField`: ``default=date.today`` - from
       :meth:`datetime.date.today`
     * For :class:`DateTimeField`: ``default=timezone.now`` - from
-      :func:`ginger.utils.timezone.now`
+      :func:`gingerdj.utils.timezone.now`
 
 The default form widget for this field is a
-:class:`~ginger.forms.DateInput`. The admin adds a JavaScript calendar,
+:class:`~gingerdj.forms.DateInput`. The admin adds a JavaScript calendar,
 and a shortcut for "Today". Includes an additional ``invalid_date`` error
 message key.
 
@@ -817,8 +817,8 @@ A date and time, represented in Python by a ``datetime.datetime`` instance.
 Takes the same extra arguments as :class:`DateField`.
 
 The default form widget for this field is a single
-:class:`~ginger.forms.DateTimeInput`. The admin uses two separate
-:class:`~ginger.forms.TextInput` widgets with JavaScript shortcuts.
+:class:`~gingerdj.forms.DateTimeInput`. The admin uses two separate
+:class:`~gingerdj.forms.TextInput` widgets with JavaScript shortcuts.
 
 ``DecimalField``
 ----------------
@@ -827,7 +827,7 @@ The default form widget for this field is a single
 
 A fixed-precision decimal number, represented in Python by a
 :class:`~decimal.Decimal` instance. It validates the input using
-:class:`~ginger.core.validators.DecimalValidator`.
+:class:`~gingerdj.core.validators.DecimalValidator`.
 
 Has the following **required** arguments:
 
@@ -850,9 +850,9 @@ decimal places::
 
     models.DecimalField(..., max_digits=19, decimal_places=10)
 
-The default form widget for this field is a :class:`~ginger.forms.NumberInput`
-when :attr:`~ginger.forms.Field.localize` is ``False`` or
-:class:`~ginger.forms.TextInput` otherwise.
+The default form widget for this field is a :class:`~gingerdj.forms.NumberInput`
+when :attr:`~gingerdj.forms.Field.localize` is ``False`` or
+:class:`~gingerdj.forms.TextInput` otherwise.
 
 .. note::
 
@@ -884,7 +884,7 @@ SECOND(6)``. Otherwise a ``bigint`` of microseconds is used.
 .. class:: EmailField(max_length=254, **options)
 
 A :class:`CharField` that checks that the value is a valid email address using
-:class:`~ginger.core.validators.EmailValidator`.
+:class:`~gingerdj.core.validators.EmailValidator`.
 
 ``FileField``
 -------------
@@ -903,7 +903,7 @@ Has the following optional arguments:
 
     This attribute provides a way of setting the upload directory and file name,
     and can be set in two ways. In both cases, the value is passed to the
-    :meth:`Storage.save() <ginger.core.files.storage.Storage.save>` method.
+    :meth:`Storage.save() <gingerdj.core.files.storage.Storage.save>` method.
 
     If you specify a string value or a :class:`~pathlib.Path`, it may contain
     :func:`~time.strftime` formatting, which will be replaced by the date/time
@@ -918,7 +918,7 @@ Has the following optional arguments:
             upload = models.FileField(upload_to="uploads/%Y/%m/%d/")
 
     If you are using the default
-    :class:`~ginger.core.files.storage.FileSystemStorage`, the string value
+    :class:`~gingerdj.core.files.storage.FileSystemStorage`, the string value
     will be appended to your :setting:`MEDIA_ROOT` path to form the location on
     the local filesystem where uploaded files will be stored. If you are using
     a different storage, check that storage's documentation to see how it
@@ -964,13 +964,13 @@ Has the following optional arguments:
     for details on how to provide this object.
 
 The default form widget for this field is a
-:class:`~ginger.forms.ClearableFileInput`.
+:class:`~gingerdj.forms.ClearableFileInput`.
 
 Using a :class:`FileField` or an :class:`ImageField` (see below) in a model
 takes a few steps:
 
 #. In your settings file, you'll need to define :setting:`MEDIA_ROOT` as the
-   full path to a directory where you'd like Ginger to store uploaded files.
+   full path to a directory where you'd like GingerDJ to store uploaded files.
    (For performance, these files are not stored in the database.) Define
    :setting:`MEDIA_URL` as the base public URL of that directory. Make sure
    that this directory is writable by the web server's user account.
@@ -981,8 +981,8 @@ takes a few steps:
 
 #. All that will be stored in your database is a path to the file
    (relative to :setting:`MEDIA_ROOT`). You'll most likely want to use the
-   convenience :attr:`~ginger.db.models.fields.files.FieldFile.url` attribute
-   provided by Ginger. For example, if your :class:`ImageField` is called
+   convenience :attr:`~gingerdj.db.models.fields.files.FieldFile.url` attribute
+   provided by GingerDJ. For example, if your :class:`ImageField` is called
    ``mug_shot``, you can get the absolute path to your image in a template with
    ``{{ object.mug_shot.url }}``.
 
@@ -994,10 +994,10 @@ the two-digit day. If you upload a file on Jan. 15, 2007, it will be saved in
 the directory ``/home/media/photos/2007/01/15``.
 
 If you wanted to retrieve the uploaded file's on-disk filename, or the file's
-size, you could use the :attr:`~ginger.core.files.File.name` and
-:attr:`~ginger.core.files.File.size` attributes respectively; for more
+size, you could use the :attr:`~gingerdj.core.files.File.name` and
+:attr:`~gingerdj.core.files.File.size` attributes respectively; for more
 information on the available attributes and methods, see the
-:class:`~ginger.core.files.File` class reference and the :doc:`/topics/files`
+:class:`~gingerdj.core.files.File` class reference and the :doc:`/topics/files`
 topic guide.
 
 .. note::
@@ -1006,9 +1006,9 @@ topic guide.
     saved.
 
 The uploaded file's relative URL can be obtained using the
-:attr:`~ginger.db.models.fields.files.FieldFile.url` attribute. Internally,
-this calls the :meth:`~ginger.core.files.storage.Storage.url` method of the
-underlying :class:`~ginger.core.files.storage.Storage` class.
+:attr:`~gingerdj.db.models.fields.files.FieldFile.url` attribute. Internally,
+this calls the :meth:`~gingerdj.core.files.storage.Storage.url` method of the
+underlying :class:`~gingerdj.core.files.storage.Storage` class.
 
 .. _file-upload-security:
 
@@ -1031,22 +1031,22 @@ can change the maximum length using the :attr:`~CharField.max_length` argument.
 ``FileField`` and ``FieldFile``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. currentmodule:: ginger.db.models.fields.files
+.. currentmodule:: gingerdj.db.models.fields.files
 
 .. class:: FieldFile
 
-When you access a :class:`~ginger.db.models.FileField` on a model, you are
+When you access a :class:`~gingerdj.db.models.FileField` on a model, you are
 given an instance of :class:`FieldFile` as a proxy for accessing the underlying
 file.
 
-The API of :class:`FieldFile` mirrors that of :class:`~ginger.core.files.File`,
+The API of :class:`FieldFile` mirrors that of :class:`~gingerdj.core.files.File`,
 with one key difference: *The object wrapped by the class is not necessarily a
 wrapper around Python's built-in file object.* Instead, it is a wrapper around
-the result of the :attr:`Storage.open()<ginger.core.files.storage.Storage.open>`
-method, which may be a :class:`~ginger.core.files.File` object, or it may be a
-custom storage's implementation of the :class:`~ginger.core.files.File` API.
+the result of the :attr:`Storage.open()<gingerdj.core.files.storage.Storage.open>`
+method, which may be a :class:`~gingerdj.core.files.File` object, or it may be a
+custom storage's implementation of the :class:`~gingerdj.core.files.File` API.
 
-In addition to the API inherited from :class:`~ginger.core.files.File` such as
+In addition to the API inherited from :class:`~gingerdj.core.files.File` such as
 ``read()`` and ``write()``, :class:`FieldFile` includes several methods that
 can be used to interact with the underlying file:
 
@@ -1059,25 +1059,25 @@ can be used to interact with the underlying file:
 .. attribute:: FieldFile.name
 
 The name of the file including the relative path from the root of the
-:class:`~ginger.core.files.storage.Storage` of the associated
-:class:`~ginger.db.models.FileField`.
+:class:`~gingerdj.core.files.storage.Storage` of the associated
+:class:`~gingerdj.db.models.FileField`.
 
 .. attribute:: FieldFile.path
 
 A read-only property to access the file's local filesystem path by calling the
-:meth:`~ginger.core.files.storage.Storage.path` method of the underlying
-:class:`~ginger.core.files.storage.Storage` class.
+:meth:`~gingerdj.core.files.storage.Storage.path` method of the underlying
+:class:`~gingerdj.core.files.storage.Storage` class.
 
 .. attribute:: FieldFile.size
 
 The result of the underlying :attr:`Storage.size()
-<ginger.core.files.storage.Storage.size>` method.
+<gingerdj.core.files.storage.Storage.size>` method.
 
 .. attribute:: FieldFile.url
 
 A read-only property to access the file's relative URL by calling the
-:meth:`~ginger.core.files.storage.Storage.url` method of the underlying
-:class:`~ginger.core.files.storage.Storage` class.
+:meth:`~gingerdj.core.files.storage.Storage.url` method of the underlying
+:class:`~gingerdj.core.files.storage.Storage` class.
 
 .. method:: FieldFile.open(mode='rb')
 
@@ -1099,7 +1099,7 @@ associated with this instance.
 This method takes a filename and file contents and passes them to the storage
 class for the field, then associates the stored file with the model field.
 If you want to manually associate file data with
-:class:`~ginger.db.models.FileField` instances on your model, the ``save()``
+:class:`~gingerdj.db.models.FileField` instances on your model, the ``save()``
 method is used to persist that file data.
 
 Takes two required arguments: ``name`` which is the name of the file, and
@@ -1109,11 +1109,11 @@ saved after the file associated with this field has been altered. Defaults to
 ``True``.
 
 Note that the ``content`` argument should be an instance of
-:class:`ginger.core.files.File`, not Python's built-in file object.
-You can construct a :class:`~ginger.core.files.File` from an existing
+:class:`gingerdj.core.files.File`, not Python's built-in file object.
+You can construct a :class:`~gingerdj.core.files.File` from an existing
 Python file object like this::
 
-    from ginger.core.files import File
+    from gingerdj.core.files import File
 
     # Open an existing file using Python's built-in open()
     f = open("/path/to/hello.world")
@@ -1121,7 +1121,7 @@ Python file object like this::
 
 Or you can construct one from a Python string like this::
 
-    from ginger.core.files.base import ContentFile
+    from gingerdj.core.files.base import ContentFile
 
     myfile = ContentFile("hello world")
 
@@ -1142,7 +1142,7 @@ to cleanup orphaned files, you'll need to handle it yourself (for instance,
 with a custom management command that can be run manually or scheduled to run
 periodically via e.g. cron).
 
-.. currentmodule:: ginger.db.models
+.. currentmodule:: gingerdj.db.models
 
 ``FilePathField``
 -----------------
@@ -1162,8 +1162,8 @@ directory on the filesystem. Has some special arguments, of which the first is
     path at runtime. Example::
 
         import os
-        from ginger.conf import settings
-        from ginger.db import models
+        from gingerdj.conf import settings
+        from gingerdj.db import models
 
 
         def images_path():
@@ -1217,9 +1217,9 @@ can change the maximum length using the :attr:`~CharField.max_length` argument.
 
 A floating-point number represented in Python by a ``float`` instance.
 
-The default form widget for this field is a :class:`~ginger.forms.NumberInput`
-when :attr:`~ginger.forms.Field.localize` is ``False`` or
-:class:`~ginger.forms.TextInput` otherwise.
+The default form widget for this field is a :class:`~gingerdj.forms.NumberInput`
+when :attr:`~gingerdj.forms.Field.localize` is ``False`` or
+:class:`~gingerdj.forms.TextInput` otherwise.
 
 .. _floatfield_vs_decimalfield:
 
@@ -1281,7 +1281,7 @@ materialized view.
 .. admonition:: Database limitations
 
     There are many database-specific restrictions on generated fields that
-    Ginger doesn't validate and the database may raise an error e.g. PostgreSQL
+    GingerDJ doesn't validate and the database may raise an error e.g. PostgreSQL
     requires functions and operators referenced in a generated column to be
     marked as ``IMMUTABLE``.
 
@@ -1302,7 +1302,7 @@ materialized view.
 
 An IPv4 or IPv6 address, in string format (e.g. ``192.0.2.30`` or
 ``2a02:42fe::4``). The default form widget for this field is a
-:class:`~ginger.forms.TextInput`.
+:class:`~gingerdj.forms.TextInput`.
 
 The IPv6 address normalization follows :rfc:`4291#section-2.2` section 2.2,
 including using the IPv4 format suggested in paragraph 3 of that section, like
@@ -1359,7 +1359,7 @@ columns with a default max length of 100 characters. As with other fields, you
 can change the maximum length using the :attr:`~CharField.max_length` argument.
 
 The default form widget for this field is a
-:class:`~ginger.forms.ClearableFileInput`.
+:class:`~gingerdj.forms.ClearableFileInput`.
 
 ``IntegerField``
 ----------------
@@ -1367,15 +1367,15 @@ The default form widget for this field is a
 .. class:: IntegerField(**options)
 
 An integer. Values from ``-2147483648`` to ``2147483647`` are safe in all
-databases supported by Ginger.
+databases supported by GingerDJ.
 
-It uses :class:`~ginger.core.validators.MinValueValidator` and
-:class:`~ginger.core.validators.MaxValueValidator` to validate the input based
+It uses :class:`~gingerdj.core.validators.MinValueValidator` and
+:class:`~gingerdj.core.validators.MaxValueValidator` to validate the input based
 on the values that the default database supports.
 
-The default form widget for this field is a :class:`~ginger.forms.NumberInput`
-when :attr:`~ginger.forms.Field.localize` is ``False`` or
-:class:`~ginger.forms.TextInput` otherwise.
+The default form widget for this field is a :class:`~gingerdj.forms.NumberInput`
+when :attr:`~gingerdj.forms.Field.localize` is ``False`` or
+:class:`~gingerdj.forms.TextInput` otherwise.
 
 ``JSONField``
 -------------
@@ -1394,7 +1394,7 @@ Python native format: dictionaries, lists, strings, numbers, booleans and
     An optional :py:class:`json.JSONEncoder` subclass to serialize data types
     not supported by the standard JSON serializer (e.g. ``datetime.datetime``
     or :class:`~python:uuid.UUID`). For example, you can use the
-    :class:`~ginger.core.serializers.json.GingerJSONEncoder` class.
+    :class:`~gingerdj.core.serializers.json.GingerJSONEncoder` class.
 
     Defaults to ``json.JSONEncoder``.
 
@@ -1414,7 +1414,7 @@ To query ``JSONField`` in the database, see :ref:`querying-jsonfield`.
 
 .. admonition:: Default value
 
-    If you give the field a :attr:`~ginger.db.models.Field.default`, ensure
+    If you give the field a :attr:`~gingerdj.db.models.Field.default`, ensure
     it's a callable such as the :py:class:`dict` class or a function that
     returns a fresh object each time. Incorrectly using a mutable object like
     ``default={}`` or ``default=[]`` creates a mutable default that is shared
@@ -1422,10 +1422,10 @@ To query ``JSONField`` in the database, see :ref:`querying-jsonfield`.
 
 .. admonition:: Indexing
 
-    :class:`~ginger.db.models.Index` and :attr:`.Field.db_index` both create a
+    :class:`~gingerdj.db.models.Index` and :attr:`.Field.db_index` both create a
     B-tree index, which isn't particularly helpful when querying ``JSONField``.
     On PostgreSQL only, you can use
-    :class:`~ginger.contrib.postgres.indexes.GinIndex` that is better suited.
+    :class:`~gingerdj.contrib.postgres.indexes.GinIndex` that is better suited.
 
 .. admonition:: PostgreSQL users
 
@@ -1450,7 +1450,7 @@ To query ``JSONField`` in the database, see :ref:`querying-jsonfield`.
 
 Like a :class:`PositiveIntegerField`, but only allows values under a certain
 (database-dependent) point. Values from ``0`` to ``9223372036854775807`` are
-safe in all databases supported by Ginger.
+safe in all databases supported by GingerDJ.
 
 ``PositiveIntegerField``
 ------------------------
@@ -1459,7 +1459,7 @@ safe in all databases supported by Ginger.
 
 Like an :class:`IntegerField`, but must be either positive or zero (``0``).
 Values from ``0`` to ``2147483647`` are safe in all databases supported by
-Ginger. The value ``0`` is accepted for backward compatibility reasons.
+GingerDJ. The value ``0`` is accepted for backward compatibility reasons.
 
 ``PositiveSmallIntegerField``
 -----------------------------
@@ -1468,7 +1468,7 @@ Ginger. The value ``0`` is accepted for backward compatibility reasons.
 
 Like a :class:`PositiveIntegerField`, but only allows values under a certain
 (database-dependent) point. Values from ``0`` to ``32767`` are safe in all
-databases supported by Ginger.
+databases supported by GingerDJ.
 
 ``SlugField``
 -------------
@@ -1481,17 +1481,17 @@ in URLs.
 
 Like a CharField, you can specify :attr:`~CharField.max_length` (read the note
 about database portability and :attr:`~CharField.max_length` in that section,
-too). If :attr:`~CharField.max_length` is not specified, Ginger will use a
+too). If :attr:`~CharField.max_length` is not specified, GingerDJ will use a
 default length of 50.
 
 Implies setting :attr:`Field.db_index` to ``True``.
 
 It is often useful to automatically prepopulate a SlugField based on the value
 of some other value.  You can do this automatically in the admin using
-:attr:`~ginger.contrib.admin.ModelAdmin.prepopulated_fields`.
+:attr:`~gingerdj.contrib.admin.ModelAdmin.prepopulated_fields`.
 
-It uses :class:`~ginger.core.validators.validate_slug` or
-:class:`~ginger.core.validators.validate_unicode_slug` for validation.
+It uses :class:`~gingerdj.core.validators.validate_slug` or
+:class:`~gingerdj.core.validators.validate_unicode_slug` for validation.
 
 .. attribute:: SlugField.allow_unicode
 
@@ -1505,7 +1505,7 @@ It uses :class:`~ginger.core.validators.validate_slug` or
 
 Like an :class:`AutoField`, but only allows values under a certain
 (database-dependent) limit. Values from ``1`` to ``32767`` are safe in all
-databases supported by Ginger.
+databases supported by GingerDJ.
 
 ``SmallIntegerField``
 ---------------------
@@ -1514,7 +1514,7 @@ databases supported by Ginger.
 
 Like an :class:`IntegerField`, but only allows values under a certain
 (database-dependent) point. Values from ``-32768`` to ``32767`` are safe in all
-databases supported by Ginger.
+databases supported by GingerDJ.
 
 ``TextField``
 -------------
@@ -1522,10 +1522,10 @@ databases supported by Ginger.
 .. class:: TextField(**options)
 
 A large text field. The default form widget for this field is a
-:class:`~ginger.forms.Textarea`.
+:class:`~gingerdj.forms.Textarea`.
 
 If you specify a ``max_length`` attribute, it will be reflected in the
-:class:`~ginger.forms.Textarea` widget of the auto-generated form field.
+:class:`~gingerdj.forms.Textarea` widget of the auto-generated form field.
 However it is not enforced at the model or database level. Use a
 :class:`CharField` for that.
 
@@ -1550,7 +1550,7 @@ However it is not enforced at the model or database level. Use a
 A time, represented in Python by a ``datetime.time`` instance. Accepts the same
 auto-population options as :class:`DateField`.
 
-The default form widget for this field is a :class:`~ginger.forms.TimeInput`.
+The default form widget for this field is a :class:`~gingerdj.forms.TimeInput`.
 The admin adds some JavaScript shortcuts.
 
 ``URLField``
@@ -1559,9 +1559,9 @@ The admin adds some JavaScript shortcuts.
 .. class:: URLField(max_length=200, **options)
 
 A :class:`CharField` for a URL, validated by
-:class:`~ginger.core.validators.URLValidator`.
+:class:`~gingerdj.core.validators.URLValidator`.
 
-The default form widget for this field is a :class:`~ginger.forms.URLInput`.
+The default form widget for this field is a :class:`~gingerdj.forms.URLInput`.
 
 Like all :class:`CharField` subclasses, :class:`URLField` takes the optional
 :attr:`~CharField.max_length` argument. If you don't specify
@@ -1581,7 +1581,7 @@ Universally unique identifiers are a good alternative to :class:`AutoField` for
 it is recommended to use :attr:`~Field.default`::
 
     import uuid
-    from ginger.db import models
+    from gingerdj.db import models
 
 
     class MyUUIDModel(models.Model):
@@ -1602,12 +1602,12 @@ not an instance of ``UUID``.
 Relationship fields
 ===================
 
-.. module:: ginger.db.models.fields.related
+.. module:: gingerdj.db.models.fields.related
    :synopsis: Related field types
 
-.. currentmodule:: ginger.db.models
+.. currentmodule:: gingerdj.db.models
 
-Ginger also defines a set of fields that represent relations.
+GingerDJ also defines a set of fields that represent relations.
 
 .. _ref-foreignkey:
 
@@ -1630,7 +1630,7 @@ on_delete=models.CASCADE)``.
 If you need to create a relationship on a model that has not yet been defined,
 you can use the name of the model, rather than the model object itself::
 
-    from ginger.db import models
+    from gingerdj.db import models
 
 
     class Car(models.Model):
@@ -1652,7 +1652,7 @@ concrete model and are not relative to the abstract model's ``app_label``:
 .. code-block:: python
     :caption: ``products/models.py``
 
-    from ginger.db import models
+    from gingerdj.db import models
 
 
     class AbstractCar(models.Model):
@@ -1664,7 +1664,7 @@ concrete model and are not relative to the abstract model's ``app_label``:
 .. code-block:: python
     :caption: ``production/models.py``
 
-    from ginger.db import models
+    from gingerdj.db import models
     from products.models import AbstractCar
 
 
@@ -1701,7 +1701,7 @@ like a partial or multiple column index.
 Database Representation
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-Behind the scenes, Ginger appends ``"_id"`` to the field name to create its
+Behind the scenes, GingerDJ appends ``"_id"`` to the field name to create its
 database column name. In the above example, the database table for the ``Car``
 model will have a ``manufacturer_id`` column. (You can change this explicitly by
 specifying :attr:`~Field.db_column`) However, your code should never have to
@@ -1718,7 +1718,7 @@ relation works.
 
 .. attribute:: ForeignKey.on_delete
 
-    When an object referenced by a :class:`ForeignKey` is deleted, Ginger will
+    When an object referenced by a :class:`ForeignKey` is deleted, GingerDJ will
     emulate the behavior of the SQL constraint specified by the
     :attr:`on_delete` argument. For example, if you have a nullable
     :class:`ForeignKey` and you want it to be set null when the referenced
@@ -1735,29 +1735,29 @@ relation works.
     database-level cascade options :ticket:`may be implemented later <21961>`.
 
 The possible values for :attr:`~ForeignKey.on_delete` are found in
-:mod:`ginger.db.models`:
+:mod:`gingerdj.db.models`:
 
 * .. attribute:: CASCADE
 
-    Cascade deletes. Ginger emulates the behavior of the SQL constraint ON
+    Cascade deletes. GingerDJ emulates the behavior of the SQL constraint ON
     DELETE CASCADE and also deletes the object containing the ForeignKey.
 
     :meth:`.Model.delete` isn't called on related models, but the
-    :data:`~ginger.db.models.signals.pre_delete` and
-    :data:`~ginger.db.models.signals.post_delete` signals are sent for all
+    :data:`~gingerdj.db.models.signals.pre_delete` and
+    :data:`~gingerdj.db.models.signals.post_delete` signals are sent for all
     deleted objects.
 
 * .. attribute:: PROTECT
 
     Prevent deletion of the referenced object by raising
-    :exc:`~ginger.db.models.ProtectedError`, a subclass of
-    :exc:`ginger.db.IntegrityError`.
+    :exc:`~gingerdj.db.models.ProtectedError`, a subclass of
+    :exc:`gingerdj.db.IntegrityError`.
 
 * .. attribute:: RESTRICT
 
     Prevent deletion of the referenced object by raising
-    :exc:`~ginger.db.models.RestrictedError` (a subclass of
-    :exc:`ginger.db.IntegrityError`). Unlike :attr:`PROTECT`, deletion of the
+    :exc:`~gingerdj.db.models.RestrictedError` (a subclass of
+    :exc:`gingerdj.db.IntegrityError`). Unlike :attr:`PROTECT`, deletion of the
     referenced object is allowed if it also references a different object
     that is being deleted in the same operation, but via a :attr:`CASCADE`
     relationship.
@@ -1808,7 +1808,7 @@ The possible values for :attr:`~ForeignKey.on_delete` are found in
 * .. attribute:: DO_NOTHING
 
     Take no action. If your database backend enforces referential
-    integrity, this will cause an :exc:`~ginger.db.IntegrityError` unless
+    integrity, this will cause an :exc:`~gingerdj.db.IntegrityError` unless
     you manually add an SQL ``ON DELETE`` constraint to the database field.
 
 .. attribute:: ForeignKey.limit_choices_to
@@ -1816,8 +1816,8 @@ The possible values for :attr:`~ForeignKey.on_delete` are found in
     Sets a limit to the available choices for this field when this field is
     rendered using a ``ModelForm`` or the admin (by default, all objects
     in the queryset are available to choose). Either a dictionary, a
-    :class:`~ginger.db.models.Q` object, or a callable returning a
-    dictionary or :class:`~ginger.db.models.Q` object can be used.
+    :class:`~gingerdj.db.models.Q` object, or a callable returning a
+    dictionary or :class:`~gingerdj.db.models.Q` object can be used.
 
     For example::
 
@@ -1828,7 +1828,7 @@ The possible values for :attr:`~ForeignKey.on_delete` are found in
         )
 
     causes the corresponding field on the ``ModelForm`` to list only ``Users``
-    that have ``is_staff=True``. This may be helpful in the Ginger admin.
+    that have ``is_staff=True``. This may be helpful in the GingerDJ admin.
 
     The callable form can be helpful, for instance, when used in conjunction
     with the Python ``datetime`` module to limit selections by date range. For
@@ -1841,10 +1841,10 @@ The possible values for :attr:`~ForeignKey.on_delete` are found in
         limit_choices_to = limit_pub_date_choices
 
     If ``limit_choices_to`` is or returns a :class:`Q object
-    <ginger.db.models.Q>`, which is useful for :ref:`complex queries
+    <gingerdj.db.models.Q>`, which is useful for :ref:`complex queries
     <complex-lookups-with-q>`, then it will only have an effect on the choices
     available in the admin when the field is not listed in
-    :attr:`~ginger.contrib.admin.ModelAdmin.raw_id_fields` in the
+    :attr:`~gingerdj.contrib.admin.ModelAdmin.raw_id_fields` in the
     ``ModelAdmin`` for the model.
 
     .. note::
@@ -1866,7 +1866,7 @@ The possible values for :attr:`~ForeignKey.on_delete` are found in
     :ref:`abstract models <abstract-base-classes>`; and when you do so
     :ref:`some special syntax <abstract-related-name>` is available.
 
-    If you'd prefer Ginger not to create a backwards relation, set
+    If you'd prefer GingerDJ not to create a backwards relation, set
     ``related_name`` to ``'+'`` or end it with ``'+'``. For example, this will
     ensure that the ``User`` model won't have a backwards relation to this
     model::
@@ -1881,7 +1881,7 @@ The possible values for :attr:`~ForeignKey.on_delete` are found in
 
     The name to use for the reverse filter name from the target model. It
     defaults to the value of :attr:`related_name` or
-    :attr:`~ginger.db.models.Options.default_related_name` if set, otherwise it
+    :attr:`~gingerdj.db.models.Options.default_related_name` if set, otherwise it
     defaults to the name of the model::
 
         # Declare the ForeignKey with related_query_name
@@ -1903,7 +1903,7 @@ The possible values for :attr:`~ForeignKey.on_delete` are found in
 
 .. attribute:: ForeignKey.to_field
 
-    The field on the related object that the relation is to. By default, Ginger
+    The field on the related object that the relation is to. By default, GingerDJ
     uses the primary key of the related object. If you reference a different
     field, that field must have ``unique=True``.
 
@@ -1951,12 +1951,12 @@ which the model is related, which works exactly the same as it does for
 :ref:`lazy <lazy-relationships>` relationships.
 
 Related objects can be added, removed, or created with the field's
-:class:`~ginger.db.models.fields.related.RelatedManager`.
+:class:`~gingerdj.db.models.fields.related.RelatedManager`.
 
 Database Representation
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-Behind the scenes, Ginger creates an intermediary join table to represent the
+Behind the scenes, GingerDJ creates an intermediary join table to represent the
 many-to-many relationship. By default, this table name is generated using the
 name of the many-to-many field and the name of the table for the model that
 contains it. Since some databases don't support table names above a certain
@@ -1989,29 +1989,29 @@ that control how the relationship functions.
     Only used in the definition of ManyToManyFields on self. Consider the
     following model::
 
-        from ginger.db import models
+        from gingerdj.db import models
 
 
         class Person(models.Model):
             friends = models.ManyToManyField("self")
 
-    When Ginger processes this model, it identifies that it has a
+    When GingerDJ processes this model, it identifies that it has a
     :class:`ManyToManyField` on itself, and as a result, it doesn't add a
     ``person_set`` attribute to the ``Person`` class. Instead, the
     :class:`ManyToManyField` is assumed to be symmetrical -- that is, if I am
     your friend, then you are my friend.
 
     If you do not want symmetry in many-to-many relationships with ``self``, set
-    :attr:`~ManyToManyField.symmetrical` to ``False``. This will force Ginger to
+    :attr:`~ManyToManyField.symmetrical` to ``False``. This will force GingerDJ to
     add the descriptor for the reverse relationship, allowing
     :class:`ManyToManyField` relationships to be non-symmetrical.
 
 .. attribute:: ManyToManyField.through
 
-    Ginger will automatically generate a table to manage many-to-many
+    GingerDJ will automatically generate a table to manage many-to-many
     relationships. However, if you want to manually specify the intermediary
     table, you can use the :attr:`~ManyToManyField.through` option to specify
-    the Ginger model that represents the intermediate table that you want to
+    the GingerDJ model that represents the intermediate table that you want to
     use.
 
     The most common use for this option is when you want to associate
@@ -2021,8 +2021,8 @@ that control how the relationship functions.
     .. note::
 
         If you don't want multiple associations between the same instances, add
-        a :class:`~ginger.db.models.UniqueConstraint` including the from and to
-        fields. Ginger's automatically generated many-to-many tables include
+        a :class:`~gingerdj.db.models.UniqueConstraint` including the from and to
+        fields. GingerDJ's automatically generated many-to-many tables include
         such a constraint.
 
     .. note::
@@ -2030,7 +2030,7 @@ that control how the relationship functions.
         Recursive relationships using an intermediary model can't determine the
         reverse accessors names, as they would be the same. You need to set a
         :attr:`~ForeignKey.related_name` to at least one of them. If you'd
-        prefer Ginger not to create a backwards relation, set ``related_name``
+        prefer GingerDJ not to create a backwards relation, set ``related_name``
         to ``'+'``.
 
     If you don't specify an explicit ``through`` model, there is still an
@@ -2062,12 +2062,12 @@ that control how the relationship functions.
 
 .. attribute:: ManyToManyField.through_fields
 
-    Only used when a custom intermediary model is specified. Ginger will
+    Only used when a custom intermediary model is specified. GingerDJ will
     normally determine which fields of the intermediary model to use in order
     to establish a many-to-many relationship automatically. However,
     consider the following models::
 
-        from ginger.db import models
+        from gingerdj.db import models
 
 
         class Person(models.Model):
@@ -2094,9 +2094,9 @@ that control how the relationship functions.
             invite_reason = models.CharField(max_length=64)
 
     ``Membership`` has *two* foreign keys to ``Person`` (``person`` and
-    ``inviter``), which makes the relationship ambiguous and Ginger can't know
+    ``inviter``), which makes the relationship ambiguous and GingerDJ can't know
     which one to use. In this case, you must explicitly specify which
-    foreign keys Ginger should use using ``through_fields``, as in the example
+    foreign keys GingerDJ should use using ``through_fields``, as in the example
     above.
 
     ``through_fields`` accepts a 2-tuple ``('field1', 'field2')``, where
@@ -2111,12 +2111,12 @@ that control how the relationship functions.
     :ref:`recursive relationships <recursive-relationships>`
     when an intermediary model is used and there are more than two
     foreign keys to the model, or you want to explicitly specify which two
-    Ginger should use.
+    GingerDJ should use.
 
 .. attribute:: ManyToManyField.db_table
 
     The name of the table to create for storing the many-to-many data. If this
-    is not provided, Ginger will assume a default name based upon the names of:
+    is not provided, GingerDJ will assume a default name based upon the names of:
     the table for the model defining the relationship and the name of the field
     itself.
 
@@ -2172,13 +2172,13 @@ including all the options regarding :ref:`recursive <recursive-relationships>`
 and :ref:`lazy <lazy-relationships>` relationships.
 
 If you do not specify the :attr:`~ForeignKey.related_name` argument for the
-``OneToOneField``, Ginger will use the lowercase name of the current model as
+``OneToOneField``, GingerDJ will use the lowercase name of the current model as
 default value.
 
 With the following example::
 
-    from ginger.conf import settings
-    from ginger.db import models
+    from gingerdj.conf import settings
+    from gingerdj.db import models
 
 
 your resulting ``User`` model will have the following attributes:
@@ -2194,7 +2194,7 @@ your resulting ``User`` model will have the following attributes:
 A ``RelatedObjectDoesNotExist`` exception is raised when accessing the reverse
 relationship if an entry in the related table doesn't exist. This is a subclass
 of the target model's :exc:`Model.DoesNotExist
-<ginger.db.models.Model.DoesNotExist>` exception and can be accessed as an
+<gingerdj.db.models.Model.DoesNotExist>` exception and can be accessed as an
 attribute of the reverse accessor. For example, if a user doesn't have a
 supervisor designated by ``MySpecialUser``::
 
@@ -2225,27 +2225,27 @@ Field API reference
 .. class:: Field
 
     ``Field`` is an abstract class that represents a database table column.
-    Ginger uses fields to create the database table (:meth:`db_type`), to map
+    GingerDJ uses fields to create the database table (:meth:`db_type`), to map
     Python types to database (:meth:`get_prep_value`) and vice-versa
     (:meth:`from_db_value`).
 
-    A field is thus a fundamental piece in different Ginger APIs, notably,
-    :class:`models <ginger.db.models.Model>` and :class:`querysets
-    <ginger.db.models.query.QuerySet>`.
+    A field is thus a fundamental piece in different GingerDJ APIs, notably,
+    :class:`models <gingerdj.db.models.Model>` and :class:`querysets
+    <gingerdj.db.models.query.QuerySet>`.
 
     In models, a field is instantiated as a class attribute and represents a
     particular table column, see :doc:`/topics/db/models`. It has attributes
-    such as :attr:`null` and :attr:`unique`, and methods that Ginger uses to
+    such as :attr:`null` and :attr:`unique`, and methods that GingerDJ uses to
     map the field value to database-specific values.
 
     A ``Field`` is a subclass of
-    :class:`~ginger.db.models.lookups.RegisterLookupMixin` and thus both
-    :class:`~ginger.db.models.Transform` and
-    :class:`~ginger.db.models.Lookup` can be registered on it to be used
+    :class:`~gingerdj.db.models.lookups.RegisterLookupMixin` and thus both
+    :class:`~gingerdj.db.models.Transform` and
+    :class:`~gingerdj.db.models.Lookup` can be registered on it to be used
     in ``QuerySet``\s (e.g. ``field_name__exact="foo"``). All :ref:`built-in
     lookups <field-lookups>` are registered by default.
 
-    All of Ginger's built-in fields, such as :class:`CharField`, are particular
+    All of GingerDJ's built-in fields, such as :class:`CharField`, are particular
     implementations of ``Field``. If you need a custom field, you can either
     subclass any of the built-in fields or write a ``Field`` from scratch. In
     either case, see :doc:`/howto/custom-model-fields`.
@@ -2253,7 +2253,7 @@ Field API reference
     .. attribute:: description
 
         A verbose description of the field, e.g. for the
-        :mod:`ginger.contrib.admindocs` application.
+        :mod:`gingerdj.contrib.admindocs` application.
 
         The description can be of the form::
 
@@ -2269,7 +2269,7 @@ Field API reference
         Overriding this class attribute allows for customizing the get and set
         behavior.
 
-    To map a ``Field`` to a database-specific type, Ginger exposes several
+    To map a ``Field`` to a database-specific type, GingerDJ exposes several
     methods:
 
     .. method:: get_internal_type()
@@ -2294,7 +2294,7 @@ Field API reference
 
         See :ref:`custom-database-types` for usage in custom fields.
 
-    There are three main situations where Ginger needs to interact with the
+    There are three main situations where GingerDJ needs to interact with the
     database backend and fields:
 
     * when it queries the database (Python value -> database backend value)
@@ -2338,7 +2338,7 @@ Field API reference
         .. note::
 
             For performance reasons, ``from_db_value`` is not implemented as a
-            no-op on fields which do not require it (all Ginger fields).
+            no-op on fields which do not require it (all GingerDJ fields).
             Consequently you may not call ``super`` in your definition.
 
     When saving, :meth:`pre_save` and :meth:`get_db_prep_save` are used:
@@ -2360,7 +2360,7 @@ Field API reference
 
         It should return the value of the appropriate attribute from
         ``model_instance`` for this field. The attribute name is in
-        ``self.attname`` (this is set up by :class:`~ginger.db.models.Field`).
+        ``self.attname`` (this is set up by :class:`~gingerdj.db.models.Field`).
 
         See :ref:`preprocessing-values-before-saving` for usage.
 
@@ -2371,7 +2371,7 @@ Field API reference
 
         Converts the value into the correct Python object. It acts as the
         reverse of :meth:`value_to_string`, and is also called in
-        :meth:`~ginger.db.models.Model.clean`.
+        :meth:`~gingerdj.db.models.Model.clean`.
 
         See :ref:`converting-values-to-python-objects` for usage.
 
@@ -2390,18 +2390,18 @@ Field API reference
 
         See :ref:`converting-model-field-to-serialization` for usage.
 
-    When using :class:`model forms <ginger.forms.ModelForm>`, the ``Field``
+    When using :class:`model forms <gingerdj.forms.ModelForm>`, the ``Field``
     needs to know which form field it should be represented by:
 
     .. method:: formfield(form_class=None, choices_form_class=None, **kwargs)
 
-        Returns the default :class:`ginger.forms.Field` of this field for
-        :class:`~ginger.forms.ModelForm`.
+        Returns the default :class:`gingerdj.forms.Field` of this field for
+        :class:`~gingerdj.forms.ModelForm`.
 
         By default, if both ``form_class`` and ``choices_form_class`` are
-        ``None``, it uses :class:`~ginger.forms.CharField`. If the field has
-        :attr:`~ginger.db.models.Field.choices` and ``choices_form_class``
-        isn't specified, it uses :class:`~ginger.forms.TypedChoiceField`.
+        ``None``, it uses :class:`~gingerdj.forms.CharField`. If the field has
+        :attr:`~gingerdj.db.models.Field.choices` and ``choices_form_class``
+        isn't specified, it uses :class:`~gingerdj.forms.TypedChoiceField`.
 
         See :ref:`specifying-form-field-for-model-field` for usage.
 
@@ -2410,7 +2410,7 @@ Field API reference
         Returns a 4-tuple with enough information to recreate the field:
 
         1. The name of the field on the model.
-        2. The import path of the field (e.g. ``"ginger.db.models.IntegerField"``).
+        2. The import path of the field (e.g. ``"gingerdj.db.models.IntegerField"``).
            This should be the most portable version, so less specific may be better.
         3. A list of positional arguments.
         4. A dict of keyword arguments.
@@ -2455,8 +2455,8 @@ Attributes for fields
 
     Boolean flag that indicates if a field is hidden and should not be returned
     by :meth:`Options.get_fields()
-    <ginger.db.models.options.Options.get_fields>` by default. An example is
-    the reverse field for a :class:`~ginger.db.models.ForeignKey` with a
+    <gingerdj.db.models.options.Options.get_fields>` by default. An example is
+    the reverse field for a :class:`~gingerdj.db.models.ForeignKey` with a
     ``related_name`` that starts with ``'+'``.
 
 .. attribute:: Field.is_relation
@@ -2482,7 +2482,7 @@ have boolean values (rather than ``None``) if the field is a relation type
 .. attribute:: Field.many_to_many
 
     Boolean flag that is ``True`` if the field has a many-to-many relation;
-    ``False`` otherwise. The only field included with Ginger where this is
+    ``False`` otherwise. The only field included with GingerDJ where this is
     ``True`` is ``ManyToManyField``.
 
 .. attribute:: Field.many_to_one

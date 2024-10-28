@@ -2,9 +2,9 @@ import zoneinfo
 from datetime import datetime, timedelta
 from datetime import timezone as datetime_timezone
 
-from ginger.conf import settings
-from ginger.db import DataError, OperationalError
-from ginger.db.models import (
+from gingerdj.conf import settings
+from gingerdj.db import DataError, OperationalError
+from gingerdj.db.models import (
     DateField,
     DateTimeField,
     F,
@@ -14,7 +14,7 @@ from ginger.db.models import (
     Subquery,
     TimeField,
 )
-from ginger.db.models.functions import (
+from gingerdj.db.models.functions import (
     Extract,
     ExtractDay,
     ExtractHour,
@@ -39,13 +39,13 @@ from ginger.db.models.functions import (
     TruncWeek,
     TruncYear,
 )
-from ginger.test import (
+from gingerdj.test import (
     TestCase,
     override_settings,
     skipIfDBFeature,
     skipUnlessDBFeature,
 )
-from ginger.utils import timezone
+from gingerdj.utils import timezone
 
 from ..models import Author, DTModel, Fan
 

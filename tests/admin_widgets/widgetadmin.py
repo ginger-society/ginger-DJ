@@ -1,4 +1,4 @@
-from ginger.contrib import admin
+from gingerdj.contrib import admin
 
 from .models import (
     Advisor,

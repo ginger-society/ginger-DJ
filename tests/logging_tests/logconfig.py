@@ -1,8 +1,8 @@
 import logging
 
-from ginger.conf import settings
-from ginger.core.mail.backends.base import BaseEmailBackend
-from ginger.views.debug import ExceptionReporter
+from gingerdj.conf import settings
+from gingerdj.core.mail.backends.base import BaseEmailBackend
+from gingerdj.views.debug import ExceptionReporter
 
 
 class MyHandler(logging.Handler):

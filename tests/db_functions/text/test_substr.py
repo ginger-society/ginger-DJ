@@ -1,6 +1,6 @@
-from ginger.db.models import Value as V
-from ginger.db.models.functions import Lower, StrIndex, Substr, Upper
-from ginger.test import TestCase
+from gingerdj.db.models import Value as V
+from gingerdj.db.models.functions import Lower, StrIndex, Substr, Upper
+from gingerdj.test import TestCase
 
 from ..models import Author
 

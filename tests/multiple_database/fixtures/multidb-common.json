@@ -1,10 +1,10 @@
 [
-    {
-        "pk": 1,
-        "model": "multiple_database.book",
-        "fields": {
-            "title": "The Definitive Guide to Ginger",
-            "published": "2009-7-8"
-        }
+  {
+    "pk": 1,
+    "model": "multiple_database.book",
+    "fields": {
+      "title": "The Definitive Guide to GingerDJ",
+      "published": "2009-7-8"
     }
+  }
 ]

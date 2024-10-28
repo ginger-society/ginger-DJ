@@ -1,22 +1,22 @@
 from functools import update_wrapper, wraps
 from unittest import TestCase
 
-from ginger.contrib.admin.views.decorators import staff_member_required
+from gingerdj.contrib.admin.views.decorators import staff_member_required
 
-from ginger.http import HttpResponse
-from ginger.test import SimpleTestCase
-from ginger.utils.decorators import method_decorator
-from ginger.utils.functional import keep_lazy, keep_lazy_text, lazy
-from ginger.utils.safestring import mark_safe
-from ginger.views.decorators.cache import cache_control, cache_page, never_cache
-from ginger.views.decorators.http import (
+from gingerdj.http import HttpResponse
+from gingerdj.test import SimpleTestCase
+from gingerdj.utils.decorators import method_decorator
+from gingerdj.utils.functional import keep_lazy, keep_lazy_text, lazy
+from gingerdj.utils.safestring import mark_safe
+from gingerdj.views.decorators.cache import cache_control, cache_page, never_cache
+from gingerdj.views.decorators.http import (
     condition,
     require_GET,
     require_http_methods,
     require_POST,
     require_safe,
 )
-from ginger.views.decorators.vary import vary_on_cookie, vary_on_headers
+from gingerdj.views.decorators.vary import vary_on_cookie, vary_on_headers
 
 
 def fully_decorated(request):
@@ -41,26 +41,26 @@ def compose(*functions):
 
 
 full_decorator = compose(
-    # ginger.views.decorators.http
+    # gingerdj.views.decorators.http
     require_http_methods(["GET"]),
     require_GET,
     require_POST,
     require_safe,
     condition(lambda r: None, lambda r: None),
-    # ginger.views.decorators.vary
+    # gingerdj.views.decorators.vary
     vary_on_headers("Accept-language"),
     vary_on_cookie,
-    # ginger.views.decorators.cache
+    # gingerdj.views.decorators.cache
     cache_page(60 * 15),
     cache_control(private=True),
     never_cache,
     # Apply user_passes_test twice to check #9474
-    # ginger.contrib.admin.views.decorators
-    # ginger.utils.functional
+    # gingerdj.contrib.admin.views.decorators
+    # gingerdj.utils.functional
     keep_lazy(HttpResponse),
     keep_lazy_text,
     lazy,
-    # ginger.utils.safestring
+    # gingerdj.utils.safestring
     mark_safe,
 )
 

@@ -1,4 +1,4 @@
-from ginger.contrib.admin.apps import SimpleAdminConfig
+from gingerdj.contrib.admin.apps import SimpleAdminConfig
 
 
 class MyCustomAdminConfig(SimpleAdminConfig):

@@ -1,5 +1,5 @@
-from ginger.db import models
-from ginger.utils.translation import gettext_lazy as _
+from gingerdj.db import models
+from gingerdj.utils.translation import gettext_lazy as _
 
 
 class Relation(models.Model):
@@ -37,7 +37,6 @@ class AbstractPerson(models.Model):
     )
 
     object_id_abstract = models.PositiveIntegerField()
-
 
     class Meta:
         abstract = True
@@ -100,7 +99,7 @@ class Person(BasePerson):
     )
 
     object_id_concrete = models.PositiveIntegerField()
-  
+
     class Meta:
         verbose_name = _("Person")
 

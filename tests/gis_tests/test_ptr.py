@@ -1,8 +1,8 @@
 import ctypes
 from unittest import mock
 
-from ginger.contrib.gis.ptr import CPointerBase
-from ginger.test import SimpleTestCase
+from gingerdj.contrib.gis.ptr import CPointerBase
+from gingerdj.test import SimpleTestCase
 
 
 class CPointerBaseTests(SimpleTestCase):

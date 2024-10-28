@@ -3,20 +3,20 @@ import re
 from datetime import date
 from decimal import Decimal
 
-from ginger import forms
-from ginger.core.exceptions import ImproperlyConfigured
-from ginger.db import models
-from ginger.forms.formsets import formset_factory
-from ginger.forms.models import (
+from gingerdj import forms
+from gingerdj.core.exceptions import ImproperlyConfigured
+from gingerdj.db import models
+from gingerdj.forms.formsets import formset_factory
+from gingerdj.forms.models import (
     BaseModelFormSet,
     ModelForm,
     _get_foreign_key,
     inlineformset_factory,
     modelformset_factory,
 )
-from ginger.forms.renderers import GingerTemplates
-from ginger.http import QueryDict
-from ginger.test import TestCase, skipUnlessDBFeature
+from gingerdj.forms.renderers import GingerTemplates
+from gingerdj.http import QueryDict
+from gingerdj.test import TestCase, skipUnlessDBFeature
 
 from .models import (
     AlternateBook,
@@ -1564,7 +1564,7 @@ class ModelFormsetTest(TestCase):
         )
         formset = FormSet(instance=person)
 
-        # Ginger will render a hidden field for model fields that have a callable
+        # GingerDJ will render a hidden field for model fields that have a callable
         # default. This is required to ensure the value is tested for change correctly
         # when determine what extra forms have changed to save.
 
@@ -1674,7 +1674,7 @@ class ModelFormsetTest(TestCase):
 
     def test_inlineformset_with_arrayfield(self):
         class SimpleArrayField(forms.CharField):
-            """A proxy for ginger.contrib.postgres.forms.SimpleArrayField."""
+            """A proxy for gingerdj.contrib.postgres.forms.SimpleArrayField."""
 
             def to_python(self, value):
                 value = super().to_python(value)
@@ -2348,7 +2348,7 @@ class TestModelFormsetOverridesTroughFormMeta(TestCase):
         self.assertNotIn("DELETE", formset.forms[1].fields)
 
     def test_inlineformset_factory_passes_renderer(self):
-        from ginger.forms.renderers import Jinja2
+        from gingerdj.forms.renderers import Jinja2
 
         renderer = Jinja2()
         BookFormSet = inlineformset_factory(
@@ -2361,7 +2361,7 @@ class TestModelFormsetOverridesTroughFormMeta(TestCase):
         self.assertEqual(formset.renderer, renderer)
 
     def test_modelformset_factory_passes_renderer(self):
-        from ginger.forms.renderers import Jinja2
+        from gingerdj.forms.renderers import Jinja2
 
         renderer = Jinja2()
         BookFormSet = modelformset_factory(Author, fields="__all__", renderer=renderer)

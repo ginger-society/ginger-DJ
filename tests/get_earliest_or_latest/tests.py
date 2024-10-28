@@ -1,7 +1,7 @@
 from datetime import datetime
 
-from ginger.db.models import Avg
-from ginger.test import TestCase
+from gingerdj.db.models import Avg
+from gingerdj.test import TestCase
 
 from .models import Article, Comment, IndexErrorArticle, Person
 

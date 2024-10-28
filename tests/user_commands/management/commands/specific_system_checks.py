@@ -1,5 +1,5 @@
-from ginger.core.checks import Tags
-from ginger.core.management.base import BaseCommand
+from gingerdj.core.checks import Tags
+from gingerdj.core.management.base import BaseCommand
 
 
 class Command(BaseCommand):

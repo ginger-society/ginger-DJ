@@ -1,7 +1,7 @@
-from ginger import forms
-from ginger.http import HttpResponse
-from ginger.template import Context, Template
-from ginger.views.generic.edit import UpdateView
+from gingerdj import forms
+from gingerdj.http import HttpResponse
+from gingerdj.template import Context, Template
+from gingerdj.views.generic.edit import UpdateView
 
 from .models import Article
 

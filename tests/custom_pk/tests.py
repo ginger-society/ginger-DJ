@@ -1,5 +1,5 @@
-from ginger.db import IntegrityError, transaction
-from ginger.test import TestCase, skipIfDBFeature, skipUnlessDBFeature
+from gingerdj.db import IntegrityError, transaction
+from gingerdj.test import TestCase, skipIfDBFeature, skipUnlessDBFeature
 
 from .fields import MyWrapper
 from .models import Bar, Business, CustomAutoFieldModel, Employee, Foo

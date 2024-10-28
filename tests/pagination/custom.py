@@ -1,4 +1,4 @@
-from ginger.core.paginator import Page, Paginator
+from gingerdj.core.paginator import Page, Paginator
 
 
 class ValidAdjacentNumsPage(Page):

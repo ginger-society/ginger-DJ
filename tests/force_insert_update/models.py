@@ -1,9 +1,9 @@
 """
-Tests for forcing insert and update queries (instead of Ginger's normal
+Tests for forcing insert and update queries (instead of GingerDJ's normal
 automatic behavior).
 """
 
-from ginger.db import models
+from gingerdj.db import models
 
 
 class Counter(models.Model):

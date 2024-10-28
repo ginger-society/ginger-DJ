@@ -4,12 +4,12 @@ from unittest import mock
 
 from asgiref.sync import async_to_sync, iscoroutinefunction
 
-from ginger.core.cache import DEFAULT_CACHE_ALIAS, caches
-from ginger.core.exceptions import ImproperlyConfigured, SynchronousOnlyOperation
-from ginger.http import HttpResponse, HttpResponseNotAllowed
-from ginger.test import RequestFactory, SimpleTestCase
-from ginger.utils.asyncio import async_unsafe
-from ginger.views.generic.base import View
+from gingerdj.core.cache import DEFAULT_CACHE_ALIAS, caches
+from gingerdj.core.exceptions import ImproperlyConfigured, SynchronousOnlyOperation
+from gingerdj.http import HttpResponse, HttpResponseNotAllowed
+from gingerdj.test import RequestFactory, SimpleTestCase
+from gingerdj.utils.asyncio import async_unsafe
+from gingerdj.views.generic.base import View
 
 from .models import SimpleModel
 

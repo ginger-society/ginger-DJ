@@ -2,14 +2,14 @@ import datetime
 import json
 from contextlib import contextmanager
 
-from ginger.contrib import admin
-from ginger.contrib.admin.exceptions import NotRegistered
-from ginger.contrib.admin.tests import AdminSeleniumTestCase
-from ginger.contrib.admin.views.autocomplete import AutocompleteJsonView
-from ginger.core.exceptions import PermissionDenied
-from ginger.http import Http404
-from ginger.test import RequestFactory, override_settings
-from ginger.urls import reverse, reverse_lazy
+from gingerdj.contrib import admin
+from gingerdj.contrib.admin.exceptions import NotRegistered
+from gingerdj.contrib.admin.tests import AdminSeleniumTestCase
+from gingerdj.contrib.admin.views.autocomplete import AutocompleteJsonView
+from gingerdj.core.exceptions import PermissionDenied
+from gingerdj.http import Http404
+from gingerdj.test import RequestFactory, override_settings
+from gingerdj.urls import reverse, reverse_lazy
 
 from .admin import AnswerAdmin, QuestionAdmin
 from .models import (

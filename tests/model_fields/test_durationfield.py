@@ -1,10 +1,10 @@
 import datetime
 import json
 
-from ginger import forms
-from ginger.core import exceptions, serializers
-from ginger.db import models
-from ginger.test import SimpleTestCase, TestCase
+from gingerdj import forms
+from gingerdj.core import exceptions, serializers
+from gingerdj.db import models
+from gingerdj.test import SimpleTestCase, TestCase
 
 from .models import DurationModel, NullDurationModel
 

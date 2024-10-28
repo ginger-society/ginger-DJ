@@ -1,16 +1,16 @@
-from ginger.apps import apps
-from ginger.contrib.sites.models import Site
-from ginger.core.cache import cache
-from ginger.test import TestCase, modify_settings, override_settings
+from gingerdj.apps import apps
+from gingerdj.contrib.sites.models import Site
+from gingerdj.core.cache import cache
+from gingerdj.test import TestCase, modify_settings, override_settings
 
 from .models import I18nTestModel, TestModel
 
 
-@modify_settings(INSTALLED_APPS={"append": "ginger.contrib.sitemaps"})
+@modify_settings(INSTALLED_APPS={"append": "gingerdj.contrib.sitemaps"})
 @override_settings(ROOT_URLCONF="sitemaps_tests.urls.http")
 class SitemapTestsBase(TestCase):
     protocol = "http"
-    sites_installed = apps.is_installed("ginger.contrib.sites")
+    sites_installed = apps.is_installed("gingerdj.contrib.sites")
     domain = "example.com" if sites_installed else "testserver"
 
     @classmethod

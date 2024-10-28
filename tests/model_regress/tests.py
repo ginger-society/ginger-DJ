@@ -2,12 +2,12 @@ import copy
 import datetime
 from operator import attrgetter
 
-from ginger.core.exceptions import ValidationError
-from ginger.db import models, router
-from ginger.db.models.sql import InsertQuery
-from ginger.test import TestCase, skipUnlessDBFeature
-from ginger.test.utils import isolate_apps
-from ginger.utils.timezone import get_fixed_timezone
+from gingerdj.core.exceptions import ValidationError
+from gingerdj.db import models, router
+from gingerdj.db.models.sql import InsertQuery
+from gingerdj.test import TestCase, skipUnlessDBFeature
+from gingerdj.test.utils import isolate_apps
+from gingerdj.utils.timezone import get_fixed_timezone
 
 from .models import (
     Article,

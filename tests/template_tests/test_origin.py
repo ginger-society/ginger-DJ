@@ -1,7 +1,7 @@
 import os
 from unittest import TestCase
 
-from ginger.template import Engine
+from gingerdj.template import Engine
 
 from .utils import TEMPLATE_DIR
 

@@ -1,7 +1,7 @@
 from decimal import Decimal
 
-from ginger.template.defaultfilters import pluralize
-from ginger.test import SimpleTestCase
+from gingerdj.template.defaultfilters import pluralize
+from gingerdj.test import SimpleTestCase
 
 from ..utils import setup
 

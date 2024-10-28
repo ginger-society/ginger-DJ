@@ -1,7 +1,7 @@
 import datetime
 
-from ginger import forms
-from ginger.test import TestCase
+from gingerdj import forms
+from gingerdj.test import TestCase
 
 from .models import Article
 

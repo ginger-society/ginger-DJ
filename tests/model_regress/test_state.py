@@ -1,5 +1,5 @@
-from ginger.db.models.base import ModelState, ModelStateFieldsCacheDescriptor
-from ginger.test import SimpleTestCase
+from gingerdj.db.models.base import ModelState, ModelStateFieldsCacheDescriptor
+from gingerdj.test import SimpleTestCase
 
 
 class ModelStateTests(SimpleTestCase):

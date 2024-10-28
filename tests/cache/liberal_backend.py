@@ -1,4 +1,4 @@
-from ginger.core.cache.backends.locmem import LocMemCache
+from gingerdj.core.cache.backends.locmem import LocMemCache
 
 
 class LiberalKeyValidationMixin:

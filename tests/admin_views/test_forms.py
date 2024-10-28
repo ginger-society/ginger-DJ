@@ -1,8 +1,7 @@
-from ginger.contrib.admin.helpers import AdminForm
-from ginger.test import SimpleTestCase, TestCase, override_settings
+from gingerdj.contrib.admin.helpers import AdminForm
+from gingerdj.test import SimpleTestCase, TestCase, override_settings
 
 from .admin import ArticleForm
-
 
 
 class AdminFormTests(SimpleTestCase):

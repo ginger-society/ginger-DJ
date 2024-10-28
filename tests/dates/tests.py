@@ -1,9 +1,9 @@
 import datetime
 from unittest import skipUnless
 
-from ginger.core.exceptions import FieldError
-from ginger.db import connection
-from ginger.test import TestCase, override_settings
+from gingerdj.core.exceptions import FieldError
+from gingerdj.db import connection
+from gingerdj.test import TestCase, override_settings
 
 from .models import Article, Category, Comment
 

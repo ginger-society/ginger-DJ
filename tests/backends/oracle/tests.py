@@ -1,9 +1,9 @@
 import unittest
 from unittest import mock
 
-from ginger.db import DatabaseError, NotSupportedError, connection
-from ginger.db.models import BooleanField
-from ginger.test import TestCase, TransactionTestCase
+from gingerdj.db import DatabaseError, NotSupportedError, connection
+from gingerdj.db.models import BooleanField
+from gingerdj.test import TestCase, TransactionTestCase
 
 from ..models import Square, VeryLongModelNameZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ
 
@@ -95,7 +95,7 @@ class TransactionalTests(TransactionTestCase):
                 (
                     'The database did not return a new row id. Probably "ORA-1403: no '
                     'data found" was raised internally but was hidden by the Oracle '
-                    "OCI library (see https://code.ginger.gloportal.dev/ticket/28859)."
+                    "OCI library (see https://code.gingerdj.gloportal.dev/ticket/28859)."
                 ),
             ):
                 Square.objects.create(root=2, square=4)
@@ -104,7 +104,7 @@ class TransactionalTests(TransactionTestCase):
                 cursor.execute('DROP TRIGGER "TRG_NO_DATA_FOUND"')
 
     def test_password_with_at_sign(self):
-        from ginger.db.backends.oracle.base import Database
+        from gingerdj.db.backends.oracle.base import Database
 
         old_password = connection.settings_dict["PASSWORD"]
         connection.settings_dict["PASSWORD"] = "p@ssword"

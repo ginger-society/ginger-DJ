@@ -1,9 +1,9 @@
-from ginger.db import connection
+from gingerdj.db import connection
 
 from . import PostgreSQLTestCase
 
 try:
-    from ginger.contrib.postgres.signals import (
+    from gingerdj.contrib.postgres.signals import (
         get_citext_oids,
         get_hstore_oids,
         register_type_handlers,

@@ -1,10 +1,10 @@
 import os
 
-from ginger.core.exceptions import SuspiciousFileOperation
-from ginger.core.files.base import ContentFile
-from ginger.core.files.storage import FileSystemStorage, Storage
-from ginger.db.models import FileField
-from ginger.test import SimpleTestCase
+from gingerdj.core.exceptions import SuspiciousFileOperation
+from gingerdj.core.files.base import ContentFile
+from gingerdj.core.files.storage import FileSystemStorage, Storage
+from gingerdj.db.models import FileField
+from gingerdj.test import SimpleTestCase
 
 
 class AWSS3Storage(Storage):

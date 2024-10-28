@@ -1,7 +1,7 @@
-from ginger.core.exceptions import PermissionDenied
-from ginger.http import HttpResponse
-from ginger.template import engines
-from ginger.template.response import TemplateResponse
+from gingerdj.core.exceptions import PermissionDenied
+from gingerdj.http import HttpResponse
+from gingerdj.template import engines
+from gingerdj.template.response import TemplateResponse
 
 
 def normal_view(request):
@@ -9,7 +9,7 @@ def normal_view(request):
 
 
 def template_response(request):
-    template = engines["ginger"].from_string(
+    template = engines["gingerdj"].from_string(
         "template_response OK{% for m in mw %}\n{{ m }}{% endfor %}"
     )
     return TemplateResponse(request, template, context={"mw": []})

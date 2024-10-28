@@ -1,8 +1,8 @@
 import datetime
 
-from ginger.core.exceptions import ImproperlyConfigured
-from ginger.test import TestCase, override_settings
-from ginger.views.generic.base import View
+from gingerdj.core.exceptions import ImproperlyConfigured
+from gingerdj.test import TestCase, override_settings
+from gingerdj.views.generic.base import View
 
 from .models import Artist, Author, Book, Page
 

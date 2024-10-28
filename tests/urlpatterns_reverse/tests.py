@@ -8,13 +8,17 @@ import threading
 
 from admin_scripts.tests import AdminScriptTestCase
 
-from ginger.conf import settings
-from ginger.core.exceptions import ImproperlyConfigured, ViewDoesNotExist
-from ginger.http import HttpRequest, HttpResponsePermanentRedirect, HttpResponseRedirect
-from ginger.shortcuts import redirect
-from ginger.test import RequestFactory, SimpleTestCase, TestCase, override_settings
-from ginger.test.utils import override_script_prefix
-from ginger.urls import (
+from gingerdj.conf import settings
+from gingerdj.core.exceptions import ImproperlyConfigured, ViewDoesNotExist
+from gingerdj.http import (
+    HttpRequest,
+    HttpResponsePermanentRedirect,
+    HttpResponseRedirect,
+)
+from gingerdj.shortcuts import redirect
+from gingerdj.test import RequestFactory, SimpleTestCase, TestCase, override_settings
+from gingerdj.test.utils import override_script_prefix
+from gingerdj.urls import (
     NoReverseMatch,
     Resolver404,
     ResolverMatch,
@@ -30,7 +34,7 @@ from ginger.urls import (
     reverse,
     reverse_lazy,
 )
-from ginger.urls.resolvers import RegexPattern
+from gingerdj.urls.resolvers import RegexPattern
 
 from . import middleware, urlconf_outer, views
 from .utils import URLObject
@@ -681,7 +685,7 @@ class ReverseLazyTest(TestCase):
         self.assertRedirects(response, "/redirected_to/", status_code=302)
 
     def test_user_permission_with_lazy_reverse(self):
-        
+
         response = self.client.get("/login_required_view/")
         self.assertRedirects(
             response, "/login/?next=/login_required_view/", status_code=302
@@ -714,7 +718,7 @@ class ReverseLazySettingsTest(AdminScriptTestCase):
         self.write_settings(
             "settings.py",
             extra=(
-                "from ginger.urls import reverse_lazy\n"
+                "from gingerdj.urls import reverse_lazy\n"
                 "LOGIN_URL = reverse_lazy('login')"
             ),
         )
@@ -1624,7 +1628,7 @@ class ViewLoadingTests(SimpleTestCase):
             get_callable("urlpatterns_reverse.views.i_should_not_exist")
 
     def test_attributeerror_not_hidden(self):
-        msg = "I am here to confuse ginger.urls.get_callable"
+        msg = "I am here to confuse gingerdj.urls.get_callable"
         with self.assertRaisesMessage(AttributeError, msg):
             get_callable("urlpatterns_reverse.views_broken.i_am_broken")
 

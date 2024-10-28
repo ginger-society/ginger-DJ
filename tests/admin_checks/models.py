@@ -2,7 +2,7 @@
 Tests of ModelAdmin system checks logic.
 """
 
-from ginger.db import models
+from gingerdj.db import models
 
 
 class Album(models.Model):

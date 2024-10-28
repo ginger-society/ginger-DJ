@@ -1,5 +1,5 @@
-from ginger.http import HttpResponse
-from ginger.views.decorators.http import condition, etag, last_modified
+from gingerdj.http import HttpResponse
+from gingerdj.views.decorators.http import condition, etag, last_modified
 
 from .tests import ETAG, FULL_RESPONSE, LAST_MODIFIED, WEAK_ETAG
 

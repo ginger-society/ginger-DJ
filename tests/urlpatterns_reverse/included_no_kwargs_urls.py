@@ -1,4 +1,4 @@
-from ginger.urls import re_path
+from gingerdj.urls import re_path
 
 from .views import empty_view
 

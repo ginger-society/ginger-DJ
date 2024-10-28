@@ -2,19 +2,19 @@ import pickle
 import time
 from datetime import datetime
 
-from ginger.template import engines
-from ginger.template.response import (
+from gingerdj.template import engines
+from gingerdj.template.response import (
     ContentNotRenderedError,
     SimpleTemplateResponse,
     TemplateResponse,
 )
-from ginger.test import (
+from gingerdj.test import (
     RequestFactory,
     SimpleTestCase,
     modify_settings,
     override_settings,
 )
-from ginger.test.utils import require_jinja2
+from gingerdj.test.utils import require_jinja2
 
 from .utils import TEMPLATE_DIR
 
@@ -37,7 +37,7 @@ def custom_urlconf_middleware(get_response):
 
 class SimpleTemplateResponseTest(SimpleTestCase):
     def _response(self, template="foo", *args, **kwargs):
-        template = engines["ginger"].from_string(template)
+        template = engines["gingerdj"].from_string(template)
         return SimpleTemplateResponse(template, *args, **kwargs)
 
     def test_template_resolving(self):
@@ -67,7 +67,7 @@ class SimpleTemplateResponseTest(SimpleTestCase):
         self.assertEqual(response.content, b"foo")
 
         # rebaking doesn't change the rendered content
-        template = engines["ginger"].from_string("bar{{ baz }}")
+        template = engines["gingerdj"].from_string("bar{{ baz }}")
         response.template_name = template
         response.render()
         self.assertEqual(response.content, b"foo")
@@ -142,7 +142,7 @@ class SimpleTemplateResponseTest(SimpleTestCase):
         response = SimpleTemplateResponse("template_tests/using.html").render()
         self.assertEqual(response.content, b"DTL\n")
         response = SimpleTemplateResponse(
-            "template_tests/using.html", using="ginger"
+            "template_tests/using.html", using="gingerdj"
         ).render()
         self.assertEqual(response.content, b"DTL\n")
         response = SimpleTemplateResponse(
@@ -249,7 +249,7 @@ class SimpleTemplateResponseTest(SimpleTestCase):
 @override_settings(
     TEMPLATES=[
         {
-            "BACKEND": "ginger.template.backends.ginger.GingerTemplates",
+            "BACKEND": "gingerdj.template.backends.gingerdj.GingerTemplates",
             "DIRS": [TEMPLATE_DIR],
             "OPTIONS": {
                 "context_processors": [test_processor_name],
@@ -262,7 +262,7 @@ class TemplateResponseTest(SimpleTestCase):
 
     def _response(self, template="foo", *args, **kwargs):
         self._request = self.factory.get("/")
-        template = engines["ginger"].from_string(template)
+        template = engines["gingerdj"].from_string(template)
         return TemplateResponse(self._request, template, *args, **kwargs)
 
     def test_render(self):
@@ -298,7 +298,7 @@ class TemplateResponseTest(SimpleTestCase):
         response = TemplateResponse(request, "template_tests/using.html").render()
         self.assertEqual(response.content, b"DTL\n")
         response = TemplateResponse(
-            request, "template_tests/using.html", using="ginger"
+            request, "template_tests/using.html", using="gingerdj"
         ).render()
         self.assertEqual(response.content, b"DTL\n")
         response = TemplateResponse(
@@ -386,8 +386,8 @@ class CustomURLConfTest(SimpleTestCase):
 @modify_settings(
     MIDDLEWARE={
         "append": [
-            "ginger.middleware.cache.FetchFromCacheMiddleware",
-            "ginger.middleware.cache.UpdateCacheMiddleware",
+            "gingerdj.middleware.cache.FetchFromCacheMiddleware",
+            "gingerdj.middleware.cache.UpdateCacheMiddleware",
         ],
     },
 )

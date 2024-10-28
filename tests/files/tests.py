@@ -8,17 +8,17 @@ from io import BytesIO, StringIO, TextIOWrapper
 from pathlib import Path
 from unittest import mock
 
-from ginger.core.files import File, locks
-from ginger.core.files.base import ContentFile
-from ginger.core.files.move import file_move_safe
-from ginger.core.files.temp import NamedTemporaryFile
-from ginger.core.files.uploadedfile import (
+from gingerdj.core.files import File, locks
+from gingerdj.core.files.base import ContentFile
+from gingerdj.core.files.move import file_move_safe
+from gingerdj.core.files.temp import NamedTemporaryFile
+from gingerdj.core.files.uploadedfile import (
     InMemoryUploadedFile,
     SimpleUploadedFile,
     TemporaryUploadedFile,
     UploadedFile,
 )
-from ginger.test import override_settings
+from gingerdj.test import override_settings
 
 try:
     from PIL import Image, features
@@ -28,7 +28,7 @@ except ImportError:
     Image = None
     HAS_WEBP = False
 else:
-    from ginger.core.files import images
+    from gingerdj.core.files import images
 
 
 class FileTests(unittest.TestCase):
@@ -68,7 +68,7 @@ class FileTests(unittest.TestCase):
 
     def test_namedtemporaryfile_closes(self):
         """
-        The symbol ginger.core.files.NamedTemporaryFile is assigned as
+        The symbol gingerdj.core.files.NamedTemporaryFile is assigned as
         a different class on different operating systems. In
         any case, the result should minimally mock some of the API of
         tempfile.NamedTemporaryFile from the Python standard library.
@@ -456,20 +456,22 @@ class FileMoveSafeTests(unittest.TestCase):
         try:
             # This exception is required to reach the copystat() call in
             # file_safe_move().
-            with mock.patch("ginger.core.files.move.os.rename", side_effect=OSError()):
+            with mock.patch(
+                "gingerdj.core.files.move.os.rename", side_effect=OSError()
+            ):
                 # An error besides PermissionError isn't ignored.
                 with mock.patch(
-                    "ginger.core.files.move.copystat", side_effect=os_error
+                    "gingerdj.core.files.move.copystat", side_effect=os_error
                 ):
                     with self.assertRaises(OSError):
                         file_move_safe(self.file_a, self.file_b, allow_overwrite=True)
                 # When copystat() throws PermissionError, copymode() error besides
                 # PermissionError isn't ignored.
                 with mock.patch(
-                    "ginger.core.files.move.copystat", side_effect=permission_error
+                    "gingerdj.core.files.move.copystat", side_effect=permission_error
                 ):
                     with mock.patch(
-                        "ginger.core.files.move.copymode", side_effect=os_error
+                        "gingerdj.core.files.move.copymode", side_effect=os_error
                     ):
                         with self.assertRaises(OSError):
                             file_move_safe(
@@ -477,14 +479,15 @@ class FileMoveSafeTests(unittest.TestCase):
                             )
                 # PermissionError raised by copystat() is ignored.
                 with mock.patch(
-                    "ginger.core.files.move.copystat", side_effect=permission_error
+                    "gingerdj.core.files.move.copystat", side_effect=permission_error
                 ):
                     self.assertIsNone(
                         file_move_safe(self.file_a, self.file_b, allow_overwrite=True)
                     )
                     # PermissionError raised by copymode() is ignored too.
                     with mock.patch(
-                        "ginger.core.files.move.copymode", side_effect=permission_error
+                        "gingerdj.core.files.move.copymode",
+                        side_effect=permission_error,
                     ):
                         self.assertIsNone(
                             file_move_safe(

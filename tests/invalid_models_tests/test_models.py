@@ -1,12 +1,12 @@
 import unittest
 
-from ginger.core.checks import Error, Warning
-from ginger.core.checks.model_checks import _check_lazy_references
-from ginger.db import connection, connections, models
-from ginger.db.models.functions import Abs, Lower, Round
-from ginger.db.models.signals import post_init
-from ginger.test import SimpleTestCase, TestCase, skipUnlessDBFeature
-from ginger.test.utils import isolate_apps, override_settings, register_lookup
+from gingerdj.core.checks import Error, Warning
+from gingerdj.core.checks.model_checks import _check_lazy_references
+from gingerdj.db import connection, connections, models
+from gingerdj.db.models.functions import Abs, Lower, Round
+from gingerdj.db.models.signals import post_init
+from gingerdj.test import SimpleTestCase, TestCase, skipUnlessDBFeature
+from gingerdj.test.utils import isolate_apps, override_settings, register_lookup
 
 
 class EmptyRouter:
@@ -1701,7 +1701,7 @@ class OtherModelTests(SimpleTestCase):
 
         self.assertEqual(C.check(), [])
 
-    @isolate_apps("ginger.test", kwarg_name="apps")
+    @isolate_apps("gingerdj.test", kwarg_name="apps")
     def test_lazy_reference_checks(self, apps):
         class DummyModel(models.Model):
             author = models.ForeignKey("Author", models.CASCADE)

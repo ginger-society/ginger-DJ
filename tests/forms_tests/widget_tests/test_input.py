@@ -1,4 +1,4 @@
-from ginger.forms.widgets import Input
+from gingerdj.forms.widgets import Input
 
 from .base import WidgetTest
 

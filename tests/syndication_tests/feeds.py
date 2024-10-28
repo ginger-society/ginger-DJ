@@ -1,8 +1,8 @@
 from functools import wraps
 
-from ginger.contrib.syndication import views
-from ginger.utils import feedgenerator
-from ginger.utils.timezone import get_fixed_timezone
+from gingerdj.contrib.syndication import views
+from gingerdj.utils import feedgenerator
+from gingerdj.utils.timezone import get_fixed_timezone
 
 from .models import Article, Entry
 
@@ -32,7 +32,7 @@ class TestRss2Feed(views.Feed):
     author_name = "Sally Smith"
     author_email = "test@example.com"
     author_link = "http://www.example.com/"
-    categories = ("python", "ginger")
+    categories = ("python", "gingerdj")
     feed_copyright = "Copyright (c) 2007, Sally Smith"
     ttl = 600
 
@@ -268,7 +268,7 @@ class MyCustomAtom1Feed(feedgenerator.Atom1Feed):
 
     def root_attributes(self):
         attrs = super().root_attributes()
-        attrs["ginger"] = "rocks"
+        attrs["gingerdj"] = "rocks"
         return attrs
 
     def add_root_elements(self, handler):

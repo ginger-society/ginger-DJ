@@ -2,7 +2,7 @@
 Callable defaults
 
 You can pass callable objects as the ``default`` parameter to a field. When
-the object is created without an explicit value passed in, Ginger will call
+the object is created without an explicit value passed in, GingerDJ will call
 the method to determine the default value.
 
 This example uses ``datetime.datetime.now`` as the default for the ``pub_date``
@@ -12,9 +12,9 @@ field.
 from datetime import datetime
 from decimal import Decimal
 
-from ginger.db import models
-from ginger.db.models.functions import Coalesce, ExtractYear, Now, Pi
-from ginger.db.models.lookups import GreaterThan
+from gingerdj.db import models
+from gingerdj.db.models.functions import Coalesce, ExtractYear, Now, Pi
+from gingerdj.db.models.lookups import GreaterThan
 
 
 class Article(models.Model):

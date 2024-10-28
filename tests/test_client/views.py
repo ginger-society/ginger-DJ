@@ -2,22 +2,22 @@ import json
 from urllib.parse import urlencode
 from xml.dom.minidom import parseString
 
-from ginger.core import mail
-from ginger.core.exceptions import ValidationError
-from ginger.forms import fields
-from ginger.forms.forms import Form
-from ginger.http import (
+from gingerdj.core import mail
+from gingerdj.core.exceptions import ValidationError
+from gingerdj.forms import fields
+from gingerdj.forms.forms import Form
+from gingerdj.http import (
     HttpResponse,
     HttpResponseBadRequest,
     HttpResponseNotAllowed,
     HttpResponseNotFound,
     HttpResponseRedirect,
 )
-from ginger.shortcuts import render
-from ginger.template import Context, Template
-from ginger.test import Client
-from ginger.utils.decorators import method_decorator
-from ginger.views.generic import TemplateView
+from gingerdj.shortcuts import render
+from gingerdj.template import Context, Template
+from gingerdj.test import Client
+from gingerdj.utils.decorators import method_decorator
+from gingerdj.views.generic import TemplateView
 
 
 def get_view(request):
@@ -268,7 +268,6 @@ def form_view_with_template(request):
     )
 
 
-
 def session_view(request):
     "A view that modifies the session"
     request.session["tobacconist"] = "hovercraft"
@@ -327,7 +326,7 @@ def nesting_exception_view(request):
 
 
 def ginger_project_redirect(request):
-    return HttpResponseRedirect("https://www.ginger.gloportal.dev/")
+    return HttpResponseRedirect("https://www.gingerdj.gloportal.dev/")
 
 
 def no_trailing_slash_external_redirect(request):

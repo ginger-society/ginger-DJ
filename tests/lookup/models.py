@@ -4,8 +4,8 @@ The lookup API
 This demonstrates features of the database API.
 """
 
-from ginger.db import models
-from ginger.db.models.lookups import IsNull
+from gingerdj.db import models
+from gingerdj.db.models.lookups import IsNull
 
 
 class Alarm(models.Model):

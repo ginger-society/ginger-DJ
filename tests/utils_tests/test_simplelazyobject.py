@@ -1,7 +1,7 @@
 import pickle
 
-from ginger.test import TestCase
-from ginger.utils.functional import SimpleLazyObject
+from gingerdj.test import TestCase
+from gingerdj.utils.functional import SimpleLazyObject
 
 
 # class TestUtilsSimpleLazyObjectGingerTestCase(TestCase):

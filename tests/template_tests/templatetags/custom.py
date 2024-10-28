@@ -1,8 +1,8 @@
-from ginger import template
-from ginger.template.base import TextNode
-from ginger.template.defaultfilters import stringfilter
-from ginger.utils.html import escape, format_html
-from ginger.utils.safestring import mark_safe
+from gingerdj import template
+from gingerdj.template.base import TextNode
+from gingerdj.template.defaultfilters import stringfilter
+from gingerdj.utils.html import escape, format_html
+from gingerdj.utils.safestring import mark_safe
 
 register = template.Library()
 

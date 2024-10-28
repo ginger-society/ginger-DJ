@@ -6,8 +6,8 @@ from pathlib import Path
 from unittest import mock
 from urllib.parse import quote, quote_plus
 
-from ginger.test import SimpleTestCase
-from ginger.utils.encoding import (
+from gingerdj.test import SimpleTestCase
+from gingerdj.utils.encoding import (
     GingerUnicodeDecodeError,
     escape_uri_path,
     filepath_to_uri,
@@ -20,9 +20,9 @@ from ginger.utils.encoding import (
     smart_str,
     uri_to_iri,
 )
-from ginger.utils.functional import SimpleLazyObject
-from ginger.utils.translation import gettext_lazy
-from ginger.utils.version import PYPY
+from gingerdj.utils.functional import SimpleLazyObject
+from gingerdj.utils.translation import gettext_lazy
+from gingerdj.utils.version import PYPY
 
 
 class TestEncodingUtils(SimpleTestCase):
@@ -132,7 +132,7 @@ class TestEncodingUtils(SimpleTestCase):
             decoded_paths.append(inspect.currentframe().f_back.f_locals["path"])
             return quote(*args, **kwargs)
 
-        with mock.patch("ginger.utils.encoding.quote", mock_quote):
+        with mock.patch("gingerdj.utils.encoding.quote", mock_quote):
             self.assertEqual(repercent_broken_unicode(data), b"test%FCtest%FCtest%FC")
 
         # decode() is called on smaller fragment of the path each time.

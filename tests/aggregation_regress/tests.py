@@ -4,9 +4,9 @@ from decimal import Decimal
 from operator import attrgetter
 from unittest import mock
 
-from ginger.core.exceptions import FieldError
-from ginger.db import connection
-from ginger.db.models import (
+from gingerdj.core.exceptions import FieldError
+from gingerdj.db import connection
+from gingerdj.db.models import (
     Aggregate,
     Avg,
     Case,
@@ -23,9 +23,9 @@ from ginger.db.models import (
     Variance,
     When,
 )
-from ginger.db.models.functions import Cast, Concat
-from ginger.test import TestCase, skipUnlessDBFeature
-from ginger.test.utils import Approximate
+from gingerdj.db.models.functions import Cast, Concat
+from gingerdj.test import TestCase, skipUnlessDBFeature
+from gingerdj.test.utils import Approximate
 
 from .models import (
     Alfa,
@@ -77,7 +77,7 @@ class AggregationTests(TestCase):
 
         cls.b1 = Book.objects.create(
             isbn="159059725",
-            name="The Definitive Guide to Ginger: Web Development Done Right",
+            name="The Definitive Guide to GingerDJ: Web Development Done Right",
             pages=447,
             rating=4.5,
             price=Decimal("30.00"),
@@ -87,7 +87,7 @@ class AggregationTests(TestCase):
         )
         cls.b2 = Book.objects.create(
             isbn="067232959",
-            name="Sams Teach Yourself Ginger in 24 Hours",
+            name="Sams Teach Yourself GingerDJ in 24 Hours",
             pages=528,
             rating=3.0,
             price=Decimal("23.09"),
@@ -97,7 +97,7 @@ class AggregationTests(TestCase):
         )
         cls.b3 = Book.objects.create(
             isbn="159059996",
-            name="Practical Ginger Projects",
+            name="Practical GingerDJ Projects",
             pages=300,
             rating=4.0,
             price=Decimal("29.69"),
@@ -107,7 +107,7 @@ class AggregationTests(TestCase):
         )
         cls.b4 = Book.objects.create(
             isbn="013235613",
-            name="Python Web Development with Ginger",
+            name="Python Web Development with GingerDJ",
             pages=350,
             rating=4.0,
             price=Decimal("29.69"),
@@ -173,7 +173,7 @@ class AggregationTests(TestCase):
     def test_annotation_with_value(self):
         values = (
             Book.objects.filter(
-                name="Practical Ginger Projects",
+                name="Practical GingerDJ Projects",
             )
             .annotate(
                 discount_price=F("price") * 2,
@@ -306,7 +306,7 @@ class AggregationTests(TestCase):
             contact_id=self.a3.id,
             isbn="067232959",
             mean_auth_age=45.0,
-            name="Sams Teach Yourself Ginger in 24 Hours",
+            name="Sams Teach Yourself GingerDJ in 24 Hours",
             pages=528,
             price=Decimal("23.09"),
             pubdate=datetime.date(2008, 3, 3),
@@ -327,7 +327,7 @@ class AggregationTests(TestCase):
             contact_id=self.a3.id,
             isbn="067232959",
             mean_auth_age=45.0,
-            name="Sams Teach Yourself Ginger in 24 Hours",
+            name="Sams Teach Yourself GingerDJ in 24 Hours",
             pages=528,
             price=Decimal("23.09"),
             pubdate=datetime.date(2008, 3, 3),
@@ -354,7 +354,7 @@ class AggregationTests(TestCase):
                 "contact_id": self.a3.id,
                 "isbn": "067232959",
                 "mean_auth_age": 45.0,
-                "name": "Sams Teach Yourself Ginger in 24 Hours",
+                "name": "Sams Teach Yourself GingerDJ in 24 Hours",
                 "pages": 528,
                 "price": Decimal("23.09"),
                 "pubdate": datetime.date(2008, 3, 3),
@@ -381,7 +381,7 @@ class AggregationTests(TestCase):
                 "contact_id": self.a3.id,
                 "isbn": "067232959",
                 "mean_auth_age": 45.0,
-                "name": "Sams Teach Yourself Ginger in 24 Hours",
+                "name": "Sams Teach Yourself GingerDJ in 24 Hours",
                 "pages": 528,
                 "price": Decimal("23.09"),
                 "pubdate": datetime.date(2008, 3, 3),
@@ -401,7 +401,7 @@ class AggregationTests(TestCase):
         self.assertEqual(
             obj,
             {
-                "name": "The Definitive Guide to Ginger: Web Development Done Right",
+                "name": "The Definitive Guide to GingerDJ: Web Development Done Right",
             },
         )
 
@@ -415,7 +415,7 @@ class AggregationTests(TestCase):
             obj,
             {
                 "mean_auth_age": 34.5,
-                "name": "The Definitive Guide to Ginger: Web Development Done Right",
+                "name": "The Definitive Guide to GingerDJ: Web Development Done Right",
             },
         )
 
@@ -428,7 +428,7 @@ class AggregationTests(TestCase):
         )
         self.assertSequenceEqual(
             qs,
-            [{"name": "Python Web Development with Ginger"}],
+            [{"name": "Python Web Development with GingerDJ"}],
         )
 
         # The annotations are added to values output if values() precedes
@@ -443,7 +443,7 @@ class AggregationTests(TestCase):
             obj,
             {
                 "mean_auth_age": 34.5,
-                "name": "The Definitive Guide to Ginger: Web Development Done Right",
+                "name": "The Definitive Guide to GingerDJ: Web Development Done Right",
             },
         )
 
@@ -837,13 +837,13 @@ class AggregationTests(TestCase):
                 "publisher__name", "name"
             ),
             [
-                "Practical Ginger Projects",
-                "The Definitive Guide to Ginger: Web Development Done Right",
+                "Practical GingerDJ Projects",
+                "The Definitive Guide to GingerDJ: Web Development Done Right",
                 "Paradigms of Artificial Intelligence Programming: Case Studies in "
                 "Common Lisp",
                 "Artificial Intelligence: A Modern Approach",
-                "Python Web Development with Ginger",
-                "Sams Teach Yourself Ginger in 24 Hours",
+                "Python Web Development with GingerDJ",
+                "Sams Teach Yourself GingerDJ in 24 Hours",
             ],
             lambda b: b.name,
         )
@@ -864,14 +864,19 @@ class AggregationTests(TestCase):
                     "Prentice Hall",
                     "Peter Norvig",
                 ),
-                ("Practical Ginger Projects", 29.0, "Apress", "James Bennett"),
+                ("Practical GingerDJ Projects", 29.0, "Apress", "James Bennett"),
                 (
-                    "Python Web Development with Ginger",
+                    "Python Web Development with GingerDJ",
                     Approximate(30.333, places=2),
                     "Prentice Hall",
                     "Jeffrey Forcier",
                 ),
-                ("Sams Teach Yourself Ginger in 24 Hours", 45.0, "Sams", "Brad Dayley"),
+                (
+                    "Sams Teach Yourself GingerDJ in 24 Hours",
+                    45.0,
+                    "Sams",
+                    "Brad Dayley",
+                ),
             ],
             lambda b: (b.name, b.authors__age__avg, b.publisher.name, b.contact.name),
         )
@@ -921,7 +926,7 @@ class AggregationTests(TestCase):
         self.assertQuerySetEqual(
             Book.objects.filter(id__in=ids),
             [
-                "Python Web Development with Ginger",
+                "Python Web Development with GingerDJ",
             ],
             lambda b: b.name,
         )
@@ -1033,10 +1038,10 @@ class AggregationTests(TestCase):
                 "Artificial Intelligence: A Modern Approach",
                 "Paradigms of Artificial Intelligence Programming: Case Studies in "
                 "Common Lisp",
-                "Practical Ginger Projects",
-                "Python Web Development with Ginger",
-                "Sams Teach Yourself Ginger in 24 Hours",
-                "The Definitive Guide to Ginger: Web Development Done Right",
+                "Practical GingerDJ Projects",
+                "Python Web Development with GingerDJ",
+                "Sams Teach Yourself GingerDJ in 24 Hours",
+                "The Definitive Guide to GingerDJ: Web Development Done Right",
             ],
             lambda b: b.name,
         )
@@ -1091,9 +1096,9 @@ class AggregationTests(TestCase):
         self.assertQuerySetEqual(
             books,
             [
-                "Practical Ginger Projects",
-                "Sams Teach Yourself Ginger in 24 Hours",
-                "The Definitive Guide to Ginger: Web Development Done Right",
+                "Practical GingerDJ Projects",
+                "Sams Teach Yourself GingerDJ in 24 Hours",
+                "The Definitive Guide to GingerDJ: Web Development Done Right",
             ],
             lambda b: b.name,
         )
@@ -1196,7 +1201,7 @@ class AggregationTests(TestCase):
         )
         self.assertQuerySetEqual(
             Book.objects.filter(pk__in=qs),
-            ["Python Web Development with Ginger"],
+            ["Python Web Development with GingerDJ"],
             attrgetter("name"),
         )
 
@@ -1240,22 +1245,22 @@ class AggregationTests(TestCase):
     def test_annotation_disjunction(self):
         qs = (
             Book.objects.annotate(n_authors=Count("authors"))
-            .filter(Q(n_authors=2) | Q(name="Python Web Development with Ginger"))
+            .filter(Q(n_authors=2) | Q(name="Python Web Development with GingerDJ"))
             .order_by("name")
         )
         self.assertQuerySetEqual(
             qs,
             [
                 "Artificial Intelligence: A Modern Approach",
-                "Python Web Development with Ginger",
-                "The Definitive Guide to Ginger: Web Development Done Right",
+                "Python Web Development with GingerDJ",
+                "The Definitive Guide to GingerDJ: Web Development Done Right",
             ],
             attrgetter("name"),
         )
 
         qs = (
             Book.objects.annotate(n_authors=Count("authors")).filter(
-                Q(name="The Definitive Guide to Ginger: Web Development Done Right")
+                Q(name="The Definitive Guide to GingerDJ: Web Development Done Right")
                 | (
                     Q(name="Artificial Intelligence: A Modern Approach")
                     & Q(n_authors=3)
@@ -1265,7 +1270,7 @@ class AggregationTests(TestCase):
         self.assertQuerySetEqual(
             qs,
             [
-                "The Definitive Guide to Ginger: Web Development Done Right",
+                "The Definitive Guide to GingerDJ: Web Development Done Right",
             ],
             attrgetter("name"),
         )
@@ -1308,14 +1313,14 @@ class AggregationTests(TestCase):
 
     def test_quoting_aggregate_order_by(self):
         qs = (
-            Book.objects.filter(name="Python Web Development with Ginger")
+            Book.objects.filter(name="Python Web Development with GingerDJ")
             .annotate(authorCount=Count("authors"))
             .order_by("authorCount")
         )
         self.assertQuerySetEqual(
             qs,
             [
-                ("Python Web Development with Ginger", 3),
+                ("Python Web Development with GingerDJ", 3),
             ],
             lambda b: (b.name, b.authorCount),
         )
@@ -1498,10 +1503,10 @@ class AggregationTests(TestCase):
                     "Common Lisp",
                     1,
                 ),
-                ("Practical Ginger Projects", 1),
-                ("Python Web Development with Ginger", 3),
-                ("Sams Teach Yourself Ginger in 24 Hours", 1),
-                ("The Definitive Guide to Ginger: Web Development Done Right", 2),
+                ("Practical GingerDJ Projects", 1),
+                ("Python Web Development with GingerDJ", 3),
+                ("Sams Teach Yourself GingerDJ in 24 Hours", 1),
+                ("The Definitive Guide to GingerDJ: Web Development Done Right", 2),
             ],
         )
 
@@ -1522,10 +1527,10 @@ class AggregationTests(TestCase):
                         "Studies in Common Lisp",
                         1,
                     ),
-                    ("Practical Ginger Projects", 1),
-                    ("Python Web Development with Ginger", 3),
-                    ("Sams Teach Yourself Ginger in 24 Hours", 1),
-                    ("The Definitive Guide to Ginger: Web Development Done Right", 2),
+                    ("Practical GingerDJ Projects", 1),
+                    ("Python Web Development with GingerDJ", 3),
+                    ("Sams Teach Yourself GingerDJ in 24 Hours", 1),
+                    ("The Definitive Guide to GingerDJ: Web Development Done Right", 2),
                 ],
             )
 
@@ -1560,7 +1565,7 @@ class AggregationTests(TestCase):
         )
         # Force treating unmanaged models as tables.
         with mock.patch(
-            "ginger.db.connection.features.allows_group_by_selected_pks_on_model",
+            "gingerdj.db.connection.features.allows_group_by_selected_pks_on_model",
             return_value=True,
         ):
             with (
@@ -1580,11 +1585,11 @@ class AggregationTests(TestCase):
                             "Studies in Common Lisp",
                             1,
                         ),
-                        ("Practical Ginger Projects", 1),
-                        ("Python Web Development with Ginger", 3),
-                        ("Sams Teach Yourself Ginger in 24 Hours", 1),
+                        ("Practical GingerDJ Projects", 1),
+                        ("Python Web Development with GingerDJ", 3),
+                        ("Sams Teach Yourself GingerDJ in 24 Hours", 1),
                         (
-                            "The Definitive Guide to Ginger: Web Development Done "
+                            "The Definitive Guide to GingerDJ: Web Development Done "
                             "Right",
                             2,
                         ),
@@ -1603,7 +1608,7 @@ class AggregationTests(TestCase):
 
         tests aggregations with generic reverse relations
         """
-        ginger_book = Book.objects.get(name="Practical Ginger Projects")
+        ginger_book = Book.objects.get(name="Practical GingerDJ Projects")
         ItemTag.objects.create(
             object_id=ginger_book.id,
             tag="intermediate",
@@ -1611,7 +1616,7 @@ class AggregationTests(TestCase):
         )
         ItemTag.objects.create(
             object_id=ginger_book.id,
-            tag="ginger",
+            tag="gingerdj",
             content_type=ContentType.objects.get_for_model(ginger_book),
         )
         # Assign a tag to model with same PK as the book above. If the JOIN
@@ -1637,16 +1642,16 @@ class AggregationTests(TestCase):
         self.assertEqual(
             [(b.name, b.tags__count) for b in results],
             [
-                ("Practical Ginger Projects", 2),
+                ("Practical GingerDJ Projects", 2),
                 (
                     "Paradigms of Artificial Intelligence Programming: Case Studies in "
                     "Common Lisp",
                     1,
                 ),
                 ("Artificial Intelligence: A Modern Approach", 0),
-                ("Python Web Development with Ginger", 0),
-                ("Sams Teach Yourself Ginger in 24 Hours", 0),
-                ("The Definitive Guide to Ginger: Web Development Done Right", 0),
+                ("Python Web Development with GingerDJ", 0),
+                ("Sams Teach Yourself GingerDJ in 24 Hours", 0),
+                ("The Definitive Guide to GingerDJ: Web Development Done Right", 0),
             ],
         )
 
@@ -1758,7 +1763,7 @@ class AggregationTests(TestCase):
             account=F("publisher__num_awards")
         )
         self.assertQuerySetEqual(
-            qs, ["Sams Teach Yourself Ginger in 24 Hours"], lambda b: b.name
+            qs, ["Sams Teach Yourself GingerDJ in 24 Hours"], lambda b: b.name
         )
 
     def test_annotate_reserved_word(self):
@@ -1890,7 +1895,7 @@ class AggregationTests(TestCase):
         recipe.tasters.add(shadow_author)
         shadow_recipe.tasters.add(author)
         # This selects how many tasters each author had according to a
-        # calculated field "name". The table has a column "name" that Ginger is
+        # calculated field "name". The table has a column "name" that GingerDJ is
         # unaware of, and is equal for the two authors. The grouping column
         # cannot be referenced by its name ("name"), as it'd return one result
         # which is incorrect.

@@ -1,7 +1,7 @@
-from ginger.test import SimpleTestCase
-from ginger.test.utils import override_settings
-from ginger.urls.resolvers import RegexPattern, RoutePattern, get_resolver
-from ginger.utils.translation import gettext_lazy as _
+from gingerdj.test import SimpleTestCase
+from gingerdj.test.utils import override_settings
+from gingerdj.urls.resolvers import RegexPattern, RoutePattern, get_resolver
+from gingerdj.utils.translation import gettext_lazy as _
 
 
 class RegexPatternTests(SimpleTestCase):

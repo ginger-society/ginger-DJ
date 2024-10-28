@@ -1,8 +1,8 @@
 import copy
 import json
 
-from ginger.core.exceptions import ValidationError
-from ginger.forms.utils import (
+from gingerdj.core.exceptions import ValidationError
+from gingerdj.forms.utils import (
     ErrorDict,
     ErrorList,
     RenderableFieldMixin,
@@ -10,9 +10,9 @@ from ginger.forms.utils import (
     flatatt,
     pretty_name,
 )
-from ginger.test import SimpleTestCase
-from ginger.utils.safestring import mark_safe
-from ginger.utils.translation import gettext_lazy
+from gingerdj.test import SimpleTestCase
+from gingerdj.utils.safestring import mark_safe
+from gingerdj.utils.translation import gettext_lazy
 
 
 class FormsUtilsTestCase(SimpleTestCase):

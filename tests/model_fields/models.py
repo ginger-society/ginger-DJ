@@ -2,14 +2,14 @@ import json
 import tempfile
 import uuid
 
-from ginger.core.files.storage import FileSystemStorage
-from ginger.core.serializers.json import GingerJSONEncoder
-from ginger.db import connection, models
-from ginger.db.models import F, Value
-from ginger.db.models.fields.files import ImageFieldFile
-from ginger.db.models.functions import Lower
-from ginger.utils.functional import SimpleLazyObject
-from ginger.utils.translation import gettext_lazy as _
+from gingerdj.core.files.storage import FileSystemStorage
+from gingerdj.core.serializers.json import GingerJSONEncoder
+from gingerdj.db import connection, models
+from gingerdj.db.models import F, Value
+from gingerdj.db.models.fields.files import ImageFieldFile
+from gingerdj.db.models.functions import Lower
+from gingerdj.utils.functional import SimpleLazyObject
+from gingerdj.utils.translation import gettext_lazy as _
 
 try:
     from PIL import Image

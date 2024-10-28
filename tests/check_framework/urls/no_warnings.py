@@ -1,4 +1,4 @@
-from ginger.urls import include, path, re_path
+from gingerdj.urls import include, path, re_path
 
 urlpatterns = [
     path("foo/", lambda x: x, name="foo"),

@@ -1,5 +1,5 @@
-from ginger.template.defaultfilters import default_if_none
-from ginger.test import SimpleTestCase
+from gingerdj.template.defaultfilters import default_if_none
+from gingerdj.test import SimpleTestCase
 
 
 class FunctionTests(SimpleTestCase):

@@ -1,7 +1,7 @@
-from ginger.core.checks import Error
-from ginger.core.checks.compatibility.ginger_4_0 import check_csrf_trusted_origins
-from ginger.test import SimpleTestCase
-from ginger.test.utils import override_settings
+from gingerdj.core.checks import Error
+from gingerdj.core.checks.compatibility.ginger_4_0 import check_csrf_trusted_origins
+from gingerdj.test import SimpleTestCase
+from gingerdj.test.utils import override_settings
 
 
 class CheckCSRFTrustedOrigins(SimpleTestCase):
@@ -11,7 +11,7 @@ class CheckCSRFTrustedOrigins(SimpleTestCase):
             check_csrf_trusted_origins(None),
             [
                 Error(
-                    "As of Ginger 4.0, the values in the CSRF_TRUSTED_ORIGINS "
+                    "As of GingerDJ 4.0, the values in the CSRF_TRUSTED_ORIGINS "
                     "setting must start with a scheme (usually http:// or "
                     "https://) but found example.com. See the release notes for "
                     "details.",

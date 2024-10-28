@@ -3,11 +3,11 @@ import traceback
 from datetime import date, datetime, timedelta
 from threading import Thread
 
-from ginger.core.exceptions import FieldError
-from ginger.db import DatabaseError, IntegrityError, connection
-from ginger.test import TestCase, TransactionTestCase, skipUnlessDBFeature
-from ginger.test.utils import CaptureQueriesContext
-from ginger.utils.functional import lazy
+from gingerdj.core.exceptions import FieldError
+from gingerdj.db import DatabaseError, IntegrityError, connection
+from gingerdj.test import TestCase, TransactionTestCase, skipUnlessDBFeature
+from gingerdj.test.utils import CaptureQueriesContext
+from gingerdj.utils.functional import lazy
 
 from .models import (
     Author,
@@ -390,10 +390,10 @@ class UpdateOrCreateTests(TestCase):
         self.assertIs(created, True)
         self.assertEqual(p.books.count(), 1)
         book, created = p.books.update_or_create(
-            name="Basics of Ginger", create_defaults={"name": "Advanced Ginger"}
+            name="Basics of GingerDJ", create_defaults={"name": "Advanced GingerDJ"}
         )
         self.assertIs(created, True)
-        self.assertEqual(book.name, "Advanced Ginger")
+        self.assertEqual(book.name, "Advanced GingerDJ")
         self.assertEqual(p.books.count(), 2)
 
     def test_update_with_related_manager(self):
@@ -404,13 +404,13 @@ class UpdateOrCreateTests(TestCase):
         p = Publisher.objects.create(name="Acme Publishing")
         book = Book.objects.create(name="The Book of Ed & Fred", publisher=p)
         self.assertEqual(p.books.count(), 1)
-        name = "The Book of Ginger"
+        name = "The Book of GingerDJ"
         book, created = p.books.update_or_create(defaults={"name": name}, id=book.id)
         self.assertFalse(created)
         self.assertEqual(book.name, name)
         # create_defaults should be ignored.
         book, created = p.books.update_or_create(
-            create_defaults={"name": "Basics of Ginger"},
+            create_defaults={"name": "Basics of GingerDJ"},
             defaults={"name": name},
             id=book.id,
         )
@@ -431,12 +431,12 @@ class UpdateOrCreateTests(TestCase):
         self.assertIs(created, True)
         self.assertEqual(author.books.count(), 1)
         book, created = author.books.update_or_create(
-            name="Basics of Ginger",
+            name="Basics of GingerDJ",
             publisher=p,
-            create_defaults={"name": "Advanced Ginger"},
+            create_defaults={"name": "Advanced GingerDJ"},
         )
         self.assertIs(created, True)
-        self.assertEqual(book.name, "Advanced Ginger")
+        self.assertEqual(book.name, "Advanced GingerDJ")
         self.assertEqual(author.books.count(), 2)
 
     def test_update_with_many(self):
@@ -449,7 +449,7 @@ class UpdateOrCreateTests(TestCase):
         book = Book.objects.create(name="The Book of Ed & Fred", publisher=p)
         book.authors.add(author)
         self.assertEqual(author.books.count(), 1)
-        name = "The Book of Ginger"
+        name = "The Book of GingerDJ"
         book, created = author.books.update_or_create(
             defaults={"name": name}, id=book.id
         )
@@ -457,7 +457,7 @@ class UpdateOrCreateTests(TestCase):
         self.assertEqual(book.name, name)
         # create_defaults should be ignored.
         book, created = author.books.update_or_create(
-            create_defaults={"name": "Basics of Ginger"},
+            create_defaults={"name": "Basics of GingerDJ"},
             defaults={"name": name},
             id=book.id,
         )

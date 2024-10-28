@@ -1,6 +1,6 @@
-from ginger.contrib.staticfiles.utils import check_settings
-from ginger.core.exceptions import ImproperlyConfigured
-from ginger.test import SimpleTestCase, override_settings
+from gingerdj.contrib.staticfiles.utils import check_settings
+from gingerdj.core.exceptions import ImproperlyConfigured
+from gingerdj.test import SimpleTestCase, override_settings
 
 
 class CheckSettingsTests(SimpleTestCase):

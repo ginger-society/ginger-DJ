@@ -1,10 +1,10 @@
 import unittest
 
-from ginger.core.management.color import no_style
-from ginger.db import connection
-from ginger.db.models.expressions import Col
-from ginger.db.models.functions import Cast
-from ginger.test import SimpleTestCase
+from gingerdj.core.management.color import no_style
+from gingerdj.db import connection
+from gingerdj.db.models.expressions import Col
+from gingerdj.db.models.functions import Cast
+from gingerdj.test import SimpleTestCase
 
 from ..models import Author, Book, Person, Tag
 

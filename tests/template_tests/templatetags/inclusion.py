@@ -1,4 +1,4 @@
-from ginger.template import Engine, Library
+from gingerdj.template import Engine, Library
 
 engine = Engine(app_dirs=True)
 register = Library()

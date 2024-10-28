@@ -1,11 +1,11 @@
 """
 Using a custom primary key
 
-By default, Ginger adds an ``"id"`` field to each model. But you can override
+By default, GingerDJ adds an ``"id"`` field to each model. But you can override
 this behavior by explicitly adding ``primary_key=True`` to a field.
 """
 
-from ginger.db import models
+from gingerdj.db import models
 
 from .fields import MyAutoField, MyWrapperField
 

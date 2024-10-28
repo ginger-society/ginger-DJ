@@ -1,20 +1,20 @@
 import json
 
-from ginger.core import checks, exceptions, serializers
-from ginger.db import connection
-from ginger.db.models import F, OuterRef, Subquery
-from ginger.db.models.expressions import RawSQL
-from ginger.forms import Form
-from ginger.test.utils import CaptureQueriesContext, isolate_apps
+from gingerdj.core import checks, exceptions, serializers
+from gingerdj.db import connection
+from gingerdj.db.models import F, OuterRef, Subquery
+from gingerdj.db.models.expressions import RawSQL
+from gingerdj.forms import Form
+from gingerdj.test.utils import CaptureQueriesContext, isolate_apps
 
 from . import PostgreSQLSimpleTestCase, PostgreSQLTestCase
 from .models import HStoreModel, PostgreSQLModel
 
 try:
-    from ginger.contrib.postgres import forms
-    from ginger.contrib.postgres.fields import HStoreField
-    from ginger.contrib.postgres.fields.hstore import KeyTransform
-    from ginger.contrib.postgres.validators import KeysValidator
+    from gingerdj.contrib.postgres import forms
+    from gingerdj.contrib.postgres.fields import HStoreField
+    from gingerdj.contrib.postgres.fields.hstore import KeyTransform
+    from gingerdj.contrib.postgres.validators import KeysValidator
 except ImportError:
     pass
 
@@ -454,7 +454,7 @@ class TestValidator(PostgreSQLSimpleTestCase):
         }
         validator = KeysValidator(keys=["a", "b"], strict=True, messages=messages)
         path, args, kwargs = validator.deconstruct()
-        self.assertEqual(path, "ginger.contrib.postgres.validators.KeysValidator")
+        self.assertEqual(path, "gingerdj.contrib.postgres.validators.KeysValidator")
         self.assertEqual(args, ())
         self.assertEqual(
             kwargs, {"keys": ["a", "b"], "strict": True, "messages": messages}

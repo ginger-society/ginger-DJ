@@ -2,8 +2,8 @@ import unittest
 
 import sqlparse
 
-from ginger.db import connection
-from ginger.test import TestCase
+from gingerdj.db import connection
+from gingerdj.test import TestCase
 
 
 @unittest.skipUnless(connection.vendor == "sqlite", "SQLite tests")

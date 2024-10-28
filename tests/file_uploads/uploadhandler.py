@@ -5,7 +5,7 @@ Upload handlers to test the upload API.
 import os
 from tempfile import NamedTemporaryFile
 
-from ginger.core.files.uploadhandler import (
+from gingerdj.core.files.uploadhandler import (
     FileUploadHandler,
     StopUpload,
     TemporaryFileUploadHandler,

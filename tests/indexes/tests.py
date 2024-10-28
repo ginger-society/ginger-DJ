@@ -1,18 +1,18 @@
 import datetime
 from unittest import skipUnless
 
-from ginger.conf import settings
-from ginger.db import connection
-from ginger.db.models import CASCADE, ForeignKey, Index, Q
-from ginger.db.models.functions import Lower
-from ginger.test import (
+from gingerdj.conf import settings
+from gingerdj.db import connection
+from gingerdj.db.models import CASCADE, ForeignKey, Index, Q
+from gingerdj.db.models.functions import Lower
+from gingerdj.test import (
     TestCase,
     TransactionTestCase,
     skipIfDBFeature,
     skipUnlessDBFeature,
 )
-from ginger.test.utils import override_settings
-from ginger.utils import timezone
+from gingerdj.test.utils import override_settings
+from gingerdj.utils import timezone
 
 from .models import Article, ArticleTranslation, IndexedArticle2
 

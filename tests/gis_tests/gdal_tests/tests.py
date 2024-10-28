@@ -1,6 +1,6 @@
 import unittest
 
-from ginger.contrib.gis.gdal import GDAL_VERSION, gdal_full_version, gdal_version
+from gingerdj.contrib.gis.gdal import GDAL_VERSION, gdal_full_version, gdal_version
 
 
 class GDALTest(unittest.TestCase):

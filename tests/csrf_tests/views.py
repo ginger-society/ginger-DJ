@@ -1,10 +1,10 @@
-from ginger.http import HttpResponse
-from ginger.middleware.csrf import get_token, rotate_token
-from ginger.template import Context, RequestContext, Template
-from ginger.template.context_processors import csrf
-from ginger.utils.decorators import decorator_from_middleware
-from ginger.utils.deprecation import MiddlewareMixin
-from ginger.views.decorators.csrf import csrf_protect, ensure_csrf_cookie
+from gingerdj.http import HttpResponse
+from gingerdj.middleware.csrf import get_token, rotate_token
+from gingerdj.template import Context, RequestContext, Template
+from gingerdj.template.context_processors import csrf
+from gingerdj.utils.decorators import decorator_from_middleware
+from gingerdj.utils.deprecation import MiddlewareMixin
+from gingerdj.views.decorators.csrf import csrf_protect, ensure_csrf_cookie
 
 
 class TestingHttpResponse(HttpResponse):

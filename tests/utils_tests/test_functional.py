@@ -1,6 +1,6 @@
-from ginger.test import SimpleTestCase
-from ginger.utils.functional import cached_property, classproperty, lazy
-from ginger.utils.version import PY312
+from gingerdj.test import SimpleTestCase
+from gingerdj.utils.functional import cached_property, classproperty, lazy
+from gingerdj.utils.version import PY312
 
 
 class FunctionalTests(SimpleTestCase):

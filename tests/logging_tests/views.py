@@ -1,11 +1,15 @@
-from ginger.core.exceptions import DisallowedHost, PermissionDenied, SuspiciousOperation
-from ginger.http import (
+from gingerdj.core.exceptions import (
+    DisallowedHost,
+    PermissionDenied,
+    SuspiciousOperation,
+)
+from gingerdj.http import (
     Http404,
     HttpResponse,
     HttpResponseRedirect,
     HttpResponseServerError,
 )
-from ginger.http.multipartparser import MultiPartParserError
+from gingerdj.http.multipartparser import MultiPartParserError
 
 
 def innocent(request):

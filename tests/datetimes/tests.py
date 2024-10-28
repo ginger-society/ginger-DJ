@@ -1,7 +1,7 @@
 import datetime
 
-from ginger.test import TestCase, override_settings
-from ginger.utils import timezone
+from gingerdj.test import TestCase, override_settings
+from gingerdj.utils import timezone
 
 from .models import Article, Category, Comment
 

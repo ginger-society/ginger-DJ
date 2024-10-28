@@ -2,9 +2,9 @@ import unittest
 from contextlib import contextmanager
 from unittest import mock
 
-from ginger.core.exceptions import ImproperlyConfigured
-from ginger.db import NotSupportedError, connection
-from ginger.test import TestCase, override_settings
+from gingerdj.core.exceptions import ImproperlyConfigured
+from gingerdj.db import NotSupportedError, connection
+from gingerdj.test import TestCase, override_settings
 
 
 @contextmanager

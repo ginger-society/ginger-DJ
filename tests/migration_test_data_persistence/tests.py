@@ -1,4 +1,4 @@
-from ginger.test import TestCase, TransactionTestCase
+from gingerdj.test import TestCase, TransactionTestCase
 
 from .models import Book
 

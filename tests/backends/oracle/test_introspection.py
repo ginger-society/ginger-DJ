@@ -1,7 +1,7 @@
 import unittest
 
-from ginger.db import connection
-from ginger.test import TransactionTestCase, skipUnlessDBFeature
+from gingerdj.db import connection
+from gingerdj.test import TransactionTestCase, skipUnlessDBFeature
 
 from ..models import Person, Square
 

@@ -1,14 +1,14 @@
 from unittest.mock import MagicMock, patch
 
-from ginger.db import DEFAULT_DB_ALIAS, connection, connections, transaction
-from ginger.db.backends.base.base import BaseDatabaseWrapper
-from ginger.test import (
+from gingerdj.db import DEFAULT_DB_ALIAS, connection, connections, transaction
+from gingerdj.db.backends.base.base import BaseDatabaseWrapper
+from gingerdj.test import (
     SimpleTestCase,
     TestCase,
     TransactionTestCase,
     skipUnlessDBFeature,
 )
-from ginger.test.utils import CaptureQueriesContext, override_settings
+from gingerdj.test.utils import CaptureQueriesContext, override_settings
 
 from ..models import Person, Square
 
@@ -68,7 +68,7 @@ class DatabaseWrapperLoggingTests(TransactionTestCase):
     def test_commit_debug_log(self):
         conn = connections[DEFAULT_DB_ALIAS]
         with CaptureQueriesContext(conn):
-            with self.assertLogs("ginger.db.backends", "DEBUG") as cm:
+            with self.assertLogs("gingerdj.db.backends", "DEBUG") as cm:
                 with transaction.atomic():
                     Person.objects.create(first_name="first", last_name="last")
 
@@ -76,13 +76,13 @@ class DatabaseWrapperLoggingTests(TransactionTestCase):
                 self.assertEqual(conn.queries_log[-3]["sql"], "BEGIN")
                 self.assertRegex(
                     cm.output[0],
-                    r"DEBUG:ginger.db.backends:\(\d+.\d{3}\) "
+                    r"DEBUG:gingerdj.db.backends:\(\d+.\d{3}\) "
                     rf"BEGIN; args=None; alias={DEFAULT_DB_ALIAS}",
                 )
                 self.assertEqual(conn.queries_log[-1]["sql"], "COMMIT")
                 self.assertRegex(
                     cm.output[-1],
-                    r"DEBUG:ginger.db.backends:\(\d+.\d{3}\) "
+                    r"DEBUG:gingerdj.db.backends:\(\d+.\d{3}\) "
                     rf"COMMIT; args=None; alias={DEFAULT_DB_ALIAS}",
                 )
 
@@ -90,7 +90,7 @@ class DatabaseWrapperLoggingTests(TransactionTestCase):
     def test_rollback_debug_log(self):
         conn = connections[DEFAULT_DB_ALIAS]
         with CaptureQueriesContext(conn):
-            with self.assertLogs("ginger.db.backends", "DEBUG") as cm:
+            with self.assertLogs("gingerdj.db.backends", "DEBUG") as cm:
                 with self.assertRaises(Exception), transaction.atomic():
                     Person.objects.create(first_name="first", last_name="last")
                     raise Exception("Force rollback")
@@ -98,12 +98,12 @@ class DatabaseWrapperLoggingTests(TransactionTestCase):
                 self.assertEqual(conn.queries_log[-1]["sql"], "ROLLBACK")
                 self.assertRegex(
                     cm.output[-1],
-                    r"DEBUG:ginger.db.backends:\(\d+.\d{3}\) "
+                    r"DEBUG:gingerdj.db.backends:\(\d+.\d{3}\) "
                     rf"ROLLBACK; args=None; alias={DEFAULT_DB_ALIAS}",
                 )
 
     def test_no_logs_without_debug(self):
-        with self.assertNoLogs("ginger.db.backends", "DEBUG"):
+        with self.assertNoLogs("gingerdj.db.backends", "DEBUG"):
             with self.assertRaises(Exception), transaction.atomic():
                 Person.objects.create(first_name="first", last_name="last")
                 raise Exception("Force rollback")

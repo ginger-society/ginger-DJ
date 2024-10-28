@@ -1,7 +1,7 @@
-from ginger.db import connection, migrations
+from gingerdj.db import connection, migrations
 
 if connection.features.supports_raster:
-    from ginger.contrib.postgres.operations import CreateExtension
+    from gingerdj.contrib.postgres.operations import CreateExtension
 
     class Migration(migrations.Migration):
         operations = [

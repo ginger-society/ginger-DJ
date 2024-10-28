@@ -1,5 +1,5 @@
-from ginger.template.defaultfilters import get_digit
-from ginger.test import SimpleTestCase
+from gingerdj.template.defaultfilters import get_digit
+from gingerdj.test import SimpleTestCase
 
 
 class FunctionTests(SimpleTestCase):

@@ -1,5 +1,5 @@
-from ginger.db.models import FilteredRelation
-from ginger.test import TestCase
+from gingerdj.db.models import FilteredRelation
+from gingerdj.test import TestCase
 
 from .models import Organiser, Pool, PoolStyle, Tournament
 

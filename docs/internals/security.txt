@@ -1,12 +1,12 @@
 ==========================
-Ginger's security policies
+GingerDJ's security policies
 ==========================
 
-Ginger's development team is strongly committed to responsible
+GingerDJ's development team is strongly committed to responsible
 reporting and disclosure of security-related issues. As such, we've
 adopted and follow a set of policies which conform to that ideal and
 are geared toward allowing us to deliver timely security updates to
-the official distribution of Ginger, as well as to third-party
+the official distribution of GingerDJ, as well as to third-party
 distributions.
 
 .. _reporting-security-issues:
@@ -17,14 +17,14 @@ Reporting security issues
 **Short version: please report security issues by emailing
 security@gingersociety.org**.
 
-Most normal bugs in Ginger are reported to `our public Trac instance`_, but
+Most normal bugs in GingerDJ are reported to `our public Trac instance`_, but
 due to the sensitive nature of security issues, we ask that they **not** be
 publicly reported in this fashion.
 
-Instead, if you believe you've found something in Ginger which has security
+Instead, if you believe you've found something in GingerDJ which has security
 implications, please send a description of the issue via email to
 ``security@gingersociety.org``. Mail sent to that address reaches the `security
-team <https://www.ginger.gloportal.dev/foundation/teams/#security-team>`_.
+team <https://www.gingerdj.gloportal.dev/foundation/teams/#security-team>`_.
 
 Once you've submitted an issue via email, you should receive an acknowledgment
 from a member of the security team within 48 hours, and depending on the
@@ -36,26 +36,26 @@ action to be taken, you may receive further followup emails.
     ``security@gingersociety.org`` is ``0xfcb84b8d1d17f80b``, and this public
     key is available from most commonly-used keyservers.
 
-.. _our public Trac instance: https://code.ginger.gloportal.dev/query
+.. _our public Trac instance: https://code.gingerdj.gloportal.dev/query
 
 .. _security-support:
 
 Supported versions
 ==================
 
-At any given time, the Ginger team provides official security support
-for several versions of Ginger:
+At any given time, the GingerDJ team provides official security support
+for several versions of GingerDJ:
 
 * The `main development branch`_, hosted on GitHub, which will become the
-  next major release of Ginger, receives security support. Security issues that
+  next major release of GingerDJ, receives security support. Security issues that
   only affect the main development branch and not any stable released versions
   are fixed in public without going through the :ref:`disclosure process
   <security-disclosure>`.
 
-* The two most recent Ginger release series receive security
+* The two most recent GingerDJ release series receive security
   support. For example, during the development cycle leading to the
-  release of Ginger 1.5, support will be provided for Ginger 1.4 and
-  Ginger 1.3. Upon the release of Ginger 1.5, Ginger 1.3's security
+  release of GingerDJ 1.5, support will be provided for GingerDJ 1.4 and
+  GingerDJ 1.3. Upon the release of GingerDJ 1.5, GingerDJ 1.3's security
   support will end.
 
 * :term:`Long-term support release`\s will receive security updates for a
@@ -63,15 +63,15 @@ for several versions of Ginger:
 
 When new releases are issued for security reasons, the accompanying
 notice will include a list of affected versions. This list is
-comprised solely of *supported* versions of Ginger: older versions may
+comprised solely of *supported* versions of GingerDJ: older versions may
 also be affected, but we do not investigate to determine that, and
 will not issue patches or new releases for those versions.
 
-.. _main development branch: https://github.com/ginger/ginger/
+.. _main development branch: https://github.com/gingerdj/gingerdj/
 
 .. _security-disclosure:
 
-How Ginger discloses security issues
+How GingerDJ discloses security issues
 ====================================
 
 Our process for taking a security issue from private discussion to
@@ -79,10 +79,10 @@ public disclosure involves multiple steps.
 
 Approximately one week before public disclosure, we send two notifications:
 
-First, we notify |ginger-announce| of the date and approximate time of the
+First, we notify |gingerdj-announce| of the date and approximate time of the
 upcoming security release, as well as the severity of the issues. This is to
 aid organizations that need to ensure they have staff available to handle
-triaging our announcement and upgrade Ginger as needed. Severity levels are:
+triaging our announcement and upgrade GingerDJ as needed. Severity levels are:
 
 * **High**
 
@@ -105,36 +105,36 @@ triaging our announcement and upgrade Ginger as needed. Severity levels are:
 
 Second, we notify a list of :ref:`people and organizations
 <security-notifications>`, primarily composed of operating-system vendors and
-other distributors of Ginger. This email is signed with the PGP key of someone
-from `Ginger's release team`_ and consists of:
+other distributors of GingerDJ. This email is signed with the PGP key of someone
+from `GingerDJ's release team`_ and consists of:
 
-* A full description of the issue and the affected versions of Ginger.
+* A full description of the issue and the affected versions of GingerDJ.
 
 * The steps we will be taking to remedy the issue.
 
-* The patch(es), if any, that will be applied to Ginger.
+* The patch(es), if any, that will be applied to GingerDJ.
 
-* The date on which the Ginger team will apply these patches, issue
+* The date on which the GingerDJ team will apply these patches, issue
   new releases and publicly disclose the issue.
 
 On the day of disclosure, we will take the following steps:
 
-#. Apply the relevant patch(es) to Ginger's codebase.
+#. Apply the relevant patch(es) to GingerDJ's codebase.
 
 #. Issue the relevant release(s), by placing new packages on the :pypi:`Python
-   Package Index <Ginger>` and on the `ginger.gloportal.dev website
-   <https://www.ginger.gloportal.dev/download/>`_, and tagging the new release(s)
-   in Ginger's git repository.
+   Package Index <GingerDJ>` and on the `gingerdj.gloportal.dev website
+   <https://www.gingerdj.gloportal.dev/download/>`_, and tagging the new release(s)
+   in GingerDJ's git repository.
 
-#. Post a public entry on `the official Ginger development blog`_,
+#. Post a public entry on `the official GingerDJ development blog`_,
    describing the issue and its resolution in detail, pointing to the
    relevant patches and new releases, and crediting the reporter of
    the issue (if the reporter wishes to be publicly identified).
 
-#. Post a notice to the |ginger-announce| and oss-security@lists.openwall.com
+#. Post a notice to the |gingerdj-announce| and oss-security@lists.openwall.com
    mailing lists that links to the blog post.
 
-.. _the official Ginger development blog: https://www.ginger.gloportal.dev/weblog/
+.. _the official GingerDJ development blog: https://www.gingerdj.gloportal.dev/weblog/
 
 If a reported issue is believed to be particularly time-sensitive --
 due to a known exploit in the wild, for example -- the time between
@@ -147,7 +147,7 @@ may privately contact and discuss those issues with the appropriate
 maintainers, and coordinate our own disclosure and resolution with
 theirs.
 
-.. _Ginger's release team: https://www.ginger.gloportal.dev/foundation/teams/#releasers-team
+.. _Ginger's release team: https://www.gingerdj.gloportal.dev/foundation/teams/#releasers-team
 
 .. _security-notifications:
 
@@ -160,16 +160,16 @@ notification of security issues is not and will not be made public.
 We also aim to keep this list as small as effectively possible, in
 order to better manage the flow of confidential information prior to
 disclosure. As such, our notification list is *not* simply a list of
-users of Ginger, and being a user of Ginger is not sufficient reason
+users of GingerDJ, and being a user of GingerDJ is not sufficient reason
 to be placed on the notification list.
 
 In broad terms, recipients of security notifications fall into three
 groups:
 
-1. Operating-system vendors and other distributors of Ginger who
+1. Operating-system vendors and other distributors of GingerDJ who
    provide a suitably-generic (i.e., *not* an individual's personal
    email address) contact address for reporting issues with their
-   Ginger package, or for general security reporting. In either case,
+   GingerDJ package, or for general security reporting. In either case,
    such addresses **must not** forward to public mailing lists or bug
    trackers. Addresses which forward to the private email of an
    individual maintainer or security-response contact are acceptable,
@@ -181,10 +181,10 @@ groups:
    on these notifications.
 
 3. On a case-by-case basis, other entities who, in the judgment of the
-   Ginger development team, need to be made aware of a pending
+   GingerDJ development team, need to be made aware of a pending
    security issue. Typically, membership in this group will consist of
    some of the largest and/or most likely to be severely impacted
-   known users or distributors of Ginger, and will require a
+   known users or distributors of GingerDJ, and will require a
    demonstrated ability to responsibly receive, keep confidential and
    act on these notifications.
 
@@ -198,7 +198,7 @@ Requesting notifications
 
 If you believe that you, or an organization you are authorized to
 represent, fall into one of the groups listed above, you can ask to be
-added to Ginger's notification list by emailing
+added to GingerDJ's notification list by emailing
 ``security@gingersociety.org``. Please use the subject line "Security
 notification request".
 
@@ -212,8 +212,8 @@ Your request **must** include the following information:
 
 * A detailed explanation of why you are requesting security notifications.
   Again, please keep in mind that this is *not* simply a list for users of
-  Ginger, and the overwhelming majority of users should subscribe to
-  |ginger-announce| to receive advanced notice of when a security release will
+  GingerDJ, and the overwhelming majority of users should subscribe to
+  |gingerdj-announce| to receive advanced notice of when a security release will
   happen, without the details of the issues, rather than request detailed
   notifications.
 
@@ -229,13 +229,13 @@ Your request **must** include the following information:
   which can be used to verify email received from you and encrypt
   email sent to you, as needed.
 
-Once submitted, your request will be considered by the Ginger
+Once submitted, your request will be considered by the GingerDJ
 development team; you will receive a reply notifying you of the result
 of your request within 30 days.
 
 Please also bear in mind that for any individual or organization,
 receiving security notifications is a privilege granted at the sole
-discretion of the Ginger development team, and that this privilege can
+discretion of the GingerDJ development team, and that this privilege can
 be revoked at any time, with or without explanation.
 
 .. admonition:: Provide all required information

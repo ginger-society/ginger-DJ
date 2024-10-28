@@ -3,7 +3,7 @@ Class-based views
 =================
 
 A view is a callable which takes a request and returns a
-response. This can be more than just a function, and Ginger provides
+response. This can be more than just a function, and GingerDJ provides
 an example of some classes which can be used as views. These allow you
 to structure your views and reuse code by harnessing inheritance and
 mixins. There are also some generic views for tasks which we'll get to later,
@@ -22,11 +22,11 @@ documentation</ref/class-based-views/index>`.
 Basic examples
 ==============
 
-Ginger provides base view classes which will suit a wide range of applications.
-All views inherit from the :class:`~ginger.views.generic.base.View` class, which
+GingerDJ provides base view classes which will suit a wide range of applications.
+All views inherit from the :class:`~gingerdj.views.generic.base.View` class, which
 handles linking the view into the URLs, HTTP method dispatching and other
-common features. :class:`~ginger.views.generic.base.RedirectView` provides a
-HTTP redirect, and :class:`~ginger.views.generic.base.TemplateView` extends the
+common features. :class:`~gingerdj.views.generic.base.RedirectView` provides a
+HTTP redirect, and :class:`~gingerdj.views.generic.base.TemplateView` extends the
 base class to make it also render a template.
 
 
@@ -35,20 +35,20 @@ Usage in your URLconf
 
 The most direct way to use generic views is to create them directly in your
 URLconf. If you're only changing a few attributes on a class-based view, you
-can pass them into the :meth:`~ginger.views.generic.base.View.as_view` method
+can pass them into the :meth:`~gingerdj.views.generic.base.View.as_view` method
 call itself::
 
-    from ginger.urls import path
-    from ginger.views.generic import TemplateView
+    from gingerdj.urls import path
+    from gingerdj.views.generic import TemplateView
 
     urlpatterns = [
         path("about/", TemplateView.as_view(template_name="about.html")),
     ]
 
-Any arguments passed to :meth:`~ginger.views.generic.base.View.as_view` will
+Any arguments passed to :meth:`~gingerdj.views.generic.base.View.as_view` will
 override attributes set on the class. In this example, we set ``template_name``
 on the ``TemplateView``. A similar overriding pattern can be used for the
-``url`` attribute on :class:`~ginger.views.generic.base.RedirectView`.
+``url`` attribute on :class:`~gingerdj.views.generic.base.RedirectView`.
 
 
 Subclassing generic views
@@ -58,24 +58,24 @@ The second, more powerful way to use generic views is to inherit from an
 existing view and override attributes (such as the ``template_name``) or
 methods (such as ``get_context_data``) in your subclass to provide new values
 or methods. Consider, for example, a view that just displays one template,
-``about.html``. Ginger has a generic view to do this -
-:class:`~ginger.views.generic.base.TemplateView` - so we can subclass it, and
+``about.html``. GingerDJ has a generic view to do this -
+:class:`~gingerdj.views.generic.base.TemplateView` - so we can subclass it, and
 override the template name::
 
     # some_app/views.py
-    from ginger.views.generic import TemplateView
+    from gingerdj.views.generic import TemplateView
 
 
     class AboutView(TemplateView):
         template_name = "about.html"
 
 Then we need to add this new view into our URLconf.
-:class:`~ginger.views.generic.base.TemplateView` is a class, not a function, so
-we point the URL to the :meth:`~ginger.views.generic.base.View.as_view` class
+:class:`~gingerdj.views.generic.base.TemplateView` is a class, not a function, so
+we point the URL to the :meth:`~gingerdj.views.generic.base.View.as_view` class
 method instead, which provides a function-like entry to class-based views::
 
     # urls.py
-    from ginger.urls import path
+    from gingerdj.urls import path
     from some_app.views import AboutView
 
     urlpatterns = [
@@ -100,7 +100,7 @@ preferable to ask the API when the most recent book was published.
 
 We map the URL to book list view in the URLconf::
 
-    from ginger.urls import path
+    from gingerdj.urls import path
     from books.views import BookListView
 
     urlpatterns = [
@@ -109,8 +109,8 @@ We map the URL to book list view in the URLconf::
 
 And the view::
 
-    from ginger.http import HttpResponse
-    from ginger.views.generic import ListView
+    from gingerdj.http import HttpResponse
+    from gingerdj.views.generic import ListView
     from books.models import Book
 
 
@@ -145,8 +145,8 @@ subclasses may define asynchronous (``async def``) method handlers to leverage
 asynchronous code using ``await``::
 
     import asyncio
-    from ginger.http import HttpResponse
-    from ginger.views import View
+    from gingerdj.http import HttpResponse
+    from gingerdj.views import View
 
 
     class AsyncView(View):
@@ -160,6 +160,6 @@ synchronous, using ``def``, or all asynchronous, using ``async def``. An
 ``ImproperlyConfigured`` exception will be raised in ``as_view()`` if ``def``
 and ``async def`` declarations are mixed.
 
-Ginger will automatically detect asynchronous views and run them in an
-asynchronous context. You can read more about Ginger's asynchronous support,
+GingerDJ will automatically detect asynchronous views and run them in an
+asynchronous context. You can read more about GingerDJ's asynchronous support,
 and how to best use async views, in :doc:`/topics/async`.

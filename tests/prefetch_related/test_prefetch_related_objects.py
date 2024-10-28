@@ -1,5 +1,5 @@
-from ginger.db.models import Prefetch, prefetch_related_objects
-from ginger.test import TestCase
+from gingerdj.db.models import Prefetch, prefetch_related_objects
+from gingerdj.test import TestCase
 
 from .models import Author, Book, House, Reader, Room
 

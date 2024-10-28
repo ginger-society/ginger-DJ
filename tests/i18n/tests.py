@@ -12,15 +12,15 @@ from unittest import mock
 
 from asgiref.local import Local
 
-from ginger import forms
-from ginger.apps import AppConfig
-from ginger.conf import settings
-from ginger.conf.locale import LANG_INFO
-from ginger.conf.urls.i18n import i18n_patterns
-from ginger.template import Context, Template
-from ginger.test import RequestFactory, SimpleTestCase, TestCase, override_settings
-from ginger.utils import translation
-from ginger.utils.formats import (
+from gingerdj import forms
+from gingerdj.apps import AppConfig
+from gingerdj.conf import settings
+from gingerdj.conf.locale import LANG_INFO
+from gingerdj.conf.urls.i18n import i18n_patterns
+from gingerdj.template import Context, Template
+from gingerdj.test import RequestFactory, SimpleTestCase, TestCase, override_settings
+from gingerdj.utils import translation
+from gingerdj.utils.formats import (
     date_format,
     get_format,
     iter_format_modules,
@@ -31,9 +31,9 @@ from ginger.utils.formats import (
     sanitize_strftime_format,
     time_format,
 )
-from ginger.utils.numberformat import format as nformat
-from ginger.utils.safestring import SafeString, mark_safe
-from ginger.utils.translation import (
+from gingerdj.utils.numberformat import format as nformat
+from gingerdj.utils.safestring import SafeString, mark_safe
+from gingerdj.utils.translation import (
     activate,
     check_for_language,
     deactivate,
@@ -54,7 +54,7 @@ from ginger.utils.translation import (
     trans_null,
     trans_real,
 )
-from ginger.utils.translation.reloader import (
+from gingerdj.utils.translation.reloader import (
     translation_file_changed,
     watch_for_translation_changes,
 )
@@ -75,7 +75,7 @@ class AppModuleStub:
 
 @contextmanager
 def patch_formats(lang, **settings):
-    from ginger.utils.formats import _format_cache
+    from gingerdj.utils.formats import _format_cache
 
     # Populate _format_cache with temporary values
     for key, value in settings.items():
@@ -117,7 +117,7 @@ class TranslationTests(SimpleTestCase):
     @translation.override("fr")
     def test_multiple_plurals_per_language(self):
         """
-        Normally, French has 2 plurals. As other/locale/fr/LC_MESSAGES/ginger.po
+        Normally, French has 2 plurals. As other/locale/fr/LC_MESSAGES/gingerdj.po
         has a different plural equation with 3 plurals, this tests if those
         plural are honored.
         """
@@ -1227,7 +1227,7 @@ class FormattingTests(SimpleTestCase):
 
     def test_sanitize_separators(self):
         """
-        Tests ginger.utils.formats.sanitize_separators.
+        Tests gingerdj.utils.formats.sanitize_separators.
         """
         # Non-strings are untouched
         self.assertEqual(sanitize_separators(123), 123)
@@ -1273,7 +1273,7 @@ class FormattingTests(SimpleTestCase):
         """
         # Importing some format modules so that we can compare the returned
         # modules with these expected modules
-        default_mod = import_module("ginger.conf.locale.de.formats")
+        default_mod = import_module("gingerdj.conf.locale.de.formats")
         test_mod = import_module("i18n.other.locale.de.formats")
         test_mod2 = import_module("i18n.other2.locale.de.formats")
 
@@ -1304,8 +1304,8 @@ class FormattingTests(SimpleTestCase):
         Tests the iter_format_modules function always yields format modules in
         a stable and correct order in presence of both base ll and ll_CC formats.
         """
-        en_format_mod = import_module("ginger.conf.locale.en.formats")
-        en_gb_format_mod = import_module("ginger.conf.locale.en_GB.formats")
+        en_format_mod = import_module("gingerdj.conf.locale.en.formats")
+        en_gb_format_mod = import_module("gingerdj.conf.locale.en_GB.formats")
         self.assertEqual(
             list(iter_format_modules("en-gb")), [en_gb_format_mod, en_format_mod]
         )
@@ -1542,12 +1542,12 @@ class MiscTests(SimpleTestCase):
             ("pt", "pt"),
             ("es,de", "es"),
             ("es-a,de", "es"),
-            # There isn't a Ginger translation to a US variation of the Spanish
+            # There isn't a GingerDJ translation to a US variation of the Spanish
             # language, a safe assumption. When the user sets it as the
             # preferred language, the main 'es' translation should be selected
             # instead.
             ("es-us", "es"),
-            # There isn't a main language (zh) translation of Ginger but there
+            # There isn't a main language (zh) translation of GingerDJ but there
             # is a translation to variation (zh-hans) the user sets zh-hans as
             # the preferred language, it should be selected without falling
             # back nor ignoring it.
@@ -1574,7 +1574,7 @@ class MiscTests(SimpleTestCase):
     def test_support_for_deprecated_chinese_language_codes(self):
         """
         Some browsers (Firefox, IE, etc.) use deprecated language codes. As these
-        language codes will be removed in Ginger 1.9, these will be incorrectly
+        language codes will be removed in GingerDJ 1.9, these will be incorrectly
         matched. For example zh-tw (traditional) will be interpreted as zh-hans
         (simplified), which is wrong. So we should also accept these deprecated
         language codes.
@@ -1627,13 +1627,13 @@ class MiscTests(SimpleTestCase):
         request.COOKIES[settings.LANGUAGE_COOKIE_NAME] = "es"
         self.assertEqual("es", g(request))
 
-        # There isn't a Ginger translation to a US variation of the Spanish
+        # There isn't a GingerDJ translation to a US variation of the Spanish
         # language, a safe assumption. When the user sets it as the preferred
         # language, the main 'es' translation should be selected instead.
         request = self.rf.get("/")
         request.COOKIES[settings.LANGUAGE_COOKIE_NAME] = "es-us"
         self.assertEqual(g(request), "es")
-        # There isn't a main language (zh) translation of Ginger but there is a
+        # There isn't a main language (zh) translation of GingerDJ but there is a
         # translation to variation (zh-hans) the user sets zh-hans as the
         # preferred language, it should be selected without falling back nor
         # ignoring it.
@@ -1783,7 +1783,9 @@ class AppResolutionOrderI18NTests(ResolutionOrderI18NTests):
             self.assertGettext("Date/time", "Datum/Zeit")
 
             with self.modify_settings(
-                INSTALLED_APPS={"remove": "ginger.contrib.admin.apps.SimpleAdminConfig"}
+                INSTALLED_APPS={
+                    "remove": "gingerdj.contrib.admin.apps.SimpleAdminConfig"
+                }
             ):
                 # Force refreshing translations.
                 activate("de")
@@ -1876,8 +1878,8 @@ class TestLanguageInfo(SimpleTestCase):
         ("fr", "French"),
     ],
     MIDDLEWARE=[
-        "ginger.middleware.locale.LocaleMiddleware",
-        "ginger.middleware.common.CommonMiddleware",
+        "gingerdj.middleware.locale.LocaleMiddleware",
+        "gingerdj.middleware.common.CommonMiddleware",
     ],
     ROOT_URLCONF="i18n.urls",
 )
@@ -1898,8 +1900,8 @@ class LocaleMiddlewareTests(TestCase):
         ("fr", "French"),
     ],
     MIDDLEWARE=[
-        "ginger.middleware.locale.LocaleMiddleware",
-        "ginger.middleware.common.CommonMiddleware",
+        "gingerdj.middleware.locale.LocaleMiddleware",
+        "gingerdj.middleware.common.CommonMiddleware",
     ],
     ROOT_URLCONF="i18n.urls_default_unprefixed",
     LANGUAGE_CODE="en",
@@ -1955,8 +1957,8 @@ class UnprefixedDefaultLanguageTests(SimpleTestCase):
         ("pt-br", "Portuguese (Brazil)"),
     ],
     MIDDLEWARE=[
-        "ginger.middleware.locale.LocaleMiddleware",
-        "ginger.middleware.common.CommonMiddleware",
+        "gingerdj.middleware.locale.LocaleMiddleware",
+        "gingerdj.middleware.common.CommonMiddleware",
     ],
     ROOT_URLCONF="i18n.urls",
 )
@@ -1976,7 +1978,7 @@ class CountrySpecificLanguageTests(SimpleTestCase):
         self.assertFalse(check_for_language("en\x00"))
         self.assertFalse(check_for_language(None))
         self.assertFalse(check_for_language("be@ "))
-        # Specifying encoding is not supported (Ginger enforces UTF-8)
+        # Specifying encoding is not supported (GingerDJ enforces UTF-8)
         self.assertFalse(check_for_language("tr-TR.UTF-8"))
         self.assertFalse(check_for_language("tr-TR.UTF8"))
         self.assertFalse(check_for_language("de-DE.utf-8"))
@@ -2042,8 +2044,8 @@ class TranslationFilesMissing(SimpleTestCase):
 
 class NonGingerLanguageTests(SimpleTestCase):
     """
-    A language non present in default Ginger languages can still be
-    installed/used by a Ginger project.
+    A language non present in default GingerDJ languages can still be
+    installed/used by a GingerDJ project.
     """
 
     @override_settings(
@@ -2065,13 +2067,13 @@ class NonGingerLanguageTests(SimpleTestCase):
             os.makedirs(os.path.join(app_dir, "locale", "dummy_Lang", "LC_MESSAGES"))
             open(
                 os.path.join(
-                    app_dir, "locale", "dummy_Lang", "LC_MESSAGES", "ginger.mo"
+                    app_dir, "locale", "dummy_Lang", "LC_MESSAGES", "gingerdj.mo"
                 ),
                 "w",
             ).close()
             app_config = AppConfig("dummy_app", AppModuleStub(__path__=[app_dir]))
             with mock.patch(
-                "ginger.apps.apps.get_app_configs", return_value=[app_config]
+                "gingerdj.apps.apps.get_app_configs", return_value=[app_config]
             ):
                 self.assertIs(check_for_language("dummy-lang"), True)
 
@@ -2118,7 +2120,7 @@ class WatchForTranslationChangesTests(SimpleTestCase):
 
     def test_i18n_app_dirs_ignore_ginger_apps(self):
         mocked_sender = mock.MagicMock()
-        with self.settings(INSTALLED_APPS=["ginger.contrib.admin"]):
+        with self.settings(INSTALLED_APPS=["gingerdj.contrib.admin"]):
             watch_for_translation_changes(mocked_sender)
         mocked_sender.watch_dir.assert_called_once_with(Path("locale"), "**/*.mo")
 

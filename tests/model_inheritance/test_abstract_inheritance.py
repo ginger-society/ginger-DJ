@@ -1,8 +1,8 @@
-from ginger.core.checks import Error
-from ginger.core.exceptions import FieldDoesNotExist, FieldError
-from ginger.db import models
-from ginger.test import SimpleTestCase
-from ginger.test.utils import isolate_apps
+from gingerdj.core.checks import Error
+from gingerdj.core.exceptions import FieldDoesNotExist, FieldError
+from gingerdj.db import models
+from gingerdj.test import SimpleTestCase
+from gingerdj.test.utils import isolate_apps
 
 
 @isolate_apps("model_inheritance")

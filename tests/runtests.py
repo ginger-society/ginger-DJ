@@ -14,27 +14,27 @@ import warnings
 from pathlib import Path
 import sys
 
-sys.path.append('/app')
+sys.path.append("/app")
 
 
 try:
-    import ginger
+    import gingerdj
 except ImportError as e:
     raise RuntimeError(
-        "Ginger module not found, reference tests/README.rst for instructions."
+        "GingerDJ module not found, reference tests/README.rst for instructions."
     ) from e
 else:
-    from ginger.apps import apps
-    from ginger.conf import settings
-    from ginger.core.exceptions import ImproperlyConfigured
-    from ginger.db import connection, connections
-    from ginger.test import TestCase, TransactionTestCase
-    from ginger.test.runner import get_max_test_processes, parallel_type
-    from ginger.test.selenium import SeleniumTestCase, SeleniumTestCaseBase
-    from ginger.test.utils import NullTimeKeeper, TimeKeeper, get_runner
-    from ginger.utils.deprecation import RemovedInGinger60Warning
-    from ginger.utils.log import DEFAULT_LOGGING
-    from ginger.utils.version import PY312, PYPY
+    from gingerdj.apps import apps
+    from gingerdj.conf import settings
+    from gingerdj.core.exceptions import ImproperlyConfigured
+    from gingerdj.db import connection, connections
+    from gingerdj.test import TestCase, TransactionTestCase
+    from gingerdj.test.runner import get_max_test_processes, parallel_type
+    from gingerdj.test.selenium import SeleniumTestCase, SeleniumTestCaseBase
+    from gingerdj.test.utils import NullTimeKeeper, TimeKeeper, get_runner
+    from gingerdj.utils.deprecation import RemovedInGinger60Warning
+    from gingerdj.utils.log import DEFAULT_LOGGING
+    from gingerdj.utils.version import PY312, PYPY
 
 try:
     import MySQLdb
@@ -64,7 +64,7 @@ RUNTESTS_DIR = os.path.abspath(os.path.dirname(__file__))
 TEMPLATE_DIR = os.path.join(RUNTESTS_DIR, "templates")
 
 # Create a specific subdirectory for the duration of the test suite.
-TMPDIR = tempfile.mkdtemp(prefix="ginger_")
+TMPDIR = tempfile.mkdtemp(prefix="gingerdj_")
 # Set the TMPDIR environment variable in addition to tempfile.tempdir
 # so that children processes inherit it.
 tempfile.tempdir = os.environ["TMPDIR"] = TMPDIR
@@ -85,25 +85,25 @@ SUBDIRS_TO_SKIP = {
 }
 
 ALWAYS_INSTALLED_APPS = [
-    "ginger.contrib.sites",
-    "ginger.contrib.messages",
-    "ginger.contrib.admin.apps.SimpleAdminConfig",
-    "ginger.contrib.staticfiles",
+    "gingerdj.contrib.sites",
+    "gingerdj.contrib.messages",
+    "gingerdj.contrib.admin.apps.SimpleAdminConfig",
+    "gingerdj.contrib.staticfiles",
 ]
 
 ALWAYS_MIDDLEWARE = [
-    "ginger.middleware.common.CommonMiddleware",
-    "ginger.middleware.csrf.CsrfViewMiddleware",
-    "ginger.contrib.messages.middleware.MessageMiddleware",
+    "gingerdj.middleware.common.CommonMiddleware",
+    "gingerdj.middleware.csrf.CsrfViewMiddleware",
+    "gingerdj.contrib.messages.middleware.MessageMiddleware",
 ]
 
 # Need to add the associated contrib app to INSTALLED_APPS in some cases to
 # avoid "RuntimeError: Model class X doesn't declare an explicit app_label
 # and isn't in an application in INSTALLED_APPS."
 CONTRIB_TESTS_TO_APPS = {
-    "deprecation": ["ginger.contrib.flatpages", "ginger.contrib.redirects"],
-    "flatpages_tests": ["ginger.contrib.flatpages"],
-    "redirects_tests": ["ginger.contrib.redirects"],
+    "deprecation": ["gingerdj.contrib.flatpages", "gingerdj.contrib.redirects"],
+    "flatpages_tests": ["gingerdj.contrib.flatpages"],
+    "redirects_tests": ["gingerdj.contrib.redirects"],
 }
 
 
@@ -165,7 +165,7 @@ def get_filtered_test_modules(start_at, start_after, gis_enabled, test_labels=No
         label_modules.add(test_module)
 
     # It would be nice to put this validation earlier but it must come after
-    # ginger.setup() so that connection.features.gis_enabled can be accessed.
+    # gingerdj.setup() so that connection.features.gis_enabled can be accessed.
     if "gis_tests" in label_modules and not gis_enabled:
         print("Aborting: A GIS database backend is required to run gis_tests.")
         sys.exit(1)
@@ -211,14 +211,14 @@ def setup_collect_tests(start_at, start_after, test_labels=None):
     settings.STATIC_ROOT = os.path.join(TMPDIR, "static")
     settings.TEMPLATES = [
         {
-            "BACKEND": "ginger.template.backends.ginger.GingerTemplates",
+            "BACKEND": "gingerdj.template.backends.gingerdj.GingerTemplates",
             "DIRS": [TEMPLATE_DIR],
             "APP_DIRS": True,
             "OPTIONS": {
                 "context_processors": [
-                    "ginger.template.context_processors.debug",
-                    "ginger.template.context_processors.request",
-                    "ginger.contrib.messages.context_processors.messages",
+                    "gingerdj.template.context_processors.debug",
+                    "gingerdj.template.context_processors.request",
+                    "gingerdj.contrib.messages.context_processors.messages",
                 ],
             },
         }
@@ -233,16 +233,16 @@ def setup_collect_tests(start_at, start_after, test_labels=None):
     log_config = copy.deepcopy(DEFAULT_LOGGING)
     # Filter out non-error logging so we don't have to capture it in lots of
     # tests.
-    log_config["loggers"]["ginger"]["level"] = "ERROR"
+    log_config["loggers"]["gingerdj"]["level"] = "ERROR"
     settings.LOGGING = log_config
     settings.SILENCED_SYSTEM_CHECKS = [
         "fields.W342",  # ForeignKey(unique=True) -> OneToOneField
     ]
 
     # Load all the ALWAYS_INSTALLED_APPS.
-    ginger.setup()
+    gingerdj.setup()
 
-    # This flag must be evaluated after ginger.setup() because otherwise it can
+    # This flag must be evaluated after gingerdj.setup() because otherwise it can
     # raise AppRegistryNotReady when running gis_tests in isolation on some
     # backends (e.g. PostGIS).
     gis_enabled = connection.features.gis_enabled
@@ -268,7 +268,7 @@ def get_installed():
     return [app_config.name for app_config in apps.get_app_configs()]
 
 
-# This function should be called only after calling ginger.setup(),
+# This function should be called only after calling gingerdj.setup(),
 # since it calls connection.features.gis_enabled.
 def get_apps_to_install(test_modules):
     for test_module in test_modules:
@@ -279,7 +279,7 @@ def get_apps_to_install(test_modules):
     # Add contrib.gis to INSTALLED_APPS if needed (rather than requiring
     # @override_settings(INSTALLED_APPS=...) on all test cases.
     if connection.features.gis_enabled:
-        yield "ginger.contrib.gis"
+        yield "gingerdj.contrib.gis"
 
 
 def setup_run_tests(verbosity, start_at, start_after, test_labels=None):
@@ -308,7 +308,7 @@ def setup_run_tests(verbosity, start_at, start_after, test_labels=None):
     TestCase.available_apps = None
 
     # Set an environment variable that other code may consult to see if
-    # Ginger's own test suite is running.
+    # GingerDJ's own test suite is running.
     os.environ["RUNNING_GINGERS_TEST_SUITE"] = "true"
 
     test_labels = test_labels or test_modules
@@ -374,8 +374,8 @@ def ginger_tests(
         max_parallel = parallel
 
     if verbosity >= 1:
-        msg = "Testing against Ginger installed in '%s'" % os.path.dirname(
-            ginger.__file__
+        msg = "Testing against GingerDJ installed in '%s'" % os.path.dirname(
+            gingerdj.__file__
         )
         if max_parallel > 1:
             msg += " with up to %d processes" % max_parallel
@@ -385,10 +385,10 @@ def ginger_tests(
     test_labels, state = setup_run_tests(*process_setup_args)
     # Run the test suite, including the extra validation tests.
     if not hasattr(settings, "TEST_RUNNER"):
-        settings.TEST_RUNNER = "ginger.test.runner.DiscoverRunner"
+        settings.TEST_RUNNER = "gingerdj.test.runner.DiscoverRunner"
 
     if parallel in {0, "auto"}:
-        # This doesn't work before ginger.setup() on some databases.
+        # This doesn't work before gingerdj.setup() on some databases.
         if all(conn.features.can_clone_databases for conn in connections.all()):
             parallel = max_parallel
         else:
@@ -524,7 +524,7 @@ def paired_tests(paired_test, options, test_labels, start_at, start_after):
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Run the Ginger test suite.")
+    parser = argparse.ArgumentParser(description="Run the GingerDJ test suite.")
     parser.add_argument(
         "modules",
         nargs="*",
@@ -544,17 +544,17 @@ if __name__ == "__main__":
         "--noinput",
         action="store_false",
         dest="interactive",
-        help="Tells Ginger to NOT prompt the user for input of any kind.",
+        help="Tells GingerDJ to NOT prompt the user for input of any kind.",
     )
     parser.add_argument(
         "--failfast",
         action="store_true",
-        help="Tells Ginger to stop running the test suite after first failed test.",
+        help="Tells GingerDJ to stop running the test suite after first failed test.",
     )
     parser.add_argument(
         "--keepdb",
         action="store_true",
-        help="Tells Ginger to preserve the test database between runs.",
+        help="Tells GingerDJ to preserve the test database between runs.",
     )
     parser.add_argument(
         "--settings",

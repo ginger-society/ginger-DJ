@@ -1,14 +1,14 @@
-from ginger import forms
-from ginger.contrib import admin
-from ginger.contrib.admin import BooleanFieldListFilter, SimpleListFilter
-from ginger.contrib.admin.options import VERTICAL, ModelAdmin, TabularInline
-from ginger.contrib.admin.sites import AdminSite
-from ginger.core.checks import Error
-from ginger.db.models import CASCADE, F, Field, ForeignKey, ManyToManyField, Model
-from ginger.db.models.functions import Upper
-from ginger.forms.models import BaseModelFormSet
-from ginger.test import SimpleTestCase
-from ginger.test.utils import isolate_apps
+from gingerdj import forms
+from gingerdj.contrib import admin
+from gingerdj.contrib.admin import BooleanFieldListFilter, SimpleListFilter
+from gingerdj.contrib.admin.options import VERTICAL, ModelAdmin, TabularInline
+from gingerdj.contrib.admin.sites import AdminSite
+from gingerdj.core.checks import Error
+from gingerdj.db.models import CASCADE, F, Field, ForeignKey, ManyToManyField, Model
+from gingerdj.db.models.functions import Upper
+from gingerdj.forms.models import BaseModelFormSet
+from gingerdj.test import SimpleTestCase
+from gingerdj.test.utils import isolate_apps
 
 from .models import Band, Song, User, ValidationTestInlineModel, ValidationTestModel
 

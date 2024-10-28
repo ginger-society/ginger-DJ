@@ -6,7 +6,7 @@
 
 import unittest
 
-from ginger.contrib.gis.geos.mutable_list import ListMixin
+from gingerdj.contrib.gis.geos.mutable_list import ListMixin
 
 
 class UserListA(ListMixin):

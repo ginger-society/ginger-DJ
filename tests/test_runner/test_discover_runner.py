@@ -7,16 +7,16 @@ from contextlib import contextmanager
 from importlib import import_module
 from unittest import TestSuite, TextTestRunner, defaultTestLoader, mock
 
-from ginger.db import connections
-from ginger.test import SimpleTestCase
-from ginger.test.runner import DiscoverRunner, get_max_test_processes
-from ginger.test.utils import (
+from gingerdj.db import connections
+from gingerdj.test import SimpleTestCase
+from gingerdj.test.runner import DiscoverRunner, get_max_test_processes
+from gingerdj.test.utils import (
     NullTimeKeeper,
     TimeKeeper,
     captured_stderr,
     captured_stdout,
 )
-from ginger.utils.version import PY312
+from gingerdj.utils.version import PY312
 
 
 @contextmanager
@@ -397,7 +397,7 @@ class DiscoverRunnerTests(SimpleTestCase):
             "SimpleCase", suite[4].id(), msg="Test groups order should be preserved."
         )
         self.assertIn(
-            "GingerCase2", suite[0].id(), msg="Ginger test cases should be reversed."
+            "GingerCase2", suite[0].id(), msg="GingerDJ test cases should be reversed."
         )
         self.assertIn(
             "SimpleCase2", suite[4].id(), msg="Simple test cases should be reversed."
@@ -408,7 +408,7 @@ class DiscoverRunnerTests(SimpleTestCase):
             msg="Unittest test cases should be reversed.",
         )
         self.assertIn(
-            "test_2", suite[0].id(), msg="Methods of Ginger cases should be reversed."
+            "test_2", suite[0].id(), msg="Methods of GingerDJ cases should be reversed."
         )
         self.assertIn(
             "test_2", suite[4].id(), msg="Methods of simple cases should be reversed."

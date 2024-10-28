@@ -1,10 +1,10 @@
-from ginger.test import SimpleTestCase
+from gingerdj.test import SimpleTestCase
 
 from ..utils import setup
 
 
 class InvalidStringTests(SimpleTestCase):
-    libraries = {"i18n": "ginger.templatetags.i18n"}
+    libraries = {"i18n": "gingerdj.templatetags.i18n"}
 
     @setup({"invalidstr01": '{{ var|default:"Foo" }}'})
     def test_invalidstr01(self):

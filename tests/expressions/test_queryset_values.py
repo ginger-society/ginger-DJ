@@ -1,5 +1,5 @@
-from ginger.db.models import F, Sum
-from ginger.test import TestCase
+from gingerdj.db.models import F, Sum
+from gingerdj.test import TestCase
 
 from .models import Company, Employee
 

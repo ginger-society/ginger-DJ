@@ -2,12 +2,12 @@ import os
 import re
 from io import StringIO
 
-from ginger.contrib.gis.gdal import GDAL_VERSION, Driver, GDALException
-from ginger.contrib.gis.utils.ogrinspect import ogrinspect
-from ginger.core.management import call_command
-from ginger.db import connection, connections
-from ginger.test import SimpleTestCase, TestCase, skipUnlessDBFeature
-from ginger.test.utils import modify_settings
+from gingerdj.contrib.gis.gdal import GDAL_VERSION, Driver, GDALException
+from gingerdj.contrib.gis.utils.ogrinspect import ogrinspect
+from gingerdj.core.management import call_command
+from gingerdj.db import connection, connections
+from gingerdj.test import SimpleTestCase, TestCase, skipUnlessDBFeature
+from gingerdj.test.utils import modify_settings
 
 from ..test_data import TEST_DATA
 from .models import AllOGRFields
@@ -59,7 +59,7 @@ class InspectDbTests(TestCase):
 
 
 @modify_settings(
-    INSTALLED_APPS={"append": "ginger.contrib.gis"},
+    INSTALLED_APPS={"append": "gingerdj.contrib.gis"},
 )
 class OGRInspectTest(SimpleTestCase):
     maxDiff = 1024
@@ -69,8 +69,8 @@ class OGRInspectTest(SimpleTestCase):
         model_def = ogrinspect(shp_file, "MyModel")
 
         expected = [
-            "# This is an auto-generated Ginger model module created by ogrinspect.",
-            "from ginger.contrib.gis.db import models",
+            "# This is an auto-generated GingerDJ model module created by ogrinspect.",
+            "from gingerdj.contrib.gis.db import models",
             "",
             "",
             "class MyModel(models.Model):",
@@ -96,8 +96,8 @@ class OGRInspectTest(SimpleTestCase):
         model_def = ogrinspect(shp_file, "City")
 
         expected = [
-            "# This is an auto-generated Ginger model module created by ogrinspect.",
-            "from ginger.contrib.gis.db import models",
+            "# This is an auto-generated GingerDJ model module created by ogrinspect.",
+            "from gingerdj.contrib.gis.db import models",
             "",
             "",
             "class City(models.Model):",
@@ -131,9 +131,9 @@ class OGRInspectTest(SimpleTestCase):
 
         self.assertTrue(
             model_def.startswith(
-                "# This is an auto-generated Ginger model module created by "
+                "# This is an auto-generated GingerDJ model module created by "
                 "ogrinspect.\n"
-                "from ginger.contrib.gis.db import models\n"
+                "from gingerdj.contrib.gis.db import models\n"
                 "\n"
                 "\n"
                 "class Measurement(models.Model):\n"
@@ -201,22 +201,22 @@ def get_ogr_db_string():
     """
     Construct the DB string that GDAL will use to inspect the database.
     GDAL will create its own connection to the database, so we re-use the
-    connection settings from the Ginger test.
+    connection settings from the GingerDJ test.
     """
     db = connections.settings["default"]
 
-    # Map from the ginger backend into the OGR driver name and database identifier
+    # Map from the gingerdj backend into the OGR driver name and database identifier
     # https://gdal.org/drivers/vector/
     #
     # TODO: Support Oracle (OCI).
     drivers = {
-        "ginger.contrib.gis.db.backends.postgis": (
+        "gingerdj.contrib.gis.db.backends.postgis": (
             "PostgreSQL",
             "PG:dbname='%(db_name)s'",
             " ",
         ),
-        "ginger.contrib.gis.db.backends.mysql": ("MySQL", 'MYSQL:"%(db_name)s"', ","),
-        "ginger.contrib.gis.db.backends.spatialite": ("SQLite", "%(db_name)s", ""),
+        "gingerdj.contrib.gis.db.backends.mysql": ("MySQL", 'MYSQL:"%(db_name)s"', ","),
+        "gingerdj.contrib.gis.db.backends.spatialite": ("SQLite", "%(db_name)s", ""),
     }
 
     db_engine = db["ENGINE"]
@@ -240,7 +240,7 @@ def get_ogr_db_string():
 
     def add(key, template):
         value = db.get(key, None)
-        # Don't add the parameter if it is not in ginger's settings
+        # Don't add the parameter if it is not in gingerdj's settings
         if value:
             params.append(template % value)
 

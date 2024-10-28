@@ -1,5 +1,5 @@
-from ginger.db import models
-from ginger.utils import timezone
+from gingerdj.db import models
+from gingerdj.utils import timezone
 
 
 class Article(models.Model):

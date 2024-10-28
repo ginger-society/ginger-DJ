@@ -1,5 +1,5 @@
-from ginger.db import DatabaseError, IntegrityError, models, transaction
-from ginger.test import TestCase
+from gingerdj.db import DatabaseError, IntegrityError, models, transaction
+from gingerdj.test import TestCase
 
 from .models import (
     Counter,

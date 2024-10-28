@@ -1,10 +1,10 @@
-from ginger.contrib.gis.geos import Point
-from ginger.test import SimpleTestCase, override_settings
+from gingerdj.contrib.gis.geos import Point
+from gingerdj.test import SimpleTestCase, override_settings
 
 from .models import City, site, site_gis, site_gis_custom
 
 
-@override_settings(ROOT_URLCONF="ginger.contrib.gis.tests.geoadmin.urls")
+@override_settings(ROOT_URLCONF="gingerdj.contrib.gis.tests.geoadmin.urls")
 class GeoAdminTest(SimpleTestCase):
     admin_site = site  # ModelAdmin
 
@@ -12,7 +12,7 @@ class GeoAdminTest(SimpleTestCase):
         geoadmin = self.admin_site.get_model_admin(City)
         form = geoadmin.get_changelist_form(None)({"point": ""})
         with self.assertRaisesMessage(AssertionError, "no logs"):
-            with self.assertLogs("ginger.contrib.gis", "ERROR"):
+            with self.assertLogs("gingerdj.contrib.gis", "ERROR"):
                 output = str(form["point"])
         self.assertInHTML(
             '<textarea id="id_point" class="vSerializedField required" cols="150"'
@@ -23,7 +23,7 @@ class GeoAdminTest(SimpleTestCase):
     def test_widget_invalid_string(self):
         geoadmin = self.admin_site.get_model_admin(City)
         form = geoadmin.get_changelist_form(None)({"point": "INVALID()"})
-        with self.assertLogs("ginger.contrib.gis", "ERROR") as cm:
+        with self.assertLogs("gingerdj.contrib.gis", "ERROR") as cm:
             output = str(form["point"])
         self.assertInHTML(
             '<textarea id="id_point" class="vSerializedField required" cols="150"'

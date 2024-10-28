@@ -1,6 +1,6 @@
-from ginger.core.exceptions import ValidationError
-from ginger.forms import GenericIPAddressField
-from ginger.test import SimpleTestCase
+from gingerdj.core.exceptions import ValidationError
+from gingerdj.forms import GenericIPAddressField
+from gingerdj.test import SimpleTestCase
 
 
 class GenericIPAddressFieldTest(SimpleTestCase):
@@ -12,7 +12,7 @@ class GenericIPAddressFieldTest(SimpleTestCase):
 
     def test_generic_ipaddress_as_generic(self):
         # The edge cases of the IPv6 validation code are not deeply tested
-        # here, they are covered in the tests for ginger.utils.ipv6
+        # here, they are covered in the tests for gingerdj.utils.ipv6
         f = GenericIPAddressField()
         with self.assertRaisesMessage(ValidationError, "'This field is required.'"):
             f.clean("")

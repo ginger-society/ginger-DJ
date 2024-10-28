@@ -1,11 +1,11 @@
 import datetime
 
-from ginger import forms
-from ginger.core.exceptions import ValidationError
-from ginger.forms.models import ModelChoiceIterator, ModelChoiceIteratorValue
-from ginger.forms.widgets import CheckboxSelectMultiple
-from ginger.template import Context, Template
-from ginger.test import TestCase
+from gingerdj import forms
+from gingerdj.core.exceptions import ValidationError
+from gingerdj.forms.models import ModelChoiceIterator, ModelChoiceIteratorValue
+from gingerdj.forms.widgets import CheckboxSelectMultiple
+from gingerdj.template import Context, Template
+from gingerdj.test import TestCase
 
 from .models import Article, Author, Book, Category, Writer
 

@@ -5,15 +5,15 @@ Generic editing views
 The following views are described on this page and provide a foundation for
 editing content:
 
-* :class:`ginger.views.generic.edit.FormView`
-* :class:`ginger.views.generic.edit.CreateView`
-* :class:`ginger.views.generic.edit.UpdateView`
-* :class:`ginger.views.generic.edit.DeleteView`
+* :class:`gingerdj.views.generic.edit.FormView`
+* :class:`gingerdj.views.generic.edit.CreateView`
+* :class:`gingerdj.views.generic.edit.UpdateView`
+* :class:`gingerdj.views.generic.edit.DeleteView`
 
 .. seealso::
 
     The :doc:`messages framework </ref/contrib/messages>` contains
-    :class:`~ginger.contrib.messages.views.SuccessMessageMixin`, which
+    :class:`~gingerdj.contrib.messages.views.SuccessMessageMixin`, which
     facilitates presenting messages about successful form submissions.
 
 .. note::
@@ -21,8 +21,8 @@ editing content:
     Some of the examples on this page assume that an ``Author`` model has been
     defined as follows in ``myapp/models.py``::
 
-        from ginger.db import models
-        from ginger.urls import reverse
+        from gingerdj.db import models
+        from gingerdj.urls import reverse
 
 
         class Author(models.Model):
@@ -34,7 +34,7 @@ editing content:
 ``FormView``
 ============
 
-.. class:: ginger.views.generic.edit.FormView
+.. class:: gingerdj.views.generic.edit.FormView
 
     A view that displays a form. On error, redisplays the form with validation
     errors; on success, redirects to a new URL.
@@ -43,15 +43,15 @@ editing content:
 
     This view inherits methods and attributes from the following views:
 
-    * :class:`ginger.views.generic.base.TemplateResponseMixin`
-    * :class:`ginger.views.generic.edit.BaseFormView`
-    * :class:`ginger.views.generic.edit.FormMixin`
-    * :class:`ginger.views.generic.edit.ProcessFormView`
-    * :class:`ginger.views.generic.base.View`
+    * :class:`gingerdj.views.generic.base.TemplateResponseMixin`
+    * :class:`gingerdj.views.generic.edit.BaseFormView`
+    * :class:`gingerdj.views.generic.edit.FormMixin`
+    * :class:`gingerdj.views.generic.edit.ProcessFormView`
+    * :class:`gingerdj.views.generic.base.View`
 
     **Example myapp/forms.py**::
 
-        from ginger import forms
+        from gingerdj import forms
 
 
         class ContactForm(forms.Form):
@@ -65,7 +65,7 @@ editing content:
     **Example myapp/views.py**::
 
         from myapp.forms import ContactForm
-        from ginger.views.generic.edit import FormView
+        from gingerdj.views.generic.edit import FormView
 
 
         class ContactFormView(FormView):
@@ -88,24 +88,24 @@ editing content:
             <input type="submit" value="Send message">
         </form>
 
-.. class:: ginger.views.generic.edit.BaseFormView
+.. class:: gingerdj.views.generic.edit.BaseFormView
 
     A base view for displaying a form. It is not intended to be used directly,
     but rather as a parent class of the
-    :class:`ginger.views.generic.edit.FormView` or other views displaying a
+    :class:`gingerdj.views.generic.edit.FormView` or other views displaying a
     form.
 
     **Ancestors (MRO)**
 
     This view inherits methods and attributes from the following views:
 
-    * :class:`ginger.views.generic.edit.FormMixin`
-    * :class:`ginger.views.generic.edit.ProcessFormView`
+    * :class:`gingerdj.views.generic.edit.FormMixin`
+    * :class:`gingerdj.views.generic.edit.ProcessFormView`
 
 ``CreateView``
 ==============
 
-.. class:: ginger.views.generic.edit.CreateView
+.. class:: gingerdj.views.generic.edit.CreateView
 
     A view that displays a form for creating an object, redisplaying the form
     with validation errors (if there are any) and saving the object.
@@ -114,14 +114,14 @@ editing content:
 
     This view inherits methods and attributes from the following views:
 
-    * :class:`ginger.views.generic.detail.SingleObjectTemplateResponseMixin`
-    * :class:`ginger.views.generic.base.TemplateResponseMixin`
-    * :class:`ginger.views.generic.edit.BaseCreateView`
-    * :class:`ginger.views.generic.edit.ModelFormMixin`
-    * :class:`ginger.views.generic.edit.FormMixin`
-    * :class:`ginger.views.generic.detail.SingleObjectMixin`
-    * :class:`ginger.views.generic.edit.ProcessFormView`
-    * :class:`ginger.views.generic.base.View`
+    * :class:`gingerdj.views.generic.detail.SingleObjectTemplateResponseMixin`
+    * :class:`gingerdj.views.generic.base.TemplateResponseMixin`
+    * :class:`gingerdj.views.generic.edit.BaseCreateView`
+    * :class:`gingerdj.views.generic.edit.ModelFormMixin`
+    * :class:`gingerdj.views.generic.edit.FormMixin`
+    * :class:`gingerdj.views.generic.detail.SingleObjectMixin`
+    * :class:`gingerdj.views.generic.edit.ProcessFormView`
+    * :class:`gingerdj.views.generic.base.View`
 
     **Attributes**
 
@@ -141,7 +141,7 @@ editing content:
 
     **Example myapp/views.py**::
 
-        from ginger.views.generic.edit import CreateView
+        from gingerdj.views.generic.edit import CreateView
         from myapp.models import Author
 
 
@@ -158,18 +158,18 @@ editing content:
             <input type="submit" value="Save">
         </form>
 
-.. class:: ginger.views.generic.edit.BaseCreateView
+.. class:: gingerdj.views.generic.edit.BaseCreateView
 
     A base view for creating a new object instance. It is not intended to be
     used directly, but rather as a parent class of the
-    :class:`ginger.views.generic.edit.CreateView`.
+    :class:`gingerdj.views.generic.edit.CreateView`.
 
     **Ancestors (MRO)**
 
     This view inherits methods and attributes from the following views:
 
-    * :class:`ginger.views.generic.edit.ModelFormMixin`
-    * :class:`ginger.views.generic.edit.ProcessFormView`
+    * :class:`gingerdj.views.generic.edit.ModelFormMixin`
+    * :class:`gingerdj.views.generic.edit.ProcessFormView`
 
     **Methods**
 
@@ -184,7 +184,7 @@ editing content:
 ``UpdateView``
 ==============
 
-.. class:: ginger.views.generic.edit.UpdateView
+.. class:: gingerdj.views.generic.edit.UpdateView
 
     A view that displays a form for editing an existing object, redisplaying
     the form with validation errors (if there are any) and saving changes to
@@ -195,14 +195,14 @@ editing content:
 
     This view inherits methods and attributes from the following views:
 
-    * :class:`ginger.views.generic.detail.SingleObjectTemplateResponseMixin`
-    * :class:`ginger.views.generic.base.TemplateResponseMixin`
-    * :class:`ginger.views.generic.edit.BaseUpdateView`
-    * :class:`ginger.views.generic.edit.ModelFormMixin`
-    * :class:`ginger.views.generic.edit.FormMixin`
-    * :class:`ginger.views.generic.detail.SingleObjectMixin`
-    * :class:`ginger.views.generic.edit.ProcessFormView`
-    * :class:`ginger.views.generic.base.View`
+    * :class:`gingerdj.views.generic.detail.SingleObjectTemplateResponseMixin`
+    * :class:`gingerdj.views.generic.base.TemplateResponseMixin`
+    * :class:`gingerdj.views.generic.edit.BaseUpdateView`
+    * :class:`gingerdj.views.generic.edit.ModelFormMixin`
+    * :class:`gingerdj.views.generic.edit.FormMixin`
+    * :class:`gingerdj.views.generic.detail.SingleObjectMixin`
+    * :class:`gingerdj.views.generic.edit.ProcessFormView`
+    * :class:`gingerdj.views.generic.base.View`
 
     **Attributes**
 
@@ -221,7 +221,7 @@ editing content:
 
     **Example myapp/views.py**::
 
-        from ginger.views.generic.edit import UpdateView
+        from gingerdj.views.generic.edit import UpdateView
         from myapp.models import Author
 
 
@@ -239,18 +239,18 @@ editing content:
             <input type="submit" value="Update">
         </form>
 
-.. class:: ginger.views.generic.edit.BaseUpdateView
+.. class:: gingerdj.views.generic.edit.BaseUpdateView
 
     A base view for updating an existing object instance. It is not intended to
     be used directly, but rather as a parent class of the
-    :class:`ginger.views.generic.edit.UpdateView`.
+    :class:`gingerdj.views.generic.edit.UpdateView`.
 
     **Ancestors (MRO)**
 
     This view inherits methods and attributes from the following views:
 
-    * :class:`ginger.views.generic.edit.ModelFormMixin`
-    * :class:`ginger.views.generic.edit.ProcessFormView`
+    * :class:`gingerdj.views.generic.edit.ModelFormMixin`
+    * :class:`gingerdj.views.generic.edit.ProcessFormView`
 
     **Methods**
 
@@ -265,7 +265,7 @@ editing content:
 ``DeleteView``
 ==============
 
-.. class:: ginger.views.generic.edit.DeleteView
+.. class:: gingerdj.views.generic.edit.DeleteView
 
     A view that displays a confirmation page and deletes an existing object.
     The given object will only be deleted if the request method is ``POST``. If
@@ -276,23 +276,23 @@ editing content:
 
     This view inherits methods and attributes from the following views:
 
-    * :class:`ginger.views.generic.detail.SingleObjectTemplateResponseMixin`
-    * :class:`ginger.views.generic.base.TemplateResponseMixin`
-    * :class:`ginger.views.generic.edit.BaseDeleteView`
-    * :class:`ginger.views.generic.edit.DeletionMixin`
-    * :class:`ginger.views.generic.edit.FormMixin`
-    * :class:`ginger.views.generic.base.ContextMixin`
-    * :class:`ginger.views.generic.detail.BaseDetailView`
-    * :class:`ginger.views.generic.detail.SingleObjectMixin`
-    * :class:`ginger.views.generic.base.View`
+    * :class:`gingerdj.views.generic.detail.SingleObjectTemplateResponseMixin`
+    * :class:`gingerdj.views.generic.base.TemplateResponseMixin`
+    * :class:`gingerdj.views.generic.edit.BaseDeleteView`
+    * :class:`gingerdj.views.generic.edit.DeletionMixin`
+    * :class:`gingerdj.views.generic.edit.FormMixin`
+    * :class:`gingerdj.views.generic.base.ContextMixin`
+    * :class:`gingerdj.views.generic.detail.BaseDetailView`
+    * :class:`gingerdj.views.generic.detail.SingleObjectMixin`
+    * :class:`gingerdj.views.generic.base.View`
 
     **Attributes**
 
     .. attribute:: form_class
 
-        Inherited from :class:`~ginger.views.generic.edit.BaseDeleteView`. The
+        Inherited from :class:`~gingerdj.views.generic.edit.BaseDeleteView`. The
         form class that will be used to confirm the request. By default
-        :class:`ginger.forms.Form`, resulting in an empty form that is always
+        :class:`gingerdj.forms.Form`, resulting in an empty form that is always
         valid.
 
         By providing your own ``Form`` subclass, you can add additional
@@ -308,8 +308,8 @@ editing content:
 
     **Example myapp/views.py**::
 
-        from ginger.urls import reverse_lazy
-        from ginger.views.generic.edit import DeleteView
+        from gingerdj.urls import reverse_lazy
+        from gingerdj.views.generic.edit import DeleteView
         from myapp.models import Author
 
 
@@ -327,16 +327,16 @@ editing content:
             <input type="submit" value="Confirm">
         </form>
 
-.. class:: ginger.views.generic.edit.BaseDeleteView
+.. class:: gingerdj.views.generic.edit.BaseDeleteView
 
     A base view for deleting an object instance. It is not intended to be used
     directly, but rather as a parent class of the
-    :class:`ginger.views.generic.edit.DeleteView`.
+    :class:`gingerdj.views.generic.edit.DeleteView`.
 
     **Ancestors (MRO)**
 
     This view inherits methods and attributes from the following views:
 
-    * :class:`ginger.views.generic.edit.DeletionMixin`
-    * :class:`ginger.views.generic.edit.FormMixin`
-    * :class:`ginger.views.generic.detail.BaseDetailView`
+    * :class:`gingerdj.views.generic.edit.DeletionMixin`
+    * :class:`gingerdj.views.generic.edit.FormMixin`
+    * :class:`gingerdj.views.generic.detail.BaseDetailView`

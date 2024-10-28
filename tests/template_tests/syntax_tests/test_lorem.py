@@ -1,6 +1,6 @@
-from ginger.template.base import TemplateSyntaxError
-from ginger.test import SimpleTestCase
-from ginger.utils.lorem_ipsum import COMMON_P, WORDS
+from gingerdj.template.base import TemplateSyntaxError
+from gingerdj.test import SimpleTestCase
+from gingerdj.utils.lorem_ipsum import COMMON_P, WORDS
 
 from ..utils import setup
 

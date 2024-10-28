@@ -1,8 +1,8 @@
 import copy
 import unittest
 
-from ginger.db.models.sql import AND, OR
-from ginger.utils.tree import Node
+from gingerdj.db.models.sql import AND, OR
+from gingerdj.utils.tree import Node
 
 
 class NodeTests(unittest.TestCase):

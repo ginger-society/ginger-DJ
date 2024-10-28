@@ -1,9 +1,9 @@
 import os
 from datetime import datetime, timedelta, timezone
 
-from ginger.conf import settings
-from ginger.contrib.staticfiles.storage import ManifestStaticFilesStorage
-from ginger.core.files import storage
+from gingerdj.conf import settings
+from gingerdj.contrib.staticfiles.storage import ManifestStaticFilesStorage
+from gingerdj.core.files import storage
 
 
 class DummyStorage(storage.Storage):

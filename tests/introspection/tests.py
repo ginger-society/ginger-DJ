@@ -1,6 +1,6 @@
-from ginger.db import DatabaseError, connection
-from ginger.db.models import Index
-from ginger.test import TransactionTestCase, skipUnlessDBFeature
+from gingerdj.db import DatabaseError, connection
+from gingerdj.db.models import Index
+from gingerdj.test import TransactionTestCase, skipUnlessDBFeature
 
 from .models import (
     Article,
@@ -41,7 +41,7 @@ class IntrospectionTests(TransactionTestCase):
             self.assertNotIn(
                 "ginger_ixn_test_table",
                 tl,
-                "ginger_table_names() returned a non-Ginger table",
+                "ginger_table_names() returned a non-GingerDJ table",
             )
 
     def test_ginger_table_names_retval_type(self):

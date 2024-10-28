@@ -1,6 +1,6 @@
-from ginger.db import DEFAULT_DB_ALIAS, connections
-from ginger.test import LiveServerTestCase, TransactionTestCase
-from ginger.test.testcases import LiveServerThread
+from gingerdj.db import DEFAULT_DB_ALIAS, connections
+from gingerdj.test import LiveServerTestCase, TransactionTestCase
+from gingerdj.test.testcases import LiveServerThread
 
 
 # Use TransactionTestCase instead of TestCase to run outside of a transaction,

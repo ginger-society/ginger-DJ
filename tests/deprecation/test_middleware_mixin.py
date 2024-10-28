@@ -3,28 +3,28 @@ import threading
 from asgiref.sync import async_to_sync, iscoroutinefunction
 
 
-from ginger.contrib.flatpages.middleware import FlatpageFallbackMiddleware
-from ginger.contrib.messages.middleware import MessageMiddleware
-from ginger.contrib.redirects.middleware import RedirectFallbackMiddleware
-from ginger.contrib.sessions.middleware import SessionMiddleware
-from ginger.contrib.sites.middleware import CurrentSiteMiddleware
-from ginger.db import connection
-from ginger.http.request import HttpRequest
-from ginger.http.response import HttpResponse
-from ginger.middleware.cache import (
+from gingerdj.contrib.flatpages.middleware import FlatpageFallbackMiddleware
+from gingerdj.contrib.messages.middleware import MessageMiddleware
+from gingerdj.contrib.redirects.middleware import RedirectFallbackMiddleware
+from gingerdj.contrib.sessions.middleware import SessionMiddleware
+from gingerdj.contrib.sites.middleware import CurrentSiteMiddleware
+from gingerdj.db import connection
+from gingerdj.http.request import HttpRequest
+from gingerdj.http.response import HttpResponse
+from gingerdj.middleware.cache import (
     CacheMiddleware,
     FetchFromCacheMiddleware,
     UpdateCacheMiddleware,
 )
-from ginger.middleware.clickjacking import XFrameOptionsMiddleware
-from ginger.middleware.common import BrokenLinkEmailsMiddleware, CommonMiddleware
-from ginger.middleware.csrf import CsrfViewMiddleware
-from ginger.middleware.gzip import GZipMiddleware
-from ginger.middleware.http import ConditionalGetMiddleware
-from ginger.middleware.locale import LocaleMiddleware
-from ginger.middleware.security import SecurityMiddleware
-from ginger.test import SimpleTestCase
-from ginger.utils.deprecation import MiddlewareMixin
+from gingerdj.middleware.clickjacking import XFrameOptionsMiddleware
+from gingerdj.middleware.common import BrokenLinkEmailsMiddleware, CommonMiddleware
+from gingerdj.middleware.csrf import CsrfViewMiddleware
+from gingerdj.middleware.gzip import GZipMiddleware
+from gingerdj.middleware.http import ConditionalGetMiddleware
+from gingerdj.middleware.locale import LocaleMiddleware
+from gingerdj.middleware.security import SecurityMiddleware
+from gingerdj.test import SimpleTestCase
+from gingerdj.utils.deprecation import MiddlewareMixin
 
 
 class MiddlewareMixinTests(SimpleTestCase):

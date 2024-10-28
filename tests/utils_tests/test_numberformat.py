@@ -1,8 +1,8 @@
 from decimal import Decimal
 from sys import float_info
 
-from ginger.test import SimpleTestCase
-from ginger.utils.numberformat import format as nformat
+from gingerdj.test import SimpleTestCase
+from gingerdj.utils.numberformat import format as nformat
 
 
 class TestNumberFormat(SimpleTestCase):

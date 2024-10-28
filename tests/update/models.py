@@ -3,7 +3,7 @@ Tests for the update() queryset method that allows in-place, multi-object
 updates.
 """
 
-from ginger.db import models
+from gingerdj.db import models
 
 
 class DataPoint(models.Model):

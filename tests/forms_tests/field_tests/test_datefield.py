@@ -1,10 +1,10 @@
 import sys
 from datetime import date, datetime
 
-from ginger.core.exceptions import ValidationError
-from ginger.forms import DateField, Form, HiddenInput, SelectDateWidget
-from ginger.test import SimpleTestCase
-from ginger.utils import translation
+from gingerdj.core.exceptions import ValidationError
+from gingerdj.forms import DateField, Form, HiddenInput, SelectDateWidget
+from gingerdj.test import SimpleTestCase
+from gingerdj.utils import translation
 
 
 class GetDate(Form):

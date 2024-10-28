@@ -14,12 +14,12 @@ TEST_SETTINGS = {
         Path(TEST_ROOT) / "project" / "pathlib",
     ],
     "STATICFILES_FINDERS": [
-        "ginger.contrib.staticfiles.finders.FileSystemFinder",
-        "ginger.contrib.staticfiles.finders.AppDirectoriesFinder",
-        "ginger.contrib.staticfiles.finders.DefaultStorageFinder",
+        "gingerdj.contrib.staticfiles.finders.FileSystemFinder",
+        "gingerdj.contrib.staticfiles.finders.AppDirectoriesFinder",
+        "gingerdj.contrib.staticfiles.finders.DefaultStorageFinder",
     ],
     "INSTALLED_APPS": [
-        "ginger.contrib.staticfiles",
+        "gingerdj.contrib.staticfiles",
         "staticfiles_tests",
         "staticfiles_tests.apps.test",
         "staticfiles_tests.apps.no_label",

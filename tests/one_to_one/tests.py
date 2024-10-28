@@ -1,6 +1,6 @@
-from ginger.db import IntegrityError, connection, transaction
-from ginger.test import TestCase
-from ginger.utils.deprecation import RemovedInGinger60Warning
+from gingerdj.db import IntegrityError, connection, transaction
+from gingerdj.test import TestCase
+from gingerdj.utils.deprecation import RemovedInGinger60Warning
 
 from .models import (
     Bar,

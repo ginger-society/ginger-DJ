@@ -6,22 +6,22 @@ import zoneinfo
 from unittest import mock
 from urllib.parse import parse_qsl, urljoin, urlparse
 
-from ginger import forms
-from ginger.contrib import admin
-from ginger.contrib.admin import AdminSite, ModelAdmin
-from ginger.contrib.admin.helpers import ACTION_CHECKBOX_NAME
-from ginger.contrib.admin.options import TO_FIELD_VAR
-from ginger.contrib.admin.templatetags.admin_urls import add_preserved_filters
-from ginger.contrib.admin.tests import AdminSeleniumTestCase
-from ginger.contrib.admin.utils import quote
-from ginger.contrib.admin.views.main import IS_POPUP_VAR
-from ginger.core import mail
-from ginger.core.checks import Error
-from ginger.core.files import temp as tempfile
-from ginger.db import connection
-from ginger.forms.utils import ErrorList
-from ginger.template.response import TemplateResponse
-from ginger.test import (
+from gingerdj import forms
+from gingerdj.contrib import admin
+from gingerdj.contrib.admin import AdminSite, ModelAdmin
+from gingerdj.contrib.admin.helpers import ACTION_CHECKBOX_NAME
+from gingerdj.contrib.admin.options import TO_FIELD_VAR
+from gingerdj.contrib.admin.templatetags.admin_urls import add_preserved_filters
+from gingerdj.contrib.admin.tests import AdminSeleniumTestCase
+from gingerdj.contrib.admin.utils import quote
+from gingerdj.contrib.admin.views.main import IS_POPUP_VAR
+from gingerdj.core import mail
+from gingerdj.core.checks import Error
+from gingerdj.core.files import temp as tempfile
+from gingerdj.db import connection
+from gingerdj.forms.utils import ErrorList
+from gingerdj.template.response import TemplateResponse
+from gingerdj.test import (
     RequestFactory,
     TestCase,
     ignore_warnings,
@@ -29,15 +29,15 @@ from ginger.test import (
     override_settings,
     skipUnlessDBFeature,
 )
-from ginger.test.selenium import screenshot_cases
-from ginger.test.utils import override_script_prefix
-from ginger.urls import NoReverseMatch, resolve, reverse
-from ginger.utils import formats, translation
-from ginger.utils.cache import get_max_age
-from ginger.utils.deprecation import RemovedInGinger60Warning
-from ginger.utils.encoding import iri_to_uri
-from ginger.utils.html import escape
-from ginger.utils.http import urlencode
+from gingerdj.test.selenium import screenshot_cases
+from gingerdj.test.utils import override_script_prefix
+from gingerdj.urls import NoReverseMatch, resolve, reverse
+from gingerdj.utils import formats, translation
+from gingerdj.utils.cache import get_max_age
+from gingerdj.utils.deprecation import RemovedInGinger60Warning
+from gingerdj.utils.encoding import iri_to_uri
+from gingerdj.utils.html import escape
+from gingerdj.utils.http import urlencode
 
 from . import customadmin
 from .admin import CityAdmin, site, site2
@@ -407,7 +407,7 @@ class AdminViewBasicTest(AdminViewBasicTestCase):
 
     def test_basic_edit_GET_old_url_redirect(self):
         """
-        The change URL changed in Ginger 1.9, but the old one still redirects.
+        The change URL changed in GingerDJ 1.9, but the old one still redirects.
         """
         response = self.client.get(
             reverse("admin:admin_views_section_change", args=(self.s1.pk,)).replace(
@@ -1124,7 +1124,7 @@ class AdminViewBasicTest(AdminViewBasicTestCase):
             self.assertContains(response, "%Y-%m-%d %H:%M:%S")
 
     def test_disallowed_filtering(self):
-        with self.assertLogs("ginger.security.DisallowedModelAdminLookup", "ERROR"):
+        with self.assertLogs("gingerdj.security.DisallowedModelAdminLookup", "ERROR"):
             response = self.client.get(
                 "%s?owner__email__startswith=fuzzy"
                 % reverse("admin:admin_views_album_changelist")
@@ -1167,13 +1167,13 @@ class AdminViewBasicTest(AdminViewBasicTestCase):
 
     def test_disallowed_to_field(self):
         url = reverse("admin:admin_views_section_changelist")
-        with self.assertLogs("ginger.security.DisallowedModelAdminToField", "ERROR"):
+        with self.assertLogs("gingerdj.security.DisallowedModelAdminToField", "ERROR"):
             response = self.client.get(url, {TO_FIELD_VAR: "missing_field"})
         self.assertEqual(response.status_code, 400)
 
         # Specifying a field that is not referred by any other model registered
         # to this admin site should raise an exception.
-        with self.assertLogs("ginger.security.DisallowedModelAdminToField", "ERROR"):
+        with self.assertLogs("gingerdj.security.DisallowedModelAdminToField", "ERROR"):
             response = self.client.get(
                 reverse("admin:admin_views_section_changelist"), {TO_FIELD_VAR: "name"}
             )
@@ -1220,13 +1220,13 @@ class AdminViewBasicTest(AdminViewBasicTestCase):
         # #25622 - Specifying a field of a model only referred by a generic
         # relation should raise DisallowedModelAdminToField.
         url = reverse("admin:admin_views_referencedbygenrel_changelist")
-        with self.assertLogs("ginger.security.DisallowedModelAdminToField", "ERROR"):
+        with self.assertLogs("gingerdj.security.DisallowedModelAdminToField", "ERROR"):
             response = self.client.get(url, {TO_FIELD_VAR: "object_id"})
         self.assertEqual(response.status_code, 400)
 
         # We also want to prevent the add, change, and delete views from
         # leaking a disallowed field value.
-        with self.assertLogs("ginger.security.DisallowedModelAdminToField", "ERROR"):
+        with self.assertLogs("gingerdj.security.DisallowedModelAdminToField", "ERROR"):
             response = self.client.post(
                 reverse("admin:admin_views_section_add"), {TO_FIELD_VAR: "name"}
             )
@@ -1234,12 +1234,12 @@ class AdminViewBasicTest(AdminViewBasicTestCase):
 
         section = Section.objects.create()
         url = reverse("admin:admin_views_section_change", args=(section.pk,))
-        with self.assertLogs("ginger.security.DisallowedModelAdminToField", "ERROR"):
+        with self.assertLogs("gingerdj.security.DisallowedModelAdminToField", "ERROR"):
             response = self.client.post(url, {TO_FIELD_VAR: "name"})
         self.assertEqual(response.status_code, 400)
 
         url = reverse("admin:admin_views_section_delete", args=(section.pk,))
-        with self.assertLogs("ginger.security.DisallowedModelAdminToField", "ERROR"):
+        with self.assertLogs("gingerdj.security.DisallowedModelAdminToField", "ERROR"):
             response = self.client.post(url, {TO_FIELD_VAR: "name"})
         self.assertEqual(response.status_code, 400)
 
@@ -1453,7 +1453,7 @@ class AdminViewBasicTest(AdminViewBasicTestCase):
         response = self.client.get(reverse("admin:app_list", args=("admin_views",)))
         self.assertContains(
             response,
-            "<title>Admin_Views administration | Ginger site admin</title>",
+            "<title>Admin_Views administration | GingerDJ site admin</title>",
         )
         self.assertEqual(response.context["title"], "Admin_Views administration")
         self.assertEqual(response.context["app_label"], "admin_views")
@@ -1466,7 +1466,7 @@ class AdminViewBasicTest(AdminViewBasicTestCase):
         response = self.client.get(reverse("admin2:app_list", args=("admin_views",)))
         self.assertContains(
             response,
-            "<title>Admin_Views administration | Ginger site admin</title>",
+            "<title>Admin_Views administration | GingerDJ site admin</title>",
         )
         # Models are in reverse order.
         models = [model["name"] for model in response.context["app_list"][0]["models"]]
@@ -1478,7 +1478,7 @@ class AdminViewBasicTest(AdminViewBasicTestCase):
         )
         self.assertContains(
             response,
-            "<title>Article 1 | Change article | Ginger site admin</title>",
+            "<title>Article 1 | Change article | GingerDJ site admin</title>",
         )
         self.assertContains(response, "<h1>Change article</h1>")
         self.assertContains(response, "<h2>Article 1</h2>")
@@ -1487,7 +1487,7 @@ class AdminViewBasicTest(AdminViewBasicTestCase):
         )
         self.assertContains(
             response,
-            "<title>Article 2 | Change article | Ginger site admin</title>",
+            "<title>Article 2 | Change article | GingerDJ site admin</title>",
         )
         self.assertContains(response, "<h1>Change article</h1>")
         self.assertContains(response, "<h2>Article 2</h2>")
@@ -1507,7 +1507,7 @@ class AdminViewBasicTest(AdminViewBasicTestCase):
         )
         self.assertContains(
             response,
-            "<title>Article 1 | View article | Ginger site admin</title>",
+            "<title>Article 1 | View article | GingerDJ site admin</title>",
         )
         self.assertContains(response, "<h1>View article</h1>")
         self.assertContains(response, "<h2>Article 1</h2>")
@@ -1516,7 +1516,7 @@ class AdminViewBasicTest(AdminViewBasicTestCase):
         )
         self.assertContains(
             response,
-            "<title>Article 2 | View article | Ginger site admin</title>",
+            "<title>Article 2 | View article | GingerDJ site admin</title>",
         )
         self.assertContains(response, "<h1>View article</h1>")
         self.assertContains(response, "<h2>Article 2</h2>")
@@ -1535,10 +1535,10 @@ class AdminViewBasicTest(AdminViewBasicTestCase):
         ]
         for url in tests:
             with self.subTest(url=url):
-                with self.assertNoLogs("ginger.template", "DEBUG"):
+                with self.assertNoLogs("gingerdj.template", "DEBUG"):
                     self.client.get(url)
         # Login must be after logout.
-        with self.assertNoLogs("ginger.template", "DEBUG"):
+        with self.assertNoLogs("gingerdj.template", "DEBUG"):
             self.client.post(reverse("admin:logout"))
             self.client.get(reverse("admin:login"))
 
@@ -1549,21 +1549,13 @@ class AdminViewBasicTest(AdminViewBasicTestCase):
             "index": "0",
             "_selected_action": self.a1.pk,
         }
-        with self.assertNoLogs("ginger.template", "DEBUG"):
+        with self.assertNoLogs("gingerdj.template", "DEBUG"):
             self.client.post(reverse("admin:admin_views_article_changelist"), post_data)
 
     @override_settings(
         AUTH_PASSWORD_VALIDATORS=[
-            {
-                "NAME": (
-                    "UserAttributeSimilarityValidator"
-                )
-            },
-            {
-                "NAME": (
-                    "NumericPasswordValidator"
-                )
-            },
+            {"NAME": ("UserAttributeSimilarityValidator")},
+            {"NAME": ("NumericPasswordValidator")},
         ]
     )
     def test_password_change_helptext(self):
@@ -1628,7 +1620,7 @@ class AdminViewBasicTest(AdminViewBasicTestCase):
     AUTH_PASSWORD_VALIDATORS=[],
     TEMPLATES=[
         {
-            "BACKEND": "ginger.template.backends.ginger.GingerTemplates",
+            "BACKEND": "gingerdj.template.backends.gingerdj.GingerTemplates",
             # Put this app's and the shared tests templates dirs in DIRS to
             # take precedence over the admin's templates dir.
             "DIRS": [
@@ -1638,9 +1630,9 @@ class AdminViewBasicTest(AdminViewBasicTestCase):
             "APP_DIRS": True,
             "OPTIONS": {
                 "context_processors": [
-                    "ginger.template.context_processors.debug",
-                    "ginger.template.context_processors.request",
-                    "ginger.contrib.messages.context_processors.messages",
+                    "gingerdj.template.context_processors.debug",
+                    "gingerdj.template.context_processors.request",
+                    "gingerdj.contrib.messages.context_processors.messages",
                 ],
             },
         }
@@ -1819,7 +1811,7 @@ class AdminCustomTemplateTests(AdminViewBasicTestCase):
             "_selected_action": group.id,
         }
         response = self.client.post(reverse("admin:auth_group_changelist"), post_data)
-        self.assertEqual(response.context["site_header"], "Ginger administration")
+        self.assertEqual(response.context["site_header"], "GingerDJ administration")
         self.assertContains(response, "bodyclass_consistency_check ")
 
     def test_filter_with_custom_template(self):
@@ -2104,7 +2096,7 @@ class CustomModelAdminTest(AdminViewBasicTestCase):
     def test_custom_admin_site_view(self):
         self.client.force_login(self.superuser)
         response = self.client.get(reverse("admin2:my_view"))
-        self.assertEqual(response.content, b"Ginger is a magical pony!")
+        self.assertEqual(response.content, b"GingerDJ is a magical pony!")
 
     def test_pwd_change_custom_template(self):
         self.client.force_login(self.superuser)
@@ -2126,12 +2118,12 @@ def get_perm(Model, codename):
     # Test with the admin's documented list of required context processors.
     TEMPLATES=[
         {
-            "BACKEND": "ginger.template.backends.ginger.GingerTemplates",
+            "BACKEND": "gingerdj.template.backends.gingerdj.GingerTemplates",
             "APP_DIRS": True,
             "OPTIONS": {
                 "context_processors": [
-                    "ginger.template.context_processors.request",
-                    "ginger.contrib.messages.context_processors.messages",
+                    "gingerdj.template.context_processors.request",
+                    "gingerdj.contrib.messages.context_processors.messages",
                 ],
             },
         }
@@ -2480,7 +2472,9 @@ class AdminViewPermissionsTest(TestCase):
         )
         response = self.client.get(reverse("admin:admin_views_article_add"))
         self.assertEqual(response.context["title"], "Add article")
-        self.assertContains(response, "<title>Add article | Ginger site admin</title>")
+        self.assertContains(
+            response, "<title>Add article | GingerDJ site admin</title>"
+        )
         self.assertContains(
             response, '<input type="submit" value="Save and view" name="_continue">'
         )
@@ -2556,7 +2550,7 @@ class AdminViewPermissionsTest(TestCase):
         # make sure the view removes test cookie
         self.assertIs(self.client.session.test_cookie_worked(), False)
 
-    @mock.patch("ginger.contrib.admin.options.InlineModelAdmin.has_change_permission")
+    @mock.patch("gingerdj.contrib.admin.options.InlineModelAdmin.has_change_permission")
     def test_add_view_with_view_only_inlines(self, has_change_permission):
         """User with add permission to a section but view-only for inlines."""
         self.viewuser.user_permissions.add(
@@ -2608,12 +2602,14 @@ class AdminViewPermissionsTest(TestCase):
         response = self.client.get(article_changelist_url)
         self.assertContains(
             response,
-            "<title>Select article to view | Ginger site admin</title>",
+            "<title>Select article to view | GingerDJ site admin</title>",
         )
         self.assertContains(response, "<h1>Select article to view</h1>")
         self.assertEqual(response.context["title"], "Select article to view")
         response = self.client.get(article_change_url)
-        self.assertContains(response, "<title>View article | Ginger site admin</title>")
+        self.assertContains(
+            response, "<title>View article | GingerDJ site admin</title>"
+        )
         self.assertContains(response, "<h1>View article</h1>")
         self.assertContains(response, "<label>Extra form field:</label>")
         self.assertContains(
@@ -2635,14 +2631,14 @@ class AdminViewPermissionsTest(TestCase):
         self.assertEqual(response.context["title"], "Select article to change")
         self.assertContains(
             response,
-            "<title>Select article to change | Ginger site admin</title>",
+            "<title>Select article to change | GingerDJ site admin</title>",
         )
         self.assertContains(response, "<h1>Select article to change</h1>")
         response = self.client.get(article_change_url)
         self.assertEqual(response.context["title"], "Change article")
         self.assertContains(
             response,
-            "<title>Change article | Ginger site admin</title>",
+            "<title>Change article | GingerDJ site admin</title>",
         )
         self.assertContains(response, "<h1>Change article</h1>")
         post = self.client.post(article_change_url, change_dict)
@@ -2766,7 +2762,9 @@ class AdminViewPermissionsTest(TestCase):
         self.client.force_login(self.viewuser)
         response = self.client.get(change_url)
         self.assertEqual(response.context["title"], "View article")
-        self.assertContains(response, "<title>View article | Ginger site admin</title>")
+        self.assertContains(
+            response, "<title>View article | GingerDJ site admin</title>"
+        )
         self.assertContains(response, "<h1>View article</h1>")
         self.assertContains(
             response,
@@ -3356,12 +3354,12 @@ class AdminViewPermissionsTest(TestCase):
     ROOT_URLCONF="admin_views.urls",
     TEMPLATES=[
         {
-            "BACKEND": "ginger.template.backends.ginger.GingerTemplates",
+            "BACKEND": "gingerdj.template.backends.gingerdj.GingerTemplates",
             "APP_DIRS": True,
             "OPTIONS": {
                 "context_processors": [
-                    "ginger.template.context_processors.request",
-                    "ginger.contrib.messages.context_processors.messages",
+                    "gingerdj.template.context_processors.request",
+                    "gingerdj.contrib.messages.context_processors.messages",
                 ],
             },
         }
@@ -3741,9 +3739,9 @@ class AdminViewDeletedObjectsTest(TestCase):
         should be listed for deletion.
         """
         bookmark = Bookmark.objects.create(name="gingerproject")
-        tag = FunkyTag.objects.create(content_object=bookmark, name="ginger")
+        tag = FunkyTag.objects.create(content_object=bookmark, name="gingerdj")
         tag_url = reverse("admin:admin_views_funkytag_change", args=(tag.id,))
-        should_contain = '<li>Funky tag: <a href="%s">ginger' % tag_url
+        should_contain = '<li>Funky tag: <a href="%s">gingerdj' % tag_url
         response = self.client.get(
             reverse("admin:admin_views_bookmark_delete", args=(bookmark.pk,))
         )
@@ -3763,7 +3761,7 @@ class AdminViewDeletedObjectsTest(TestCase):
 class AdminViewStringPrimaryKeyTest(TestCase):
     @classmethod
     def setUpTestData(cls):
-        
+
         cls.s1 = Section.objects.create(name="Test section")
         cls.a1 = Article.objects.create(
             content="<p>Middle content</p>",
@@ -4128,13 +4126,13 @@ class AdminViewListEditable(TestCase):
 
     def test_inheritance(self):
         Podcast.objects.create(
-            name="This Week in Ginger", release_date=datetime.date.today()
+            name="This Week in GingerDJ", release_date=datetime.date.today()
         )
         response = self.client.get(reverse("admin:admin_views_podcast_changelist"))
         self.assertEqual(response.status_code, 200)
 
     def test_inheritance_2(self):
-        Vodcast.objects.create(name="This Week in Ginger", released=True)
+        Vodcast.objects.create(name="This Week in GingerDJ", released=True)
         response = self.client.get(reverse("admin:admin_views_vodcast_changelist"))
         self.assertEqual(response.status_code, 200)
 
@@ -4821,7 +4819,6 @@ class TestCustomChangeList(TestCase):
         response = self.client.get(reverse("admin:admin_views_gadget_changelist"))
         self.assertNotContains(response, "First Gadget")
 
-
     def test_simple_inline(self):
         "A simple model can be saved as inlines"
         # First add a new inline
@@ -5211,7 +5208,7 @@ class PrePopulatedTest(TestCase):
 
 
 def _clean_sidebar_state(driver):
-    driver.execute_script("localStorage.removeItem('ginger.admin.navSidebarIsOpen')")
+    driver.execute_script("localStorage.removeItem('gingerdj.admin.navSidebarIsOpen')")
 
 
 @override_settings(ROOT_URLCONF="admin_views.urls")
@@ -6314,7 +6311,7 @@ class ReadonlyTest(AdminFieldExtractionMixin, TestCase):
             readonly_content="test\r\n\r\ntest\r\n\r\ntest\r\n\r\ntest",
         )
         Link.objects.create(
-            url="http://www.ginger.gloportal.dev",
+            url="http://www.gingerdj.gloportal.dev",
             post=p,
             readonly_link_content="test\r\nlink",
         )
@@ -6329,7 +6326,7 @@ class ReadonlyTest(AdminFieldExtractionMixin, TestCase):
     @ignore_warnings(category=RemovedInGinger60Warning)
     def test_readonly_post(self):
         data = {
-            "title": "Ginger Got Readonly Fields",
+            "title": "GingerDJ Got Readonly Fields",
             "content": "This is an incredible development.",
             "link_set-TOTAL_FORMS": "1",
             "link_set-INITIAL_FORMS": "0",
@@ -6752,7 +6749,7 @@ class CSSTest(TestCase):
         Cells of the change list table should contain the field name in their
         class attribute.
         """
-        Podcast.objects.create(name="Ginger Dose", release_date=datetime.date.today())
+        Podcast.objects.create(name="GingerDJ Dose", release_date=datetime.date.today())
         response = self.client.get(reverse("admin:admin_views_podcast_changelist"))
         self.assertContains(response, '<th class="field-name">')
         self.assertContains(response, '<td class="field-release_date nowrap">')
@@ -6768,7 +6765,9 @@ except ImportError:
 @unittest.skipUnless(docutils, "no docutils installed.")
 @override_settings(ROOT_URLCONF="admin_views.urls")
 @modify_settings(
-    INSTALLED_APPS={"append": ["ginger.contrib.admindocs", "ginger.contrib.flatpages"]}
+    INSTALLED_APPS={
+        "append": ["gingerdj.contrib.admindocs", "gingerdj.contrib.flatpages"]
+    }
 )
 class AdminDocsTest(TestCase):
     @classmethod
@@ -6781,7 +6780,7 @@ class AdminDocsTest(TestCase):
         self.client.force_login(self.superuser)
 
     def test_tags(self):
-        response = self.client.get(reverse("ginger-admindocs-tags"))
+        response = self.client.get(reverse("gingerdj-admindocs-tags"))
 
         # The builtin tag group exists
         self.assertContains(response, "<h2>Built-in tags</h2>", count=2, html=True)
@@ -6820,7 +6819,7 @@ class AdminDocsTest(TestCase):
         )
 
     def test_filters(self):
-        response = self.client.get(reverse("ginger-admindocs-filters"))
+        response = self.client.get(reverse("gingerdj-admindocs-filters"))
 
         # The builtin filter group exists
         self.assertContains(response, "<h2>Built-in filters</h2>", count=2, html=True)
@@ -6832,7 +6831,7 @@ class AdminDocsTest(TestCase):
         )
 
     def test_index_headers(self):
-        response = self.client.get(reverse("ginger-admindocs-docroot"))
+        response = self.client.get(reverse("gingerdj-admindocs-docroot"))
         self.assertContains(response, "<h1>Documentation</h1>")
         self.assertContains(response, '<h2><a href="tags/">Tags</a></h2>')
         self.assertContains(response, '<h2><a href="filters/">Filters</a></h2>')
@@ -6847,13 +6846,13 @@ class AdminDocsTest(TestCase):
     ROOT_URLCONF="admin_views.urls",
     TEMPLATES=[
         {
-            "BACKEND": "ginger.template.backends.ginger.GingerTemplates",
+            "BACKEND": "gingerdj.template.backends.gingerdj.GingerTemplates",
             "APP_DIRS": True,
             "OPTIONS": {
                 "context_processors": [
-                    "ginger.template.context_processors.debug",
-                    "ginger.template.context_processors.request",
-                    "ginger.contrib.messages.context_processors.messages",
+                    "gingerdj.template.context_processors.debug",
+                    "gingerdj.template.context_processors.request",
+                    "gingerdj.contrib.messages.context_processors.messages",
                 ],
             },
         }

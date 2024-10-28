@@ -2,8 +2,8 @@
 Writing and running tests
 =========================
 
-.. module:: ginger.test
-   :synopsis: Testing tools for Ginger applications.
+.. module:: gingerdj.test
+   :synopsis: Testing tools for GingerDJ applications.
 
 .. seealso::
 
@@ -12,19 +12,19 @@ Writing and running tests
     </topics/testing/advanced>`.
 
 This document is split into two primary sections. First, we explain how to write
-tests with Ginger. Then, we explain how to run them.
+tests with GingerDJ. Then, we explain how to run them.
 
 Writing tests
 =============
 
-Ginger's unit tests use a Python standard library module: :mod:`unittest`. This
+GingerDJ's unit tests use a Python standard library module: :mod:`unittest`. This
 module defines tests using a class-based approach.
 
-Here is an example which subclasses from :class:`ginger.test.TestCase`,
+Here is an example which subclasses from :class:`gingerdj.test.TestCase`,
 which is a subclass of :class:`unittest.TestCase` that runs each test inside a
 transaction to provide isolation::
 
-    from ginger.test import TestCase
+    from gingerdj.test import TestCase
     from myapp.models import Animal
 
 
@@ -63,7 +63,7 @@ For more details about :mod:`unittest`, see the Python documentation.
 
     If your tests rely on database access such as creating or querying models,
     be sure to create your test classes as subclasses of
-    :class:`ginger.test.TestCase` rather than :class:`unittest.TestCase`.
+    :class:`gingerdj.test.TestCase` rather than :class:`unittest.TestCase`.
 
     Using :class:`unittest.TestCase` avoids the cost of running each test in a
     transaction and flushing the database, but if your tests interact with
@@ -139,7 +139,7 @@ be reported, and any test databases created by the run will not be destroyed.
 
     It's a good idea to run your tests with Python warnings enabled:
     ``python -Wa manage.py test``. The ``-Wa`` flag tells Python to
-    display deprecation warnings. Ginger, like many other Python libraries,
+    display deprecation warnings. GingerDJ, like many other Python libraries,
     uses these warnings to flag when features are going away. It also might
     flag areas in your code that aren't strictly wrong but could benefit
     from a better implementation.
@@ -208,7 +208,7 @@ with ability to share the database between threads.
     your code* anyway - rewrite your code so that it doesn't do this.
 
     This also applies to customized implementations of
-    :meth:`~ginger.apps.AppConfig.ready()`.
+    :meth:`~gingerdj.apps.AppConfig.ready()`.
 
 .. seealso::
 
@@ -220,13 +220,13 @@ Order in which tests are executed
 ---------------------------------
 
 In order to guarantee that all ``TestCase`` code starts with a clean database,
-the Ginger test runner reorders tests in the following way:
+the GingerDJ test runner reorders tests in the following way:
 
-* All :class:`~ginger.test.TestCase` subclasses are run first.
+* All :class:`~gingerdj.test.TestCase` subclasses are run first.
 
-* Then, all other Ginger-based tests (test case classes based on
-  :class:`~ginger.test.SimpleTestCase`, including
-  :class:`~ginger.test.TransactionTestCase`) are run with no particular
+* Then, all other GingerDJ-based tests (test case classes based on
+  :class:`~gingerdj.test.SimpleTestCase`, including
+  :class:`~gingerdj.test.TransactionTestCase`) are run with no particular
   ordering guaranteed nor enforced among them.
 
 * Then any other :class:`unittest.TestCase` tests (including doctests) that may
@@ -236,7 +236,7 @@ the Ginger test runner reorders tests in the following way:
 
     The new ordering of tests may reveal unexpected dependencies on test case
     ordering. This is the case with doctests that relied on state left in the
-    database by a given :class:`~ginger.test.TransactionTestCase` test, they
+    database by a given :class:`~gingerdj.test.TransactionTestCase` test, they
     must be updated to be able to run independently.
 
 .. note::
@@ -259,9 +259,9 @@ tests and not in ``TransactionTestCase`` tests, and additionally only on
 backends where transactions are supported (the most important exception being
 MyISAM). This is also true for tests which rely on ``TransactionTestCase``
 such as :class:`LiveServerTestCase` and
-:class:`~ginger.contrib.staticfiles.testing.StaticLiveServerTestCase`.
+:class:`~gingerdj.contrib.staticfiles.testing.StaticLiveServerTestCase`.
 
-Ginger can reload that data for you on a per-testcase basis by
+GingerDJ can reload that data for you on a per-testcase basis by
 setting the ``serialized_rollback`` option to ``True`` in the body of the
 ``TestCase`` or ``TransactionTestCase``, but note that this will slow down
 that test suite by approximately 3x.
@@ -277,14 +277,14 @@ those apps to :setting:`TEST_NON_SERIALIZED_APPS`.
 
 To prevent serialized data from being loaded twice, setting
 ``serialized_rollback=True`` disables the
-:data:`~ginger.db.models.signals.post_migrate` signal when flushing the test
+:data:`~gingerdj.db.models.signals.post_migrate` signal when flushing the test
 database.
 
 Other test conditions
 ---------------------
 
 Regardless of the value of the :setting:`DEBUG` setting in your configuration
-file, all Ginger tests run with :setting:`DEBUG`\=False. This is to ensure that
+file, all GingerDJ tests run with :setting:`DEBUG`\=False. This is to ensure that
 the observed output of your code matches what will be seen in a production
 setting.
 
@@ -309,7 +309,7 @@ prepares itself. You can control the level of detail of these messages with the
 This tells you that the test runner is creating a test database, as described
 in the previous section.
 
-Once the test database has been created, Ginger will run your tests.
+Once the test database has been created, GingerDJ will run your tests.
 If everything goes well, you'll see something like this:
 
 .. code-block:: shell
@@ -369,6 +369,6 @@ time to run tests.
 Avoiding disk access for media files
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The :class:`~ginger.core.files.storage.InMemoryStorage` is a convenient way to
+The :class:`~gingerdj.core.files.storage.InMemoryStorage` is a convenient way to
 prevent disk access for media files. All data is kept in memory, then it gets
 discarded after tests run.

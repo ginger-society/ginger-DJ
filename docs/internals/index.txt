@@ -1,9 +1,9 @@
 ================
-Ginger internals
+GingerDJ internals
 ================
 
-Documentation for people hacking on Ginger itself. This is the place to go if
-you'd like to help improve Ginger or learn about how Ginger is managed.
+Documentation for people hacking on GingerDJ itself. This is the place to go if
+you'd like to help improve GingerDJ or learn about how GingerDJ is managed.
 
 .. toctree::
    :maxdepth: 2

@@ -1,7 +1,7 @@
 from unittest import mock
 
-from ginger.test import SimpleTestCase
-from ginger.test.runner import Shuffler
+from gingerdj.test import SimpleTestCase
+from gingerdj.test.runner import Shuffler
 
 
 class ShufflerTests(SimpleTestCase):

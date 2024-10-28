@@ -1,4 +1,4 @@
-from ginger.urls import path
+from gingerdj.urls import path
 
 urlpatterns = [
     path("beginning-with/<angle_bracket", lambda x: x),

@@ -1,22 +1,22 @@
-from ginger.apps import apps
-from ginger.apps.registry import Apps
-from ginger.conf import settings
-from ginger.contrib.sites import models
-from ginger.contrib.sites.checks import check_site_id
-from ginger.contrib.sites.management import create_default_site
-from ginger.contrib.sites.middleware import CurrentSiteMiddleware
-from ginger.contrib.sites.models import Site, clear_site_cache
-from ginger.contrib.sites.requests import RequestSite
-from ginger.contrib.sites.shortcuts import get_current_site
-from ginger.core import checks
-from ginger.core.exceptions import ObjectDoesNotExist, ValidationError
-from ginger.db.models.signals import post_migrate
-from ginger.http import HttpRequest, HttpResponse
-from ginger.test import SimpleTestCase, TestCase, modify_settings, override_settings
-from ginger.test.utils import captured_stdout
+from gingerdj.apps import apps
+from gingerdj.apps.registry import Apps
+from gingerdj.conf import settings
+from gingerdj.contrib.sites import models
+from gingerdj.contrib.sites.checks import check_site_id
+from gingerdj.contrib.sites.management import create_default_site
+from gingerdj.contrib.sites.middleware import CurrentSiteMiddleware
+from gingerdj.contrib.sites.models import Site, clear_site_cache
+from gingerdj.contrib.sites.requests import RequestSite
+from gingerdj.contrib.sites.shortcuts import get_current_site
+from gingerdj.core import checks
+from gingerdj.core.exceptions import ObjectDoesNotExist, ValidationError
+from gingerdj.db.models.signals import post_migrate
+from gingerdj.http import HttpRequest, HttpResponse
+from gingerdj.test import SimpleTestCase, TestCase, modify_settings, override_settings
+from gingerdj.test.utils import captured_stdout
 
 
-@modify_settings(INSTALLED_APPS={"append": "ginger.contrib.sites"})
+@modify_settings(INSTALLED_APPS={"append": "gingerdj.contrib.sites"})
 class SitesFrameworkTests(TestCase):
     databases = {"default", "other"}
 
@@ -75,7 +75,7 @@ class SitesFrameworkTests(TestCase):
             get_current_site(request)
 
         # A RequestSite is returned if the sites framework is not installed
-        with self.modify_settings(INSTALLED_APPS={"remove": "ginger.contrib.sites"}):
+        with self.modify_settings(INSTALLED_APPS={"remove": "gingerdj.contrib.sites"}):
             site = get_current_site(request)
             self.assertIsInstance(site, RequestSite)
             self.assertEqual(site.name, "example.com")
@@ -131,7 +131,7 @@ class SitesFrameworkTests(TestCase):
             get_current_site(request)
 
         # Ensure domain for RequestSite always matches host header
-        with self.modify_settings(INSTALLED_APPS={"remove": "ginger.contrib.sites"}):
+        with self.modify_settings(INSTALLED_APPS={"remove": "gingerdj.contrib.sites"}):
             request.META = {"HTTP_HOST": "example.com"}
             site = get_current_site(request)
             self.assertEqual(site.name, "example.com")
@@ -251,7 +251,7 @@ class JustOtherRouter:
         return db == "other"
 
 
-@modify_settings(INSTALLED_APPS={"append": "ginger.contrib.sites"})
+@modify_settings(INSTALLED_APPS={"append": "gingerdj.contrib.sites"})
 class CreateDefaultSiteTests(TestCase):
     databases = {"default", "other"}
 

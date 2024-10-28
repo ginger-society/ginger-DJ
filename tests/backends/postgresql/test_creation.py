@@ -3,17 +3,17 @@ from contextlib import contextmanager
 from io import StringIO
 from unittest import mock
 
-from ginger.core.exceptions import ImproperlyConfigured
-from ginger.db import DatabaseError, connection
-from ginger.db.backends.base.creation import BaseDatabaseCreation
-from ginger.test import SimpleTestCase
+from gingerdj.core.exceptions import ImproperlyConfigured
+from gingerdj.db import DatabaseError, connection
+from gingerdj.db.backends.base.creation import BaseDatabaseCreation
+from gingerdj.test import SimpleTestCase
 
 try:
-    from ginger.db.backends.postgresql.psycopg_any import errors
+    from gingerdj.db.backends.postgresql.psycopg_any import errors
 except ImportError:
     pass
 else:
-    from ginger.db.backends.postgresql.creation import DatabaseCreation
+    from gingerdj.db.backends.postgresql.creation import DatabaseCreation
 
 
 @unittest.skipUnless(connection.vendor == "postgresql", "PostgreSQL tests")

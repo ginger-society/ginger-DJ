@@ -1,8 +1,8 @@
 from functools import partial, update_wrapper
 
-from ginger.http import HttpResponse
-from ginger.urls import reverse_lazy
-from ginger.views.generic import RedirectView
+from gingerdj.http import HttpResponse
+from gingerdj.urls import reverse_lazy
+from gingerdj.views.generic import RedirectView
 
 
 def empty_view(request, *args, **kwargs):

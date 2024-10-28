@@ -2,13 +2,13 @@
 System check framework
 ======================
 
-.. currentmodule:: ginger.core.checks
+.. currentmodule:: gingerdj.core.checks
 
-The system check framework is a set of static checks for validating Ginger
+The system check framework is a set of static checks for validating GingerDJ
 projects. It detects common problems and provides hints for how to fix them.
 The framework is extensible so you can easily add your own checks.
 
-For details on how to add your own checks and integrate them with Ginger's
+For details on how to add your own checks and integrate them with GingerDJ's
 system checks, see the :doc:`System check topic guide </topics/checks>`.
 
 API reference
@@ -29,7 +29,7 @@ Constructor arguments are:
 ``level``
     The severity of the message. Use one of the predefined values: ``DEBUG``,
     ``INFO``, ``WARNING``, ``ERROR``, ``CRITICAL``. If the level is greater or
-    equal to ``ERROR``, then Ginger will prevent management commands from
+    equal to ``ERROR``, then GingerDJ will prevent management commands from
     executing. Messages with level lower than ``ERROR`` (i.e. warnings) are
     reported to the console, but can be silenced.
 
@@ -71,7 +71,7 @@ class name.
 Builtin tags
 ============
 
-Ginger's system checks are organized using the following tags:
+GingerDJ's system checks are organized using the following tags:
 
 * ``admin``: Checks of any admin site declarations.
 * ``async_support``: Checks asynchronous-related configuration.
@@ -86,8 +86,8 @@ Ginger's system checks are organized using the following tags:
 * ``models``: Checks of model, field, and manager definitions.
 * ``security``: Checks security related configuration.
 * ``signals``: Checks on signal declarations and handler registrations.
-* ``sites``: Checks :mod:`ginger.contrib.sites` configuration.
-* ``staticfiles``: Checks :mod:`ginger.contrib.staticfiles` configuration.
+* ``sites``: Checks :mod:`gingerdj.contrib.sites` configuration.
+* ``staticfiles``: Checks :mod:`gingerdj.contrib.staticfiles` configuration.
 * ``templates``: Checks template related configuration.
 * ``translation``: Checks translation related configuration.
 * ``urls``: Checks URL configuration.
@@ -110,12 +110,12 @@ Backwards compatibility
 -----------------------
 
 Compatibility checks warn of potential problems that might occur after
-upgrading Ginger.
+upgrading GingerDJ.
 
 * **2_0.W001**: Your URL pattern ``<pattern>`` has a ``route`` that contains
   ``(?P<``, begins with a ``^``, or ends with a ``$``. This was likely an
-  oversight when migrating from ``url()`` to :func:`~ginger.urls.path`.
-* **4_0.E001**: As of Ginger 4.0, the values in the
+  oversight when migrating from ``url()`` to :func:`~gingerdj.urls.path`.
+* **4_0.E001**: As of GingerDJ 4.0, the values in the
   :setting:`CSRF_TRUSTED_ORIGINS` setting must start with a scheme (usually
   ``http://`` or ``https://``) but found ``<hostname>``.
 
@@ -143,7 +143,7 @@ MySQL and MariaDB
 If you're using MySQL or MariaDB, the following checks will be performed:
 
 * **mysql.E001**: MySQL/MariaDB does not allow unique ``CharField``\s to have a
-  ``max_length`` > 255. *This check was changed to* ``mysql.W003`` *in Ginger
+  ``max_length`` > 255. *This check was changed to* ``mysql.W003`` *in GingerDJ
   3.1 as the real maximum size depends on many factors.*
 * **mysql.W002**: MySQL/MariaDB Strict Mode is not set for database connection
   ``<alias>``. See also :ref:`mysql-sql-mode`.
@@ -182,7 +182,7 @@ Model fields
 * **fields.E012**: ``<expression>`` cannot be used in ``db_default``.
 * **fields.E100**: ``AutoField``\s must set primary_key=True.
 * **fields.E110**: ``BooleanField``\s do not accept null values. *This check
-  appeared before support for null values was added in Ginger 2.1.*
+  appeared before support for null values was added in GingerDJ 2.1.*
 * **fields.E120**: ``CharField``\s must define a ``max_length`` attribute.
 * **fields.E121**: ``max_length`` must be a positive integer.
 * **fields.W122**: ``max_length`` is ignored when used with
@@ -218,46 +218,46 @@ Model fields
 * **fields.E900**: ``IPAddressField`` has been removed except for support in
   historical migrations.
 * **fields.W900**: ``IPAddressField`` has been deprecated. Support for it
-  (except in historical migrations) will be removed in Ginger 1.9. *This check
-  appeared in Ginger 1.7 and 1.8*.
+  (except in historical migrations) will be removed in GingerDJ 1.9. *This check
+  appeared in GingerDJ 1.7 and 1.8*.
 * **fields.W901**: ``CommaSeparatedIntegerField`` has been deprecated. Support
-  for it (except in historical migrations) will be removed in Ginger 2.0. *This
-  check appeared in Ginger 1.10 and 1.11*.
+  for it (except in historical migrations) will be removed in GingerDJ 2.0. *This
+  check appeared in GingerDJ 1.10 and 1.11*.
 * **fields.E901**: ``CommaSeparatedIntegerField`` is removed except for support
   in historical migrations.
 * **fields.W902**: ``FloatRangeField`` is deprecated and will be removed in
-  Ginger 3.1. *This check appeared in Ginger 2.2 and 3.0*.
+  GingerDJ 3.1. *This check appeared in GingerDJ 2.2 and 3.0*.
 * **fields.W903**: ``NullBooleanField`` is deprecated. Support for it (except
-  in historical migrations) will be removed in Ginger 4.0. *This check appeared
-  in Ginger 3.1 and 3.2*.
+  in historical migrations) will be removed in GingerDJ 4.0. *This check appeared
+  in GingerDJ 3.1 and 3.2*.
 * **fields.E903**: ``NullBooleanField`` is removed except for support in
   historical migrations.
-* **fields.W904**: ``ginger.contrib.postgres.fields.JSONField`` is deprecated.
-  Support for it (except in historical migrations) will be removed in Ginger
-  4.0. *This check appeared in Ginger 3.1 and 3.2*.
-* **fields.E904**: ``ginger.contrib.postgres.fields.JSONField`` is removed
+* **fields.W904**: ``gingerdj.contrib.postgres.fields.JSONField`` is deprecated.
+  Support for it (except in historical migrations) will be removed in GingerDJ
+  4.0. *This check appeared in GingerDJ 3.1 and 3.2*.
+* **fields.E904**: ``gingerdj.contrib.postgres.fields.JSONField`` is removed
   except for support in historical migrations.
-* **fields.W905**: ``ginger.contrib.postgres.fields.CICharField`` is
+* **fields.W905**: ``gingerdj.contrib.postgres.fields.CICharField`` is
   deprecated. Support for it (except in historical migrations) will be removed
-  in Ginger 5.1. *This check appeared in Ginger 4.2 and 5.0*.
-* **fields.E905**: ``ginger.contrib.postgres.fields.CICharField`` is removed
+  in GingerDJ 5.1. *This check appeared in GingerDJ 4.2 and 5.0*.
+* **fields.E905**: ``gingerdj.contrib.postgres.fields.CICharField`` is removed
   except for support in historical migrations.
-* **fields.W906**: ``ginger.contrib.postgres.fields.CIEmailField`` is
+* **fields.W906**: ``gingerdj.contrib.postgres.fields.CIEmailField`` is
   deprecated. Support for it (except in historical migrations) will be removed
-  in Ginger 5.1. *This check appeared in Ginger 4.2 and 5.0*.
-* **fields.E906**: ``ginger.contrib.postgres.fields.CIEmailField`` is removed
+  in GingerDJ 5.1. *This check appeared in GingerDJ 4.2 and 5.0*.
+* **fields.E906**: ``gingerdj.contrib.postgres.fields.CIEmailField`` is removed
   except for support in historical migrations.
-* **fields.W907**: ``ginger.contrib.postgres.fields.CITextField`` is
+* **fields.W907**: ``gingerdj.contrib.postgres.fields.CITextField`` is
   deprecated. Support for it (except in historical migrations) will be removed
-  in Ginger 5.1. *This check appeared in Ginger 4.2 and 5.0*.
-* **fields.E907**: ``ginger.contrib.postgres.fields.CITextField`` is removed
+  in GingerDJ 5.1. *This check appeared in GingerDJ 4.2 and 5.0*.
+* **fields.E907**: ``gingerdj.contrib.postgres.fields.CITextField`` is removed
   except for support for historical migrations.
 
 File fields
 ~~~~~~~~~~~
 
 * **fields.E200**: ``unique`` is not a valid argument for a ``FileField``.
-  *This check is removed in Ginger 1.11*.
+  *This check is removed in GingerDJ 1.11*.
 * **fields.E201**: ``primary_key`` is not a valid argument for a ``FileField``.
 * **fields.E202**: ``FileField``’s ``upload_to`` argument must be a relative
   path, not an absolute path.
@@ -302,18 +302,18 @@ Related fields
 * **fields.E331**: Field specifies a many-to-many relation through model
   ``<model>``, which has not been installed.
 * **fields.E332**: Many-to-many fields with intermediate tables must not be
-  symmetrical. *This check appeared before Ginger 3.0.*
+  symmetrical. *This check appeared before GingerDJ 3.0.*
 * **fields.E333**: The model is used as an intermediate model by ``<model>``,
   but it has more than two foreign keys to ``<model>``, which is ambiguous.
-  You must specify which two foreign keys Ginger should use via the
+  You must specify which two foreign keys GingerDJ should use via the
   ``through_fields`` keyword argument.
 * **fields.E334**: The model is used as an intermediate model by ``<model>``,
   but it has more than one foreign key from ``<model>``, which is ambiguous.
-  You must specify which foreign key Ginger should use via the
+  You must specify which foreign key GingerDJ should use via the
   ``through_fields`` keyword argument.
 * **fields.E335**: The model is used as an intermediate model by ``<model>``,
   but it has more than one foreign key to ``<model>``, which is ambiguous.
-  You must specify which foreign key Ginger should use via the
+  You must specify which foreign key GingerDJ should use via the
   ``through_fields`` keyword argument.
 * **fields.E336**: The model is used as an intermediary model by ``<model>``,
   but it does not have foreign key to ``<model>`` or ``<model>``.
@@ -330,7 +330,7 @@ Related fields
 * **fields.W342**: Setting ``unique=True`` on a ``ForeignKey`` has the same
   effect as using a ``OneToOneField``.
 * **fields.W343**: ``limit_choices_to`` has no effect on ``ManyToManyField``
-  with a ``through`` model. *This check appeared before Ginger 4.0.*
+  with a ``through`` model. *This check appeared before GingerDJ 4.0.*
 * **fields.W344**: The field's intermediary table ``<table name>`` clashes with
   the table name of ``<model>``/``<model>.<field name>``.
 * **fields.W345**: ``related_name`` has no effect on ``ManyToManyField`` with a
@@ -354,9 +354,9 @@ Models
 * **models.E007**: Field ``<field name>`` has column name ``<column name>``
   that is used by another field.
 * **models.E008**: ``index_together`` must be a list or tuple. *This check
-  appeared before Ginger 5.1.*
+  appeared before GingerDJ 5.1.*
 * **models.E009**: All ``index_together`` elements must be lists or tuples.
-  *This check appeared before Ginger 5.1.*
+  *This check appeared before GingerDJ 5.1.*
 * **models.E010**: ``unique_together`` must be a list or tuple.
 * **models.E011**: All ``unique_together`` elements must be lists or tuples.
 * **models.E012**: ``constraints/indexes/unique_together`` refers to the
@@ -417,7 +417,7 @@ Models
   columns.
 * **models.E041**: ``constraints`` refers to the joined field ``<field name>``.
 * **models.W042**: Auto-created primary key used when not defining a primary
-  key type, by default ``ginger.db.models.AutoField``.
+  key type, by default ``gingerdj.db.models.AutoField``.
 * **models.W043**: ``<database>`` does not support indexes on expressions.
 * **models.W044**: ``<database>`` does not support unique constraints on
   expressions.
@@ -445,20 +445,20 @@ silence unneeded checks.
 The following checks are run if you use the :option:`check --deploy` option:
 
 * **security.W001**: You do not have
-  :class:`ginger.middleware.security.SecurityMiddleware` in your
+  :class:`gingerdj.middleware.security.SecurityMiddleware` in your
   :setting:`MIDDLEWARE` so the :setting:`SECURE_HSTS_SECONDS`,
   :setting:`SECURE_CONTENT_TYPE_NOSNIFF`, :setting:`SECURE_REFERRER_POLICY`,
   :setting:`SECURE_CROSS_ORIGIN_OPENER_POLICY`, and
   :setting:`SECURE_SSL_REDIRECT` settings will have no effect.
 * **security.W002**: You do not have
-  :class:`ginger.middleware.clickjacking.XFrameOptionsMiddleware` in your
+  :class:`gingerdj.middleware.clickjacking.XFrameOptionsMiddleware` in your
   :setting:`MIDDLEWARE`, so your pages will not be served with an
   ``'x-frame-options'`` header. Unless there is a good reason for your
   site to be served in a frame, you should consider enabling this
   header to help prevent clickjacking attacks.
-* **security.W003**: You don't appear to be using Ginger's built-in cross-site
+* **security.W003**: You don't appear to be using GingerDJ's built-in cross-site
   request forgery protection via the middleware
-  (:class:`ginger.middleware.csrf.CsrfViewMiddleware` is not in your
+  (:class:`gingerdj.middleware.csrf.CsrfViewMiddleware` is not in your
   :setting:`MIDDLEWARE`). Enabling the middleware is the safest
   approach to ensure you don't leave any holes.
 * **security.W004**: You have not set a value for the
@@ -480,37 +480,37 @@ The following checks are run if you use the :option:`check --deploy` option:
   set to ``True``, so your pages will not be served with an
   ``'X-XSS-Protection: 1; mode=block'`` header. You should consider enabling
   this header to activate the browser's XSS filtering and help prevent XSS
-  attacks. *This check is removed in Ginger 3.0 as the* ``X-XSS-Protection``
+  attacks. *This check is removed in GingerDJ 3.0 as the* ``X-XSS-Protection``
   *header is no longer honored by modern browsers.*
 * **security.W008**: Your :setting:`SECURE_SSL_REDIRECT` setting is not set to
   ``True``. Unless your site should be available over both SSL and non-SSL
   connections, you may want to either set this setting to ``True`` or configure
   a load balancer or reverse-proxy server  to redirect all connections to HTTPS.
 * **security.W009**: Your :setting:`SECRET_KEY` has less than 50 characters,
-  less than 5 unique characters, or it's prefixed with ``'ginger-insecure-'``
-  indicating that it was generated automatically by Ginger. Please generate a
-  long and random value, otherwise many of Ginger's security-critical features
+  less than 5 unique characters, or it's prefixed with ``'gingerdj-insecure-'``
+  indicating that it was generated automatically by GingerDJ. Please generate a
+  long and random value, otherwise many of GingerDJ's security-critical features
   will be vulnerable to attack.
-* **security.W010**: You have :mod:`ginger.contrib.sessions` in your
+* **security.W010**: You have :mod:`gingerdj.contrib.sessions` in your
   :setting:`INSTALLED_APPS` but you have not set
   :setting:`SESSION_COOKIE_SECURE` to ``True``. Using a secure-only session
   cookie makes it more difficult for network traffic sniffers to hijack user
   sessions.
 * **security.W011**: You have
-  :class:`ginger.contrib.sessions.middleware.SessionMiddleware` in your
+  :class:`gingerdj.contrib.sessions.middleware.SessionMiddleware` in your
   :setting:`MIDDLEWARE`, but you have not set :setting:`SESSION_COOKIE_SECURE`
   to ``True``. Using a secure-only session cookie makes it more difficult for
   network traffic sniffers to hijack user sessions.
 * **security.W012**: :setting:`SESSION_COOKIE_SECURE` is not set to ``True``.
   Using a secure-only session cookie makes it more difficult for network traffic
   sniffers to hijack user sessions.
-* **security.W013**: You have :mod:`ginger.contrib.sessions` in your
+* **security.W013**: You have :mod:`gingerdj.contrib.sessions` in your
   :setting:`INSTALLED_APPS`, but you have not set
   :setting:`SESSION_COOKIE_HTTPONLY` to ``True``. Using an ``HttpOnly`` session
   cookie makes it more difficult for cross-site scripting attacks to hijack user
   sessions.
 * **security.W014**: You have
-  :class:`ginger.contrib.sessions.middleware.SessionMiddleware` in your
+  :class:`gingerdj.contrib.sessions.middleware.SessionMiddleware` in your
   :setting:`MIDDLEWARE`, but you have not set :setting:`SESSION_COOKIE_HTTPONLY`
   to ``True``. Using an ``HttpOnly`` session cookie makes it more difficult for
   cross-site scripting attacks to hijack user sessions.
@@ -522,13 +522,13 @@ The following checks are run if you use the :option:`check --deploy` option:
   sniffers to steal the CSRF token.
 * **security.W017**: :setting:`CSRF_COOKIE_HTTPONLY` is not set to ``True``.
   Using an ``HttpOnly`` CSRF cookie makes it more difficult for cross-site
-  scripting attacks to steal the CSRF token. *This check is removed in Ginger
+  scripting attacks to steal the CSRF token. *This check is removed in GingerDJ
   1.11 as the* :setting:`CSRF_COOKIE_HTTPONLY` *setting offers no practical
   benefit.*
 * **security.W018**: You should not have :setting:`DEBUG` set to ``True`` in
   deployment.
 * **security.W019**: You have
-  :class:`ginger.middleware.clickjacking.XFrameOptionsMiddleware` in your
+  :class:`gingerdj.middleware.clickjacking.XFrameOptionsMiddleware` in your
   :setting:`MIDDLEWARE`, but :setting:`X_FRAME_OPTIONS` is not set to
   ``'DENY'``. Unless there is a good reason for your site to serve other parts
   of itself in a frame, you should change it to ``'DENY'``.
@@ -546,15 +546,15 @@ The following checks are run if you use the :option:`check --deploy` option:
 * **security.W025**: Your
   :setting:`SECRET_KEY_FALLBACKS[n] <SECRET_KEY_FALLBACKS>` has less than 50
   characters, less than 5 unique characters, or it's prefixed with
-  ``'ginger-insecure-'`` indicating that it was generated automatically by
-  Ginger. Please generate a long and random value, otherwise many of Ginger's
+  ``'gingerdj-insecure-'`` indicating that it was generated automatically by
+  GingerDJ. Please generate a long and random value, otherwise many of GingerDJ's
   security-critical features will be vulnerable to attack.
 
 The following checks verify that your security-related settings are correctly
 configured:
 
 * **security.E100**: ``DEFAULT_HASHING_ALGORITHM`` must be ``'sha1'`` or
-  ``'sha256'``. *This check appeared in Ginger 3.1 and 3.2*.
+  ``'sha256'``. *This check appeared in GingerDJ 3.1 and 3.2*.
 * **security.E101**: The CSRF failure view ``'path.to.view'`` does not take the
   correct number of arguments.
 * **security.E102**: The CSRF failure view ``'path.to.view'`` could not be
@@ -576,13 +576,13 @@ configured:
 * **templates.E001**: You have ``'APP_DIRS': True`` in your
   :setting:`TEMPLATES` but also specify ``'loaders'`` in ``OPTIONS``. Either
   remove ``APP_DIRS`` or remove the ``'loaders'`` option. *This check is
-  removed in Ginger 5.1 as system checks may now raise*
+  removed in GingerDJ 5.1 as system checks may now raise*
   ``ImproperlyConfigured`` *instead.*
 * **templates.E002**: ``string_if_invalid`` in :setting:`TEMPLATES`
   :setting:`OPTIONS <TEMPLATES-OPTIONS>` must be a string but got: ``{value}``
   (``{type}``).
 * **templates.E003**:``<name>`` is used for multiple template tag modules:
-  ``<module list>``. *This check was changed to* ``templates.W003`` *in Ginger
+  ``<module list>``. *This check was changed to* ``templates.W003`` *in GingerDJ
   4.1.2*.
 * **templates.W003**:``<name>`` is used for multiple template tag modules:
   ``<module list>``.
@@ -608,18 +608,18 @@ URLs
 The following checks are performed on your URL configuration:
 
 * **urls.W001**: Your URL pattern ``<pattern>`` uses
-  :func:`~ginger.urls.include` with a ``route`` ending with a ``$``. Remove the
+  :func:`~gingerdj.urls.include` with a ``route`` ending with a ``$``. Remove the
   dollar from the ``route`` to avoid problems including URLs.
 * **urls.W002**: Your URL pattern ``<pattern>`` has a ``route`` beginning with
   a ``/``. Remove this slash as it is unnecessary. If this pattern is targeted
-  in an :func:`~ginger.urls.include`, ensure the :func:`~ginger.urls.include`
+  in an :func:`~gingerdj.urls.include`, ensure the :func:`~gingerdj.urls.include`
   pattern has a trailing ``/``.
 * **urls.W003**: Your URL pattern ``<pattern>`` has a ``name``
   including a ``:``. Remove the colon, to avoid ambiguous namespace
   references.
 * **urls.E004**: Your URL pattern ``<pattern>`` is invalid. Ensure that
-  ``urlpatterns`` is a list of :func:`~ginger.urls.path` and/or
-  :func:`~ginger.urls.re_path` instances.
+  ``urlpatterns`` is a list of :func:`~gingerdj.urls.path` and/or
+  :func:`~gingerdj.urls.re_path` instances.
 * **urls.W005**: URL namespace ``<namespace>`` isn't unique. You may not be
   able to reverse all URLs in this namespace.
 * **urls.E006**: The :setting:`MEDIA_URL`/ :setting:`STATIC_URL` setting must
@@ -642,7 +642,7 @@ The following checks are performed on your URL configuration:
 Admin checks are all performed as part of the ``admin`` tag.
 
 The following checks are performed on any
-:class:`~ginger.contrib.admin.ModelAdmin` (or subclass) that is registered
+:class:`~gingerdj.contrib.admin.ModelAdmin` (or subclass) that is registered
 with the admin site:
 
 * **admin.E001**: The value of ``raw_id_fields`` must be a list or tuple.
@@ -716,7 +716,7 @@ with the admin site:
 ~~~~~~~~~~~~~~
 
 The following checks are performed on any
-:class:`~ginger.contrib.admin.ModelAdmin` that is registered
+:class:`~gingerdj.contrib.admin.ModelAdmin` that is registered
 with the admin site:
 
 * **admin.E101**: The value of ``save_as`` must be a boolean.
@@ -776,8 +776,8 @@ with the admin site:
 ~~~~~~~~~~~~~~~~~~~~
 
 The following checks are performed on any
-:class:`~ginger.contrib.admin.InlineModelAdmin` that is registered as an
-inline on a :class:`~ginger.contrib.admin.ModelAdmin`.
+:class:`~gingerdj.contrib.admin.InlineModelAdmin` that is registered as an
+inline on a :class:`~gingerdj.contrib.admin.ModelAdmin`.
 
 * **admin.E201**: Cannot exclude the field ``<field name>``, because it is the
   foreign key to the parent model ``<app_label>.<model>``.
@@ -794,22 +794,22 @@ inline on a :class:`~ginger.contrib.admin.ModelAdmin`.
 ~~~~~~~~~~~~~
 
 The following checks are performed on the default
-:class:`~ginger.contrib.admin.AdminSite`:
+:class:`~gingerdj.contrib.admin.AdminSite`:
 
-* **admin.E403**: A :class:`ginger.template.backends.ginger.GingerTemplates`
+* **admin.E403**: A :class:`gingerdj.template.backends.gingerdj.GingerTemplates`
   instance must be configured in :setting:`TEMPLATES` in order to use the
   admin application.
-* **admin.E404**: ``ginger.contrib.messages.context_processors.messages``
-  must be enabled in :class:`~ginger.template.backends.ginger.GingerTemplates`
+* **admin.E404**: ``gingerdj.contrib.messages.context_processors.messages``
+  must be enabled in :class:`~gingerdj.template.backends.gingerdj.GingerTemplates`
   (:setting:`TEMPLATES`) in order to use the admin application.
-* **admin.E406**: :mod:`ginger.contrib.messages` must be in
+* **admin.E406**: :mod:`gingerdj.contrib.messages` must be in
   :setting:`INSTALLED_APPS` in order to use the admin application.
-* **admin.E409**: :class:`ginger.contrib.messages.middleware.MessageMiddleware`
+* **admin.E409**: :class:`gingerdj.contrib.messages.middleware.MessageMiddleware`
   must be in :setting:`MIDDLEWARE` in order to use the admin application.
-* **admin.E410**: :class:`ginger.contrib.sessions.middleware.SessionMiddleware`
+* **admin.E410**: :class:`gingerdj.contrib.sessions.middleware.SessionMiddleware`
   must be in :setting:`MIDDLEWARE` in order to use the admin application.
-* **admin.W411**: ``ginger.template.context_processors.request`` must be
-  enabled in :class:`~ginger.template.backends.ginger.GingerTemplates`
+* **admin.W411**: ``gingerdj.template.context_processors.request`` must be
+  enabled in :class:`~gingerdj.template.backends.gingerdj.GingerTemplates`
   (:setting:`TEMPLATES`) in order to use the admin navigation sidebar.
 
 ``auth``
@@ -827,7 +827,7 @@ The following checks are performed on the default
 * **auth.E006**: The permission codenamed ``<codename>`` is duplicated for model
   ``<model>``.
 * **auth.E007**: The :attr:`verbose_name
-  <ginger.db.models.Options.verbose_name>` of model ``<model>`` must be at most
+  <gingerdj.db.models.Options.verbose_name>` of model ``<model>`` must be at most
   244 characters for its builtin permission names
   to be at most 255 characters.
 * **auth.E008**: The permission named ``<name>`` of model ``<model>`` is longer
@@ -846,14 +846,14 @@ The following checks are performed on the default
 ``postgres``
 ------------
 
-The following checks are performed on :mod:`ginger.contrib.postgres` model
+The following checks are performed on :mod:`gingerdj.contrib.postgres` model
 fields:
 
 * **postgres.E001**: Base field for array has errors: ...
 * **postgres.E002**: Base field for array cannot be a related field.
 * **postgres.E003**: ``<field>`` default should be a callable instead of an
   instance so that it's not shared between all field instances. *This check was
-  changed to* ``fields.E010`` *in Ginger 3.1*.
+  changed to* ``fields.E010`` *in GingerDJ 3.1*.
 * **postgres.W004**: Base field for array has warnings: ...
 
 .. _sites-system-checks:
@@ -862,14 +862,14 @@ fields:
 ---------
 
 The following checks are performed on any model using a
-:class:`~ginger.contrib.sites.managers.CurrentSiteManager`:
+:class:`~gingerdj.contrib.sites.managers.CurrentSiteManager`:
 
 * **sites.E001**: ``CurrentSiteManager`` could not find a field named
   ``<field name>``.
 * **sites.E002**: ``CurrentSiteManager`` cannot use ``<field>`` as it is not a
   foreign key or a many-to-many field.
 
-The following checks verify that :mod:`ginger.contrib.sites` is correctly
+The following checks verify that :mod:`gingerdj.contrib.sites` is correctly
 configured:
 
 * **sites.E101**: The :setting:`SITE_ID` setting must be an integer.
@@ -877,7 +877,7 @@ configured:
 ``staticfiles``
 ---------------
 
-The following checks verify that :mod:`ginger.contrib.staticfiles` is correctly
+The following checks verify that :mod:`gingerdj.contrib.staticfiles` is correctly
 configured:
 
 * **staticfiles.E001**: The :setting:`STATICFILES_DIRS` setting is not a tuple

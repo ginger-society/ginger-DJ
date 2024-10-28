@@ -3,10 +3,10 @@ import os
 import tempfile
 import uuid
 
-from ginger.core import validators
-from ginger.core.exceptions import ValidationError
-from ginger.core.files.storage import FileSystemStorage
-from ginger.db import models
+from gingerdj.core import validators
+from gingerdj.core.exceptions import ValidationError
+from gingerdj.core.files.storage import FileSystemStorage
+from gingerdj.db import models
 
 temp_storage_dir = tempfile.mkdtemp()
 temp_storage = FileSystemStorage(temp_storage_dir)

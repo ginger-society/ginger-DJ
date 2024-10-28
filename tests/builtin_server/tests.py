@@ -4,9 +4,9 @@ from io import BytesIO
 from unittest import TestCase, mock
 from wsgiref import simple_server
 
-from ginger.core.servers.basehttp import get_internal_wsgi_application
-from ginger.core.signals import request_finished
-from ginger.test import RequestFactory, override_settings
+from gingerdj.core.servers.basehttp import get_internal_wsgi_application
+from gingerdj.core.signals import request_finished
+from gingerdj.test import RequestFactory, override_settings
 
 from .views import FILE_RESPONSE_HOLDER
 

@@ -15,8 +15,8 @@ extraction, interpolation, or both.
 How this script helps:
  * Add {% translate "Two %% Three %%%" %} and blocktranslate equivalent to templates.
  * Run this script.
- * Test extraction - verify the new msgid in sampleproject's ginger.po.
- * Add a translation to sampleproject's ginger.po.
+ * Test extraction - verify the new msgid in sampleproject's gingerdj.po.
+ * Add a translation to sampleproject's gingerdj.po.
  * Run this script.
  * Test interpolation - verify templatetag rendering, test each in a template
    that is rendered using an activated language from sampleproject's locale.
@@ -36,7 +36,7 @@ sys.path.append(os.path.abspath(os.path.join(proj_dir, "..", "..", "..")))
 
 def update_translation_catalogs():
     """Run makemessages and compilemessages in sampleproject."""
-    from ginger.core.management import call_command
+    from gingerdj.core.management import call_command
 
     prev_cwd = os.getcwd()
 
@@ -45,7 +45,7 @@ def update_translation_catalogs():
     call_command("compilemessages")
 
     # keep the diff friendly - remove 'POT-Creation-Date'
-    pofile = os.path.join(proj_dir, "locale", "fr", "LC_MESSAGES", "ginger.po")
+    pofile = os.path.join(proj_dir, "locale", "fr", "LC_MESSAGES", "gingerdj.po")
 
     with open(pofile) as f:
         content = f.read()

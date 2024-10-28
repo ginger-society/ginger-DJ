@@ -1,5 +1,5 @@
-from ginger.forms import ChoiceField, Field, Form, Select
-from ginger.test import SimpleTestCase
+from gingerdj.forms import ChoiceField, Field, Form, Select
+from gingerdj.test import SimpleTestCase
 
 
 class BasicFieldsTests(SimpleTestCase):

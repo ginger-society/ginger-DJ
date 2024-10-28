@@ -46,7 +46,7 @@ jobs:
       postgres:
         image: postgres:13-alpine
         env:
-          POSTGRES_DB: ginger
+          POSTGRES_DB: gingerdj
           POSTGRES_USER: user
           POSTGRES_PASSWORD: postgres
         ports:

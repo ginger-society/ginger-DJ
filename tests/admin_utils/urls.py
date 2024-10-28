@@ -1,4 +1,4 @@
-from ginger.urls import path
+from gingerdj.urls import path
 
 from .admin import custom_site, site
 

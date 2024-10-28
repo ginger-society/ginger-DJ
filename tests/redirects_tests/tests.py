@@ -1,15 +1,15 @@
-from ginger.conf import settings
-from ginger.contrib.redirects.middleware import RedirectFallbackMiddleware
-from ginger.contrib.redirects.models import Redirect
-from ginger.contrib.sites.models import Site
-from ginger.core.exceptions import ImproperlyConfigured
-from ginger.http import HttpResponse, HttpResponseForbidden, HttpResponseRedirect
-from ginger.test import TestCase, modify_settings, override_settings
+from gingerdj.conf import settings
+from gingerdj.contrib.redirects.middleware import RedirectFallbackMiddleware
+from gingerdj.contrib.redirects.models import Redirect
+from gingerdj.contrib.sites.models import Site
+from gingerdj.core.exceptions import ImproperlyConfigured
+from gingerdj.http import HttpResponse, HttpResponseForbidden, HttpResponseRedirect
+from gingerdj.test import TestCase, modify_settings, override_settings
 
 
 @modify_settings(
     MIDDLEWARE={
-        "append": "ginger.contrib.redirects.middleware.RedirectFallbackMiddleware"
+        "append": "gingerdj.contrib.redirects.middleware.RedirectFallbackMiddleware"
     }
 )
 @override_settings(APPEND_SLASH=False, ROOT_URLCONF="redirects_tests.urls", SITE_ID=1)
@@ -73,14 +73,14 @@ class RedirectTests(TestCase):
         response = self.client.get("/initial")
         self.assertEqual(response.status_code, 410)
 
-    @modify_settings(INSTALLED_APPS={"remove": "ginger.contrib.sites"})
+    @modify_settings(INSTALLED_APPS={"remove": "gingerdj.contrib.sites"})
     def test_sites_not_installed(self):
         def get_response(request):
             return HttpResponse()
 
         msg = (
             "You cannot use RedirectFallbackMiddleware when "
-            "ginger.contrib.sites is not installed."
+            "gingerdj.contrib.sites is not installed."
         )
         with self.assertRaisesMessage(ImproperlyConfigured, msg):
             RedirectFallbackMiddleware(get_response)

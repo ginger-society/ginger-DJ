@@ -1,7 +1,7 @@
 import copy
 from datetime import datetime
 
-from ginger.forms import (
+from gingerdj.forms import (
     CharField,
     FileInput,
     Form,

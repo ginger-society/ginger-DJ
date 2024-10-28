@@ -4,17 +4,17 @@ import json
 import unittest
 import uuid
 
-from ginger import forms
-from ginger.contrib.admin.utils import display_for_field
-from ginger.core import checks, exceptions, serializers, validators
-from ginger.core.exceptions import FieldError
-from ginger.core.management import call_command
-from ginger.db import IntegrityError, connection, models
-from ginger.db.models.expressions import Exists, F, OuterRef, RawSQL, Value
-from ginger.db.models.functions import Cast, JSONObject, Upper
-from ginger.test import TransactionTestCase, override_settings, skipUnlessDBFeature
-from ginger.test.utils import isolate_apps
-from ginger.utils import timezone
+from gingerdj import forms
+from gingerdj.contrib.admin.utils import display_for_field
+from gingerdj.core import checks, exceptions, serializers, validators
+from gingerdj.core.exceptions import FieldError
+from gingerdj.core.management import call_command
+from gingerdj.db import IntegrityError, connection, models
+from gingerdj.db.models.expressions import Exists, F, OuterRef, RawSQL, Value
+from gingerdj.db.models.functions import Cast, JSONObject, Upper
+from gingerdj.test import TransactionTestCase, override_settings, skipUnlessDBFeature
+from gingerdj.test.utils import isolate_apps
+from gingerdj.utils import timezone
 
 from . import PostgreSQLSimpleTestCase, PostgreSQLTestCase, PostgreSQLWidgetTestCase
 from .models import (
@@ -31,16 +31,16 @@ from .models import (
 )
 
 try:
-    from ginger.contrib.postgres.aggregates import ArrayAgg
-    from ginger.contrib.postgres.expressions import ArraySubquery
-    from ginger.contrib.postgres.fields import ArrayField
-    from ginger.contrib.postgres.fields.array import IndexTransform, SliceTransform
-    from ginger.contrib.postgres.forms import (
+    from gingerdj.contrib.postgres.aggregates import ArrayAgg
+    from gingerdj.contrib.postgres.expressions import ArraySubquery
+    from gingerdj.contrib.postgres.fields import ArrayField
+    from gingerdj.contrib.postgres.fields.array import IndexTransform, SliceTransform
+    from gingerdj.contrib.postgres.forms import (
         SimpleArrayField,
         SplitArrayField,
         SplitArrayWidget,
     )
-    from ginger.db.backends.postgresql.psycopg_any import NumericRange
+    from gingerdj.db.backends.postgresql.psycopg_any import NumericRange
 except ImportError:
     pass
 
@@ -931,7 +931,7 @@ class TestMigrations(TransactionTestCase):
     def test_subclass_deconstruct(self):
         field = ArrayField(models.IntegerField())
         name, path, args, kwargs = field.deconstruct()
-        self.assertEqual(path, "ginger.contrib.postgres.fields.ArrayField")
+        self.assertEqual(path, "gingerdj.contrib.postgres.fields.ArrayField")
 
         field = ArrayFieldSubclass()
         name, path, args, kwargs = field.deconstruct()
@@ -1418,7 +1418,7 @@ class TestSplitFormWidget(PostgreSQLWidgetTestCase):
                             "required": False,
                             "value": "val1",
                             "attrs": {},
-                            "template_name": "ginger/forms/widgets/text.html",
+                            "template_name": "gingerdj/forms/widgets/text.html",
                             "type": "text",
                         },
                         {
@@ -1427,7 +1427,7 @@ class TestSplitFormWidget(PostgreSQLWidgetTestCase):
                             "required": False,
                             "value": "val2",
                             "attrs": {},
-                            "template_name": "ginger/forms/widgets/text.html",
+                            "template_name": "gingerdj/forms/widgets/text.html",
                             "type": "text",
                         },
                     ],

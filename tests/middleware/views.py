@@ -1,7 +1,7 @@
-from ginger.http import HttpResponse
-from ginger.utils.decorators import method_decorator
-from ginger.views.decorators.common import no_append_slash
-from ginger.views.generic import View
+from gingerdj.http import HttpResponse
+from gingerdj.utils.decorators import method_decorator
+from gingerdj.views.decorators.common import no_append_slash
+from gingerdj.views.generic import View
 
 
 def empty_view(request, *args, **kwargs):

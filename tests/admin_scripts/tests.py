@@ -16,25 +16,30 @@ import unittest
 from io import StringIO
 from unittest import mock
 
-from ginger import conf, get_version
-from ginger.conf import settings
-from ginger.core.management import (
+from gingerdj import conf, get_version
+from gingerdj.conf import settings
+from gingerdj.core.management import (
     BaseCommand,
     CommandError,
     call_command,
     color,
     execute_from_command_line,
 )
-from ginger.core.management.commands.loaddata import Command as LoaddataCommand
-from ginger.core.management.commands.runserver import Command as RunserverCommand
-from ginger.core.management.commands.testserver import Command as TestserverCommand
-from ginger.db import ConnectionHandler, connection
-from ginger.db.migrations.recorder import MigrationRecorder
-from ginger.test import LiveServerTestCase, SimpleTestCase, TestCase, override_settings
-from ginger.test.utils import captured_stderr, captured_stdout
-from ginger.urls import path
-from ginger.utils.version import PY313
-from ginger.views.static import serve
+from gingerdj.core.management.commands.loaddata import Command as LoaddataCommand
+from gingerdj.core.management.commands.runserver import Command as RunserverCommand
+from gingerdj.core.management.commands.testserver import Command as TestserverCommand
+from gingerdj.db import ConnectionHandler, connection
+from gingerdj.db.migrations.recorder import MigrationRecorder
+from gingerdj.test import (
+    LiveServerTestCase,
+    SimpleTestCase,
+    TestCase,
+    override_settings,
+)
+from gingerdj.test.utils import captured_stderr, captured_stdout
+from gingerdj.urls import path
+from gingerdj.utils.version import PY313
+from gingerdj.views.static import serve
 
 from . import urls
 
@@ -100,7 +105,7 @@ class AdminScriptTestCase(SimpleTestCase):
         paths = []
         for backend in settings.DATABASES.values():
             package = backend["ENGINE"].split(".")[0]
-            if package != "ginger":
+            if package != "gingerdj":
                 backend_pkg = __import__(package)
                 backend_dir = os.path.dirname(backend_pkg.__file__)
                 paths.append(os.path.dirname(backend_dir))
@@ -108,10 +113,10 @@ class AdminScriptTestCase(SimpleTestCase):
 
     def run_test(self, args, settings_file=None, apps=None, umask=-1):
         base_dir = os.path.dirname(self.test_dir)
-        # The base dir for Ginger's tests is one level up.
+        # The base dir for GingerDJ's tests is one level up.
         tests_dir = os.path.dirname(os.path.dirname(__file__))
-        # The base dir for Ginger is one level above the test dir. We don't use
-        # `import ginger` to figure that out, so we don't pick up a Ginger
+        # The base dir for GingerDJ is one level above the test dir. We don't use
+        # `import gingerdj` to figure that out, so we don't pick up a GingerDJ
         # from site-packages or similar.
         ginger_dir = os.path.dirname(tests_dir)
         ext_backend_base_dirs = self._ext_backend_paths()
@@ -140,7 +145,7 @@ class AdminScriptTestCase(SimpleTestCase):
         return p.stdout, p.stderr
 
     def run_ginger_admin(self, args, settings_file=None, umask=-1):
-        return self.run_test(["-m", "ginger", *args], settings_file, umask=umask)
+        return self.run_test(["-m", "gingerdj", *args], settings_file, umask=umask)
 
     def run_manage(self, args, settings_file=None, manage_py=None):
         template_manage_py = (
@@ -193,16 +198,16 @@ class AdminScriptTestCase(SimpleTestCase):
 ##########################################################################
 # GINGER ADMIN TESTS
 # This first series of test classes checks the environment processing
-# of the ginger-admin.
+# of the gingerdj-admin.
 ##########################################################################
 
 
 class GingerAdminNoSettings(AdminScriptTestCase):
-    "A series of tests for ginger-admin when there is no settings.py file."
+    "A series of tests for gingerdj-admin when there is no settings.py file."
 
     def test_builtin_command(self):
         """
-        no settings: ginger-admin builtin commands fail with an error when no
+        no settings: gingerdj-admin builtin commands fail with an error when no
         settings provided.
         """
         args = ["check", "admin_scripts"]
@@ -212,7 +217,7 @@ class GingerAdminNoSettings(AdminScriptTestCase):
 
     def test_builtin_with_bad_settings(self):
         """
-        no settings: ginger-admin builtin commands fail if settings file (from
+        no settings: gingerdj-admin builtin commands fail if settings file (from
         argument) doesn't exist.
         """
         args = ["check", "--settings=bad_settings", "admin_scripts"]
@@ -222,7 +227,7 @@ class GingerAdminNoSettings(AdminScriptTestCase):
 
     def test_builtin_with_bad_environment(self):
         """
-        no settings: ginger-admin builtin commands fail if settings file (from
+        no settings: gingerdj-admin builtin commands fail if settings file (from
         environment) doesn't exist.
         """
         args = ["check", "admin_scripts"]
@@ -243,7 +248,7 @@ class GingerAdminNoSettings(AdminScriptTestCase):
 
 class GingerAdminDefaultSettings(AdminScriptTestCase):
     """
-    A series of tests for ginger-admin when using a settings.py file that
+    A series of tests for gingerdj-admin when using a settings.py file that
     contains the test application.
     """
 
@@ -253,7 +258,7 @@ class GingerAdminDefaultSettings(AdminScriptTestCase):
 
     def test_builtin_command(self):
         """
-        default: ginger-admin builtin commands fail with an error when no
+        default: gingerdj-admin builtin commands fail with an error when no
         settings provided.
         """
         args = ["check", "admin_scripts"]
@@ -263,7 +268,7 @@ class GingerAdminDefaultSettings(AdminScriptTestCase):
 
     def test_builtin_with_settings(self):
         """
-        default: ginger-admin builtin commands succeed if settings are provided
+        default: gingerdj-admin builtin commands succeed if settings are provided
         as argument.
         """
         args = ["check", "--settings=test_project.settings", "admin_scripts"]
@@ -273,7 +278,7 @@ class GingerAdminDefaultSettings(AdminScriptTestCase):
 
     def test_builtin_with_environment(self):
         """
-        default: ginger-admin builtin commands succeed if settings are provided
+        default: gingerdj-admin builtin commands succeed if settings are provided
         in the environment.
         """
         args = ["check", "admin_scripts"]
@@ -283,7 +288,7 @@ class GingerAdminDefaultSettings(AdminScriptTestCase):
 
     def test_builtin_with_bad_settings(self):
         """
-        default: ginger-admin builtin commands fail if settings file (from
+        default: gingerdj-admin builtin commands fail if settings file (from
         argument) doesn't exist.
         """
         args = ["check", "--settings=bad_settings", "admin_scripts"]
@@ -293,7 +298,7 @@ class GingerAdminDefaultSettings(AdminScriptTestCase):
 
     def test_builtin_with_bad_environment(self):
         """
-        default: ginger-admin builtin commands fail if settings file (from
+        default: gingerdj-admin builtin commands fail if settings file (from
         environment) doesn't exist.
         """
         args = ["check", "admin_scripts"]
@@ -303,18 +308,18 @@ class GingerAdminDefaultSettings(AdminScriptTestCase):
 
     def test_custom_command(self):
         """
-        default: ginger-admin can't execute user commands if it isn't provided
+        default: gingerdj-admin can't execute user commands if it isn't provided
         settings.
         """
         args = ["noargs_command"]
         out, err = self.run_ginger_admin(args)
         self.assertNoOutput(out)
-        self.assertOutput(err, "No Ginger settings specified")
+        self.assertOutput(err, "No GingerDJ settings specified")
         self.assertOutput(err, "Unknown command: 'noargs_command'")
 
     def test_custom_command_with_settings(self):
         """
-        default: ginger-admin can execute user commands if settings are
+        default: gingerdj-admin can execute user commands if settings are
         provided as argument.
         """
         args = ["noargs_command", "--settings=test_project.settings"]
@@ -324,7 +329,7 @@ class GingerAdminDefaultSettings(AdminScriptTestCase):
 
     def test_custom_command_with_environment(self):
         """
-        default: ginger-admin can execute user commands if settings are
+        default: gingerdj-admin can execute user commands if settings are
         provided in environment.
         """
         args = ["noargs_command"]
@@ -335,7 +340,7 @@ class GingerAdminDefaultSettings(AdminScriptTestCase):
 
 class GingerAdminFullPathDefaultSettings(AdminScriptTestCase):
     """
-    A series of tests for ginger-admin when using a settings.py file that
+    A series of tests for gingerdj-admin when using a settings.py file that
     contains the test application specified using a full path.
     """
 
@@ -351,7 +356,7 @@ class GingerAdminFullPathDefaultSettings(AdminScriptTestCase):
 
     def test_builtin_command(self):
         """
-        fulldefault: ginger-admin builtin commands fail with an error when no
+        fulldefault: gingerdj-admin builtin commands fail with an error when no
         settings provided.
         """
         args = ["check", "admin_scripts"]
@@ -361,7 +366,7 @@ class GingerAdminFullPathDefaultSettings(AdminScriptTestCase):
 
     def test_builtin_with_settings(self):
         """
-        fulldefault: ginger-admin builtin commands succeed if a settings file
+        fulldefault: gingerdj-admin builtin commands succeed if a settings file
         is provided.
         """
         args = ["check", "--settings=test_project.settings", "admin_scripts"]
@@ -371,7 +376,7 @@ class GingerAdminFullPathDefaultSettings(AdminScriptTestCase):
 
     def test_builtin_with_environment(self):
         """
-        fulldefault: ginger-admin builtin commands succeed if the environment
+        fulldefault: gingerdj-admin builtin commands succeed if the environment
         contains settings.
         """
         args = ["check", "admin_scripts"]
@@ -381,7 +386,7 @@ class GingerAdminFullPathDefaultSettings(AdminScriptTestCase):
 
     def test_builtin_with_bad_settings(self):
         """
-        fulldefault: ginger-admin builtin commands fail if settings file (from
+        fulldefault: gingerdj-admin builtin commands fail if settings file (from
         argument) doesn't exist.
         """
         args = ["check", "--settings=bad_settings", "admin_scripts"]
@@ -391,7 +396,7 @@ class GingerAdminFullPathDefaultSettings(AdminScriptTestCase):
 
     def test_builtin_with_bad_environment(self):
         """
-        fulldefault: ginger-admin builtin commands fail if settings file (from
+        fulldefault: gingerdj-admin builtin commands fail if settings file (from
         environment) doesn't exist.
         """
         args = ["check", "admin_scripts"]
@@ -401,18 +406,18 @@ class GingerAdminFullPathDefaultSettings(AdminScriptTestCase):
 
     def test_custom_command(self):
         """
-        fulldefault: ginger-admin can't execute user commands unless settings
+        fulldefault: gingerdj-admin can't execute user commands unless settings
         are provided.
         """
         args = ["noargs_command"]
         out, err = self.run_ginger_admin(args)
         self.assertNoOutput(out)
-        self.assertOutput(err, "No Ginger settings specified")
+        self.assertOutput(err, "No GingerDJ settings specified")
         self.assertOutput(err, "Unknown command: 'noargs_command'")
 
     def test_custom_command_with_settings(self):
         """
-        fulldefault: ginger-admin can execute user commands if settings are
+        fulldefault: gingerdj-admin can execute user commands if settings are
         provided as argument.
         """
         args = ["noargs_command", "--settings=test_project.settings"]
@@ -422,7 +427,7 @@ class GingerAdminFullPathDefaultSettings(AdminScriptTestCase):
 
     def test_custom_command_with_environment(self):
         """
-        fulldefault: ginger-admin can execute user commands if settings are
+        fulldefault: gingerdj-admin can execute user commands if settings are
         provided in environment.
         """
         args = ["noargs_command"]
@@ -433,19 +438,17 @@ class GingerAdminFullPathDefaultSettings(AdminScriptTestCase):
 
 class GingerAdminMinimalSettings(AdminScriptTestCase):
     """
-    A series of tests for ginger-admin when using a settings.py file that
+    A series of tests for gingerdj-admin when using a settings.py file that
     doesn't contain the test application.
     """
 
     def setUp(self):
         super().setUp()
-        self.write_settings(
-            "settings.py", apps=[]
-        )
+        self.write_settings("settings.py", apps=[])
 
     def test_builtin_command(self):
         """
-        minimal: ginger-admin builtin commands fail with an error when no
+        minimal: gingerdj-admin builtin commands fail with an error when no
         settings provided.
         """
         args = ["check", "admin_scripts"]
@@ -455,7 +458,7 @@ class GingerAdminMinimalSettings(AdminScriptTestCase):
 
     def test_builtin_with_settings(self):
         """
-        minimal: ginger-admin builtin commands fail if settings are provided as
+        minimal: gingerdj-admin builtin commands fail if settings are provided as
         argument.
         """
         args = ["check", "--settings=test_project.settings", "admin_scripts"]
@@ -465,7 +468,7 @@ class GingerAdminMinimalSettings(AdminScriptTestCase):
 
     def test_builtin_with_environment(self):
         """
-        minimal: ginger-admin builtin commands fail if settings are provided in
+        minimal: gingerdj-admin builtin commands fail if settings are provided in
         the environment.
         """
         args = ["check", "admin_scripts"]
@@ -475,7 +478,7 @@ class GingerAdminMinimalSettings(AdminScriptTestCase):
 
     def test_builtin_with_bad_settings(self):
         """
-        minimal: ginger-admin builtin commands fail if settings file (from
+        minimal: gingerdj-admin builtin commands fail if settings file (from
         argument) doesn't exist.
         """
         args = ["check", "--settings=bad_settings", "admin_scripts"]
@@ -485,7 +488,7 @@ class GingerAdminMinimalSettings(AdminScriptTestCase):
 
     def test_builtin_with_bad_environment(self):
         """
-        minimal: ginger-admin builtin commands fail if settings file (from
+        minimal: gingerdj-admin builtin commands fail if settings file (from
         environment) doesn't exist.
         """
         args = ["check", "admin_scripts"]
@@ -494,16 +497,16 @@ class GingerAdminMinimalSettings(AdminScriptTestCase):
         self.assertOutput(err, "No module named '?bad_settings'?", regex=True)
 
     def test_custom_command(self):
-        "minimal: ginger-admin can't execute user commands unless settings are provided"
+        "minimal: gingerdj-admin can't execute user commands unless settings are provided"
         args = ["noargs_command"]
         out, err = self.run_ginger_admin(args)
         self.assertNoOutput(out)
-        self.assertOutput(err, "No Ginger settings specified")
+        self.assertOutput(err, "No GingerDJ settings specified")
         self.assertOutput(err, "Unknown command: 'noargs_command'")
 
     def test_custom_command_with_settings(self):
         """
-        minimal: ginger-admin can't execute user commands, even if settings are
+        minimal: gingerdj-admin can't execute user commands, even if settings are
         provided as argument.
         """
         args = ["noargs_command", "--settings=test_project.settings"]
@@ -513,7 +516,7 @@ class GingerAdminMinimalSettings(AdminScriptTestCase):
 
     def test_custom_command_with_environment(self):
         """
-        minimal: ginger-admin can't execute user commands, even if settings are
+        minimal: gingerdj-admin can't execute user commands, even if settings are
         provided in environment.
         """
         args = ["noargs_command"]
@@ -524,7 +527,7 @@ class GingerAdminMinimalSettings(AdminScriptTestCase):
 
 class GingerAdminAlternateSettings(AdminScriptTestCase):
     """
-    A series of tests for ginger-admin when using a settings file with a name
+    A series of tests for gingerdj-admin when using a settings file with a name
     other than 'settings.py'.
     """
 
@@ -534,7 +537,7 @@ class GingerAdminAlternateSettings(AdminScriptTestCase):
 
     def test_builtin_command(self):
         """
-        alternate: ginger-admin builtin commands fail with an error when no
+        alternate: gingerdj-admin builtin commands fail with an error when no
         settings provided.
         """
         args = ["check", "admin_scripts"]
@@ -544,7 +547,7 @@ class GingerAdminAlternateSettings(AdminScriptTestCase):
 
     def test_builtin_with_settings(self):
         """
-        alternate: ginger-admin builtin commands succeed if settings are
+        alternate: gingerdj-admin builtin commands succeed if settings are
         provided as argument.
         """
         args = ["check", "--settings=test_project.alternate_settings", "admin_scripts"]
@@ -554,7 +557,7 @@ class GingerAdminAlternateSettings(AdminScriptTestCase):
 
     def test_builtin_with_environment(self):
         """
-        alternate: ginger-admin builtin commands succeed if settings are
+        alternate: gingerdj-admin builtin commands succeed if settings are
         provided in the environment.
         """
         args = ["check", "admin_scripts"]
@@ -564,7 +567,7 @@ class GingerAdminAlternateSettings(AdminScriptTestCase):
 
     def test_builtin_with_bad_settings(self):
         """
-        alternate: ginger-admin builtin commands fail if settings file (from
+        alternate: gingerdj-admin builtin commands fail if settings file (from
         argument) doesn't exist.
         """
         args = ["check", "--settings=bad_settings", "admin_scripts"]
@@ -574,7 +577,7 @@ class GingerAdminAlternateSettings(AdminScriptTestCase):
 
     def test_builtin_with_bad_environment(self):
         """
-        alternate: ginger-admin builtin commands fail if settings file (from
+        alternate: gingerdj-admin builtin commands fail if settings file (from
         environment) doesn't exist.
         """
         args = ["check", "admin_scripts"]
@@ -584,18 +587,18 @@ class GingerAdminAlternateSettings(AdminScriptTestCase):
 
     def test_custom_command(self):
         """
-        alternate: ginger-admin can't execute user commands unless settings
+        alternate: gingerdj-admin can't execute user commands unless settings
         are provided.
         """
         args = ["noargs_command"]
         out, err = self.run_ginger_admin(args)
         self.assertNoOutput(out)
-        self.assertOutput(err, "No Ginger settings specified")
+        self.assertOutput(err, "No GingerDJ settings specified")
         self.assertOutput(err, "Unknown command: 'noargs_command'")
 
     def test_custom_command_with_settings(self):
         """
-        alternate: ginger-admin can execute user commands if settings are
+        alternate: gingerdj-admin can execute user commands if settings are
         provided as argument.
         """
         args = ["noargs_command", "--settings=test_project.alternate_settings"]
@@ -605,7 +608,7 @@ class GingerAdminAlternateSettings(AdminScriptTestCase):
 
     def test_custom_command_with_environment(self):
         """
-        alternate: ginger-admin can execute user commands if settings are
+        alternate: gingerdj-admin can execute user commands if settings are
         provided in environment.
         """
         args = ["noargs_command"]
@@ -616,7 +619,7 @@ class GingerAdminAlternateSettings(AdminScriptTestCase):
 
 class GingerAdminMultipleSettings(AdminScriptTestCase):
     """
-    A series of tests for ginger-admin when multiple settings files
+    A series of tests for gingerdj-admin when multiple settings files
     (including the default 'settings.py') are available. The default settings
     file is insufficient for performing the operations described, so the
     alternate settings must be used by the running script.
@@ -624,14 +627,12 @@ class GingerAdminMultipleSettings(AdminScriptTestCase):
 
     def setUp(self):
         super().setUp()
-        self.write_settings(
-            "settings.py", apps=[]
-        )
+        self.write_settings("settings.py", apps=[])
         self.write_settings("alternate_settings.py")
 
     def test_builtin_command(self):
         """
-        alternate: ginger-admin builtin commands fail with an error when no
+        alternate: gingerdj-admin builtin commands fail with an error when no
         settings provided.
         """
         args = ["check", "admin_scripts"]
@@ -641,7 +642,7 @@ class GingerAdminMultipleSettings(AdminScriptTestCase):
 
     def test_builtin_with_settings(self):
         """
-        alternate: ginger-admin builtin commands succeed if settings are
+        alternate: gingerdj-admin builtin commands succeed if settings are
         provided as argument.
         """
         args = ["check", "--settings=test_project.alternate_settings", "admin_scripts"]
@@ -651,7 +652,7 @@ class GingerAdminMultipleSettings(AdminScriptTestCase):
 
     def test_builtin_with_environment(self):
         """
-        alternate: ginger-admin builtin commands succeed if settings are
+        alternate: gingerdj-admin builtin commands succeed if settings are
         provided in the environment.
         """
         args = ["check", "admin_scripts"]
@@ -661,7 +662,7 @@ class GingerAdminMultipleSettings(AdminScriptTestCase):
 
     def test_builtin_with_bad_settings(self):
         """
-        alternate: ginger-admin builtin commands fail if settings file (from
+        alternate: gingerdj-admin builtin commands fail if settings file (from
         argument) doesn't exist.
         """
         args = ["check", "--settings=bad_settings", "admin_scripts"]
@@ -670,7 +671,7 @@ class GingerAdminMultipleSettings(AdminScriptTestCase):
 
     def test_builtin_with_bad_environment(self):
         """
-        alternate: ginger-admin builtin commands fail if settings file (from
+        alternate: gingerdj-admin builtin commands fail if settings file (from
         environment) doesn't exist.
         """
         args = ["check", "admin_scripts"]
@@ -680,18 +681,18 @@ class GingerAdminMultipleSettings(AdminScriptTestCase):
 
     def test_custom_command(self):
         """
-        alternate: ginger-admin can't execute user commands unless settings are
+        alternate: gingerdj-admin can't execute user commands unless settings are
         provided.
         """
         args = ["noargs_command"]
         out, err = self.run_ginger_admin(args)
         self.assertNoOutput(out)
-        self.assertOutput(err, "No Ginger settings specified")
+        self.assertOutput(err, "No GingerDJ settings specified")
         self.assertOutput(err, "Unknown command: 'noargs_command'")
 
     def test_custom_command_with_settings(self):
         """
-        alternate: ginger-admin can execute user commands if settings are
+        alternate: gingerdj-admin can execute user commands if settings are
         provided as argument.
         """
         args = ["noargs_command", "--settings=test_project.alternate_settings"]
@@ -701,7 +702,7 @@ class GingerAdminMultipleSettings(AdminScriptTestCase):
 
     def test_custom_command_with_environment(self):
         """
-        alternate: ginger-admin can execute user commands if settings are
+        alternate: gingerdj-admin can execute user commands if settings are
         provided in environment.
         """
         args = ["noargs_command"]
@@ -712,7 +713,7 @@ class GingerAdminMultipleSettings(AdminScriptTestCase):
 
 class GingerAdminSettingsDirectory(AdminScriptTestCase):
     """
-    A series of tests for ginger-admin when the settings file is in a
+    A series of tests for gingerdj-admin when the settings file is in a
     directory. (see #9751).
     """
 
@@ -761,7 +762,7 @@ class GingerAdminSettingsDirectory(AdminScriptTestCase):
 
     def test_builtin_command(self):
         """
-        directory: ginger-admin builtin commands fail with an error when no
+        directory: gingerdj-admin builtin commands fail with an error when no
         settings provided.
         """
         args = ["check", "admin_scripts"]
@@ -771,7 +772,7 @@ class GingerAdminSettingsDirectory(AdminScriptTestCase):
 
     def test_builtin_with_bad_settings(self):
         """
-        directory: ginger-admin builtin commands fail if settings file (from
+        directory: gingerdj-admin builtin commands fail if settings file (from
         argument) doesn't exist.
         """
         args = ["check", "--settings=bad_settings", "admin_scripts"]
@@ -780,7 +781,7 @@ class GingerAdminSettingsDirectory(AdminScriptTestCase):
 
     def test_builtin_with_bad_environment(self):
         """
-        directory: ginger-admin builtin commands fail if settings file (from
+        directory: gingerdj-admin builtin commands fail if settings file (from
         environment) doesn't exist.
         """
         args = ["check", "admin_scripts"]
@@ -790,18 +791,18 @@ class GingerAdminSettingsDirectory(AdminScriptTestCase):
 
     def test_custom_command(self):
         """
-        directory: ginger-admin can't execute user commands unless settings are
+        directory: gingerdj-admin can't execute user commands unless settings are
         provided.
         """
         args = ["noargs_command"]
         out, err = self.run_ginger_admin(args)
         self.assertNoOutput(out)
-        self.assertOutput(err, "No Ginger settings specified")
+        self.assertOutput(err, "No GingerDJ settings specified")
         self.assertOutput(err, "Unknown command: 'noargs_command'")
 
     def test_builtin_with_settings(self):
         """
-        directory: ginger-admin builtin commands succeed if settings are
+        directory: gingerdj-admin builtin commands succeed if settings are
         provided as argument.
         """
         args = ["check", "--settings=test_project.settings", "admin_scripts"]
@@ -811,7 +812,7 @@ class GingerAdminSettingsDirectory(AdminScriptTestCase):
 
     def test_builtin_with_environment(self):
         """
-        directory: ginger-admin builtin commands succeed if settings are
+        directory: gingerdj-admin builtin commands succeed if settings are
         provided in the environment.
         """
         args = ["check", "admin_scripts"]
@@ -836,7 +837,7 @@ class ManageManuallyConfiguredSettings(AdminScriptTestCase):
         )
         self.assertNoOutput(out)
         self.assertOutput(err, "Unknown command: 'invalid_command'")
-        self.assertNotInOutput(err, "No Ginger settings specified")
+        self.assertNotInOutput(err, "No GingerDJ settings specified")
 
 
 class ManageNoSettings(AdminScriptTestCase):
@@ -974,7 +975,7 @@ class ManageFullPathDefaultSettings(AdminScriptTestCase):
         super().setUp()
         self.write_settings(
             "settings.py",
-            [ "admin_scripts"],
+            ["admin_scripts"],
         )
 
     def test_builtin_command(self):
@@ -1065,9 +1066,7 @@ class ManageMinimalSettings(AdminScriptTestCase):
 
     def setUp(self):
         super().setUp()
-        self.write_settings(
-            "settings.py", apps=[]
-        )
+        self.write_settings("settings.py", apps=[])
 
     def test_builtin_command(self):
         """
@@ -1266,9 +1265,7 @@ class ManageMultipleSettings(AdminScriptTestCase):
 
     def setUp(self):
         super().setUp()
-        self.write_settings(
-            "settings.py", apps=[]
-        )
+        self.write_settings("settings.py", apps=[])
         self.write_settings("alternate_settings.py")
 
     def test_builtin_command(self):
@@ -1402,12 +1399,12 @@ class ManageSettingsWithSettingsErrors(AdminScriptTestCase):
         """
         self.write_settings(
             "settings.py",
-            extra="from ginger.core.exceptions import ImproperlyConfigured\n"
+            extra="from gingerdj.core.exceptions import ImproperlyConfigured\n"
             "raise ImproperlyConfigured()",
         )
         args = ["help"]
         out, err = self.run_manage(args)
-        self.assertOutput(out, "only Ginger core commands are listed")
+        self.assertOutput(out, "only GingerDJ core commands are listed")
         self.assertNoOutput(err)
 
 
@@ -1445,24 +1442,24 @@ class ManageCheck(AdminScriptTestCase):
             apps=[
                 "admin_scripts.complex_app",
                 "admin_scripts.simple_app",
-                "ginger.contrib.admin.apps.SimpleAdminConfig",
-                "ginger.contrib.messages",
+                "gingerdj.contrib.admin.apps.SimpleAdminConfig",
+                "gingerdj.contrib.messages",
             ],
             sdict={
                 "DEBUG": True,
                 "MIDDLEWARE": [
-                    "ginger.contrib.messages.middleware.MessageMiddleware",
-                    "ginger.contrib.sessions.middleware.SessionMiddleware",
+                    "gingerdj.contrib.messages.middleware.MessageMiddleware",
+                    "gingerdj.contrib.sessions.middleware.SessionMiddleware",
                 ],
                 "TEMPLATES": [
                     {
-                        "BACKEND": "ginger.template.backends.ginger.GingerTemplates",
+                        "BACKEND": "gingerdj.template.backends.gingerdj.GingerTemplates",
                         "DIRS": [],
                         "APP_DIRS": True,
                         "OPTIONS": {
                             "context_processors": [
-                                "ginger.template.context_processors.request",
-                                "ginger.contrib.messages.context_processors.messages",
+                                "gingerdj.template.context_processors.request",
+                                "gingerdj.contrib.messages.context_processors.messages",
                             ],
                         },
                     },
@@ -1482,7 +1479,7 @@ class ManageCheck(AdminScriptTestCase):
             "settings.py",
             apps=[
                 "admin_scripts.app_with_import",
-                "ginger.contrib.sites",
+                "gingerdj.contrib.sites",
             ],
             sdict={"DEBUG": True},
         )
@@ -1522,7 +1519,7 @@ class ManageCheck(AdminScriptTestCase):
 
     def test_warning_does_not_halt(self):
         """
-        When there are only warnings or less serious messages, then Ginger
+        When there are only warnings or less serious messages, then GingerDJ
         should not prevent user from launching their project, so `check`
         command should not raise `CommandError` exception.
 
@@ -1645,7 +1642,7 @@ class ManageRunserver(SimpleTestCase):
         """
         tested_connections = ConnectionHandler({})
         with mock.patch(
-            "ginger.core.management.base.connections", new=tested_connections
+            "gingerdj.core.management.base.connections", new=tested_connections
         ):
             self.cmd.check_migrations()
 
@@ -1658,9 +1655,9 @@ class ManageRunserver(SimpleTestCase):
         # You have # ...
         self.assertIn("unapplied migration(s)", self.output.getvalue())
 
-    @mock.patch("ginger.core.management.commands.runserver.run")
-    @mock.patch("ginger.core.management.base.BaseCommand.check_migrations")
-    @mock.patch("ginger.core.management.base.BaseCommand.check")
+    @mock.patch("gingerdj.core.management.commands.runserver.run")
+    @mock.patch("gingerdj.core.management.base.BaseCommand.check_migrations")
+    @mock.patch("gingerdj.core.management.base.BaseCommand.check")
     def test_skip_checks(self, mocked_check, *mocked_objects):
         call_command(
             "runserver",
@@ -1759,7 +1756,9 @@ class ManageTestserver(SimpleTestCase):
             force_color=False,
         )
 
-    @mock.patch("ginger.db.connection.creation.create_test_db", return_value="test_db")
+    @mock.patch(
+        "gingerdj.db.connection.creation.create_test_db", return_value="test_db"
+    )
     @mock.patch.object(LoaddataCommand, "handle", return_value="")
     @mock.patch.object(RunserverCommand, "handle", return_value="")
     def test_params_to_runserver(
@@ -1827,7 +1826,7 @@ class CommandTypes(AdminScriptTestCase):
         self.assertOutput(
             out, "Type 'manage.py help <subcommand>' for help on a specific subcommand."
         )
-        self.assertOutput(out, "[ginger]")
+        self.assertOutput(out, "[gingerdj]")
         self.assertOutput(out, "startapp")
         self.assertOutput(out, "startproject")
 
@@ -1837,7 +1836,7 @@ class CommandTypes(AdminScriptTestCase):
         out, err = self.run_manage(args)
         self.assertNotInOutput(out, "usage:")
         self.assertNotInOutput(out, "Options:")
-        self.assertNotInOutput(out, "[ginger]")
+        self.assertNotInOutput(out, "[gingerdj]")
         self.assertOutput(out, "startapp")
         self.assertOutput(out, "startproject")
         self.assertNotInOutput(out, "\n\n")
@@ -1865,7 +1864,7 @@ class CommandTypes(AdminScriptTestCase):
         self.assertNotEqual(version_location, -1)
         self.assertLess(tag_location, version_location)
         self.assertOutput(
-            out, "Checks the entire Ginger project for potential problems."
+            out, "Checks the entire GingerDJ project for potential problems."
         )
 
     def test_help_default_options_with_custom_arguments(self):
@@ -2117,7 +2116,9 @@ class CommandTypes(AdminScriptTestCase):
         command = BaseCommand()
         command.check = lambda: []
         command.handle = lambda *args, **kwargs: args
-        with mock.patch("ginger.core.management.base.connections") as mock_connections:
+        with mock.patch(
+            "gingerdj.core.management.base.connections"
+        ) as mock_connections:
             command.run_from_argv(["", ""])
         # Test connections have been closed
         self.assertTrue(mock_connections.close_all.called)
@@ -2281,7 +2282,7 @@ class Discovery(SimpleTestCase):
 class ArgumentOrder(AdminScriptTestCase):
     """Tests for 2-stage argument parsing scheme.
 
-    ginger-admin command arguments are parsed in 2 parts; the core arguments
+    gingerdj-admin command arguments are parsed in 2 parts; the core arguments
     (--settings, --traceback and --pythonpath) are parsed using a basic parser,
     ignoring any unknown options. Then the full settings are
     passed to the command parser, which extracts commands of interest to the
@@ -2290,9 +2291,7 @@ class ArgumentOrder(AdminScriptTestCase):
 
     def setUp(self):
         super().setUp()
-        self.write_settings(
-            "settings.py", apps=[]
-        )
+        self.write_settings("settings.py", apps=[])
         self.write_settings("alternate_settings.py")
 
     def test_setting_then_option(self):
@@ -2359,8 +2358,8 @@ class ExecuteFromCommandLine(SimpleTestCase):
         args = ["help", "shell"]
         with captured_stdout() as out, captured_stderr() as err:
             with mock.patch("sys.argv", [None] + args):
-                execute_from_command_line(["ginger-admin"] + args)
-        self.assertIn("usage: ginger-admin shell", out.getvalue())
+                execute_from_command_line(["gingerdj-admin"] + args)
+        self.assertIn("usage: gingerdj-admin shell", out.getvalue())
         self.assertEqual(err.getvalue(), "")
 
 
@@ -2368,7 +2367,7 @@ class ExecuteFromCommandLine(SimpleTestCase):
 class StartProject(LiveServerTestCase, AdminScriptTestCase):
     available_apps = [
         "admin_scripts",
-        "ginger.contrib.sessions",
+        "gingerdj.contrib.sessions",
     ]
 
     def test_wrong_args(self):
@@ -2593,7 +2592,7 @@ class StartProject(LiveServerTestCase, AdminScriptTestCase):
             _, err = self.run_ginger_admin(args)
 
             self.assertNoOutput(err)
-            self.assertIn("Ginger/%s" % get_version(), user_agent)
+            self.assertIn("GingerDJ/%s" % get_version(), user_agent)
         finally:
             urls.urlpatterns = old_urlpatterns
 
@@ -2924,9 +2923,9 @@ class StartApp(AdminScriptTestCase):
             content = f.read()
             self.assertIn("class NewAppConfig(AppConfig)", content)
             if HAS_BLACK:
-                test_str = 'default_auto_field = "ginger.db.models.BigAutoField"'
+                test_str = 'default_auto_field = "gingerdj.db.models.BigAutoField"'
             else:
-                test_str = "default_auto_field = 'ginger.db.models.BigAutoField'"
+                test_str = "default_auto_field = 'gingerdj.db.models.BigAutoField'"
             self.assertIn(test_str, content)
             self.assertIn(
                 'name = "new_app"' if HAS_BLACK else "name = 'new_app'",
@@ -2944,7 +2943,7 @@ class DiffSettings(AdminScriptTestCase):
         out, err = self.run_manage(args)
         self.assertNoOutput(err)
         self.assertOutput(out, "FOO = 'bar'  ###")
-        # Attributes from ginger.conf.Settings don't appear.
+        # Attributes from gingerdj.conf.Settings don't appear.
         self.assertNotInOutput(out, "is_overridden = ")
 
     def test_settings_configured(self):
@@ -2953,7 +2952,7 @@ class DiffSettings(AdminScriptTestCase):
         )
         self.assertNoOutput(err)
         self.assertOutput(out, "CUSTOM = 1  ###\nDEBUG = True")
-        # Attributes from ginger.conf.UserSettingsHolder don't appear.
+        # Attributes from gingerdj.conf.UserSettingsHolder don't appear.
         self.assertNotInOutput(out, "default_settings = ")
 
     def test_dynamic_settings_configured(self):
@@ -3043,13 +3042,13 @@ class Dumpdata(AdminScriptTestCase):
 
 
 class MainModule(AdminScriptTestCase):
-    """python -m ginger works like ginger-admin."""
+    """python -m gingerdj works like gingerdj-admin."""
 
     def test_program_name_in_help(self):
-        out, err = self.run_test(["-m", "ginger", "help"])
+        out, err = self.run_test(["-m", "gingerdj", "help"])
         self.assertOutput(
             out,
-            "Type 'python -m ginger help <subcommand>' for help on a specific "
+            "Type 'python -m gingerdj help <subcommand>' for help on a specific "
             "subcommand.",
         )
 

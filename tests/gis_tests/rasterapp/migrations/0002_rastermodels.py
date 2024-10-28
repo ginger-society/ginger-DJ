@@ -1,6 +1,6 @@
-from ginger.contrib.gis.db import models
-from ginger.db import migrations
-from ginger.db.models import deletion
+from gingerdj.contrib.gis.db import models
+from gingerdj.db import migrations
+from gingerdj.db.models import deletion
 
 
 class Migration(migrations.Migration):

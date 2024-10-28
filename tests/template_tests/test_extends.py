@@ -1,7 +1,7 @@
 import os
 
-from ginger.template import Context, Engine, TemplateDoesNotExist
-from ginger.test import SimpleTestCase
+from gingerdj.template import Context, Engine, TemplateDoesNotExist
+from gingerdj.test import SimpleTestCase
 
 from .utils import ROOT
 
@@ -42,7 +42,7 @@ class ExtendsBehaviorTests(SimpleTestCase):
             dirs=[os.path.join(RECURSIVE, "fs")],
             loaders=[
                 (
-                    "ginger.template.loaders.locmem.Loader",
+                    "gingerdj.template.loaders.locmem.Loader",
                     {
                         "one.html": (
                             '{% extends "one.html" %}{% block content %}'
@@ -58,7 +58,7 @@ class ExtendsBehaviorTests(SimpleTestCase):
                         ),
                     },
                 ),
-                "ginger.template.loaders.filesystem.Loader",
+                "gingerdj.template.loaders.filesystem.Loader",
             ],
         )
         template = engine.get_template("one.html")
@@ -91,9 +91,9 @@ class ExtendsBehaviorTests(SimpleTestCase):
             ],
             loaders=[
                 (
-                    "ginger.template.loaders.cached.Loader",
+                    "gingerdj.template.loaders.cached.Loader",
                     [
-                        "ginger.template.loaders.filesystem.Loader",
+                        "gingerdj.template.loaders.filesystem.Loader",
                     ],
                 ),
             ],
@@ -127,7 +127,7 @@ class ExtendsBehaviorTests(SimpleTestCase):
         engine = Engine(
             loaders=[
                 [
-                    "ginger.template.loaders.locmem.Loader",
+                    "gingerdj.template.loaders.locmem.Loader",
                     {
                         "base.html": (
                             '{% extends "base.html" %}{% block content %}'
@@ -136,7 +136,7 @@ class ExtendsBehaviorTests(SimpleTestCase):
                     },
                 ],
                 [
-                    "ginger.template.loaders.locmem.Loader",
+                    "gingerdj.template.loaders.locmem.Loader",
                     {
                         "base.html": "{% block content %}loader2{% endblock %}",
                     },
@@ -155,7 +155,7 @@ class ExtendsBehaviorTests(SimpleTestCase):
         engine = Engine(
             loaders=[
                 [
-                    "ginger.template.loaders.locmem.Loader",
+                    "gingerdj.template.loaders.locmem.Loader",
                     {
                         "base.html": (
                             "{% extends 'base.html' %}{% block base %}{{ block.super }}"
@@ -168,7 +168,7 @@ class ExtendsBehaviorTests(SimpleTestCase):
                     },
                 ],
                 [
-                    "ginger.template.loaders.locmem.Loader",
+                    "gingerdj.template.loaders.locmem.Loader",
                     {
                         "base.html": (
                             "{% block base %}1{% endblock %}"

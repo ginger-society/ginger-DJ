@@ -2,7 +2,7 @@
 Regression tests for proper working of ForeignKey(null=True).
 """
 
-from ginger.db import models
+from gingerdj.db import models
 
 
 class SystemDetails(models.Model):

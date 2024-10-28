@@ -1,19 +1,19 @@
-from ginger.apps.registry import Apps
-from ginger.db import models
-from ginger.db.migrations.exceptions import InvalidBasesError
-from ginger.db.migrations.operations import (
+from gingerdj.apps.registry import Apps
+from gingerdj.db import models
+from gingerdj.db.migrations.exceptions import InvalidBasesError
+from gingerdj.db.migrations.operations import (
     AddField,
     AlterField,
     DeleteModel,
     RemoveField,
 )
-from ginger.db.migrations.state import (
+from gingerdj.db.migrations.state import (
     ModelState,
     ProjectState,
     get_related_models_recursive,
 )
-from ginger.test import SimpleTestCase, override_settings
-from ginger.test.utils import isolate_apps
+from gingerdj.test import SimpleTestCase, override_settings
+from gingerdj.test.utils import isolate_apps
 
 from .models import (
     FoodManager,
@@ -584,7 +584,7 @@ class StateTests(SimpleTestCase):
 
         class A(models.Model):
             class Meta:
-                app_label = "ginger.contrib.test"
+                app_label = "gingerdj.contrib.test"
 
         class B(models.Model):
             class Meta:
@@ -1818,7 +1818,6 @@ class ModelStateTests(SimpleTestCase):
         # The default manager is used in migrations
         self.assertEqual([name for name, mgr in food_state.managers], ["food_mgr"])
         self.assertEqual(food_state.managers[0][1].args, ("a", "b", 1, 2))
-
 
     @isolate_apps("migrations")
     def test_abstract_model_children_inherit_indexes(self):

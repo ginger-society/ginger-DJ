@@ -1,5 +1,5 @@
-from ginger.contrib import admin
-from ginger.urls import include, path
+from gingerdj.contrib import admin
+from gingerdj.urls import include, path
 
 from . import views
 
@@ -12,7 +12,7 @@ ns_patterns = (
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("admindocs/", include("ginger.contrib.admindocs.urls")),
+    path("admindocs/", include("gingerdj.contrib.admindocs.urls")),
     path("", include(ns_patterns, namespace="test")),
     path("xview/func/", views.xview_dec(views.xview)),
     path("xview/class/", views.xview_dec(views.XViewClass.as_view())),

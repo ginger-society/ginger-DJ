@@ -3,7 +3,7 @@ import threading
 import time
 from unittest import skipIf, skipUnless
 
-from ginger.db import (
+from gingerdj.db import (
     DatabaseError,
     Error,
     IntegrityError,
@@ -11,7 +11,7 @@ from ginger.db import (
     connection,
     transaction,
 )
-from ginger.test import (
+from gingerdj.test import (
     TestCase,
     TransactionTestCase,
     skipIfDBFeature,

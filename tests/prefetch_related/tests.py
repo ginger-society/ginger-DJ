@@ -1,20 +1,20 @@
 from unittest import mock
 
-from ginger.core.exceptions import ObjectDoesNotExist
-from ginger.db import NotSupportedError, connection
-from ginger.db.models import Prefetch, QuerySet, prefetch_related_objects
-from ginger.db.models.fields.related import ForwardManyToOneDescriptor
-from ginger.db.models.query import get_prefetcher, prefetch_one_level
-from ginger.db.models.sql import Query
-from ginger.test import (
+from gingerdj.core.exceptions import ObjectDoesNotExist
+from gingerdj.db import NotSupportedError, connection
+from gingerdj.db.models import Prefetch, QuerySet, prefetch_related_objects
+from gingerdj.db.models.fields.related import ForwardManyToOneDescriptor
+from gingerdj.db.models.query import get_prefetcher, prefetch_one_level
+from gingerdj.db.models.sql import Query
+from gingerdj.test import (
     TestCase,
     ignore_warnings,
     override_settings,
     skipIfDBFeature,
     skipUnlessDBFeature,
 )
-from ginger.test.utils import CaptureQueriesContext
-from ginger.utils.deprecation import RemovedInGinger60Warning
+from gingerdj.test.utils import CaptureQueriesContext
+from gingerdj.utils.deprecation import RemovedInGinger60Warning
 
 from .models import (
     Article,
@@ -699,8 +699,8 @@ class CustomPrefetchTests(TestCase):
         self.assertEqual(lst1, lst2)
 
     def test_generic_rel(self):
-        bookmark = Bookmark.objects.create(url="http://www.ginger.gloportal.dev/")
-        TaggedItem.objects.create(content_object=bookmark, tag="ginger")
+        bookmark = Bookmark.objects.create(url="http://www.gingerdj.gloportal.dev/")
+        TaggedItem.objects.create(content_object=bookmark, tag="gingerdj")
         TaggedItem.objects.create(
             content_object=bookmark, favorite=bookmark, tag="python"
         )
@@ -1136,7 +1136,7 @@ class GenericRelationTests(TestCase):
             [c.content_object for c in qs]
 
     def test_prefetch_GFK_uuid_pk(self):
-        article = Article.objects.create(name="Ginger")
+        article = Article.objects.create(name="GingerDJ")
         Comment.objects.create(comment="awesome", content_object_uuid=article)
         qs = Comment.objects.prefetch_related("content_object_uuid")
         self.assertEqual([c.content_object_uuid for c in qs], [article])
@@ -1177,8 +1177,8 @@ class GenericRelationTests(TestCase):
         self.assertEqual(result, [t.created_by for t in TaggedItem.objects.all()])
 
     def test_generic_relation(self):
-        bookmark = Bookmark.objects.create(url="http://www.ginger.gloportal.dev/")
-        TaggedItem.objects.create(content_object=bookmark, tag="ginger")
+        bookmark = Bookmark.objects.create(url="http://www.gingerdj.gloportal.dev/")
+        TaggedItem.objects.create(content_object=bookmark, tag="gingerdj")
         TaggedItem.objects.create(content_object=bookmark, tag="python")
 
         with self.assertNumQueries(2):
@@ -1187,11 +1187,11 @@ class GenericRelationTests(TestCase):
                 for b in Bookmark.objects.prefetch_related("tags")
                 for t in b.tags.all()
             ]
-            self.assertEqual(sorted(tags), ["ginger", "python"])
+            self.assertEqual(sorted(tags), ["gingerdj", "python"])
 
     def test_charfield_GFK(self):
-        b = Bookmark.objects.create(url="http://www.ginger.gloportal.dev/")
-        TaggedItem.objects.create(content_object=b, tag="ginger")
+        b = Bookmark.objects.create(url="http://www.gingerdj.gloportal.dev/")
+        TaggedItem.objects.create(content_object=b, tag="gingerdj")
         TaggedItem.objects.create(content_object=b, favorite=b, tag="python")
 
         with self.assertNumQueries(3):
@@ -1199,18 +1199,18 @@ class GenericRelationTests(TestCase):
                 "tags", "favorite_tags"
             )[0]
             self.assertEqual(
-                sorted(i.tag for i in bookmark.tags.all()), ["ginger", "python"]
+                sorted(i.tag for i in bookmark.tags.all()), ["gingerdj", "python"]
             )
             self.assertEqual([i.tag for i in bookmark.favorite_tags.all()], ["python"])
 
     def test_custom_queryset(self):
-        bookmark = Bookmark.objects.create(url="http://www.ginger.gloportal.dev/")
-        ginger_tag = TaggedItem.objects.create(content_object=bookmark, tag="ginger")
+        bookmark = Bookmark.objects.create(url="http://www.gingerdj.gloportal.dev/")
+        ginger_tag = TaggedItem.objects.create(content_object=bookmark, tag="gingerdj")
         TaggedItem.objects.create(content_object=bookmark, tag="python")
 
         with self.assertNumQueries(2):
             bookmark = Bookmark.objects.prefetch_related(
-                Prefetch("tags", TaggedItem.objects.filter(tag="ginger")),
+                Prefetch("tags", TaggedItem.objects.filter(tag="gingerdj")),
             ).get()
 
         with self.assertNumQueries(0):

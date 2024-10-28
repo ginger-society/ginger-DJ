@@ -1,10 +1,10 @@
-from ginger.contrib import admin
-from ginger.core import checks, management
-from ginger.db import DEFAULT_DB_ALIAS, models
-from ginger.db.models import signals
-from ginger.test import TestCase, override_settings
-from ginger.test.utils import isolate_apps
-from ginger.urls import reverse
+from gingerdj.contrib import admin
+from gingerdj.core import checks, management
+from gingerdj.db import DEFAULT_DB_ALIAS, models
+from gingerdj.db.models import signals
+from gingerdj.test import TestCase, override_settings
+from gingerdj.test.utils import isolate_apps
+from gingerdj.urls import reverse
 
 from .admin import admin as force_admin_model_registration  # NOQA
 from .models import (
@@ -257,7 +257,6 @@ class ProxyModelTests(TestCase):
         signals.pre_save.disconnect(h5, sender=MyPersonProxy)
         signals.post_save.disconnect(h6, sender=MyPersonProxy)
 
-
     def test_user_proxy_models(self):
         User.objects.create(name="Bruce")
 
@@ -421,8 +420,8 @@ class ProxyModelAdminTests(TestCase):
         Test if the admin delete page shows the correct string representation
         for a proxy model.
         """
-        user = TrackerUser.objects.get(name="Ginger Pony")
-        proxy = ProxyTrackerUser.objects.get(name="Ginger Pony")
+        user = TrackerUser.objects.get(name="GingerDJ Pony")
+        proxy = ProxyTrackerUser.objects.get(name="GingerDJ Pony")
 
         user_str = 'Tracker user: <a href="%s">%s</a>' % (
             reverse("admin_proxy:proxy_models_trackeruser_change", args=(user.pk,)),

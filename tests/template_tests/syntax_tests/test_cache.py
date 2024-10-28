@@ -1,13 +1,13 @@
-from ginger.core.cache import cache
-from ginger.template import Context, Engine, TemplateSyntaxError
-from ginger.test import SimpleTestCase, override_settings
+from gingerdj.core.cache import cache
+from gingerdj.template import Context, Engine, TemplateSyntaxError
+from gingerdj.test import SimpleTestCase, override_settings
 
 from ..utils import setup
 
 
 class CacheTagTests(SimpleTestCase):
     libraries = {
-        "cache": "ginger.templatetags.cache",
+        "cache": "gingerdj.templatetags.cache",
         "custom": "template_tests.templatetags.custom",
     }
 
@@ -163,7 +163,7 @@ class CacheTagTests(SimpleTestCase):
 class CacheTests(SimpleTestCase):
     @classmethod
     def setUpClass(cls):
-        cls.engine = Engine(libraries={"cache": "ginger.templatetags.cache"})
+        cls.engine = Engine(libraries={"cache": "gingerdj.templatetags.cache"})
         super().setUpClass()
 
     def test_cache_regression_20130(self):
@@ -176,11 +176,11 @@ class CacheTests(SimpleTestCase):
     @override_settings(
         CACHES={
             "default": {
-                "BACKEND": "ginger.core.cache.backends.locmem.LocMemCache",
+                "BACKEND": "gingerdj.core.cache.backends.locmem.LocMemCache",
                 "LOCATION": "default",
             },
             "template_fragments": {
-                "BACKEND": "ginger.core.cache.backends.locmem.LocMemCache",
+                "BACKEND": "gingerdj.core.cache.backends.locmem.LocMemCache",
                 "LOCATION": "fragments",
             },
         }

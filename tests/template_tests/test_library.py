@@ -1,8 +1,8 @@
 import functools
 
-from ginger.template import Library
-from ginger.template.base import Node
-from ginger.test import SimpleTestCase
+from gingerdj.template import Library
+from gingerdj.template.base import Node
+from gingerdj.test import SimpleTestCase
 
 
 class FilterRegistrationTests(SimpleTestCase):

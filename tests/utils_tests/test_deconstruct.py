@@ -1,6 +1,6 @@
-from ginger.test import SimpleTestCase
-from ginger.utils.deconstruct import deconstructible
-from ginger.utils.version import get_docs_version
+from gingerdj.test import SimpleTestCase
+from gingerdj.utils.deconstruct import deconstructible
+from gingerdj.utils.version import get_docs_version
 
 
 @deconstructible()
@@ -79,7 +79,7 @@ class DeconstructibleTests(SimpleTestCase):
             f"classes. Please move the object into the main module body to "
             f"use migrations.\n"
             f"For more information, see "
-            f"https://docs.ginger.gloportal.dev/en/{docs_version}/topics/"
+            f"https://docs.gingerdj.gloportal.dev/en/{docs_version}/topics/"
             f"migrations/#serializing-values"
         )
         with self.assertRaisesMessage(ValueError, msg):

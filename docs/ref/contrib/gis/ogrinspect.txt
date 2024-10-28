@@ -2,10 +2,10 @@
 OGR Inspection
 ==============
 
-.. module:: ginger.contrib.gis.utils.ogrinspect
+.. module:: gingerdj.contrib.gis.utils.ogrinspect
     :synopsis: Utilities for inspecting OGR data sources.
 
-.. currentmodule:: ginger.contrib.gis.utils
+.. currentmodule:: gingerdj.contrib.gis.utils
 
 ``ogrinspect``
 ==============

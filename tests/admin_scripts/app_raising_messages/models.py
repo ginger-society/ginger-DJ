@@ -1,5 +1,5 @@
-from ginger.core import checks
-from ginger.db import models
+from gingerdj.core import checks
+from gingerdj.db import models
 
 
 class ModelRaisingMessages(models.Model):

@@ -2,8 +2,8 @@ import datetime
 from collections import Counter
 from unittest import mock
 
-from ginger.core.exceptions import ValidationError
-from ginger.forms import (
+from gingerdj.core.exceptions import ValidationError
+from gingerdj.forms import (
     BaseForm,
     CharField,
     DateField,
@@ -13,7 +13,7 @@ from ginger.forms import (
     SplitDateTimeField,
     formsets,
 )
-from ginger.forms.formsets import (
+from gingerdj.forms.formsets import (
     INITIAL_FORM_COUNT,
     MAX_NUM_FORM_COUNT,
     MIN_NUM_FORM_COUNT,
@@ -23,14 +23,14 @@ from ginger.forms.formsets import (
     all_valid,
     formset_factory,
 )
-from ginger.forms.renderers import (
+from gingerdj.forms.renderers import (
     GingerTemplates,
     TemplatesSetting,
     get_default_renderer,
 )
-from ginger.forms.utils import ErrorList
-from ginger.forms.widgets import HiddenInput
-from ginger.test import SimpleTestCase
+from gingerdj.forms.utils import ErrorList
+from gingerdj.forms.widgets import HiddenInput
+from gingerdj.test import SimpleTestCase
 
 from . import jinja2_tests
 
@@ -219,9 +219,9 @@ class FormsFormsetTestCase(SimpleTestCase):
 
         with (
             mock.patch(
-                "ginger.forms.formsets.ManagementForm.is_valid", mocked_is_valid
+                "gingerdj.forms.formsets.ManagementForm.is_valid", mocked_is_valid
             ),
-            mock.patch("ginger.forms.forms.BaseForm.full_clean", mocked_full_clean),
+            mock.patch("gingerdj.forms.forms.BaseForm.full_clean", mocked_full_clean),
         ):
             self.assertTrue(formset.is_valid())
         self.assertEqual(is_valid_counter.call_count, 1)
@@ -1540,7 +1540,7 @@ class FormsFormsetTestCase(SimpleTestCase):
         A custom renderer passed to a formset_factory() is passed to all forms
         and ErrorList.
         """
-        from ginger.forms.renderers import Jinja2
+        from gingerdj.forms.renderers import Jinja2
 
         renderer = Jinja2()
         data = {

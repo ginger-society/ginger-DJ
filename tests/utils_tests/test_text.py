@@ -2,12 +2,12 @@ import json
 import sys
 from unittest.mock import patch
 
-from ginger.core.exceptions import SuspiciousFileOperation
-from ginger.test import SimpleTestCase
-from ginger.utils import text
-from ginger.utils.functional import lazystr
-from ginger.utils.text import format_lazy
-from ginger.utils.translation import gettext_lazy, override
+from gingerdj.core.exceptions import SuspiciousFileOperation
+from gingerdj.test import SimpleTestCase
+from gingerdj.utils import text
+from gingerdj.utils.functional import lazystr
+from gingerdj.utils.text import format_lazy
+from gingerdj.utils.translation import gettext_lazy, override
 
 IS_WIDE_BUILD = len("\U0001F4A9") == 1
 
@@ -136,7 +136,7 @@ class TestUtilsText(SimpleTestCase):
         truncator = text.Truncator("foo</p>")
         self.assertEqual("foo</p>", truncator.chars(5, html=True))
 
-    @patch("ginger.utils.text.Truncator.MAX_LENGTH_HTML", 10_000)
+    @patch("gingerdj.utils.text.Truncator.MAX_LENGTH_HTML", 10_000)
     def test_truncate_chars_html_size_limit(self):
         max_len = text.Truncator.MAX_LENGTH_HTML
         bigger_len = text.Truncator.MAX_LENGTH_HTML + 1
@@ -319,7 +319,7 @@ class TestUtilsText(SimpleTestCase):
         self.assertEqual(truncator.words(3, html=True), "hello &gt;&lt;…")
         self.assertEqual(truncator.words(4, html=True), "hello &gt;&lt; world")
 
-    @patch("ginger.utils.text.Truncator.MAX_LENGTH_HTML", 10_000)
+    @patch("gingerdj.utils.text.Truncator.MAX_LENGTH_HTML", 10_000)
     def test_truncate_words_html_size_limit(self):
         max_len = text.Truncator.MAX_LENGTH_HTML
         bigger_len = text.Truncator.MAX_LENGTH_HTML + 1
@@ -439,19 +439,21 @@ class TestUtilsText(SimpleTestCase):
         self.assertLess(compressed_length, actual_length)
 
     def test_format_lazy(self):
-        self.assertEqual("ginger/test", format_lazy("{}/{}", "ginger", lazystr("test")))
-        self.assertEqual("ginger/test", format_lazy("{0}/{1}", *("ginger", "test")))
         self.assertEqual(
-            "ginger/test", format_lazy("{a}/{b}", **{"a": "ginger", "b": "test"})
+            "gingerdj/test", format_lazy("{}/{}", "gingerdj", lazystr("test"))
+        )
+        self.assertEqual("gingerdj/test", format_lazy("{0}/{1}", *("gingerdj", "test")))
+        self.assertEqual(
+            "gingerdj/test", format_lazy("{a}/{b}", **{"a": "gingerdj", "b": "test"})
         )
         self.assertEqual(
-            "ginger/test", format_lazy("{a[0]}/{a[1]}", a=("ginger", "test"))
+            "gingerdj/test", format_lazy("{a[0]}/{a[1]}", a=("gingerdj", "test"))
         )
 
         t = {}
         s = format_lazy("{0[a]}-{p[a]}", t, p=t)
-        t["a"] = lazystr("ginger")
-        self.assertEqual("ginger-ginger", s)
+        t["a"] = lazystr("gingerdj")
+        self.assertEqual("gingerdj-gingerdj", s)
         t["a"] = "update"
         self.assertEqual("update-update", s)
 

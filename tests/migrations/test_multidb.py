@@ -1,6 +1,6 @@
-from ginger.db import connection, migrations, models
-from ginger.db.migrations.state import ProjectState
-from ginger.test import override_settings
+from gingerdj.db import connection, migrations, models
+from gingerdj.db.migrations.state import ProjectState
+from gingerdj.test import override_settings
 
 from .test_base import OperationTestBase
 

@@ -1,7 +1,7 @@
 from urllib.request import urlopen
 
-from ginger.http import HttpResponse, StreamingHttpResponse
-from ginger.views.decorators.csrf import csrf_exempt
+from gingerdj.http import HttpResponse, StreamingHttpResponse
+from gingerdj.views.decorators.csrf import csrf_exempt
 
 from .models import Person
 

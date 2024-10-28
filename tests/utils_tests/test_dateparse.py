@@ -1,14 +1,14 @@
 import unittest
 from datetime import date, datetime, time, timedelta
 
-from ginger.utils.dateparse import (
+from gingerdj.utils.dateparse import (
     parse_date,
     parse_datetime,
     parse_duration,
     parse_time,
 )
-from ginger.utils.timezone import get_fixed_timezone
-from ginger.utils.version import PY311
+from gingerdj.utils.timezone import get_fixed_timezone
+from gingerdj.utils.version import PY311
 
 
 class DateParseTests(unittest.TestCase):

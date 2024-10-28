@@ -1,7 +1,7 @@
 import os
 import unittest
 
-from ginger.forms.renderers import (
+from gingerdj.forms.renderers import (
     BaseRenderer,
     GingerDivFormRenderer,
     GingerTemplates,
@@ -9,8 +9,8 @@ from ginger.forms.renderers import (
     Jinja2DivFormRenderer,
     TemplatesSetting,
 )
-from ginger.test import SimpleTestCase, ignore_warnings
-from ginger.utils.deprecation import RemovedInGinger60Warning
+from gingerdj.test import SimpleTestCase, ignore_warnings
+from gingerdj.utils.deprecation import RemovedInGinger60Warning
 
 try:
     import jinja2

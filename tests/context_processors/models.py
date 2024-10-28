@@ -1,4 +1,4 @@
-from ginger.db import models
+from gingerdj.db import models
 
 
 class DebugObject(models.Model):

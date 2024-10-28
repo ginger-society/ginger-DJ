@@ -1,9 +1,9 @@
 import decimal
 
-from ginger.core.exceptions import ValidationError
-from ginger.forms import DecimalField, NumberInput, Widget
-from ginger.test import SimpleTestCase, override_settings
-from ginger.utils import formats, translation
+from gingerdj.core.exceptions import ValidationError
+from gingerdj.forms import DecimalField, NumberInput, Widget
+from gingerdj.test import SimpleTestCase, override_settings
+from gingerdj.utils import formats, translation
 
 from . import FormFieldAssertionsMixin
 

@@ -2,10 +2,10 @@ import os
 from pathlib import Path
 from unittest import mock
 
-from ginger.core.exceptions import ImproperlyConfigured
-from ginger.test import SimpleTestCase, override_settings
-from ginger.urls.resolvers import LocaleRegexDescriptor, RegexPattern
-from ginger.utils import translation
+from gingerdj.core.exceptions import ImproperlyConfigured
+from gingerdj.test import SimpleTestCase, override_settings
+from gingerdj.urls.resolvers import LocaleRegexDescriptor, RegexPattern
+from gingerdj.utils import translation
 
 here = os.path.dirname(os.path.abspath(__file__))
 
@@ -26,7 +26,7 @@ class LocaleRegexDescriptorTests(SimpleTestCase):
             error = AssertionError(
                 "tried to compile url regex twice for the same language"
             )
-            with mock.patch("ginger.urls.resolvers.re.compile", side_effect=error):
+            with mock.patch("gingerdj.urls.resolvers.re.compile", side_effect=error):
                 de_compiled_2 = provider.regex
         with translation.override("fr"):
             fr_compiled = provider.regex
@@ -41,7 +41,7 @@ class LocaleRegexDescriptorTests(SimpleTestCase):
         with translation.override("fr"):
             # compiled only once, regardless of language
             error = AssertionError("tried to compile non-translated url regex twice")
-            with mock.patch("ginger.urls.resolvers.re.compile", side_effect=error):
+            with mock.patch("gingerdj.urls.resolvers.re.compile", side_effect=error):
                 fr_compiled = provider.regex
         self.assertEqual(de_compiled.pattern, "^foo/$")
         self.assertEqual(fr_compiled.pattern, "^foo/$")

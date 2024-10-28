@@ -16,17 +16,17 @@ from unittest import mock
 import custom_migration_operations.more_operations
 import custom_migration_operations.operations
 
-from ginger import get_version
-from ginger.conf import SettingsReference, settings
-from ginger.core.validators import EmailValidator, RegexValidator
-from ginger.db import migrations, models
-from ginger.db.migrations.serializer import BaseSerializer
-from ginger.db.migrations.writer import MigrationWriter, OperationWriter
-from ginger.test import SimpleTestCase
-from ginger.utils.deconstruct import deconstructible
-from ginger.utils.functional import SimpleLazyObject
-from ginger.utils.timezone import get_default_timezone, get_fixed_timezone
-from ginger.utils.translation import gettext_lazy as _
+from gingerdj import get_version
+from gingerdj.conf import SettingsReference, settings
+from gingerdj.core.validators import EmailValidator, RegexValidator
+from gingerdj.db import migrations, models
+from gingerdj.db.migrations.serializer import BaseSerializer
+from gingerdj.db.migrations.writer import MigrationWriter, OperationWriter
+from gingerdj.test import SimpleTestCase
+from gingerdj.utils.deconstruct import deconstructible
+from gingerdj.utils.functional import SimpleLazyObject
+from gingerdj.utils.timezone import get_default_timezone, get_fixed_timezone
+from gingerdj.utils.translation import gettext_lazy as _
 
 from .models import FoodManager, FoodQuerySet
 
@@ -663,14 +663,14 @@ class WriterTests(SimpleTestCase):
         self.assertSerializedFieldEqual(models.CharField(max_length=255))
         self.assertSerializedResultEqual(
             models.CharField(max_length=255),
-            ("models.CharField(max_length=255)", {"from ginger.db import models"}),
+            ("models.CharField(max_length=255)", {"from gingerdj.db import models"}),
         )
         self.assertSerializedFieldEqual(models.TextField(null=True, blank=True))
         self.assertSerializedResultEqual(
             models.TextField(null=True, blank=True),
             (
                 "models.TextField(blank=True, null=True)",
-                {"from ginger.db import models"},
+                {"from gingerdj.db import models"},
             ),
         )
 
@@ -694,7 +694,7 @@ class WriterTests(SimpleTestCase):
         validator = RegexValidator(message="hello")
         string = MigrationWriter.serialize(validator)[0]
         self.assertEqual(
-            string, "ginger.core.validators.RegexValidator(message='hello')"
+            string, "gingerdj.core.validators.RegexValidator(message='hello')"
         )
         self.serialize_round_trip(validator)
 
@@ -703,7 +703,7 @@ class WriterTests(SimpleTestCase):
         string = MigrationWriter.serialize(validator)[0]
         self.assertEqual(
             string,
-            "ginger.core.validators.RegexValidator(regex=re.compile('^\\\\w+$'))",
+            "gingerdj.core.validators.RegexValidator(regex=re.compile('^\\\\w+$'))",
         )
         self.serialize_round_trip(validator)
 
@@ -712,7 +712,7 @@ class WriterTests(SimpleTestCase):
         string = MigrationWriter.serialize(validator)[0]
         self.assertEqual(
             string,
-            "ginger.core.validators.RegexValidator('^[0-9]+$', "
+            "gingerdj.core.validators.RegexValidator('^[0-9]+$', "
             "flags=re.RegexFlag['DOTALL'])",
         )
         self.serialize_round_trip(validator)
@@ -722,7 +722,7 @@ class WriterTests(SimpleTestCase):
         string = MigrationWriter.serialize(validator)[0]
         self.assertEqual(
             string,
-            "ginger.core.validators.RegexValidator('^[-a-zA-Z0-9_]+$', 'Invalid', "
+            "gingerdj.core.validators.RegexValidator('^[-a-zA-Z0-9_]+$', 'Invalid', "
             "'invalid')",
         )
         self.serialize_round_trip(validator)
@@ -731,7 +731,7 @@ class WriterTests(SimpleTestCase):
         validator = EmailValidator(message="hello")
         string = MigrationWriter.serialize(validator)[0]
         self.assertEqual(
-            string, "ginger.core.validators.EmailValidator(message='hello')"
+            string, "gingerdj.core.validators.EmailValidator(message='hello')"
         )
         self.serialize_round_trip(validator)
 
@@ -749,12 +749,12 @@ class WriterTests(SimpleTestCase):
         with self.assertRaisesMessage(ImportError, "No module named 'custom'"):
             MigrationWriter.serialize(validator)
 
-        validator = deconstructible(path="ginger.core.validators.EmailValidator2")(
+        validator = deconstructible(path="gingerdj.core.validators.EmailValidator2")(
             EmailValidator
         )(message="hello")
         with self.assertRaisesMessage(
             ValueError,
-            "Could not find object EmailValidator2 in ginger.core.validators.",
+            "Could not find object EmailValidator2 in gingerdj.core.validators.",
         ):
             MigrationWriter.serialize(validator)
 
@@ -783,7 +783,7 @@ class WriterTests(SimpleTestCase):
             "models.OrderBy(models.OrderBy(models.F('name'), descending=True)), "
             "name='complex_func_index')",
         )
-        self.assertEqual(imports, {"from ginger.db import models"})
+        self.assertEqual(imports, {"from gingerdj.db import models"})
 
     def test_serialize_empty_nonempty_tuple(self):
         """
@@ -878,7 +878,7 @@ class WriterTests(SimpleTestCase):
         self.assertSerializedEqual(models.Model)
         self.assertSerializedResultEqual(
             MigrationWriter.serialize(models.Model),
-            ("('models.Model', {'from ginger.db import models'})", set()),
+            ("('models.Model', {'from gingerdj.db import models'})", set()),
         )
 
     def test_simple_migration(self):
@@ -1024,7 +1024,7 @@ class WriterTests(SimpleTestCase):
         writer = MigrationWriter(migration)
         output = writer.as_string()
         self.assertIn(
-            "import datetime\nimport time\nfrom ginger.db import migrations, models\n",
+            "import datetime\nimport time\nfrom gingerdj.db import migrations, models\n",
             output,
         )
 
@@ -1034,7 +1034,7 @@ class WriterTests(SimpleTestCase):
         """
         migration = type("Migration", (migrations.Migration,), {"operations": []})
         dt = datetime.datetime(2015, 7, 31, 4, 40, 0, 0, tzinfo=datetime.timezone.utc)
-        with mock.patch("ginger.db.migrations.writer.now", lambda: dt):
+        with mock.patch("gingerdj.db.migrations.writer.now", lambda: dt):
             for include_header in (True, False):
                 with self.subTest(include_header=include_header):
                     writer = MigrationWriter(migration, include_header)
@@ -1043,7 +1043,7 @@ class WriterTests(SimpleTestCase):
                     self.assertEqual(
                         include_header,
                         output.startswith(
-                            "# Generated by Ginger %s on 2015-07-31 04:40\n\n"
+                            "# Generated by GingerDJ %s on 2015-07-31 04:40\n\n"
                             % get_version()
                         ),
                     )
@@ -1056,7 +1056,7 @@ class WriterTests(SimpleTestCase):
 
     def test_models_import_omitted(self):
         """
-        ginger.db.models shouldn't be imported if unused.
+        gingerdj.db.models shouldn't be imported if unused.
         """
         migration = type(
             "Migration",
@@ -1075,7 +1075,7 @@ class WriterTests(SimpleTestCase):
         )
         writer = MigrationWriter(migration)
         output = writer.as_string()
-        self.assertIn("from ginger.db import migrations\n", output)
+        self.assertIn("from gingerdj.db import migrations\n", output)
 
     def test_deconstruct_class_arguments(self):
         # Yes, it doesn't make sense to use a class as a default for a

@@ -1,7 +1,7 @@
 from decimal import Decimal
 
-from ginger.db.models.functions import Power
-from ginger.test import TestCase
+from gingerdj.db.models.functions import Power
+from gingerdj.test import TestCase
 
 from ..models import DecimalModel, FloatModel, IntegerModel
 

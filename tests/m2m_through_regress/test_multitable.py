@@ -1,4 +1,4 @@
-from ginger.test import TestCase
+from gingerdj.test import TestCase
 
 from .models import (
     CompetingTeam,

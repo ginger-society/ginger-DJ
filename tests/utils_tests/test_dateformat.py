@@ -1,10 +1,10 @@
 from datetime import date, datetime, time, timezone, tzinfo
 
-from ginger.test import SimpleTestCase, override_settings
-from ginger.test.utils import TZ_SUPPORT, requires_tz_support
-from ginger.utils import dateformat, translation
-from ginger.utils.dateformat import format
-from ginger.utils.timezone import get_default_timezone, get_fixed_timezone, make_aware
+from gingerdj.test import SimpleTestCase, override_settings
+from gingerdj.test.utils import TZ_SUPPORT, requires_tz_support
+from gingerdj.utils import dateformat, translation
+from gingerdj.utils.dateformat import format
+from gingerdj.utils.timezone import get_default_timezone, get_fixed_timezone, make_aware
 
 
 @override_settings(TIME_ZONE="Europe/Copenhagen")

@@ -3,10 +3,13 @@ import datetime
 import os
 from unittest import mock
 
-from ginger.db import DEFAULT_DB_ALIAS, connection, connections
-from ginger.db.backends.base.creation import TEST_DATABASE_PREFIX, BaseDatabaseCreation
-from ginger.test import SimpleTestCase, TransactionTestCase
-from ginger.test.utils import override_settings
+from gingerdj.db import DEFAULT_DB_ALIAS, connection, connections
+from gingerdj.db.backends.base.creation import (
+    TEST_DATABASE_PREFIX,
+    BaseDatabaseCreation,
+)
+from gingerdj.test import SimpleTestCase, TransactionTestCase
+from gingerdj.test.utils import override_settings
 
 from ..models import (
     CircularA,
@@ -20,7 +23,7 @@ from ..models import (
 
 
 def get_connection_copy():
-    # Get a copy of the default connection. (Can't use ginger.db.connection
+    # Get a copy of the default connection. (Can't use gingerdj.db.connection
     # because it'll modify the default connection itself.)
     test_connection = copy.copy(connections[DEFAULT_DB_ALIAS])
     test_connection.settings_dict = copy.deepcopy(
@@ -60,13 +63,13 @@ class TestDbSignatureTests(SimpleTestCase):
 @mock.patch.object(connection, "ensure_connection")
 @mock.patch.object(connection, "prepare_database")
 @mock.patch(
-    "ginger.db.migrations.recorder.MigrationRecorder.has_table", return_value=False
+    "gingerdj.db.migrations.recorder.MigrationRecorder.has_table", return_value=False
 )
-@mock.patch("ginger.core.management.commands.migrate.Command.sync_apps")
+@mock.patch("gingerdj.core.management.commands.migrate.Command.sync_apps")
 class TestDbCreationTests(SimpleTestCase):
     available_apps = ["backends.base.app_unmigrated"]
 
-    @mock.patch("ginger.db.migrations.executor.MigrationExecutor.migrate")
+    @mock.patch("gingerdj.db.migrations.executor.MigrationExecutor.migrate")
     def test_migrate_test_setting_false(
         self, mocked_migrate, mocked_sync_apps, *mocked_objects
     ):
@@ -93,7 +96,7 @@ class TestDbCreationTests(SimpleTestCase):
             with mock.patch.object(creation, "_destroy_test_db"):
                 creation.destroy_test_db(old_database_name, verbosity=0)
 
-    @mock.patch("ginger.db.migrations.executor.MigrationRecorder.ensure_schema")
+    @mock.patch("gingerdj.db.migrations.executor.MigrationRecorder.ensure_schema")
     def test_migrate_test_setting_false_ensure_schema(
         self,
         mocked_ensure_schema,
@@ -120,7 +123,7 @@ class TestDbCreationTests(SimpleTestCase):
             with mock.patch.object(creation, "_destroy_test_db"):
                 creation.destroy_test_db(old_database_name, verbosity=0)
 
-    @mock.patch("ginger.db.migrations.executor.MigrationExecutor.migrate")
+    @mock.patch("gingerdj.db.migrations.executor.MigrationExecutor.migrate")
     def test_migrate_test_setting_true(
         self, mocked_migrate, mocked_sync_apps, *mocked_objects
     ):
@@ -146,7 +149,7 @@ class TestDbCreationTests(SimpleTestCase):
                 creation.destroy_test_db(old_database_name, verbosity=0)
 
     @mock.patch.dict(os.environ, {"RUNNING_GINGERS_TEST_SUITE": ""})
-    @mock.patch("ginger.db.migrations.executor.MigrationExecutor.migrate")
+    @mock.patch("gingerdj.db.migrations.executor.MigrationExecutor.migrate")
     @mock.patch.object(BaseDatabaseCreation, "mark_expected_failures_and_skips")
     def test_mark_expected_failures_and_skips_call(
         self, mark_expected_failures_and_skips, *mocked_objects
@@ -203,7 +206,7 @@ class TestDeserializeDbFromString(TransactionTestCase):
         obj_1.obj = obj_2
         obj_1.save()
         # Serialize objects.
-        with mock.patch("ginger.db.migrations.loader.MigrationLoader") as loader:
+        with mock.patch("gingerdj.db.migrations.loader.MigrationLoader") as loader:
             # serialize_db_to_string() serializes only migrated apps, so mark
             # the backends app as migrated.
             loader_instance = loader.return_value
@@ -225,7 +228,7 @@ class TestDeserializeDbFromString(TransactionTestCase):
         obj_a.obj = obj_b
         obj_a.save()
         # Serialize objects.
-        with mock.patch("ginger.db.migrations.loader.MigrationLoader") as loader:
+        with mock.patch("gingerdj.db.migrations.loader.MigrationLoader") as loader:
             # serialize_db_to_string() serializes only migrated apps, so mark
             # the backends app as migrated.
             loader_instance = loader.return_value
@@ -242,7 +245,7 @@ class TestDeserializeDbFromString(TransactionTestCase):
 
     def test_serialize_db_to_string_base_manager(self):
         SchoolClass.objects.create(year=1000, last_updated=datetime.datetime.now())
-        with mock.patch("ginger.db.migrations.loader.MigrationLoader") as loader:
+        with mock.patch("gingerdj.db.migrations.loader.MigrationLoader") as loader:
             # serialize_db_to_string() serializes only migrated apps, so mark
             # the backends app as migrated.
             loader_instance = loader.return_value
@@ -257,7 +260,7 @@ class TestDeserializeDbFromString(TransactionTestCase):
         )
         bus = SchoolBus.objects.create(number=1)
         bus.schoolclasses.add(sclass)
-        with mock.patch("ginger.db.migrations.loader.MigrationLoader") as loader:
+        with mock.patch("gingerdj.db.migrations.loader.MigrationLoader") as loader:
             # serialize_db_to_string() serializes only migrated apps, so mark
             # the backends app as migrated.
             loader_instance = loader.return_value

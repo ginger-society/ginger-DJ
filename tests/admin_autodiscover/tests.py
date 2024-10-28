@@ -1,5 +1,5 @@
-from ginger.contrib import admin
-from ginger.test import SimpleTestCase
+from gingerdj.contrib import admin
+from gingerdj.test import SimpleTestCase
 
 
 class AdminAutoDiscoverTests(SimpleTestCase):

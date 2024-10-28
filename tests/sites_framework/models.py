@@ -1,6 +1,6 @@
-from ginger.contrib.sites.managers import CurrentSiteManager
-from ginger.contrib.sites.models import Site
-from ginger.db import models
+from gingerdj.contrib.sites.managers import CurrentSiteManager
+from gingerdj.contrib.sites.models import Site
+from gingerdj.db import models
 
 
 class AbstractArticle(models.Model):

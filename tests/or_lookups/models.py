@@ -5,10 +5,10 @@ To perform an OR lookup, or a lookup that combines ANDs and ORs, combine
 ``QuerySet`` objects using ``&`` and ``|`` operators.
 
 Alternatively, use positional arguments, and pass one or more expressions of
-clauses using the variable ``ginger.db.models.Q``.
+clauses using the variable ``gingerdj.db.models.Q``.
 """
 
-from ginger.db import models
+from gingerdj.db import models
 
 
 class Article(models.Model):

@@ -1,5 +1,5 @@
-from ginger.forms import SlugField
-from ginger.test import SimpleTestCase
+from gingerdj.forms import SlugField
+from gingerdj.test import SimpleTestCase
 
 
 class SlugFieldTest(SimpleTestCase):

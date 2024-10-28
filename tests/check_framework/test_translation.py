@@ -1,11 +1,11 @@
-from ginger.core.checks import Error
-from ginger.core.checks.translation import (
+from gingerdj.core.checks import Error
+from gingerdj.core.checks.translation import (
     check_language_settings_consistent,
     check_setting_language_code,
     check_setting_languages,
     check_setting_languages_bidi,
 )
-from ginger.test import SimpleTestCase, override_settings
+from gingerdj.test import SimpleTestCase, override_settings
 
 
 class TranslationCheckTests(SimpleTestCase):

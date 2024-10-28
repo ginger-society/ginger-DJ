@@ -2,62 +2,62 @@
 host     = https://www.transifex.com
 lang_map = sr@latin: sr_Latn, zh_CN: zh_Hans, zh_TW: zh_Hant
 
-[o:ginger:p:ginger:r:core]
-file_filter = ginger/conf/locale/<lang>/LC_MESSAGES/ginger.po
-source_file = ginger/conf/locale/en/LC_MESSAGES/ginger.po
+[o:gingerdj:p:gingerdj:r:core]
+file_filter = gingerdj/conf/locale/<lang>/LC_MESSAGES/gingerdj.po
+source_file = gingerdj/conf/locale/en/LC_MESSAGES/gingerdj.po
 source_lang = en
 
-[o:ginger:p:ginger:r:contrib-admin]
-file_filter = ginger/contrib/admin/locale/<lang>/LC_MESSAGES/ginger.po
-source_file = ginger/contrib/admin/locale/en/LC_MESSAGES/ginger.po
+[o:gingerdj:p:gingerdj:r:contrib-admin]
+file_filter = gingerdj/contrib/admin/locale/<lang>/LC_MESSAGES/gingerdj.po
+source_file = gingerdj/contrib/admin/locale/en/LC_MESSAGES/gingerdj.po
 source_lang = en
 
-[o:ginger:p:ginger:r:contrib-admin-js]
-file_filter = ginger/contrib/admin/locale/<lang>/LC_MESSAGES/gingerjs.po
-source_file = ginger/contrib/admin/locale/en/LC_MESSAGES/gingerjs.po
+[o:gingerdj:p:gingerdj:r:contrib-admin-js]
+file_filter = gingerdj/contrib/admin/locale/<lang>/LC_MESSAGES/gingerjs.po
+source_file = gingerdj/contrib/admin/locale/en/LC_MESSAGES/gingerjs.po
 source_lang = en
 
-[o:ginger:p:ginger:r:contrib-admindocs]
-file_filter = ginger/contrib/admindocs/locale/<lang>/LC_MESSAGES/ginger.po
-source_file = ginger/contrib/admindocs/locale/en/LC_MESSAGES/ginger.po
+[o:gingerdj:p:gingerdj:r:contrib-admindocs]
+file_filter = gingerdj/contrib/admindocs/locale/<lang>/LC_MESSAGES/gingerdj.po
+source_file = gingerdj/contrib/admindocs/locale/en/LC_MESSAGES/gingerdj.po
 source_lang = en
 
-[o:ginger:p:ginger:r:contrib-auth]
-file_filter = ginger/contrib/auth/locale/<lang>/LC_MESSAGES/ginger.po
-source_file = ginger/contrib/auth/locale/en/LC_MESSAGES/ginger.po
+[o:gingerdj:p:gingerdj:r:contrib-auth]
+file_filter = gingerdj/contrib/auth/locale/<lang>/LC_MESSAGES/gingerdj.po
+source_file = gingerdj/contrib/auth/locale/en/LC_MESSAGES/gingerdj.po
 source_lang = en
 
-[o:ginger:p:ginger:r:contrib-flatpages]
-file_filter = ginger/contrib/flatpages/locale/<lang>/LC_MESSAGES/ginger.po
-source_file = ginger/contrib/flatpages/locale/en/LC_MESSAGES/ginger.po
+[o:gingerdj:p:gingerdj:r:contrib-flatpages]
+file_filter = gingerdj/contrib/flatpages/locale/<lang>/LC_MESSAGES/gingerdj.po
+source_file = gingerdj/contrib/flatpages/locale/en/LC_MESSAGES/gingerdj.po
 source_lang = en
 
-[o:ginger:p:ginger:r:contrib-gis]
-file_filter = ginger/contrib/gis/locale/<lang>/LC_MESSAGES/ginger.po
-source_file = ginger/contrib/gis/locale/en/LC_MESSAGES/ginger.po
+[o:gingerdj:p:gingerdj:r:contrib-gis]
+file_filter = gingerdj/contrib/gis/locale/<lang>/LC_MESSAGES/gingerdj.po
+source_file = gingerdj/contrib/gis/locale/en/LC_MESSAGES/gingerdj.po
 source_lang = en
 
-[o:ginger:p:ginger:r:contrib-humanize]
-file_filter = ginger/contrib/humanize/locale/<lang>/LC_MESSAGES/ginger.po
-source_file = ginger/contrib/humanize/locale/en/LC_MESSAGES/ginger.po
+[o:gingerdj:p:gingerdj:r:contrib-humanize]
+file_filter = gingerdj/contrib/humanize/locale/<lang>/LC_MESSAGES/gingerdj.po
+source_file = gingerdj/contrib/humanize/locale/en/LC_MESSAGES/gingerdj.po
 source_lang = en
 
-[o:ginger:p:ginger:r:contrib-postgres]
-file_filter = ginger/contrib/postgres/locale/<lang>/LC_MESSAGES/ginger.po
-source_file = ginger/contrib/postgres/locale/en/LC_MESSAGES/ginger.po
+[o:gingerdj:p:gingerdj:r:contrib-postgres]
+file_filter = gingerdj/contrib/postgres/locale/<lang>/LC_MESSAGES/gingerdj.po
+source_file = gingerdj/contrib/postgres/locale/en/LC_MESSAGES/gingerdj.po
 source_lang = en
 
-[o:ginger:p:ginger:r:contrib-redirects]
-file_filter = ginger/contrib/redirects/locale/<lang>/LC_MESSAGES/ginger.po
-source_file = ginger/contrib/redirects/locale/en/LC_MESSAGES/ginger.po
+[o:gingerdj:p:gingerdj:r:contrib-redirects]
+file_filter = gingerdj/contrib/redirects/locale/<lang>/LC_MESSAGES/gingerdj.po
+source_file = gingerdj/contrib/redirects/locale/en/LC_MESSAGES/gingerdj.po
 source_lang = en
 
-[o:ginger:p:ginger:r:contrib-sessions]
-file_filter = ginger/contrib/sessions/locale/<lang>/LC_MESSAGES/ginger.po
-source_file = ginger/contrib/sessions/locale/en/LC_MESSAGES/ginger.po
+[o:gingerdj:p:gingerdj:r:contrib-sessions]
+file_filter = gingerdj/contrib/sessions/locale/<lang>/LC_MESSAGES/gingerdj.po
+source_file = gingerdj/contrib/sessions/locale/en/LC_MESSAGES/gingerdj.po
 source_lang = en
 
-[o:ginger:p:ginger:r:contrib-sites]
-file_filter = ginger/contrib/sites/locale/<lang>/LC_MESSAGES/ginger.po
-source_file = ginger/contrib/sites/locale/en/LC_MESSAGES/ginger.po
+[o:gingerdj:p:gingerdj:r:contrib-sites]
+file_filter = gingerdj/contrib/sites/locale/<lang>/LC_MESSAGES/gingerdj.po
+source_file = gingerdj/contrib/sites/locale/en/LC_MESSAGES/gingerdj.po
 source_lang = en

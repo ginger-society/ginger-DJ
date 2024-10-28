@@ -1,6 +1,6 @@
 from datetime import date
 
-from ginger.test import override_settings
+from gingerdj.test import override_settings
 
 from .base import SitemapTestsBase
 

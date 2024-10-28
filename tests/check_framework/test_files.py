@@ -1,8 +1,8 @@
 from pathlib import Path
 
-from ginger.core.checks import Error
-from ginger.core.checks.files import check_setting_file_upload_temp_dir
-from ginger.test import SimpleTestCase
+from gingerdj.core.checks import Error
+from gingerdj.core.checks.files import check_setting_file_upload_temp_dir
+from gingerdj.test import SimpleTestCase
 
 
 class FilesCheckTests(SimpleTestCase):

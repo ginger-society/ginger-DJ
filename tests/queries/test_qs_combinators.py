@@ -1,7 +1,7 @@
 import operator
 
-from ginger.db import DatabaseError, NotSupportedError, connection
-from ginger.db.models import (
+from gingerdj.db import DatabaseError, NotSupportedError, connection
+from gingerdj.db.models import (
     Exists,
     F,
     IntegerField,
@@ -10,9 +10,9 @@ from ginger.db.models import (
     Transform,
     Value,
 )
-from ginger.db.models.functions import Mod
-from ginger.test import TestCase, skipIfDBFeature, skipUnlessDBFeature
-from ginger.test.utils import CaptureQueriesContext
+from gingerdj.db.models.functions import Mod
+from gingerdj.test import TestCase, skipIfDBFeature, skipUnlessDBFeature
+from gingerdj.test.utils import CaptureQueriesContext
 
 from .models import Author, Celebrity, ExtraInfo, Number, ReservedName
 

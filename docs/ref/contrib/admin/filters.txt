@@ -4,7 +4,7 @@
 ``ModelAdmin`` List Filters
 ===========================
 
-.. currentmodule:: ginger.contrib.admin
+.. currentmodule:: gingerdj.contrib.admin
 
 ``ModelAdmin`` classes can define list filters that appear in the right sidebar
 of the change list page of the admin, as illustrated in the following
@@ -16,9 +16,9 @@ To activate per-field filtering, set :attr:`ModelAdmin.list_filter` to a list
 or tuple of elements, where each element is one of the following types:
 
 - A field name.
-- A subclass of ``ginger.contrib.admin.SimpleListFilter``.
+- A subclass of ``gingerdj.contrib.admin.SimpleListFilter``.
 - A 2-tuple containing a field name and a subclass of
-  ``ginger.contrib.admin.FieldListFilter``.
+  ``gingerdj.contrib.admin.FieldListFilter``.
 
 See the examples below for discussion of each of these options for defining
 ``list_filter``.
@@ -45,14 +45,14 @@ Using a ``SimpleListFilter``
 ============================
 
 For custom filtering, you can define your own list filter by subclassing
-``ginger.contrib.admin.SimpleListFilter``. You need to provide the ``title``
+``gingerdj.contrib.admin.SimpleListFilter``. You need to provide the ``title``
 and ``parameter_name`` attributes, and override the ``lookups`` and
 ``queryset`` methods, e.g.::
 
     from datetime import date
 
-    from ginger.contrib import admin
-    from ginger.utils.translation import gettext_lazy as _
+    from gingerdj.contrib import admin
+    from gingerdj.utils.translation import gettext_lazy as _
 
 
     class DecadeBornListFilter(admin.SimpleListFilter):
@@ -141,7 +141,7 @@ Using a field name and an explicit ``FieldListFilter``
 Finally, if you wish to specify an explicit filter type to use with a field you
 may provide a ``list_filter`` item as a 2-tuple, where the first element is a
 field name and the second element is a class inheriting from
-``ginger.contrib.admin.FieldListFilter``, for example::
+``gingerdj.contrib.admin.FieldListFilter``, for example::
 
     class PersonAdmin(admin.ModelAdmin):
         list_filter = [
@@ -203,7 +203,7 @@ It is possible to specify a custom template for rendering a list filter::
     class FilterWithCustomTemplate(admin.SimpleListFilter):
         template = "custom_template.html"
 
-See the default template provided by Ginger (``admin/filter.html``) for a
+See the default template provided by GingerDJ (``admin/filter.html``) for a
 concrete example.
 
 .. _facet-filters:

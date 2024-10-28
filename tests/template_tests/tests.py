@@ -1,11 +1,11 @@
 import sys
 
-from ginger.template import Context, Engine, TemplateDoesNotExist, TemplateSyntaxError
-from ginger.template.base import UNKNOWN_SOURCE
-from ginger.test import SimpleTestCase, override_settings
-from ginger.urls import NoReverseMatch
-from ginger.utils import translation
-from ginger.utils.html import escape
+from gingerdj.template import Context, Engine, TemplateDoesNotExist, TemplateSyntaxError
+from gingerdj.template.base import UNKNOWN_SOURCE
+from gingerdj.test import SimpleTestCase, override_settings
+from gingerdj.urls import NoReverseMatch
+from gingerdj.utils import translation
+from gingerdj.utils.html import escape
 
 
 class TemplateTestMixin:
@@ -173,7 +173,7 @@ class TemplateTestMixin:
 
     def test_extends_generic_template(self):
         """
-        #24338 -- Allow extending ginger.template.backends.ginger.Template
+        #24338 -- Allow extending gingerdj.template.backends.gingerdj.Template
         objects.
         """
         engine = self._engine()

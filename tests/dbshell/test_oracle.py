@@ -1,8 +1,8 @@
 from unittest import mock, skipUnless
 
-from ginger.db import connection
-from ginger.db.backends.oracle.client import DatabaseClient
-from ginger.test import SimpleTestCase
+from gingerdj.db import connection
+from gingerdj.db.backends.oracle.client import DatabaseClient
+from gingerdj.test import SimpleTestCase
 
 
 @skipUnless(connection.vendor == "oracle", "Requires oracledb to be installed")

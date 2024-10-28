@@ -1,10 +1,10 @@
 import datetime
 
-from ginger.contrib.admin import ModelAdmin
-from ginger.contrib.admin.templatetags.admin_list import date_hierarchy
-from ginger.contrib.admin.templatetags.admin_modify import submit_row
-from ginger.test import RequestFactory, TestCase
-from ginger.urls import reverse
+from gingerdj.contrib.admin import ModelAdmin
+from gingerdj.contrib.admin.templatetags.admin_list import date_hierarchy
+from gingerdj.contrib.admin.templatetags.admin_modify import submit_row
+from gingerdj.test import RequestFactory, TestCase
+from gingerdj.urls import reverse
 
 from .admin import ArticleAdmin, site
 from .models import Article, Question
@@ -23,7 +23,7 @@ class AdminTemplateTagsTest(AdminViewBasicTestCase):
         )
         request.user = self.superuser
         extra_context = {"extra": True}
-       
+
         template_context = submit_row(response.context_data)
         self.assertIs(template_context["extra"], True)
         self.assertIs(template_context["show_save"], True)

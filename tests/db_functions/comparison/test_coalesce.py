@@ -1,7 +1,7 @@
-from ginger.db.models import Subquery, TextField
-from ginger.db.models.functions import Coalesce, Lower
-from ginger.test import TestCase
-from ginger.utils import timezone
+from gingerdj.db.models import Subquery, TextField
+from gingerdj.db.models.functions import Coalesce, Lower
+from gingerdj.test import TestCase
+from gingerdj.utils import timezone
 
 from ..models import Article, Author
 
@@ -29,7 +29,7 @@ class CoalesceTests(TestCase):
         a1 = Author.objects.create(name="John Smith", alias="smithj")
         a2 = Author.objects.create(name="Rhonda")
         ar1 = Article.objects.create(
-            title="How to Ginger",
+            title="How to GingerDJ",
             text=lorem_ipsum,
             written=timezone.now(),
         )

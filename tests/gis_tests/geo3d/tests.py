@@ -1,8 +1,8 @@
 import os
 import re
 
-from ginger.contrib.gis.db.models import Extent3D, Q, Union
-from ginger.contrib.gis.db.models.functions import (
+from gingerdj.contrib.gis.db.models import Extent3D, Q, Union
+from gingerdj.contrib.gis.db.models.functions import (
     AsGeoJSON,
     AsKML,
     Length,
@@ -10,8 +10,8 @@ from ginger.contrib.gis.db.models.functions import (
     Scale,
     Translate,
 )
-from ginger.contrib.gis.geos import GEOSGeometry, LineString, Point, Polygon
-from ginger.test import TestCase, skipUnlessDBFeature
+from gingerdj.contrib.gis.geos import GEOSGeometry, LineString, Point, Polygon
+from gingerdj.test import TestCase, skipUnlessDBFeature
 
 from ..utils import FuncTestMixin
 from .models import (
@@ -180,7 +180,7 @@ class Geo3DTest(Geo3DLoadingHelper, TestCase):
         Testing LayerMapping on 3D models.
         """
         # Import here as GDAL is required for those imports
-        from ginger.contrib.gis.utils import LayerMapError, LayerMapping
+        from gingerdj.contrib.gis.utils import LayerMapError, LayerMapping
 
         point_mapping = {"point": "POINT"}
         mpoint_mapping = {"mpoint": "MULTIPOINT"}

@@ -1,8 +1,8 @@
 import json
 import uuid
 
-from ginger.core.serializers.json import GingerJSONEncoder
-from ginger.forms import (
+from gingerdj.core.serializers.json import GingerJSONEncoder
+from gingerdj.forms import (
     CharField,
     Form,
     JSONField,
@@ -10,7 +10,7 @@ from ginger.forms import (
     TextInput,
     ValidationError,
 )
-from ginger.test import SimpleTestCase
+from gingerdj.test import SimpleTestCase
 
 
 class JSONFieldTest(SimpleTestCase):

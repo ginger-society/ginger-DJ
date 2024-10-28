@@ -1,17 +1,17 @@
 from math import ceil
 from operator import attrgetter
 
-from ginger.core.exceptions import FieldDoesNotExist
-from ginger.db import (
+from gingerdj.core.exceptions import FieldDoesNotExist
+from gingerdj.db import (
     IntegrityError,
     NotSupportedError,
     OperationalError,
     ProgrammingError,
     connection,
 )
-from ginger.db.models import FileField, Value
-from ginger.db.models.functions import Lower, Now
-from ginger.test import (
+from gingerdj.db.models import FileField, Value
+from gingerdj.db.models.functions import Lower, Now
+from gingerdj.test import (
     TestCase,
     override_settings,
     skipIfDBFeature,

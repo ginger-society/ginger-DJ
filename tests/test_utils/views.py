@@ -1,6 +1,6 @@
-from ginger.http import HttpResponse
-from ginger.shortcuts import get_object_or_404
-from ginger.template import Context, Template
+from gingerdj.http import HttpResponse
+from gingerdj.shortcuts import get_object_or_404
+from gingerdj.template import Context, Template
 
 from .models import Person
 

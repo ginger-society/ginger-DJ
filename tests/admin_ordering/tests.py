@@ -1,7 +1,7 @@
-from ginger.contrib import admin
-from ginger.contrib.admin.options import ModelAdmin
-from ginger.db.models import F
-from ginger.test import RequestFactory, TestCase
+from gingerdj.contrib import admin
+from gingerdj.contrib.admin.options import ModelAdmin
+from gingerdj.db.models import F
+from gingerdj.test import RequestFactory, TestCase
 
 from .models import (
     Band,

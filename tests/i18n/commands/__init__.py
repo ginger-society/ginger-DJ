@@ -1,5 +1,5 @@
-from ginger.utils.translation import gettext as _
-from ginger.utils.translation import ngettext
+from gingerdj.utils.translation import gettext as _
+from gingerdj.utils.translation import ngettext
 
 # Translators: This comment should be extracted
 dummy1 = _("This is a translatable string.")

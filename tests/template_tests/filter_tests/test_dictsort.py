@@ -1,5 +1,5 @@
-from ginger.template.defaultfilters import _property_resolver, dictsort
-from ginger.test import SimpleTestCase
+from gingerdj.template.defaultfilters import _property_resolver, dictsort
+from gingerdj.test import SimpleTestCase
 
 
 class User:

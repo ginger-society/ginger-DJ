@@ -1,5 +1,5 @@
-from ginger.urls import include, path
-from ginger.views import View
+from gingerdj.urls import include, path
+from gingerdj.views import View
 
 
 def view1(request):

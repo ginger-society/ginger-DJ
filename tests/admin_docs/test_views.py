@@ -1,17 +1,17 @@
 import sys
 import unittest
 
-from ginger.conf import settings
-from ginger.contrib import admin
-from ginger.contrib.admindocs import utils, views
-from ginger.contrib.admindocs.views import get_return_data_type, simplify_regex
-from ginger.contrib.sites.models import Site
-from ginger.db import models
-from ginger.db.models import fields
-from ginger.test import SimpleTestCase, modify_settings, override_settings
-from ginger.test.utils import captured_stderr
-from ginger.urls import include, path, reverse
-from ginger.utils.functional import SimpleLazyObject
+from gingerdj.conf import settings
+from gingerdj.contrib import admin
+from gingerdj.contrib.admindocs import utils, views
+from gingerdj.contrib.admindocs.views import get_return_data_type, simplify_regex
+from gingerdj.contrib.sites.models import Site
+from gingerdj.db import models
+from gingerdj.db.models import fields
+from gingerdj.test import SimpleTestCase, modify_settings, override_settings
+from gingerdj.test.utils import captured_stderr
+from gingerdj.urls import include, path, reverse
+from gingerdj.utils.functional import SimpleLazyObject
 
 from .models import Company, Person
 from .tests import AdminDocsTestCase, TestDataMixin
@@ -23,38 +23,38 @@ class AdminDocViewTests(TestDataMixin, AdminDocsTestCase):
         self.client.force_login(self.superuser)
 
     def test_index(self):
-        response = self.client.get(reverse("ginger-admindocs-docroot"))
+        response = self.client.get(reverse("gingerdj-admindocs-docroot"))
         self.assertContains(response, "<h1>Documentation</h1>", html=True)
         self.assertContains(
             response,
-            '<div id="site-name"><a href="/admin/">Ginger administration</a></div>',
+            '<div id="site-name"><a href="/admin/">GingerDJ administration</a></div>',
         )
         self.client.logout()
-        response = self.client.get(reverse("ginger-admindocs-docroot"), follow=True)
+        response = self.client.get(reverse("gingerdj-admindocs-docroot"), follow=True)
         # Should display the login screen
         self.assertContains(
             response, '<input type="hidden" name="next" value="/admindocs/">', html=True
         )
 
     def test_bookmarklets(self):
-        response = self.client.get(reverse("ginger-admindocs-bookmarklets"))
+        response = self.client.get(reverse("gingerdj-admindocs-bookmarklets"))
         self.assertContains(response, "/admindocs/views/")
 
     def test_templatetag_index(self):
-        response = self.client.get(reverse("ginger-admindocs-tags"))
+        response = self.client.get(reverse("gingerdj-admindocs-tags"))
         self.assertContains(
             response, '<h3 id="built_in-extends">extends</h3>', html=True
         )
 
     def test_templatefilter_index(self):
-        response = self.client.get(reverse("ginger-admindocs-filters"))
+        response = self.client.get(reverse("gingerdj-admindocs-filters"))
         self.assertContains(response, '<h3 id="built_in-first">first</h3>', html=True)
 
     def test_view_index(self):
-        response = self.client.get(reverse("ginger-admindocs-views-index"))
+        response = self.client.get(reverse("gingerdj-admindocs-views-index"))
         self.assertContains(
             response,
-            '<h3><a href="/admindocs/views/ginger.contrib.admindocs.views.'
+            '<h3><a href="/admindocs/views/gingerdj.contrib.admindocs.views.'
             'BaseAdminDocsView/">/admindocs/</a></h3>',
             html=True,
         )
@@ -71,19 +71,19 @@ class AdminDocViewTests(TestDataMixin, AdminDocsTestCase):
         """
         Views that are methods are listed correctly.
         """
-        response = self.client.get(reverse("ginger-admindocs-views-index"))
+        response = self.client.get(reverse("gingerdj-admindocs-views-index"))
         self.assertContains(
             response,
             "<h3>"
-            '<a href="/admindocs/views/ginger.contrib.admin.sites.AdminSite.index/">'
+            '<a href="/admindocs/views/gingerdj.contrib.admin.sites.AdminSite.index/">'
             "/admin/</a></h3>",
             html=True,
         )
 
     def test_view_detail(self):
         url = reverse(
-            "ginger-admindocs-views-detail",
-            args=["ginger.contrib.admindocs.views.BaseAdminDocsView"],
+            "gingerdj-admindocs-views-detail",
+            args=["gingerdj.contrib.admindocs.views.BaseAdminDocsView"],
         )
         response = self.client.get(url)
         # View docstring
@@ -92,14 +92,14 @@ class AdminDocViewTests(TestDataMixin, AdminDocsTestCase):
     @override_settings(ROOT_URLCONF="admin_docs.namespace_urls")
     def test_namespaced_view_detail(self):
         url = reverse(
-            "ginger-admindocs-views-detail", args=["admin_docs.views.XViewClass"]
+            "gingerdj-admindocs-views-detail", args=["admin_docs.views.XViewClass"]
         )
         response = self.client.get(url)
         self.assertContains(response, "<h1>admin_docs.views.XViewClass</h1>")
 
     def test_view_detail_illegal_import(self):
         url = reverse(
-            "ginger-admindocs-views-detail",
+            "gingerdj-admindocs-views-detail",
             args=["urlpatterns_reverse.nonimported_module.view"],
         )
         response = self.client.get(url)
@@ -111,8 +111,8 @@ class AdminDocViewTests(TestDataMixin, AdminDocsTestCase):
         Views that are methods can be displayed.
         """
         url = reverse(
-            "ginger-admindocs-views-detail",
-            args=["ginger.contrib.admin.sites.AdminSite.index"],
+            "gingerdj-admindocs-views-detail",
+            args=["gingerdj.contrib.admin.sites.AdminSite.index"],
         )
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
@@ -120,7 +120,7 @@ class AdminDocViewTests(TestDataMixin, AdminDocsTestCase):
     def test_template_detail(self):
         response = self.client.get(
             reverse(
-                "ginger-admindocs-templates", args=["admin_doc/template_detail.html"]
+                "gingerdj-admindocs-templates", args=["admin_doc/template_detail.html"]
             )
         )
         self.assertContains(
@@ -131,14 +131,14 @@ class AdminDocViewTests(TestDataMixin, AdminDocsTestCase):
 
     def test_template_detail_loader(self):
         response = self.client.get(
-            reverse("ginger-admindocs-templates", args=["view_for_loader_test.html"])
+            reverse("gingerdj-admindocs-templates", args=["view_for_loader_test.html"])
         )
         self.assertContains(response, "view_for_loader_test.html</code></li>")
 
     def test_missing_docutils(self):
         utils.docutils_is_available = False
         try:
-            response = self.client.get(reverse("ginger-admindocs-docroot"))
+            response = self.client.get(reverse("gingerdj-admindocs-docroot"))
             self.assertContains(
                 response,
                 "<h3>The admin documentation system requires Python’s "
@@ -150,12 +150,12 @@ class AdminDocViewTests(TestDataMixin, AdminDocsTestCase):
             )
             self.assertContains(
                 response,
-                '<div id="site-name"><a href="/admin/">Ginger administration</a></div>',
+                '<div id="site-name"><a href="/admin/">GingerDJ administration</a></div>',
             )
         finally:
             utils.docutils_is_available = True
 
-    @modify_settings(INSTALLED_APPS={"remove": "ginger.contrib.sites"})
+    @modify_settings(INSTALLED_APPS={"remove": "gingerdj.contrib.sites"})
     @override_settings(SITE_ID=None)  # will restore SITE_ID after the test
     def test_no_sites_framework(self):
         """
@@ -164,7 +164,7 @@ class AdminDocViewTests(TestDataMixin, AdminDocsTestCase):
         """
         Site.objects.all().delete()
         del settings.SITE_ID
-        response = self.client.get(reverse("ginger-admindocs-views-index"))
+        response = self.client.get(reverse("gingerdj-admindocs-views-index"))
         self.assertContains(response, "View documentation")
 
     def test_callable_urlconf(self):
@@ -175,12 +175,12 @@ class AdminDocViewTests(TestDataMixin, AdminDocsTestCase):
 
         def urlpatterns():
             return (
-                path("admin/doc/", include("ginger.contrib.admindocs.urls")),
+                path("admin/doc/", include("gingerdj.contrib.admindocs.urls")),
                 path("admin/", admin.site.urls),
             )
 
         with self.settings(ROOT_URLCONF=SimpleLazyObject(urlpatterns)):
-            response = self.client.get(reverse("ginger-admindocs-views-index"))
+            response = self.client.get(reverse("gingerdj-admindocs-views-index"))
             self.assertEqual(response.status_code, 200)
 
 
@@ -194,7 +194,7 @@ class AdminDocViewDefaultEngineOnly(TestDataMixin, AdminDocsTestCase):
         for fpath in cases:
             with self.subTest(path=fpath):
                 response = self.client.get(
-                    reverse("ginger-admindocs-templates", args=[fpath]),
+                    reverse("gingerdj-admindocs-templates", args=[fpath]),
                 )
                 self.assertEqual(response.status_code, 400)
 
@@ -203,12 +203,12 @@ class AdminDocViewDefaultEngineOnly(TestDataMixin, AdminDocsTestCase):
     TEMPLATES=[
         {
             "NAME": "ONE",
-            "BACKEND": "ginger.template.backends.ginger.GingerTemplates",
+            "BACKEND": "gingerdj.template.backends.gingerdj.GingerTemplates",
             "APP_DIRS": True,
         },
         {
             "NAME": "TWO",
-            "BACKEND": "ginger.template.backends.ginger.GingerTemplates",
+            "BACKEND": "gingerdj.template.backends.gingerdj.GingerTemplates",
             "APP_DIRS": True,
         },
     ]
@@ -218,13 +218,13 @@ class AdminDocViewWithMultipleEngines(AdminDocViewTests):
     def test_templatefilter_index(self):
         # Overridden because non-trivial TEMPLATES settings aren't supported
         # but the page shouldn't crash (#24125).
-        response = self.client.get(reverse("ginger-admindocs-filters"))
+        response = self.client.get(reverse("gingerdj-admindocs-filters"))
         self.assertContains(response, "<title>Template filters</title>", html=True)
 
     def test_templatetag_index(self):
         # Overridden because non-trivial TEMPLATES settings aren't supported
         # but the page shouldn't crash (#24125).
-        response = self.client.get(reverse("ginger-admindocs-tags"))
+        response = self.client.get(reverse("gingerdj-admindocs-tags"))
         self.assertContains(response, "<title>Template tags</title>", html=True)
 
 
@@ -234,7 +234,9 @@ class TestModelDetailView(TestDataMixin, AdminDocsTestCase):
         self.client.force_login(self.superuser)
         with captured_stderr() as self.docutils_stderr:
             self.response = self.client.get(
-                reverse("ginger-admindocs-models-detail", args=["admin_docs", "Person"])
+                reverse(
+                    "gingerdj-admindocs-models-detail", args=["admin_docs", "Person"]
+                )
             )
 
     def test_table_headers(self):
@@ -254,7 +256,7 @@ class TestModelDetailView(TestDataMixin, AdminDocsTestCase):
     def test_method_excludes(self):
         """
         Methods that begin with strings defined in
-        ``ginger.contrib.admindocs.views.MODEL_METHODS_EXCLUDE``
+        ``gingerdj.contrib.admindocs.views.MODEL_METHODS_EXCLUDE``
         shouldn't be displayed in the admin docs.
         """
         self.assertContains(self.response, "<td>get_full_name</td>")
@@ -307,7 +309,7 @@ class TestModelDetailView(TestDataMixin, AdminDocsTestCase):
         self.assertContains(self.response, "<td>a_cached_property</td>")
 
     def test_method_data_types(self):
-        company = Company.objects.create(name="Ginger")
+        company = Company.objects.create(name="GingerDJ")
         person = Person.objects.create(
             first_name="Human", last_name="User", company=company
         )
@@ -373,7 +375,7 @@ class TestModelDetailView(TestDataMixin, AdminDocsTestCase):
     def test_model_with_many_to_one(self):
         link = '<a class="reference external" href="/admindocs/models/%s/">%s</a>'
         response = self.client.get(
-            reverse("ginger-admindocs-models-detail", args=["admin_docs", "company"])
+            reverse("gingerdj-admindocs-models-detail", args=["admin_docs", "company"])
         )
         self.assertContains(
             response,
@@ -392,7 +394,7 @@ class TestModelDetailView(TestDataMixin, AdminDocsTestCase):
         relationship links.
         """
         response = self.client.get(
-            reverse("ginger-admindocs-models-detail", args=["admin_docs", "family"])
+            reverse("gingerdj-admindocs-models-detail", args=["admin_docs", "family"])
         )
         fields = response.context_data.get("fields")
         self.assertEqual(len(fields), 2)
@@ -425,7 +427,7 @@ class TestModelDetailView(TestDataMixin, AdminDocsTestCase):
 
     def test_app_not_found(self):
         response = self.client.get(
-            reverse("ginger-admindocs-models-detail", args=["doesnotexist", "Person"])
+            reverse("gingerdj-admindocs-models-detail", args=["doesnotexist", "Person"])
         )
         self.assertEqual(response.context["exception"], "App 'doesnotexist' not found")
         self.assertEqual(response.status_code, 404)
@@ -433,7 +435,7 @@ class TestModelDetailView(TestDataMixin, AdminDocsTestCase):
     def test_model_not_found(self):
         response = self.client.get(
             reverse(
-                "ginger-admindocs-models-detail", args=["admin_docs", "doesnotexist"]
+                "gingerdj-admindocs-models-detail", args=["admin_docs", "doesnotexist"]
             )
         )
         self.assertEqual(

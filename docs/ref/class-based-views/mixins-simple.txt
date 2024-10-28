@@ -5,7 +5,7 @@ Simple mixins
 ``ContextMixin``
 ================
 
-.. class:: ginger.views.generic.base.ContextMixin
+.. class:: gingerdj.views.generic.base.ContextMixin
 
     **Attributes**
 
@@ -13,9 +13,9 @@ Simple mixins
 
         A dictionary to include in the context. This is a convenient way of
         specifying some context in
-        :meth:`~ginger.views.generic.base.View.as_view`. Example usage::
+        :meth:`~gingerdj.views.generic.base.View.as_view`. Example usage::
 
-            from ginger.views.generic import TemplateView
+            from gingerdj.views.generic import TemplateView
 
             TemplateView.as_view(extra_context={"title": "Custom Title"})
 
@@ -46,10 +46,10 @@ Simple mixins
 ``TemplateResponseMixin``
 =========================
 
-.. class:: ginger.views.generic.base.TemplateResponseMixin
+.. class:: gingerdj.views.generic.base.TemplateResponseMixin
 
     Provides a mechanism to construct a
-    :class:`~ginger.template.response.TemplateResponse`, given
+    :class:`~gingerdj.template.response.TemplateResponse`, given
     suitable context. The template to use is configurable and can be
     further customized by subclasses.
 
@@ -59,20 +59,20 @@ Simple mixins
 
         The full name of a template to use as defined by a string. Not defining
         a ``template_name`` will raise a
-        :class:`ginger.core.exceptions.ImproperlyConfigured` exception.
+        :class:`gingerdj.core.exceptions.ImproperlyConfigured` exception.
 
     .. attribute:: template_engine
 
         The :setting:`NAME <TEMPLATES-NAME>` of a template engine to use for
         loading the template. ``template_engine`` is passed as the ``using``
         keyword argument to ``response_class``. Default is ``None``, which
-        tells Ginger to search for the template in all configured engines.
+        tells GingerDJ to search for the template in all configured engines.
 
     .. attribute:: response_class
 
         The response class to be returned by ``render_to_response`` method.
         Default is :class:`TemplateResponse
-        <ginger.template.response.TemplateResponse>`. The template and context
+        <gingerdj.template.response.TemplateResponse>`. The template and context
         of ``TemplateResponse`` instances can be altered later (e.g. in
         :ref:`template response middleware <template-response-middleware>`).
 
@@ -84,7 +84,7 @@ Simple mixins
 
         The content type to use for the response. ``content_type`` is passed
         as a keyword argument to ``response_class``. Default is ``None`` --
-        meaning that Ginger uses ``'text/html'``.
+        meaning that GingerDJ uses ``'text/html'``.
 
     **Methods**
 

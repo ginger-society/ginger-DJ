@@ -1,7 +1,7 @@
-from ginger.db import models
-from ginger.db.models import QuerySet
-from ginger.db.models.manager import BaseManager
-from ginger.urls import reverse
+from gingerdj.db import models
+from gingerdj.db.models import QuerySet
+from gingerdj.db.models.manager import BaseManager
+from gingerdj.urls import reverse
 
 
 class Artist(models.Model):

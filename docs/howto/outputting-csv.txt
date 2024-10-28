@@ -3,20 +3,20 @@ How to create CSV output
 ========================
 
 This document explains how to output CSV (Comma Separated Values) dynamically
-using Ginger views. To do this, you can either use the Python CSV library or the
-Ginger template system.
+using GingerDJ views. To do this, you can either use the Python CSV library or the
+GingerDJ template system.
 
 Using the Python CSV library
 ============================
 
-Python comes with a CSV library, :mod:`csv`. The key to using it with Ginger is
+Python comes with a CSV library, :mod:`csv`. The key to using it with GingerDJ is
 that the :mod:`csv` module's CSV-creation capability acts on file-like objects,
-and Ginger's :class:`~ginger.http.HttpResponse` objects are file-like objects.
+and GingerDJ's :class:`~gingerdj.http.HttpResponse` objects are file-like objects.
 
 Here's an example::
 
     import csv
-    from ginger.http import HttpResponse
+    from gingerdj.http import HttpResponse
 
 
     def some_view(request):
@@ -46,7 +46,7 @@ mention:
 
 * You can hook into the CSV-generation API by passing ``response`` as the first
   argument to ``csv.writer``. The ``csv.writer`` function expects a file-like
-  object, and :class:`~ginger.http.HttpResponse` objects fit the bill.
+  object, and :class:`~gingerdj.http.HttpResponse` objects fit the bill.
 
 * For each row in your CSV file, call ``writer.writerow``, passing it an
   :term:`iterable`.
@@ -61,7 +61,7 @@ Streaming large CSV files
 -------------------------
 
 When dealing with views that generate very large responses, you might want to
-consider using Ginger's :class:`~ginger.http.StreamingHttpResponse` instead.
+consider using GingerDJ's :class:`~gingerdj.http.StreamingHttpResponse` instead.
 For example, by streaming a file that takes a long time to generate you can
 avoid a load balancer dropping a connection that might have otherwise timed out
 while the server was generating the response.
@@ -71,7 +71,7 @@ the assembly and transmission of a large CSV file::
 
     import csv
 
-    from ginger.http import StreamingHttpResponse
+    from gingerdj.http import StreamingHttpResponse
 
 
     class Echo:
@@ -101,7 +101,7 @@ the assembly and transmission of a large CSV file::
 Using the template system
 =========================
 
-Alternatively, you can use the :doc:`Ginger template system </topics/templates>`
+Alternatively, you can use the :doc:`GingerDJ template system </topics/templates>`
 to generate CSV. This is lower-level than using the convenient Python :mod:`csv`
 module, but the solution is presented here for completeness.
 
@@ -110,8 +110,8 @@ template output the commas in a :ttag:`for` loop.
 
 Here's an example, which generates the same CSV file as above::
 
-    from ginger.http import HttpResponse
-    from ginger.template import loader
+    from gingerdj.http import HttpResponse
+    from gingerdj.template import loader
 
 
     def some_view(request):

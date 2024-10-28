@@ -1,9 +1,9 @@
 import datetime
 
-from ginger.core import signing
-from ginger.test import SimpleTestCase, override_settings
-from ginger.test.utils import freeze_time
-from ginger.utils.crypto import InvalidAlgorithm
+from gingerdj.core import signing
+from gingerdj.test import SimpleTestCase, override_settings
+from gingerdj.test.utils import freeze_time
+from gingerdj.utils.crypto import InvalidAlgorithm
 
 
 class TestSigner(SimpleTestCase):

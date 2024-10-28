@@ -9,16 +9,16 @@ from unittest import mock
 
 from admin_scripts.tests import AdminScriptTestCase
 
-from ginger.conf import STATICFILES_STORAGE_ALIAS, settings
-from ginger.contrib.staticfiles import storage
-from ginger.contrib.staticfiles.management.commands import collectstatic, runserver
-from ginger.core.exceptions import ImproperlyConfigured
-from ginger.core.management import CommandError, call_command
-from ginger.core.management.base import SystemCheckError
-from ginger.test import RequestFactory, override_settings
-from ginger.test.utils import extend_sys_path
-from ginger.utils._os import symlinks_supported
-from ginger.utils.functional import empty
+from gingerdj.conf import STATICFILES_STORAGE_ALIAS, settings
+from gingerdj.contrib.staticfiles import storage
+from gingerdj.contrib.staticfiles.management.commands import collectstatic, runserver
+from gingerdj.core.exceptions import ImproperlyConfigured
+from gingerdj.core.management import CommandError, call_command
+from gingerdj.core.management.base import SystemCheckError
+from gingerdj.test import RequestFactory, override_settings
+from gingerdj.test.utils import extend_sys_path
+from gingerdj.utils._os import symlinks_supported
+from gingerdj.utils.functional import empty
 
 from .cases import CollectionTestCase, StaticFilesTestCase, TestDefaults
 from .settings import TEST_ROOT, TEST_SETTINGS
@@ -34,10 +34,10 @@ class TestNoFilesCreated:
 
 
 class TestRunserver(StaticFilesTestCase):
-    @override_settings(MIDDLEWARE=["ginger.middleware.common.CommonMiddleware"])
+    @override_settings(MIDDLEWARE=["gingerdj.middleware.common.CommonMiddleware"])
     def test_middleware_loaded_only_once(self):
         command = runserver.Command()
-        with mock.patch("ginger.middleware.common.CommonMiddleware") as mocked:
+        with mock.patch("gingerdj.middleware.common.CommonMiddleware") as mocked:
             command.get_handler(use_static_handler=True, insecure_serving=True)
             self.assertEqual(mocked.call_count, 1)
 
@@ -145,7 +145,7 @@ class TestConfiguration(StaticFilesTestCase):
                     **settings.STORAGES,
                     STATICFILES_STORAGE_ALIAS: {
                         "BACKEND": (
-                            "ginger.contrib.staticfiles.storage.StaticFilesStorage"
+                            "gingerdj.contrib.staticfiles.storage.StaticFilesStorage"
                         )
                     },
                 }
@@ -191,7 +191,7 @@ class TestCollectionHelpSubcommand(AdminScriptTestCase):
         Even if the STATIC_ROOT setting is not set, one can still call the
         `manage.py help collectstatic` command.
         """
-        self.write_settings("settings.py", apps=["ginger.contrib.staticfiles"])
+        self.write_settings("settings.py", apps=["gingerdj.contrib.staticfiles"])
         out, err = self.run_manage(["help", "collectstatic"])
         self.assertNoOutput(err)
 
@@ -255,7 +255,7 @@ class TestCollectionVerbosity(CollectionTestCase):
             **settings.STORAGES,
             STATICFILES_STORAGE_ALIAS: {
                 "BACKEND": (
-                    "ginger.contrib.staticfiles.storage.ManifestStaticFilesStorage"
+                    "gingerdj.contrib.staticfiles.storage.ManifestStaticFilesStorage"
                 )
             },
         }
@@ -270,7 +270,7 @@ class TestCollectionVerbosity(CollectionTestCase):
             **settings.STORAGES,
             STATICFILES_STORAGE_ALIAS: {
                 "BACKEND": (
-                    "ginger.contrib.staticfiles.storage.ManifestStaticFilesStorage"
+                    "gingerdj.contrib.staticfiles.storage.ManifestStaticFilesStorage"
                 )
             },
         }
@@ -423,7 +423,7 @@ class TestCollectionDryRun(TestNoFilesCreated, CollectionTestCase):
     STORAGES={
         **settings.STORAGES,
         STATICFILES_STORAGE_ALIAS: {
-            "BACKEND": "ginger.contrib.staticfiles.storage.ManifestStaticFilesStorage"
+            "BACKEND": "gingerdj.contrib.staticfiles.storage.ManifestStaticFilesStorage"
         },
     }
 )

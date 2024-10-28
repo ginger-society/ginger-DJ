@@ -1,13 +1,13 @@
 import json
 from datetime import datetime
 
-from ginger.contrib.admin.models import ADDITION, CHANGE, DELETION, LogEntry
-from ginger.contrib.admin.utils import quote
-from ginger.test import TestCase, override_settings
-from ginger.urls import reverse
-from ginger.utils import translation
-from ginger.utils.deprecation import RemovedInGinger60Warning
-from ginger.utils.html import escape
+from gingerdj.contrib.admin.models import ADDITION, CHANGE, DELETION, LogEntry
+from gingerdj.contrib.admin.utils import quote
+from gingerdj.test import TestCase, override_settings
+from gingerdj.urls import reverse
+from gingerdj.utils import translation
+from gingerdj.utils.deprecation import RemovedInGinger60Warning
+from gingerdj.utils.html import escape
 
 from .models import Article, ArticleProxy, Car, InheritedLogEntryManager, Site
 
@@ -91,7 +91,7 @@ class LogEntryTests(TestCase):
             self.assertEqual(logentry.get_change_message(), "Ajout.")
 
     def test_logentry_change_message_not_json(self):
-        """LogEntry.change_message was a string before Ginger 1.10."""
+        """LogEntry.change_message was a string before GingerDJ 1.10."""
         logentry = LogEntry(change_message="non-JSON string")
         self.assertEqual(logentry.get_change_message(), logentry.change_message)
 

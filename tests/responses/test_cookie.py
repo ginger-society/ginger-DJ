@@ -3,10 +3,10 @@ from datetime import date, datetime, timedelta, timezone
 from email.utils import format_datetime as format_datetime_rfc5322
 from http import cookies
 
-from ginger.http import HttpResponse
-from ginger.test import SimpleTestCase
-from ginger.test.utils import freeze_time
-from ginger.utils.http import http_date
+from gingerdj.http import HttpResponse
+from gingerdj.test import SimpleTestCase
+from gingerdj.test.utils import freeze_time
+from gingerdj.utils.http import http_date
 
 
 class SetCookieTests(SimpleTestCase):

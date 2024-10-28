@@ -2,9 +2,9 @@
 View decorators
 ===============
 
-.. module:: ginger.views.decorators.http
+.. module:: gingerdj.views.decorators.http
 
-Ginger provides several decorators that can be applied to views to support
+GingerDJ provides several decorators that can be applied to views to support
 various HTTP features.
 
 See :ref:`decorating-class-based-views` for how to use these decorators with
@@ -13,16 +13,16 @@ class-based views.
 Allowed HTTP methods
 ====================
 
-The decorators in :mod:`ginger.views.decorators.http` can be used to restrict
+The decorators in :mod:`gingerdj.views.decorators.http` can be used to restrict
 access to views based on the request method. These decorators will return
-a :class:`ginger.http.HttpResponseNotAllowed` if the conditions are not met.
+a :class:`gingerdj.http.HttpResponseNotAllowed` if the conditions are not met.
 
 .. function:: require_http_methods(request_method_list)
 
     Decorator to require that a view only accepts particular request
     methods. Usage::
 
-        from ginger.views.decorators.http import require_http_methods
+        from gingerdj.views.decorators.http import require_http_methods
 
 
         @require_http_methods(["GET", "POST"])
@@ -74,7 +74,7 @@ a :class:`ginger.http.HttpResponseNotAllowed` if the conditions are not met.
 Conditional view processing
 ===========================
 
-The following decorators in :mod:`ginger.views.decorators.http` can be used to
+The following decorators in :mod:`gingerdj.views.decorators.http` can be used to
 control caching behavior on particular views.
 
 .. function:: condition(etag_func=None, last_modified_func=None)
@@ -91,12 +91,12 @@ control caching behavior on particular views.
 
         Support for wrapping asynchronous view functions was added.
 
-.. module:: ginger.views.decorators.gzip
+.. module:: gingerdj.views.decorators.gzip
 
 GZip compression
 ================
 
-The decorators in :mod:`ginger.views.decorators.gzip` control content
+The decorators in :mod:`gingerdj.views.decorators.gzip` control content
 compression on a per-view basis.
 
 .. function:: gzip_page()
@@ -109,12 +109,12 @@ compression on a per-view basis.
 
         Support for wrapping asynchronous view functions was added.
 
-.. module:: ginger.views.decorators.vary
+.. module:: gingerdj.views.decorators.vary
 
 Vary headers
 ============
 
-The decorators in :mod:`ginger.views.decorators.vary` can be used to control
+The decorators in :mod:`gingerdj.views.decorators.vary` can be used to control
 caching based on specific request headers.
 
 .. function:: vary_on_cookie(func)
@@ -134,19 +134,19 @@ caching based on specific request headers.
 
         Support for wrapping asynchronous view functions was added.
 
-.. module:: ginger.views.decorators.cache
+.. module:: gingerdj.views.decorators.cache
 
 Caching
 =======
 
-The decorators in :mod:`ginger.views.decorators.cache` control server and
+The decorators in :mod:`gingerdj.views.decorators.cache` control server and
 client-side caching.
 
 .. function:: cache_control(**kwargs)
 
     This decorator patches the response's ``Cache-Control`` header by adding
     all of the keyword arguments to it. See
-    :func:`~ginger.utils.cache.patch_cache_control` for the details of the
+    :func:`~gingerdj.utils.cache.patch_cache_control` for the details of the
     transformation.
 
     .. versionchanged:: 5.0
@@ -167,13 +167,13 @@ client-side caching.
 
         Support for wrapping asynchronous view functions was added.
 
-.. module:: ginger.views.decorators.common
+.. module:: gingerdj.views.decorators.common
 
 Common
 ======
 
-The decorators in :mod:`ginger.views.decorators.common` allow per-view
-customization of :class:`~ginger.middleware.common.CommonMiddleware` behavior.
+The decorators in :mod:`gingerdj.views.decorators.common` allow per-view
+customization of :class:`~gingerdj.middleware.common.CommonMiddleware` behavior.
 
 .. function:: no_append_slash()
 

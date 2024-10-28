@@ -1,10 +1,10 @@
 import asyncio
 from http import HTTPStatus
 
-from ginger.core.exceptions import BadRequest, SuspiciousOperation
-from ginger.db import connection, transaction
-from ginger.http import HttpResponse, StreamingHttpResponse
-from ginger.views.decorators.csrf import csrf_exempt
+from gingerdj.core.exceptions import BadRequest, SuspiciousOperation
+from gingerdj.db import connection, transaction
+from gingerdj.http import HttpResponse, StreamingHttpResponse
+from gingerdj.views.decorators.csrf import csrf_exempt
 
 
 def regular(request):

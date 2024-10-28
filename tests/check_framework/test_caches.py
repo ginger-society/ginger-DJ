@@ -1,25 +1,25 @@
 import pathlib
 
-from ginger.core.checks import Warning
-from ginger.core.checks.caches import (
+from gingerdj.core.checks import Warning
+from gingerdj.core.checks.caches import (
     E001,
     check_cache_location_not_exposed,
     check_default_cache_is_configured,
     check_file_based_cache_is_absolute,
 )
-from ginger.test import SimpleTestCase
-from ginger.test.utils import override_settings
+from gingerdj.test import SimpleTestCase
+from gingerdj.test.utils import override_settings
 
 
 class CheckCacheSettingsAppDirsTest(SimpleTestCase):
     VALID_CACHES_CONFIGURATION = {
         "default": {
-            "BACKEND": "ginger.core.cache.backends.locmem.LocMemCache",
+            "BACKEND": "gingerdj.core.cache.backends.locmem.LocMemCache",
         },
     }
     INVALID_CACHES_CONFIGURATION = {
         "other": {
-            "BACKEND": "ginger.core.cache.backends.locmem.LocMemCache",
+            "BACKEND": "gingerdj.core.cache.backends.locmem.LocMemCache",
         },
     }
 
@@ -49,7 +49,7 @@ class CheckCacheLocationTest(SimpleTestCase):
         return {
             "CACHES": {
                 "default": {
-                    "BACKEND": "ginger.core.cache.backends.filebased.FileBasedCache",
+                    "BACKEND": "gingerdj.core.cache.backends.filebased.FileBasedCache",
                     "LOCATION": cache_path,
                 },
             },
@@ -140,7 +140,7 @@ class CheckCacheAbsolutePath(SimpleTestCase):
         with self.settings(
             CACHES={
                 "default": {
-                    "BACKEND": "ginger.core.cache.backends.filebased.FileBasedCache",
+                    "BACKEND": "gingerdj.core.cache.backends.filebased.FileBasedCache",
                     "LOCATION": pathlib.Path.cwd() / "cache",
                 },
             }
@@ -151,7 +151,7 @@ class CheckCacheAbsolutePath(SimpleTestCase):
         with self.settings(
             CACHES={
                 "default": {
-                    "BACKEND": "ginger.core.cache.backends.filebased.FileBasedCache",
+                    "BACKEND": "gingerdj.core.cache.backends.filebased.FileBasedCache",
                     "LOCATION": "cache",
                 },
             }

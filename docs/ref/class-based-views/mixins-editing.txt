@@ -2,12 +2,12 @@
 Editing mixins
 ==============
 
-The following mixins are used to construct Ginger's editing views:
+The following mixins are used to construct GingerDJ's editing views:
 
-* :class:`ginger.views.generic.edit.FormMixin`
-* :class:`ginger.views.generic.edit.ModelFormMixin`
-* :class:`ginger.views.generic.edit.ProcessFormView`
-* :class:`ginger.views.generic.edit.DeletionMixin`
+* :class:`gingerdj.views.generic.edit.FormMixin`
+* :class:`gingerdj.views.generic.edit.ModelFormMixin`
+* :class:`gingerdj.views.generic.edit.ProcessFormView`
+* :class:`gingerdj.views.generic.edit.DeletionMixin`
 
 .. note::
 
@@ -17,13 +17,13 @@ The following mixins are used to construct Ginger's editing views:
 ``FormMixin``
 =============
 
-.. class:: ginger.views.generic.edit.FormMixin
+.. class:: gingerdj.views.generic.edit.FormMixin
 
     A mixin class that provides facilities for creating and displaying forms.
 
     **Mixins**
 
-    * :class:`ginger.views.generic.base.ContextMixin`
+    * :class:`gingerdj.views.generic.base.ContextMixin`
 
     **Methods and Attributes**
 
@@ -41,22 +41,22 @@ The following mixins are used to construct Ginger's editing views:
 
     .. attribute:: prefix
 
-        The :attr:`~ginger.forms.Form.prefix` for the generated form.
+        The :attr:`~gingerdj.forms.Form.prefix` for the generated form.
 
     .. method:: get_initial()
 
         Retrieve initial data for the form. By default, returns a copy of
-        :attr:`~ginger.views.generic.edit.FormMixin.initial`.
+        :attr:`~gingerdj.views.generic.edit.FormMixin.initial`.
 
     .. method:: get_form_class()
 
         Retrieve the form class to instantiate. By default
-        :attr:`~ginger.views.generic.edit.FormMixin.form_class`.
+        :attr:`~gingerdj.views.generic.edit.FormMixin.form_class`.
 
     .. method:: get_form(form_class=None)
 
         Instantiate an instance of ``form_class`` using
-        :meth:`~ginger.views.generic.edit.FormMixin.get_form_kwargs`.
+        :meth:`~gingerdj.views.generic.edit.FormMixin.get_form_kwargs`.
         If ``form_class`` isn't provided :meth:`get_form_class` will be used.
 
     .. method:: get_form_kwargs()
@@ -69,19 +69,19 @@ The following mixins are used to construct Ginger's editing views:
 
     .. method:: get_prefix()
 
-        Determine the :attr:`~ginger.forms.Form.prefix` for the generated form.
-        Returns :attr:`~ginger.views.generic.edit.FormMixin.prefix` by default.
+        Determine the :attr:`~gingerdj.forms.Form.prefix` for the generated form.
+        Returns :attr:`~gingerdj.views.generic.edit.FormMixin.prefix` by default.
 
     .. method:: get_success_url()
 
         Determine the URL to redirect to when the form is successfully
         validated. Returns
-        :attr:`~ginger.views.generic.edit.FormMixin.success_url` by default.
+        :attr:`~gingerdj.views.generic.edit.FormMixin.success_url` by default.
 
     .. method:: form_valid(form)
 
         Redirects to
-        :meth:`~ginger.views.generic.edit.FormMixin.get_success_url`.
+        :meth:`~gingerdj.views.generic.edit.FormMixin.get_success_url`.
 
     .. method:: form_invalid(form)
 
@@ -95,27 +95,27 @@ The following mixins are used to construct Ginger's editing views:
 ``ModelFormMixin``
 ==================
 
-.. class:: ginger.views.generic.edit.ModelFormMixin
+.. class:: gingerdj.views.generic.edit.ModelFormMixin
 
     A form mixin that works on ``ModelForms``, rather than a standalone form.
 
     Since this is a subclass of
-    :class:`~ginger.views.generic.detail.SingleObjectMixin`, instances of this
+    :class:`~gingerdj.views.generic.detail.SingleObjectMixin`, instances of this
     mixin have access to the
-    :attr:`~ginger.views.generic.detail.SingleObjectMixin.model` and
-    :attr:`~ginger.views.generic.detail.SingleObjectMixin.queryset` attributes,
+    :attr:`~gingerdj.views.generic.detail.SingleObjectMixin.model` and
+    :attr:`~gingerdj.views.generic.detail.SingleObjectMixin.queryset` attributes,
     describing the type of object that the ``ModelForm`` is manipulating.
 
     If you specify both the
-    :attr:`~ginger.views.generic.edit.ModelFormMixin.fields` and
-    :attr:`~ginger.views.generic.edit.FormMixin.form_class` attributes, an
-    :exc:`~ginger.core.exceptions.ImproperlyConfigured` exception will be
+    :attr:`~gingerdj.views.generic.edit.ModelFormMixin.fields` and
+    :attr:`~gingerdj.views.generic.edit.FormMixin.form_class` attributes, an
+    :exc:`~gingerdj.core.exceptions.ImproperlyConfigured` exception will be
     raised.
 
     **Mixins**
 
-    * :class:`ginger.views.generic.edit.FormMixin`
-    * :class:`ginger.views.generic.detail.SingleObjectMixin`
+    * :class:`gingerdj.views.generic.edit.FormMixin`
+    * :class:`gingerdj.views.generic.detail.SingleObjectMixin`
 
     **Methods and Attributes**
 
@@ -123,16 +123,16 @@ The following mixins are used to construct Ginger's editing views:
 
         A model class. Can be explicitly provided, otherwise will be determined
         by examining ``self.object`` or
-        :attr:`~ginger.views.generic.detail.SingleObjectMixin.queryset`.
+        :attr:`~gingerdj.views.generic.detail.SingleObjectMixin.queryset`.
 
     .. attribute:: fields
 
         A list of names of fields. This is interpreted the same way as the
-        ``Meta.fields`` attribute of :class:`~ginger.forms.ModelForm`.
+        ``Meta.fields`` attribute of :class:`~gingerdj.forms.ModelForm`.
 
         This is a required attribute if you are generating the form class
         automatically (e.g. using ``model``). Omitting this attribute will
-        result in an :exc:`~ginger.core.exceptions.ImproperlyConfigured`
+        result in an :exc:`~gingerdj.core.exceptions.ImproperlyConfigured`
         exception.
 
     .. attribute:: success_url
@@ -147,23 +147,23 @@ The following mixins are used to construct Ginger's editing views:
     .. method:: get_form_class()
 
         Retrieve the form class to instantiate. If
-        :attr:`~ginger.views.generic.edit.FormMixin.form_class` is provided,
+        :attr:`~gingerdj.views.generic.edit.FormMixin.form_class` is provided,
         that class will be used. Otherwise, a ``ModelForm`` will be
         instantiated using the model associated with the
-        :attr:`~ginger.views.generic.detail.SingleObjectMixin.queryset`, or
-        with the :attr:`~ginger.views.generic.detail.SingleObjectMixin.model`,
+        :attr:`~gingerdj.views.generic.detail.SingleObjectMixin.queryset`, or
+        with the :attr:`~gingerdj.views.generic.detail.SingleObjectMixin.model`,
         depending on which attribute is provided.
 
     .. method:: get_form_kwargs()
 
         Add the current instance (``self.object``) to the standard
-        :meth:`~ginger.views.generic.edit.FormMixin.get_form_kwargs`.
+        :meth:`~gingerdj.views.generic.edit.FormMixin.get_form_kwargs`.
 
     .. method:: get_success_url()
 
         Determine the URL to redirect to when the form is successfully
         validated. Returns
-        :attr:`ginger.views.generic.edit.ModelFormMixin.success_url` if it is
+        :attr:`gingerdj.views.generic.edit.ModelFormMixin.success_url` if it is
         provided; otherwise, attempts to use the ``get_absolute_url()`` of the
         object.
 
@@ -171,7 +171,7 @@ The following mixins are used to construct Ginger's editing views:
 
         Saves the form instance, sets the current object for the view, and
         redirects to
-        :meth:`~ginger.views.generic.edit.FormMixin.get_success_url`.
+        :meth:`~gingerdj.views.generic.edit.FormMixin.get_success_url`.
 
     .. method:: form_invalid(form)
 
@@ -181,26 +181,26 @@ The following mixins are used to construct Ginger's editing views:
 ``ProcessFormView``
 ===================
 
-.. class:: ginger.views.generic.edit.ProcessFormView
+.. class:: gingerdj.views.generic.edit.ProcessFormView
 
     A mixin that provides basic HTTP GET and POST workflow.
 
     .. note::
 
         This is named 'ProcessFormView' and inherits directly from
-        :class:`ginger.views.generic.base.View`, but breaks if used
+        :class:`gingerdj.views.generic.base.View`, but breaks if used
         independently, so it is more of a mixin.
 
     **Extends**
 
-    * :class:`ginger.views.generic.base.View`
+    * :class:`gingerdj.views.generic.base.View`
 
     **Methods and Attributes**
 
     .. method:: get(request, *args, **kwargs)
 
         Renders a response using a context created with
-        :meth:`~ginger.views.generic.edit.FormMixin.get_context_data`.
+        :meth:`~gingerdj.views.generic.edit.FormMixin.get_context_data`.
 
     .. method:: post(request, *args, **kwargs)
 
@@ -216,7 +216,7 @@ The following mixins are used to construct Ginger's editing views:
 ``DeletionMixin``
 =================
 
-.. class:: ginger.views.generic.edit.DeletionMixin
+.. class:: gingerdj.views.generic.edit.DeletionMixin
 
     Enables handling of the ``DELETE`` HTTP action.
 
@@ -241,5 +241,5 @@ The following mixins are used to construct Ginger's editing views:
 
         Returns the url to redirect to when the nominated object has been
         successfully deleted. Returns
-        :attr:`~ginger.views.generic.edit.DeletionMixin.success_url` by
+        :attr:`~gingerdj.views.generic.edit.DeletionMixin.success_url` by
         default.

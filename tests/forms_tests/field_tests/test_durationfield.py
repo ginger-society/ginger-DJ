@@ -1,10 +1,10 @@
 import datetime
 
-from ginger.core.exceptions import ValidationError
-from ginger.forms import DurationField
-from ginger.test import SimpleTestCase
-from ginger.utils import translation
-from ginger.utils.duration import duration_string
+from gingerdj.core.exceptions import ValidationError
+from gingerdj.forms import DurationField
+from gingerdj.test import SimpleTestCase
+from gingerdj.utils import translation
+from gingerdj.utils.duration import duration_string
 
 from . import FormFieldAssertionsMixin
 

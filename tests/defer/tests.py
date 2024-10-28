@@ -1,5 +1,5 @@
-from ginger.core.exceptions import FieldDoesNotExist, FieldError
-from ginger.test import SimpleTestCase, TestCase
+from gingerdj.core.exceptions import FieldDoesNotExist, FieldError
+from gingerdj.test import SimpleTestCase, TestCase
 
 from .models import (
     BigChild,

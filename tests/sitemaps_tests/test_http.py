@@ -1,12 +1,12 @@
 import os
 from datetime import date
 
-from ginger.contrib.sitemaps import Sitemap
-from ginger.contrib.sites.models import Site
-from ginger.core.exceptions import ImproperlyConfigured
-from ginger.test import modify_settings, override_settings
-from ginger.utils import translation
-from ginger.utils.formats import localize
+from gingerdj.contrib.sitemaps import Sitemap
+from gingerdj.contrib.sites.models import Site
+from gingerdj.core.exceptions import ImproperlyConfigured
+from gingerdj.test import modify_settings, override_settings
+from gingerdj.utils import translation
+from gingerdj.utils.formats import localize
 
 from .base import SitemapTestsBase
 from .models import I18nTestModel, TestModel
@@ -59,7 +59,7 @@ class HTTPSitemapTests(SitemapTestsBase):
     @override_settings(
         TEMPLATES=[
             {
-                "BACKEND": "ginger.template.backends.ginger.GingerTemplates",
+                "BACKEND": "gingerdj.template.backends.gingerdj.GingerTemplates",
                 "DIRS": [os.path.join(os.path.dirname(__file__), "templates")],
             }
         ]
@@ -131,7 +131,7 @@ class HTTPSitemapTests(SitemapTestsBase):
     @override_settings(
         TEMPLATES=[
             {
-                "BACKEND": "ginger.template.backends.ginger.GingerTemplates",
+                "BACKEND": "gingerdj.template.backends.gingerdj.GingerTemplates",
                 "DIRS": [os.path.join(os.path.dirname(__file__), "templates")],
             }
         ]
@@ -255,7 +255,7 @@ class HTTPSitemapTests(SitemapTestsBase):
             self.assertContains(response, "<priority>0.5</priority>")
             self.assertContains(response, "<lastmod>%s</lastmod>" % date.today())
 
-    @modify_settings(INSTALLED_APPS={"remove": "ginger.contrib.sites"})
+    @modify_settings(INSTALLED_APPS={"remove": "gingerdj.contrib.sites"})
     def test_requestsite_sitemap(self):
         # Hitting the flatpages sitemap without the sites framework installed
         # doesn't raise an exception.
@@ -279,7 +279,7 @@ class HTTPSitemapTests(SitemapTestsBase):
         with self.assertRaisesMessage(ImproperlyConfigured, self.use_sitemap_err_msg):
             Sitemap().get_urls()
 
-    @modify_settings(INSTALLED_APPS={"remove": "ginger.contrib.sites"})
+    @modify_settings(INSTALLED_APPS={"remove": "gingerdj.contrib.sites"})
     def test_sitemap_get_urls_no_site_2(self):
         """
         Check we get ImproperlyConfigured when we don't pass a site object to
@@ -335,7 +335,7 @@ class HTTPSitemapTests(SitemapTestsBase):
         A simple i18n sitemap index can be rendered, without logging variable
         lookup errors.
         """
-        with self.assertNoLogs("ginger.template", "DEBUG"):
+        with self.assertNoLogs("gingerdj.template", "DEBUG"):
             response = self.client.get("/simple/i18n.xml")
         expected_content = (
             '<?xml version="1.0" encoding="UTF-8"?>\n'

@@ -1,5 +1,5 @@
-from ginger.db import connection
-from ginger.db.backends.ddl_references import (
+from gingerdj.db import connection
+from gingerdj.db.backends.ddl_references import (
     Columns,
     Expressions,
     ForeignKeyName,
@@ -7,11 +7,11 @@ from ginger.db.backends.ddl_references import (
     Statement,
     Table,
 )
-from ginger.db.models import ExpressionList, F
-from ginger.db.models.functions import Upper
-from ginger.db.models.indexes import IndexExpression
-from ginger.db.models.sql import Query
-from ginger.test import SimpleTestCase, TransactionTestCase
+from gingerdj.db.models import ExpressionList, F
+from gingerdj.db.models.functions import Upper
+from gingerdj.db.models.indexes import IndexExpression
+from gingerdj.db.models.sql import Query
+from gingerdj.test import SimpleTestCase, TransactionTestCase
 
 from .models import Person
 

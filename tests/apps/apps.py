@@ -1,8 +1,8 @@
-from ginger.apps import AppConfig
+from gingerdj.apps import AppConfig
 
 
 class MyAdmin(AppConfig):
-    name = "ginger.contrib.admin"
+    name = "gingerdj.contrib.admin"
     verbose_name = "Admin sweet admin."
 
 
@@ -29,4 +29,4 @@ class RelabeledAppsConfig(AppConfig):
 
 class ModelPKAppsConfig(AppConfig):
     name = "apps"
-    default_auto_field = "ginger.db.models.BigAutoField"
+    default_auto_field = "gingerdj.db.models.BigAutoField"

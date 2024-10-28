@@ -1,6 +1,6 @@
-from ginger.core.exceptions import ValidationError
-from ginger.db import models
-from ginger.test import SimpleTestCase, TestCase
+from gingerdj.core.exceptions import ValidationError
+from gingerdj.db import models
+from gingerdj.test import SimpleTestCase, TestCase
 
 from .models import Post
 

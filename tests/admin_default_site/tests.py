@@ -1,6 +1,6 @@
-from ginger.contrib import admin
-from ginger.contrib.admin import sites
-from ginger.test import SimpleTestCase, override_settings
+from gingerdj.contrib import admin
+from gingerdj.contrib.admin import sites
+from gingerdj.test import SimpleTestCase, override_settings
 
 from .sites import CustomAdminSite
 
@@ -8,8 +8,8 @@ from .sites import CustomAdminSite
 @override_settings(
     INSTALLED_APPS=[
         "admin_default_site.apps.MyCustomAdminConfig",
-        "ginger.contrib.messages",
-        "ginger.contrib.staticfiles",
+        "gingerdj.contrib.messages",
+        "gingerdj.contrib.staticfiles",
     ]
 )
 class CustomAdminSiteTests(SimpleTestCase):

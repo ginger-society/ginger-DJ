@@ -1,7 +1,7 @@
-from ginger.template.base import TemplateSyntaxError
-from ginger.template.context import Context
-from ginger.template.loader_tags import BlockContext, BlockNode
-from ginger.test import SimpleTestCase
+from gingerdj.template.base import TemplateSyntaxError
+from gingerdj.template.context import Context
+from gingerdj.template.loader_tags import BlockContext, BlockNode
+from gingerdj.test import SimpleTestCase
 
 from ..utils import SilentAttrClass, SilentGetItemClass, SomeClass, setup
 

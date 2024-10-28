@@ -1,7 +1,7 @@
-from ginger.db.models import Value
-from ginger.db.models.functions import StrIndex
-from ginger.test import TestCase
-from ginger.utils import timezone
+from gingerdj.db.models import Value
+from gingerdj.db.models.functions import StrIndex
+from gingerdj.test import TestCase
+from gingerdj.utils import timezone
 
 from ..models import Article, Author
 
@@ -18,8 +18,8 @@ class StrIndexTests(TestCase):
 
     def test_annotate_textfield(self):
         Article.objects.create(
-            title="How to Ginger",
-            text="This is about How to Ginger.",
+            title="How to GingerDJ",
+            text="This is about How to GingerDJ.",
             written=timezone.now(),
         )
         Article.objects.create(

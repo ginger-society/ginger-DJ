@@ -2,13 +2,13 @@ import datetime
 import json
 from decimal import Decimal
 
-from ginger import forms
-from ginger.core import exceptions, serializers
-from ginger.db.models import DateField, DateTimeField, F, Func, Value
-from ginger.http import QueryDict
-from ginger.test import override_settings
-from ginger.test.utils import isolate_apps
-from ginger.utils import timezone
+from gingerdj import forms
+from gingerdj.core import exceptions, serializers
+from gingerdj.db.models import DateField, DateTimeField, F, Func, Value
+from gingerdj.http import QueryDict
+from gingerdj.test import override_settings
+from gingerdj.test.utils import isolate_apps
+from gingerdj.utils import timezone
 
 from . import PostgreSQLSimpleTestCase, PostgreSQLTestCase
 from .models import (
@@ -20,13 +20,13 @@ from .models import (
 )
 
 try:
-    from ginger.contrib.postgres import fields as pg_fields
-    from ginger.contrib.postgres import forms as pg_forms
-    from ginger.contrib.postgres.validators import (
+    from gingerdj.contrib.postgres import fields as pg_fields
+    from gingerdj.contrib.postgres import forms as pg_forms
+    from gingerdj.contrib.postgres.validators import (
         RangeMaxValueValidator,
         RangeMinValueValidator,
     )
-    from ginger.db.backends.postgresql.psycopg_any import (
+    from gingerdj.db.backends.postgresql.psycopg_any import (
         DateRange,
         DateTimeTZRange,
         NumericRange,

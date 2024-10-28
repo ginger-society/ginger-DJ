@@ -5,21 +5,21 @@ from unittest import mock
 
 from admin_scripts.tests import AdminScriptTestCase
 
-from ginger.apps import apps
-from ginger.core import management
-from ginger.core.checks import Tags
-from ginger.core.management import BaseCommand, CommandError, find_commands
-from ginger.core.management.utils import (
+from gingerdj.apps import apps
+from gingerdj.core import management
+from gingerdj.core.checks import Tags
+from gingerdj.core.management import BaseCommand, CommandError, find_commands
+from gingerdj.core.management.utils import (
     find_command,
     get_random_secret_key,
     is_ignored_path,
     normalize_path_patterns,
     popen_wrapper,
 )
-from ginger.db import connection
-from ginger.test import SimpleTestCase, override_settings
-from ginger.test.utils import captured_stderr, extend_sys_path
-from ginger.utils import translation
+from gingerdj.db import connection
+from gingerdj.test import SimpleTestCase, override_settings
+from gingerdj.test.utils import captured_stderr, extend_sys_path
+from gingerdj.utils import translation
 
 from .management.commands import dance
 
@@ -188,14 +188,14 @@ class CommandTests(SimpleTestCase):
 
     def test_requires_system_checks_empty(self):
         with mock.patch(
-            "ginger.core.management.base.BaseCommand.check"
+            "gingerdj.core.management.base.BaseCommand.check"
         ) as mocked_check:
             management.call_command("no_system_checks")
         self.assertIs(mocked_check.called, False)
 
     def test_requires_system_checks_specific(self):
         with mock.patch(
-            "ginger.core.management.base.BaseCommand.check"
+            "gingerdj.core.management.base.BaseCommand.check"
         ) as mocked_check:
             management.call_command("specific_system_checks", skip_checks=False)
         mocked_check.assert_called_once_with(tags=[Tags.staticfiles, Tags.models])
@@ -456,7 +456,7 @@ class CommandRunTests(AdminScriptTestCase):
     def test_skip_checks(self):
         self.write_settings(
             "settings.py",
-            apps=["ginger.contrib.staticfiles", "user_commands"],
+            apps=["gingerdj.contrib.staticfiles", "user_commands"],
             sdict={
                 # (staticfiles.E001) The STATICFILES_DIRS setting is not a tuple or
                 # list.

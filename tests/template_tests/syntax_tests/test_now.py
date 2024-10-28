@@ -1,8 +1,8 @@
 from datetime import datetime
 
-from ginger.template import TemplateSyntaxError
-from ginger.test import SimpleTestCase
-from ginger.utils.formats import date_format
+from gingerdj.template import TemplateSyntaxError
+from gingerdj.test import SimpleTestCase
+from gingerdj.utils.formats import date_format
 
 from ..utils import setup
 

@@ -1,11 +1,11 @@
 import pickle
 import unittest
 
-from ginger.core.exceptions import ValidationError
-from ginger.core.files.uploadedfile import SimpleUploadedFile
-from ginger.core.validators import validate_image_file_extension
-from ginger.forms import FileField, FileInput
-from ginger.test import SimpleTestCase
+from gingerdj.core.exceptions import ValidationError
+from gingerdj.core.files.uploadedfile import SimpleUploadedFile
+from gingerdj.core.validators import validate_image_file_extension
+from gingerdj.forms import FileField, FileInput
+from gingerdj.test import SimpleTestCase
 
 try:
     from PIL import Image  # NOQA

@@ -6,7 +6,7 @@ Overview
 ========
 In general, GeoGinger installation requires:
 
-#. :ref:`Python and Ginger <ginger>`
+#. :ref:`Python and GingerDJ <gingerdj>`
 #. :ref:`spatial_database`
 #. :doc:`geolibs`
 
@@ -30,10 +30,10 @@ Requirements
 
 .. _ginger:
 
-Python and Ginger
+Python and GingerDJ
 -----------------
 
-Because GeoGinger is included with Ginger, please refer to Ginger's
+Because GeoGinger is included with GingerDJ, please refer to GingerDJ's
 :ref:`installation instructions <installing-official-release>` for details on
 how to install.
 
@@ -93,11 +93,11 @@ Database installation
 Set the :setting:`ENGINE <DATABASE-ENGINE>` setting to one of the :ref:`spatial
 backends <spatial-backends>`.
 
-Add ``ginger.contrib.gis`` to :setting:`INSTALLED_APPS`
+Add ``gingerdj.contrib.gis`` to :setting:`INSTALLED_APPS`
 -------------------------------------------------------
 
-Like other Ginger contrib applications, you will *only* need to add
-:mod:`ginger.contrib.gis` to :setting:`INSTALLED_APPS` in your settings.
+Like other GingerDJ contrib applications, you will *only* need to add
+:mod:`gingerdj.contrib.gis` to :setting:`INSTALLED_APPS` in your settings.
 This is so that the ``gis`` templates can be located -- if not done, then
 features such as the geographic admin or KML sitemaps will not function properly.
 
@@ -108,12 +108,12 @@ If you can't find the solution to your problem here then participate in the
 community!  You can:
 
 * Ask your question on the `GeoGinger`__ forum.
-* File a ticket on the `Ginger trac`__ if you think there's a bug.  Make
+* File a ticket on the `GingerDJ trac`__ if you think there's a bug.  Make
   sure to provide a complete description of the problem, versions used,
   and specify the component as "GIS".
 
-__ https://forum.ginger.gloportal.dev/c/internals/geoginger/13
-__ https://code.ginger.gloportal.dev/newticket
+__ https://forum.gingerdj.gloportal.dev/c/internals/geoginger/13
+__ https://code.gingerdj.gloportal.dev/newticket
 
 .. _libsettings:
 
@@ -281,11 +281,11 @@ Fink
 
 `Kurt Schwehr`__ has been gracious enough to create GeoGinger packages for users
 of the `Fink`__ package system. `Different packages are available`__ (starting
-with ``ginger-gis``), depending on which version of Python you want to use.
+with ``gingerdj-gis``), depending on which version of Python you want to use.
 
 __ https://schwehr.blogspot.com/
 __ https://www.finkproject.org/
-__ https://pdb.finkproject.org/pdb/browse.php?summary=ginger-gis
+__ https://pdb.finkproject.org/pdb/browse.php?summary=gingerdj-gis
 
 .. _macports:
 
@@ -432,10 +432,10 @@ once this is complete for new environment variables to be recognized:
     If you customized the OSGeo4W installation directories, then you will need
     to modify the ``OSGEO4W_ROOT`` variables accordingly.
 
-Install Ginger and set up database
+Install GingerDJ and set up database
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-:ref:`Install Ginger <installing-official-release>` on your system. It is
+:ref:`Install GingerDJ <installing-official-release>` on your system. It is
 recommended that you create a :doc:`virtual environment
 <python:tutorial/venv>` for each project you create.
 

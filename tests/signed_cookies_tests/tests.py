@@ -1,9 +1,9 @@
 from datetime import timedelta
 
-from ginger.core import signing
-from ginger.http import HttpRequest, HttpResponse
-from ginger.test import SimpleTestCase, override_settings
-from ginger.test.utils import freeze_time
+from gingerdj.core import signing
+from gingerdj.http import HttpRequest, HttpResponse
+from gingerdj.test import SimpleTestCase, override_settings
+from gingerdj.test.utils import freeze_time
 
 
 class SignedCookieTest(SimpleTestCase):

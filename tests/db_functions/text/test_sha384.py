@@ -1,8 +1,8 @@
-from ginger.db import connection
-from ginger.db.models import CharField
-from ginger.db.models.functions import SHA384
-from ginger.test import TestCase
-from ginger.test.utils import register_lookup
+from gingerdj.db import connection
+from gingerdj.db.models import CharField
+from gingerdj.db.models.functions import SHA384
+from gingerdj.test import TestCase
+from gingerdj.test.utils import register_lookup
 
 from ..models import Author
 

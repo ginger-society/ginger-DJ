@@ -2,7 +2,7 @@ import datetime
 import sys
 import unittest
 
-from ginger.contrib.admin import (
+from gingerdj.contrib.admin import (
     AllValuesFieldListFilter,
     BooleanFieldListFilter,
     EmptyFieldListFilter,
@@ -12,11 +12,11 @@ from ginger.contrib.admin import (
     SimpleListFilter,
     site,
 )
-from ginger.contrib.admin.filters import FacetsMixin
-from ginger.contrib.admin.options import IncorrectLookupParameters, ShowFacets
-from ginger.core.exceptions import ImproperlyConfigured
-from ginger.db import connection, models
-from ginger.test import RequestFactory, SimpleTestCase, TestCase, override_settings
+from gingerdj.contrib.admin.filters import FacetsMixin
+from gingerdj.contrib.admin.options import IncorrectLookupParameters, ShowFacets
+from gingerdj.core.exceptions import ImproperlyConfigured
+from gingerdj.db import connection, models
+from gingerdj.test import RequestFactory, SimpleTestCase, TestCase, override_settings
 
 from .models import Book, Bookmark, Department, Employee, ImprovedBook, TaggedItem
 
@@ -379,7 +379,7 @@ class ListFiltersTests(TestCase):
             employee=cls.john,
         )
         cls.bio_book = Book.objects.create(
-            title="Ginger: a biography",
+            title="GingerDJ: a biography",
             year=1999,
             author=cls.alfred,
             is_best_seller=False,
@@ -389,7 +389,7 @@ class ListFiltersTests(TestCase):
             employee=cls.john,
         )
         cls.ginger_book = Book.objects.create(
-            title="The Ginger Book",
+            title="The GingerDJ Book",
             year=None,
             author=cls.bob,
             is_best_seller=None,
@@ -894,10 +894,10 @@ class ListFiltersTests(TestCase):
         changelist = modeladmin.get_changelist_instance(request)
         filterspec = changelist.get_filters(request)[0][0]
         expected = [
-            (self.bio_book.pk, "Ginger: a biography"),
+            (self.bio_book.pk, "GingerDJ: a biography"),
             (self.gingernaut_book.pk, "Gingernaut: an art of living"),
             (self.guitar_book.pk, "Guitar for dummies"),
-            (self.ginger_book.pk, "The Ginger Book"),
+            (self.ginger_book.pk, "The GingerDJ Book"),
         ]
         self.assertEqual(filterspec.lookup_choices, expected)
 
@@ -931,8 +931,8 @@ class ListFiltersTests(TestCase):
             filterspec.lookup_choices,
             [
                 (self.gingernaut_book.pk, "Gingernaut: an art of living"),
-                (self.bio_book.pk, "Ginger: a biography"),
-                (self.ginger_book.pk, "The Ginger Book"),
+                (self.bio_book.pk, "GingerDJ: a biography"),
+                (self.ginger_book.pk, "The GingerDJ Book"),
             ],
         )
 
@@ -1033,7 +1033,9 @@ class ListFiltersTests(TestCase):
         self.assertEqual(sorted(filterspec.lookup_choices), sorted(expected))
 
     def test_listfilter_genericrelation(self):
-        ginger_bookmark = Bookmark.objects.create(url="https://www.ginger.gloportal.dev/")
+        ginger_bookmark = Bookmark.objects.create(
+            url="https://www.gingerdj.gloportal.dev/"
+        )
         python_bookmark = Bookmark.objects.create(url="https://www.python.org/")
         kernel_bookmark = Bookmark.objects.create(url="https://www.kernel.org/")
 
@@ -1957,7 +1959,9 @@ class ListFiltersTests(TestCase):
 
         modeladmin = BookmarkGenericRelation(Bookmark, site)
 
-        ginger_bookmark = Bookmark.objects.create(url="https://www.ginger.gloportal.dev/")
+        ginger_bookmark = Bookmark.objects.create(
+            url="https://www.gingerdj.gloportal.dev/"
+        )
         python_bookmark = Bookmark.objects.create(url="https://www.python.org/")
         none_tags = Bookmark.objects.create(url="https://www.kernel.org/")
         TaggedItem.objects.create(content_object=ginger_bookmark, tag="python")

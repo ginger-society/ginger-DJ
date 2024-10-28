@@ -1,4 +1,4 @@
-from ginger.db import models
+from gingerdj.db import models
 
 
 # No related name is needed here, since symmetrical relations are not

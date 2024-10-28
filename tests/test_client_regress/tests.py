@@ -5,20 +5,20 @@ Regression tests for the Test Client, especially the customized assertions.
 import itertools
 import os
 
-from ginger.http import HttpResponse
-from ginger.template import Context, RequestContext, TemplateSyntaxError, engines
-from ginger.template.response import SimpleTemplateResponse
-from ginger.test import (
+from gingerdj.http import HttpResponse
+from gingerdj.template import Context, RequestContext, TemplateSyntaxError, engines
+from gingerdj.template.response import SimpleTemplateResponse
+from gingerdj.test import (
     Client,
     SimpleTestCase,
     TestCase,
     modify_settings,
     override_settings,
 )
-from ginger.test.client import RedirectCycleError, RequestFactory, encode_file
-from ginger.test.utils import ContextList
-from ginger.urls import NoReverseMatch, reverse
-from ginger.utils.translation import gettext_lazy
+from gingerdj.test.client import RedirectCycleError, RequestFactory, encode_file
+from gingerdj.test.utils import ContextList
+from gingerdj.urls import NoReverseMatch, reverse
+from gingerdj.utils.translation import gettext_lazy
 
 from .views import CustomTestException
 
@@ -248,7 +248,7 @@ class AssertContainsTests(SimpleTestCase):
         """
         An unrendered SimpleTemplateResponse may be used in assertContains().
         """
-        template = engines["ginger"].from_string("Hello")
+        template = engines["gingerdj"].from_string("Hello")
         response = SimpleTemplateResponse(template)
         self.assertContains(response, "Hello")
 
@@ -264,7 +264,7 @@ class AssertContainsTests(SimpleTestCase):
         """
         An unrendered SimpleTemplateResponse may be used in assertNotContains().
         """
-        template = engines["ginger"].from_string("Hello")
+        template = engines["gingerdj"].from_string("Hello")
         response = SimpleTemplateResponse(template)
         self.assertNotContains(response, "Bye")
 
@@ -637,7 +637,7 @@ class AssertRedirectsTests(SimpleTestCase):
                 )
 
     def test_redirect_fetch_redirect_response(self):
-        """Preserve extra headers of requests made with ginger.test.Client."""
+        """Preserve extra headers of requests made with gingerdj.test.Client."""
         methods = (
             "get",
             "post",
@@ -749,7 +749,7 @@ class TemplateExceptionTests(SimpleTestCase):
     @override_settings(
         TEMPLATES=[
             {
-                "BACKEND": "ginger.template.backends.ginger.GingerTemplates",
+                "BACKEND": "gingerdj.template.backends.gingerdj.GingerTemplates",
                 "DIRS": [os.path.join(os.path.dirname(__file__), "bad_templates")],
             }
         ]
@@ -839,7 +839,7 @@ class ContextTests(TestDataMixin, TestCase):
         with self.settings(
             TEMPLATES=[
                 {
-                    "BACKEND": "ginger.template.backends.ginger.GingerTemplates",
+                    "BACKEND": "gingerdj.template.backends.gingerdj.GingerTemplates",
                     "APP_DIRS": True,
                     "OPTIONS": {
                         "context_processors": [

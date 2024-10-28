@@ -1,6 +1,6 @@
-from ginger.contrib.flatpages.models import FlatPage
-from ginger.test import SimpleTestCase, override_settings
-from ginger.test.utils import override_script_prefix
+from gingerdj.contrib.flatpages.models import FlatPage
+from gingerdj.test import SimpleTestCase, override_settings
+from gingerdj.test.utils import override_script_prefix
 
 
 class FlatpageModelTests(SimpleTestCase):

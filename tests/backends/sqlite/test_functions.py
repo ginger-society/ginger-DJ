@@ -1,9 +1,9 @@
-from ginger.db.backends.sqlite3._functions import (
+from gingerdj.db.backends.sqlite3._functions import (
     _sqlite_date_trunc,
     _sqlite_datetime_trunc,
     _sqlite_time_trunc,
 )
-from ginger.test import SimpleTestCase
+from gingerdj.test import SimpleTestCase
 
 
 class FunctionTests(SimpleTestCase):

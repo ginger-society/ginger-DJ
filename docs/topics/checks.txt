@@ -2,9 +2,9 @@
 System check framework
 ======================
 
-.. module:: ginger.core.checks
+.. module:: gingerdj.core.checks
 
-The system check framework is a set of static checks for validating Ginger
+The system check framework is a set of static checks for validating GingerDJ
 projects. It detects common problems and provides hints for how to fix them.
 The framework is extensible so you can easily add your own checks.
 
@@ -14,12 +14,12 @@ triggered implicitly before most commands, including :djadmin:`runserver` and
 WSGI stack that is used in deployment. If you need to run system checks on your
 deployment server, trigger them explicitly using :djadmin:`check`.
 
-Serious errors will prevent Ginger commands (such as :djadmin:`runserver`) from
+Serious errors will prevent GingerDJ commands (such as :djadmin:`runserver`) from
 running at all. Minor problems are reported to the console. If you have inspected
 the cause of a warning and are happy to ignore it, you can hide specific warnings
 using the :setting:`SILENCED_SYSTEM_CHECKS` setting in your project settings file.
 
-A full list of all checks that can be raised by Ginger can be found in the
+A full list of all checks that can be raised by GingerDJ can be found in the
 :doc:`System check reference </ref/checks>`.
 
 Writing your own checks
@@ -29,7 +29,7 @@ The framework is flexible and allows you to write functions that perform
 any other kind of check you may require. The following is an example stub
 check function::
 
-    from ginger.core.checks import Error, register
+    from gingerdj.core.checks import Error, register
 
 
     @register()
@@ -65,8 +65,8 @@ The function must return a list of messages. If no problems are found as a resul
 of the check, the check function must return an empty list.
 
 The warnings and errors raised by the check method must be instances of
-:class:`~ginger.core.checks.CheckMessage`. An instance of
-:class:`~ginger.core.checks.CheckMessage` encapsulates a single reportable
+:class:`~gingerdj.core.checks.CheckMessage`. An instance of
+:class:`~gingerdj.core.checks.CheckMessage` encapsulates a single reportable
 error or warning. It also provides context and hints applicable to the
 message, and a unique identifier that is used for filtering purposes.
 
@@ -92,7 +92,7 @@ Registering and labeling checks
 Lastly, your check function must be registered explicitly with system check
 registry. Checks should be registered in a file that's loaded when your
 application is loaded; for example, in the :meth:`AppConfig.ready()
-<ginger.apps.AppConfig.ready>` method.
+<gingerdj.apps.AppConfig.ready>` method.
 
 .. function:: register(*tags)(function)
 
@@ -101,7 +101,7 @@ check. Tagging checks is useful since it allows you to run only a certain
 group of checks. For example, to register a compatibility check, you would
 make the following call::
 
-    from ginger.core.checks import register, Tags
+    from gingerdj.core.checks import register, Tags
 
 
     @register(Tags.compatibility)
@@ -149,8 +149,8 @@ constructor of ``IntegerField``. You may want to add a check to ensure that user
 provide a min value that is less than or equal to the max value. The following
 code snippet shows how you can implement this check::
 
-    from ginger.core import checks
-    from ginger.db import models
+    from gingerdj.core import checks
+    from gingerdj.db import models
 
 
     class RangedIntegerField(models.IntegerField):
@@ -183,7 +183,7 @@ code snippet shows how you can implement this check::
             return []
 
 If you wanted to add checks to a model manager, you would take the same
-approach on your subclass of :class:`~ginger.db.models.Manager`.
+approach on your subclass of :class:`~gingerdj.db.models.Manager`.
 
 If you want to add a check to a model class, the approach is *almost* the same:
 the only difference is that the check is a classmethod, not an instance method::
@@ -204,7 +204,7 @@ Writing tests
 
 Messages are comparable. That allows you to easily write tests::
 
-    from ginger.core.checks import Error
+    from gingerdj.core.checks import Error
 
     errors = checked_object.check()
     expected_errors = [
@@ -222,21 +222,21 @@ Writing integration tests
 
 Given the need to register certain checks when the application loads, it can be
 useful to test their integration within the system checks framework. This can
-be accomplished by using the :func:`~ginger.core.management.call_command`
+be accomplished by using the :func:`~gingerdj.core.management.call_command`
 function.
 
 For example, this test demonstrates that the :setting:`SITE_ID` setting must be
 an integer, a built-in :ref:`check from the sites framework
 <sites-system-checks>`::
 
-    from ginger.core.management import call_command
-    from ginger.core.management.base import SystemCheckError
-    from ginger.test import SimpleTestCase, modify_settings, override_settings
+    from gingerdj.core.management import call_command
+    from gingerdj.core.management.base import SystemCheckError
+    from gingerdj.test import SimpleTestCase, modify_settings, override_settings
 
 
     class SystemCheckIntegrationTest(SimpleTestCase):
         @override_settings(SITE_ID="non_integer")
-        @modify_settings(INSTALLED_APPS={"prepend": "ginger.contrib.sites"})
+        @modify_settings(INSTALLED_APPS={"prepend": "gingerdj.contrib.sites"})
         def test_non_integer_site_id(self):
             message = "(sites.E101) The SITE_ID setting must be an integer."
             with self.assertRaisesMessage(SystemCheckError, message):
@@ -245,8 +245,8 @@ an integer, a built-in :ref:`check from the sites framework
 Consider the following check which issues a warning on deployment if a custom
 setting named ``ENABLE_ANALYTICS`` is not set to ``True``::
 
-    from ginger.conf import settings
-    from ginger.core.checks import Warning, register
+    from gingerdj.conf import settings
+    from gingerdj.core.checks import Warning, register
 
 
     @register("myapp", deploy=True)
@@ -266,8 +266,8 @@ the warning message in the ``stderr`` output can be asserted like so::
 
     from io import StringIO
 
-    from ginger.core.management import call_command
-    from ginger.test import SimpleTestCase, override_settings
+    from gingerdj.core.management import call_command
+    from gingerdj.test import SimpleTestCase, override_settings
 
 
     class EnableAnalyticsDeploymentCheckTest(SimpleTestCase):

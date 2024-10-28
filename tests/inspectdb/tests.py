@@ -2,11 +2,11 @@ import re
 from io import StringIO
 from unittest import mock, skipUnless
 
-from ginger.core.management import call_command
-from ginger.core.management.commands import inspectdb
-from ginger.db import connection
-from ginger.db.backends.base.introspection import TableInfo
-from ginger.test import TestCase, TransactionTestCase, skipUnlessDBFeature
+from gingerdj.core.management import call_command
+from gingerdj.core.management.commands import inspectdb
+from gingerdj.db import connection
+from gingerdj.db.backends.base.introspection import TableInfo
+from gingerdj.test import TestCase, TransactionTestCase, skipUnlessDBFeature
 
 from .models import PeopleMoreData, test_collation
 
@@ -69,7 +69,7 @@ class InspectDBTestCase(TestCase):
         return assertFieldType
 
     def test_field_types(self):
-        """Test introspection of various Ginger field types"""
+        """Test introspection of various GingerDJ field types"""
         assertFieldType = self.make_field_type_asserter()
         introspected_field_types = connection.features.introspected_field_types
         char_field_type = introspected_field_types["CharField"]
@@ -189,7 +189,7 @@ class InspectDBTestCase(TestCase):
         self.assertIn("char_field = models.CharField()", output)
 
     def test_number_field_types(self):
-        """Test introspection of various Ginger field types"""
+        """Test introspection of various GingerDJ field types"""
         assertFieldType = self.make_field_type_asserter()
         introspected_field_types = connection.features.introspected_field_types
 
@@ -446,7 +446,7 @@ class InspectDBTestCase(TestCase):
         """
         out = StringIO()
         with mock.patch(
-            "ginger.db.connection.introspection.data_types_reverse."
+            "gingerdj.db.connection.introspection.data_types_reverse."
             "base_data_types_reverse",
             {
                 "text": "myfields.TextField",
@@ -465,7 +465,7 @@ class InspectDBTestCase(TestCase):
         """
         out = StringIO()
         with mock.patch(
-            "ginger.db.connection.introspection.get_table_list",
+            "gingerdj.db.connection.introspection.get_table_list",
             return_value=[TableInfo(name="nonexistent", type="t")],
         ):
             call_command("inspectdb", stdout=out)

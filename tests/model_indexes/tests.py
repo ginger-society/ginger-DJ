@@ -1,10 +1,15 @@
 from unittest import mock
 
-from ginger.conf import settings
-from ginger.db import connection, models
-from ginger.db.models.functions import Lower, Upper
-from ginger.test import SimpleTestCase, TestCase, override_settings, skipUnlessDBFeature
-from ginger.test.utils import isolate_apps
+from gingerdj.conf import settings
+from gingerdj.db import connection, models
+from gingerdj.db.models.functions import Lower, Upper
+from gingerdj.test import (
+    SimpleTestCase,
+    TestCase,
+    override_settings,
+    skipUnlessDBFeature,
+)
+from gingerdj.test.utils import isolate_apps
 
 from .models import Book, ChildModel1, ChildModel2
 
@@ -148,7 +153,7 @@ class SimpleIndexesTests(SimpleTestCase):
     def test_expressions_with_opclasses(self):
         msg = (
             "Index.opclasses cannot be used with expressions. Use "
-            "ginger.contrib.postgres.indexes.OpClass() instead."
+            "gingerdj.contrib.postgres.indexes.OpClass() instead."
         )
         with self.assertRaisesMessage(ValueError, msg):
             models.Index(
@@ -213,7 +218,7 @@ class SimpleIndexesTests(SimpleTestCase):
         index = models.Index(fields=["title"], db_tablespace="idx_tbls")
         index.set_name_with_model(Book)
         path, args, kwargs = index.deconstruct()
-        self.assertEqual(path, "ginger.db.models.Index")
+        self.assertEqual(path, "gingerdj.db.models.Index")
         self.assertEqual(args, ())
         self.assertEqual(
             kwargs,
@@ -232,7 +237,7 @@ class SimpleIndexesTests(SimpleTestCase):
         )
         index.set_name_with_model(Book)
         path, args, kwargs = index.deconstruct()
-        self.assertEqual(path, "ginger.db.models.Index")
+        self.assertEqual(path, "gingerdj.db.models.Index")
         self.assertEqual(args, ())
         self.assertEqual(
             kwargs,
@@ -251,7 +256,7 @@ class SimpleIndexesTests(SimpleTestCase):
         )
         index.set_name_with_model(Book)
         path, args, kwargs = index.deconstruct()
-        self.assertEqual(path, "ginger.db.models.Index")
+        self.assertEqual(path, "gingerdj.db.models.Index")
         self.assertEqual(args, ())
         self.assertEqual(
             kwargs,
@@ -265,7 +270,7 @@ class SimpleIndexesTests(SimpleTestCase):
     def test_deconstruct_with_expressions(self):
         index = models.Index(Upper("title"), name="book_func_idx")
         path, args, kwargs = index.deconstruct()
-        self.assertEqual(path, "ginger.db.models.Index")
+        self.assertEqual(path, "gingerdj.db.models.Index")
         self.assertEqual(args, (Upper("title"),))
         self.assertEqual(kwargs, {"name": "book_func_idx"})
 

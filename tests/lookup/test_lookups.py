@@ -1,9 +1,9 @@
 from datetime import datetime
 from unittest import mock
 
-from ginger.db.models import DateTimeField, Value
-from ginger.db.models.lookups import Lookup, YearLookup
-from ginger.test import SimpleTestCase
+from gingerdj.db.models import DateTimeField, Value
+from gingerdj.db.models.lookups import Lookup, YearLookup
+from gingerdj.test import SimpleTestCase
 
 
 class CustomLookup(Lookup):

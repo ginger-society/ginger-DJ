@@ -1,7 +1,7 @@
-from ginger.core.exceptions import PermissionDenied
-from ginger.template.response import TemplateResponse
-from ginger.test import SimpleTestCase, modify_settings, override_settings
-from ginger.urls import path
+from gingerdj.core.exceptions import PermissionDenied
+from gingerdj.template.response import TemplateResponse
+from gingerdj.test import SimpleTestCase, modify_settings, override_settings
+from gingerdj.urls import path
 
 
 class MiddlewareAccessingContent:

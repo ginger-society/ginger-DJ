@@ -3,8 +3,8 @@ Testing some internals of the template processing.
 These are *not* examples to be copied in user code.
 """
 
-from ginger.template import Library, TemplateSyntaxError
-from ginger.template.base import (
+from gingerdj.template import Library, TemplateSyntaxError
+from gingerdj.template.base import (
     FilterExpression,
     Lexer,
     Parser,
@@ -12,8 +12,8 @@ from ginger.template.base import (
     TokenType,
     Variable,
 )
-from ginger.template.defaultfilters import register as filter_library
-from ginger.test import SimpleTestCase
+from gingerdj.template.defaultfilters import register as filter_library
+from gingerdj.test import SimpleTestCase
 
 
 class ParserTests(SimpleTestCase):

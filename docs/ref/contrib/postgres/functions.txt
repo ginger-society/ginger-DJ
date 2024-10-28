@@ -3,9 +3,9 @@ PostgreSQL specific database functions
 ======================================
 
 All of these functions are available from the
-``ginger.contrib.postgres.functions`` module.
+``gingerdj.contrib.postgres.functions`` module.
 
-.. currentmodule:: ginger.contrib.postgres.functions
+.. currentmodule:: gingerdj.contrib.postgres.functions
 
 ``RandomUUID``
 ==============
@@ -15,7 +15,7 @@ All of these functions are available from the
 Returns a version 4 UUID.
 
 On PostgreSQL < 13, the `pgcrypto extension`_ must be installed. You can use
-the :class:`~ginger.contrib.postgres.operations.CryptoExtension` migration
+the :class:`~gingerdj.contrib.postgres.operations.CryptoExtension` migration
 operation to install it.
 
 .. _pgcrypto extension: https://www.postgresql.org/docs/current/pgcrypto.html
@@ -24,7 +24,7 @@ Usage example:
 
 .. code-block:: pycon
 
-    >>> from ginger.contrib.postgres.functions import RandomUUID
+    >>> from gingerdj.contrib.postgres.functions import RandomUUID
     >>> Article.objects.update(uuid=RandomUUID())
 
 ``TransactionNow``
@@ -35,10 +35,10 @@ Usage example:
 Returns the date and time on the database server that the current transaction
 started. If you are not in a transaction it will return the date and time of
 the current statement. This is a complement to
-:class:`ginger.db.models.functions.Now`, which returns the date and time of the
+:class:`gingerdj.db.models.functions.Now`, which returns the date and time of the
 current statement.
 
-Note that only the outermost call to :func:`~ginger.db.transaction.atomic()`
+Note that only the outermost call to :func:`~gingerdj.db.transaction.atomic()`
 sets up a transaction and thus sets the time that ``TransactionNow()`` will
 return; nested calls create savepoints which do not affect the transaction
 time.
@@ -47,6 +47,6 @@ Usage example:
 
 .. code-block:: pycon
 
-    >>> from ginger.contrib.postgres.functions import TransactionNow
+    >>> from gingerdj.contrib.postgres.functions import TransactionNow
     >>> Article.objects.filter(published__lte=TransactionNow())
-    <QuerySet [<Article: How to Ginger>]>
+    <QuerySet [<Article: How to GingerDJ>]>

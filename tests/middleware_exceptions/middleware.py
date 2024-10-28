@@ -1,9 +1,9 @@
 from asgiref.sync import iscoroutinefunction, markcoroutinefunction
 
-from ginger.http import Http404, HttpResponse
-from ginger.template import engines
-from ginger.template.response import TemplateResponse
-from ginger.utils.decorators import (
+from gingerdj.http import Http404, HttpResponse
+from gingerdj.template import engines
+from gingerdj.template.response import TemplateResponse
+from gingerdj.utils.decorators import (
     async_only_middleware,
     sync_and_async_middleware,
     sync_only_middleware,
@@ -62,7 +62,7 @@ class ProcessViewNoneMiddleware(BaseMiddleware):
 
 class ProcessViewTemplateResponseMiddleware(BaseMiddleware):
     def process_view(self, request, view_func, view_args, view_kwargs):
-        template = engines["ginger"].from_string(
+        template = engines["gingerdj"].from_string(
             "Processed view {{ view }}{% for m in mw %}\n{{ m }}{% endfor %}"
         )
         return TemplateResponse(

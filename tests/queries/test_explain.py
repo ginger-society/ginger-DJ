@@ -2,10 +2,10 @@ import json
 import unittest
 import xml.etree.ElementTree
 
-from ginger.db import NotSupportedError, connection, transaction
-from ginger.db.models import Count
-from ginger.test import TestCase, skipIfDBFeature, skipUnlessDBFeature
-from ginger.test.utils import CaptureQueriesContext
+from gingerdj.db import NotSupportedError, connection, transaction
+from gingerdj.db.models import Count
+from gingerdj.test import TestCase, skipIfDBFeature, skipUnlessDBFeature
+from gingerdj.test.utils import CaptureQueriesContext
 
 from .models import Tag
 

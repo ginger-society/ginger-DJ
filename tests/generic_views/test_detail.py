@@ -1,11 +1,11 @@
 import datetime
 
-from ginger.core.exceptions import ImproperlyConfigured, ObjectDoesNotExist
-from ginger.test import TestCase, override_settings
-from ginger.test.client import RequestFactory
-from ginger.views.generic.base import View
-from ginger.views.generic.detail import SingleObjectTemplateResponseMixin
-from ginger.views.generic.edit import ModelFormMixin
+from gingerdj.core.exceptions import ImproperlyConfigured, ObjectDoesNotExist
+from gingerdj.test import TestCase, override_settings
+from gingerdj.test.client import RequestFactory
+from gingerdj.views.generic.base import View
+from gingerdj.views.generic.detail import SingleObjectTemplateResponseMixin
+from gingerdj.views.generic.edit import ModelFormMixin
 
 from .models import Artist, Author, Book, Page
 

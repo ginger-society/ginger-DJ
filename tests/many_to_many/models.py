@@ -7,7 +7,7 @@ In this example, an ``Article`` can be published in multiple ``Publication``
 objects, and a ``Publication`` has multiple ``Article`` objects.
 """
 
-from ginger.db import models
+from gingerdj.db import models
 
 
 class Publication(models.Model):

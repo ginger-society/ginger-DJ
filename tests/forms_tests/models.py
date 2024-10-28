@@ -2,8 +2,8 @@ import datetime
 import itertools
 import tempfile
 
-from ginger.core.files.storage import FileSystemStorage
-from ginger.db import models
+from gingerdj.core.files.storage import FileSystemStorage
+from gingerdj.db import models
 
 callable_default_counter = itertools.count()
 

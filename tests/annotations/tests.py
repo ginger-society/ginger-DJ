@@ -1,8 +1,8 @@
 import datetime
 from decimal import Decimal
 
-from ginger.core.exceptions import FieldDoesNotExist, FieldError
-from ginger.db.models import (
+from gingerdj.core.exceptions import FieldDoesNotExist, FieldError
+from gingerdj.db.models import (
     BooleanField,
     Case,
     CharField,
@@ -23,8 +23,8 @@ from ginger.db.models import (
     Value,
     When,
 )
-from ginger.db.models.expressions import RawSQL
-from ginger.db.models.functions import (
+from gingerdj.db.models.expressions import RawSQL
+from gingerdj.db.models.functions import (
     Cast,
     Coalesce,
     ExtractYear,
@@ -33,9 +33,9 @@ from ginger.db.models.functions import (
     Lower,
     Trim,
 )
-from ginger.db.models.sql.query import get_field_names_from_opts
-from ginger.test import TestCase, skipUnlessDBFeature
-from ginger.test.utils import register_lookup
+from gingerdj.db.models.sql.query import get_field_names_from_opts
+from gingerdj.test import TestCase, skipUnlessDBFeature
+from gingerdj.test.utils import register_lookup
 
 from .models import (
     Author,
@@ -78,7 +78,7 @@ class NonAggregateAnnotationTestCase(TestCase):
 
         cls.b1 = Book.objects.create(
             isbn="159059725",
-            name="The Definitive Guide to Ginger: Web Development Done Right",
+            name="The Definitive Guide to GingerDJ: Web Development Done Right",
             pages=447,
             rating=4.5,
             price=Decimal("30.00"),
@@ -88,7 +88,7 @@ class NonAggregateAnnotationTestCase(TestCase):
         )
         cls.b2 = Book.objects.create(
             isbn="067232959",
-            name="Sams Teach Yourself Ginger in 24 Hours",
+            name="Sams Teach Yourself GingerDJ in 24 Hours",
             pages=528,
             rating=3.0,
             price=Decimal("23.09"),
@@ -98,7 +98,7 @@ class NonAggregateAnnotationTestCase(TestCase):
         )
         cls.b3 = Book.objects.create(
             isbn="159059996",
-            name="Practical Ginger Projects",
+            name="Practical GingerDJ Projects",
             pages=300,
             rating=4.0,
             price=Decimal("29.69"),
@@ -108,7 +108,7 @@ class NonAggregateAnnotationTestCase(TestCase):
         )
         cls.b4 = Book.objects.create(
             isbn="013235613",
-            name="Python Web Development with Ginger",
+            name="Python Web Development with GingerDJ",
             pages=350,
             rating=4.0,
             price=Decimal("29.69"),
@@ -234,7 +234,7 @@ class NonAggregateAnnotationTestCase(TestCase):
         )
 
     def test_chaining_transforms(self):
-        Company.objects.create(name=" Ginger Society  ")
+        Company.objects.create(name=" GingerDJ Society  ")
         Company.objects.create(name="Yahoo")
         with register_lookup(CharField, Trim), register_lookup(CharField, Length):
             for expr in [Length("name__trim"), F("name__trim__length")]:
@@ -242,7 +242,7 @@ class NonAggregateAnnotationTestCase(TestCase):
                     self.assertCountEqual(
                         Company.objects.annotate(length=expr).values("name", "length"),
                         [
-                            {"name": " Ginger Society  ", "length": 26},
+                            {"name": " GingerDJ Society  ", "length": 26},
                             {"name": "Yahoo", "length": 5},
                         ],
                     )
@@ -538,7 +538,7 @@ class NonAggregateAnnotationTestCase(TestCase):
                 store_name=F("store__name"),
             )
             .filter(
-                name="Practical Ginger Projects",
+                name="Practical GingerDJ Projects",
             )
             .order_by("store_name")
         )
@@ -821,7 +821,7 @@ class NonAggregateAnnotationTestCase(TestCase):
             description="Beautiful Devices",
         ).save()
         Company(
-            name="Ginger Society",
+            name="GingerDJ Society",
             motto=None,
             ticker_name=None,
             description=None,
@@ -850,7 +850,7 @@ class NonAggregateAnnotationTestCase(TestCase):
             qs,
             [
                 ("Apple", "APPL"),
-                ("Ginger Society", "No Tag"),
+                ("GingerDJ Society", "No Tag"),
                 ("Google", "Do No Evil"),
                 ("Yahoo", "Internet Company"),
             ],
@@ -865,7 +865,7 @@ class NonAggregateAnnotationTestCase(TestCase):
             description="Beautiful Devices",
         ).save()
         Company(
-            name="Ginger Society",
+            name="GingerDJ Society",
             motto=None,
             ticker_name=None,
             description=None,
@@ -906,7 +906,7 @@ class NonAggregateAnnotationTestCase(TestCase):
             qs,
             [
                 ("Apple", "APPL".lower()),
-                ("Ginger Society", "No Tag".lower()),
+                ("GingerDJ Society", "No Tag".lower()),
                 ("Google", "Do No Evil".lower()),
                 ("Yahoo", "Internet Company".lower()),
             ],
@@ -1176,7 +1176,7 @@ class AliasTests(TestCase):
             contact=cls.a1,
             publisher=p1,
             pubdate=datetime.date(2007, 12, 6),
-            name="The Definitive Guide to Ginger: Web Development Done Right",
+            name="The Definitive Guide to GingerDJ: Web Development Done Right",
         )
         cls.b2 = Book.objects.create(
             isbn="159059996",
@@ -1186,7 +1186,7 @@ class AliasTests(TestCase):
             contact=cls.a3,
             publisher=p1,
             pubdate=datetime.date(2008, 6, 23),
-            name="Practical Ginger Projects",
+            name="Practical GingerDJ Projects",
         )
         cls.b3 = Book.objects.create(
             isbn="013790395",

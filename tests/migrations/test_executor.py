@@ -1,19 +1,19 @@
 from unittest import mock
 
-from ginger.apps.registry import apps as global_apps
-from ginger.db import DatabaseError, connection, migrations, models
-from ginger.db.migrations.exceptions import InvalidMigrationPlan
-from ginger.db.migrations.executor import MigrationExecutor
-from ginger.db.migrations.graph import MigrationGraph
-from ginger.db.migrations.recorder import MigrationRecorder
-from ginger.db.migrations.state import ProjectState
-from ginger.test import (
+from gingerdj.apps.registry import apps as global_apps
+from gingerdj.db import DatabaseError, connection, migrations, models
+from gingerdj.db.migrations.exceptions import InvalidMigrationPlan
+from gingerdj.db.migrations.executor import MigrationExecutor
+from gingerdj.db.migrations.graph import MigrationGraph
+from gingerdj.db.migrations.recorder import MigrationRecorder
+from gingerdj.db.migrations.state import ProjectState
+from gingerdj.test import (
     SimpleTestCase,
     modify_settings,
     override_settings,
     skipUnlessDBFeature,
 )
-from ginger.test.utils import isolate_lru_cache
+from gingerdj.test.utils import isolate_lru_cache
 
 from .test_base import MigrationTestBase
 
@@ -27,10 +27,7 @@ class ExecutorTests(MigrationTestBase):
     test failures first, as they may be propagating into here.
     """
 
-    available_apps = [
-        "migrations",
-        "migrations2"
-    ]
+    available_apps = ["migrations", "migrations2"]
 
     @override_settings(MIGRATION_MODULES={"migrations": "migrations.test_migrations"})
     def test_run(self):
@@ -735,7 +732,7 @@ class ExecutorTests(MigrationTestBase):
 
         executor = MigrationExecutor(connection)
         with mock.patch(
-            "ginger.db.migrations.executor.MigrationExecutor.record_migration"
+            "gingerdj.db.migrations.executor.MigrationExecutor.record_migration"
         ) as record_migration:
             record_migration.side_effect = RuntimeError("Recording migration failed.")
             with self.assertRaisesMessage(RuntimeError, "Recording migration failed."):

@@ -1,1 +1,1 @@
-from ginger import Xtemplate  # NOQA
+from gingerdj import Xtemplate  # NOQA

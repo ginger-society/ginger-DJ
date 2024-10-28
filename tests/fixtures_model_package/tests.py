@@ -1,6 +1,6 @@
-from ginger.core import management
-from ginger.core.management import CommandError
-from ginger.test import TestCase
+from gingerdj.core import management
+from gingerdj.core.management import CommandError
+from gingerdj.test import TestCase
 
 from .models import Article
 
@@ -13,7 +13,7 @@ class SampleTestCase(TestCase):
         self.assertQuerySetEqual(
             Article.objects.all(),
             [
-                "Ginger conquers world!",
+                "GingerDJ conquers world!",
                 "Copyright is fine the way it is",
                 "Poker has no place on ESPN",
             ],
@@ -41,7 +41,7 @@ class FixtureTestCase(TestCase):
         self.assertQuerySetEqual(
             Article.objects.all(),
             [
-                "Ginger conquers world!",
+                "GingerDJ conquers world!",
                 "Copyright is fine the way it is",
                 "Poker has no place on ESPN",
             ],
@@ -57,7 +57,7 @@ class FixtureTestCase(TestCase):
         self.assertQuerySetEqual(
             Article.objects.all(),
             [
-                "Ginger conquers world!",
+                "GingerDJ conquers world!",
                 "Copyright is fine the way it is",
                 "Poker has no place on ESPN",
             ],

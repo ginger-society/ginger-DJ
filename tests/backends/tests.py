@@ -1,4 +1,4 @@
-"""Tests related to ginger.db.backends that haven't been organized."""
+"""Tests related to gingerdj.db.backends that haven't been organized."""
 
 import datetime
 import threading
@@ -6,8 +6,8 @@ import unittest
 import warnings
 from unittest import mock
 
-from ginger.core.management.color import no_style
-from ginger.db import (
+from gingerdj.core.management.color import no_style
+from gingerdj.db import (
     DEFAULT_DB_ALIAS,
     DatabaseError,
     IntegrityError,
@@ -16,11 +16,11 @@ from ginger.db import (
     reset_queries,
     transaction,
 )
-from ginger.db.backends.base.base import BaseDatabaseWrapper
-from ginger.db.backends.signals import connection_created
-from ginger.db.backends.utils import CursorWrapper
-from ginger.db.models.sql.constants import CURSOR
-from ginger.test import (
+from gingerdj.db.backends.base.base import BaseDatabaseWrapper
+from gingerdj.db.backends.signals import connection_created
+from gingerdj.db.backends.utils import CursorWrapper
+from gingerdj.db.models.sql.constants import CURSOR
+from gingerdj.test import (
     TestCase,
     TransactionTestCase,
     override_settings,
@@ -201,7 +201,7 @@ class LongNameTest(TransactionTestCase):
         obj = (
             VeryLongModelNameZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ.objects.create()
         )
-        rel_obj = Person.objects.create(first_name="Ginger", last_name="Reinhardt")
+        rel_obj = Person.objects.create(first_name="GingerDJ", last_name="Reinhardt")
         obj.m2m_also_quite_long_zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz.add(rel_obj)
 
     def test_sequence_name_length_limits_flush(self):
@@ -564,7 +564,7 @@ class BackendTestCase(TransactionTestCase):
             BaseDatabaseWrapper.queries_limit = old_queries_limit
             new_connection.close()
 
-    @mock.patch("ginger.db.backends.utils.logger")
+    @mock.patch("gingerdj.db.backends.utils.logger")
     @override_settings(DEBUG=True)
     def test_queries_logger(self, mocked_logger):
         sql = "SELECT 1" + connection.features.bare_select_suffix
@@ -755,7 +755,7 @@ class ThreadTests(TransactionTestCase):
 
     def test_default_connection_thread_local(self):
         """
-        The default connection (i.e. ginger.db.connection) is different for
+        The default connection (i.e. gingerdj.db.connection) is different for
         each thread (#17258).
         """
         # Map connections by id because connections with identical aliases
@@ -766,9 +766,9 @@ class ThreadTests(TransactionTestCase):
         connections_dict[id(connection)] = connection
 
         def runner():
-            # Passing ginger.db.connection between threads doesn't work while
+            # Passing gingerdj.db.connection between threads doesn't work while
             # connections[DEFAULT_DB_ALIAS] does.
-            from ginger.db import connections
+            from gingerdj.db import connections
 
             connection = connections[DEFAULT_DB_ALIAS]
             # Allow thread sharing so the connection can be closed by the
@@ -808,7 +808,7 @@ class ThreadTests(TransactionTestCase):
             connections_dict[id(conn)] = conn
 
         def runner():
-            from ginger.db import connections
+            from gingerdj.db import connections
 
             for conn in connections.all():
                 # Allow thread sharing so the connection can be closed by the
@@ -843,7 +843,7 @@ class ThreadTests(TransactionTestCase):
 
         def do_thread():
             def runner(main_thread_connection):
-                from ginger.db import connections
+                from gingerdj.db import connections
 
                 connections["default"] = main_thread_connection
                 try:

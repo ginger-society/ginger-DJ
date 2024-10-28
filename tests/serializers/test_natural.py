@@ -1,6 +1,6 @@
-from ginger.core import serializers
-from ginger.db import connection
-from ginger.test import TestCase
+from gingerdj.core import serializers
+from gingerdj.db import connection
+from gingerdj.test import TestCase
 
 from .models import (
     Child,
@@ -54,9 +54,9 @@ def natural_key_serializer_test(self, format):
 def natural_key_test(self, format):
     book1 = {
         "data": "978-1590597255",
-        "title": "The Definitive Guide to Ginger: Web Development Done Right",
+        "title": "The Definitive Guide to GingerDJ: Web Development Done Right",
     }
-    book2 = {"data": "978-1590599969", "title": "Practical Ginger Projects"}
+    book2 = {"data": "978-1590599969", "title": "Practical GingerDJ Projects"}
 
     # Create the books.
     adrian = NaturalKeyAnchor.objects.create(**book1)

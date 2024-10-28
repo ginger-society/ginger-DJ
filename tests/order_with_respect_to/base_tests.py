@@ -1,6 +1,6 @@
 """
 The tests are shared with contenttypes_tests and so shouldn't import or
-reference any models directly. Subclasses should inherit ginger.test.TestCase.
+reference any models directly. Subclasses should inherit gingerdj.test.TestCase.
 """
 
 from operator import attrgetter

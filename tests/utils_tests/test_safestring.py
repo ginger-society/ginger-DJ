@@ -1,9 +1,9 @@
-from ginger.template import Context, Template
-from ginger.test import SimpleTestCase
-from ginger.utils import html, translation
-from ginger.utils.functional import Promise, lazy, lazystr
-from ginger.utils.safestring import SafeData, SafeString, mark_safe
-from ginger.utils.translation import gettext_lazy
+from gingerdj.template import Context, Template
+from gingerdj.test import SimpleTestCase
+from gingerdj.utils import html, translation
+from gingerdj.utils.functional import Promise, lazy, lazystr
+from gingerdj.utils.safestring import SafeData, SafeString, mark_safe
+from gingerdj.utils.translation import gettext_lazy
 
 
 class customescape(str):

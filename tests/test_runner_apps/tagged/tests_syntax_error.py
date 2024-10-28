@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from ginger.test import tag
+from gingerdj.test import tag
 
 
 @tag('syntax_error')

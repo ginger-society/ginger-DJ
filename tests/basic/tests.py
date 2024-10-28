@@ -3,8 +3,8 @@ import threading
 from datetime import datetime, timedelta
 from unittest import mock
 
-from ginger.core.exceptions import MultipleObjectsReturned, ObjectDoesNotExist
-from ginger.db import (
+from gingerdj.core.exceptions import MultipleObjectsReturned, ObjectDoesNotExist
+from gingerdj.db import (
     DEFAULT_DB_ALIAS,
     DatabaseError,
     connection,
@@ -12,18 +12,18 @@ from ginger.db import (
     models,
     transaction,
 )
-from ginger.db.models.manager import BaseManager
-from ginger.db.models.query import MAX_GET_RESULTS, EmptyQuerySet
-from ginger.test import (
+from gingerdj.db.models.manager import BaseManager
+from gingerdj.db.models.query import MAX_GET_RESULTS, EmptyQuerySet
+from gingerdj.test import (
     SimpleTestCase,
     TestCase,
     TransactionTestCase,
     skipUnlessDBFeature,
 )
-from ginger.test.utils import CaptureQueriesContext, ignore_warnings
-from ginger.utils.connection import ConnectionDoesNotExist
-from ginger.utils.deprecation import RemovedInGinger60Warning
-from ginger.utils.translation import gettext_lazy
+from gingerdj.test.utils import CaptureQueriesContext, ignore_warnings
+from gingerdj.utils.connection import ConnectionDoesNotExist
+from gingerdj.utils.deprecation import RemovedInGinger60Warning
+from gingerdj.utils.translation import gettext_lazy
 
 from .models import (
     Article,
@@ -583,7 +583,7 @@ class ModelLookupTest(TestCase):
         self.assertSequenceEqual(Article.objects.all(), [self.a])
 
     def test_rich_lookup(self):
-        # Ginger provides a rich database lookup API.
+        # GingerDJ provides a rich database lookup API.
         self.assertEqual(Article.objects.get(id__exact=self.a.id), self.a)
         self.assertEqual(Article.objects.get(headline__startswith="Swallow"), self.a)
         self.assertEqual(Article.objects.get(pub_date__year=2005), self.a)
@@ -628,7 +628,7 @@ class ModelLookupTest(TestCase):
         )
 
     def test_does_not_exist(self):
-        # Ginger raises an Article.DoesNotExist exception for get() if the
+        # GingerDJ raises an Article.DoesNotExist exception for get() if the
         # parameters don't match any object.
         with self.assertRaisesMessage(
             ObjectDoesNotExist, "Article matching query does not exist."
@@ -648,7 +648,7 @@ class ModelLookupTest(TestCase):
             )
 
     def test_lookup_by_primary_key(self):
-        # Lookup by a primary key is the most common case, so Ginger
+        # Lookup by a primary key is the most common case, so GingerDJ
         # provides a shortcut for primary-key exact lookups.
         # The following is identical to articles.get(id=a.id).
         self.assertEqual(Article.objects.get(pk=self.a.id), self.a)
@@ -672,7 +672,7 @@ class ModelLookupTest(TestCase):
 
         self.assertEqual(Article.objects.count(), 2)
 
-        # Ginger raises an Article.MultipleObjectsReturned exception if the
+        # GingerDJ raises an Article.MultipleObjectsReturned exception if the
         # lookup matches more than one object
         msg = "get() returned more than one Article -- it returned 2!"
         with self.assertRaisesMessage(MultipleObjectsReturned, msg):
@@ -853,7 +853,7 @@ class SelectOnSaveTests(TestCase):
             with self.assertNumQueries(3):
                 asos.save()
                 self.assertTrue(FakeQuerySet.called)
-            # This is not wanted behavior, but this is how Ginger has always
+            # This is not wanted behavior, but this is how GingerDJ has always
             # behaved for databases that do not return correct information
             # about matched rows for UPDATE.
             with self.assertRaisesMessage(

@@ -1,8 +1,8 @@
 from unittest import mock
 
-from ginger.db import connection
-from ginger.db.backends.base.client import BaseDatabaseClient
-from ginger.test import SimpleTestCase
+from gingerdj.db import connection
+from gingerdj.db.backends.base.client import BaseDatabaseClient
+from gingerdj.test import SimpleTestCase
 
 
 class SimpleDatabaseClientTests(SimpleTestCase):

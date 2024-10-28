@@ -1,8 +1,8 @@
 from datetime import date, timedelta
 
-from ginger.template.defaultfilters import add
-from ginger.test import SimpleTestCase
-from ginger.utils.translation import gettext_lazy
+from gingerdj.template.defaultfilters import add
+from gingerdj.test import SimpleTestCase
+from gingerdj.utils.translation import gettext_lazy
 
 from ..utils import setup
 

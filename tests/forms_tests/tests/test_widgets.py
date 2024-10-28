@@ -1,6 +1,6 @@
-from ginger.contrib.admin.tests import AdminSeleniumTestCase
-from ginger.test import override_settings
-from ginger.urls import reverse
+from gingerdj.contrib.admin.tests import AdminSeleniumTestCase
+from gingerdj.test import override_settings
+from gingerdj.urls import reverse
 
 from ..models import Article
 

@@ -2,8 +2,8 @@
 Testing signals emitted on changing m2m relations.
 """
 
-from ginger.db import models
-from ginger.test import TestCase
+from gingerdj.db import models
+from gingerdj.test import TestCase
 
 from .models import Car, Part, Person, SportsCar
 

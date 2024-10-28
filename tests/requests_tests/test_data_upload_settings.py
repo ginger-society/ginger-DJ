@@ -1,13 +1,13 @@
 from io import BytesIO
 
-from ginger.core.exceptions import (
+from gingerdj.core.exceptions import (
     RequestDataTooBig,
     TooManyFieldsSent,
     TooManyFilesSent,
 )
-from ginger.core.handlers.wsgi import WSGIRequest
-from ginger.test import SimpleTestCase
-from ginger.test.client import FakePayload
+from gingerdj.core.handlers.wsgi import WSGIRequest
+from gingerdj.test import SimpleTestCase
+from gingerdj.test.client import FakePayload
 
 TOO_MANY_FIELDS_MSG = (
     "The number of GET/POST parameters exceeded settings.DATA_UPLOAD_MAX_NUMBER_FIELDS."

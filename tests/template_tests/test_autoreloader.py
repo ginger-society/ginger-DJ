@@ -1,9 +1,9 @@
 from pathlib import Path
 from unittest import mock
 
-from ginger.template import autoreload
-from ginger.test import SimpleTestCase, override_settings
-from ginger.test.utils import require_jinja2
+from gingerdj.template import autoreload
+from gingerdj.test import SimpleTestCase, override_settings
+from gingerdj.test.utils import require_jinja2
 
 ROOT = Path(__file__).parent.absolute()
 EXTRA_TEMPLATES_DIR = ROOT / "templates_extra"
@@ -13,32 +13,32 @@ EXTRA_TEMPLATES_DIR = ROOT / "templates_extra"
     INSTALLED_APPS=["template_tests"],
     TEMPLATES=[
         {
-            "BACKEND": "ginger.template.backends.dummy.TemplateStrings",
+            "BACKEND": "gingerdj.template.backends.dummy.TemplateStrings",
             "APP_DIRS": True,
         },
         {
-            "BACKEND": "ginger.template.backends.ginger.GingerTemplates",
+            "BACKEND": "gingerdj.template.backends.gingerdj.GingerTemplates",
             "DIRS": [EXTRA_TEMPLATES_DIR],
             "OPTIONS": {
                 "context_processors": [
-                    "ginger.template.context_processors.request",
+                    "gingerdj.template.context_processors.request",
                 ],
                 "loaders": [
-                    "ginger.template.loaders.filesystem.Loader",
-                    "ginger.template.loaders.app_directories.Loader",
+                    "gingerdj.template.loaders.filesystem.Loader",
+                    "gingerdj.template.loaders.app_directories.Loader",
                 ],
             },
         },
     ],
 )
 class TemplateReloadTests(SimpleTestCase):
-    @mock.patch("ginger.template.autoreload.reset_loaders")
+    @mock.patch("gingerdj.template.autoreload.reset_loaders")
     def test_template_changed(self, mock_reset):
         template_path = Path(__file__).parent / "templates" / "index.html"
         self.assertTrue(autoreload.template_changed(None, template_path))
         mock_reset.assert_called_once()
 
-    @mock.patch("ginger.template.autoreload.reset_loaders")
+    @mock.patch("gingerdj.template.autoreload.reset_loaders")
     def test_non_template_changed(self, mock_reset):
         self.assertIsNone(autoreload.template_changed(None, Path(__file__)))
         mock_reset.assert_not_called()
@@ -47,29 +47,29 @@ class TemplateReloadTests(SimpleTestCase):
         TEMPLATES=[
             {
                 "DIRS": [ROOT],
-                "BACKEND": "ginger.template.backends.ginger.GingerTemplates",
+                "BACKEND": "gingerdj.template.backends.gingerdj.GingerTemplates",
             }
         ]
     )
-    @mock.patch("ginger.template.autoreload.reset_loaders")
+    @mock.patch("gingerdj.template.autoreload.reset_loaders")
     def test_non_template_changed_in_template_directory(self, mock_reset):
         self.assertIsNone(autoreload.template_changed(None, Path(__file__)))
         mock_reset.assert_not_called()
 
-    @mock.patch("ginger.forms.renderers.get_default_renderer")
+    @mock.patch("gingerdj.forms.renderers.get_default_renderer")
     def test_form_template_reset_template_change(self, mock_renderer):
         template_path = Path(__file__).parent / "templates" / "index.html"
         self.assertIs(autoreload.template_changed(None, template_path), True)
         mock_renderer.assert_called_once()
 
-    @mock.patch("ginger.template.loaders.cached.Loader.reset")
+    @mock.patch("gingerdj.template.loaders.cached.Loader.reset")
     def test_form_template_reset_template_change_reset_call(self, mock_loader_reset):
         template_path = Path(__file__).parent / "templates" / "index.html"
         self.assertIs(autoreload.template_changed(None, template_path), True)
         mock_loader_reset.assert_called_once()
 
-    @override_settings(FORM_RENDERER="ginger.forms.renderers.TemplatesSetting")
-    @mock.patch("ginger.template.loaders.cached.Loader.reset")
+    @override_settings(FORM_RENDERER="gingerdj.forms.renderers.TemplatesSetting")
+    @mock.patch("gingerdj.template.loaders.cached.Loader.reset")
     def test_form_template_reset_template_change_no_gingertemplates(
         self, mock_loader_reset
     ):
@@ -77,7 +77,7 @@ class TemplateReloadTests(SimpleTestCase):
         self.assertIs(autoreload.template_changed(None, template_path), True)
         mock_loader_reset.assert_not_called()
 
-    @mock.patch("ginger.forms.renderers.get_default_renderer")
+    @mock.patch("gingerdj.forms.renderers.get_default_renderer")
     def test_form_template_reset_non_template_change(self, mock_renderer):
         self.assertIsNone(autoreload.template_changed(None, Path(__file__)))
         mock_renderer.assert_not_called()
@@ -102,7 +102,7 @@ class TemplateReloadTests(SimpleTestCase):
             },
         )
 
-    @mock.patch("ginger.template.loaders.base.Loader.reset")
+    @mock.patch("gingerdj.template.loaders.base.Loader.reset")
     def test_reset_all_loaders(self, mock_reset):
         autoreload.reset_loaders()
         self.assertEqual(mock_reset.call_count, 2)
@@ -111,7 +111,7 @@ class TemplateReloadTests(SimpleTestCase):
         TEMPLATES=[
             {
                 "DIRS": [""],
-                "BACKEND": "ginger.template.backends.ginger.GingerTemplates",
+                "BACKEND": "gingerdj.template.backends.gingerdj.GingerTemplates",
             }
         ]
     )
@@ -126,7 +126,7 @@ class TemplateReloadTests(SimpleTestCase):
                     "template_tests/relative_str",
                     Path("template_tests/relative_path"),
                 ],
-                "BACKEND": "ginger.template.backends.ginger.GingerTemplates",
+                "BACKEND": "gingerdj.template.backends.gingerdj.GingerTemplates",
             }
         ]
     )
@@ -162,7 +162,7 @@ class Jinja2TemplateReloadTests(SimpleTestCase):
             },
         )
 
-    @mock.patch("ginger.template.loaders.base.Loader.reset")
+    @mock.patch("gingerdj.template.loaders.base.Loader.reset")
     def test_reset_all_loaders(self, mock_reset):
         autoreload.reset_loaders()
         self.assertEqual(mock_reset.call_count, 0)

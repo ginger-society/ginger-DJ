@@ -2,9 +2,9 @@ import os
 import shutil
 import tempfile
 
-from ginger import conf
-from ginger.test import SimpleTestCase
-from ginger.test.utils import extend_sys_path
+from gingerdj import conf
+from gingerdj.test import SimpleTestCase
+from gingerdj.test.utils import extend_sys_path
 
 
 class TestStartProjectSettings(SimpleTestCase):

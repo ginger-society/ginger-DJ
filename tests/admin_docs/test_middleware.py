@@ -1,5 +1,5 @@
-from ginger.core.exceptions import ImproperlyConfigured
-from ginger.test import override_settings
+from gingerdj.core.exceptions import ImproperlyConfigured
+from gingerdj.test import override_settings
 
 from .tests import AdminDocsTestCase, TestDataMixin
 

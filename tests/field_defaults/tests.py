@@ -2,10 +2,10 @@ from datetime import datetime
 from decimal import Decimal
 from math import pi
 
-from ginger.core.exceptions import ValidationError
-from ginger.db import connection
-from ginger.db.models import Case, F, FloatField, Value, When
-from ginger.db.models.expressions import (
+from gingerdj.core.exceptions import ValidationError
+from gingerdj.db import connection
+from gingerdj.db.models import Case, F, FloatField, Value, When
+from gingerdj.db.models.expressions import (
     Expression,
     ExpressionList,
     ExpressionWrapper,
@@ -13,9 +13,9 @@ from ginger.db.models.expressions import (
     OrderByList,
     RawSQL,
 )
-from ginger.db.models.functions import Collate
-from ginger.db.models.lookups import GreaterThan
-from ginger.test import SimpleTestCase, TestCase, skipIfDBFeature, skipUnlessDBFeature
+from gingerdj.db.models.functions import Collate
+from gingerdj.db.models.lookups import GreaterThan
+from gingerdj.test import SimpleTestCase, TestCase, skipIfDBFeature, skipUnlessDBFeature
 
 from .models import (
     Article,
@@ -93,7 +93,7 @@ class DefaultTests(TestCase):
         obj1 = DBDefaultsPK.objects.create()
         if not connection.features.can_return_columns_from_insert:
             # refresh_from_db() cannot be used because that needs the pk to
-            # already be known to Ginger.
+            # already be known to GingerDJ.
             obj1 = DBDefaultsPK.objects.get(pk="en")
         self.assertEqual(obj1.pk, "en")
         self.assertEqual(obj1.language_code, "en")
@@ -112,7 +112,7 @@ class DefaultTests(TestCase):
         parent2 = DBDefaultsPK.objects.create()
         if not connection.features.can_return_columns_from_insert:
             # refresh_from_db() cannot be used because that needs the pk to
-            # already be known to Ginger.
+            # already be known to GingerDJ.
             parent2 = DBDefaultsPK.objects.get(pk="en")
         child2 = DBDefaultsFK.objects.create(language_code=parent2)
         self.assertEqual(child2.language_code, parent2)

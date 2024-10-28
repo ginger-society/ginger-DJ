@@ -2,7 +2,7 @@ import uuid
 from datetime import datetime
 from time import sleep
 
-from ginger.contrib.postgres.functions import RandomUUID, TransactionNow
+from gingerdj.contrib.postgres.functions import RandomUUID, TransactionNow
 
 from . import PostgreSQLTestCase
 from .models import NowTestModel, UUIDTestModel

@@ -5,7 +5,7 @@ To execute arbitrary code around ``save()`` and ``delete()``, just subclass
 the methods.
 """
 
-from ginger.db import models
+from gingerdj.db import models
 
 
 class Person(models.Model):

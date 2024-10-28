@@ -1,7 +1,7 @@
 from datetime import datetime
 
-from ginger.contrib.sitemaps import GenericSitemap
-from ginger.test import override_settings
+from gingerdj.contrib.sitemaps import GenericSitemap
+from gingerdj.test import override_settings
 
 from .base import SitemapTestsBase
 from .models import TestModel

@@ -1,5 +1,5 @@
-from ginger.contrib import admin
-from ginger.urls import path
+from gingerdj.contrib import admin
+from gingerdj.urls import path
 
 urlpatterns = [
     # This is the same as in the default project template

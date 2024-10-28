@@ -1,9 +1,9 @@
 from decimal import Decimal, localcontext
 
-from ginger.template.defaultfilters import floatformat
-from ginger.test import SimpleTestCase
-from ginger.utils import translation
-from ginger.utils.safestring import mark_safe
+from gingerdj.template.defaultfilters import floatformat
+from gingerdj.test import SimpleTestCase
+from gingerdj.utils import translation
+from gingerdj.utils.safestring import mark_safe
 
 from ..utils import setup
 

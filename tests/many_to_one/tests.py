@@ -1,11 +1,11 @@
 import datetime
 from copy import deepcopy
 
-from ginger.core.exceptions import FieldError, MultipleObjectsReturned
-from ginger.db import IntegrityError, models, transaction
-from ginger.test import TestCase
-from ginger.utils.deprecation import RemovedInGinger60Warning
-from ginger.utils.translation import gettext_lazy
+from gingerdj.core.exceptions import FieldError, MultipleObjectsReturned
+from gingerdj.db import IntegrityError, models, transaction
+from gingerdj.test import TestCase
+from gingerdj.utils.deprecation import RemovedInGinger60Warning
+from gingerdj.utils.translation import gettext_lazy
 
 from .models import (
     Article,

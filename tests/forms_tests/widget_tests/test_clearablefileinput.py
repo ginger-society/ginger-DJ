@@ -1,5 +1,5 @@
-from ginger.core.files.uploadedfile import SimpleUploadedFile
-from ginger.forms import ClearableFileInput, FileField, Form, MultiWidget
+from gingerdj.core.files.uploadedfile import SimpleUploadedFile
+from gingerdj.forms import ClearableFileInput, FileField, Form, MultiWidget
 
 from .base import WidgetTest
 
@@ -133,7 +133,7 @@ class ClearableFileInputTest(WidgetTest):
             )
 
         form = TestForm()
-        with self.assertNoLogs("ginger.template", "DEBUG"):
+        with self.assertNoLogs("gingerdj.template", "DEBUG"):
             form.render()
 
     def test_render_as_subwidget(self):

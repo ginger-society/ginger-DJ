@@ -1,8 +1,8 @@
-from ginger.contrib.admin import ModelAdmin, TabularInline
-from ginger.contrib.admin.helpers import InlineAdminForm
-from ginger.contrib.admin.tests import AdminSeleniumTestCase
-from ginger.test import RequestFactory, TestCase, override_settings
-from ginger.urls import reverse
+from gingerdj.contrib.admin import ModelAdmin, TabularInline
+from gingerdj.contrib.admin.helpers import InlineAdminForm
+from gingerdj.contrib.admin.tests import AdminSeleniumTestCase
+from gingerdj.test import RequestFactory, TestCase, override_settings
+from gingerdj.urls import reverse
 
 from .admin import InnerInline
 from .admin import site as admin_site

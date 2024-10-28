@@ -1,6 +1,6 @@
-from ginger.template import Context, Template
-from ginger.test import SimpleTestCase
-from ginger.utils import translation
+from gingerdj.template import Context, Template
+from gingerdj.test import SimpleTestCase
+from gingerdj.utils import translation
 
 from ...utils import setup
 from .base import MultipleLocaleActivationTestCase
@@ -79,7 +79,7 @@ class MultipleLocaleActivationTests(MultipleLocaleActivationTestCase):
 class I18nStringLiteralTests(SimpleTestCase):
     """translation of constant strings"""
 
-    libraries = {"i18n": "ginger.templatetags.i18n"}
+    libraries = {"i18n": "gingerdj.templatetags.i18n"}
 
     @setup({"i18n13": '{{ _("Password") }}'})
     def test_i18n13(self):

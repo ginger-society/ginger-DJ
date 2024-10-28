@@ -1,5 +1,5 @@
-from ginger.db import transaction
-from ginger.test import TestCase
+from gingerdj.db import transaction
+from gingerdj.test import TestCase
 
 from .models import FloatModel
 

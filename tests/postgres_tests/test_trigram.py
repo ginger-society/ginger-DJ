@@ -2,7 +2,7 @@ from . import PostgreSQLTestCase
 from .models import CharFieldModel, TextFieldModel
 
 try:
-    from ginger.contrib.postgres.search import (
+    from gingerdj.contrib.postgres.search import (
         TrigramDistance,
         TrigramSimilarity,
         TrigramStrictWordDistance,

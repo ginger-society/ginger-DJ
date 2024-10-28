@@ -8,13 +8,13 @@ from io import StringIO
 from pathlib import Path
 from unittest import mock
 
-from ginger.conf import STATICFILES_STORAGE_ALIAS, settings
-from ginger.contrib.staticfiles import finders, storage
-from ginger.contrib.staticfiles.management.commands.collectstatic import (
+from gingerdj.conf import STATICFILES_STORAGE_ALIAS, settings
+from gingerdj.contrib.staticfiles import finders, storage
+from gingerdj.contrib.staticfiles.management.commands.collectstatic import (
     Command as CollectstaticCommand,
 )
-from ginger.core.management import call_command
-from ginger.test import SimpleTestCase, override_settings
+from gingerdj.core.management import call_command
+from gingerdj.test import SimpleTestCase, override_settings
 
 from .cases import CollectionTestCase
 from .settings import TEST_ROOT
@@ -179,7 +179,7 @@ class TestHashedFiles:
 
     @override_settings(
         STATICFILES_DIRS=[os.path.join(TEST_ROOT, "project", "loop")],
-        STATICFILES_FINDERS=["ginger.contrib.staticfiles.finders.FileSystemFinder"],
+        STATICFILES_FINDERS=["gingerdj.contrib.staticfiles.finders.FileSystemFinder"],
     )
     def test_import_loop(self):
         finders.get_finder.cache_clear()
@@ -333,7 +333,7 @@ class TestHashedFiles:
 
     @override_settings(
         STATICFILES_DIRS=[os.path.join(TEST_ROOT, "project", "faulty")],
-        STATICFILES_FINDERS=["ginger.contrib.staticfiles.finders.FileSystemFinder"],
+        STATICFILES_FINDERS=["gingerdj.contrib.staticfiles.finders.FileSystemFinder"],
     )
     def test_post_processing_failure(self):
         """
@@ -348,7 +348,7 @@ class TestHashedFiles:
 
     @override_settings(
         STATICFILES_DIRS=[os.path.join(TEST_ROOT, "project", "nonutf8")],
-        STATICFILES_FINDERS=["ginger.contrib.staticfiles.finders.FileSystemFinder"],
+        STATICFILES_FINDERS=["gingerdj.contrib.staticfiles.finders.FileSystemFinder"],
     )
     def test_post_processing_nonutf8(self):
         finders.get_finder.cache_clear()
@@ -399,7 +399,7 @@ class TestExtraPatternsStorage(CollectionTestCase):
     STORAGES={
         **settings.STORAGES,
         STATICFILES_STORAGE_ALIAS: {
-            "BACKEND": "ginger.contrib.staticfiles.storage.ManifestStaticFilesStorage",
+            "BACKEND": "gingerdj.contrib.staticfiles.storage.ManifestStaticFilesStorage",
         },
     }
 )
@@ -565,7 +565,7 @@ class TestCollectionManifestStorage(TestHashedFiles, CollectionTestCase):
     STORAGES={
         **settings.STORAGES,
         STATICFILES_STORAGE_ALIAS: {
-            "BACKEND": "ginger.contrib.staticfiles.storage.ManifestStaticFilesStorage",
+            "BACKEND": "gingerdj.contrib.staticfiles.storage.ManifestStaticFilesStorage",
         },
     },
 )
@@ -576,7 +576,9 @@ class TestCollectionManifestStorageStaticUrlSlash(CollectionTestCase):
     def test_protocol_relative_url_ignored(self):
         with override_settings(
             STATICFILES_DIRS=[os.path.join(TEST_ROOT, "project", "static_url_slash")],
-            STATICFILES_FINDERS=["ginger.contrib.staticfiles.finders.FileSystemFinder"],
+            STATICFILES_FINDERS=[
+                "gingerdj.contrib.staticfiles.finders.FileSystemFinder"
+            ],
         ):
             self.run_collectstatic()
         relpath = self.hashed_file_path("ignored.css")
@@ -866,7 +868,7 @@ class TestStaticFilePermissions(CollectionTestCase):
     STORAGES={
         **settings.STORAGES,
         STATICFILES_STORAGE_ALIAS: {
-            "BACKEND": "ginger.contrib.staticfiles.storage.ManifestStaticFilesStorage",
+            "BACKEND": "gingerdj.contrib.staticfiles.storage.ManifestStaticFilesStorage",
         },
     }
 )

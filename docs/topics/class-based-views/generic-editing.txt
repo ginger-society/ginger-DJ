@@ -10,7 +10,7 @@ Form processing generally has 3 paths:
 
 Implementing this yourself often results in a lot of repeated boilerplate code
 (see :ref:`Using a form in a view<using-a-form-in-a-view>`). To help avoid
-this, Ginger provides a collection of generic class-based views for form
+this, GingerDJ provides a collection of generic class-based views for form
 processing.
 
 Basic forms
@@ -21,7 +21,7 @@ Given a contact form:
 .. code-block:: python
     :caption: ``forms.py``
 
-    from ginger import forms
+    from gingerdj import forms
 
 
     class ContactForm(forms.Form):
@@ -38,7 +38,7 @@ The view can be constructed using a ``FormView``:
     :caption: ``views.py``
 
     from myapp.forms import ContactForm
-    from ginger.views.generic.edit import FormView
+    from gingerdj.views.generic.edit import FormView
 
 
     class ContactFormView(FormView):
@@ -55,54 +55,54 @@ The view can be constructed using a ``FormView``:
 Notes:
 
 * FormView inherits
-  :class:`~ginger.views.generic.base.TemplateResponseMixin` so
-  :attr:`~ginger.views.generic.base.TemplateResponseMixin.template_name`
+  :class:`~gingerdj.views.generic.base.TemplateResponseMixin` so
+  :attr:`~gingerdj.views.generic.base.TemplateResponseMixin.template_name`
   can be used here.
 * The default implementation for
-  :meth:`~ginger.views.generic.edit.FormMixin.form_valid` simply
-  redirects to the :attr:`~ginger.views.generic.edit.FormMixin.success_url`.
+  :meth:`~gingerdj.views.generic.edit.FormMixin.form_valid` simply
+  redirects to the :attr:`~gingerdj.views.generic.edit.FormMixin.success_url`.
 
 Model forms
 ===========
 
 Generic views really shine when working with models.  These generic
-views will automatically create a :class:`~ginger.forms.ModelForm`, so long as
+views will automatically create a :class:`~gingerdj.forms.ModelForm`, so long as
 they can work out which model class to use:
 
-* If the :attr:`~ginger.views.generic.edit.ModelFormMixin.model` attribute is
+* If the :attr:`~gingerdj.views.generic.edit.ModelFormMixin.model` attribute is
   given, that model class will be used.
-* If :meth:`~ginger.views.generic.detail.SingleObjectMixin.get_object()`
+* If :meth:`~gingerdj.views.generic.detail.SingleObjectMixin.get_object()`
   returns an object, the class of that object will be used.
-* If a :attr:`~ginger.views.generic.detail.SingleObjectMixin.queryset` is
+* If a :attr:`~gingerdj.views.generic.detail.SingleObjectMixin.queryset` is
   given, the model for that queryset will be used.
 
 Model form views provide a
-:meth:`~ginger.views.generic.edit.ModelFormMixin.form_valid()` implementation
+:meth:`~gingerdj.views.generic.edit.ModelFormMixin.form_valid()` implementation
 that saves the model automatically.  You can override this if you have any
 special requirements; see below for examples.
 
 You don't even need to provide a ``success_url`` for
-:class:`~ginger.views.generic.edit.CreateView` or
-:class:`~ginger.views.generic.edit.UpdateView` - they will use
-:meth:`~ginger.db.models.Model.get_absolute_url()` on the model object if available.
+:class:`~gingerdj.views.generic.edit.CreateView` or
+:class:`~gingerdj.views.generic.edit.UpdateView` - they will use
+:meth:`~gingerdj.db.models.Model.get_absolute_url()` on the model object if available.
 
-If you want to use a custom :class:`~ginger.forms.ModelForm` (for instance to
+If you want to use a custom :class:`~gingerdj.forms.ModelForm` (for instance to
 add extra validation), set
-:attr:`~ginger.views.generic.edit.FormMixin.form_class` on your view.
+:attr:`~gingerdj.views.generic.edit.FormMixin.form_class` on your view.
 
 .. note::
     When specifying a custom form class, you must still specify the model,
-    even though the :attr:`~ginger.views.generic.edit.FormMixin.form_class` may
-    be a :class:`~ginger.forms.ModelForm`.
+    even though the :attr:`~gingerdj.views.generic.edit.FormMixin.form_class` may
+    be a :class:`~gingerdj.forms.ModelForm`.
 
-First we need to add :meth:`~ginger.db.models.Model.get_absolute_url()` to our
+First we need to add :meth:`~gingerdj.db.models.Model.get_absolute_url()` to our
 ``Author`` class:
 
 .. code-block:: python
     :caption: ``models.py``
 
-    from ginger.db import models
-    from ginger.urls import reverse
+    from gingerdj.db import models
+    from gingerdj.urls import reverse
 
 
     class Author(models.Model):
@@ -118,8 +118,8 @@ here; we don't have to write any logic ourselves:
 .. code-block:: python
     :caption: ``views.py``
 
-    from ginger.urls import reverse_lazy
-    from ginger.views.generic.edit import CreateView, DeleteView, UpdateView
+    from gingerdj.urls import reverse_lazy
+    from gingerdj.views.generic.edit import CreateView, DeleteView, UpdateView
     from myapp.models import Author
 
 
@@ -138,24 +138,24 @@ here; we don't have to write any logic ourselves:
         success_url = reverse_lazy("author-list")
 
 .. note::
-    We have to use :func:`~ginger.urls.reverse_lazy` instead of
+    We have to use :func:`~gingerdj.urls.reverse_lazy` instead of
     ``reverse()``, as the urls are not loaded when the file is imported.
 
 The ``fields`` attribute works the same way as the ``fields`` attribute on the
-inner ``Meta`` class on :class:`~ginger.forms.ModelForm`. Unless you define the
+inner ``Meta`` class on :class:`~gingerdj.forms.ModelForm`. Unless you define the
 form class in another way, the attribute is required and the view will raise
-an :exc:`~ginger.core.exceptions.ImproperlyConfigured` exception if it's not.
+an :exc:`~gingerdj.core.exceptions.ImproperlyConfigured` exception if it's not.
 
-If you specify both the :attr:`~ginger.views.generic.edit.ModelFormMixin.fields`
-and :attr:`~ginger.views.generic.edit.FormMixin.form_class` attributes, an
-:exc:`~ginger.core.exceptions.ImproperlyConfigured` exception will be raised.
+If you specify both the :attr:`~gingerdj.views.generic.edit.ModelFormMixin.fields`
+and :attr:`~gingerdj.views.generic.edit.FormMixin.form_class` attributes, an
+:exc:`~gingerdj.core.exceptions.ImproperlyConfigured` exception will be raised.
 
 Finally, we hook these new views into the URLconf:
 
 .. code-block:: python
     :caption: ``urls.py``
 
-    from ginger.urls import path
+    from gingerdj.urls import path
     from myapp.views import AuthorCreateView, AuthorDeleteView, AuthorUpdateView
 
     urlpatterns = [
@@ -168,11 +168,11 @@ Finally, we hook these new views into the URLconf:
 .. note::
 
     These views inherit
-    :class:`~ginger.views.generic.detail.SingleObjectTemplateResponseMixin`
+    :class:`~gingerdj.views.generic.detail.SingleObjectTemplateResponseMixin`
     which uses
-    :attr:`~ginger.views.generic.detail.SingleObjectTemplateResponseMixin.template_name_suffix`
+    :attr:`~gingerdj.views.generic.detail.SingleObjectTemplateResponseMixin.template_name_suffix`
     to construct the
-    :attr:`~ginger.views.generic.base.TemplateResponseMixin.template_name`
+    :attr:`~gingerdj.views.generic.base.TemplateResponseMixin.template_name`
     based on the model.
 
     In this example:
@@ -182,14 +182,14 @@ Finally, we hook these new views into the URLconf:
 
     If you wish to have separate templates for :class:`CreateView` and
     :class:`UpdateView`, you can set either
-    :attr:`~ginger.views.generic.base.TemplateResponseMixin.template_name` or
-    :attr:`~ginger.views.generic.detail.SingleObjectTemplateResponseMixin.template_name_suffix`
+    :attr:`~gingerdj.views.generic.base.TemplateResponseMixin.template_name` or
+    :attr:`~gingerdj.views.generic.detail.SingleObjectTemplateResponseMixin.template_name_suffix`
     on your view class.
 
 .. code-block:: python
     :caption: ``views.py``
 
-    from ginger.views.generic.edit import CreateView
+    from gingerdj.views.generic.edit import CreateView
     from myapp.models import Author
 
 
@@ -209,8 +209,8 @@ Content negotiation example
 Here is an example showing how you might go about implementing a form that
 works with an API-based workflow as well as 'normal' form POSTs::
 
-    from ginger.http import JsonResponse
-    from ginger.views.generic.edit import CreateView
+    from gingerdj.http import JsonResponse
+    from gingerdj.views.generic.edit import CreateView
     from myapp.models import Author
 
 

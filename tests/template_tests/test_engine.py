@@ -1,9 +1,9 @@
 import os
 
-from ginger.core.exceptions import ImproperlyConfigured
-from ginger.template import Context
-from ginger.template.engine import Engine
-from ginger.test import SimpleTestCase, override_settings
+from gingerdj.core.exceptions import ImproperlyConfigured
+from gingerdj.template import Context
+from gingerdj.template.engine import Engine
+from gingerdj.test import SimpleTestCase, override_settings
 
 from .utils import ROOT, TEMPLATE_DIR
 
@@ -16,19 +16,19 @@ class EngineTest(SimpleTestCase):
         self.assertEqual(
             repr(engine),
             "<Engine: app_dirs=False debug=False loaders=[("
-            "'ginger.template.loaders.cached.Loader', "
-            "['ginger.template.loaders.filesystem.Loader'])] "
+            "'gingerdj.template.loaders.cached.Loader', "
+            "['gingerdj.template.loaders.filesystem.Loader'])] "
             "string_if_invalid='' file_charset='utf-8' builtins=["
-            "'ginger.template.defaulttags', 'ginger.template.defaultfilters', "
-            "'ginger.template.loader_tags'] autoescape=True>",
+            "'gingerdj.template.defaulttags', 'gingerdj.template.defaultfilters', "
+            "'gingerdj.template.loader_tags'] autoescape=True>",
         )
 
     def test_repr(self):
         engine = Engine(
             dirs=[TEMPLATE_DIR],
-            context_processors=["ginger.template.context_processors.debug"],
+            context_processors=["gingerdj.template.context_processors.debug"],
             debug=True,
-            loaders=["ginger.template.loaders.filesystem.Loader"],
+            loaders=["gingerdj.template.loaders.filesystem.Loader"],
             string_if_invalid="x",
             file_charset="utf-16",
             libraries={"custom": "template_tests.templatetags.custom"},
@@ -37,12 +37,12 @@ class EngineTest(SimpleTestCase):
         self.assertEqual(
             repr(engine),
             f"<Engine: dirs=[{TEMPLATE_DIR!r}] app_dirs=False "
-            "context_processors=['ginger.template.context_processors.debug'] "
-            "debug=True loaders=['ginger.template.loaders.filesystem.Loader'] "
+            "context_processors=['gingerdj.template.context_processors.debug'] "
+            "debug=True loaders=['gingerdj.template.loaders.filesystem.Loader'] "
             "string_if_invalid='x' file_charset='utf-16' "
             "libraries={'custom': 'template_tests.templatetags.custom'} "
-            "builtins=['ginger.template.defaulttags', "
-            "'ginger.template.defaultfilters', 'ginger.template.loader_tags'] "
+            "builtins=['gingerdj.template.defaulttags', "
+            "'gingerdj.template.defaultfilters', 'gingerdj.template.loader_tags'] "
             "autoescape=False>",
         )
 
@@ -76,7 +76,7 @@ class GetDefaultTests(SimpleTestCase):
         TEMPLATES=[
             {
                 "NAME": "default",
-                "BACKEND": "ginger.template.backends.ginger.GingerTemplates",
+                "BACKEND": "gingerdj.template.backends.gingerdj.GingerTemplates",
                 "OPTIONS": {"file_charset": "abc"},
             }
         ]
@@ -88,12 +88,12 @@ class GetDefaultTests(SimpleTestCase):
         TEMPLATES=[
             {
                 "NAME": "default",
-                "BACKEND": "ginger.template.backends.ginger.GingerTemplates",
+                "BACKEND": "gingerdj.template.backends.gingerdj.GingerTemplates",
                 "OPTIONS": {"file_charset": "abc"},
             },
             {
                 "NAME": "other",
-                "BACKEND": "ginger.template.backends.ginger.GingerTemplates",
+                "BACKEND": "gingerdj.template.backends.gingerdj.GingerTemplates",
                 "OPTIONS": {"file_charset": "def"},
             },
         ]
@@ -113,8 +113,8 @@ class LoaderTests(SimpleTestCase):
         #21460 -- The order of template loader works.
         """
         loaders = [
-            "ginger.template.loaders.filesystem.Loader",
-            "ginger.template.loaders.app_directories.Loader",
+            "gingerdj.template.loaders.filesystem.Loader",
+            "gingerdj.template.loaders.app_directories.Loader",
         ]
         engine = Engine(dirs=[OTHER_DIR, TEMPLATE_DIR], loaders=loaders)
         template = engine.get_template("priority/foo.html")
@@ -126,10 +126,10 @@ class LoaderTests(SimpleTestCase):
         """
         loaders = [
             (
-                "ginger.template.loaders.cached.Loader",
+                "gingerdj.template.loaders.cached.Loader",
                 [
-                    "ginger.template.loaders.filesystem.Loader",
-                    "ginger.template.loaders.app_directories.Loader",
+                    "gingerdj.template.loaders.filesystem.Loader",
+                    "gingerdj.template.loaders.app_directories.Loader",
                 ],
             ),
         ]

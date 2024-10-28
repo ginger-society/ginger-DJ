@@ -6,13 +6,13 @@ All text copyright Python (Monty) Pictures. Thanks to sacred-texts.com for the
 transcript.
 """
 
-from ginger.db.models import F, Value
+from gingerdj.db.models import F, Value
 
 from . import PostgreSQLSimpleTestCase, PostgreSQLTestCase
 from .models import Character, Line, LineSavedSearch, Scene
 
 try:
-    from ginger.contrib.postgres.search import (
+    from gingerdj.contrib.postgres.search import (
         SearchConfig,
         SearchHeadline,
         SearchQuery,

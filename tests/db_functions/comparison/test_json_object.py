@@ -1,9 +1,9 @@
-from ginger.db import NotSupportedError
-from ginger.db.models import F, Value
-from ginger.db.models.functions import JSONObject, Lower
-from ginger.test import TestCase
-from ginger.test.testcases import skipIfDBFeature, skipUnlessDBFeature
-from ginger.utils import timezone
+from gingerdj.db import NotSupportedError
+from gingerdj.db.models import F, Value
+from gingerdj.db.models.functions import JSONObject, Lower
+from gingerdj.test import TestCase
+from gingerdj.test.testcases import skipIfDBFeature, skipUnlessDBFeature
+from gingerdj.utils import timezone
 
 from ..models import Article, Author
 

@@ -1,5 +1,5 @@
-from ginger.conf import STATICFILES_STORAGE_ALIAS
-from ginger.test import override_settings
+from gingerdj.conf import STATICFILES_STORAGE_ALIAS
+from gingerdj.test import override_settings
 
 from .cases import StaticFilesTestCase
 

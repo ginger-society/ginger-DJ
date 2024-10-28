@@ -1,5 +1,5 @@
-from ginger.db import connection, models
-from ginger.test import SimpleTestCase
+from gingerdj.db import connection, models
+from gingerdj.test import SimpleTestCase
 
 from .fields import CustomDescriptorField, CustomTypedField
 

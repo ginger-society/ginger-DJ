@@ -1,5 +1,5 @@
-from ginger.db import models
-from ginger.db.models.query_utils import DeferredAttribute
+from gingerdj.db import models
+from gingerdj.db.models.query_utils import DeferredAttribute
 
 
 class CustomTypedField(models.TextField):

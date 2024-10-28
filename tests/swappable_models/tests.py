@@ -1,5 +1,5 @@
-from ginger.core import management
-from ginger.test import TestCase, override_settings
+from gingerdj.core import management
+from gingerdj.test import TestCase, override_settings
 
 from .models import Article
 
@@ -21,9 +21,7 @@ class SwappableModelTests(TestCase):
 
         # Content types and permissions exist for the swapped model,
         # but not for the swappable model.
-        apps_models = [
-           
-        ]
+        apps_models = []
         self.assertIn(("swappable_models", "alternatearticle"), apps_models)
         self.assertNotIn(("swappable_models", "article"), apps_models)
 

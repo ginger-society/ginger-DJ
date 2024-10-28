@@ -1,9 +1,9 @@
 from unittest import mock
 
-from ginger.template import TemplateDoesNotExist
-from ginger.test import Client, RequestFactory, SimpleTestCase, override_settings
-from ginger.utils.translation import override
-from ginger.views.csrf import CSRF_FAILURE_TEMPLATE_NAME, csrf_failure
+from gingerdj.template import TemplateDoesNotExist
+from gingerdj.test import Client, RequestFactory, SimpleTestCase, override_settings
+from gingerdj.utils.translation import override
+from gingerdj.views.csrf import CSRF_FAILURE_TEMPLATE_NAME, csrf_failure
 
 
 @override_settings(ROOT_URLCONF="view_tests.urls")
@@ -15,9 +15,9 @@ class CsrfViewTests(SimpleTestCase):
     @override_settings(
         USE_I18N=True,
         MIDDLEWARE=[
-            "ginger.middleware.locale.LocaleMiddleware",
-            "ginger.middleware.common.CommonMiddleware",
-            "ginger.middleware.csrf.CsrfViewMiddleware",
+            "gingerdj.middleware.locale.LocaleMiddleware",
+            "gingerdj.middleware.common.CommonMiddleware",
+            "gingerdj.middleware.csrf.CsrfViewMiddleware",
         ],
     )
     def test_translation(self):
@@ -92,11 +92,11 @@ class CsrfViewTests(SimpleTestCase):
     @override_settings(
         TEMPLATES=[
             {
-                "BACKEND": "ginger.template.backends.ginger.GingerTemplates",
+                "BACKEND": "gingerdj.template.backends.gingerdj.GingerTemplates",
                 "OPTIONS": {
                     "loaders": [
                         (
-                            "ginger.template.loaders.locmem.Loader",
+                            "gingerdj.template.loaders.locmem.Loader",
                             {
                                 CSRF_FAILURE_TEMPLATE_NAME: (
                                     "Test template for CSRF failure"
@@ -127,7 +127,7 @@ class CsrfViewTests(SimpleTestCase):
         be opened as utf-8 charset as is the default specified on template
         engines.
         """
-        from ginger.views.csrf import Path
+        from gingerdj.views.csrf import Path
 
         with mock.patch.object(Path, "open") as m:
             csrf_failure(mock.MagicMock(), mock.Mock())

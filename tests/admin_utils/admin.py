@@ -1,5 +1,5 @@
-from ginger import forms
-from ginger.contrib import admin
+from gingerdj import forms
+from gingerdj.contrib import admin
 
 from .models import Article, ArticleProxy, Site
 

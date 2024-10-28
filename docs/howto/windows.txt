@@ -1,12 +1,12 @@
 ================================
-How to install Ginger on Windows
+How to install GingerDJ on Windows
 ================================
 
-This document will guide you through installing Python 3.12 and Ginger on
+This document will guide you through installing Python 3.12 and GingerDJ on
 Windows. It also provides instructions for setting up a virtual environment,
 which makes it easier to work on Python projects. This is meant as a beginner's
-guide for users working on Ginger projects and does not reflect how Ginger
-should be installed when developing patches for Ginger itself.
+guide for users working on GingerDJ projects and does not reflect how GingerDJ
+should be installed when developing patches for GingerDJ itself.
 
 The steps in this guide have been tested with Windows 10. In other
 versions, the steps would be similar. You will need to be familiar with using
@@ -17,7 +17,7 @@ the Windows command prompt.
 Install Python
 ==============
 
-Ginger is a Python web framework, thus requiring Python to be installed on your
+GingerDJ is a Python web framework, thus requiring Python to be installed on your
 machine. At the time of writing, Python 3.12 is the latest version.
 
 To install Python on your machine go to https://www.python.org/downloads/. The
@@ -41,7 +41,7 @@ About ``pip``
 
 :pypi:`pip` is a package manager for Python and is included by default with the
 Python installer. It helps to install and uninstall Python packages
-(such as Ginger!). For the rest of the installation, we'll use ``pip`` to
+(such as GingerDJ!). For the rest of the installation, we'll use ``pip`` to
 install Python packages from the command line.
 
 .. _virtualenvironment:
@@ -49,7 +49,7 @@ install Python packages from the command line.
 Setting up a virtual environment
 ================================
 
-It is best practice to provide a dedicated environment for each Ginger project
+It is best practice to provide a dedicated environment for each GingerDJ project
 you create. There are many options to manage environments and packages within
 the Python ecosystem, some of which are recommended in the `Python
 documentation <https://packaging.python.org/guides/tool-recommendations/>`_.
@@ -75,25 +75,25 @@ The virtual environment will be activated and you'll see "(project-name)" next
 to the command prompt to designate that. Each time you start a new command
 prompt, you'll need to activate the environment again.
 
-Install Ginger
+Install GingerDJ
 ==============
 
-Ginger can be installed easily using ``pip`` within your virtual environment.
+GingerDJ can be installed easily using ``pip`` within your virtual environment.
 
 In the command prompt, ensure your virtual environment is active, and execute
 the following command:
 
 .. code-block:: doscon
 
-    ...\> py -m pip install Ginger
+    ...\> py -m pip install GingerDJ
 
-This will download and install the latest Ginger release.
+This will download and install the latest GingerDJ release.
 
-After the installation has completed, you can verify your Ginger installation
-by executing ``ginger-admin --version`` in the command prompt.
+After the installation has completed, you can verify your GingerDJ installation
+by executing ``gingerdj-admin --version`` in the command prompt.
 
 See :ref:`database-installation` for information on database installation
-with Ginger.
+with GingerDJ.
 
 Colored terminal output
 =======================
@@ -115,14 +115,14 @@ See :ref:`syntax-coloring` for more information on color settings.
 Common pitfalls
 ===============
 
-* If ``ginger-admin`` only displays the help text no matter what arguments
+* If ``gingerdj-admin`` only displays the help text no matter what arguments
   it is given, there is probably a problem with the file association in
   Windows. Check if there is more than one environment variable set for
   running Python scripts in ``PATH``. This usually occurs when there is more
   than one Python version installed.
 
 * If you are connecting to the internet behind a proxy, there might be problems
-  in running the command ``py -m pip install Ginger``. Set the environment
+  in running the command ``py -m pip install GingerDJ``. Set the environment
   variables for proxy configuration in the command prompt as follows:
 
   .. code-block:: doscon
@@ -130,7 +130,7 @@ Common pitfalls
     ...\> set http_proxy=http://username:password@proxyserver:proxyport
     ...\> set https_proxy=https://username:password@proxyserver:proxyport
 
-* In general, Ginger assumes that ``UTF-8`` encoding is used for I/O. This may
+* In general, GingerDJ assumes that ``UTF-8`` encoding is used for I/O. This may
   cause problems if your system is set to use a different encoding. Recent
   versions of Python allow setting the :envvar:`PYTHONUTF8` environment
   variable in order to force a ``UTF-8`` encoding. Windows 10 also provides a

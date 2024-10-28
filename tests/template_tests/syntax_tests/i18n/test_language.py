@@ -1,11 +1,11 @@
 from template_tests.utils import setup
 
-from ginger.template import TemplateSyntaxError
-from ginger.test import SimpleTestCase
+from gingerdj.template import TemplateSyntaxError
+from gingerdj.test import SimpleTestCase
 
 
 class I18nLanguageTagTests(SimpleTestCase):
-    libraries = {"i18n": "ginger.templatetags.i18n"}
+    libraries = {"i18n": "gingerdj.templatetags.i18n"}
 
     @setup({"i18n_language": "{% load i18n %} {% language %} {% endlanguage %}"})
     def test_no_arg(self):

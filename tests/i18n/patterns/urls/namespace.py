@@ -1,6 +1,6 @@
-from ginger.urls import path, re_path
-from ginger.utils.translation import gettext_lazy as _
-from ginger.views.generic import TemplateView
+from gingerdj.urls import path, re_path
+from gingerdj.utils.translation import gettext_lazy as _
+from gingerdj.views.generic import TemplateView
 
 view = TemplateView.as_view(template_name="dummy.html")
 

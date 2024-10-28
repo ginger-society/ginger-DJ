@@ -1,10 +1,10 @@
 import os
 
-from ginger.template import Context, Engine, TemplateSyntaxError
-from ginger.template.base import Node
-from ginger.template.library import InvalidTemplateLibrary
-from ginger.test import SimpleTestCase
-from ginger.test.utils import extend_sys_path
+from gingerdj.template import Context, Engine, TemplateSyntaxError
+from gingerdj.template.base import Node
+from gingerdj.template.library import InvalidTemplateLibrary
+from gingerdj.test import SimpleTestCase
+from gingerdj.test.utils import extend_sys_path
 
 from .templatetags import custom, inclusion
 from .utils import ROOT

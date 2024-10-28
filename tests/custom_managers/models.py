@@ -9,7 +9,7 @@ There are two reasons you might want to customize a ``Manager``: to add extra
 returns.
 """
 
-from ginger.db import models
+from gingerdj.db import models
 
 
 class PersonManager(models.Manager):

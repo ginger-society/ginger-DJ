@@ -1,11 +1,11 @@
 from urllib.parse import urlencode
 
-from ginger.conf import settings
-from ginger.http import HttpResponse, HttpResponseRedirect, JsonResponse
-from ginger.shortcuts import render
-from ginger.template.loader import render_to_string
-from ginger.test import Client
-from ginger.test.client import CONTENT_TYPE_RE
+from gingerdj.conf import settings
+from gingerdj.http import HttpResponse, HttpResponseRedirect, JsonResponse
+from gingerdj.shortcuts import render
+from gingerdj.template.loader import render_to_string
+from gingerdj.test import Client
+from gingerdj.test.client import CONTENT_TYPE_RE
 
 
 class CustomTestException(Exception):
@@ -41,6 +41,7 @@ def request_data(request, template="base.html", data="sausage"):
         },
     )
 
+
 def login_protected_redirect_view(request):
     "A view that redirects all requests to the GET view"
     return HttpResponseRedirect("/get_view/")
@@ -49,6 +50,7 @@ def login_protected_redirect_view(request):
 def get_view(request):
     "A simple login protected view"
     return HttpResponse("Hello world")
+
 
 def view_with_argument(request, name):
     """A view that takes a string argument

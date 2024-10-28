@@ -6,9 +6,9 @@ import os
 import sys
 import unittest
 
-from ginger.apps import apps
-from ginger.core.management import ManagementUtility
-from ginger.test.utils import captured_stdout
+from gingerdj.apps import apps
+from gingerdj.core.management import ManagementUtility
+from gingerdj.test.utils import captured_stdout
 
 
 class BashCompletionTests(unittest.TestCase):
@@ -38,9 +38,9 @@ class BashCompletionTests(unittest.TestCase):
         case a word is completed and the cursor is placed after a whitespace,
         $COMP_CWORD must be incremented by 1:
 
-          * 'ginger-admin start' -> COMP_CWORD=1
-          * 'ginger-admin startproject' -> COMP_CWORD=1
-          * 'ginger-admin startproject ' -> COMP_CWORD=2
+          * 'gingerdj-admin start' -> COMP_CWORD=1
+          * 'gingerdj-admin startproject' -> COMP_CWORD=1
+          * 'gingerdj-admin startproject ' -> COMP_CWORD=2
         """
         os.environ["COMP_WORDS"] = input_str
         idx = len(input_str.split(" ")) - 1  # Index of the last word
@@ -59,7 +59,7 @@ class BashCompletionTests(unittest.TestCase):
 
     def test_ginger_admin_py(self):
         "ginger_admin.py will autocomplete option flags"
-        self._user_input("ginger-admin sqlmigrate --verb")
+        self._user_input("gingerdj-admin sqlmigrate --verb")
         output = self._run_autocomplete()
         self.assertEqual(output, ["--verbosity="])
 
@@ -71,32 +71,32 @@ class BashCompletionTests(unittest.TestCase):
 
     def test_custom_command(self):
         "A custom command can autocomplete option flags"
-        self._user_input("ginger-admin test_command --l")
+        self._user_input("gingerdj-admin test_command --l")
         output = self._run_autocomplete()
         self.assertEqual(output, ["--list"])
 
     def test_subcommands(self):
         "Subcommands can be autocompleted"
-        self._user_input("ginger-admin sql")
+        self._user_input("gingerdj-admin sql")
         output = self._run_autocomplete()
         self.assertEqual(output, ["sqlflush sqlmigrate sqlsequencereset"])
 
     def test_completed_subcommand(self):
         "Show option flags in case a subcommand is completed"
-        self._user_input("ginger-admin startproject ")  # Trailing whitespace
+        self._user_input("gingerdj-admin startproject ")  # Trailing whitespace
         output = self._run_autocomplete()
         for item in output:
             self.assertTrue(item.startswith("--"))
 
     def test_help(self):
         "No errors, just an empty list if there are no autocomplete options"
-        self._user_input("ginger-admin help --")
+        self._user_input("gingerdj-admin help --")
         output = self._run_autocomplete()
         self.assertEqual(output, [""])
 
     def test_app_completion(self):
         "Application names will be autocompleted for an AppCommand"
-        self._user_input("ginger-admin sqlmigrate a")
+        self._user_input("gingerdj-admin sqlmigrate a")
         output = self._run_autocomplete()
         a_labels = sorted(
             app_config.label

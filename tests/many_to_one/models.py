@@ -4,7 +4,7 @@ Many-to-one relationships
 To define a many-to-one relationship, use ``ForeignKey()``.
 """
 
-from ginger.db import models
+from gingerdj.db import models
 
 
 class Reporter(models.Model):

@@ -1,11 +1,11 @@
 import time
 
-from ginger.core.exceptions import ImproperlyConfigured
-from ginger.http import HttpResponse
-from ginger.test import RequestFactory, SimpleTestCase, override_settings
-from ginger.test.utils import require_jinja2
-from ginger.urls import resolve
-from ginger.views.generic import RedirectView, TemplateView, View
+from gingerdj.core.exceptions import ImproperlyConfigured
+from gingerdj.http import HttpResponse
+from gingerdj.test import RequestFactory, SimpleTestCase, override_settings
+from gingerdj.test.utils import require_jinja2
+from gingerdj.urls import resolve
+from gingerdj.views.generic import RedirectView, TemplateView, View
 
 from . import views
 
@@ -357,7 +357,7 @@ class TemplateViewTest(SimpleTestCase):
         view = TemplateView.as_view(template_name="generic_views/using.html")
         self.assertEqual(view(request).render().content, b"DTL\n")
         view = TemplateView.as_view(
-            template_name="generic_views/using.html", template_engine="ginger"
+            template_name="generic_views/using.html", template_engine="gingerdj"
         )
         self.assertEqual(view(request).render().content, b"DTL\n")
         view = TemplateView.as_view(

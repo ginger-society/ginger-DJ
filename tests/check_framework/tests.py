@@ -3,16 +3,16 @@ import sys
 from io import StringIO
 from unittest import skipIf
 
-from ginger.apps import apps
-from ginger.core import checks
-from ginger.core.checks import Error, Warning
-from ginger.core.checks.messages import CheckMessage
-from ginger.core.checks.registry import CheckRegistry
-from ginger.core.management import call_command
-from ginger.core.management.base import CommandError
-from ginger.db import models
-from ginger.test import SimpleTestCase
-from ginger.test.utils import isolate_apps, override_settings, override_system_checks
+from gingerdj.apps import apps
+from gingerdj.core import checks
+from gingerdj.core.checks import Error, Warning
+from gingerdj.core.checks.messages import CheckMessage
+from gingerdj.core.checks.registry import CheckRegistry
+from gingerdj.core.management import call_command
+from gingerdj.core.management.base import CommandError
+from gingerdj.db import models
+from gingerdj.test import SimpleTestCase
+from gingerdj.test.utils import isolate_apps, override_settings, override_system_checks
 
 from .models import SimpleModel, my_check
 

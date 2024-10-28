@@ -1,14 +1,14 @@
 from unittest import mock
 
-from ginger.core.exceptions import ValidationError
-from ginger.db import IntegrityError, connection, models
-from ginger.db.models import F
-from ginger.db.models.constraints import BaseConstraint, UniqueConstraint
-from ginger.db.models.functions import Lower
-from ginger.db.transaction import atomic
-from ginger.test import SimpleTestCase, TestCase, skipIfDBFeature, skipUnlessDBFeature
-from ginger.test.utils import ignore_warnings
-from ginger.utils.deprecation import RemovedInGinger60Warning
+from gingerdj.core.exceptions import ValidationError
+from gingerdj.db import IntegrityError, connection, models
+from gingerdj.db.models import F
+from gingerdj.db.models.constraints import BaseConstraint, UniqueConstraint
+from gingerdj.db.models.functions import Lower
+from gingerdj.db.transaction import atomic
+from gingerdj.test import SimpleTestCase, TestCase, skipIfDBFeature, skipUnlessDBFeature
+from gingerdj.test.utils import ignore_warnings
+from gingerdj.utils.deprecation import RemovedInGinger60Warning
 
 from .models import (
     ChildModel,
@@ -89,7 +89,7 @@ class BaseConstraintTests(SimpleTestCase):
             violation_error_code="custom_code",
         )
         path, args, kwargs = constraint.deconstruct()
-        self.assertEqual(path, "ginger.db.models.BaseConstraint")
+        self.assertEqual(path, "gingerdj.db.models.BaseConstraint")
         self.assertEqual(args, ())
         self.assertEqual(
             kwargs,
@@ -222,7 +222,7 @@ class CheckConstraintTests(TestCase):
         name = "price_gt_discounted_price"
         constraint = models.CheckConstraint(condition=check, name=name)
         path, args, kwargs = constraint.deconstruct()
-        self.assertEqual(path, "ginger.db.models.CheckConstraint")
+        self.assertEqual(path, "gingerdj.db.models.CheckConstraint")
         self.assertEqual(args, ())
         self.assertEqual(kwargs, {"condition": check, "name": name})
 
@@ -702,7 +702,7 @@ class UniqueConstraintTests(TestCase):
         name = "unique_fields"
         constraint = models.UniqueConstraint(fields=fields, name=name)
         path, args, kwargs = constraint.deconstruct()
-        self.assertEqual(path, "ginger.db.models.UniqueConstraint")
+        self.assertEqual(path, "gingerdj.db.models.UniqueConstraint")
         self.assertEqual(args, ())
         self.assertEqual(kwargs, {"fields": tuple(fields), "name": name})
 
@@ -714,7 +714,7 @@ class UniqueConstraintTests(TestCase):
             fields=fields, name=name, condition=condition
         )
         path, args, kwargs = constraint.deconstruct()
-        self.assertEqual(path, "ginger.db.models.UniqueConstraint")
+        self.assertEqual(path, "gingerdj.db.models.UniqueConstraint")
         self.assertEqual(args, ())
         self.assertEqual(
             kwargs, {"fields": tuple(fields), "name": name, "condition": condition}
@@ -729,7 +729,7 @@ class UniqueConstraintTests(TestCase):
             deferrable=models.Deferrable.DEFERRED,
         )
         path, args, kwargs = constraint.deconstruct()
-        self.assertEqual(path, "ginger.db.models.UniqueConstraint")
+        self.assertEqual(path, "gingerdj.db.models.UniqueConstraint")
         self.assertEqual(args, ())
         self.assertEqual(
             kwargs,
@@ -746,7 +746,7 @@ class UniqueConstraintTests(TestCase):
         include = ["baz_1", "baz_2"]
         constraint = models.UniqueConstraint(fields=fields, name=name, include=include)
         path, args, kwargs = constraint.deconstruct()
-        self.assertEqual(path, "ginger.db.models.UniqueConstraint")
+        self.assertEqual(path, "gingerdj.db.models.UniqueConstraint")
         self.assertEqual(args, ())
         self.assertEqual(
             kwargs,
@@ -765,7 +765,7 @@ class UniqueConstraintTests(TestCase):
             fields=fields, name=name, opclasses=opclasses
         )
         path, args, kwargs = constraint.deconstruct()
-        self.assertEqual(path, "ginger.db.models.UniqueConstraint")
+        self.assertEqual(path, "gingerdj.db.models.UniqueConstraint")
         self.assertEqual(args, ())
         self.assertEqual(
             kwargs,
@@ -783,7 +783,7 @@ class UniqueConstraintTests(TestCase):
             fields=fields, name=name, nulls_distinct=True
         )
         path, args, kwargs = constraint.deconstruct()
-        self.assertEqual(path, "ginger.db.models.UniqueConstraint")
+        self.assertEqual(path, "gingerdj.db.models.UniqueConstraint")
         self.assertEqual(args, ())
         self.assertEqual(
             kwargs,
@@ -798,7 +798,7 @@ class UniqueConstraintTests(TestCase):
         name = "unique_fields"
         constraint = models.UniqueConstraint(Lower("title"), name=name)
         path, args, kwargs = constraint.deconstruct()
-        self.assertEqual(path, "ginger.db.models.UniqueConstraint")
+        self.assertEqual(path, "gingerdj.db.models.UniqueConstraint")
         self.assertEqual(args, (Lower("title"),))
         self.assertEqual(kwargs, {"name": name})
 
@@ -1216,7 +1216,7 @@ class UniqueConstraintTests(TestCase):
     def test_expressions_with_opclasses(self):
         msg = (
             "UniqueConstraint.opclasses cannot be used with expressions. Use "
-            "ginger.contrib.postgres.indexes.OpClass() instead."
+            "gingerdj.contrib.postgres.indexes.OpClass() instead."
         )
         with self.assertRaisesMessage(ValueError, msg):
             models.UniqueConstraint(

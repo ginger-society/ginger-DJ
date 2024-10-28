@@ -1,17 +1,17 @@
 import json
 import pickle
 
-from ginger.contrib.gis.gdal import (
+from gingerdj.contrib.gis.gdal import (
     CoordTransform,
     GDALException,
     OGRGeometry,
     OGRGeomType,
     SpatialReference,
 )
-from ginger.template import Context
-from ginger.template.engine import Engine
-from ginger.test import SimpleTestCase
-from ginger.utils.deprecation import RemovedInGinger60Warning
+from gingerdj.template import Context
+from gingerdj.template.engine import Engine
+from gingerdj.test import SimpleTestCase
+from gingerdj.utils.deprecation import RemovedInGinger60Warning
 
 from ..test_data import TestDataMixin
 
@@ -48,11 +48,11 @@ class OGRGeomTest(SimpleTestCase, TestDataMixin):
         self.assertEqual(OGRGeomType(1), OGRGeomType("point"))
         self.assertNotEqual(OGRGeomType("POINT"), OGRGeomType(6))
 
-        # Testing the Ginger field name equivalent property.
-        self.assertEqual("PointField", OGRGeomType("Point").ginger)
-        self.assertEqual("GeometryField", OGRGeomType("Geometry").ginger)
-        self.assertEqual("GeometryField", OGRGeomType("Unknown").ginger)
-        self.assertIsNone(OGRGeomType("none").ginger)
+        # Testing the GingerDJ field name equivalent property.
+        self.assertEqual("PointField", OGRGeomType("Point").gingerdj)
+        self.assertEqual("GeometryField", OGRGeomType("Geometry").gingerdj)
+        self.assertEqual("GeometryField", OGRGeomType("Unknown").gingerdj)
+        self.assertIsNone(OGRGeomType("none").gingerdj)
 
         # 'Geometry' initialization implies an unknown geometry type.
         gt = OGRGeomType("Geometry")
@@ -68,7 +68,7 @@ class OGRGeomTest(SimpleTestCase, TestDataMixin):
         self.assertEqual(OGRGeomType(wkb25bit + 1), "Point25D")
         self.assertEqual(OGRGeomType("MultiLineString25D"), (5 + wkb25bit))
         self.assertEqual(
-            "GeometryCollectionField", OGRGeomType("GeometryCollection25D").ginger
+            "GeometryCollectionField", OGRGeomType("GeometryCollection25D").gingerdj
         )
 
     def test_wkt(self):

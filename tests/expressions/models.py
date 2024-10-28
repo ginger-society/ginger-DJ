@@ -4,7 +4,7 @@ Tests for F() query expression syntax.
 
 import uuid
 
-from ginger.db import models
+from gingerdj.db import models
 
 
 class Manager(models.Model):

@@ -1,11 +1,11 @@
 import sys
 from datetime import date
 
-from ginger.forms import DateField, Form, SelectDateWidget
-from ginger.test import override_settings
-from ginger.utils import translation
-from ginger.utils.dates import MONTHS_AP
-from ginger.utils.version import PYPY
+from gingerdj.forms import DateField, Form, SelectDateWidget
+from gingerdj.test import override_settings
+from gingerdj.utils import translation
+from gingerdj.utils.dates import MONTHS_AP
+from gingerdj.utils.version import PYPY
 
 from .base import WidgetTest
 

@@ -1,9 +1,9 @@
 from unittest import skipUnless
 
-import ginger.utils.version
-from ginger import get_version
-from ginger.test import SimpleTestCase
-from ginger.utils.version import (
+import gingerdj.utils.version
+from gingerdj import get_version
+from gingerdj.test import SimpleTestCase
+from gingerdj.utils.version import (
     get_complete_version,
     get_git_changeset,
     get_version_tuple,
@@ -20,18 +20,18 @@ class VersionTests(SimpleTestCase):
         self.assertRegex(ver_string, r"1\.4(\.dev[0-9]+)?")
 
     @skipUnless(
-        hasattr(ginger.utils.version, "__file__"),
+        hasattr(gingerdj.utils.version, "__file__"),
         "test_development() checks the same when __file__ is already missing, "
         "e.g. in a frozen environments",
     )
     def test_development_no_file(self):
         get_git_changeset.cache_clear()
-        version_file = ginger.utils.version.__file__
+        version_file = gingerdj.utils.version.__file__
         try:
-            del ginger.utils.version.__file__
+            del gingerdj.utils.version.__file__
             self.test_development()
         finally:
-            ginger.utils.version.__file__ = version_file
+            gingerdj.utils.version.__file__ = version_file
 
     def test_releases(self):
         tuples_to_strings = (

@@ -1,6 +1,6 @@
 import uuid
 
-from ginger.db import models
+from gingerdj.db import models
 
 
 class Event(models.Model):
@@ -126,5 +126,3 @@ class CustomIdUser(models.Model):
 
 class CharPK(models.Model):
     char_pk = models.CharField(max_length=100, primary_key=True)
-
-

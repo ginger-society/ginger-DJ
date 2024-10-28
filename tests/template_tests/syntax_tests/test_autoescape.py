@@ -1,6 +1,6 @@
-from ginger.template import TemplateSyntaxError
-from ginger.test import SimpleTestCase
-from ginger.utils.safestring import mark_safe
+from gingerdj.template import TemplateSyntaxError
+from gingerdj.test import SimpleTestCase
+from gingerdj.utils.safestring import mark_safe
 
 from ..utils import SafeClass, UnsafeClass, setup
 

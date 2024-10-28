@@ -1,11 +1,11 @@
 from unittest import skipUnless
 
-from ginger.db import connection
-from ginger.db.models import CharField, TextField
-from ginger.db.models import Value as V
-from ginger.db.models.functions import Concat, ConcatPair, Upper
-from ginger.test import TestCase
-from ginger.utils import timezone
+from gingerdj.db import connection
+from gingerdj.db.models import CharField, TextField
+from gingerdj.db.models import Value as V
+from gingerdj.db.models.functions import Concat, ConcatPair, Upper
+from gingerdj.test import TestCase
+from gingerdj.utils import timezone
 
 from ..models import Article, Author
 

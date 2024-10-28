@@ -1,13 +1,13 @@
 from xml.dom import minidom
 
-from ginger.conf import settings
-from ginger.contrib.sites.models import Site
-from ginger.test import TestCase, modify_settings, override_settings
+from gingerdj.conf import settings
+from gingerdj.contrib.sites.models import Site
+from gingerdj.test import TestCase, modify_settings, override_settings
 
 from .models import City
 
 
-@modify_settings(INSTALLED_APPS={"append": "ginger.contrib.sites"})
+@modify_settings(INSTALLED_APPS={"append": "gingerdj.contrib.sites"})
 @override_settings(ROOT_URLCONF="gis_tests.geoapp.urls")
 class GeoFeedTest(TestCase):
     fixtures = ["initial"]

@@ -1,5 +1,5 @@
-from ginger.forms import Form, MultipleChoiceField, MultipleHiddenInput
-from ginger.utils.datastructures import MultiValueDict
+from gingerdj.forms import Form, MultipleChoiceField, MultipleHiddenInput
+from gingerdj.utils.datastructures import MultiValueDict
 
 from .base import WidgetTest
 

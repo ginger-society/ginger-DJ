@@ -1,9 +1,9 @@
 import uuid
 from decimal import Decimal
 
-from ginger.apps import apps
-from ginger.db import IntegrityError, connection
-from ginger.db.models import (
+from gingerdj.apps import apps
+from gingerdj.db import IntegrityError, connection
+from gingerdj.db.models import (
     CharField,
     F,
     FloatField,
@@ -11,9 +11,9 @@ from ginger.db.models import (
     IntegerField,
     Model,
 )
-from ginger.db.models.functions import Lower
-from ginger.test import SimpleTestCase, TestCase, skipUnlessDBFeature
-from ginger.test.utils import isolate_apps
+from gingerdj.db.models.functions import Lower
+from gingerdj.test import SimpleTestCase, TestCase, skipUnlessDBFeature
+from gingerdj.test.utils import isolate_apps
 
 from .models import (
     Foo,
@@ -105,7 +105,7 @@ class BaseGeneratedFieldTests(SimpleTestCase):
             expression=F("a") + F("b"), output_field=IntegerField(), db_persist=True
         )
         _, path, args, kwargs = field.deconstruct()
-        self.assertEqual(path, "ginger.db.models.GeneratedField")
+        self.assertEqual(path, "gingerdj.db.models.GeneratedField")
         self.assertEqual(args, [])
         self.assertEqual(kwargs["db_persist"], True)
         self.assertEqual(kwargs["expression"], F("a") + F("b"))

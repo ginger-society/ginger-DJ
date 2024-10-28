@@ -1,9 +1,9 @@
 from unittest import mock
 
-from ginger.core.management import call_command
-from ginger.core.management.base import CommandError
-from ginger.db import connection
-from ginger.test import SimpleTestCase
+from gingerdj.core.management import call_command
+from gingerdj.core.management.base import CommandError
+from gingerdj.db import connection
+from gingerdj.test import SimpleTestCase
 
 
 class DbshellCommandTestCase(SimpleTestCase):

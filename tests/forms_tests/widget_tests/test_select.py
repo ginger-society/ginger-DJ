@@ -1,8 +1,8 @@
 import datetime
 
-from ginger.forms import ChoiceField, Form, MultiWidget, Select, TextInput
-from ginger.test import override_settings
-from ginger.utils.safestring import mark_safe
+from gingerdj.forms import ChoiceField, Form, MultiWidget, Select, TextInput
+from gingerdj.test import override_settings
+from gingerdj.utils.safestring import mark_safe
 
 from .test_choicewidget import ChoiceWidgetTest
 
@@ -324,7 +324,7 @@ class SelectTest(ChoiceWidgetTest):
                     "attrs": {},
                     "index": "0_0",
                     "label": "Vinyl",
-                    "template_name": "ginger/forms/widgets/select_option.html",
+                    "template_name": "gingerdj/forms/widgets/select_option.html",
                     "name": "name",
                     "selected": False,
                     "wrap_label": True,
@@ -335,7 +335,7 @@ class SelectTest(ChoiceWidgetTest):
                     "attrs": {},
                     "index": "0_1",
                     "label": "CD",
-                    "template_name": "ginger/forms/widgets/select_option.html",
+                    "template_name": "gingerdj/forms/widgets/select_option.html",
                     "name": "name",
                     "selected": False,
                     "wrap_label": True,
@@ -350,7 +350,7 @@ class SelectTest(ChoiceWidgetTest):
             [
                 {
                     "value": "vhs",
-                    "template_name": "ginger/forms/widgets/select_option.html",
+                    "template_name": "gingerdj/forms/widgets/select_option.html",
                     "label": "VHS Tape",
                     "attrs": {"selected": True},
                     "index": "1_0",
@@ -361,7 +361,7 @@ class SelectTest(ChoiceWidgetTest):
                 },
                 {
                     "value": "dvd",
-                    "template_name": "ginger/forms/widgets/select_option.html",
+                    "template_name": "gingerdj/forms/widgets/select_option.html",
                     "label": "DVD",
                     "attrs": {},
                     "index": "1_1",
@@ -381,7 +381,7 @@ class SelectTest(ChoiceWidgetTest):
                 {
                     "value": "unknown",
                     "selected": False,
-                    "template_name": "ginger/forms/widgets/select_option.html",
+                    "template_name": "gingerdj/forms/widgets/select_option.html",
                     "label": "Unknown",
                     "attrs": {},
                     "index": "2",

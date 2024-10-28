@@ -1,7 +1,7 @@
 from unittest import mock
 
-from ginger.http import HttpRequest
-from ginger.template import (
+from gingerdj.http import HttpRequest
+from gingerdj.template import (
     Context,
     Engine,
     RequestContext,
@@ -9,8 +9,8 @@ from ginger.template import (
     Variable,
     VariableDoesNotExist,
 )
-from ginger.template.context import RenderContext
-from ginger.test import RequestFactory, SimpleTestCase, override_settings
+from gingerdj.template.context import RenderContext
+from gingerdj.test import RequestFactory, SimpleTestCase, override_settings
 
 
 class ContextTests(SimpleTestCase):
@@ -237,7 +237,7 @@ class RequestContextTests(SimpleTestCase):
         engine = Engine(
             loaders=[
                 (
-                    "ginger.template.loaders.locmem.Loader",
+                    "gingerdj.template.loaders.locmem.Loader",
                     {
                         "child": '{{ var|default:"none" }}',
                     },
@@ -284,10 +284,10 @@ class RequestContextTests(SimpleTestCase):
     @override_settings(
         TEMPLATES=[
             {
-                "BACKEND": "ginger.template.backends.ginger.GingerTemplates",
+                "BACKEND": "gingerdj.template.backends.gingerdj.GingerTemplates",
                 "OPTIONS": {
                     "context_processors": [
-                        "ginger.template.context_processors.request",
+                        "gingerdj.template.context_processors.request",
                         "template_tests.test_context.context_process_returning_none",
                     ],
                 },

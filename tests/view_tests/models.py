@@ -1,8 +1,8 @@
 """
-Regression tests for Ginger built-in views.
+Regression tests for GingerDJ built-in views.
 """
 
-from ginger.db import models
+from gingerdj.db import models
 
 
 class Author(models.Model):

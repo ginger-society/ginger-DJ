@@ -2,7 +2,7 @@
 Tests for defer() and only().
 """
 
-from ginger.db import models
+from gingerdj.db import models
 
 
 class Secondary(models.Model):

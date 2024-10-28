@@ -9,8 +9,8 @@ import random
 import tempfile
 from pathlib import Path
 
-from ginger.core.files.storage import FileSystemStorage, default_storage
-from ginger.db import models
+from gingerdj.core.files.storage import FileSystemStorage, default_storage
+from gingerdj.db import models
 
 
 class CustomValidNameStorage(FileSystemStorage):

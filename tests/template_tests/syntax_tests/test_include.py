@@ -1,12 +1,12 @@
-from ginger.template import (
+from gingerdj.template import (
     Context,
     Engine,
     TemplateDoesNotExist,
     TemplateSyntaxError,
     loader,
 )
-from ginger.template.loader_tags import IncludeNode
-from ginger.test import SimpleTestCase
+from gingerdj.template.loader_tags import IncludeNode
+from gingerdj.test import SimpleTestCase
 
 from ..utils import setup
 from .test_basic import basic_templates
@@ -256,9 +256,9 @@ class IncludeTests(SimpleTestCase):
             debug=True,
             loaders=[
                 (
-                    "ginger.template.loaders.cached.Loader",
+                    "gingerdj.template.loaders.cached.Loader",
                     [
-                        "ginger.template.loaders.app_directories.Loader",
+                        "gingerdj.template.loaders.app_directories.Loader",
                     ],
                 ),
             ],
@@ -353,7 +353,7 @@ class IncludeTests(SimpleTestCase):
         engine = Engine(
             loaders=[
                 (
-                    "ginger.template.loaders.locmem.Loader",
+                    "gingerdj.template.loaders.locmem.Loader",
                     {
                         "template": (
                             '{% for x in vars %}{% include "include" %}{% endfor %}'

@@ -1,5 +1,5 @@
-from ginger.db import connection, transaction
-from ginger.test import TransactionTestCase, skipUnlessDBFeature
+from gingerdj.db import connection, transaction
+from gingerdj.test import TransactionTestCase, skipUnlessDBFeature
 
 from .models import Thing
 
@@ -47,7 +47,7 @@ class TestConnectionOnCommit(TransactionTestCase):
         def robust_callback():
             raise ForcedError("robust callback")
 
-        with self.assertLogs("ginger.db.backends.base", "ERROR") as cm:
+        with self.assertLogs("gingerdj.db.backends.base", "ERROR") as cm:
             transaction.on_commit(robust_callback, robust=True)
             self.do(1)
 
@@ -67,7 +67,7 @@ class TestConnectionOnCommit(TransactionTestCase):
         def robust_callback():
             raise ForcedError("robust callback")
 
-        with self.assertLogs("ginger.db.backends", "ERROR") as cm:
+        with self.assertLogs("gingerdj.db.backends", "ERROR") as cm:
             with transaction.atomic():
                 transaction.on_commit(robust_callback, robust=True)
                 self.do(1)

@@ -1,5 +1,5 @@
-from ginger.core.exceptions import FieldError
-from ginger.test import TestCase
+from gingerdj.core.exceptions import FieldError
+from gingerdj.test import TestCase
 
 from .models import Choice, Inner, OuterA, OuterB, Poll
 

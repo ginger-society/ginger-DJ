@@ -1,4 +1,4 @@
-from ginger.forms import ChoiceField, Form, SelectMultiple
+from gingerdj.forms import ChoiceField, Form, SelectMultiple
 
 from .base import WidgetTest
 

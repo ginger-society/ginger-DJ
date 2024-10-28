@@ -2,9 +2,9 @@ import datetime
 
 from asgiref.sync import iscoroutinefunction
 
-from ginger.http import HttpRequest, HttpResponse, HttpResponseNotAllowed
-from ginger.test import SimpleTestCase
-from ginger.views.decorators.http import (
+from gingerdj.http import HttpRequest, HttpResponse, HttpResponseNotAllowed
+from gingerdj.test import SimpleTestCase
+from gingerdj.views.decorators.http import (
     condition,
     conditional_page,
     require_http_methods,

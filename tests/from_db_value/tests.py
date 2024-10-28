@@ -1,6 +1,6 @@
-from ginger.db import connection
-from ginger.db.models import Max
-from ginger.test import TestCase
+from gingerdj.db import connection
+from gingerdj.db.models import Max
+from gingerdj.test import TestCase
 
 from .models import Cash, CashModel
 

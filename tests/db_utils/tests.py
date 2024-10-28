@@ -1,12 +1,12 @@
-"""Tests for ginger.db.utils."""
+"""Tests for gingerdj.db.utils."""
 
 import unittest
 
-from ginger.core.exceptions import ImproperlyConfigured
-from ginger.db import DEFAULT_DB_ALIAS, ProgrammingError, connection
-from ginger.db.utils import ConnectionHandler, load_backend
-from ginger.test import SimpleTestCase, TestCase
-from ginger.utils.connection import ConnectionDoesNotExist
+from gingerdj.core.exceptions import ImproperlyConfigured
+from gingerdj.db import DEFAULT_DB_ALIAS, ProgrammingError, connection
+from gingerdj.db.utils import ConnectionHandler, load_backend
+from gingerdj.test import SimpleTestCase, TestCase
+from gingerdj.utils.connection import ConnectionDoesNotExist
 
 
 class ConnectionHandlerTests(SimpleTestCase):
@@ -25,7 +25,8 @@ class ConnectionHandlerTests(SimpleTestCase):
     def assertImproperlyConfigured(self, DATABASES):
         conns = ConnectionHandler(DATABASES)
         self.assertEqual(
-            conns[DEFAULT_DB_ALIAS].settings_dict["ENGINE"], "ginger.db.backends.dummy"
+            conns[DEFAULT_DB_ALIAS].settings_dict["ENGINE"],
+            "gingerdj.db.backends.dummy",
         )
         msg = (
             "settings.DATABASES is improperly configured. Please supply the "
@@ -53,7 +54,7 @@ class ConnectionHandlerTests(SimpleTestCase):
         msg = "The connection 'nonexistent' doesn't exist."
         conns = ConnectionHandler(
             {
-                DEFAULT_DB_ALIAS: {"ENGINE": "ginger.db.backends.dummy"},
+                DEFAULT_DB_ALIAS: {"ENGINE": "gingerdj.db.backends.dummy"},
             }
         )
         with self.assertRaisesMessage(ConnectionDoesNotExist, msg):
@@ -63,7 +64,7 @@ class ConnectionHandlerTests(SimpleTestCase):
 class DatabaseErrorWrapperTests(TestCase):
     @unittest.skipUnless(connection.vendor == "postgresql", "PostgreSQL test")
     def test_reraising_backend_specific_database_exception(self):
-        from ginger.db.backends.postgresql.psycopg_any import is_psycopg3
+        from gingerdj.db.backends.postgresql.psycopg_any import is_psycopg3
 
         with connection.cursor() as cursor:
             msg = 'table "X" does not exist'
@@ -84,7 +85,7 @@ class LoadBackendTests(SimpleTestCase):
         msg = (
             "'foo' isn't an available database backend or couldn't be "
             "imported. Check the above exception. To use one of the built-in "
-            "backends, use 'ginger.db.backends.XXX', where XXX is one of:\n"
+            "backends, use 'gingerdj.db.backends.XXX', where XXX is one of:\n"
             "    'mysql', 'oracle', 'postgresql', 'sqlite3'"
         )
         with self.assertRaisesMessage(ImproperlyConfigured, msg) as cm:

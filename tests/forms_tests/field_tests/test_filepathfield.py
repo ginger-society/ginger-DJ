@@ -1,8 +1,8 @@
 import os.path
 
-from ginger.core.exceptions import ValidationError
-from ginger.forms import FilePathField
-from ginger.test import SimpleTestCase
+from gingerdj.core.exceptions import ValidationError
+from gingerdj.forms import FilePathField
+from gingerdj.test import SimpleTestCase
 
 PATH = os.path.dirname(os.path.abspath(__file__))
 

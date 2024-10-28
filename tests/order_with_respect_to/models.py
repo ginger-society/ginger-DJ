@@ -2,7 +2,7 @@
 Tests for the order_with_respect_to Meta attribute.
 """
 
-from ginger.db import models
+from gingerdj.db import models
 
 
 class Question(models.Model):

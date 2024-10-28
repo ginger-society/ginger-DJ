@@ -3,17 +3,17 @@ import functools
 import re
 from unittest import mock
 
-from ginger.apps import apps
-from ginger.conf import settings
-from ginger.core.validators import RegexValidator, validate_slug
-from ginger.db import connection, migrations, models
-from ginger.db.migrations.autodetector import MigrationAutodetector
-from ginger.db.migrations.graph import MigrationGraph
-from ginger.db.migrations.loader import MigrationLoader
-from ginger.db.migrations.questioner import MigrationQuestioner
-from ginger.db.migrations.state import ModelState, ProjectState
-from ginger.test import SimpleTestCase, TestCase, override_settings
-from ginger.test.utils import isolate_lru_cache
+from gingerdj.apps import apps
+from gingerdj.conf import settings
+from gingerdj.core.validators import RegexValidator, validate_slug
+from gingerdj.db import connection, migrations, models
+from gingerdj.db.migrations.autodetector import MigrationAutodetector
+from gingerdj.db.migrations.graph import MigrationGraph
+from gingerdj.db.migrations.loader import MigrationLoader
+from gingerdj.db.migrations.questioner import MigrationQuestioner
+from gingerdj.db.migrations.state import ModelState, ProjectState
+from gingerdj.test import SimpleTestCase, TestCase, override_settings
+from gingerdj.test.utils import isolate_lru_cache
 
 from .models import FoodManager, FoodQuerySet
 
@@ -1295,7 +1295,7 @@ class AutodetectorTests(BaseAutodetectorTests):
         self.assertOperationAttributes(changes, "testapp", 0, 0, name="name")
 
     @mock.patch(
-        "ginger.db.migrations.questioner.MigrationQuestioner.ask_not_null_addition",
+        "gingerdj.db.migrations.questioner.MigrationQuestioner.ask_not_null_addition",
         side_effect=AssertionError("Should not have prompted for not null addition"),
     )
     def test_add_not_null_field_with_db_default(self, mocked_ask_method):
@@ -1310,7 +1310,7 @@ class AutodetectorTests(BaseAutodetectorTests):
         )
 
     @mock.patch(
-        "ginger.db.migrations.questioner.MigrationQuestioner.ask_not_null_addition",
+        "gingerdj.db.migrations.questioner.MigrationQuestioner.ask_not_null_addition",
         side_effect=AssertionError("Should not have prompted for not null addition"),
     )
     def test_add_date_fields_with_auto_now_not_asking_for_default(
@@ -1329,7 +1329,7 @@ class AutodetectorTests(BaseAutodetectorTests):
         self.assertOperationFieldAttributes(changes, "testapp", 0, 2, auto_now=True)
 
     @mock.patch(
-        "ginger.db.migrations.questioner.MigrationQuestioner.ask_not_null_addition",
+        "gingerdj.db.migrations.questioner.MigrationQuestioner.ask_not_null_addition",
         side_effect=AssertionError("Should not have prompted for not null addition"),
     )
     def test_add_date_fields_with_auto_now_add_not_asking_for_null_addition(
@@ -1348,7 +1348,7 @@ class AutodetectorTests(BaseAutodetectorTests):
         self.assertOperationFieldAttributes(changes, "testapp", 0, 2, auto_now_add=True)
 
     @mock.patch(
-        "ginger.db.migrations.questioner.MigrationQuestioner.ask_auto_now_add_addition"
+        "gingerdj.db.migrations.questioner.MigrationQuestioner.ask_auto_now_add_addition"
     )
     def test_add_date_fields_with_auto_now_add_asking_for_default(
         self, mocked_ask_method
@@ -1480,7 +1480,7 @@ class AutodetectorTests(BaseAutodetectorTests):
         )
 
     @mock.patch(
-        "ginger.db.migrations.questioner.MigrationQuestioner.ask_not_null_alteration",
+        "gingerdj.db.migrations.questioner.MigrationQuestioner.ask_not_null_alteration",
         side_effect=AssertionError("Should not have prompted for not null addition"),
     )
     def test_alter_field_to_not_null_with_default(self, mocked_ask_method):
@@ -1499,7 +1499,7 @@ class AutodetectorTests(BaseAutodetectorTests):
         )
 
     @mock.patch(
-        "ginger.db.migrations.questioner.MigrationQuestioner.ask_not_null_alteration",
+        "gingerdj.db.migrations.questioner.MigrationQuestioner.ask_not_null_alteration",
         side_effect=AssertionError("Should not have prompted for not null alteration"),
     )
     def test_alter_field_to_not_null_with_db_default(self, mocked_ask_method):
@@ -1516,7 +1516,7 @@ class AutodetectorTests(BaseAutodetectorTests):
         )
 
     @mock.patch(
-        "ginger.db.migrations.questioner.MigrationQuestioner.ask_not_null_alteration",
+        "gingerdj.db.migrations.questioner.MigrationQuestioner.ask_not_null_alteration",
         return_value=models.NOT_PROVIDED,
     )
     def test_alter_field_to_not_null_without_default(self, mocked_ask_method):
@@ -1536,7 +1536,7 @@ class AutodetectorTests(BaseAutodetectorTests):
         )
 
     @mock.patch(
-        "ginger.db.migrations.questioner.MigrationQuestioner.ask_not_null_alteration",
+        "gingerdj.db.migrations.questioner.MigrationQuestioner.ask_not_null_alteration",
         return_value="Some Name",
     )
     def test_alter_field_to_not_null_oneoff_default(self, mocked_ask_method):
@@ -1883,7 +1883,7 @@ class AutodetectorTests(BaseAutodetectorTests):
             changes["app"][0].operations[0].field.deconstruct(),
             (
                 "field",
-                "ginger.db.models.IntegerField",
+                "gingerdj.db.models.IntegerField",
                 [],
                 {"db_column": "field"},
             ),
@@ -1955,7 +1955,7 @@ class AutodetectorTests(BaseAutodetectorTests):
             changes["app"][0].operations[0].field.deconstruct(),
             (
                 "foo",
-                "ginger.db.models.ForeignKey",
+                "gingerdj.db.models.ForeignKey",
                 [],
                 {"to": "app.foo", "on_delete": models.CASCADE, "db_column": "foo_id"},
             ),
@@ -3500,7 +3500,7 @@ class AutodetectorTests(BaseAutodetectorTests):
         # The model the FK on the book model points to.
         fk_field = changes["otherapp"][0].operations[0].fields[2][1]
         self.assertEqual(fk_field.remote_field.model, "testapp.Author")
-    
+
     def test_add_field_with_default(self):
         """#22030 - Adding a field with a default should work."""
         changes = self.get_changes([self.author_empty], [self.author_name_default])
@@ -3679,7 +3679,7 @@ class AutodetectorTests(BaseAutodetectorTests):
         self.assertOperationAttributes(changes, "testapp", 0, 1, name="Publisher")
 
     @mock.patch(
-        "ginger.db.migrations.questioner.MigrationQuestioner.ask_not_null_addition",
+        "gingerdj.db.migrations.questioner.MigrationQuestioner.ask_not_null_addition",
         side_effect=AssertionError("Should not have prompted for not null addition"),
     )
     def test_add_many_to_many(self, mocked_ask_method):
@@ -4517,7 +4517,7 @@ class AutodetectorTests(BaseAutodetectorTests):
         self.assertOperationTypes(changes, "b", 0, ["CreateModel", "CreateModel"])
 
     @mock.patch(
-        "ginger.db.migrations.questioner.MigrationQuestioner.ask_not_null_addition",
+        "gingerdj.db.migrations.questioner.MigrationQuestioner.ask_not_null_addition",
         side_effect=AssertionError("Should not have prompted for not null addition"),
     )
     def test_add_blank_textfield_and_charfield(self, mocked_ask_method):
@@ -4534,7 +4534,7 @@ class AutodetectorTests(BaseAutodetectorTests):
         self.assertOperationAttributes(changes, "testapp", 0, 0)
 
     @mock.patch(
-        "ginger.db.migrations.questioner.MigrationQuestioner.ask_not_null_addition"
+        "gingerdj.db.migrations.questioner.MigrationQuestioner.ask_not_null_addition"
     )
     def test_add_non_blank_textfield_and_charfield(self, mocked_ask_method):
         """

@@ -1,13 +1,13 @@
 """
 Transactions
 
-Ginger handles transactions in three different ways. The default is to commit
+GingerDJ handles transactions in three different ways. The default is to commit
 each transaction upon a write, but you can decorate a function to get
 commit-on-success behavior. Alternatively, you can manage the transaction
 manually.
 """
 
-from ginger.db import models
+from gingerdj.db import models
 
 
 class Reporter(models.Model):

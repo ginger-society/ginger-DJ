@@ -1,5 +1,5 @@
-from ginger.db.models.signals import post_save, pre_save
-from ginger.test import TestCase
+from gingerdj.db.models.signals import post_save, pre_save
+from gingerdj.test import TestCase
 
 from .models import Account, Employee, Person, Profile, ProxyEmployee
 

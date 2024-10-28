@@ -1,10 +1,10 @@
-from ginger.contrib.gis.db.models import Collect, Count, Extent, F, MakeLine, Q, Union
-from ginger.contrib.gis.db.models.functions import Centroid
-from ginger.contrib.gis.geos import GEOSGeometry, MultiPoint, Point
-from ginger.db import NotSupportedError, connection
-from ginger.test import TestCase, skipUnlessDBFeature
-from ginger.test.utils import override_settings
-from ginger.utils import timezone
+from gingerdj.contrib.gis.db.models import Collect, Count, Extent, F, MakeLine, Q, Union
+from gingerdj.contrib.gis.db.models.functions import Centroid
+from gingerdj.contrib.gis.geos import GEOSGeometry, MultiPoint, Point
+from gingerdj.db import NotSupportedError, connection
+from gingerdj.test import TestCase, skipUnlessDBFeature
+from gingerdj.test.utils import override_settings
+from gingerdj.utils import timezone
 
 from .models import Article, Author, Book, City, DirectoryEntry, Event, Location, Parcel
 

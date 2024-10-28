@@ -92,7 +92,7 @@ spatial database entitled ``template_postgis``.
 GeoGinger tests
 ===============
 
-To have the GeoGinger tests executed when :ref:`running the Ginger test suite
+To have the GeoGinger tests executed when :ref:`running the GingerDJ test suite
 <running-unit-tests>` with ``runtests.py`` all of the databases in the settings
 file must be using one of the :ref:`spatial database backends
 <spatial-backends>`.
@@ -102,17 +102,17 @@ Example
 -------
 
 The following is an example bare-bones settings file with spatial backends
-that can be used to run the entire Ginger test suite, including those
-in :mod:`ginger.contrib.gis`::
+that can be used to run the entire GingerDJ test suite, including those
+in :mod:`gingerdj.contrib.gis`::
 
     DATABASES = {
         "default": {
-            "ENGINE": "ginger.contrib.gis.db.backends.postgis",
+            "ENGINE": "gingerdj.contrib.gis.db.backends.postgis",
             "NAME": "geoginger",
             "USER": "geoginger",
         },
         "other": {
-            "ENGINE": "ginger.contrib.gis.db.backends.postgis",
+            "ENGINE": "gingerdj.contrib.gis.db.backends.postgis",
             "NAME": "other",
             "USER": "geoginger",
         },
@@ -121,7 +121,7 @@ in :mod:`ginger.contrib.gis`::
     SECRET_KEY = "ginger_tests_secret_key"
 
 Assuming the settings above were in a ``postgis.py`` file in the same
-directory as ``runtests.py``, then all Ginger and GeoGinger tests would
+directory as ``runtests.py``, then all GingerDJ and GeoGinger tests would
 be performed when executing the command:
 
 .. code-block:: shell

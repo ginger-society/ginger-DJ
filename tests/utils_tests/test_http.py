@@ -3,9 +3,9 @@ import unittest
 from datetime import datetime, timezone
 from unittest import mock
 
-from ginger.test import SimpleTestCase
-from ginger.utils.datastructures import MultiValueDict
-from ginger.utils.http import (
+from gingerdj.test import SimpleTestCase
+from gingerdj.utils.datastructures import MultiValueDict
+from gingerdj.utils.http import (
     base36_to_int,
     content_disposition_header,
     escape_leading_slashes,
@@ -334,7 +334,7 @@ class HttpDateProcessingTests(unittest.TestCase):
         )
 
     @unittest.skipIf(platform.architecture()[0] == "32bit", "The Year 2038 problem.")
-    @mock.patch("ginger.utils.http.datetime")
+    @mock.patch("gingerdj.utils.http.datetime")
     def test_parsing_rfc850(self, mocked_datetime):
         mocked_datetime.side_effect = datetime
         now_1 = datetime(2019, 11, 6, 8, 49, 37, tzinfo=timezone.utc)

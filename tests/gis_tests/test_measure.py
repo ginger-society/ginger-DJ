@@ -5,8 +5,8 @@ and conversions. Here are some tests.
 
 import unittest
 
-from ginger.contrib.gis.measure import A, Area, D, Distance
-from ginger.test import SimpleTestCase
+from gingerdj.contrib.gis.measure import A, Area, D, Distance
+from gingerdj.test import SimpleTestCase
 
 
 class DistanceTest(SimpleTestCase):

@@ -1,7 +1,7 @@
-from ginger.template.defaultfilters import urlize
-from ginger.test import SimpleTestCase
-from ginger.utils.functional import lazy
-from ginger.utils.safestring import mark_safe
+from gingerdj.template.defaultfilters import urlize
+from gingerdj.test import SimpleTestCase
+from gingerdj.utils.functional import lazy
+from gingerdj.utils.safestring import mark_safe
 
 from ..utils import setup
 
@@ -121,12 +121,12 @@ class FunctionTests(SimpleTestCase):
             '<a href="http://www.google.com" rel="nofollow">www.google.com</a>',
         )
         self.assertEqual(
-            urlize("ginger.goportal.dev"),
-            '<a href="http://ginger.goportal.dev" rel="nofollow">ginger.goportal.dev</a>',
+            urlize("gingerdj.goportal.dev"),
+            '<a href="http://gingerdj.goportal.dev" rel="nofollow">gingerdj.goportal.dev</a>',
         )
         self.assertEqual(
-            urlize("ginger.goportal.dev.org/"),
-            '<a href="http://ginger.goportal.dev/" rel="nofollow">ginger.goportal.dev/</a>',
+            urlize("gingerdj.goportal.dev.org/"),
+            '<a href="http://gingerdj.goportal.dev/" rel="nofollow">gingerdj.goportal.dev/</a>',
         )
 
     def test_url_split_chars(self):
@@ -402,8 +402,8 @@ class FunctionTests(SimpleTestCase):
         or query string
         """
         self.assertEqual(
-            urlize("Go to ginger.gloportal.dev! and enjoy."),
-            'Go to <a href="http://ginger.gloportal.dev" rel="nofollow">ginger.gloportal.dev'
+            urlize("Go to gingerdj.gloportal.dev! and enjoy."),
+            'Go to <a href="http://gingerdj.gloportal.dev" rel="nofollow">gingerdj.gloportal.dev'
             "</a>! and enjoy.",
         )
         self.assertEqual(

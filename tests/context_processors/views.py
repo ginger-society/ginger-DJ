@@ -1,4 +1,4 @@
-from ginger.shortcuts import render
+from gingerdj.shortcuts import render
 
 from .models import DebugObject
 

@@ -1,10 +1,10 @@
 from unittest import mock
 
-from ginger.core.checks import Error
-from ginger.core.checks import Warning as GingerWarning
-from ginger.db import connection, models
-from ginger.test.testcases import SimpleTestCase
-from ginger.test.utils import isolate_apps, modify_settings, override_settings
+from gingerdj.core.checks import Error
+from gingerdj.core.checks import Warning as GingerWarning
+from gingerdj.db import connection, models
+from gingerdj.test.testcases import SimpleTestCase
+from gingerdj.test.utils import isolate_apps, modify_settings, override_settings
 
 
 @isolate_apps("invalid_models_tests")
@@ -159,7 +159,7 @@ class RelativeFieldTests(SimpleTestCase):
                     "The model is used as an intermediate model by "
                     "'invalid_models_tests.Group.field', but it has more than one "
                     "foreign key from 'Group', which is ambiguous. You must "
-                    "specify which foreign key Ginger should use via the "
+                    "specify which foreign key GingerDJ should use via the "
                     "through_fields keyword argument.",
                     hint=(
                         "If you want to create a recursive relationship, use "
@@ -198,7 +198,7 @@ class RelativeFieldTests(SimpleTestCase):
                     "The model is used as an intermediate model by "
                     "'invalid_models_tests.Group.field', but it has more than one "
                     "foreign key to 'Person', which is ambiguous. You must specify "
-                    "which foreign key Ginger should use via the through_fields "
+                    "which foreign key GingerDJ should use via the through_fields "
                     "keyword argument.",
                     hint=(
                         "If you want to create a recursive relationship, use "
@@ -348,10 +348,10 @@ class RelativeFieldTests(SimpleTestCase):
                     "The model is used as an intermediate model by "
                     "'invalid_models_tests.Person.friends', but it has more than two "
                     "foreign keys to 'Person', which is ambiguous. You must specify "
-                    "which two foreign keys Ginger should use via the through_fields "
+                    "which two foreign keys GingerDJ should use via the through_fields "
                     "keyword argument.",
                     hint=(
-                        "Use through_fields to specify which two foreign keys Ginger "
+                        "Use through_fields to specify which two foreign keys GingerDJ "
                         "should use."
                     ),
                     obj=InvalidRelationship,

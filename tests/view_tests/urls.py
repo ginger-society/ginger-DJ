@@ -1,10 +1,10 @@
 import os
 from functools import partial
 
-from ginger.conf.urls.i18n import i18n_patterns
-from ginger.urls import include, path, re_path
-from ginger.utils.translation import gettext_lazy as _
-from ginger.views import defaults, i18n, static
+from gingerdj.conf.urls.i18n import i18n_patterns
+from gingerdj.urls import include, path, re_path
+from gingerdj.utils.translation import gettext_lazy as _
+from gingerdj.views import defaults, i18n, static
 
 from . import views
 
@@ -29,7 +29,7 @@ urlpatterns = [
     path("classbased404/", views.Http404View.as_view()),
     path("classbased500/", views.Raises500View.as_view()),
     # i18n views
-    path("i18n/", include("ginger.conf.urls.i18n")),
+    path("i18n/", include("gingerdj.conf.urls.i18n")),
     path("jsi18n/", i18n.JavaScriptCatalog.as_view(packages=["view_tests"])),
     path("jsi18n_no_packages/", i18n.JavaScriptCatalog.as_view()),
     path("jsi18n/app1/", i18n.JavaScriptCatalog.as_view(packages=["view_tests.app1"])),
@@ -49,7 +49,9 @@ urlpatterns = [
     ),
     path(
         "jsi18n_admin/",
-        i18n.JavaScriptCatalog.as_view(packages=["ginger.contrib.admin", "view_tests"]),
+        i18n.JavaScriptCatalog.as_view(
+            packages=["gingerdj.contrib.admin", "view_tests"]
+        ),
     ),
     path("jsi18n_template/", views.jsi18n),
     path("jsi18n_multi_catalogs/", views.jsi18n_multi_catalogs),

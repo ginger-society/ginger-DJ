@@ -2,9 +2,9 @@ import datetime
 from decimal import Decimal
 from unittest import mock
 
-from ginger.core.exceptions import FieldError
-from ginger.db import NotSupportedError, connection
-from ginger.db.models import (
+from gingerdj.core.exceptions import FieldError
+from gingerdj.db import NotSupportedError, connection
+from gingerdj.db.models import (
     Avg,
     Case,
     Count,
@@ -24,8 +24,8 @@ from ginger.db.models import (
     WindowFrame,
     WindowFrameExclusion,
 )
-from ginger.db.models.fields.json import KeyTextTransform, KeyTransform
-from ginger.db.models.functions import (
+from gingerdj.db.models.fields.json import KeyTextTransform, KeyTransform
+from gingerdj.db.models.functions import (
     Cast,
     CumeDist,
     DenseRank,
@@ -41,9 +41,9 @@ from ginger.db.models.functions import (
     RowNumber,
     Upper,
 )
-from ginger.db.models.lookups import Exact
-from ginger.test import SimpleTestCase, TestCase, skipIfDBFeature, skipUnlessDBFeature
-from ginger.test.utils import CaptureQueriesContext
+from gingerdj.db.models.lookups import Exact
+from gingerdj.test import SimpleTestCase, TestCase, skipIfDBFeature, skipUnlessDBFeature
+from gingerdj.test.utils import CaptureQueriesContext
 
 from .models import Classification, Detail, Employee, PastEmployeeDepartment
 

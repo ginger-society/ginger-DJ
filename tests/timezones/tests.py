@@ -6,19 +6,19 @@ from contextlib import contextmanager
 from unittest import SkipTest, skipIf
 from xml.dom.minidom import parseString
 
-from ginger.core import serializers
-from ginger.db import connection
-from ginger.db.models import F, Max, Min
-from ginger.db.models.functions import Now
-from ginger.http import HttpRequest
-from ginger.template import (
+from gingerdj.core import serializers
+from gingerdj.db import connection
+from gingerdj.db.models import F, Max, Min
+from gingerdj.db.models.functions import Now
+from gingerdj.http import HttpRequest
+from gingerdj.template import (
     Context,
     RequestContext,
     Template,
     TemplateSyntaxError,
     context_processors,
 )
-from ginger.test import (
+from gingerdj.test import (
     SimpleTestCase,
     TestCase,
     TransactionTestCase,
@@ -26,10 +26,10 @@ from ginger.test import (
     skipIfDBFeature,
     skipUnlessDBFeature,
 )
-from ginger.test.utils import requires_tz_support
-from ginger.urls import reverse
-from ginger.utils import timezone, translation
-from ginger.utils.timezone import timedelta
+from gingerdj.test.utils import requires_tz_support
+from gingerdj.urls import reverse
+from gingerdj.utils import timezone, translation
+from gingerdj.utils.timezone import timedelta
 
 from .forms import (
     EventForm,
@@ -1164,7 +1164,7 @@ class TemplateTests(SimpleTestCase):
     @skipIf(sys.platform == "win32", "Windows uses non-standard time zone names")
     def test_tz_template_context_processor(self):
         """
-        Test the ginger.template.context_processors.tz template context processor.
+        Test the gingerdj.template.context_processors.tz template context processor.
         """
         tpl = Template("{{ TIME_ZONE }}")
         context = Context()

@@ -3,9 +3,9 @@ Models can have a ``managed`` attribute, which specifies whether the SQL code
 is generated for the table on various manage.py operations.
 """
 
-from ginger.db import models
+from gingerdj.db import models
 
-#  All of these models are created in the database by Ginger.
+#  All of these models are created in the database by GingerDJ.
 
 
 class A01(models.Model):
@@ -38,7 +38,7 @@ class C01(models.Model):
 
 # All of these models use the same tables as the previous set (they are shadows
 # of possibly a subset of the columns). There should be no creation errors,
-# since we have told Ginger they aren't managed by Ginger.
+# since we have told GingerDJ they aren't managed by GingerDJ.
 
 
 class A02(models.Model):

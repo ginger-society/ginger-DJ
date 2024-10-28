@@ -3,7 +3,7 @@ Database migration operations
 =============================
 
 All of these :doc:`operations </ref/migration-operations>` are available from
-the ``ginger.contrib.postgres.operations`` module.
+the ``gingerdj.contrib.postgres.operations`` module.
 
 .. _create-postgresql-extensions:
 
@@ -16,11 +16,11 @@ other extensions.
 
 Set up the hstore extension in PostgreSQL before the first ``CreateModel``
 or ``AddField`` operation that involves
-:class:`~ginger.contrib.postgres.fields.HStoreField` by adding a migration with
-the :class:`~ginger.contrib.postgres.operations.HStoreExtension` operation.
+:class:`~gingerdj.contrib.postgres.fields.HStoreField` by adding a migration with
+the :class:`~gingerdj.contrib.postgres.operations.HStoreExtension` operation.
 For example::
 
-    from ginger.contrib.postgres.operations import HStoreExtension
+    from gingerdj.contrib.postgres.operations import HStoreExtension
 
 
     class Migration(migrations.Migration):
@@ -31,12 +31,12 @@ For example::
 The operation skips adding the extension if it already exists.
 
 For most extensions, this requires a database user with superuser privileges.
-If the Ginger database user doesn't have the appropriate privileges, you'll
-have to create the extension outside of Ginger migrations with a user that has
-them. In that case, connect to your Ginger database and run the query
+If the GingerDJ database user doesn't have the appropriate privileges, you'll
+have to create the extension outside of GingerDJ migrations with a user that has
+them. In that case, connect to your GingerDJ database and run the query
 ``CREATE EXTENSION IF NOT EXISTS hstore;``.
 
-.. currentmodule:: ginger.contrib.postgres.operations
+.. currentmodule:: gingerdj.contrib.postgres.operations
 
 ``CreateExtension``
 ===================
@@ -115,12 +115,12 @@ Managing collations using migrations
 If you need to filter or order a column using a particular collation that your
 operating system provides but PostgreSQL does not, you can manage collations in
 your database using a migration file. These collations can then be used with
-the ``db_collation`` parameter on :class:`~ginger.db.models.CharField`,
-:class:`~ginger.db.models.TextField`, and their subclasses.
+the ``db_collation`` parameter on :class:`~gingerdj.db.models.CharField`,
+:class:`~gingerdj.db.models.TextField`, and their subclasses.
 
 For example, to create a collation for German phone book ordering::
 
-    from ginger.contrib.postgres.operations import CreateCollation
+    from gingerdj.contrib.postgres.operations import CreateCollation
 
 
     class Migration(migrations.Migration):
@@ -161,7 +161,7 @@ database.
 
 .. class:: AddIndexConcurrently(model_name, index)
 
-    Like :class:`~ginger.db.migrations.operations.AddIndex`, but creates an
+    Like :class:`~gingerdj.db.migrations.operations.AddIndex`, but creates an
     index with the ``CONCURRENTLY`` option. This has a few caveats to be aware
     of when using this option, see `the PostgreSQL documentation of building
     indexes concurrently <https://www.postgresql.org/docs/current/
@@ -169,7 +169,7 @@ database.
 
 .. class:: RemoveIndexConcurrently(model_name, name)
 
-    Like :class:`~ginger.db.migrations.operations.RemoveIndex`, but removes the
+    Like :class:`~gingerdj.db.migrations.operations.RemoveIndex`, but removes the
     index with the ``CONCURRENTLY`` option. This has a few caveats to be aware
     of when using this option, see `the PostgreSQL documentation
     <https://www.postgresql.org/docs/current/sql-dropindex.html>`_.
@@ -189,14 +189,14 @@ the table to verify that all existing rows satisfy the constraint.
 
 To validate check constraints created with the ``NOT VALID`` option at a later
 point of time, use the
-:class:`~ginger.contrib.postgres.operations.ValidateConstraint` operation.
+:class:`~gingerdj.contrib.postgres.operations.ValidateConstraint` operation.
 
 See `the PostgreSQL documentation <https://www.postgresql.org/docs/current/
 sql-altertable.html#SQL-ALTERTABLE-NOTES>`__ for more details.
 
 .. class:: AddConstraintNotValid(model_name, constraint)
 
-    Like :class:`~ginger.db.migrations.operations.AddConstraint`, but avoids
+    Like :class:`~gingerdj.db.migrations.operations.AddConstraint`, but avoids
     validating the constraint on existing rows.
 
 .. class:: ValidateConstraint(model_name, name)
@@ -209,6 +209,6 @@ sql-altertable.html#SQL-ALTERTABLE-NOTES>`__ for more details.
     ``AddConstraintNotValid`` and ``ValidateConstraint`` operations should be
     performed in two separate migrations. Performing both operations in the
     same atomic migration has the same effect as
-    :class:`~ginger.db.migrations.operations.AddConstraint`, whereas performing
+    :class:`~gingerdj.db.migrations.operations.AddConstraint`, whereas performing
     them in a single non-atomic migration, may leave your database in an
     inconsistent state if the ``ValidateConstraint`` operation fails.

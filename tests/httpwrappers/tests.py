@@ -5,11 +5,11 @@ import pickle
 import unittest
 import uuid
 
-from ginger.core.exceptions import DisallowedRedirect
-from ginger.core.serializers.json import GingerJSONEncoder
-from ginger.core.signals import request_finished
-from ginger.db import close_old_connections
-from ginger.http import (
+from gingerdj.core.exceptions import DisallowedRedirect
+from gingerdj.core.serializers.json import GingerJSONEncoder
+from gingerdj.core.signals import request_finished
+from gingerdj.db import close_old_connections
+from gingerdj.http import (
     BadHeaderError,
     HttpResponse,
     HttpResponseNotAllowed,
@@ -22,8 +22,8 @@ from ginger.http import (
     StreamingHttpResponse,
     parse_cookie,
 )
-from ginger.test import SimpleTestCase
-from ginger.utils.functional import lazystr
+from gingerdj.test import SimpleTestCase
+from gingerdj.utils.functional import lazystr
 
 
 class QueryDictTests(SimpleTestCase):

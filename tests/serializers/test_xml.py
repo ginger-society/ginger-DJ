@@ -1,8 +1,8 @@
 from xml.dom import minidom
 
-from ginger.core import serializers
-from ginger.core.serializers.xml_serializer import DTDForbidden
-from ginger.test import TestCase, TransactionTestCase
+from gingerdj.core import serializers
+from gingerdj.core.serializers.xml_serializer import DTDForbidden
+from gingerdj.test import TestCase, TransactionTestCase
 
 from .tests import SerializersTestBase, SerializersTransactionTestBase
 
@@ -10,16 +10,16 @@ from .tests import SerializersTestBase, SerializersTransactionTestBase
 class XmlSerializerTestCase(SerializersTestBase, TestCase):
     serializer_name = "xml"
     pkless_str = """<?xml version="1.0" encoding="utf-8"?>
-<ginger-objects version="1.0">
+<gingerdj-objects version="1.0">
     <object model="serializers.category">
         <field type="CharField" name="name">Reference</field>
     </object>
     <object model="serializers.category">
         <field type="CharField" name="name">Non-fiction</field>
     </object>
-</ginger-objects>"""
+</gingerdj-objects>"""
     mapping_ordering_str = """<?xml version="1.0" encoding="utf-8"?>
-<ginger-objects version="1.0">
+<gingerdj-objects version="1.0">
   <object model="serializers.article" pk="%(article_pk)s">
     <field name="author" rel="ManyToOneRel" to="serializers.author">%(author_pk)s</field>
     <field name="headline" type="CharField">Poker has no place on ESPN</field>
@@ -28,7 +28,7 @@ class XmlSerializerTestCase(SerializersTestBase, TestCase):
     <field name="meta_data" rel="ManyToManyRel" to="serializers.categorymetadata"></field>
     <field name="topics" rel="ManyToManyRel" to="serializers.topic"></field>
   </object>
-</ginger-objects>"""  # NOQA
+</gingerdj-objects>"""  # NOQA
 
     @staticmethod
     def _validate_output(serial_str):
@@ -96,7 +96,7 @@ class XmlSerializerTransactionTestCase(
 ):
     serializer_name = "xml"
     fwd_ref_str = """<?xml version="1.0" encoding="utf-8"?>
-<ginger-objects version="1.0">
+<gingerdj-objects version="1.0">
     <object pk="1" model="serializers.article">
         <field to="serializers.author" name="author" rel="ManyToOneRel">1</field>
         <field type="CharField" name="headline">Forward references pose no problem</field>
@@ -111,4 +111,4 @@ class XmlSerializerTransactionTestCase(
     </object>
     <object pk="1" model="serializers.category">
         <field type="CharField" name="name">Reference</field></object>
-</ginger-objects>"""  # NOQA
+</gingerdj-objects>"""  # NOQA

@@ -1,8 +1,8 @@
 import copy
 
-from ginger.contrib.gis.db.models import GeometryField
-from ginger.contrib.gis.db.models.sql import AreaField, DistanceField
-from ginger.test import SimpleTestCase
+from gingerdj.contrib.gis.db.models import GeometryField
+from gingerdj.contrib.gis.db.models.sql import AreaField, DistanceField
+from gingerdj.test import SimpleTestCase
 
 
 class FieldsTests(SimpleTestCase):

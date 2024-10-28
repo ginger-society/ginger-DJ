@@ -1,5 +1,5 @@
-from ginger.core.management.base import BaseCommand
-from ginger.urls import reverse
+from gingerdj.core.management.base import BaseCommand
+from gingerdj.urls import reverse
 
 
 class Command(BaseCommand):

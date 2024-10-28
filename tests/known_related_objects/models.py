@@ -4,7 +4,7 @@ Existing related object instance caching.
 Queries are not redone when going back through known relations.
 """
 
-from ginger.db import models
+from gingerdj.db import models
 
 
 class Tournament(models.Model):

@@ -1,7 +1,7 @@
-from ginger.core.exceptions import ValidationError
-from ginger.db import models
-from ginger.forms import ChoiceField, Form
-from ginger.test import SimpleTestCase
+from gingerdj.core.exceptions import ValidationError
+from gingerdj.db import models
+from gingerdj.forms import ChoiceField, Form
+from gingerdj.test import SimpleTestCase
 
 from . import FormFieldAssertionsMixin
 

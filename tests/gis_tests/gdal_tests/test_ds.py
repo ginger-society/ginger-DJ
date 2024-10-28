@@ -3,10 +3,10 @@ import re
 from datetime import datetime
 from pathlib import Path
 
-from ginger.contrib.gis.gdal import DataSource, Envelope, GDALException, OGRGeometry
-from ginger.contrib.gis.gdal.field import OFTDateTime, OFTInteger, OFTReal, OFTString
-from ginger.contrib.gis.geos import GEOSGeometry
-from ginger.test import SimpleTestCase
+from gingerdj.contrib.gis.gdal import DataSource, Envelope, GDALException, OGRGeometry
+from gingerdj.contrib.gis.gdal.field import OFTDateTime, OFTInteger, OFTReal, OFTString
+from gingerdj.contrib.gis.geos import GEOSGeometry
+from gingerdj.test import SimpleTestCase
 
 from ..test_data import TEST_DATA, TestDS, get_ds_file
 

@@ -2,15 +2,15 @@ import compileall
 import os
 from importlib import import_module
 
-from ginger.db import connection, connections
-from ginger.db.migrations.exceptions import (
+from gingerdj.db import connection, connections
+from gingerdj.db.migrations.exceptions import (
     AmbiguityError,
     InconsistentMigrationHistory,
     NodeNotFoundError,
 )
-from ginger.db.migrations.loader import MigrationLoader
-from ginger.db.migrations.recorder import MigrationRecorder
-from ginger.test import TestCase, modify_settings, override_settings
+from gingerdj.db.migrations.loader import MigrationLoader
+from gingerdj.db.migrations.recorder import MigrationRecorder
+from gingerdj.test import TestCase, modify_settings, override_settings
 
 from .test_base import MigrationTestBase
 
@@ -439,7 +439,7 @@ class LoaderTests(TestCase):
         # However, starting at 3 or 4, nonexistent migrations would be needed.
         msg = (
             "Migration migrations.6_auto depends on nonexistent node "
-            "('migrations', '5_auto'). Ginger tried to replace migration "
+            "('migrations', '5_auto'). GingerDJ tried to replace migration "
             "migrations.5_auto with any of [migrations.3_squashed_5] but wasn't able "
             "to because some of the replaced migrations are already applied."
         )

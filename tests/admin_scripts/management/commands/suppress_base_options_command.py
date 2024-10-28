@@ -1,4 +1,4 @@
-from ginger.core.management import BaseCommand
+from gingerdj.core.management import BaseCommand
 
 
 class Command(BaseCommand):

@@ -2,21 +2,21 @@ import unittest
 
 from forms_tests.widget_tests.base import WidgetTest
 
-from ginger.db import connection
-from ginger.test import SimpleTestCase, TestCase, modify_settings
-from ginger.utils.functional import cached_property
+from gingerdj.db import connection
+from gingerdj.test import SimpleTestCase, TestCase, modify_settings
+from gingerdj.utils.functional import cached_property
 
 
 @unittest.skipUnless(connection.vendor == "postgresql", "PostgreSQL specific tests")
 # To register type handlers and locate the widget's template.
-@modify_settings(INSTALLED_APPS={"append": "ginger.contrib.postgres"})
+@modify_settings(INSTALLED_APPS={"append": "gingerdj.contrib.postgres"})
 class PostgreSQLSimpleTestCase(SimpleTestCase):
     pass
 
 
 @unittest.skipUnless(connection.vendor == "postgresql", "PostgreSQL specific tests")
 # To register type handlers and locate the widget's template.
-@modify_settings(INSTALLED_APPS={"append": "ginger.contrib.postgres"})
+@modify_settings(INSTALLED_APPS={"append": "gingerdj.contrib.postgres"})
 class PostgreSQLTestCase(TestCase):
     @cached_property
     def default_text_search_config(self):
@@ -32,6 +32,6 @@ class PostgreSQLTestCase(TestCase):
 
 @unittest.skipUnless(connection.vendor == "postgresql", "PostgreSQL specific tests")
 # To locate the widget's template.
-@modify_settings(INSTALLED_APPS={"append": "ginger.contrib.postgres"})
+@modify_settings(INSTALLED_APPS={"append": "gingerdj.contrib.postgres"})
 class PostgreSQLWidgetTestCase(WidgetTest, PostgreSQLSimpleTestCase):
     pass

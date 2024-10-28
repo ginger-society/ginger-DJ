@@ -1,5 +1,5 @@
-from ginger.apps.registry import Apps
-from ginger.db import models
+from gingerdj.apps.registry import Apps
+from gingerdj.db import models
 
 # We're testing app registry presence on load, so this is handy.
 

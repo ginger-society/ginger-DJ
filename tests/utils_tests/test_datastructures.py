@@ -1,13 +1,13 @@
 """
-Tests for stuff in ginger.utils.datastructures.
+Tests for stuff in gingerdj.utils.datastructures.
 """
 
 import collections.abc
 import copy
 import pickle
 
-from ginger.test import SimpleTestCase
-from ginger.utils.datastructures import (
+from gingerdj.test import SimpleTestCase
+from gingerdj.utils.datastructures import (
     CaseInsensitiveMapping,
     DictWrapper,
     ImmutableList,

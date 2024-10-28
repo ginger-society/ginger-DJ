@@ -1,5 +1,5 @@
-from ginger.contrib.sitemaps import views
-from ginger.urls import path
+from gingerdj.contrib.sitemaps import views
+from gingerdj.urls import path
 
 from .http import SimpleSitemap
 
@@ -18,6 +18,6 @@ urlpatterns = [
         "secure/sitemap-<section>.xml",
         views.sitemap,
         {"sitemaps": secure_sitemaps},
-        name="ginger.contrib.sitemaps.views.sitemap",
+        name="gingerdj.contrib.sitemaps.views.sitemap",
     ),
 ]

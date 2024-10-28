@@ -1,12 +1,12 @@
-from ginger import forms
-from ginger.contrib import messages
-from ginger.contrib.messages.views import SuccessMessageMixin
-from ginger.http import HttpResponse, HttpResponseRedirect
-from ginger.template import engines
-from ginger.template.response import TemplateResponse
-from ginger.urls import path, re_path, reverse
-from ginger.views.decorators.cache import never_cache
-from ginger.views.generic.edit import DeleteView, FormView
+from gingerdj import forms
+from gingerdj.contrib import messages
+from gingerdj.contrib.messages.views import SuccessMessageMixin
+from gingerdj.http import HttpResponse, HttpResponseRedirect
+from gingerdj.template import engines
+from gingerdj.template.response import TemplateResponse
+from gingerdj.urls import path, re_path, reverse
+from gingerdj.views.decorators.cache import never_cache
+from gingerdj.views.generic.edit import DeleteView, FormView
 
 from .models import SomeObject
 
@@ -44,13 +44,13 @@ def add_template_response(request, message_type):
 
 @never_cache
 def show(request):
-    template = engines["ginger"].from_string(TEMPLATE)
+    template = engines["gingerdj"].from_string(TEMPLATE)
     return HttpResponse(template.render(request=request))
 
 
 @never_cache
 def show_template_response(request):
-    template = engines["ginger"].from_string(TEMPLATE)
+    template = engines["gingerdj"].from_string(TEMPLATE)
     return TemplateResponse(request, template)
 
 

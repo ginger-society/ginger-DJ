@@ -2,7 +2,7 @@
 Specifying ordering
 
 Specify default ordering for a model using the ``ordering`` attribute, which
-should be a list or tuple of field names. This tells Ginger how to order
+should be a list or tuple of field names. This tells GingerDJ how to order
 ``QuerySet`` results.
 
 If a field name in ``ordering`` starts with a hyphen, that field will be
@@ -13,7 +13,7 @@ The ordering attribute is not required. If you leave it off, ordering will be
 undefined -- not random, just undefined.
 """
 
-from ginger.db import models
+from gingerdj.db import models
 
 
 class Author(models.Model):

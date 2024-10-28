@@ -4,9 +4,9 @@ from datetime import datetime
 
 from asgiref.sync import async_to_sync, sync_to_async
 
-from ginger.db import NotSupportedError, connection
-from ginger.db.models import Prefetch, Sum
-from ginger.test import TestCase, skipIfDBFeature, skipUnlessDBFeature
+from gingerdj.db import NotSupportedError, connection
+from gingerdj.db.models import Prefetch, Sum
+from gingerdj.test import TestCase, skipIfDBFeature, skipUnlessDBFeature
 
 from .models import RelatedModel, SimpleModel
 

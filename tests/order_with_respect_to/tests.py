@@ -1,8 +1,8 @@
 from operator import attrgetter
 
-from ginger.db import models
-from ginger.test import SimpleTestCase, TestCase
-from ginger.test.utils import isolate_apps
+from gingerdj.db import models
+from gingerdj.test import SimpleTestCase, TestCase
+from gingerdj.test.utils import isolate_apps
 
 from .base_tests import BaseOrderWithRespectToTests
 from .models import Answer, Dimension, Entity, Post, Question

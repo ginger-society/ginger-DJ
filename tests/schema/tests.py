@@ -5,18 +5,18 @@ from copy import copy
 from decimal import Decimal
 from unittest import mock
 
-from ginger.core.exceptions import FieldError
-from ginger.core.management.color import no_style
-from ginger.core.serializers.json import GingerJSONEncoder
-from ginger.db import (
+from gingerdj.core.exceptions import FieldError
+from gingerdj.core.management.color import no_style
+from gingerdj.core.serializers.json import GingerJSONEncoder
+from gingerdj.db import (
     DatabaseError,
     DataError,
     IntegrityError,
     OperationalError,
     connection,
 )
-from ginger.db.backends.utils import truncate_name
-from ginger.db.models import (
+from gingerdj.db.backends.utils import truncate_name
+from gingerdj.db.models import (
     CASCADE,
     PROTECT,
     AutoField,
@@ -53,8 +53,8 @@ from ginger.db.models import (
     UUIDField,
     Value,
 )
-from ginger.db.models.fields.json import KT, KeyTextTransform
-from ginger.db.models.functions import (
+from gingerdj.db.models.fields.json import KT, KeyTextTransform
+from gingerdj.db.models.functions import (
     Abs,
     Cast,
     Collate,
@@ -64,10 +64,10 @@ from ginger.db.models.functions import (
     Round,
     Upper,
 )
-from ginger.db.models.indexes import IndexExpression
-from ginger.db.transaction import TransactionManagementError, atomic
-from ginger.test import TransactionTestCase, skipIfDBFeature, skipUnlessDBFeature
-from ginger.test.utils import CaptureQueriesContext, isolate_apps, register_lookup
+from gingerdj.db.models.indexes import IndexExpression
+from gingerdj.db.transaction import TransactionManagementError, atomic
+from gingerdj.test import TransactionTestCase, skipIfDBFeature, skipUnlessDBFeature
+from gingerdj.test.utils import CaptureQueriesContext, isolate_apps, register_lookup
 
 from .fields import CustomManyToManyField, InheritedManyToManyField, MediumBlobField
 from .models import (
@@ -1375,7 +1375,7 @@ class SchemaTests(TransactionTestCase):
 
     @unittest.skipUnless(connection.vendor == "postgresql", "PostgreSQL specific")
     def test_alter_field_with_custom_db_type(self):
-        from ginger.contrib.postgres.fields import ArrayField
+        from gingerdj.contrib.postgres.fields import ArrayField
 
         class Foo(Model):
             field = ArrayField(CharField(max_length=255))
@@ -1396,7 +1396,7 @@ class SchemaTests(TransactionTestCase):
     @isolate_apps("schema")
     @unittest.skipUnless(connection.vendor == "postgresql", "PostgreSQL specific")
     def test_alter_array_field_decrease_base_field_length(self):
-        from ginger.contrib.postgres.fields import ArrayField
+        from gingerdj.contrib.postgres.fields import ArrayField
 
         class ArrayModel(Model):
             field = ArrayField(CharField(max_length=16))
@@ -1420,7 +1420,7 @@ class SchemaTests(TransactionTestCase):
     @isolate_apps("schema")
     @unittest.skipUnless(connection.vendor == "postgresql", "PostgreSQL specific")
     def test_alter_array_field_decrease_nested_base_field_length(self):
-        from ginger.contrib.postgres.fields import ArrayField
+        from gingerdj.contrib.postgres.fields import ArrayField
 
         class ArrayModel(Model):
             field = ArrayField(ArrayField(CharField(max_length=16)))
@@ -1463,7 +1463,7 @@ class SchemaTests(TransactionTestCase):
         "supports_non_deterministic_collations",
     )
     def test_db_collation_arrayfield(self):
-        from ginger.contrib.postgres.fields import ArrayField
+        from gingerdj.contrib.postgres.fields import ArrayField
 
         ci_collation = self._add_ci_collation()
         cs_collation = "en-x-icu"
@@ -1763,11 +1763,11 @@ class SchemaTests(TransactionTestCase):
         # Ensure the field is unique
         author = Author.objects.create(name="Joe")
         BookWithO2O.objects.create(
-            author=author, title="Ginger 1", pub_date=datetime.datetime.now()
+            author=author, title="GingerDJ 1", pub_date=datetime.datetime.now()
         )
         with self.assertRaises(IntegrityError):
             BookWithO2O.objects.create(
-                author=author, title="Ginger 2", pub_date=datetime.datetime.now()
+                author=author, title="GingerDJ 2", pub_date=datetime.datetime.now()
             )
         BookWithO2O.objects.all().delete()
         self.assertForeignKeyExists(BookWithO2O, "author_id", "schema_author")
@@ -1784,10 +1784,10 @@ class SchemaTests(TransactionTestCase):
         )
         # Ensure the field is not unique anymore
         Book.objects.create(
-            author=author, title="Ginger 1", pub_date=datetime.datetime.now()
+            author=author, title="GingerDJ 1", pub_date=datetime.datetime.now()
         )
         Book.objects.create(
-            author=author, title="Ginger 2", pub_date=datetime.datetime.now()
+            author=author, title="GingerDJ 2", pub_date=datetime.datetime.now()
         )
         self.assertForeignKeyExists(Book, "author_id", "schema_author")
 
@@ -1809,10 +1809,10 @@ class SchemaTests(TransactionTestCase):
         # Ensure the field is not unique
         author = Author.objects.create(name="Joe")
         Book.objects.create(
-            author=author, title="Ginger 1", pub_date=datetime.datetime.now()
+            author=author, title="GingerDJ 1", pub_date=datetime.datetime.now()
         )
         Book.objects.create(
-            author=author, title="Ginger 2", pub_date=datetime.datetime.now()
+            author=author, title="GingerDJ 2", pub_date=datetime.datetime.now()
         )
         Book.objects.all().delete()
         self.assertForeignKeyExists(Book, "author_id", "schema_author")
@@ -1829,11 +1829,11 @@ class SchemaTests(TransactionTestCase):
         )
         # Ensure the field is unique now
         BookWithO2O.objects.create(
-            author=author, title="Ginger 1", pub_date=datetime.datetime.now()
+            author=author, title="GingerDJ 1", pub_date=datetime.datetime.now()
         )
         with self.assertRaises(IntegrityError):
             BookWithO2O.objects.create(
-                author=author, title="Ginger 2", pub_date=datetime.datetime.now()
+                author=author, title="GingerDJ 2", pub_date=datetime.datetime.now()
             )
         self.assertForeignKeyExists(BookWithO2O, "author_id", "schema_author")
 
@@ -3057,7 +3057,7 @@ class SchemaTests(TransactionTestCase):
         new_field = CharField(max_length=255, unique=True)
         new_field.model = Author
         new_field.set_attributes_from_name("name")
-        with self.assertLogs("ginger.db.backends.schema", "DEBUG") as cm:
+        with self.assertLogs("gingerdj.db.backends.schema", "DEBUG") as cm:
             with connection.schema_editor() as editor:
                 editor.alter_field(Author, Author._meta.get_field("name"), new_field)
         # One SQL statement is executed to alter the field.
@@ -3090,7 +3090,7 @@ class SchemaTests(TransactionTestCase):
         new_field = SlugField(max_length=75, unique=True)
         new_field.model = Tag
         new_field.set_attributes_from_name("slug")
-        with self.assertLogs("ginger.db.backends.schema", "DEBUG") as cm:
+        with self.assertLogs("gingerdj.db.backends.schema", "DEBUG") as cm:
             with connection.schema_editor() as editor:
                 editor.alter_field(Tag, Tag._meta.get_field("slug"), new_field)
         # One SQL statement is executed to alter the field.
@@ -5246,8 +5246,8 @@ class SchemaTests(TransactionTestCase):
             editor.alter_field(Node, old_field, new_field, strict=True)
         self.assertForeignKeyExists(Node, "parent_id", Node._meta.db_table)
 
-    @mock.patch("ginger.db.backends.base.schema.datetime")
-    @mock.patch("ginger.db.backends.base.schema.timezone")
+    @mock.patch("gingerdj.db.backends.base.schema.datetime")
+    @mock.patch("gingerdj.db.backends.base.schema.timezone")
     def test_add_datefield_and_datetimefield_use_effective_default(
         self, mocked_datetime, mocked_tz
     ):

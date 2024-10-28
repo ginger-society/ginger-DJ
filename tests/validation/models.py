@@ -1,8 +1,8 @@
 from datetime import datetime
 
-from ginger.core.exceptions import ValidationError
-from ginger.db import models
-from ginger.db.models.functions import Lower
+from gingerdj.core.exceptions import ValidationError
+from gingerdj.db import models
+from gingerdj.db.models.functions import Lower
 
 
 def validate_answer_to_universe(value):

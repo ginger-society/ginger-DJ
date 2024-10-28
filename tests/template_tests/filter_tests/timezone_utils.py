@@ -1,7 +1,7 @@
 from datetime import date, datetime
 
-from ginger.test import SimpleTestCase
-from ginger.utils import timezone
+from gingerdj.test import SimpleTestCase
+from gingerdj.utils import timezone
 
 
 class TimezoneTestCase(SimpleTestCase):

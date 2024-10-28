@@ -1,8 +1,8 @@
 import os
 
-from ginger.core.management import call_command
-from ginger.test import TestCase, TransactionTestCase
-from ginger.test.utils import extend_sys_path
+from gingerdj.core.management import call_command
+from gingerdj.test import TestCase, TransactionTestCase
+from gingerdj.test.utils import extend_sys_path
 
 from .models import (
     ConcreteModel,

@@ -2,7 +2,7 @@
 Models
 ======
 
-.. module:: ginger.db.models
+.. module:: gingerdj.db.models
 
 A model is the single, definitive source of information about your data. It
 contains the essential fields and behaviors of the data you're storing.
@@ -11,11 +11,11 @@ Generally, each model maps to a single database table.
 The basics:
 
 * Each model is a Python class that subclasses
-  :class:`ginger.db.models.Model`.
+  :class:`gingerdj.db.models.Model`.
 
 * Each attribute of the model represents a database field.
 
-* With all of this, Ginger gives you an automatically-generated
+* With all of this, GingerDJ gives you an automatically-generated
   database-access API; see :doc:`/topics/db/queries`.
 
 
@@ -25,7 +25,7 @@ Quick example
 This example model defines a ``Person``, which has a ``first_name`` and
 ``last_name``::
 
-    from ginger.db import models
+    from gingerdj.db import models
 
 
     class Person(models.Model):
@@ -55,13 +55,13 @@ Some technical notes:
   overridden. See :ref:`automatic-primary-key-fields`.
 
 * The ``CREATE TABLE`` SQL in this example is formatted using PostgreSQL
-  syntax, but it's worth noting Ginger uses SQL tailored to the database
+  syntax, but it's worth noting GingerDJ uses SQL tailored to the database
   backend specified in your :doc:`settings file </topics/settings>`.
 
 Using models
 ============
 
-Once you have defined your models, you need to tell Ginger you're going to *use*
+Once you have defined your models, you need to tell GingerDJ you're going to *use*
 those models. Do this by editing your settings file and changing the
 :setting:`INSTALLED_APPS` setting to add the name of the module that contains
 your ``models.py``.
@@ -92,7 +92,7 @@ attributes. Be careful not to choose field names that conflict with the
 
 Example::
 
-    from ginger.db import models
+    from gingerdj.db import models
 
 
     class Musician(models.Model):
@@ -111,7 +111,7 @@ Field types
 -----------
 
 Each field in your model should be an instance of the appropriate
-:class:`~ginger.db.models.Field` class. Ginger uses the field class types to
+:class:`~gingerdj.db.models.Field` class. GingerDJ uses the field class types to
 determine a few things:
 
 * The column type, which tells the database what kind of data to store (e.g.
@@ -120,12 +120,12 @@ determine a few things:
 * The default HTML :doc:`widget </ref/forms/widgets>` to use when rendering a form
   field (e.g. ``<input type="text">``, ``<select>``).
 
-* The minimal validation requirements, used in Ginger's admin and in
+* The minimal validation requirements, used in GingerDJ's admin and in
   automatically-generated forms.
 
-Ginger ships with dozens of built-in field types; you can find the complete list
+GingerDJ ships with dozens of built-in field types; you can find the complete list
 in the :ref:`model field reference <model-field-types>`. You can easily write
-your own fields if Ginger's built-in ones don't do the trick; see
+your own fields if GingerDJ's built-in ones don't do the trick; see
 :doc:`/howto/custom-model-fields`.
 
 Field options
@@ -133,8 +133,8 @@ Field options
 
 Each field takes a certain set of field-specific arguments (documented in the
 :ref:`model field reference <model-field-types>`). For example,
-:class:`~ginger.db.models.CharField` (and its subclasses) require a
-:attr:`~ginger.db.models.CharField.max_length` argument which specifies the size
+:class:`~gingerdj.db.models.CharField` (and its subclasses) require a
+:attr:`~gingerdj.db.models.CharField.max_length` argument which specifies the size
 of the ``VARCHAR`` database field used to store the data.
 
 There's also a set of common arguments available to all field types. All are
@@ -143,7 +143,7 @@ optional. They're fully explained in the :ref:`reference
 ones:
 
 :attr:`~Field.null`
-    If ``True``, Ginger will store empty values as ``NULL`` in the database.
+    If ``True``, GingerDJ will store empty values as ``NULL`` in the database.
     Default is ``False``.
 
 :attr:`~Field.blank`
@@ -181,10 +181,10 @@ ones:
     database. The second element is displayed by the field's form widget.
 
     Given a model instance, the display value for a field with ``choices`` can
-    be accessed using the :meth:`~ginger.db.models.Model.get_FOO_display`
+    be accessed using the :meth:`~gingerdj.db.models.Model.get_FOO_display`
     method. For example::
 
-        from ginger.db import models
+        from gingerdj.db import models
 
 
         class Person(models.Model):
@@ -208,7 +208,7 @@ ones:
     You can also use enumeration classes to define ``choices`` in a concise
     way::
 
-        from ginger.db import models
+        from gingerdj.db import models
 
 
         class Runner(models.Model):
@@ -236,7 +236,7 @@ ones:
     If ``True``, this field is the primary key for the model.
 
     If you don't specify :attr:`primary_key=True <Field.primary_key>` for
-    any fields in your model, Ginger will automatically add an
+    any fields in your model, GingerDJ will automatically add an
     :class:`IntegerField` to hold the primary key, so you don't need to set
     :attr:`primary_key=True <Field.primary_key>` on any of your fields
     unless you want to override the default primary-key behavior. For more,
@@ -246,7 +246,7 @@ ones:
     key on an existing object and then save it, a new object will be created
     alongside the old one. For example::
 
-        from ginger.db import models
+        from gingerdj.db import models
 
 
         class Fruit(models.Model):
@@ -272,15 +272,15 @@ details can be found in the :ref:`common model field option reference
 Automatic primary key fields
 ----------------------------
 
-By default, Ginger gives each model an auto-incrementing primary key with the
+By default, GingerDJ gives each model an auto-incrementing primary key with the
 type specified per app in :attr:`AppConfig.default_auto_field
-<ginger.apps.AppConfig.default_auto_field>` or globally in the
+<gingerdj.apps.AppConfig.default_auto_field>` or globally in the
 :setting:`DEFAULT_AUTO_FIELD` setting. For example::
 
     id = models.BigAutoField(primary_key=True)
 
 If you'd like to specify a custom primary key, specify
-:attr:`primary_key=True <Field.primary_key>` on one of your fields. If Ginger
+:attr:`primary_key=True <Field.primary_key>` on one of your fields. If GingerDJ
 sees you've explicitly set :attr:`Field.primary_key`, it won't add the automatic
 ``id`` column.
 
@@ -292,10 +292,10 @@ Each model requires exactly one field to have :attr:`primary_key=True
 Verbose field names
 -------------------
 
-Each field type, except for :class:`~ginger.db.models.ForeignKey`,
-:class:`~ginger.db.models.ManyToManyField` and
-:class:`~ginger.db.models.OneToOneField`, takes an optional first positional
-argument -- a verbose name. If the verbose name isn't given, Ginger will
+Each field type, except for :class:`~gingerdj.db.models.ForeignKey`,
+:class:`~gingerdj.db.models.ManyToManyField` and
+:class:`~gingerdj.db.models.OneToOneField`, takes an optional first positional
+argument -- a verbose name. If the verbose name isn't given, GingerDJ will
 automatically create it using the field's attribute name, converting underscores
 to spaces.
 
@@ -307,9 +307,9 @@ In this example, the verbose name is ``"first name"``::
 
     first_name = models.CharField(max_length=30)
 
-:class:`~ginger.db.models.ForeignKey`,
-:class:`~ginger.db.models.ManyToManyField` and
-:class:`~ginger.db.models.OneToOneField` require the first argument to be a
+:class:`~gingerdj.db.models.ForeignKey`,
+:class:`~gingerdj.db.models.ManyToManyField` and
+:class:`~gingerdj.db.models.OneToOneField` require the first argument to be a
 model class, so use the :attr:`~Field.verbose_name` keyword argument::
 
     poll = models.ForeignKey(
@@ -325,31 +325,31 @@ model class, so use the :attr:`~Field.verbose_name` keyword argument::
     )
 
 The convention is not to capitalize the first letter of the
-:attr:`~Field.verbose_name`. Ginger will automatically capitalize the first
+:attr:`~Field.verbose_name`. GingerDJ will automatically capitalize the first
 letter where it needs to.
 
 Relationships
 -------------
 
 Clearly, the power of relational databases lies in relating tables to each
-other. Ginger offers ways to define the three most common types of database
+other. GingerDJ offers ways to define the three most common types of database
 relationships: many-to-one, many-to-many and one-to-one.
 
 Many-to-one relationships
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-To define a many-to-one relationship, use :class:`ginger.db.models.ForeignKey`.
-You use it just like any other :class:`~ginger.db.models.Field` type: by
+To define a many-to-one relationship, use :class:`gingerdj.db.models.ForeignKey`.
+You use it just like any other :class:`~gingerdj.db.models.Field` type: by
 including it as a class attribute of your model.
 
-:class:`~ginger.db.models.ForeignKey` requires a positional argument: the class
+:class:`~gingerdj.db.models.ForeignKey` requires a positional argument: the class
 to which the model is related.
 
 For example, if a ``Car`` model has a ``Manufacturer`` -- that is, a
 ``Manufacturer`` makes multiple cars but each ``Car`` only has one
 ``Manufacturer`` -- use the following definitions::
 
-    from ginger.db import models
+    from gingerdj.db import models
 
 
     class Manufacturer(models.Model):
@@ -367,7 +367,7 @@ models not yet defined <lazy-relationships>`; see :ref:`the model field
 reference <ref-foreignkey>` for details.
 
 It's suggested, but not required, that the name of a
-:class:`~ginger.db.models.ForeignKey` field (``manufacturer`` in the example
+:class:`~gingerdj.db.models.ForeignKey` field (``manufacturer`` in the example
 above) be the name of the model, lowercase. You can call the field whatever you
 want. For example::
 
@@ -380,7 +380,7 @@ want. For example::
 
 .. seealso::
 
-    :class:`~ginger.db.models.ForeignKey` fields accept a number of extra
+    :class:`~gingerdj.db.models.ForeignKey` fields accept a number of extra
     arguments which are explained in :ref:`the model field reference
     <foreign-key-arguments>`. These options help define how the relationship
     should work; all are optional.
@@ -396,18 +396,18 @@ Many-to-many relationships
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 To define a many-to-many relationship, use
-:class:`~ginger.db.models.ManyToManyField`. You use it just like any other
-:class:`~ginger.db.models.Field` type: by including it as a class attribute of
+:class:`~gingerdj.db.models.ManyToManyField`. You use it just like any other
+:class:`~gingerdj.db.models.Field` type: by including it as a class attribute of
 your model.
 
-:class:`~ginger.db.models.ManyToManyField` requires a positional argument: the
+:class:`~gingerdj.db.models.ManyToManyField` requires a positional argument: the
 class to which the model is related.
 
 For example, if a ``Pizza`` has multiple ``Topping`` objects -- that is, a
 ``Topping`` can be on multiple pizzas and each ``Pizza`` has multiple toppings
 -- here's how you'd represent that::
 
-    from ginger.db import models
+    from gingerdj.db import models
 
 
     class Topping(models.Model):
@@ -419,23 +419,23 @@ For example, if a ``Pizza`` has multiple ``Topping`` objects -- that is, a
         # ...
         toppings = models.ManyToManyField(Topping)
 
-As with :class:`~ginger.db.models.ForeignKey`, you can also create
+As with :class:`~gingerdj.db.models.ForeignKey`, you can also create
 :ref:`recursive relationships <recursive-relationships>` (an object with a
 many-to-many relationship to itself) and :ref:`relationships to models not yet
 defined <lazy-relationships>`.
 
 It's suggested, but not required, that the name of a
-:class:`~ginger.db.models.ManyToManyField` (``toppings`` in the example above)
+:class:`~gingerdj.db.models.ManyToManyField` (``toppings`` in the example above)
 be a plural describing the set of related model objects.
 
 It doesn't matter which model has the
-:class:`~ginger.db.models.ManyToManyField`, but you should only put it in one
+:class:`~gingerdj.db.models.ManyToManyField`, but you should only put it in one
 of the models -- not both.
 
-Generally, :class:`~ginger.db.models.ManyToManyField` instances should go in
+Generally, :class:`~gingerdj.db.models.ManyToManyField` instances should go in
 the object that's going to be edited on a form. In the above example,
 ``toppings`` is in ``Pizza`` (rather than ``Topping`` having a ``pizzas``
-:class:`~ginger.db.models.ManyToManyField` ) because it's more natural to think
+:class:`~gingerdj.db.models.ManyToManyField` ) because it's more natural to think
 about a pizza having toppings than a topping being on multiple pizzas. The way
 it's set up above, the ``Pizza`` form would let users select the toppings.
 
@@ -444,7 +444,7 @@ it's set up above, the ``Pizza`` form would let users select the toppings.
     See the :doc:`Many-to-many relationship model example
     </topics/db/examples/many_to_many>` for a full example.
 
-:class:`~ginger.db.models.ManyToManyField` fields also accept a number of
+:class:`~gingerdj.db.models.ManyToManyField` fields also accept a number of
 extra arguments which are explained in :ref:`the model field reference
 <manytomany-arguments>`. These options help define how the relationship
 should work; all are optional.
@@ -456,25 +456,25 @@ Extra fields on many-to-many relationships
 
 When you're only dealing with many-to-many relationships such as mixing and
 matching pizzas and toppings, a standard
-:class:`~ginger.db.models.ManyToManyField` is all you need. However, sometimes
+:class:`~gingerdj.db.models.ManyToManyField` is all you need. However, sometimes
 you may need to associate data with the relationship between two models.
 
 For example, consider the case of an application tracking the musical groups
 which musicians belong to. There is a many-to-many relationship between a person
 and the groups of which they are a member, so you could use a
-:class:`~ginger.db.models.ManyToManyField` to represent this relationship.
+:class:`~gingerdj.db.models.ManyToManyField` to represent this relationship.
 However, there is a lot of detail about the membership that you might want to
 collect, such as the date at which the person joined the group.
 
-For these situations, Ginger allows you to specify the model that will be used
+For these situations, GingerDJ allows you to specify the model that will be used
 to govern the many-to-many relationship. You can then put extra fields on the
 intermediate model. The intermediate model is associated with the
-:class:`~ginger.db.models.ManyToManyField` using the
+:class:`~gingerdj.db.models.ManyToManyField` using the
 :attr:`through <ManyToManyField.through>` argument to point to the model
 that will act as an intermediary. For our musician example, the code would look
 something like this::
 
-    from ginger.db import models
+    from gingerdj.db import models
 
 
     class Person(models.Model):
@@ -506,7 +506,7 @@ There are a few restrictions on the intermediate model:
 
 * Your intermediate model must contain one - and *only* one - foreign key
   to the source model (this would be ``Group`` in our example), or you must
-  explicitly specify the foreign keys Ginger should use for the relationship
+  explicitly specify the foreign keys GingerDJ should use for the relationship
   using :attr:`ManyToManyField.through_fields <ManyToManyField.through_fields>`.
   If you have more than one foreign key and ``through_fields`` is not
   specified, a validation error will be raised. A similar restriction applies
@@ -520,7 +520,7 @@ There are a few restrictions on the intermediate model:
   must also specify ``through_fields`` as above, or a validation error
   will be raised.
 
-Now that you have set up your :class:`~ginger.db.models.ManyToManyField` to use
+Now that you have set up your :class:`~gingerdj.db.models.ManyToManyField` to use
 your intermediary model (``Membership``, in this case), you're ready to start
 creating some many-to-many relationships. You do this by creating instances of
 the intermediate model:
@@ -550,9 +550,9 @@ the intermediate model:
     >>> beatles.members.all()
     <QuerySet [<Person: Ringo Starr>, <Person: Paul McCartney>]>
 
-You can also use :meth:`~ginger.db.models.fields.related.RelatedManager.add`,
-:meth:`~ginger.db.models.fields.related.RelatedManager.create`, or
-:meth:`~ginger.db.models.fields.related.RelatedManager.set` to create
+You can also use :meth:`~gingerdj.db.models.fields.related.RelatedManager.add`,
+:meth:`~gingerdj.db.models.fields.related.RelatedManager.create`, or
+:meth:`~gingerdj.db.models.fields.related.RelatedManager.set` to create
 relationships, as long as you specify ``through_defaults`` for any required
 fields:
 
@@ -570,7 +570,7 @@ You may prefer to create instances of the intermediate model directly.
 
 If the custom through table defined by the intermediate model does not enforce
 uniqueness on the ``(model1, model2)`` pair, allowing multiple values, the
-:meth:`~ginger.db.models.fields.related.RelatedManager.remove` call will
+:meth:`~gingerdj.db.models.fields.related.RelatedManager.remove` call will
 remove all intermediate model instances:
 
 .. code-block:: pycon
@@ -588,7 +588,7 @@ remove all intermediate model instances:
     >>> beatles.members.all()
     <QuerySet [<Person: Paul McCartney>]>
 
-The :meth:`~ginger.db.models.fields.related.RelatedManager.clear`
+The :meth:`~gingerdj.db.models.fields.related.RelatedManager.clear`
 method can be used to remove all many-to-many relationships for an instance:
 
 .. code-block:: pycon
@@ -646,13 +646,13 @@ One-to-one relationships
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
 To define a one-to-one relationship, use
-:class:`~ginger.db.models.OneToOneField`. You use it just like any other
+:class:`~gingerdj.db.models.OneToOneField`. You use it just like any other
 ``Field`` type: by including it as a class attribute of your model.
 
 This is most useful on the primary key of an object when that object "extends"
 another object in some way.
 
-:class:`~ginger.db.models.OneToOneField` requires a positional argument: the
+:class:`~gingerdj.db.models.OneToOneField` requires a positional argument: the
 class to which the model is related.
 
 For example, if you were building a database of "places", you would
@@ -660,12 +660,12 @@ build pretty standard stuff such as address, phone number, etc. in the
 database. Then, if you wanted to build a database of restaurants on
 top of the places, instead of repeating yourself and replicating those
 fields in the ``Restaurant`` model, you could make ``Restaurant`` have
-a :class:`~ginger.db.models.OneToOneField` to ``Place`` (because a
+a :class:`~gingerdj.db.models.OneToOneField` to ``Place`` (because a
 restaurant "is a" place; in fact, to handle this you'd typically use
 :ref:`inheritance <model-inheritance>`, which involves an implicit
 one-to-one relation).
 
-As with :class:`~ginger.db.models.ForeignKey`, a :ref:`recursive relationship
+As with :class:`~gingerdj.db.models.ForeignKey`, a :ref:`recursive relationship
 <recursive-relationships>` can be defined and :ref:`references to as-yet
 undefined models <lazy-relationships>` can be made.
 
@@ -674,14 +674,14 @@ undefined models <lazy-relationships>` can be made.
     See the :doc:`One-to-one relationship model example
     </topics/db/examples/one_to_one>` for a full example.
 
-:class:`~ginger.db.models.OneToOneField` fields also accept an optional
-:attr:`~ginger.db.models.OneToOneField.parent_link` argument.
+:class:`~gingerdj.db.models.OneToOneField` fields also accept an optional
+:attr:`~gingerdj.db.models.OneToOneField.parent_link` argument.
 
-:class:`~ginger.db.models.OneToOneField` classes used to automatically become
+:class:`~gingerdj.db.models.OneToOneField` classes used to automatically become
 the primary key on a model. This is no longer true (although you can manually
-pass in the :attr:`~ginger.db.models.Field.primary_key` argument if you like).
+pass in the :attr:`~gingerdj.db.models.Field.primary_key` argument if you like).
 Thus, it's now possible to have multiple fields of type
-:class:`~ginger.db.models.OneToOneField` on a single model.
+:class:`~gingerdj.db.models.OneToOneField` on a single model.
 
 Models across files
 -------------------
@@ -690,7 +690,7 @@ It's perfectly OK to relate a model to one from another app. To do this, import
 the related model at the top of the file where your model is defined. Then,
 refer to the other model class wherever needed. For example::
 
-    from ginger.db import models
+    from gingerdj.db import models
     from geography.models import ZipCode
 
 
@@ -706,7 +706,7 @@ refer to the other model class wherever needed. For example::
 Field name restrictions
 -----------------------
 
-Ginger places some restrictions on model field names:
+GingerDJ places some restrictions on model field names:
 
 #. A field name cannot be a Python reserved word, because that would result
    in a Python syntax error. For example:
@@ -717,7 +717,7 @@ Ginger places some restrictions on model field names:
            pass = models.IntegerField() # 'pass' is a reserved word!
 
 #. A field name cannot contain more than one underscore in a row, due to
-   the way Ginger's query lookup syntax works. For example::
+   the way GingerDJ's query lookup syntax works. For example::
 
        class Example(models.Model):
            foo__bar = models.IntegerField()  # 'foo__bar' has two underscores!
@@ -729,7 +729,7 @@ necessarily have to match your database column name. See the
 :attr:`~Field.db_column` option.
 
 SQL reserved words, such as ``join``, ``where`` or ``select``, *are* allowed as
-model field names, because Ginger escapes all database table names and column
+model field names, because GingerDJ escapes all database table names and column
 names in every underlying SQL query. It uses the quoting syntax of your
 particular database engine.
 
@@ -748,7 +748,7 @@ provided in :doc:`/howto/custom-model-fields`.
 
 Give your model metadata by using an inner ``class Meta``, like so::
 
-    from ginger.db import models
+    from gingerdj.db import models
 
 
     class Ox(models.Model):
@@ -774,11 +774,11 @@ Model attributes
 
 ``objects``
     The most important attribute of a model is the
-    :class:`~ginger.db.models.Manager`. It's the interface through which
-    database query operations are provided to Ginger models and is used to
+    :class:`~gingerdj.db.models.Manager`. It's the interface through which
+    database query operations are provided to GingerDJ models and is used to
     :ref:`retrieve the instances <retrieving-objects>` from the database. If no
     custom ``Manager`` is defined, the default name is
-    :attr:`~ginger.db.models.Model.objects`. Managers are only accessible via
+    :attr:`~gingerdj.db.models.Model.objects`. Managers are only accessible via
     model classes, not the model instances.
 
 .. _model-methods:
@@ -787,7 +787,7 @@ Model methods
 =============
 
 Define custom methods on a model to add custom "row-level" functionality to your
-objects. Whereas :class:`~ginger.db.models.Manager` methods are intended to do
+objects. Whereas :class:`~gingerdj.db.models.Manager` methods are intended to do
 "table-wide" things, model methods should act on a particular model instance.
 
 This is a valuable technique for keeping business logic in one place -- the
@@ -795,7 +795,7 @@ model.
 
 For example, this model has a few custom methods::
 
-    from ginger.db import models
+    from gingerdj.db import models
 
 
     class Person(models.Model):
@@ -828,7 +828,7 @@ below -- but there are a couple that you'll almost always want to define:
 
 :meth:`~Model.__str__`
     A Python "magic method" that returns a string representation of any
-    object. This is what Python and Ginger will use whenever a model
+    object. This is what Python and GingerDJ will use whenever a model
     instance needs to be coerced and displayed as a plain string. Most
     notably, this happens when you display an object in an interactive
     console or in the admin.
@@ -837,7 +837,7 @@ below -- but there are a couple that you'll almost always want to define:
     at all.
 
 :meth:`~Model.get_absolute_url`
-    This tells Ginger how to calculate the URL for an object. Ginger uses
+    This tells GingerDJ how to calculate the URL for an object. GingerDJ uses
     this in its admin interface, and any time it needs to figure out a URL
     for an object.
 
@@ -861,7 +861,7 @@ A classic use-case for overriding the built-in methods is if you want something
 to happen whenever you save an object. For example (see
 :meth:`~Model.save` for documentation of the parameters it accepts)::
 
-    from ginger.db import models
+    from gingerdj.db import models
 
 
     class Blog(models.Model):
@@ -875,7 +875,7 @@ to happen whenever you save an object. For example (see
 
 You can also prevent saving::
 
-    from ginger.db import models
+    from gingerdj.db import models
 
 
     class Blog(models.Model):
@@ -894,7 +894,7 @@ gets saved into the database. If you forget to call the superclass method, the
 default behavior won't happen and the database won't get touched.
 
 It's also important that you pass through the arguments that can be
-passed to the model method -- that's what the ``**kwargs`` bit does. Ginger
+passed to the model method -- that's what the ``**kwargs`` bit does. GingerDJ
 will, from time to time, extend the capabilities of built-in model methods,
 adding new keyword arguments. If you use ``**kwargs`` in your method
 definitions, you are guaranteed that your code will automatically support those
@@ -905,8 +905,8 @@ also want to have this field added to the ``update_fields`` keyword argument.
 This will ensure the field is saved when ``update_fields`` is specified. For
 example::
 
-    from ginger.db import models
-    from ginger.utils.text import slugify
+    from gingerdj.db import models
+    from gingerdj.utils.text import slugify
 
 
     class Blog(models.Model):
@@ -928,17 +928,17 @@ See :ref:`ref-models-update-fields` for more details.
     Note that the :meth:`~Model.delete()` method for an object is not
     necessarily called when :ref:`deleting objects in bulk using a
     QuerySet <topics-db-queries-delete>` or as a result of a :attr:`cascading
-    delete <ginger.db.models.ForeignKey.on_delete>`. To ensure customized
+    delete <gingerdj.db.models.ForeignKey.on_delete>`. To ensure customized
     delete logic gets executed, you can use
-    :data:`~ginger.db.models.signals.pre_delete` and/or
-    :data:`~ginger.db.models.signals.post_delete` signals.
+    :data:`~gingerdj.db.models.signals.pre_delete` and/or
+    :data:`~gingerdj.db.models.signals.post_delete` signals.
 
     Unfortunately, there isn't a workaround when
-    :meth:`creating<ginger.db.models.query.QuerySet.bulk_create>` or
-    :meth:`updating<ginger.db.models.query.QuerySet.update>` objects in bulk,
+    :meth:`creating<gingerdj.db.models.query.QuerySet.bulk_create>` or
+    :meth:`updating<gingerdj.db.models.query.QuerySet.update>` objects in bulk,
     since none of :meth:`~Model.save()`,
-    :data:`~ginger.db.models.signals.pre_save`, and
-    :data:`~ginger.db.models.signals.post_save` are called.
+    :data:`~gingerdj.db.models.signals.pre_save`, and
+    :data:`~gingerdj.db.models.signals.post_save` are called.
 
 Executing custom SQL
 --------------------
@@ -952,17 +952,17 @@ on :doc:`using raw SQL</topics/db/sql>`.
 Model inheritance
 =================
 
-Model inheritance in Ginger works almost identically to the way normal
+Model inheritance in GingerDJ works almost identically to the way normal
 class inheritance works in Python, but the basics at the beginning of the page
 should still be followed. That means the base class should subclass
-:class:`ginger.db.models.Model`.
+:class:`gingerdj.db.models.Model`.
 
 The only decision you have to make is whether you want the parent models to be
 models in their own right (with their own database tables), or if the parents
 are just holders of common information that will only be visible through the
 child models.
 
-There are three styles of inheritance that are possible in Ginger.
+There are three styles of inheritance that are possible in GingerDJ.
 
 1. Often, you will just want to use the parent class to hold information that
    you don't want to have to type out for each child model. This class isn't
@@ -989,7 +989,7 @@ fields will be added to those of the child class.
 
 An example::
 
-    from ginger.db import models
+    from gingerdj.db import models
 
 
     class CommonInfo(models.Model):
@@ -1004,7 +1004,7 @@ An example::
         home_group = models.CharField(max_length=5)
 
 The ``Student`` model will have three fields: ``name``, ``age`` and
-``home_group``. The ``CommonInfo`` model cannot be used as a normal Ginger
+``home_group``. The ``CommonInfo`` model cannot be used as a normal GingerDJ
 model, since it is an abstract base class. It does not generate a database
 table or have a manager, and cannot be instantiated or saved directly.
 
@@ -1018,13 +1018,13 @@ still only creating one database table per child model at the database level.
 ``Meta`` inheritance
 ~~~~~~~~~~~~~~~~~~~~
 
-When an abstract base class is created, Ginger makes any :ref:`Meta <meta-options>`
+When an abstract base class is created, GingerDJ makes any :ref:`Meta <meta-options>`
 inner class you declared in the base class available as an
 attribute. If a child class does not declare its own :ref:`Meta <meta-options>`
 class, it will inherit the parent's :ref:`Meta <meta-options>`. If the child wants to
 extend the parent's :ref:`Meta <meta-options>` class, it can subclass it. For example::
 
-    from ginger.db import models
+    from gingerdj.db import models
 
 
     class CommonInfo(models.Model):
@@ -1039,7 +1039,7 @@ extend the parent's :ref:`Meta <meta-options>` class, it can subclass it. For ex
         class Meta(CommonInfo.Meta):
             db_table = "student_info"
 
-Ginger does make one adjustment to the :ref:`Meta <meta-options>` class of an
+GingerDJ does make one adjustment to the :ref:`Meta <meta-options>` class of an
 abstract base class: before installing the :ref:`Meta <meta-options>`
 attribute, it sets ``abstract=False``. This means that children of abstract
 base classes don't automatically become abstract classes themselves. To make
@@ -1057,7 +1057,7 @@ from the first listed class will be inherited by default. To inherit :ref:`Meta
 <meta-options>` options from multiple abstract base classes, you must
 explicitly declare the :ref:`Meta <meta-options>` inheritance. For example::
 
-    from ginger.db import models
+    from gingerdj.db import models
 
 
     class CommonInfo(models.Model):
@@ -1086,18 +1086,18 @@ explicitly declare the :ref:`Meta <meta-options>` inheritance. For example::
 Be careful with ``related_name`` and ``related_query_name``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-If you are using :attr:`~ginger.db.models.ForeignKey.related_name` or
-:attr:`~ginger.db.models.ForeignKey.related_query_name` on a ``ForeignKey`` or
+If you are using :attr:`~gingerdj.db.models.ForeignKey.related_name` or
+:attr:`~gingerdj.db.models.ForeignKey.related_query_name` on a ``ForeignKey`` or
 ``ManyToManyField``, you must always specify a *unique* reverse name and query
 name for the field. This would normally cause a problem in abstract base
 classes, since the fields on this class are included into each of the child
 classes, with exactly the same values for the attributes (including
-:attr:`~ginger.db.models.ForeignKey.related_name` and
-:attr:`~ginger.db.models.ForeignKey.related_query_name`) each time.
+:attr:`~gingerdj.db.models.ForeignKey.related_name` and
+:attr:`~gingerdj.db.models.ForeignKey.related_query_name`) each time.
 
 To work around this problem, when you are using
-:attr:`~ginger.db.models.ForeignKey.related_name` or
-:attr:`~ginger.db.models.ForeignKey.related_query_name` in an abstract base
+:attr:`~gingerdj.db.models.ForeignKey.related_name` or
+:attr:`~gingerdj.db.models.ForeignKey.related_query_name` in an abstract base
 class (only), part of the value should contain ``'%(app_label)s'`` and
 ``'%(class)s'``.
 
@@ -1110,7 +1110,7 @@ class (only), part of the value should contain ``'%(app_label)s'`` and
 
 For example, given an app ``common/models.py``::
 
-    from ginger.db import models
+    from gingerdj.db import models
 
 
     class Base(models.Model):
@@ -1147,14 +1147,14 @@ The reverse name of the ``common.ChildB.m2m`` field will be
 will be ``rare_childb_related`` and the reverse query name will be
 ``rare_childbs``. It's up to you how you use the ``'%(class)s'`` and
 ``'%(app_label)s'`` portion to construct your related name or related query name
-but if you forget to use it, Ginger will raise errors when you perform system
+but if you forget to use it, GingerDJ will raise errors when you perform system
 checks (or run :djadmin:`migrate`).
 
-If you don't specify a :attr:`~ginger.db.models.ForeignKey.related_name`
+If you don't specify a :attr:`~gingerdj.db.models.ForeignKey.related_name`
 attribute for a field in an abstract base class, the default reverse name will
 be the name of the child class followed by ``'_set'``, just as it normally
 would be if you'd declared the field directly on the child class. For example,
-in the above code, if the :attr:`~ginger.db.models.ForeignKey.related_name`
+in the above code, if the :attr:`~gingerdj.db.models.ForeignKey.related_name`
 attribute was omitted, the reverse name for the ``m2m`` field would be
 ``childa_set`` in the ``ChildA`` case and ``childb_set`` for the ``ChildB``
 field.
@@ -1164,14 +1164,14 @@ field.
 Multi-table inheritance
 -----------------------
 
-The second type of model inheritance supported by Ginger is when each model in
+The second type of model inheritance supported by GingerDJ is when each model in
 the hierarchy is a model all by itself. Each model corresponds to its own
 database table and can be queried and created individually. The inheritance
 relationship introduces links between the child model and each of its parents
-(via an automatically-created :class:`~ginger.db.models.OneToOneField`).
+(via an automatically-created :class:`~gingerdj.db.models.OneToOneField`).
 For example::
 
-    from ginger.db import models
+    from gingerdj.db import models
 
 
     class Place(models.Model):
@@ -1208,7 +1208,7 @@ created directly as a ``Place`` object or was the parent of some other class),
 referring to ``p.restaurant`` would raise a ``Restaurant.DoesNotExist``
 exception.
 
-The automatically-created :class:`~ginger.db.models.OneToOneField` on
+The automatically-created :class:`~gingerdj.db.models.OneToOneField` on
 ``Restaurant`` that links it to ``Place`` looks like this::
 
     place_ptr = models.OneToOneField(
@@ -1219,8 +1219,8 @@ The automatically-created :class:`~ginger.db.models.OneToOneField` on
     )
 
 You can override that field by declaring your own
-:class:`~ginger.db.models.OneToOneField` with :attr:`parent_link=True
-<ginger.db.models.OneToOneField.parent_link>` on ``Restaurant``.
+:class:`~gingerdj.db.models.OneToOneField` with :attr:`parent_link=True
+<gingerdj.db.models.OneToOneField.parent_link>` on ``Restaurant``.
 
 .. _meta-and-multi-table-inheritance:
 
@@ -1237,8 +1237,8 @@ right).
 So a child model does not have access to its parent's :ref:`Meta
 <meta-options>` class. However, there are a few limited cases where the child
 inherits behavior from the parent: if the child does not specify an
-:attr:`~ginger.db.models.Options.ordering` attribute or a
-:attr:`~ginger.db.models.Options.get_latest_by` attribute, it will inherit
+:attr:`~gingerdj.db.models.Options.ordering` attribute or a
+:attr:`~gingerdj.db.models.Options.get_latest_by` attribute, it will inherit
 these from its parent.
 
 If the parent has an ordering and you don't want the child to have any natural
@@ -1254,19 +1254,19 @@ Inheritance and reverse relations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Because multi-table inheritance uses an implicit
-:class:`~ginger.db.models.OneToOneField` to link the child and
+:class:`~gingerdj.db.models.OneToOneField` to link the child and
 the parent, it's possible to move from the parent down to the child,
 as in the above example. However, this uses up the name that is the
-default :attr:`~ginger.db.models.ForeignKey.related_name` value for
-:class:`~ginger.db.models.ForeignKey` and
-:class:`~ginger.db.models.ManyToManyField` relations.  If you
+default :attr:`~gingerdj.db.models.ForeignKey.related_name` value for
+:class:`~gingerdj.db.models.ForeignKey` and
+:class:`~gingerdj.db.models.ManyToManyField` relations.  If you
 are putting those types of relations on a subclass of the parent model, you
-**must** specify the :attr:`~ginger.db.models.ForeignKey.related_name`
-attribute on each such field. If you forget, Ginger will raise a validation
+**must** specify the :attr:`~gingerdj.db.models.ForeignKey.related_name`
+attribute on each such field. If you forget, GingerDJ will raise a validation
 error.
 
 For example, using the above ``Place`` class again, let's create another
-subclass with a :class:`~ginger.db.models.ManyToManyField`::
+subclass with a :class:`~gingerdj.db.models.ManyToManyField`::
 
     class Supplier(Place):
         customers = models.ManyToManyField(Place)
@@ -1287,12 +1287,12 @@ error: ``models.ManyToManyField(Place, related_name='provider')``.
 Specifying the parent link field
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-As mentioned, Ginger will automatically create a
-:class:`~ginger.db.models.OneToOneField` linking your child
+As mentioned, GingerDJ will automatically create a
+:class:`~gingerdj.db.models.OneToOneField` linking your child
 class back to any non-abstract parent models. If you want to control the
 name of the attribute linking back to the parent, you can create your
-own :class:`~ginger.db.models.OneToOneField` and set
-:attr:`parent_link=True <ginger.db.models.OneToOneField.parent_link>`
+own :class:`~gingerdj.db.models.OneToOneField` and set
+:attr:`parent_link=True <gingerdj.db.models.OneToOneField.parent_link>`
 to indicate that your field is the link back to the parent class.
 
 .. _proxy-models:
@@ -1314,13 +1314,13 @@ model. The difference is that you can change things like the default model
 ordering or the default manager in the proxy, without having to alter the
 original.
 
-Proxy models are declared like normal models. You tell Ginger that it's a
-proxy model by setting the :attr:`~ginger.db.models.Options.proxy` attribute of
+Proxy models are declared like normal models. You tell GingerDJ that it's a
+proxy model by setting the :attr:`~gingerdj.db.models.Options.proxy` attribute of
 the ``Meta`` class to ``True``.
 
 For example, suppose you want to add a method to the ``Person`` model. You can do it like this::
 
-    from ginger.db import models
+    from gingerdj.db import models
 
 
     class Person(models.Model):
@@ -1364,7 +1364,7 @@ models <meta-and-multi-table-inheritance>`.
 ``QuerySet``\s still return the model that was requested
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-There is no way to have Ginger return, say, a ``MyPerson`` object whenever you
+There is no way to have GingerDJ return, say, a ``MyPerson`` object whenever you
 query for ``Person`` objects. A queryset for ``Person`` objects will return
 those types of objects. The whole point of proxy objects is that code relying
 on the original ``Person`` will use those and your own code can use the
@@ -1393,7 +1393,7 @@ classes will still be available.
 Continuing our example from above, you could change the default manager used
 when you query the ``Person`` model like this::
 
-    from ginger.db import models
+    from gingerdj.db import models
 
 
     class NewManager(models.Manager):
@@ -1433,11 +1433,11 @@ Differences between proxy inheritance and unmanaged models
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Proxy model inheritance might look fairly similar to creating an unmanaged
-model, using the :attr:`~ginger.db.models.Options.managed` attribute on a
+model, using the :attr:`~gingerdj.db.models.Options.managed` attribute on a
 model's ``Meta`` class.
 
 With careful setting of :attr:`Meta.db_table
-<ginger.db.models.Options.db_table>` you could create an unmanaged model that
+<gingerdj.db.models.Options.db_table>` you could create an unmanaged model that
 shadows an existing model and adds Python methods to it. However, that would be
 very repetitive and fragile as you need to keep both copies synchronized if you
 make any changes.
@@ -1451,7 +1451,7 @@ The general rules are:
 #. If you are mirroring an existing model or database table and don't want
    all the original database table columns, use ``Meta.managed=False``.
    That option is normally useful for modeling database views and tables
-   not under the control of Ginger.
+   not under the control of GingerDJ.
 #. If you are wanting to change the Python-only behavior of a model, but
    keep all the same fields as in the original, use ``Meta.proxy=True``.
    This sets things up so that the proxy model is an exact copy of the
@@ -1462,7 +1462,7 @@ The general rules are:
 Multiple inheritance
 --------------------
 
-Just as with Python's subclassing, it's possible for a Ginger model to inherit
+Just as with Python's subclassing, it's possible for a GingerDJ model to inherit
 from multiple parent models. Keep in mind that normal Python name resolution
 rules apply. The first base class that a particular name (e.g. :ref:`Meta
 <meta-options>`) appears in will be the one that is used; for example, this
@@ -1478,7 +1478,7 @@ coming from.
 
 Note that inheriting from multiple models that have a common ``id`` primary
 key field will raise an error. To properly use multiple inheritance, you can
-use an explicit :class:`~ginger.db.models.AutoField` in the base models::
+use an explicit :class:`~gingerdj.db.models.AutoField` in the base models::
 
     class Article(models.Model):
         article_id = models.AutoField(primary_key=True)
@@ -1493,8 +1493,8 @@ use an explicit :class:`~ginger.db.models.AutoField` in the base models::
     class BookReview(Book, Article):
         pass
 
-Or use a common ancestor to hold the :class:`~ginger.db.models.AutoField`. This
-requires using an explicit :class:`~ginger.db.models.OneToOneField` from each
+Or use a common ancestor to hold the :class:`~gingerdj.db.models.AutoField`. This
+requires using an explicit :class:`~gingerdj.db.models.OneToOneField` from each
 parent model to the common ancestor to avoid a clash between the fields that
 are automatically generated and inherited by the child::
 
@@ -1521,7 +1521,7 @@ Field name "hiding" is not permitted
 ------------------------------------
 
 In normal Python class inheritance, it is permissible for a child class to
-override any attribute from the parent class. In Ginger, this isn't usually
+override any attribute from the parent class. In GingerDJ, this isn't usually
 permitted for model fields. If a non-abstract model base class has a field
 called ``author``, you can't create another model field or define
 an attribute called ``author`` in any class that inherits from that base class.
@@ -1534,13 +1534,13 @@ by setting ``field_name = None``.
 
     Model managers are inherited from abstract base classes. Overriding an
     inherited field which is referenced by an inherited
-    :class:`~ginger.db.models.Manager` may cause subtle bugs. See :ref:`custom
+    :class:`~gingerdj.db.models.Manager` may cause subtle bugs. See :ref:`custom
     managers and model inheritance <custom-managers-and-inheritance>`.
 
 .. note::
 
     Some fields define extra attributes on the model, e.g. a
-    :class:`~ginger.db.models.ForeignKey` defines an extra attribute with
+    :class:`~gingerdj.db.models.ForeignKey` defines an extra attribute with
     ``_id`` appended to the field name, as well as ``related_name`` and
     ``related_query_name`` on the foreign model.
 
@@ -1551,18 +1551,18 @@ Overriding fields in a parent model leads to difficulties in areas such as
 initializing new instances (specifying which field is being initialized in
 ``Model.__init__``) and serialization. These are features which normal Python
 class inheritance doesn't have to deal with in quite the same way, so the
-difference between Ginger model inheritance and Python class inheritance isn't
+difference between GingerDJ model inheritance and Python class inheritance isn't
 arbitrary.
 
 This restriction only applies to attributes which are
-:class:`~ginger.db.models.Field` instances. Normal Python attributes
+:class:`~gingerdj.db.models.Field` instances. Normal Python attributes
 can be overridden if you wish. It also only applies to the name of the
 attribute as Python sees it: if you are manually specifying the database
 column name, you can have the same column name appearing in both a child and
 an ancestor model for multi-table inheritance (they are columns in two
 different database tables).
 
-Ginger will raise a :exc:`~ginger.core.exceptions.FieldError` if you override
+GingerDJ will raise a :exc:`~gingerdj.core.exceptions.FieldError` if you override
 any model field in any ancestor model.
 
 Note that because of the way fields are resolved during class definition, model

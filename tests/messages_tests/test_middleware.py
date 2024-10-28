@@ -1,7 +1,7 @@
 import unittest
 
-from ginger.contrib.messages.middleware import MessageMiddleware
-from ginger.http import HttpRequest, HttpResponse
+from gingerdj.contrib.messages.middleware import MessageMiddleware
+from gingerdj.http import HttpRequest, HttpResponse
 
 
 class MiddlewareTests(unittest.TestCase):

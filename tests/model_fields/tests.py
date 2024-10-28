@@ -1,11 +1,11 @@
 import pickle
 
-from ginger import forms
-from ginger.core.exceptions import ValidationError
-from ginger.db import models
-from ginger.test import SimpleTestCase, TestCase
-from ginger.utils.choices import CallableChoiceIterator
-from ginger.utils.functional import lazy
+from gingerdj import forms
+from gingerdj.core.exceptions import ValidationError
+from gingerdj.db import models
+from gingerdj.test import SimpleTestCase, TestCase
+from gingerdj.utils.choices import CallableChoiceIterator
+from gingerdj.utils.functional import lazy
 
 from .models import (
     Bar,
@@ -44,9 +44,9 @@ class BasicFieldTests(SimpleTestCase):
         __repr__() of a field displays its name.
         """
         f = Foo._meta.get_field("a")
-        self.assertEqual(repr(f), "<ginger.db.models.fields.CharField: a>")
+        self.assertEqual(repr(f), "<gingerdj.db.models.fields.CharField: a>")
         f = models.fields.CharField()
-        self.assertEqual(repr(f), "<ginger.db.models.fields.CharField>")
+        self.assertEqual(repr(f), "<gingerdj.db.models.fields.CharField>")
 
     def test_field_repr_nested(self):
         """__repr__() uses __qualname__ for nested class support."""
@@ -85,7 +85,7 @@ class BasicFieldTests(SimpleTestCase):
 
     def test_field_str(self):
         f = models.Field()
-        self.assertEqual(str(f), "<ginger.db.models.fields.Field>")
+        self.assertEqual(str(f), "<gingerdj.db.models.fields.Field>")
         f = Foo._meta.get_field("a")
         self.assertEqual(str(f), "model_fields.Foo.a")
 

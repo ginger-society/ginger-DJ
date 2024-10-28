@@ -1,15 +1,15 @@
 import unittest
 from unittest import mock
 
-from ginger.core.checks.database import check_database_backends
-from ginger.db import connection, connections
-from ginger.test import TestCase
+from gingerdj.core.checks.database import check_database_backends
+from gingerdj.db import connection, connections
+from gingerdj.test import TestCase
 
 
 class DatabaseCheckTests(TestCase):
     databases = {"default", "other"}
 
-    @mock.patch("ginger.db.backends.base.validation.BaseDatabaseValidation.check")
+    @mock.patch("gingerdj.db.backends.base.validation.BaseDatabaseValidation.check")
     def test_database_checks_called(self, mocked_check):
         check_database_backends()
         self.assertFalse(mocked_check.called)

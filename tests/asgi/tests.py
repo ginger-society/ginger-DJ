@@ -7,23 +7,23 @@ from pathlib import Path
 from asgiref.sync import sync_to_async
 from asgiref.testing import ApplicationCommunicator
 
-from ginger.contrib.staticfiles.handlers import ASGIStaticFilesHandler
-from ginger.core.asgi import get_asgi_application
-from ginger.core.exceptions import RequestDataTooBig
-from ginger.core.handlers.asgi import ASGIHandler, ASGIRequest
-from ginger.core.signals import request_finished, request_started
-from ginger.db import close_old_connections
-from ginger.http import HttpResponse, StreamingHttpResponse
-from ginger.test import (
+from gingerdj.contrib.staticfiles.handlers import ASGIStaticFilesHandler
+from gingerdj.core.asgi import get_asgi_application
+from gingerdj.core.exceptions import RequestDataTooBig
+from gingerdj.core.handlers.asgi import ASGIHandler, ASGIRequest
+from gingerdj.core.signals import request_finished, request_started
+from gingerdj.db import close_old_connections
+from gingerdj.http import HttpResponse, StreamingHttpResponse
+from gingerdj.test import (
     AsyncRequestFactory,
     SimpleTestCase,
     ignore_warnings,
     modify_settings,
     override_settings,
 )
-from ginger.urls import path
-from ginger.utils.http import http_date
-from ginger.views.decorators.csrf import csrf_exempt
+from gingerdj.urls import path
+from gingerdj.utils.http import http_date
+from gingerdj.views.decorators.csrf import csrf_exempt
 
 from .urls import sync_waiter, test_filename
 
@@ -81,7 +81,7 @@ class ASGITest(SimpleTestCase):
     # StreamingHTTPResponse triggers a warning when iterating the file.
     # assertWarnsMessage is not async compatible, so ignore_warnings for the
     # test.
-    @ignore_warnings(module="ginger.http.response")
+    @ignore_warnings(module="gingerdj.http.response")
     async def test_file_response(self):
         """
         Makes sure that FileResponse works over ASGI.
@@ -123,13 +123,13 @@ class ASGITest(SimpleTestCase):
         # Allow response.close() to finish.
         await communicator.wait()
 
-    @modify_settings(INSTALLED_APPS={"append": "ginger.contrib.staticfiles"})
+    @modify_settings(INSTALLED_APPS={"append": "gingerdj.contrib.staticfiles"})
     @override_settings(
         STATIC_URL="static/",
         STATIC_ROOT=TEST_STATIC_ROOT,
         STATICFILES_DIRS=[TEST_STATIC_ROOT],
         STATICFILES_FINDERS=[
-            "ginger.contrib.staticfiles.finders.FileSystemFinder",
+            "gingerdj.contrib.staticfiles.finders.FileSystemFinder",
         ],
     )
     async def test_static_file_response(self):
@@ -398,7 +398,7 @@ class ASGITest(SimpleTestCase):
         scope = self.async_request_factory._base_scope(path="/", type="other")
         communicator = ApplicationCommunicator(application, scope)
         await communicator.send_input({"type": "http.request"})
-        msg = "Ginger can only handle ASGI/HTTP connections, not other."
+        msg = "GingerDJ can only handle ASGI/HTTP connections, not other."
         with self.assertRaisesMessage(ValueError, msg):
             await communicator.receive_output()
 

@@ -1,8 +1,8 @@
 from datetime import datetime
 
-from ginger.contrib.admin.options import IncorrectLookupParameters
-from ginger.test import RequestFactory, TestCase
-from ginger.utils.timezone import make_aware
+from gingerdj.contrib.admin.options import IncorrectLookupParameters
+from gingerdj.test import RequestFactory, TestCase
+from gingerdj.utils.timezone import make_aware
 
 from .admin import EventAdmin
 from .admin import site as custom_site

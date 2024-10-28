@@ -7,9 +7,9 @@ from copy import deepcopy
 from decimal import Decimal
 from unittest import mock
 
-from ginger.core.exceptions import FieldError
-from ginger.db import DatabaseError, NotSupportedError, connection
-from ginger.db.models import (
+from gingerdj.core.exceptions import FieldError
+from gingerdj.db import DatabaseError, NotSupportedError, connection
+from gingerdj.db.models import (
     AutoField,
     Avg,
     BinaryField,
@@ -45,7 +45,7 @@ from ginger.db.models import (
     Variance,
     When,
 )
-from ginger.db.models.expressions import (
+from gingerdj.db.models.expressions import (
     Col,
     Combinable,
     CombinedExpression,
@@ -53,7 +53,7 @@ from ginger.db.models.expressions import (
     RawSQL,
     Ref,
 )
-from ginger.db.models.functions import (
+from gingerdj.db.models.functions import (
     Coalesce,
     Concat,
     Left,
@@ -62,16 +62,16 @@ from ginger.db.models.functions import (
     Substr,
     Upper,
 )
-from ginger.db.models.sql import constants
-from ginger.db.models.sql.datastructures import Join
-from ginger.test import SimpleTestCase, TestCase, skipUnlessDBFeature
-from ginger.test.utils import (
+from gingerdj.db.models.sql import constants
+from gingerdj.db.models.sql.datastructures import Join
+from gingerdj.test import SimpleTestCase, TestCase, skipUnlessDBFeature
+from gingerdj.test.utils import (
     Approximate,
     CaptureQueriesContext,
     isolate_apps,
     register_lookup,
 )
-from ginger.utils.functional import SimpleLazyObject
+from gingerdj.utils.functional import SimpleLazyObject
 
 from .models import (
     UUID,
@@ -1280,7 +1280,7 @@ class FTests(SimpleTestCase):
     def test_deconstruct(self):
         f = F("name")
         path, args, kwargs = f.deconstruct()
-        self.assertEqual(path, "ginger.db.models.F")
+        self.assertEqual(path, "gingerdj.db.models.F")
         self.assertEqual(args, (f.name,))
         self.assertEqual(kwargs, {})
 
@@ -2247,14 +2247,14 @@ class ValueTests(TestCase):
     def test_deconstruct(self):
         value = Value("name")
         path, args, kwargs = value.deconstruct()
-        self.assertEqual(path, "ginger.db.models.Value")
+        self.assertEqual(path, "gingerdj.db.models.Value")
         self.assertEqual(args, (value.value,))
         self.assertEqual(kwargs, {})
 
     def test_deconstruct_output_field(self):
         value = Value("name", output_field=CharField())
         path, args, kwargs = value.deconstruct()
-        self.assertEqual(path, "ginger.db.models.Value")
+        self.assertEqual(path, "gingerdj.db.models.Value")
         self.assertEqual(args, (value.value,))
         self.assertEqual(len(kwargs), 1)
         self.assertEqual(

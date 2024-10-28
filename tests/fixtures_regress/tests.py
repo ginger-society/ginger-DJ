@@ -5,12 +5,12 @@ import re
 from io import StringIO
 from pathlib import Path
 
-from ginger.core import management, serializers
-from ginger.core.exceptions import ImproperlyConfigured
-from ginger.core.serializers.base import DeserializationError
-from ginger.db import IntegrityError, transaction
-from ginger.db.models import signals
-from ginger.test import (
+from gingerdj.core import management, serializers
+from gingerdj.core.exceptions import ImproperlyConfigured
+from gingerdj.core.serializers.base import DeserializationError
+from gingerdj.db import IntegrityError, transaction
+from gingerdj.db.models import signals
+from gingerdj.test import (
     TestCase,
     TransactionTestCase,
     override_settings,

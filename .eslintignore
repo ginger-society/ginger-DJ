@@ -1,7 +1,7 @@
 **/*.min.js
 **/vendor/**/*.js
-ginger/contrib/gis/templates/**/*.js
-ginger/views/templates/*.js
+gingerdj/contrib/gis/templates/**/*.js
+gingerdj/views/templates/*.js
 docs/_build/**/*.js
 node_modules/**.js
 tests/**/*.js

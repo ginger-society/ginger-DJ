@@ -1,5 +1,5 @@
-from ginger.core.serializers.base import DeserializedObject
-from ginger.test import SimpleTestCase
+from gingerdj.core.serializers.base import DeserializedObject
+from gingerdj.test import SimpleTestCase
 
 from .models import Author
 

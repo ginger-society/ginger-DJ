@@ -1,6 +1,6 @@
-from ginger.http import HttpResponse, StreamingHttpResponse
-from ginger.urls import reverse
-from ginger.utils.deprecation import MiddlewareMixin
+from gingerdj.http import HttpResponse, StreamingHttpResponse
+from gingerdj.urls import reverse
+from gingerdj.utils.deprecation import MiddlewareMixin
 
 from . import urlconf_inner
 

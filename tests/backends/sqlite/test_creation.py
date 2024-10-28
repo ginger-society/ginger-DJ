@@ -3,8 +3,8 @@ import multiprocessing
 import unittest
 from unittest import mock
 
-from ginger.db import DEFAULT_DB_ALIAS, NotSupportedError, connection, connections
-from ginger.test import SimpleTestCase
+from gingerdj.db import DEFAULT_DB_ALIAS, NotSupportedError, connection, connections
+from gingerdj.test import SimpleTestCase
 
 
 @unittest.skipUnless(connection.vendor == "sqlite", "SQLite tests")

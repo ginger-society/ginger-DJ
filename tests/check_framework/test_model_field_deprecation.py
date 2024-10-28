@@ -1,7 +1,7 @@
-from ginger.core import checks
-from ginger.db import models
-from ginger.test import SimpleTestCase
-from ginger.test.utils import isolate_apps
+from gingerdj.core import checks
+from gingerdj.db import models
+from gingerdj.test import SimpleTestCase
+from gingerdj.test.utils import isolate_apps
 
 
 @isolate_apps("check_framework")

@@ -1,10 +1,10 @@
 from datetime import datetime, timedelta
 
-from ginger.db import connection
-from ginger.db.models import TextField
-from ginger.db.models.functions import Cast, Now
-from ginger.test import TestCase
-from ginger.utils import timezone
+from gingerdj.db import connection
+from gingerdj.db.models import TextField
+from gingerdj.db.models.functions import Cast, Now
+from gingerdj.test import TestCase
+from gingerdj.utils import timezone
 
 from ..models import Article
 
@@ -16,7 +16,7 @@ lorem_ipsum = """
 class NowTests(TestCase):
     def test_basic(self):
         a1 = Article.objects.create(
-            title="How to Ginger",
+            title="How to GingerDJ",
             text=lorem_ipsum,
             written=timezone.now(),
         )
@@ -41,7 +41,7 @@ class NowTests(TestCase):
         self.assertIsInstance(a2.published, datetime)
         self.assertQuerySetEqual(
             Article.objects.filter(published__lte=Now()),
-            ["How to Ginger"],
+            ["How to GingerDJ"],
             lambda a: a.title,
         )
         self.assertQuerySetEqual(
@@ -52,7 +52,7 @@ class NowTests(TestCase):
 
     def test_microseconds(self):
         Article.objects.create(
-            title="How to Ginger",
+            title="How to GingerDJ",
             text=lorem_ipsum,
             written=timezone.now(),
         )

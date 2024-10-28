@@ -3,10 +3,10 @@ import sys
 import time
 import unittest
 
-from ginger.core.files.base import ContentFile
-from ginger.core.files.storage import InMemoryStorage
-from ginger.core.files.uploadedfile import TemporaryUploadedFile
-from ginger.test import SimpleTestCase, override_settings
+from gingerdj.core.files.base import ContentFile
+from gingerdj.core.files.storage import InMemoryStorage
+from gingerdj.core.files.uploadedfile import TemporaryUploadedFile
+from gingerdj.test import SimpleTestCase, override_settings
 
 
 class MemoryStorageIOTests(unittest.TestCase):
@@ -233,7 +233,7 @@ class InMemoryStorageTests(SimpleTestCase):
     def test_deconstruction(self):
         storage = InMemoryStorage()
         path, args, kwargs = storage.deconstruct()
-        self.assertEqual(path, "ginger.core.files.storage.InMemoryStorage")
+        self.assertEqual(path, "gingerdj.core.files.storage.InMemoryStorage")
         self.assertEqual(args, ())
         self.assertEqual(kwargs, {})
 

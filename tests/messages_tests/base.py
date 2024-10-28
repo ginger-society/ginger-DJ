@@ -1,11 +1,11 @@
-from ginger.contrib.messages import Message, constants, get_level, set_level
-from ginger.contrib.messages.api import MessageFailure
-from ginger.contrib.messages.constants import DEFAULT_LEVELS
-from ginger.contrib.messages.storage import default_storage
-from ginger.http import HttpRequest, HttpResponse
-from ginger.test import modify_settings, override_settings
-from ginger.urls import reverse
-from ginger.utils.translation import gettext_lazy
+from gingerdj.contrib.messages import Message, constants, get_level, set_level
+from gingerdj.contrib.messages.api import MessageFailure
+from gingerdj.contrib.messages.constants import DEFAULT_LEVELS
+from gingerdj.contrib.messages.storage import default_storage
+from gingerdj.http import HttpRequest, HttpResponse
+from gingerdj.test import modify_settings, override_settings
+from gingerdj.urls import reverse
+from gingerdj.utils.translation import gettext_lazy
 
 
 def add_level_messages(storage):
@@ -37,12 +37,12 @@ class BaseTests:
             override_settings(
                 TEMPLATES=[
                     {
-                        "BACKEND": "ginger.template.backends.ginger.GingerTemplates",
+                        "BACKEND": "gingerdj.template.backends.gingerdj.GingerTemplates",
                         "DIRS": [],
                         "APP_DIRS": True,
                         "OPTIONS": {
                             "context_processors": (
-                                "ginger.contrib.messages.context_processors.messages",
+                                "gingerdj.contrib.messages.context_processors.messages",
                             ),
                         },
                     }
@@ -52,7 +52,7 @@ class BaseTests:
                 MESSAGE_STORAGE=(
                     f"{cls.storage_class.__module__}.{cls.storage_class.__name__}"
                 ),
-                SESSION_SERIALIZER="ginger.contrib.sessions.serializers.JSONSerializer",
+                SESSION_SERIALIZER="gingerdj.contrib.sessions.serializers.JSONSerializer",
             )
         )
         super().setUpClass()
@@ -211,14 +211,14 @@ class BaseTests:
             self.assertContains(response, msg)
 
     @modify_settings(
-        INSTALLED_APPS={"remove": "ginger.contrib.messages"},
-        MIDDLEWARE={"remove": "ginger.contrib.messages.middleware.MessageMiddleware"},
+        INSTALLED_APPS={"remove": "gingerdj.contrib.messages"},
+        MIDDLEWARE={"remove": "gingerdj.contrib.messages.middleware.MessageMiddleware"},
     )
     @override_settings(
         MESSAGE_LEVEL=constants.DEBUG,
         TEMPLATES=[
             {
-                "BACKEND": "ginger.template.backends.ginger.GingerTemplates",
+                "BACKEND": "gingerdj.template.backends.gingerdj.GingerTemplates",
                 "DIRS": [],
                 "APP_DIRS": True,
             }
@@ -239,13 +239,13 @@ class BaseTests:
                 self.client.post(add_url, data, follow=True)
 
     @modify_settings(
-        INSTALLED_APPS={"remove": "ginger.contrib.messages"},
-        MIDDLEWARE={"remove": "ginger.contrib.messages.middleware.MessageMiddleware"},
+        INSTALLED_APPS={"remove": "gingerdj.contrib.messages"},
+        MIDDLEWARE={"remove": "gingerdj.contrib.messages.middleware.MessageMiddleware"},
     )
     @override_settings(
         TEMPLATES=[
             {
-                "BACKEND": "ginger.template.backends.ginger.GingerTemplates",
+                "BACKEND": "gingerdj.template.backends.gingerdj.GingerTemplates",
                 "DIRS": [],
                 "APP_DIRS": True,
             }

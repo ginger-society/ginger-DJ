@@ -1,6 +1,6 @@
 import unittest
 
-from ginger.contrib.gis.gdal import Envelope, GDALException
+from gingerdj.contrib.gis.gdal import Envelope, GDALException
 
 
 class TestPoint:

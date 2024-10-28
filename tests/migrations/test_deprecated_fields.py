@@ -1,5 +1,5 @@
-from ginger.core.management import call_command
-from ginger.test import override_settings
+from gingerdj.core.management import call_command
+from gingerdj.test import override_settings
 
 from .test_base import MigrationTestBase
 

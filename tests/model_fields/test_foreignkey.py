@@ -1,11 +1,11 @@
 from decimal import Decimal
 
-from ginger.apps import apps
-from ginger.core import checks
-from ginger.core.exceptions import FieldError
-from ginger.db import models
-from ginger.test import TestCase, skipIfDBFeature
-from ginger.test.utils import isolate_apps
+from gingerdj.apps import apps
+from gingerdj.core import checks
+from gingerdj.core.exceptions import FieldError
+from gingerdj.db import models
+from gingerdj.test import TestCase, skipIfDBFeature
+from gingerdj.test.utils import isolate_apps
 
 from .models import Bar, FkToChar, Foo, PrimaryKeyCharModel
 

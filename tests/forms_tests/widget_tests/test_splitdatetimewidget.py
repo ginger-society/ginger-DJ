@@ -1,6 +1,6 @@
 from datetime import date, datetime, time
 
-from ginger.forms import Form, SplitDateTimeField, SplitDateTimeWidget
+from gingerdj.forms import Form, SplitDateTimeField, SplitDateTimeWidget
 
 from .base import WidgetTest
 

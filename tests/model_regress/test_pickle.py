@@ -1,15 +1,15 @@
 import pickle
 
-import ginger
-from ginger.db import GINGER_VERSION_PICKLE_KEY, models
-from ginger.test import SimpleTestCase
+import gingerdj
+from gingerdj.db import GINGER_VERSION_PICKLE_KEY, models
+from gingerdj.test import SimpleTestCase
 
 
 class ModelPickleTests(SimpleTestCase):
     def test_missing_ginger_version_unpickling(self):
         """
         #21430 -- Verifies a warning is raised for models that are
-        unpickled without a Ginger version
+        unpickled without a GingerDJ version
         """
 
         class MissingGingerVersion(models.Model):
@@ -22,14 +22,14 @@ class ModelPickleTests(SimpleTestCase):
                 return reduce_list
 
         p = MissingGingerVersion(title="FooBar")
-        msg = "Pickled model instance's Ginger version is not specified."
+        msg = "Pickled model instance's GingerDJ version is not specified."
         with self.assertRaisesMessage(RuntimeWarning, msg):
             pickle.loads(pickle.dumps(p))
 
     def test_unsupported_unpickle(self):
         """
         #21430 -- Verifies a warning is raised for models that are
-        unpickled with a different Ginger version than the current
+        unpickled with a different GingerDJ version than the current
         """
 
         class DifferentGingerVersion(models.Model):
@@ -43,8 +43,8 @@ class ModelPickleTests(SimpleTestCase):
 
         p = DifferentGingerVersion(title="FooBar")
         msg = (
-            "Pickled model instance's Ginger version 1.0 does not match the "
-            "current version %s." % ginger.__version__
+            "Pickled model instance's GingerDJ version 1.0 does not match the "
+            "current version %s." % gingerdj.__version__
         )
         with self.assertRaisesMessage(RuntimeWarning, msg):
             pickle.loads(pickle.dumps(p))

@@ -1,10 +1,10 @@
 import os
 import unittest
 
-from ginger.core.exceptions import ValidationError
-from ginger.core.files.uploadedfile import SimpleUploadedFile, TemporaryUploadedFile
-from ginger.forms import ClearableFileInput, FileInput, ImageField, Widget
-from ginger.test import SimpleTestCase
+from gingerdj.core.exceptions import ValidationError
+from gingerdj.core.files.uploadedfile import SimpleUploadedFile, TemporaryUploadedFile
+from gingerdj.forms import ClearableFileInput, FileInput, ImageField, Widget
+from gingerdj.test import SimpleTestCase
 
 from . import FormFieldAssertionsMixin
 

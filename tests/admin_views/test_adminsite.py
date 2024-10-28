@@ -1,8 +1,8 @@
-from ginger.contrib import admin
-from ginger.contrib.admin.actions import delete_selected
-from ginger.test import SimpleTestCase, TestCase, override_settings
-from ginger.test.client import RequestFactory
-from ginger.urls import path, reverse
+from gingerdj.contrib import admin
+from gingerdj.contrib.admin.actions import delete_selected
+from gingerdj.test import SimpleTestCase, TestCase, override_settings
+from gingerdj.test.client import RequestFactory
+from gingerdj.urls import path, reverse
 
 from .models import Article
 
@@ -43,8 +43,8 @@ class SiteEachContextTest(TestCase):
 
     def test_each_context(self):
         ctx = self.ctx
-        self.assertEqual(ctx["site_header"], "Ginger administration")
-        self.assertEqual(ctx["site_title"], "Ginger site admin")
+        self.assertEqual(ctx["site_header"], "GingerDJ administration")
+        self.assertEqual(ctx["site_title"], "GingerDJ site admin")
         self.assertEqual(ctx["site_url"], "/")
         self.assertIs(ctx["has_permission"], True)
 
@@ -75,7 +75,6 @@ class SiteEachContextTest(TestCase):
         article = admin_views["models"][0]
         self.assertEqual(article["object_name"], "Article")
         self.assertEqual(article["model"], Article)
-
 
 
 class SiteActionsTests(SimpleTestCase):

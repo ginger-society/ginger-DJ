@@ -1,19 +1,19 @@
 """
-Tests for Ginger's bundled context processors.
+Tests for GingerDJ's bundled context processors.
 """
 
-from ginger.test import SimpleTestCase, TestCase, override_settings
+from gingerdj.test import SimpleTestCase, TestCase, override_settings
 
 
 @override_settings(
     ROOT_URLCONF="context_processors.urls",
     TEMPLATES=[
         {
-            "BACKEND": "ginger.template.backends.ginger.GingerTemplates",
+            "BACKEND": "gingerdj.template.backends.gingerdj.GingerTemplates",
             "APP_DIRS": True,
             "OPTIONS": {
                 "context_processors": [
-                    "ginger.template.context_processors.request",
+                    "gingerdj.template.context_processors.request",
                 ],
             },
         }
@@ -21,7 +21,7 @@ from ginger.test import SimpleTestCase, TestCase, override_settings
 )
 class RequestContextProcessorTests(SimpleTestCase):
     """
-    Tests for the ``ginger.template.context_processors.request`` processor.
+    Tests for the ``gingerdj.template.context_processors.request`` processor.
     """
 
     def test_request_attributes(self):
@@ -55,11 +55,11 @@ class RequestContextProcessorTests(SimpleTestCase):
     ROOT_URLCONF="context_processors.urls",
     TEMPLATES=[
         {
-            "BACKEND": "ginger.template.backends.ginger.GingerTemplates",
+            "BACKEND": "gingerdj.template.backends.gingerdj.GingerTemplates",
             "APP_DIRS": True,
             "OPTIONS": {
                 "context_processors": [
-                    "ginger.template.context_processors.debug",
+                    "gingerdj.template.context_processors.debug",
                 ],
             },
         }
@@ -67,7 +67,7 @@ class RequestContextProcessorTests(SimpleTestCase):
 )
 class DebugContextProcessorTests(TestCase):
     """
-    Tests for the ``ginger.template.context_processors.debug`` processor.
+    Tests for the ``gingerdj.template.context_processors.debug`` processor.
     """
 
     databases = {"default", "other"}

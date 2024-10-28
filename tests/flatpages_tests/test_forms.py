@@ -1,12 +1,12 @@
-from ginger.conf import settings
-from ginger.contrib.flatpages.forms import FlatpageForm
-from ginger.contrib.flatpages.models import FlatPage
-from ginger.contrib.sites.models import Site
-from ginger.test import TestCase, modify_settings, override_settings
-from ginger.utils import translation
+from gingerdj.conf import settings
+from gingerdj.contrib.flatpages.forms import FlatpageForm
+from gingerdj.contrib.flatpages.models import FlatPage
+from gingerdj.contrib.sites.models import Site
+from gingerdj.test import TestCase, modify_settings, override_settings
+from gingerdj.utils import translation
 
 
-@modify_settings(INSTALLED_APPS={"append": ["ginger.contrib.flatpages"]})
+@modify_settings(INSTALLED_APPS={"append": ["gingerdj.contrib.flatpages"]})
 @override_settings(SITE_ID=1)
 class FlatpageAdminFormTests(TestCase):
     @classmethod
@@ -65,7 +65,7 @@ class FlatpageAdminFormTests(TestCase):
             self.assertEqual(form.errors["url"], ["URL is missing a leading slash."])
 
     @override_settings(
-        APPEND_SLASH=True, MIDDLEWARE=["ginger.middleware.common.CommonMiddleware"]
+        APPEND_SLASH=True, MIDDLEWARE=["gingerdj.middleware.common.CommonMiddleware"]
     )
     def test_flatpage_requires_trailing_slash_with_append_slash(self):
         form = FlatpageForm(data=dict(url="/no_trailing_slash", **self.form_data))
@@ -79,7 +79,7 @@ class FlatpageAdminFormTests(TestCase):
             self.assertEqual(form.errors["url"], ["URL is missing a trailing slash."])
 
     @override_settings(
-        APPEND_SLASH=False, MIDDLEWARE=["ginger.middleware.common.CommonMiddleware"]
+        APPEND_SLASH=False, MIDDLEWARE=["gingerdj.middleware.common.CommonMiddleware"]
     )
     def test_flatpage_doesnt_requires_trailing_slash_without_append_slash(self):
         form = FlatpageForm(data=dict(url="/no_trailing_slash", **self.form_data))

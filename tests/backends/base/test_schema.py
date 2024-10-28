@@ -1,6 +1,6 @@
-from ginger.db import models
-from ginger.db.backends.base.schema import BaseDatabaseSchemaEditor
-from ginger.test import SimpleTestCase
+from gingerdj.db import models
+from gingerdj.db.backends.base.schema import BaseDatabaseSchemaEditor
+from gingerdj.test import SimpleTestCase
 
 
 class SchemaEditorTests(SimpleTestCase):

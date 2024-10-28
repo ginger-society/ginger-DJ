@@ -1,8 +1,8 @@
 import re
 
-from ginger.db import connection
-from ginger.test import TestCase, skipUnlessDBFeature
-from ginger.utils.functional import cached_property
+from gingerdj.db import connection
+from gingerdj.test import TestCase, skipUnlessDBFeature
+from gingerdj.utils.functional import cached_property
 
 test_srs = (
     {
@@ -139,7 +139,7 @@ class SpatialRefSysTest(TestCase):
         Test adding a new entry in the SpatialRefSys model using the
         add_srs_entry utility.
         """
-        from ginger.contrib.gis.utils import add_srs_entry
+        from gingerdj.contrib.gis.utils import add_srs_entry
 
         add_srs_entry(3857)
         self.assertTrue(self.SpatialRefSys.objects.filter(srid=3857).exists())

@@ -1,7 +1,7 @@
 import datetime
 from decimal import Decimal
 
-from ginger.db.models import (
+from gingerdj.db.models import (
     AutoField,
     BinaryField,
     BooleanField,
@@ -26,8 +26,8 @@ from ginger.db.models import (
     TimeField,
     URLField,
 )
-from ginger.test import SimpleTestCase
-from ginger.utils.functional import lazy
+from gingerdj.test import SimpleTestCase
+from gingerdj.utils.functional import lazy
 
 
 class PromiseTest(SimpleTestCase):

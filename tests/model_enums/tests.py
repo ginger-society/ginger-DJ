@@ -3,13 +3,13 @@ import decimal
 import ipaddress
 import uuid
 
-from ginger.db import models
-from ginger.template import Context, Template
-from ginger.test import SimpleTestCase
-from ginger.utils.deprecation import RemovedInGinger60Warning
-from ginger.utils.functional import Promise
-from ginger.utils.translation import gettext_lazy as _
-from ginger.utils.version import PY311
+from gingerdj.db import models
+from gingerdj.template import Context, Template
+from gingerdj.test import SimpleTestCase
+from gingerdj.utils.deprecation import RemovedInGinger60Warning
+from gingerdj.utils.functional import Promise
+from gingerdj.utils.translation import gettext_lazy as _
+from gingerdj.utils.version import PY311
 
 
 class Suit(models.IntegerChoices):
@@ -325,7 +325,7 @@ class CustomChoicesTests(SimpleTestCase):
 
 class ChoicesMetaDeprecationTests(SimpleTestCase):
     def test_deprecation_warning(self):
-        from ginger.db.models import enums
+        from gingerdj.db.models import enums
 
         msg = "ChoicesMeta is deprecated in favor of ChoicesType."
         with self.assertWarnsMessage(RemovedInGinger60Warning, msg):

@@ -5,10 +5,10 @@ run with a backend other than PostgreSQL.
 
 import enum
 
-from ginger.db import models
+from gingerdj.db import models
 
 try:
-    from ginger.contrib.postgres.fields import (
+    from gingerdj.contrib.postgres.fields import (
         ArrayField,
         BigIntegerRangeField,
         DateRangeField,
@@ -17,7 +17,7 @@ try:
         HStoreField,
         IntegerRangeField,
     )
-    from ginger.contrib.postgres.search import SearchVector, SearchVectorField
+    from gingerdj.contrib.postgres.search import SearchVector, SearchVectorField
 except ImportError:
 
     class DummyArrayField(models.Field):

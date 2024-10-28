@@ -1,13 +1,13 @@
 =====================
-How to install Ginger
+How to install GingerDJ
 =====================
 
-This document will get you up and running with Ginger.
+This document will get you up and running with GingerDJ.
 
 Install Python
 ==============
 
-Ginger is a Python web framework. See :ref:`faq-python-version-support` for
+GingerDJ is a Python web framework. See :ref:`faq-python-version-support` for
 details.
 
 Get the latest version of Python at https://www.python.org/downloads/ or with
@@ -15,18 +15,18 @@ your operating system's package manager.
 
 .. admonition:: Python on Windows
 
-    If you are just starting with Ginger and using Windows, you may find
+    If you are just starting with GingerDJ and using Windows, you may find
     :doc:`/howto/windows` useful.
 
 Install Apache and ``mod_wsgi``
 ===============================
 
-If you just want to experiment with Ginger, skip ahead to the next
-section; Ginger includes a lightweight web server you can use for
+If you just want to experiment with GingerDJ, skip ahead to the next
+section; GingerDJ includes a lightweight web server you can use for
 testing, so you won't need to set up Apache until you're ready to
-deploy Ginger in production.
+deploy GingerDJ in production.
 
-If you want to use Ginger on a production site, use `Apache`_ with
+If you want to use GingerDJ on a production site, use `Apache`_ with
 `mod_wsgi`_. mod_wsgi operates in one of two modes: embedded
 mode or daemon mode. In embedded mode, mod_wsgi is similar to
 mod_perl -- it embeds Python within Apache and loads Python code into
@@ -40,15 +40,15 @@ without restarting the entire Apache web server, possibly making
 refreshing your codebase more seamless. Consult the mod_wsgi
 documentation to determine which mode is right for your setup. Make
 sure you have Apache installed with the mod_wsgi module activated.
-Ginger will work with any version of Apache that supports mod_wsgi.
+GingerDJ will work with any version of Apache that supports mod_wsgi.
 
-See :doc:`How to use Ginger with mod_wsgi </howto/deployment/wsgi/modwsgi>`
+See :doc:`How to use GingerDJ with mod_wsgi </howto/deployment/wsgi/modwsgi>`
 for information on how to configure mod_wsgi once you have it
 installed.
 
-If you can't use mod_wsgi for some reason, fear not: Ginger supports many other
+If you can't use mod_wsgi for some reason, fear not: GingerDJ supports many other
 deployment options. One is :doc:`uWSGI </howto/deployment/wsgi/uwsgi>`; it works
-very well with `nginx`_. Additionally, Ginger follows the WSGI spec
+very well with `nginx`_. Additionally, GingerDJ follows the WSGI spec
 (:pep:`3333`), which allows it to run on a variety of server platforms.
 
 .. _Apache: https://httpd.apache.org/
@@ -60,8 +60,8 @@ very well with `nginx`_. Additionally, Ginger follows the WSGI spec
 Get your database running
 =========================
 
-If you plan to use Ginger's database API functionality, you'll need to make
-sure a database server is running. Ginger supports many different database
+If you plan to use GingerDJ's database API functionality, you'll need to make
+sure a database server is running. GingerDJ supports many different database
 servers and is officially supported with PostgreSQL_, MariaDB_, MySQL_, Oracle_
 and SQLite_.
 
@@ -74,7 +74,7 @@ production.
 
 In addition to the officially supported databases, there are :ref:`backends
 provided by 3rd parties <third-party-notes>` that allow you to use other
-databases with Ginger.
+databases with GingerDJ.
 
 In addition to a database backend, you'll need to make sure your Python
 database bindings are installed.
@@ -97,17 +97,17 @@ database bindings are installed.
 * If you're using an unofficial 3rd party backend, please consult the
   documentation provided for any additional requirements.
 
-If you plan to use Ginger's ``manage.py migrate`` command to automatically
-create database tables for your models (after first installing Ginger and
-creating a project), you'll need to ensure that Ginger has permission to create
+If you plan to use GingerDJ's ``manage.py migrate`` command to automatically
+create database tables for your models (after first installing GingerDJ and
+creating a project), you'll need to ensure that GingerDJ has permission to create
 and alter tables in the database you're using; if you plan to manually create
-the tables, you can grant Ginger ``SELECT``, ``INSERT``, ``UPDATE`` and
+the tables, you can grant GingerDJ ``SELECT``, ``INSERT``, ``UPDATE`` and
 ``DELETE`` permissions. After creating a database user with these permissions,
 you'll specify the details in your project's settings file, see
 :setting:`DATABASES` for details.
 
-If you're using Ginger's :doc:`testing framework</topics/testing/index>` to test
-database queries, Ginger will need permission to create a test database.
+If you're using GingerDJ's :doc:`testing framework</topics/testing/index>` to test
+database queries, GingerDJ will need permission to create a test database.
 
 .. _PostgreSQL: https://www.postgresql.org/
 .. _MariaDB: https://mariadb.org/
@@ -118,9 +118,9 @@ database queries, Ginger will need permission to create a test database.
 .. _oracledb: https://oracle.github.io/python-oracledb/
 .. _Oracle: https://www.oracle.com/
 
-.. _install-ginger-code:
+.. _install-gingerdj-code:
 
-Install the Ginger code
+Install the GingerDJ code
 =======================
 
 Installation instructions are slightly different depending on whether you're
@@ -132,7 +132,7 @@ release, or fetching the latest development version.
 Installing an official release with ``pip``
 -------------------------------------------
 
-This is the recommended way to install Ginger.
+This is the recommended way to install GingerDJ.
 
 #. Install pip_. The easiest is to use the `standalone pip installer`_. If your
    distribution already has ``pip`` installed, you might need to update it if
@@ -149,7 +149,7 @@ This is the recommended way to install Ginger.
 
    .. console::
 
-        $ python -m pip install Ginger
+        $ python -m pip install GingerDJ
 
 .. _pip: https://pip.pypa.io/
 .. _standalone pip installer: https://pip.pypa.io/en/latest/installation/
@@ -160,28 +160,28 @@ Installing a distribution-specific package
 ------------------------------------------
 
 Check the :doc:`distribution specific notes </misc/distributions>` to see if
-your platform/distribution provides official Ginger packages/installers.
+your platform/distribution provides official GingerDJ packages/installers.
 Distribution-provided packages will typically allow for automatic installation
 of dependencies and supported upgrade paths; however, these packages will rarely
-contain the latest release of Ginger.
+contain the latest release of GingerDJ.
 
 .. _installing-development-version:
 
-If you'd like to be able to update your Ginger code occasionally with the
+If you'd like to be able to update your GingerDJ code occasionally with the
 latest bug fixes and improvements, follow these instructions:
 
 #. Make sure that you have Git_ installed and that you can run its commands
    from a shell. (Enter ``git help`` at a shell prompt to test this.)
 
-#. Check out Ginger's main development branch like so:
+#. Check out GingerDJ's main development branch like so:
 
    .. console::
 
-        $ git clone https://github.com/ginger/ginger.git
+        $ git clone https://github.com/gingerdj/gingerdj.git
 
-   This will create a directory ``ginger`` in your current directory.
+   This will create a directory ``gingerdj`` in your current directory.
 
-#. Make sure that the Python interpreter can load Ginger's code. The most
+#. Make sure that the Python interpreter can load GingerDJ's code. The most
    convenient way to do this is to use a virtual environment and pip_. The
    :doc:`contributing tutorial </intro/contributing>` walks through how to
    create a virtual environment.
@@ -191,14 +191,14 @@ latest bug fixes and improvements, follow these instructions:
 
    .. console::
 
-        $ python -m pip install -e ginger/
+        $ python -m pip install -e gingerdj/
 
-   This will make Ginger's code importable, and will also make the
-   ``ginger-admin`` utility command available. In other words, you're all
+   This will make GingerDJ's code importable, and will also make the
+   ``gingerdj-admin`` utility command available. In other words, you're all
    set!
 
-When you want to update your copy of the Ginger source code, run the command
-``git pull`` from within the ``ginger`` directory. When you do this, Git will
+When you want to update your copy of the GingerDJ source code, run the command
+``git pull`` from within the ``gingerdj`` directory. When you do this, Git will
 download any changes.
 
 .. _Git: https://git-scm.com/

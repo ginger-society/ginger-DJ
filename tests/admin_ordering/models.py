@@ -1,5 +1,5 @@
-from ginger.contrib import admin
-from ginger.db import models
+from gingerdj.contrib import admin
+from gingerdj.db import models
 
 
 class Band(models.Model):

@@ -1,6 +1,6 @@
 # Fake views for testing url reverse lookup
-from ginger.http import HttpResponse
-from ginger.template.response import TemplateResponse
+from gingerdj.http import HttpResponse
+from gingerdj.template.response import TemplateResponse
 
 
 def index(request):

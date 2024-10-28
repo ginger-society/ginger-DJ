@@ -1,26 +1,26 @@
 from datetime import date
 
-from ginger import forms
-from ginger.contrib.admin.models import ADDITION, CHANGE, DELETION, LogEntry
-from ginger.contrib.admin.options import (
+from gingerdj import forms
+from gingerdj.contrib.admin.models import ADDITION, CHANGE, DELETION, LogEntry
+from gingerdj.contrib.admin.options import (
     HORIZONTAL,
     VERTICAL,
     ModelAdmin,
     TabularInline,
     get_content_type_for_model,
 )
-from ginger.contrib.admin.sites import AdminSite
-from ginger.contrib.admin.widgets import (
+from gingerdj.contrib.admin.sites import AdminSite
+from gingerdj.contrib.admin.widgets import (
     AdminDateWidget,
     AdminRadioSelect,
     AutocompleteSelect,
     AutocompleteSelectMultiple,
 )
-from ginger.db import models
-from ginger.forms.widgets import Select
-from ginger.test import RequestFactory, SimpleTestCase, TestCase
-from ginger.test.utils import isolate_apps
-from ginger.utils.deprecation import RemovedInGinger60Warning
+from gingerdj.db import models
+from gingerdj.forms.widgets import Select
+from gingerdj.test import RequestFactory, SimpleTestCase, TestCase
+from gingerdj.test.utils import isolate_apps
+from gingerdj.utils.deprecation import RemovedInGinger60Warning
 
 from .models import Band, Concert, Song
 
@@ -293,7 +293,7 @@ class ModelAdminTests(TestCase):
         request_band_name_filter = RequestFactory().get(
             "/", {"main_band__name": "test"}
         )
-        
+
         with self.assertWarnsMessage(RemovedInGinger60Warning, msg):
             changelist = model_admin.get_changelist_instance(request_band_name_filter)
             filterspec = changelist.get_filters(request_band_name_filter)[0][0]
@@ -1003,7 +1003,7 @@ class ModelAdminTests(TestCase):
 
     def test_get_deleted_objects(self):
         mock_request = MockRequest()
-        
+
         self.site.register(Band, ModelAdmin)
         ma = self.site.get_model_admin(Band)
         (

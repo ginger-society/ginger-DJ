@@ -1,5 +1,5 @@
-from ginger.test import SimpleTestCase
-from ginger.utils.hashable import make_hashable
+from gingerdj.test import SimpleTestCase
+from gingerdj.utils.hashable import make_hashable
 
 
 class TestHashable(SimpleTestCase):

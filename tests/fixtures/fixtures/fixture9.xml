@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ginger-objects version="1.0">
+<gingerdj-objects version="1.0">
     <object pk="2" model="fixtures.visa">
         <field type="CharField" name="person">
             <natural>Stephane Grappelli</natural>
@@ -19,11 +19,11 @@
         <field type="CharField" name="name">Music for all ages</field>
         <field to="fixtures.person" name="authors" rel="ManyToManyRel">
             <object>
-                <natural>Ginger Reinhardt</natural>
+                <natural>GingerDJ Reinhardt</natural>
             </object>
             <object>
                 <natural>Artist formerly known as &quot;Prince&quot;</natural>
             </object>
         </field>
     </object>
-</ginger-objects>
+</gingerdj-objects>

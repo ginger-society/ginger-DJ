@@ -1,4 +1,4 @@
-from ginger.urls import include, path, re_path
+from gingerdj.urls import include, path, re_path
 
 from .utils import URLObject
 from .views import empty_view, view_class_instance

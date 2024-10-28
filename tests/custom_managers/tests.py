@@ -1,5 +1,5 @@
-from ginger.db import models
-from ginger.test import TestCase
+from gingerdj.db import models
+from gingerdj.test import TestCase
 
 from .models import (
     Book,
@@ -570,7 +570,7 @@ class CustomManagerTests(TestCase):
         mgr = models.Manager()
         as_manager, mgr_path, qs_path, args, kwargs = mgr.deconstruct()
         self.assertFalse(as_manager)
-        self.assertEqual(mgr_path, "ginger.db.models.manager.Manager")
+        self.assertEqual(mgr_path, "gingerdj.db.models.manager.Manager")
         self.assertEqual(args, ())
         self.assertEqual(kwargs, {})
 
@@ -615,7 +615,7 @@ class CustomManagerTests(TestCase):
         mgr = CustomManager("arg")
         msg = (
             "Could not find manager BaseCustomManagerFromCustomQuerySet in "
-            "ginger.db.models.manager.\n"
+            "gingerdj.db.models.manager.\n"
             "Please note that you need to inherit from managers you "
             "dynamically generated with 'from_queryset()'."
         )

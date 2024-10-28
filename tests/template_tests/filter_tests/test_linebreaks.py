@@ -1,7 +1,7 @@
-from ginger.template.defaultfilters import linebreaks_filter
-from ginger.test import SimpleTestCase
-from ginger.utils.functional import lazy
-from ginger.utils.safestring import mark_safe
+from gingerdj.template.defaultfilters import linebreaks_filter
+from gingerdj.test import SimpleTestCase
+from gingerdj.utils.functional import lazy
+from gingerdj.utils.safestring import mark_safe
 
 from ..utils import setup
 

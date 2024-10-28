@@ -1,7 +1,7 @@
 import datetime
 
-from ginger.db import GINGER_VERSION_PICKLE_KEY, models
-from ginger.utils.translation import gettext_lazy as _
+from gingerdj.db import GINGER_VERSION_PICKLE_KEY, models
+from gingerdj.utils.translation import gettext_lazy as _
 
 
 def standalone_number():

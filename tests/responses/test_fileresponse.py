@@ -5,9 +5,9 @@ import sys
 import tempfile
 from unittest import skipIf
 
-from ginger.core.files.base import ContentFile
-from ginger.http import FileResponse
-from ginger.test import SimpleTestCase
+from gingerdj.core.files.base import ContentFile
+from gingerdj.http import FileResponse
+from gingerdj.test import SimpleTestCase
 
 
 class UnseekableBytesIO(io.BytesIO):

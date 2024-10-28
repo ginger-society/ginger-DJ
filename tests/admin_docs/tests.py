@@ -1,4 +1,4 @@
-from ginger.test import SimpleTestCase, TestCase, modify_settings, override_settings
+from gingerdj.test import SimpleTestCase, TestCase, modify_settings, override_settings
 
 
 class TestDataMixin:
@@ -8,12 +8,12 @@ class TestDataMixin:
 
 
 @override_settings(ROOT_URLCONF="admin_docs.urls")
-@modify_settings(INSTALLED_APPS={"append": "ginger.contrib.admindocs"})
+@modify_settings(INSTALLED_APPS={"append": "gingerdj.contrib.admindocs"})
 class AdminDocsSimpleTestCase(SimpleTestCase):
     pass
 
 
 @override_settings(ROOT_URLCONF="admin_docs.urls")
-@modify_settings(INSTALLED_APPS={"append": "ginger.contrib.admindocs"})
+@modify_settings(INSTALLED_APPS={"append": "gingerdj.contrib.admindocs"})
 class AdminDocsTestCase(TestCase):
     pass

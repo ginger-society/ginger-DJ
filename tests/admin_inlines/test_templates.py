@@ -1,7 +1,7 @@
 import json
 
-from ginger.template.loader import render_to_string
-from ginger.test import SimpleTestCase
+from gingerdj.template.loader import render_to_string
+from gingerdj.test import SimpleTestCase
 
 
 class TestTemplates(SimpleTestCase):

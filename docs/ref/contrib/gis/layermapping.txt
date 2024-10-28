@@ -2,10 +2,10 @@
 ``LayerMapping`` data import utility
 ====================================
 
-.. module:: ginger.contrib.gis.utils.layermapping
+.. module:: gingerdj.contrib.gis.utils.layermapping
     :synopsis: Spatial data import utility for GeoGinger models.
 
-.. currentmodule:: ginger.contrib.gis.utils
+.. currentmodule:: gingerdj.contrib.gis.utils
 
 The :class:`LayerMapping` class provides a way to map the contents of
 vector spatial data files (e.g. shapefiles) into GeoGinger models.
@@ -24,7 +24,7 @@ then inserting into a GeoGinger model.
     GIS data sources, like shapefiles, may be very large.  If you find
     that :class:`LayerMapping` is using too much memory, set
     :setting:`DEBUG` to ``False`` in your settings.  When :setting:`DEBUG`
-    is set to ``True``, Ginger :ref:`automatically logs <faq-see-raw-sql-queries>`
+    is set to ``True``, GingerDJ :ref:`automatically logs <faq-see-raw-sql-queries>`
     *every* SQL query -- and when SQL statements contain geometries, this may
     consume more memory than is typical.
 
@@ -36,7 +36,7 @@ Example
 
 .. code-block:: pycon
 
-    >>> from ginger.contrib.gis.gdal import DataSource
+    >>> from gingerdj.contrib.gis.gdal import DataSource
     >>> ds = DataSource("test_poly.shp")
     >>> layer = ds[0]
     >>> print(layer.fields)  # Exploring the fields in the layer, we only want the 'str' field.
@@ -52,9 +52,9 @@ Example
         PRIMEM["Greenwich",0],
         UNIT["Degree",0.017453292519943295]]
 
-#. Now we define our corresponding Ginger model (make sure to use :djadmin:`migrate`)::
+#. Now we define our corresponding GingerDJ model (make sure to use :djadmin:`migrate`)::
 
-    from ginger.contrib.gis.db import models
+    from gingerdj.contrib.gis.db import models
 
 
     class TestGeo(models.Model):
@@ -69,7 +69,7 @@ Example
 
 .. code-block:: pycon
 
-    >>> from ginger.contrib.gis.utils import LayerMapping
+    >>> from gingerdj.contrib.gis.utils import LayerMapping
     >>> from geoapp.models import TestGeo
     >>> mapping = {
     ...     "name": "str",  # The 'name' model field maps to the 'str' layer field.
@@ -85,7 +85,7 @@ Here, :class:`LayerMapping` transformed the three geometries from the shapefile
 in their original spatial reference system (WGS84) to the spatial reference
 system of the GeoGinger model (NAD83).  If no spatial reference system is
 defined for the layer, use the ``source_srs`` keyword with a
-:class:`~ginger.contrib.gis.gdal.SpatialReference` object to specify one.
+:class:`~gingerdj.contrib.gis.gdal.SpatialReference` object to specify one.
 
 ``LayerMapping`` API
 ====================
@@ -102,7 +102,7 @@ Argument           Description
 
 ``data_source``    The path to the OGR-supported data source file
                    (e.g., a shapefile).  Also accepts
-                   :class:`ginger.contrib.gis.gdal.DataSource` instances.
+                   :class:`gingerdj.contrib.gis.gdal.DataSource` instances.
 
 ``mapping``        A dictionary: keys are strings corresponding to
                    the model field, and values correspond to
@@ -121,7 +121,7 @@ Keyword Arguments
 ``source_srs``         Use this to specify the source SRS manually (for
                        example, some shapefiles don't come with a ``'.prj'``
                        file).  An integer SRID, WKT or PROJ strings, and
-                       :class:`ginger.contrib.gis.gdal.SpatialReference`
+                       :class:`gingerdj.contrib.gis.gdal.SpatialReference`
                        objects are accepted.
 
 ``encoding``           Specifies the character set encoding of the strings
@@ -205,7 +205,7 @@ Troubleshooting
 Running out of memory
 ---------------------
 
-As noted in the warning at the top of this section, Ginger stores all SQL
+As noted in the warning at the top of this section, GingerDJ stores all SQL
 queries when ``DEBUG=True``.  Set ``DEBUG=False`` in your settings, and this
 should stop excessive memory use when running ``LayerMapping`` scripts.
 

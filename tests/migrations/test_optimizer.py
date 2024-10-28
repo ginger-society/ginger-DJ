@@ -1,9 +1,9 @@
-from ginger.db import migrations, models
-from ginger.db.migrations import operations
-from ginger.db.migrations.optimizer import MigrationOptimizer
-from ginger.db.migrations.serializer import serializer_factory
-from ginger.db.models.functions import Abs
-from ginger.test import SimpleTestCase
+from gingerdj.db import migrations, models
+from gingerdj.db.migrations import operations
+from gingerdj.db.migrations.optimizer import MigrationOptimizer
+from gingerdj.db.migrations.serializer import serializer_factory
+from gingerdj.db.models.functions import Abs
+from gingerdj.test import SimpleTestCase
 
 from .models import EmptyManager, UnicodeModel
 

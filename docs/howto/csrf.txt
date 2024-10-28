@@ -1,18 +1,18 @@
 .. _using-csrf:
 
 ===================================
-How to use Ginger's CSRF protection
+How to use GingerDJ's CSRF protection
 ===================================
 
 To take advantage of CSRF protection in your views, follow these steps:
 
 #. The CSRF middleware is activated by default in the :setting:`MIDDLEWARE`
    setting. If you override that setting, remember that
-   ``'ginger.middleware.csrf.CsrfViewMiddleware'`` should come before any view
+   ``'gingerdj.middleware.csrf.CsrfViewMiddleware'`` should come before any view
    middleware that assume that CSRF attacks have been dealt with.
 
    If you disabled it, which is not recommended, you can use
-   :func:`~ginger.views.decorators.csrf.csrf_protect` on particular views
+   :func:`~gingerdj.views.decorators.csrf.csrf_protect` on particular views
    you want to protect (see below).
 
 #. In any template that uses a POST form, use the :ttag:`csrf_token` tag inside
@@ -26,9 +26,9 @@ To take advantage of CSRF protection in your views, follow these steps:
    that would cause the CSRF token to be leaked, leading to a vulnerability.
 
 #. In the corresponding view functions, ensure that
-   :class:`~ginger.template.RequestContext` is used to render the response so
+   :class:`~gingerdj.template.RequestContext` is used to render the response so
    that ``{% csrf_token %}`` will work properly. If you're using the
-   :func:`~ginger.shortcuts.render` function, generic views, or contrib apps,
+   :func:`~gingerdj.shortcuts.render` function, generic views, or contrib apps,
    you are covered already since these all use ``RequestContext``.
 
 .. _csrf-ajax:
@@ -92,17 +92,17 @@ The above code could be simplified by using the `JavaScript Cookie library
     The CSRF token is also present in the DOM in a masked form, but only if
     explicitly included using :ttag:`csrf_token` in a template. The cookie
     contains the canonical, unmasked token. The
-    :class:`~ginger.middleware.csrf.CsrfViewMiddleware` will accept either.
+    :class:`~gingerdj.middleware.csrf.CsrfViewMiddleware` will accept either.
     However, in order to protect against `BREACH`_ attacks, it's recommended to
     use a masked token.
 
 .. warning::
 
     If your view is not rendering a template containing the :ttag:`csrf_token`
-    template tag, Ginger might not set the CSRF token cookie. This is common in
+    template tag, GingerDJ might not set the CSRF token cookie. This is common in
     cases where forms are dynamically added to the page. To address this case,
-    Ginger provides a view decorator which forces setting of the cookie:
-    :func:`~ginger.views.decorators.csrf.ensure_csrf_cookie`.
+    GingerDJ provides a view decorator which forces setting of the cookie:
+    :func:`~gingerdj.views.decorators.csrf.ensure_csrf_cookie`.
 
 .. _BREACH: https://www.breachattack.com/
 
@@ -147,9 +147,9 @@ Finally, you'll need to set the header on your AJAX request. Using the
 Using CSRF protection in Jinja2 templates
 =========================================
 
-Ginger's :class:`~ginger.template.backends.jinja2.Jinja2` template backend
+GingerDJ's :class:`~gingerdj.template.backends.jinja2.Jinja2` template backend
 adds ``{{ csrf_input }}`` to the context of all templates which is equivalent
-to ``{% csrf_token %}`` in the Ginger template language. For example:
+to ``{% csrf_token %}`` in the GingerDJ template language. For example:
 
 .. code-block:: html+jinja
 
@@ -159,7 +159,7 @@ Using the decorator method
 ==========================
 
 Rather than adding ``CsrfViewMiddleware`` as a blanket protection, you can use
-the :func:`~ginger.views.decorators.csrf.csrf_protect` decorator, which has
+the :func:`~gingerdj.views.decorators.csrf.csrf_protect` decorator, which has
 exactly the same functionality, on particular views that need the protection.
 It must be used **both** on views that insert the CSRF token in the output, and
 on those that accept the POST form data. (These are often the same view
@@ -184,8 +184,8 @@ The error page, however, is not very friendly, so you may want to provide your
 own view for handling this condition. To do this, set the
 :setting:`CSRF_FAILURE_VIEW` setting.
 
-CSRF failures are logged as warnings to the :ref:`ginger.security.csrf
-<ginger-security-logger>` logger.
+CSRF failures are logged as warnings to the :ref:`gingerdj.security.csrf
+<gingerdj-security-logger>` logger.
 
 Using CSRF protection with caching
 ==================================
@@ -200,10 +200,10 @@ However, if you use cache decorators on individual views, the CSRF middleware
 will not yet have been able to set the Vary header or the CSRF cookie, and the
 response will be cached without either one. In this case, on any views that
 will require a CSRF token to be inserted you should use the
-:func:`ginger.views.decorators.csrf.csrf_protect` decorator first::
+:func:`gingerdj.views.decorators.csrf.csrf_protect` decorator first::
 
-  from ginger.views.decorators.cache import cache_page
-  from ginger.views.decorators.csrf import csrf_protect
+  from gingerdj.views.decorators.cache import cache_page
+  from gingerdj.views.decorators.csrf import csrf_protect
 
 
   @cache_page(60 * 15)
@@ -218,7 +218,7 @@ Testing and CSRF protection
 
 The ``CsrfViewMiddleware`` will usually be a big hindrance to testing view
 functions, due to the need for the CSRF token which must be sent with every POST
-request. For this reason, Ginger's HTTP client for tests has been modified to
+request. For this reason, GingerDJ's HTTP client for tests has been modified to
 set a flag on requests which relaxes the middleware and the ``csrf_protect``
 decorator so that they no longer rejects requests. In every other respect
 (e.g. sending cookies etc.), they behave the same.
@@ -229,7 +229,7 @@ CSRF checks:
 
 .. code-block:: pycon
 
-    >>> from ginger.test import Client
+    >>> from gingerdj.test import Client
     >>> csrf_client = Client(enforce_csrf_checks=True)
 
 Edge cases
@@ -247,7 +247,7 @@ Most views requires CSRF protection, but a few do not.
 
 Solution: rather than disabling the middleware and applying ``csrf_protect`` to
 all the views that need it, enable the middleware and use
-:func:`~ginger.views.decorators.csrf.csrf_exempt`.
+:func:`~gingerdj.views.decorators.csrf.csrf_exempt`.
 
 Setting the token when ``CsrfViewMiddleware.process_view()`` is not used
 ------------------------------------------------------------------------
@@ -256,7 +256,7 @@ There are cases when ``CsrfViewMiddleware.process_view`` may not have run
 before your view is run - 404 and 500 handlers, for example - but you still
 need the CSRF token in a form.
 
-Solution: use :func:`~ginger.views.decorators.csrf.requires_csrf_token`
+Solution: use :func:`~gingerdj.views.decorators.csrf.requires_csrf_token`
 
 Including the CSRF token in an unprotected view
 -----------------------------------------------
@@ -264,8 +264,8 @@ Including the CSRF token in an unprotected view
 There may be some views that are unprotected and have been exempted by
 ``csrf_exempt``, but still need to include the CSRF token.
 
-Solution: use :func:`~ginger.views.decorators.csrf.csrf_exempt` followed by
-:func:`~ginger.views.decorators.csrf.requires_csrf_token`. (i.e. ``requires_csrf_token``
+Solution: use :func:`~gingerdj.views.decorators.csrf.csrf_exempt` followed by
+:func:`~gingerdj.views.decorators.csrf.requires_csrf_token`. (i.e. ``requires_csrf_token``
 should be the innermost decorator).
 
 Protecting a view for only one path
@@ -274,11 +274,11 @@ Protecting a view for only one path
 A view needs CSRF protection under one set of conditions only, and mustn't have
 it for the rest of the time.
 
-Solution: use :func:`~ginger.views.decorators.csrf.csrf_exempt` for the whole
-view function, and :func:`~ginger.views.decorators.csrf.csrf_protect` for the
+Solution: use :func:`~gingerdj.views.decorators.csrf.csrf_exempt` for the whole
+view function, and :func:`~gingerdj.views.decorators.csrf.csrf_protect` for the
 path within it that needs protection. Example::
 
-    from ginger.views.decorators.csrf import csrf_exempt, csrf_protect
+    from gingerdj.views.decorators.csrf import csrf_exempt, csrf_protect
 
 
     @csrf_exempt
@@ -298,7 +298,7 @@ Protecting a page that uses AJAX without an HTML form
 A page makes a POST request via AJAX, and the page does not have an HTML form
 with a :ttag:`csrf_token` that would cause the required CSRF cookie to be sent.
 
-Solution: use :func:`~ginger.views.decorators.csrf.ensure_csrf_cookie` on the
+Solution: use :func:`~gingerdj.views.decorators.csrf.ensure_csrf_cookie` on the
 view that sends the page.
 
 CSRF protection in reusable applications

@@ -1,8 +1,8 @@
-from ginger.contrib.admin.models import CHANGE, LogEntry
-from ginger.contrib.admin.tests import AdminSeleniumTestCase
-from ginger.core.paginator import Paginator
-from ginger.test import TestCase, override_settings
-from ginger.urls import reverse
+from gingerdj.contrib.admin.models import CHANGE, LogEntry
+from gingerdj.contrib.admin.tests import AdminSeleniumTestCase
+from gingerdj.core.paginator import Paginator
+from gingerdj.test import TestCase, override_settings
+from gingerdj.urls import reverse
 
 from .models import City, State
 

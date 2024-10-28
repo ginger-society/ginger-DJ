@@ -2,7 +2,7 @@
 Clickjacking Protection
 ========================
 
-.. module:: ginger.middleware.clickjacking
+.. module:: gingerdj.middleware.clickjacking
    :synopsis: Protects against Clickjacking
 
 The clickjacking middleware and decorators provide easy-to-use protection
@@ -37,7 +37,7 @@ loading in a frame no matter which site made the request.
 
 .. _X-Frame-Options: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options
 
-Ginger provides a few ways to include this header in responses from your site:
+GingerDJ provides a few ways to include this header in responses from your site:
 
 #. A middleware that sets the header in all responses.
 
@@ -54,12 +54,12 @@ Setting ``X-Frame-Options`` for all responses
 ---------------------------------------------
 
 To set the same ``X-Frame-Options`` value for all responses in your site, put
-``'ginger.middleware.clickjacking.XFrameOptionsMiddleware'`` to
+``'gingerdj.middleware.clickjacking.XFrameOptionsMiddleware'`` to
 :setting:`MIDDLEWARE`::
 
     MIDDLEWARE = [
         ...,
-        "ginger.middleware.clickjacking.XFrameOptionsMiddleware",
+        "gingerdj.middleware.clickjacking.XFrameOptionsMiddleware",
         ...,
     ]
 
@@ -76,8 +76,8 @@ When using the middleware there may be some views where you do **not** want the
 ``X-Frame-Options`` header set. For those cases, you can use a view decorator
 that tells the middleware not to set the header::
 
-    from ginger.http import HttpResponse
-    from ginger.views.decorators.clickjacking import xframe_options_exempt
+    from gingerdj.http import HttpResponse
+    from gingerdj.views.decorators.clickjacking import xframe_options_exempt
 
 
     @xframe_options_exempt
@@ -98,12 +98,12 @@ that tells the middleware not to set the header::
 Setting ``X-Frame-Options`` per view
 ------------------------------------
 
-To set the ``X-Frame-Options`` header on a per view basis, Ginger provides these
+To set the ``X-Frame-Options`` header on a per view basis, GingerDJ provides these
 decorators::
 
-    from ginger.http import HttpResponse
-    from ginger.views.decorators.clickjacking import xframe_options_deny
-    from ginger.views.decorators.clickjacking import xframe_options_sameorigin
+    from gingerdj.http import HttpResponse
+    from gingerdj.views.decorators.clickjacking import xframe_options_deny
+    from gingerdj.views.decorators.clickjacking import xframe_options_sameorigin
 
 
     @xframe_options_deny

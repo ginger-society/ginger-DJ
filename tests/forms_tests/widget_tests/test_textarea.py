@@ -1,5 +1,5 @@
-from ginger.forms import CharField, Form, Textarea
-from ginger.utils.safestring import mark_safe
+from gingerdj.forms import CharField, Form, Textarea
+from gingerdj.utils.safestring import mark_safe
 
 from .base import WidgetTest
 

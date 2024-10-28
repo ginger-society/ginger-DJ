@@ -1,5 +1,5 @@
-from ginger.test import SimpleTestCase, override_settings
-from ginger.test.utils import require_jinja2
+from gingerdj.test import SimpleTestCase, override_settings
+from gingerdj.test.utils import require_jinja2
 
 
 @override_settings(ROOT_URLCONF="shortcuts.urls")
@@ -31,7 +31,7 @@ class RenderTests(SimpleTestCase):
     def test_render_with_using(self):
         response = self.client.get("/render/using/")
         self.assertEqual(response.content, b"DTL\n")
-        response = self.client.get("/render/using/?using=ginger")
+        response = self.client.get("/render/using/?using=gingerdj")
         self.assertEqual(response.content, b"DTL\n")
         response = self.client.get("/render/using/?using=jinja2")
         self.assertEqual(response.content, b"Jinja2\n")

@@ -1,8 +1,8 @@
 ============
-Using Ginger
+Using GingerDJ
 ============
 
-Introductions to all the key parts of Ginger you'll need to know:
+Introductions to all the key parts of GingerDJ you'll need to know:
 
 .. toctree::
    :maxdepth: 2

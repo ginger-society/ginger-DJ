@@ -2,11 +2,11 @@ import datetime
 import tempfile
 import uuid
 
-from ginger.contrib import admin
-from ginger.core.exceptions import ValidationError
-from ginger.core.files.storage import FileSystemStorage
-from ginger.db import models
-from ginger.utils import timezone
+from gingerdj.contrib import admin
+from gingerdj.core.exceptions import ValidationError
+from gingerdj.core.files.storage import FileSystemStorage
+from gingerdj.db import models
+from gingerdj.utils import timezone
 
 
 class Section(models.Model):

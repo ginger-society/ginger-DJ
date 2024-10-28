@@ -1,6 +1,6 @@
-from ginger.db.models import IntegerField, Value
-from ginger.db.models.functions import Left, Lower
-from ginger.test import TestCase
+from gingerdj.db.models import IntegerField, Value
+from gingerdj.db.models.functions import Left, Lower
+from gingerdj.test import TestCase
 
 from ..models import Author
 

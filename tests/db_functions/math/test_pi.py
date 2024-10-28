@@ -1,7 +1,7 @@
 import math
 
-from ginger.db.models.functions import Pi
-from ginger.test import TestCase
+from gingerdj.db.models.functions import Pi
+from gingerdj.test import TestCase
 
 from ..models import FloatModel
 

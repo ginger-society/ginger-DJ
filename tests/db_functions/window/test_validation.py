@@ -1,5 +1,5 @@
-from ginger.db.models.functions import Lag, Lead, NthValue, Ntile
-from ginger.test import SimpleTestCase
+from gingerdj.db.models.functions import Lag, Lead, NthValue, Ntile
+from gingerdj.test import SimpleTestCase
 
 
 class ValidationTests(SimpleTestCase):

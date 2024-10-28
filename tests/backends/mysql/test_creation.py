@@ -3,10 +3,10 @@ import unittest
 from io import StringIO
 from unittest import mock
 
-from ginger.db import DatabaseError, connection
-from ginger.db.backends.base.creation import BaseDatabaseCreation
-from ginger.db.backends.mysql.creation import DatabaseCreation
-from ginger.test import SimpleTestCase
+from gingerdj.db import DatabaseError, connection
+from gingerdj.db.backends.base.creation import BaseDatabaseCreation
+from gingerdj.db.backends.mysql.creation import DatabaseCreation
+from gingerdj.test import SimpleTestCase
 
 
 @unittest.skipUnless(connection.vendor == "mysql", "MySQL tests")
@@ -66,7 +66,7 @@ class DatabaseCreationTests(SimpleTestCase):
                 "PASSWORD": "",
                 "PORT": "",
                 "HOST": "",
-                "ENGINE": "ginger.db.backends.mysql",
+                "ENGINE": "gingerdj.db.backends.mysql",
                 "OPTIONS": {
                     "read_default_file": "my.cnf",
                 },

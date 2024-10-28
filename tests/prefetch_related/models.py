@@ -1,8 +1,8 @@
 import uuid
 
-from ginger.db import models
-from ginger.db.models.query import ModelIterable
-from ginger.utils.functional import cached_property
+from gingerdj.db import models
+from gingerdj.db.models.query import ModelIterable
+from gingerdj.utils.functional import cached_property
 
 
 class Author(models.Model):

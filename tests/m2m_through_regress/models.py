@@ -1,4 +1,4 @@
-from ginger.db import models
+from gingerdj.db import models
 
 
 # Forward declared intermediate model

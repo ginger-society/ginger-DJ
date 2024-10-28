@@ -6,7 +6,7 @@ unexpected results
 
 """
 
-from ginger.db import models
+from gingerdj.db import models
 
 
 # The first two models represent a very simple null FK ordering case.

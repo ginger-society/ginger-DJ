@@ -10,7 +10,7 @@ performing a ``filter()`` lookup and raising a ``Http404`` exception if a
 ``DoesNotExist`` exception was raised during the ``filter()`` call.
 """
 
-from ginger.db import models
+from gingerdj.db import models
 
 
 class Author(models.Model):

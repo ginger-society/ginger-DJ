@@ -1,7 +1,7 @@
-from ginger.template.defaultfilters import striptags
-from ginger.test import SimpleTestCase
-from ginger.utils.functional import lazystr
-from ginger.utils.safestring import mark_safe
+from gingerdj.template.defaultfilters import striptags
+from gingerdj.test import SimpleTestCase
+from gingerdj.utils.functional import lazystr
+from gingerdj.utils.safestring import mark_safe
 
 from ..utils import setup
 

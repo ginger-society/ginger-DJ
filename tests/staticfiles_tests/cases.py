@@ -2,10 +2,10 @@ import os
 import shutil
 import tempfile
 
-from ginger.conf import settings
-from ginger.core.management import call_command
-from ginger.template import Context, Template
-from ginger.test import SimpleTestCase, override_settings
+from gingerdj.conf import settings
+from gingerdj.core.management import call_command
+from gingerdj.template import Context, Template
+from gingerdj.test import SimpleTestCase, override_settings
 
 from .settings import TEST_SETTINGS
 

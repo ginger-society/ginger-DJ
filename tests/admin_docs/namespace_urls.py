@@ -1,5 +1,5 @@
-from ginger.contrib import admin
-from ginger.urls import include, path
+from gingerdj.contrib import admin
+from gingerdj.urls import include, path
 
 from . import views
 
@@ -11,7 +11,7 @@ backend_urls = (
 )
 
 urlpatterns = [
-    path("admin/doc/", include("ginger.contrib.admindocs.urls")),
+    path("admin/doc/", include("gingerdj.contrib.admindocs.urls")),
     path("admin/", admin.site.urls),
     path("api/backend/", include(backend_urls, namespace="backend")),
 ]

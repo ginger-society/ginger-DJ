@@ -1,8 +1,8 @@
 import hashlib
 import unittest
 
-from ginger.test import SimpleTestCase
-from ginger.utils.crypto import (
+from gingerdj.test import SimpleTestCase
+from gingerdj.utils.crypto import (
     InvalidAlgorithm,
     constant_time_compare,
     pbkdf2,

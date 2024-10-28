@@ -11,25 +11,30 @@ from io import StringIO
 from pathlib import Path
 from urllib.request import urlopen
 
-from ginger.conf import DEFAULT_STORAGE_ALIAS, STATICFILES_STORAGE_ALIAS
-from ginger.core.cache import cache
-from ginger.core.exceptions import SuspiciousFileOperation
-from ginger.core.files.base import ContentFile, File
-from ginger.core.files.storage import FileSystemStorage, InvalidStorageError
-from ginger.core.files.storage import Storage as BaseStorage
-from ginger.core.files.storage import StorageHandler, default_storage, storages
-from ginger.core.files.uploadedfile import (
+from gingerdj.conf import DEFAULT_STORAGE_ALIAS, STATICFILES_STORAGE_ALIAS
+from gingerdj.core.cache import cache
+from gingerdj.core.exceptions import SuspiciousFileOperation
+from gingerdj.core.files.base import ContentFile, File
+from gingerdj.core.files.storage import FileSystemStorage, InvalidStorageError
+from gingerdj.core.files.storage import Storage as BaseStorage
+from gingerdj.core.files.storage import StorageHandler, default_storage, storages
+from gingerdj.core.files.uploadedfile import (
     InMemoryUploadedFile,
     SimpleUploadedFile,
     TemporaryUploadedFile,
 )
-from ginger.db.models import FileField
-from ginger.db.models.fields.files import FileDescriptor
-from ginger.test import LiveServerTestCase, SimpleTestCase, TestCase, override_settings
-from ginger.test.utils import requires_tz_support
-from ginger.urls import NoReverseMatch, reverse_lazy
-from ginger.utils import timezone
-from ginger.utils._os import symlinks_supported
+from gingerdj.db.models import FileField
+from gingerdj.db.models.fields.files import FileDescriptor
+from gingerdj.test import (
+    LiveServerTestCase,
+    SimpleTestCase,
+    TestCase,
+    override_settings,
+)
+from gingerdj.test.utils import requires_tz_support
+from gingerdj.urls import NoReverseMatch, reverse_lazy
+from gingerdj.utils import timezone
+from gingerdj.utils._os import symlinks_supported
 
 from .models import (
     Storage,
@@ -45,7 +50,7 @@ FILE_SUFFIX_REGEX = "[A-Za-z0-9]{7}"
 class FileSystemStorageTests(unittest.TestCase):
     def test_deconstruction(self):
         path, args, kwargs = temp_storage.deconstruct()
-        self.assertEqual(path, "ginger.core.files.storage.FileSystemStorage")
+        self.assertEqual(path, "gingerdj.core.files.storage.FileSystemStorage")
         self.assertEqual(args, ())
         self.assertEqual(kwargs, {"location": temp_storage_location})
 
@@ -104,20 +109,20 @@ class FileStorageTests(SimpleTestCase):
     def _test_file_time_getter(self, getter):
         # Check for correct behavior under both USE_TZ=True and USE_TZ=False.
         # The tests are similar since they both set up a situation where the
-        # system time zone, Ginger's TIME_ZONE, and UTC are distinct.
+        # system time zone, GingerDJ's TIME_ZONE, and UTC are distinct.
         self._test_file_time_getter_tz_handling_on(getter)
         self._test_file_time_getter_tz_handling_off(getter)
 
     @override_settings(USE_TZ=True, TIME_ZONE="Africa/Algiers")
     def _test_file_time_getter_tz_handling_on(self, getter):
-        # Ginger's TZ (and hence the system TZ) is set to Africa/Algiers which
-        # is UTC+1 and has no DST change. We can set the Ginger TZ to something
-        # else so that UTC, Ginger's TIME_ZONE, and the system timezone are all
+        # GingerDJ's TZ (and hence the system TZ) is set to Africa/Algiers which
+        # is UTC+1 and has no DST change. We can set the GingerDJ TZ to something
+        # else so that UTC, GingerDJ's TIME_ZONE, and the system timezone are all
         # different.
         now_in_algiers = timezone.make_aware(datetime.now())
 
         with timezone.override(timezone.get_fixed_timezone(-300)):
-            # At this point the system TZ is +1 and the Ginger TZ
+            # At this point the system TZ is +1 and the GingerDJ TZ
             # is -5. The following will be aware in UTC.
             now = timezone.now()
             self.assertFalse(self.storage.exists("test.file.tz.on"))
@@ -143,14 +148,14 @@ class FileStorageTests(SimpleTestCase):
 
     @override_settings(USE_TZ=False, TIME_ZONE="Africa/Algiers")
     def _test_file_time_getter_tz_handling_off(self, getter):
-        # Ginger's TZ (and hence the system TZ) is set to Africa/Algiers which
-        # is UTC+1 and has no DST change. We can set the Ginger TZ to something
-        # else so that UTC, Ginger's TIME_ZONE, and the system timezone are all
+        # GingerDJ's TZ (and hence the system TZ) is set to Africa/Algiers which
+        # is UTC+1 and has no DST change. We can set the GingerDJ TZ to something
+        # else so that UTC, GingerDJ's TIME_ZONE, and the system timezone are all
         # different.
         now_in_algiers = timezone.make_aware(datetime.now())
 
         with timezone.override(timezone.get_fixed_timezone(-300)):
-            # At this point the system TZ is +1 and the Ginger TZ
+            # At this point the system TZ is +1 and the GingerDJ TZ
             # is -5.
             self.assertFalse(self.storage.exists("test.file.tz.off"))
 
@@ -927,7 +932,7 @@ class FieldCallableFileStorageTests(SimpleTestCase):
 
         msg = (
             "FileField.storage must be a subclass/instance of "
-            "ginger.core.files.storage.base.Storage"
+            "gingerdj.core.files.storage.base.Storage"
         )
         for invalid_type in (NotStorage, str, list, set, tuple):
             with self.subTest(invalid_type=invalid_type):
@@ -1133,7 +1138,7 @@ class StorageHandlerTests(SimpleTestCase):
     @override_settings(
         STORAGES={
             "custom_storage": {
-                "BACKEND": "ginger.core.files.storage.FileSystemStorage",
+                "BACKEND": "gingerdj.core.files.storage.FileSystemStorage",
             },
         }
     )
@@ -1148,10 +1153,10 @@ class StorageHandlerTests(SimpleTestCase):
             storages.backends,
             {
                 DEFAULT_STORAGE_ALIAS: {
-                    "BACKEND": "ginger.core.files.storage.FileSystemStorage",
+                    "BACKEND": "gingerdj.core.files.storage.FileSystemStorage",
                 },
                 STATICFILES_STORAGE_ALIAS: {
-                    "BACKEND": "ginger.contrib.staticfiles.storage.StaticFilesStorage",
+                    "BACKEND": "gingerdj.contrib.staticfiles.storage.StaticFilesStorage",
                 },
             },
         )
@@ -1166,13 +1171,13 @@ class StorageHandlerTests(SimpleTestCase):
         test_storages = StorageHandler(
             {
                 "invalid_backend": {
-                    "BACKEND": "ginger.nonexistent.NonexistentBackend",
+                    "BACKEND": "gingerdj.nonexistent.NonexistentBackend",
                 },
             }
         )
         msg = (
-            "Could not find backend 'ginger.nonexistent.NonexistentBackend': "
-            "No module named 'ginger.nonexistent'"
+            "Could not find backend 'gingerdj.nonexistent.NonexistentBackend': "
+            "No module named 'gingerdj.nonexistent'"
         )
         with self.assertRaisesMessage(InvalidStorageError, msg):
             test_storages["invalid_backend"]

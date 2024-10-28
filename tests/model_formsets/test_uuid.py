@@ -1,5 +1,5 @@
-from ginger.forms.models import inlineformset_factory
-from ginger.test import TestCase
+from gingerdj.forms.models import inlineformset_factory
+from gingerdj.test import TestCase
 
 from .models import (
     AutoPKChildOfUUIDPKParent,

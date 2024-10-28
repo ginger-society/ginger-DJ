@@ -1,7 +1,7 @@
-from ginger import forms
-from ginger.core.exceptions import NON_FIELD_ERRORS
-from ginger.test import TestCase
-from ginger.utils.functional import lazy
+from gingerdj import forms
+from gingerdj.core.exceptions import NON_FIELD_ERRORS
+from gingerdj.test import TestCase
+from gingerdj.utils.functional import lazy
 
 from . import ValidationAssertions
 from .models import (

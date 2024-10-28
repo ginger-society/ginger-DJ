@@ -1,5 +1,5 @@
-from ginger.test import SimpleTestCase
-from ginger.test.client import FakePayload
+from gingerdj.test import SimpleTestCase
+from gingerdj.test.client import FakePayload
 
 
 class FakePayloadTests(SimpleTestCase):

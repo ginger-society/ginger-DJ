@@ -1,6 +1,6 @@
-from ginger import forms
-from ginger.db import models
-from ginger.test import SimpleTestCase, TestCase
+from gingerdj import forms
+from gingerdj.db import models
+from gingerdj.test import SimpleTestCase, TestCase
 
 from .models import Post
 

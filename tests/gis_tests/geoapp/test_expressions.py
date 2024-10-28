@@ -1,8 +1,8 @@
-from ginger.contrib.gis.db.models import F, GeometryField, Value, functions
-from ginger.contrib.gis.geos import Point, Polygon
-from ginger.db import connection
-from ginger.db.models import Count, Min
-from ginger.test import TestCase, skipUnlessDBFeature
+from gingerdj.contrib.gis.db.models import F, GeometryField, Value, functions
+from gingerdj.contrib.gis.geos import Point, Polygon
+from gingerdj.db import connection
+from gingerdj.db.models import Count, Min
+from gingerdj.test import TestCase, skipUnlessDBFeature
 
 from .models import City, ManyPointModel, MultiFields
 

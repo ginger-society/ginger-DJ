@@ -1,7 +1,7 @@
 import os
 
-from ginger.db.models import FilePathField
-from ginger.test import SimpleTestCase
+from gingerdj.db.models import FilePathField
+from gingerdj.test import SimpleTestCase
 
 
 class FilePathFieldTests(SimpleTestCase):

@@ -1,8 +1,8 @@
-from ginger.forms import CharField, Form, Media, MultiWidget, TextInput
-from ginger.template import Context, Template
-from ginger.templatetags.static import static
-from ginger.test import SimpleTestCase, override_settings
-from ginger.utils.html import format_html, html_safe
+from gingerdj.forms import CharField, Form, Media, MultiWidget, TextInput
+from gingerdj.template import Context, Template
+from gingerdj.templatetags.static import static
+from gingerdj.test import SimpleTestCase, override_settings
+from gingerdj.utils.html import format_html, html_safe
 
 
 @override_settings(
@@ -734,7 +734,7 @@ class Asset:
         """
         Given a relative or absolute path to a static asset, return an absolute
         path. An absolute path will be returned unchanged while a relative path
-        will be passed to ginger.templatetags.static.static().
+        will be passed to gingerdj.templatetags.static.static().
         """
         if path.startswith(("http://", "https://", "/")):
             return path

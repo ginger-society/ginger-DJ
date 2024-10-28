@@ -1,12 +1,12 @@
 from unittest import skipUnless
 
-from ginger.contrib.gis.db.models import fields
-from ginger.contrib.gis.geos import MultiPolygon, Polygon
-from ginger.core.exceptions import ImproperlyConfigured
-from ginger.db import connection, migrations, models
-from ginger.db.migrations.migration import Migration
-from ginger.db.migrations.state import ProjectState
-from ginger.test import TransactionTestCase, skipIfDBFeature, skipUnlessDBFeature
+from gingerdj.contrib.gis.db.models import fields
+from gingerdj.contrib.gis.geos import MultiPolygon, Polygon
+from gingerdj.core.exceptions import ImproperlyConfigured
+from gingerdj.db import connection, migrations, models
+from gingerdj.db.migrations.migration import Migration
+from gingerdj.db.migrations.state import ProjectState
+from gingerdj.test import TransactionTestCase, skipIfDBFeature, skipUnlessDBFeature
 
 try:
     GeometryColumns = connection.ops.geometry_columns()

@@ -1,9 +1,9 @@
 from unittest import mock
 
-from ginger.db import migrations
+from gingerdj.db import migrations
 
 try:
-    from ginger.contrib.postgres.operations import (
+    from gingerdj.contrib.postgres.operations import (
         BloomExtension,
         BtreeGinExtension,
         BtreeGistExtension,

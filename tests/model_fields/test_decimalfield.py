@@ -1,10 +1,10 @@
 import math
 from decimal import Decimal
 
-from ginger.core import validators
-from ginger.core.exceptions import ValidationError
-from ginger.db import models
-from ginger.test import TestCase
+from gingerdj.core import validators
+from gingerdj.core.exceptions import ValidationError
+from gingerdj.db import models
+from gingerdj.test import TestCase
 
 from .models import BigD, Foo
 

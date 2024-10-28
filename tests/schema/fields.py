@@ -1,7 +1,7 @@
 from functools import partial
 
-from ginger.db import models
-from ginger.db.models.fields.related import (
+from gingerdj.db import models
+from gingerdj.db.models.fields.related import (
     RECURSIVE_RELATIONSHIP_CONSTANT,
     ManyToManyDescriptor,
     RelatedField,

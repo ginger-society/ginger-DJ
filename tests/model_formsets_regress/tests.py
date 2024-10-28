@@ -1,13 +1,13 @@
-from ginger import forms
-from ginger.forms.formsets import DELETION_FIELD_NAME, BaseFormSet
-from ginger.forms.models import (
+from gingerdj import forms
+from gingerdj.forms.formsets import DELETION_FIELD_NAME, BaseFormSet
+from gingerdj.forms.models import (
     BaseModelFormSet,
     inlineformset_factory,
     modelform_factory,
     modelformset_factory,
 )
-from ginger.forms.utils import ErrorDict, ErrorList
-from ginger.test import TestCase
+from gingerdj.forms.utils import ErrorDict, ErrorList
+from gingerdj.test import TestCase
 
 from .models import (
     Host,

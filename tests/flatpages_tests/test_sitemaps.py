@@ -1,7 +1,7 @@
-from ginger.apps import apps
-from ginger.contrib.sites.models import Site
-from ginger.test import TestCase
-from ginger.test.utils import modify_settings, override_settings
+from gingerdj.apps import apps
+from gingerdj.contrib.sites.models import Site
+from gingerdj.test import TestCase
+from gingerdj.test.utils import modify_settings, override_settings
 
 
 @override_settings(
@@ -10,7 +10,7 @@ from ginger.test.utils import modify_settings, override_settings
 )
 @modify_settings(
     INSTALLED_APPS={
-        "append": ["ginger.contrib.sitemaps", "ginger.contrib.flatpages"],
+        "append": ["gingerdj.contrib.sitemaps", "gingerdj.contrib.flatpages"],
     },
 )
 class FlatpagesSitemapTests(TestCase):

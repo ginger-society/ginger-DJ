@@ -6,12 +6,12 @@ import warnings
 from io import StringIO
 from unittest import mock
 
-from ginger.conf import STATICFILES_STORAGE_ALIAS, settings
-from ginger.contrib.staticfiles.finders import get_finder, get_finders
-from ginger.contrib.staticfiles.storage import staticfiles_storage
-from ginger.core.exceptions import ImproperlyConfigured
-from ginger.core.files.storage import default_storage
-from ginger.db import (
+from gingerdj.conf import STATICFILES_STORAGE_ALIAS, settings
+from gingerdj.contrib.staticfiles.finders import get_finder, get_finders
+from gingerdj.contrib.staticfiles.storage import staticfiles_storage
+from gingerdj.core.exceptions import ImproperlyConfigured
+from gingerdj.core.files.storage import default_storage
+from gingerdj.db import (
     IntegrityError,
     connection,
     connections,
@@ -19,7 +19,7 @@ from ginger.db import (
     router,
     transaction,
 )
-from ginger.forms import (
+from gingerdj.forms import (
     CharField,
     EmailField,
     Form,
@@ -27,28 +27,28 @@ from ginger.forms import (
     ValidationError,
     formset_factory,
 )
-from ginger.http import HttpResponse
-from ginger.template import Context, Template
-from ginger.template.loader import render_to_string
-from ginger.test import (
+from gingerdj.http import HttpResponse
+from gingerdj.template import Context, Template
+from gingerdj.template.loader import render_to_string
+from gingerdj.test import (
     SimpleTestCase,
     TestCase,
     TransactionTestCase,
     skipIfDBFeature,
     skipUnlessDBFeature,
 )
-from ginger.test.html import HTMLParseError, parse_html
-from ginger.test.testcases import DatabaseOperationForbidden
-from ginger.test.utils import (
+from gingerdj.test.html import HTMLParseError, parse_html
+from gingerdj.test.testcases import DatabaseOperationForbidden
+from gingerdj.test.utils import (
     CaptureQueriesContext,
     TestContextDecorator,
     isolate_apps,
     override_settings,
     setup_test_environment,
 )
-from ginger.urls import NoReverseMatch, path, reverse, reverse_lazy
-from ginger.utils.html import VOID_ELEMENTS
-from ginger.utils.version import PY311
+from gingerdj.urls import NoReverseMatch, path, reverse, reverse_lazy
+from gingerdj.utils.html import VOID_ELEMENTS
+from gingerdj.utils.version import PY311
 
 from .models import Car, Person, PossessedCar
 from .views import empty_response
@@ -68,7 +68,7 @@ class SkippingTestCase(SimpleTestCase):
 
     def test_skip_unless_db_feature(self):
         """
-        Testing the ginger.test.skipUnlessDBFeature decorator.
+        Testing the gingerdj.test.skipUnlessDBFeature decorator.
         """
 
         # Total hack, but it works, just want an attribute that's always true.
@@ -111,7 +111,7 @@ class SkippingTestCase(SimpleTestCase):
 
     def test_skip_if_db_feature(self):
         """
-        Testing the ginger.test.skipIfDBFeature decorator.
+        Testing the gingerdj.test.skipIfDBFeature decorator.
         """
 
         @skipIfDBFeature("__class__")
@@ -260,7 +260,7 @@ class AssertNumQueriesUponConnectionTests(TransactionTestCase):
                     cursor.execute("SELECT 1" + connection.features.bare_select_suffix)
 
         ensure_connection = (
-            "ginger.db.backends.base.base.BaseDatabaseWrapper.ensure_connection"
+            "gingerdj.db.backends.base.base.BaseDatabaseWrapper.ensure_connection"
         )
         with mock.patch(ensure_connection, side_effect=make_configuration_query):
             with self.assertNumQueries(1):
@@ -624,7 +624,7 @@ class AssertTemplateUsedContextManagerTests(SimpleTestCase):
 
     def test_assert_used_on_http_response(self):
         response = HttpResponse()
-        msg = "%s() is only usable on responses fetched using the Ginger test Client."
+        msg = "%s() is only usable on responses fetched using the GingerDJ test Client."
         with self.assertRaisesMessage(ValueError, msg % "assertTemplateUsed"):
             self.assertTemplateUsed(response, "template.html")
         with self.assertRaisesMessage(ValueError, msg % "assertTemplateNotUsed"):
@@ -1729,7 +1729,7 @@ class SetupTestEnvironmentTests(SimpleTestCase):
         for type_ in (list, tuple):
             with self.subTest(type_=type_):
                 allowed_hosts = type_("*")
-                with mock.patch("ginger.test.utils._TestState") as x:
+                with mock.patch("gingerdj.test.utils._TestState") as x:
                     del x.saved_data
                     with self.settings(ALLOWED_HOSTS=allowed_hosts):
                         setup_test_environment()
@@ -1777,7 +1777,7 @@ class OverrideSettingsTests(SimpleTestCase):
     def test_override_media_root(self):
         """
         Overriding the MEDIA_ROOT setting should be reflected in the
-        base_location attribute of ginger.core.files.storage.default_storage.
+        base_location attribute of gingerdj.core.files.storage.default_storage.
         """
         self.assertEqual(default_storage.base_location, "")
         with self.settings(MEDIA_ROOT="test_value"):
@@ -1786,7 +1786,7 @@ class OverrideSettingsTests(SimpleTestCase):
     def test_override_media_url(self):
         """
         Overriding the MEDIA_URL setting should be reflected in the
-        base_url attribute of ginger.core.files.storage.default_storage.
+        base_url attribute of gingerdj.core.files.storage.default_storage.
         """
         self.assertEqual(default_storage.base_location, "")
         with self.settings(MEDIA_URL="/test_value/"):
@@ -1796,7 +1796,7 @@ class OverrideSettingsTests(SimpleTestCase):
         """
         Overriding the FILE_UPLOAD_PERMISSIONS setting should be reflected in
         the file_permissions_mode attribute of
-        ginger.core.files.storage.default_storage.
+        gingerdj.core.files.storage.default_storage.
         """
         self.assertEqual(default_storage.file_permissions_mode, 0o644)
         with self.settings(FILE_UPLOAD_PERMISSIONS=0o777):
@@ -1806,7 +1806,7 @@ class OverrideSettingsTests(SimpleTestCase):
         """
         Overriding the FILE_UPLOAD_DIRECTORY_PERMISSIONS setting should be
         reflected in the directory_permissions_mode attribute of
-        ginger.core.files.storage.default_storage.
+        gingerdj.core.files.storage.default_storage.
         """
         self.assertIsNone(default_storage.directory_permissions_mode)
         with self.settings(FILE_UPLOAD_DIRECTORY_PERMISSIONS=0o777):
@@ -1824,7 +1824,7 @@ class OverrideSettingsTests(SimpleTestCase):
         """
         Overriding the STATIC_URL setting should be reflected in the
         base_url attribute of
-        ginger.contrib.staticfiles.storage.staticfiles_storage.
+        gingerdj.contrib.staticfiles.storage.staticfiles_storage.
         """
         with self.settings(STATIC_URL="/test/"):
             self.assertEqual(staticfiles_storage.base_url, "/test/")
@@ -1833,7 +1833,7 @@ class OverrideSettingsTests(SimpleTestCase):
         """
         Overriding the STATIC_ROOT setting should be reflected in the
         location attribute of
-        ginger.contrib.staticfiles.storage.staticfiles_storage.
+        gingerdj.contrib.staticfiles.storage.staticfiles_storage.
         """
         with self.settings(STATIC_ROOT="/tmp/test"):
             self.assertEqual(staticfiles_storage.location, os.path.abspath("/tmp/test"))
@@ -1841,10 +1841,10 @@ class OverrideSettingsTests(SimpleTestCase):
     def test_override_staticfiles_storage(self):
         """
         Overriding the STORAGES setting should be reflected in
-        the value of ginger.contrib.staticfiles.storage.staticfiles_storage.
+        the value of gingerdj.contrib.staticfiles.storage.staticfiles_storage.
         """
         new_class = "ManifestStaticFilesStorage"
-        new_storage = "ginger.contrib.staticfiles.storage." + new_class
+        new_storage = "gingerdj.contrib.staticfiles.storage." + new_class
         with self.settings(
             STORAGES={STATICFILES_STORAGE_ALIAS: {"BACKEND": new_storage}}
         ):
@@ -1853,11 +1853,11 @@ class OverrideSettingsTests(SimpleTestCase):
     def test_override_staticfiles_finders(self):
         """
         Overriding the STATICFILES_FINDERS setting should be reflected in
-        the return value of ginger.contrib.staticfiles.finders.get_finders.
+        the return value of gingerdj.contrib.staticfiles.finders.get_finders.
         """
         current = get_finders()
         self.assertGreater(len(list(current)), 1)
-        finders = ["ginger.contrib.staticfiles.finders.FileSystemFinder"]
+        finders = ["gingerdj.contrib.staticfiles.finders.FileSystemFinder"]
         with self.settings(STATICFILES_FINDERS=finders):
             self.assertEqual(len(list(get_finders())), len(finders))
 
@@ -1865,14 +1865,14 @@ class OverrideSettingsTests(SimpleTestCase):
         """
         Overriding the STATICFILES_DIRS setting should be reflected in
         the locations attribute of the
-        ginger.contrib.staticfiles.finders.FileSystemFinder instance.
+        gingerdj.contrib.staticfiles.finders.FileSystemFinder instance.
         """
-        finder = get_finder("ginger.contrib.staticfiles.finders.FileSystemFinder")
+        finder = get_finder("gingerdj.contrib.staticfiles.finders.FileSystemFinder")
         test_path = "/tmp/test"
         expected_location = ("", test_path)
         self.assertNotIn(expected_location, finder.locations)
         with self.settings(STATICFILES_DIRS=[test_path]):
-            finder = get_finder("ginger.contrib.staticfiles.finders.FileSystemFinder")
+            finder = get_finder("gingerdj.contrib.staticfiles.finders.FileSystemFinder")
             self.assertIn(expected_location, finder.locations)
 
 
@@ -2043,7 +2043,7 @@ class CaptureOnCommitCallbacksTests(TestCase):
             self.callback_called = True
             raise MyException("robust callback")
 
-        with self.assertLogs("ginger.test", "ERROR") as cm:
+        with self.assertLogs("gingerdj.test", "ERROR") as cm:
             with self.captureOnCommitCallbacks(execute=True) as callbacks:
                 transaction.on_commit(hook, robust=True)
 
@@ -2135,9 +2135,9 @@ class AllowedDatabaseQueriesTests(SimpleTestCase):
         connections_dict = {}
 
         def thread_func():
-            # Passing ginger.db.connection between threads doesn't work while
+            # Passing gingerdj.db.connection between threads doesn't work while
             # connections[DEFAULT_DB_ALIAS] does.
-            from ginger.db import connections
+            from gingerdj.db import connections
 
             connection = connections["default"]
 

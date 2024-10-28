@@ -12,7 +12,7 @@ Model inheritance exists in two varieties:
 Both styles are demonstrated here.
 """
 
-from ginger.db import models
+from gingerdj.db import models
 
 #
 # Abstract base classes

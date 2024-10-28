@@ -1,10 +1,10 @@
 from io import StringIO
 
-from ginger.apps import apps
-from ginger.core import management
-from ginger.db import migrations
-from ginger.db.models import signals
-from ginger.test import TransactionTestCase, override_settings
+from gingerdj.apps import apps
+from gingerdj.core import management
+from gingerdj.db import migrations
+from gingerdj.db.models import signals
+from gingerdj.test import TransactionTestCase, override_settings
 
 APP_CONFIG = apps.get_app_config("migrate_signals")
 SIGNAL_ARGS = [

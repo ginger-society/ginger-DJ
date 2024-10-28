@@ -1,6 +1,6 @@
-from ginger.db.migrations.exceptions import CircularDependencyError, NodeNotFoundError
-from ginger.db.migrations.graph import DummyNode, MigrationGraph, Node
-from ginger.test import SimpleTestCase
+from gingerdj.db.migrations.exceptions import CircularDependencyError, NodeNotFoundError
+from gingerdj.db.migrations.graph import DummyNode, MigrationGraph, Node
+from gingerdj.test import SimpleTestCase
 
 
 class GraphTests(SimpleTestCase):

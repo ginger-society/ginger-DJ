@@ -2,9 +2,9 @@
 A second, custom AdminSite -- see tests.CustomAdminSiteTests.
 """
 
-from ginger.contrib import admin
-from ginger.http import HttpResponse
-from ginger.urls import path
+from gingerdj.contrib import admin
+from gingerdj.http import HttpResponse
+from gingerdj.urls import path
 
 from . import admin as base_admin
 from . import forms, models
@@ -26,7 +26,7 @@ class Admin2(admin.AdminSite):
         ] + super().get_urls()
 
     def my_view(self, request):
-        return HttpResponse("Ginger is a magical pony!")
+        return HttpResponse("GingerDJ is a magical pony!")
 
     def password_change(self, request, extra_context=None):
         return super().password_change(request, {"spam": "eggs"})

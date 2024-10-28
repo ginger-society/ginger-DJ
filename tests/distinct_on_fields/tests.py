@@ -1,8 +1,8 @@
-from ginger.db import connection
-from ginger.db.models import CharField, F, Max
-from ginger.db.models.functions import Lower
-from ginger.test import TestCase, skipUnlessDBFeature
-from ginger.test.utils import register_lookup
+from gingerdj.db import connection
+from gingerdj.db.models import CharField, F, Max
+from gingerdj.db.models.functions import Lower
+from gingerdj.test import TestCase, skipUnlessDBFeature
+from gingerdj.test.utils import register_lookup
 
 from .models import Celebrity, Fan, Staff, StaffTag, Tag
 

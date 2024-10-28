@@ -1,4 +1,4 @@
-from ginger.db import connection
+from gingerdj.db import connection
 
 from . import PostgreSQLTestCase
 from .models import CharFieldModel, TextFieldModel

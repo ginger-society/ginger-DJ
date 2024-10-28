@@ -1,5 +1,5 @@
 =============================
-Ginger documentation contents
+GingerDJ documentation contents
 =============================
 
 .. toctree::

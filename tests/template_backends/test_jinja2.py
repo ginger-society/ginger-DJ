@@ -1,8 +1,8 @@
 from pathlib import Path
 from unittest import mock, skipIf
 
-from ginger.template import TemplateSyntaxError
-from ginger.test import RequestFactory
+from gingerdj.template import TemplateSyntaxError
+from gingerdj.test import RequestFactory
 
 from .test_dummy import TemplateStringsTests
 
@@ -12,7 +12,7 @@ except ImportError:
     jinja2 = None
     Jinja2 = None
 else:
-    from ginger.template.backends.jinja2 import Jinja2
+    from gingerdj.template.backends.jinja2 import Jinja2
 
 
 @skipIf(jinja2 is None, "this test requires jinja2")
@@ -22,7 +22,7 @@ class Jinja2Tests(TemplateStringsTests):
     options = {
         "keep_trailing_newline": True,
         "context_processors": [
-            "ginger.template.context_processors.static",
+            "gingerdj.template.context_processors.static",
         ],
     }
 

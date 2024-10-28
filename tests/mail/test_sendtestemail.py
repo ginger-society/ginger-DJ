@@ -1,6 +1,6 @@
-from ginger.core import mail
-from ginger.core.management import CommandError, call_command
-from ginger.test import SimpleTestCase, override_settings
+from gingerdj.core import mail
+from gingerdj.core.management import CommandError, call_command
+from gingerdj.test import SimpleTestCase, override_settings
 
 
 @override_settings(

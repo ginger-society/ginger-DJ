@@ -1,5 +1,5 @@
 ========================
-Ginger's cache framework
+GingerDJ's cache framework
 ========================
 
 A fundamental trade-off in dynamic websites is, well, they're dynamic. Each
@@ -30,13 +30,13 @@ explaining how this would work for a dynamically generated web page:
         save the generated page in the cache (for next time)
         return the generated page
 
-Ginger comes with a robust cache system that lets you save dynamic pages so
-they don't have to be calculated for each request. For convenience, Ginger
+GingerDJ comes with a robust cache system that lets you save dynamic pages so
+they don't have to be calculated for each request. For convenience, GingerDJ
 offers different levels of cache granularity: You can cache the output of
 specific views, you can cache only the pieces that are difficult to produce,
 or you can cache your entire site.
 
-Ginger also works well with "downstream" caches, such as `Squid
+GingerDJ also works well with "downstream" caches, such as `Squid
 <http://www.squid-cache.org/>`_ and browser-based caches. These are the types
 of caches that you don't directly control but to which you can provide hints
 (via HTTP headers) about which parts of your site should be cached, and how.
@@ -78,13 +78,13 @@ database or filesystem usage.
 
 After installing Memcached itself, you'll need to install a Memcached
 binding. There are several Python Memcached bindings available; the
-two supported by Ginger are :pypi:`pylibmc` and :pypi:`pymemcache`.
+two supported by GingerDJ are :pypi:`pylibmc` and :pypi:`pymemcache`.
 
-To use Memcached with Ginger:
+To use Memcached with GingerDJ:
 
 * Set :setting:`BACKEND <CACHES-BACKEND>` to
-  ``ginger.core.cache.backends.memcached.PyMemcacheCache`` or
-  ``ginger.core.cache.backends.memcached.PyLibMCCache`` (depending on your
+  ``gingerdj.core.cache.backends.memcached.PyMemcacheCache`` or
+  ``gingerdj.core.cache.backends.memcached.PyLibMCCache`` (depending on your
   chosen memcached binding)
 
 * Set :setting:`LOCATION <CACHES-LOCATION>` to ``ip:port`` values,
@@ -97,7 +97,7 @@ the ``pymemcache`` binding::
 
     CACHES = {
         "default": {
-            "BACKEND": "ginger.core.cache.backends.memcached.PyMemcacheCache",
+            "BACKEND": "gingerdj.core.cache.backends.memcached.PyMemcacheCache",
             "LOCATION": "127.0.0.1:11211",
         }
     }
@@ -107,7 +107,7 @@ In this example, Memcached is available through a local Unix socket file
 
     CACHES = {
         "default": {
-            "BACKEND": "ginger.core.cache.backends.memcached.PyMemcacheCache",
+            "BACKEND": "gingerdj.core.cache.backends.memcached.PyMemcacheCache",
             "LOCATION": "unix:/tmp/memcached.sock",
         }
     }
@@ -125,7 +125,7 @@ address 172.19.26.240 and 172.19.26.242, both on port 11211::
 
     CACHES = {
         "default": {
-            "BACKEND": "ginger.core.cache.backends.memcached.PyMemcacheCache",
+            "BACKEND": "gingerdj.core.cache.backends.memcached.PyMemcacheCache",
             "LOCATION": [
                 "172.19.26.240:11211",
                 "172.19.26.242:11211",
@@ -139,7 +139,7 @@ on the IP addresses 172.19.26.240 (port 11211), 172.19.26.242 (port 11212), and
 
     CACHES = {
         "default": {
-            "BACKEND": "ginger.core.cache.backends.memcached.PyMemcacheCache",
+            "BACKEND": "gingerdj.core.cache.backends.memcached.PyMemcacheCache",
             "LOCATION": [
                 "172.19.26.240:11211",
                 "172.19.26.242:11212",
@@ -161,7 +161,7 @@ A final point about Memcached is that memory-based caching has a
 disadvantage: because the cached data is stored in memory, the data will be
 lost if your server crashes. Clearly, memory isn't intended for permanent data
 storage, so don't rely on memory-based caching as your only data storage.
-Without a doubt, *none* of the Ginger caching backends should be used for
+Without a doubt, *none* of the GingerDJ caching backends should be used for
 permanent storage -- they're all intended to be solutions for caching, not
 storage -- but we point this out here because memory-based caching is
 particularly temporary.
@@ -177,13 +177,13 @@ need a Redis server running either locally or on a remote machine.
 __ https://redis.io/
 
 After setting up the Redis server, you'll need to install Python bindings for
-Redis. :pypi:`redis-py <redis>` is the binding supported natively by Ginger.
+Redis. :pypi:`redis-py <redis>` is the binding supported natively by GingerDJ.
 Installing the :pypi:`hiredis-py <hiredis>` package is also recommended.
 
-To use Redis as your cache backend with Ginger:
+To use Redis as your cache backend with GingerDJ:
 
 * Set :setting:`BACKEND <CACHES-BACKEND>` to
-  ``ginger.core.cache.backends.redis.RedisCache``.
+  ``gingerdj.core.cache.backends.redis.RedisCache``.
 
 * Set :setting:`LOCATION <CACHES-LOCATION>` to the URL pointing to your Redis
   instance, using the appropriate scheme. See the ``redis-py`` docs for
@@ -194,7 +194,7 @@ For example, if Redis is running on localhost (127.0.0.1) port 6379::
 
     CACHES = {
         "default": {
-            "BACKEND": "ginger.core.cache.backends.redis.RedisCache",
+            "BACKEND": "gingerdj.core.cache.backends.redis.RedisCache",
             "LOCATION": "redis://127.0.0.1:6379",
         }
     }
@@ -204,7 +204,7 @@ username and password, add them in the ``LOCATION`` along with the URL::
 
     CACHES = {
         "default": {
-            "BACKEND": "ginger.core.cache.backends.redis.RedisCache",
+            "BACKEND": "gingerdj.core.cache.backends.redis.RedisCache",
             "LOCATION": "redis://username:password@127.0.0.1:6379",
         }
     }
@@ -217,7 +217,7 @@ chosen at random::
 
     CACHES = {
         "default": {
-            "BACKEND": "ginger.core.cache.backends.redis.RedisCache",
+            "BACKEND": "gingerdj.core.cache.backends.redis.RedisCache",
             "LOCATION": [
                 "redis://127.0.0.1:6379",  # leader
                 "redis://127.0.0.1:6378",  # read-replica 1
@@ -231,13 +231,13 @@ chosen at random::
 Database caching
 ----------------
 
-Ginger can store its cached data in your database. This works best if you've
+GingerDJ can store its cached data in your database. This works best if you've
 got a fast, well-indexed database server.
 
 To use a database table as your cache backend:
 
 * Set :setting:`BACKEND <CACHES-BACKEND>` to
-  ``ginger.core.cache.backends.db.DatabaseCache``
+  ``gingerdj.core.cache.backends.db.DatabaseCache``
 
 * Set :setting:`LOCATION <CACHES-LOCATION>` to ``tablename``, the name of the
   database table. This name can be whatever you want, as long as it's a valid
@@ -247,7 +247,7 @@ In this example, the cache table's name is ``my_cache_table``::
 
     CACHES = {
         "default": {
-            "BACKEND": "ginger.core.cache.backends.db.DatabaseCache",
+            "BACKEND": "gingerdj.core.cache.backends.db.DatabaseCache",
             "LOCATION": "my_cache_table",
         }
     }
@@ -267,7 +267,7 @@ command:
     python manage.py createcachetable
 
 This creates a table in your database that is in the proper format that
-Ginger's database-cache system expects. The name of the table is taken from
+GingerDJ's database-cache system expects. The name of the table is taken from
 :setting:`LOCATION <CACHES-LOCATION>`.
 
 If you are using multiple database caches, :djadmin:`createcachetable` creates
@@ -329,13 +329,13 @@ Filesystem caching
 
 The file-based backend serializes and stores each cache value as a separate
 file. To use this backend set :setting:`BACKEND <CACHES-BACKEND>` to
-``"ginger.core.cache.backends.filebased.FileBasedCache"`` and
+``"gingerdj.core.cache.backends.filebased.FileBasedCache"`` and
 :setting:`LOCATION <CACHES-LOCATION>` to a suitable directory. For example,
 to store cached data in ``/var/tmp/ginger_cache``, use this setting::
 
     CACHES = {
         "default": {
-            "BACKEND": "ginger.core.cache.backends.filebased.FileBasedCache",
+            "BACKEND": "gingerdj.core.cache.backends.filebased.FileBasedCache",
             "LOCATION": "/var/tmp/ginger_cache",
         }
     }
@@ -345,7 +345,7 @@ like this::
 
     CACHES = {
         "default": {
-            "BACKEND": "ginger.core.cache.backends.filebased.FileBasedCache",
+            "BACKEND": "gingerdj.core.cache.backends.filebased.FileBasedCache",
             "LOCATION": "c:/foo/bar",
         }
     }
@@ -376,7 +376,7 @@ the user ``apache``.
     Filesystem caching may become slow when storing a large number of files. If
     you run into this problem, consider using a different caching mechanism.
     You can also subclass
-    :source:`FileBasedCache <ginger/core/cache/backends/filebased.py>` and
+    :source:`FileBasedCache <gingerdj/core/cache/backends/filebased.py>` and
     improve the culling strategy.
 
 .. _local-memory-caching:
@@ -388,12 +388,12 @@ This is the default cache if another is not specified in your settings file. If
 you want the speed advantages of in-memory caching but don't have the capability
 of running Memcached, consider the local-memory cache backend. This cache is
 per-process (see below) and thread-safe. To use it, set :setting:`BACKEND
-<CACHES-BACKEND>` to ``"ginger.core.cache.backends.locmem.LocMemCache"``. For
+<CACHES-BACKEND>` to ``"gingerdj.core.cache.backends.locmem.LocMemCache"``. For
 example::
 
     CACHES = {
         "default": {
-            "BACKEND": "ginger.core.cache.backends.locmem.LocMemCache",
+            "BACKEND": "gingerdj.core.cache.backends.locmem.LocMemCache",
             "LOCATION": "unique-snowflake",
         }
     }
@@ -414,7 +414,7 @@ production environments. It's nice for development.
 Dummy caching (for development)
 -------------------------------
 
-Finally, Ginger comes with a "dummy" cache that doesn't actually cache -- it
+Finally, GingerDJ comes with a "dummy" cache that doesn't actually cache -- it
 just implements the cache interface without doing anything.
 
 This is useful if you have a production site that uses heavy-duty caching in
@@ -424,16 +424,16 @@ activate dummy caching, set :setting:`BACKEND <CACHES-BACKEND>` like so::
 
     CACHES = {
         "default": {
-            "BACKEND": "ginger.core.cache.backends.dummy.DummyCache",
+            "BACKEND": "gingerdj.core.cache.backends.dummy.DummyCache",
         }
     }
 
 Using a custom cache backend
 ----------------------------
 
-While Ginger includes support for a number of cache backends out-of-the-box,
+While GingerDJ includes support for a number of cache backends out-of-the-box,
 sometimes you might want to use a customized cache backend. To use an external
-cache backend with Ginger, use the Python import path as the
+cache backend with GingerDJ, use the Python import path as the
 :setting:`BACKEND <CACHES-BACKEND>` of the :setting:`CACHES` setting, like so::
 
     CACHES = {
@@ -444,10 +444,10 @@ cache backend with Ginger, use the Python import path as the
 
 If you're building your own backend, you can use the standard cache backends
 as reference implementations. You'll find the code in the
-:source:`ginger/core/cache/backends/` directory of the Ginger source.
+:source:`gingerdj/core/cache/backends/` directory of the GingerDJ source.
 
 Note: Without a really compelling reason, such as a host that doesn't support
-them, you should stick to the cache backends included with Ginger. They've
+them, you should stick to the cache backends included with GingerDJ. They've
 been well-tested and are well-documented.
 
 .. _cache_arguments:
@@ -495,13 +495,13 @@ behavior. These arguments are provided as additional keys in the
 
 * :setting:`KEY_PREFIX <CACHES-KEY_PREFIX>`: A string that will be
   automatically included (prepended by default) to all cache keys
-  used by the Ginger server.
+  used by the GingerDJ server.
 
   See the :ref:`cache documentation <cache_key_prefixing>` for
   more information.
 
 * :setting:`VERSION <CACHES-VERSION>`: The default version number
-  for cache keys generated by the Ginger server.
+  for cache keys generated by the GingerDJ server.
 
   See the :ref:`cache documentation <cache_versioning>` for more
   information.
@@ -518,7 +518,7 @@ of 60 seconds, and a maximum capacity of 1000 items::
 
     CACHES = {
         "default": {
-            "BACKEND": "ginger.core.cache.backends.filebased.FileBasedCache",
+            "BACKEND": "gingerdj.core.cache.backends.filebased.FileBasedCache",
             "LOCATION": "/var/tmp/ginger_cache",
             "TIMEOUT": 60,
             "OPTIONS": {"MAX_ENTRIES": 1000},
@@ -530,7 +530,7 @@ the binary protocol, SASL authentication, and the ``ketama`` behavior mode::
 
     CACHES = {
         "default": {
-            "BACKEND": "ginger.core.cache.backends.memcached.PyLibMCCache",
+            "BACKEND": "gingerdj.core.cache.backends.memcached.PyLibMCCache",
             "LOCATION": "127.0.0.1:11211",
             "OPTIONS": {
                 "binary": True,
@@ -550,7 +550,7 @@ flag on the connection's socket::
 
     CACHES = {
         "default": {
-            "BACKEND": "ginger.core.cache.backends.memcached.PyMemcacheCache",
+            "BACKEND": "gingerdj.core.cache.backends.memcached.PyMemcacheCache",
             "LOCATION": "127.0.0.1:11211",
             "OPTIONS": {
                 "no_delay": True,
@@ -569,7 +569,7 @@ class`_ (``redis.ConnectionPool`` is used by default)::
 
     CACHES = {
         "default": {
-            "BACKEND": "ginger.core.cache.backends.redis.RedisCache",
+            "BACKEND": "gingerdj.core.cache.backends.redis.RedisCache",
             "LOCATION": "redis://127.0.0.1:6379",
             "OPTIONS": {
                 "db": "10",
@@ -589,14 +589,14 @@ The per-site cache
 
 Once the cache is set up, the simplest way to use caching is to cache your
 entire site. You'll need to add
-``'ginger.middleware.cache.UpdateCacheMiddleware'`` and
-``'ginger.middleware.cache.FetchFromCacheMiddleware'`` to your
+``'gingerdj.middleware.cache.UpdateCacheMiddleware'`` and
+``'gingerdj.middleware.cache.FetchFromCacheMiddleware'`` to your
 :setting:`MIDDLEWARE` setting, as in this example::
 
     MIDDLEWARE = [
-        "ginger.middleware.cache.UpdateCacheMiddleware",
-        "ginger.middleware.common.CommonMiddleware",
-        "ginger.middleware.cache.FetchFromCacheMiddleware",
+        "gingerdj.middleware.cache.UpdateCacheMiddleware",
+        "gingerdj.middleware.common.CommonMiddleware",
+        "gingerdj.middleware.cache.FetchFromCacheMiddleware",
     ]
 
 .. note::
@@ -605,15 +605,15 @@ entire site. You'll need to add
     and the "fetch" middleware must be last. The details are a bit obscure, but
     see `Order of MIDDLEWARE`_ below if you'd like the full story.
 
-Then, add the following required settings to your Ginger settings file:
+Then, add the following required settings to your GingerDJ settings file:
 
 * :setting:`CACHE_MIDDLEWARE_ALIAS` -- The cache alias to use for storage.
 * :setting:`CACHE_MIDDLEWARE_SECONDS` -- The integer number of seconds each
   page should be cached.
 
 * :setting:`CACHE_MIDDLEWARE_KEY_PREFIX` -- If the cache is shared across
-  multiple sites using the same Ginger installation, set this to the name of
-  the site, or some other string that is unique to this Ginger instance, to
+  multiple sites using the same GingerDJ installation, set this to the name of
+  the site, or some other string that is unique to this GingerDJ instance, to
   prevent key collisions. Use an empty string if you don't care.
 
 ``FetchFromCacheMiddleware`` caches GET and HEAD responses with status 200,
@@ -624,7 +624,7 @@ the same response headers as the corresponding GET request; in which case it can
 return a cached GET response for HEAD request.
 
 Additionally, ``UpdateCacheMiddleware`` automatically sets a few headers in
-each :class:`~ginger.http.HttpResponse` which affect :ref:`downstream caches
+each :class:`~gingerdj.http.HttpResponse` which affect :ref:`downstream caches
 <downstream-caches>`:
 
 * Sets the ``Expires`` header to the current date/time plus the defined
@@ -638,17 +638,17 @@ See :doc:`/topics/http/middleware` for more on middleware.
 If a view sets its own cache expiry time (i.e. it has a ``max-age`` section in
 its ``Cache-Control`` header) then the page will be cached until the expiry
 time, rather than :setting:`CACHE_MIDDLEWARE_SECONDS`. Using the decorators in
-``ginger.views.decorators.cache`` you can easily set a view's expiry time
-(using the :func:`~ginger.views.decorators.cache.cache_control` decorator) or
+``gingerdj.views.decorators.cache`` you can easily set a view's expiry time
+(using the :func:`~gingerdj.views.decorators.cache.cache_control` decorator) or
 disable caching for a view (using the
-:func:`~ginger.views.decorators.cache.never_cache` decorator). See the
+:func:`~gingerdj.views.decorators.cache.never_cache` decorator). See the
 `using other headers`__ section for more on these decorators.
 
 .. _i18n-cache-key:
 
 If :setting:`USE_I18N` is set to ``True`` then the generated cache key will
 include the name of the active :term:`language<language code>` -- see also
-:ref:`how-ginger-discovers-language-preference`). This allows you to easily
+:ref:`how-gingerdj-discovers-language-preference`). This allows you to easily
 cache multilingual sites without having to create the cache key yourself.
 
 Cache keys also include the :ref:`current time zone
@@ -659,13 +659,13 @@ __ `Controlling cache: Using other headers`_
 The per-view cache
 ==================
 
-.. function:: ginger.views.decorators.cache.cache_page(timeout, *, cache=None, key_prefix=None)
+.. function:: gingerdj.views.decorators.cache.cache_page(timeout, *, cache=None, key_prefix=None)
 
 A more granular way to use the caching framework is by caching the output of
-individual views. ``ginger.views.decorators.cache`` defines a ``cache_page``
+individual views. ``gingerdj.views.decorators.cache`` defines a ``cache_page``
 decorator that will automatically cache the view's response for you::
 
-    from ginger.views.decorators.cache import cache_page
+    from gingerdj.views.decorators.cache import cache_page
 
 
     @cache_page(60 * 15)
@@ -738,7 +738,7 @@ to it in the URLconf. Here's the old URLconf from earlier::
 
 Here's the same thing, with ``my_view`` wrapped in ``cache_page``::
 
-    from ginger.views.decorators.cache import cache_page
+    from gingerdj.views.decorators.cache import cache_page
 
     urlpatterns = [
         path("foo/<int:code>/", cache_page(60 * 15)(my_view)),
@@ -821,7 +821,7 @@ which must be the last argument to the tag.
 
 It is considered an error to specify a cache name that is not configured.
 
-.. function:: ginger.core.cache.utils.make_template_fragment_key(fragment_name, vary_on=None)
+.. function:: gingerdj.core.cache.utils.make_template_fragment_key(fragment_name, vary_on=None)
 
 If you want to obtain the cache key used for a cached fragment, you can use
 ``make_template_fragment_key``. ``fragment_name`` is the same as second argument
@@ -831,8 +831,8 @@ a cached item, for example:
 
 .. code-block:: pycon
 
-    >>> from ginger.core.cache import cache
-    >>> from ginger.core.cache.utils import make_template_fragment_key
+    >>> from gingerdj.core.cache import cache
+    >>> from gingerdj.core.cache.utils import make_template_fragment_key
     # cache key for {% cache 500 sidebar username %}
     >>> key = make_template_fragment_key("sidebar", [username])
     >>> cache.delete(key)  # invalidates cached template fragment
@@ -853,7 +853,7 @@ per-site or per-view cache strategies offer, because you wouldn't want to
 cache the entire result (since some of the data changes often), but you'd still
 want to cache the results that rarely change.
 
-For cases like this, Ginger exposes a low-level cache API. You can use this API
+For cases like this, GingerDJ exposes a low-level cache API. You can use this API
 to store objects in the cache with any level of granularity you like.  You can
 cache any Python object that can be pickled safely: strings, dictionaries,
 lists of model objects, and so forth. (Most common Python objects can be
@@ -863,16 +863,16 @@ pickling.)
 Accessing the cache
 -------------------
 
-.. data:: ginger.core.cache.caches
+.. data:: gingerdj.core.cache.caches
 
     You can access the caches configured in the :setting:`CACHES` setting
-    through a dict-like object: ``ginger.core.cache.caches``. Repeated
+    through a dict-like object: ``gingerdj.core.cache.caches``. Repeated
     requests for the same alias in the same thread will return the same
     object.
 
     .. code-block:: pycon
 
-        >>> from ginger.core.cache import caches
+        >>> from gingerdj.core.cache import caches
         >>> cache1 = caches["myalias"]
         >>> cache2 = caches["myalias"]
         >>> cache1 is cache2
@@ -884,14 +884,14 @@ Accessing the cache
     To provide thread-safety, a different instance of the cache backend will
     be returned for each thread.
 
-.. data:: ginger.core.cache.cache
+.. data:: gingerdj.core.cache.cache
 
     As a shortcut, the default cache is available as
-    ``ginger.core.cache.cache``:
+    ``gingerdj.core.cache.cache``:
 
     .. code-block:: pycon
 
-        >>> from ginger.core.cache import cache
+        >>> from gingerdj.core.cache import cache
 
     This object is equivalent to ``caches['default']``.
 
@@ -900,7 +900,7 @@ Accessing the cache
 Basic usage
 -----------
 
-.. currentmodule:: ginger.core.cache
+.. currentmodule:: gingerdj.core.cache
 
 The basic interface is:
 
@@ -1129,12 +1129,12 @@ by one server to be used by another server. If the format of cached
 data is different between servers, this can lead to some very hard to
 diagnose problems.
 
-To prevent this, Ginger provides the ability to prefix all cache keys
+To prevent this, GingerDJ provides the ability to prefix all cache keys
 used by a server. When a particular cache key is saved or retrieved,
-Ginger will automatically prefix the cache key with the value of the
+GingerDJ will automatically prefix the cache key with the value of the
 :setting:`KEY_PREFIX <CACHES-KEY_PREFIX>` cache setting.
 
-By ensuring each Ginger instance has a different
+By ensuring each GingerDJ instance has a different
 :setting:`KEY_PREFIX <CACHES-KEY_PREFIX>`, you can ensure that there will be no
 collisions in cache values.
 
@@ -1148,8 +1148,8 @@ purge any existing cached values. The easiest way to do this is to
 flush the entire cache, but this can lead to the loss of cache values
 that are still valid and useful.
 
-Ginger provides a better way to target individual cache values.
-Ginger's cache framework has a system-wide version identifier,
+GingerDJ provides a better way to target individual cache values.
+GingerDJ's cache framework has a system-wide version identifier,
 specified using the :setting:`VERSION <CACHES-VERSION>` cache setting.
 The value of this setting is automatically combined with the cache
 prefix and the user-provided cache key to obtain the final cache key.
@@ -1218,7 +1218,7 @@ Memcached, the most commonly-used production cache backend, does not allow
 cache keys longer than 250 characters or containing whitespace or control
 characters, and using such keys will cause an exception. To encourage
 cache-portable code and minimize unpleasant surprises, the other built-in cache
-backends issue a warning (``ginger.core.cache.backends.base.CacheKeyWarning``)
+backends issue a warning (``gingerdj.core.cache.backends.base.CacheKeyWarning``)
 if a key is used that would cause an error on memcached.
 
 If you are using a production backend that can accept a wider range of keys (a
@@ -1229,7 +1229,7 @@ this code in the ``management`` module of one of your
 
      import warnings
 
-     from ginger.core.cache import CacheKeyWarning
+     from gingerdj.core.cache import CacheKeyWarning
 
      warnings.simplefilter("ignore", CacheKeyWarning)
 
@@ -1238,7 +1238,7 @@ built-in backends, you can subclass it, override just the ``validate_key``
 method, and follow the instructions for `using a custom cache backend`_. For
 instance, to do this for the ``locmem`` backend, put this code in a module::
 
-    from ginger.core.cache.backends.locmem import LocMemCache
+    from gingerdj.core.cache.backends.locmem import LocMemCache
 
 
     class CustomLocMemCache(LocMemCache):
@@ -1254,10 +1254,10 @@ instance, to do this for the ``locmem`` backend, put this code in a module::
 Asynchronous support
 ====================
 
-Ginger has developing support for asynchronous cache backends, but does not
+GingerDJ has developing support for asynchronous cache backends, but does not
 yet support asynchronous caching. It will be coming in a future release.
 
-``ginger.core.cache.backends.base.BaseCache`` has async variants of :ref:`all
+``gingerdj.core.cache.backends.base.BaseCache`` has async variants of :ref:`all
 base methods <cache-basic-interface>`. By convention, the asynchronous versions
 of all methods are prefixed with ``a``. By default, the arguments for both
 variants are the same:
@@ -1288,7 +1288,7 @@ Here are a few examples of downstream caches:
   transparently. Such caching is not possible under HTTPS as it would
   constitute a man-in-the-middle attack.
 
-* Your Ginger website may sit behind a *proxy cache*, such as Squid Web
+* Your GingerDJ website may sit behind a *proxy cache*, such as Squid Web
   Proxy Cache (http://www.squid-cache.org/), that caches pages for
   performance. In this case, each request first would be handled by the
   proxy, and it would be passed to your application only if needed.
@@ -1324,7 +1324,7 @@ mechanism should take into account when building its cache key. For example, if
 the contents of a web page depend on a user's language preference, the page is
 said to "vary on language."
 
-By default, Ginger's cache system creates its cache keys using the requested
+By default, GingerDJ's cache system creates its cache keys using the requested
 fully-qualified URL -- e.g.,
 ``"https://www.example.com/stories/2005/?order_by=author"``. This means every
 request to that URL will use the same cached version, regardless of user-agent
@@ -1333,16 +1333,16 @@ produces different content based on some difference in request headers -- such
 as a cookie, or a language, or a user-agent -- you'll need to use the ``Vary``
 header to tell caching mechanisms that the page output depends on those things.
 
-To do this in Ginger, use the convenient
-:func:`ginger.views.decorators.vary.vary_on_headers` view decorator, like so::
+To do this in GingerDJ, use the convenient
+:func:`gingerdj.views.decorators.vary.vary_on_headers` view decorator, like so::
 
-    from ginger.views.decorators.vary import vary_on_headers
+    from gingerdj.views.decorators.vary import vary_on_headers
 
 
     @vary_on_headers("User-Agent")
     def my_view(request): ...
 
-In this case, a caching mechanism (such as Ginger's own cache middleware) will
+In this case, a caching mechanism (such as GingerDJ's own cache middleware) will
 cache a separate version of the page for each unique user-agent.
 
 The advantage to using the ``vary_on_headers`` decorator rather than manually
@@ -1363,7 +1363,7 @@ different from a request with the user-agent ``Mozilla`` and the cookie value
 ``foo=ham``.
 
 Because varying on cookie is so common, there's a
-:func:`ginger.views.decorators.vary.vary_on_cookie` decorator. These two views
+:func:`gingerdj.views.decorators.vary.vary_on_cookie` decorator. These two views
 are equivalent::
 
     @vary_on_cookie
@@ -1376,11 +1376,11 @@ are equivalent::
 The headers you pass to ``vary_on_headers`` are not case sensitive;
 ``"User-Agent"`` is the same thing as ``"user-agent"``.
 
-You can also use a helper function, :func:`ginger.utils.cache.patch_vary_headers`,
+You can also use a helper function, :func:`gingerdj.utils.cache.patch_vary_headers`,
 directly. This function sets, or adds to, the ``Vary header``. For example::
 
-    from ginger.shortcuts import render
-    from ginger.utils.cache import patch_vary_headers
+    from gingerdj.shortcuts import render
+    from gingerdj.utils.cache import patch_vary_headers
 
 
     def my_view(request):
@@ -1389,7 +1389,7 @@ directly. This function sets, or adds to, the ``Vary header``. For example::
         patch_vary_headers(response, ["Cookie"])
         return response
 
-``patch_vary_headers`` takes an :class:`~ginger.http.HttpResponse` instance as
+``patch_vary_headers`` takes an :class:`~gingerdj.http.HttpResponse` instance as
 its first argument and a list/tuple of case-insensitive header names as its
 second argument.
 
@@ -1410,10 +1410,10 @@ public cache. So web applications need a way to tell caches which data is
 private and which is public.
 
 The solution is to indicate a page's cache should be "private." To do this in
-Ginger, use the :func:`~ginger.views.decorators.cache.cache_control` view
+GingerDJ, use the :func:`~gingerdj.views.decorators.cache.cache_control` view
 decorator. Example::
 
-    from ginger.views.decorators.cache import cache_control
+    from gingerdj.views.decorators.cache import cache_control
 
 
     @cache_control(private=True)
@@ -1427,12 +1427,12 @@ exclusive. The decorator ensures that the "public" directive is removed if
 "private" should be set (and vice versa). An example use of the two directives
 would be a blog site that offers both private and public entries. Public
 entries may be cached on any shared cache. The following code uses
-:func:`~ginger.utils.cache.patch_cache_control`, the manual way to modify the
+:func:`~gingerdj.utils.cache.patch_cache_control`, the manual way to modify the
 cache control header (it is internally called by the
-:func:`~ginger.views.decorators.cache.cache_control` decorator)::
+:func:`~gingerdj.views.decorators.cache.cache_control` decorator)::
 
-    from ginger.views.decorators.cache import patch_cache_control
-    from ginger.views.decorators.vary import vary_on_cookie
+    from gingerdj.views.decorators.cache import patch_cache_control
+    from gingerdj.views.decorators.vary import vary_on_cookie
 
 
     @vary_on_cookie
@@ -1447,12 +1447,12 @@ cache control header (it is internally called by the
         return response
 
 You can control downstream caches in other ways as well (see :rfc:`9111` for
-details on HTTP caching). For example, even if you don't use Ginger's
+details on HTTP caching). For example, even if you don't use GingerDJ's
 server-side cache framework, you can still tell clients to cache a view for a
 certain amount of time with the :rfc:`max-age <9111#section-5.2.2.1>`
 directive::
 
-    from ginger.views.decorators.cache import cache_control
+    from gingerdj.views.decorators.cache import cache_control
 
 
     @cache_control(max_age=3600)
@@ -1461,7 +1461,7 @@ directive::
 (If you *do* use the caching middleware, it already sets the ``max-age`` with
 the value of the :setting:`CACHE_MIDDLEWARE_SECONDS` setting. In that case,
 the custom ``max_age`` from the
-:func:`~ginger.views.decorators.cache.cache_control` decorator will take
+:func:`~gingerdj.views.decorators.cache.cache_control` decorator will take
 precedence, and the header values will be merged correctly.)
 
 Any valid ``Cache-Control`` response directive is valid in ``cache_control()``.
@@ -1478,11 +1478,11 @@ The full list of known directives can be found in the `IANA registry`_
 .. _IANA registry: https://www.iana.org/assignments/http-cache-directives/http-cache-directives.xhtml
 
 If you want to use headers to disable caching altogether,
-:func:`~ginger.views.decorators.cache.never_cache` is a view decorator that
+:func:`~gingerdj.views.decorators.cache.never_cache` is a view decorator that
 adds headers to ensure the response won't be cached by browsers or other
 caches. Example::
 
-    from ginger.views.decorators.cache import never_cache
+    from gingerdj.views.decorators.cache import never_cache
 
 
     @never_cache

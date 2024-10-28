@@ -1,6 +1,6 @@
-from ginger.template import Context, Engine
-from ginger.template.base import TextNode, VariableNode
-from ginger.test import SimpleTestCase
+from gingerdj.template import Context, Engine
+from gingerdj.template.base import TextNode, VariableNode
+from gingerdj.test import SimpleTestCase
 
 
 class NodelistTest(SimpleTestCase):

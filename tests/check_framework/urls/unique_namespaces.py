@@ -1,4 +1,4 @@
-from ginger.urls import include, path
+from gingerdj.urls import include, path
 
 common_url_patterns = (
     [

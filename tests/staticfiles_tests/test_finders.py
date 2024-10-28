@@ -1,9 +1,9 @@
 import os
 
-from ginger.conf import settings
-from ginger.contrib.staticfiles import finders, storage
-from ginger.core.exceptions import ImproperlyConfigured
-from ginger.test import SimpleTestCase, override_settings
+from gingerdj.conf import settings
+from gingerdj.contrib.staticfiles import finders, storage
+from gingerdj.core.exceptions import ImproperlyConfigured
+from gingerdj.test import SimpleTestCase, override_settings
 
 from .cases import StaticFilesTestCase
 from .settings import TEST_ROOT
@@ -77,7 +77,7 @@ class TestDefaultStorageFinder(TestFinders, StaticFilesTestCase):
 
 
 @override_settings(
-    STATICFILES_FINDERS=["ginger.contrib.staticfiles.finders.FileSystemFinder"],
+    STATICFILES_FINDERS=["gingerdj.contrib.staticfiles.finders.FileSystemFinder"],
     STATICFILES_DIRS=[os.path.join(TEST_ROOT, "project", "documents")],
 )
 class TestMiscFinder(SimpleTestCase):
@@ -87,13 +87,13 @@ class TestMiscFinder(SimpleTestCase):
 
     def test_get_finder(self):
         self.assertIsInstance(
-            finders.get_finder("ginger.contrib.staticfiles.finders.FileSystemFinder"),
+            finders.get_finder("gingerdj.contrib.staticfiles.finders.FileSystemFinder"),
             finders.FileSystemFinder,
         )
 
     def test_get_finder_bad_classname(self):
         with self.assertRaises(ImportError):
-            finders.get_finder("ginger.contrib.staticfiles.finders.FooBarFinder")
+            finders.get_finder("gingerdj.contrib.staticfiles.finders.FooBarFinder")
 
     def test_get_finder_bad_module(self):
         with self.assertRaises(ImportError):
@@ -102,7 +102,7 @@ class TestMiscFinder(SimpleTestCase):
     def test_cache(self):
         finders.get_finder.cache_clear()
         for n in range(10):
-            finders.get_finder("ginger.contrib.staticfiles.finders.FileSystemFinder")
+            finders.get_finder("gingerdj.contrib.staticfiles.finders.FileSystemFinder")
         cache_info = finders.get_finder.cache_info()
         self.assertEqual(cache_info.hits, 9)
         self.assertEqual(cache_info.currsize, 1)
@@ -118,7 +118,7 @@ class TestMiscFinder(SimpleTestCase):
     def test_location_empty(self):
         msg = (
             "The storage backend of the staticfiles finder "
-            "<class 'ginger.contrib.staticfiles.finders.DefaultStorageFinder'> "
+            "<class 'gingerdj.contrib.staticfiles.finders.DefaultStorageFinder'> "
             "doesn't have a valid location."
         )
         with self.assertRaisesMessage(ImproperlyConfigured, msg):

@@ -2,12 +2,12 @@
 Widgets
 =======
 
-.. module:: ginger.forms.widgets
-   :synopsis: Ginger's built-in form widgets.
+.. module:: gingerdj.forms.widgets
+   :synopsis: GingerDJ's built-in form widgets.
 
-.. currentmodule:: ginger.forms
+.. currentmodule:: gingerdj.forms
 
-A widget is Ginger's representation of an HTML input element. The widget
+A widget is GingerDJ's representation of an HTML input element. The widget
 handles the rendering of the HTML, and the extraction of data from a GET/POST
 dictionary that corresponds to the widget.
 
@@ -28,7 +28,7 @@ rather than the XHTML style of ``checked='checked'``.
 Specifying widgets
 ==================
 
-Whenever you specify a field on a form, Ginger will use a default widget
+Whenever you specify a field on a form, GingerDJ will use a default widget
 that is appropriate to the type of data that is to be displayed. To find
 which widget is used on which field, see the documentation about
 :ref:`built-in-fields`.
@@ -36,7 +36,7 @@ which widget is used on which field, see the documentation about
 However, if you want to use a different widget for a field, you can
 use the :attr:`~Field.widget` argument on the field definition. For example::
 
-    from ginger import forms
+    from gingerdj import forms
 
 
     class CommentForm(forms.Form):
@@ -52,10 +52,10 @@ Setting arguments for widgets
 
 Many widgets have optional extra arguments; they can be set when defining the
 widget on the field. In the following example, the
-:attr:`~ginger.forms.SelectDateWidget.years` attribute is set for a
-:class:`~ginger.forms.SelectDateWidget`::
+:attr:`~gingerdj.forms.SelectDateWidget.years` attribute is set for a
+:class:`~gingerdj.forms.SelectDateWidget`::
 
-    from ginger import forms
+    from gingerdj import forms
 
     BIRTH_YEAR_CHOICES = ["1980", "1981", "1982"]
     FAVORITE_COLORS_CHOICES = {
@@ -94,7 +94,7 @@ example:
 
 .. code-block:: pycon
 
-    >>> from ginger import forms
+    >>> from gingerdj import forms
     >>> CHOICES = {"1": "First", "2": "Second"}
     >>> choice_field = forms.ChoiceField(widget=forms.RadioSelect, choices=CHOICES)
     >>> choice_field.choices
@@ -114,8 +114,8 @@ choices are inherent to the model and not just the representational widget.
 Customizing widget instances
 ============================
 
-When Ginger renders a widget as HTML, it only renders very minimal markup -
-Ginger doesn't add class names, or any other widget-specific attributes. This
+When GingerDJ renders a widget as HTML, it only renders very minimal markup -
+GingerDJ doesn't add class names, or any other widget-specific attributes. This
 means, for example, that all :class:`TextInput` widgets will appear the same
 on your web pages.
 
@@ -134,7 +134,7 @@ CSS files).
 
 For example, take the following form::
 
-    from ginger import forms
+    from gingerdj import forms
 
 
     class CommentForm(forms.Form):
@@ -184,7 +184,7 @@ you can use the :attr:`Form.fields` attribute::
             self.fields["name"].widget.attrs.update({"class": "special"})
             self.fields["comment"].widget.attrs.update(size="40")
 
-Ginger will then include the extra attributes in the rendered output:
+GingerDJ will then include the extra attributes in the rendered output:
 
     >>> f = CommentForm(auto_id=False)
     >>> print(f)
@@ -235,7 +235,7 @@ foundation for custom widgets.
 
         .. code-block:: pycon
 
-            >>> from ginger import forms
+            >>> from gingerdj import forms
             >>> name = forms.TextInput(attrs={"size": 10, "title": "Your name"})
             >>> name.render("name", "A name")
             '<input title="Your name" type="text" name="name" value="A name" size="10">'
@@ -306,7 +306,7 @@ foundation for custom widgets.
 
         Given a dictionary of data and this widget's name, returns the value
         of this widget. ``files`` may contain data coming from
-        :attr:`request.FILES <ginger.http.HttpRequest.FILES>`. Returns ``None``
+        :attr:`request.FILES <gingerdj.http.HttpRequest.FILES>`. Returns ``None``
         if a value wasn't provided. Note also that ``value_from_datadict`` may
         be called more than once during handling of form data, so if you
         customize it and add expensive processing, you should implement some
@@ -320,9 +320,9 @@ foundation for custom widgets.
         The method's result affects whether or not a field in a model form
         :ref:`falls back to its default <topics-modelform-save>`.
 
-        Special cases are :class:`~ginger.forms.CheckboxInput`,
-        :class:`~ginger.forms.CheckboxSelectMultiple`, and
-        :class:`~ginger.forms.SelectMultiple`, which always return
+        Special cases are :class:`~gingerdj.forms.CheckboxInput`,
+        :class:`~gingerdj.forms.CheckboxSelectMultiple`, and
+        :class:`~gingerdj.forms.SelectMultiple`, which always return
         ``False`` because an unchecked checkbox and unselected
         ``<select multiple>`` don't appear in the data of an HTML form
         submission, so it's unknown whether or not the user submitted a value.
@@ -332,25 +332,25 @@ foundation for custom widgets.
         An attribute to identify if the widget should be grouped in a
         ``<fieldset>`` with a ``<legend>`` when rendered. Defaults to ``False``
         but is ``True`` when the widget contains multiple ``<input>`` tags such as
-        :class:`~ginger.forms.CheckboxSelectMultiple`,
-        :class:`~ginger.forms.RadioSelect`,
-        :class:`~ginger.forms.MultiWidget`,
-        :class:`~ginger.forms.SplitDateTimeWidget`, and
-        :class:`~ginger.forms.SelectDateWidget`.
+        :class:`~gingerdj.forms.CheckboxSelectMultiple`,
+        :class:`~gingerdj.forms.RadioSelect`,
+        :class:`~gingerdj.forms.MultiWidget`,
+        :class:`~gingerdj.forms.SplitDateTimeWidget`, and
+        :class:`~gingerdj.forms.SelectDateWidget`.
 
     .. method:: use_required_attribute(initial)
 
         Given a form field's ``initial`` value, returns whether or not the
         widget can be rendered with the ``required`` HTML attribute. Forms use
         this method along with :attr:`Field.required
-        <ginger.forms.Field.required>` and :attr:`Form.use_required_attribute
-        <ginger.forms.Form.use_required_attribute>` to determine whether or not
+        <gingerdj.forms.Field.required>` and :attr:`Form.use_required_attribute
+        <gingerdj.forms.Form.use_required_attribute>` to determine whether or not
         to display the ``required`` attribute for each field.
 
         By default, returns ``False`` for hidden widgets and ``True``
-        otherwise. Special cases are :class:`~ginger.forms.FileInput` and
-        :class:`~ginger.forms.ClearableFileInput`, which return ``False`` when
-        ``initial`` is set, and :class:`~ginger.forms.CheckboxSelectMultiple`,
+        otherwise. Special cases are :class:`~gingerdj.forms.FileInput` and
+        :class:`~gingerdj.forms.ClearableFileInput`, which return ``False`` when
+        ``initial`` is set, and :class:`~gingerdj.forms.CheckboxSelectMultiple`,
         which always returns ``False`` because browser validation would require
         all checkboxes to be checked instead of at least one.
 
@@ -365,8 +365,8 @@ foundation for custom widgets.
 .. class:: MultiWidget(widgets, attrs=None)
 
     A widget that is composed of multiple widgets.
-    :class:`~ginger.forms.MultiWidget` works hand in hand with the
-    :class:`~ginger.forms.MultiValueField`.
+    :class:`~gingerdj.forms.MultiWidget` works hand in hand with the
+    :class:`~gingerdj.forms.MultiValueField`.
 
     :class:`MultiWidget` has one required argument:
 
@@ -376,7 +376,7 @@ foundation for custom widgets.
 
         .. code-block:: pycon
 
-            >>> from ginger.forms import MultiWidget, TextInput
+            >>> from gingerdj.forms import MultiWidget, TextInput
             >>> widget = MultiWidget(widgets=[TextInput, TextInput])
             >>> widget.render("name", ["john", "paul"])
             '<input type="text" name="name_0" value="john"><input type="text" name="name_1" value="paul">'
@@ -412,7 +412,7 @@ foundation for custom widgets.
         :class:`~datetime.datetime` value into a list with date and time split
         into two separate values::
 
-            from ginger.forms import MultiWidget
+            from gingerdj.forms import MultiWidget
 
 
             class SplitDateTimeWidget(MultiWidget):
@@ -425,8 +425,8 @@ foundation for custom widgets.
 
         .. tip::
 
-            Note that :class:`~ginger.forms.MultiValueField` has a
-            complementary method :meth:`~ginger.forms.MultiValueField.compress`
+            Note that :class:`~gingerdj.forms.MultiValueField` has a
+            complementary method :meth:`~gingerdj.forms.MultiValueField.compress`
             with the opposite responsibility - to combine cleaned values of
             all member fields into one.
 
@@ -448,12 +448,12 @@ foundation for custom widgets.
 
     Here's an example widget which subclasses :class:`MultiWidget` to display
     a date with the day, month, and year in different select boxes. This widget
-    is intended to be used with a :class:`~ginger.forms.DateField` rather than
-    a :class:`~ginger.forms.MultiValueField`, thus we have implemented
+    is intended to be used with a :class:`~gingerdj.forms.DateField` rather than
+    a :class:`~gingerdj.forms.MultiValueField`, thus we have implemented
     :meth:`~Widget.value_from_datadict`::
 
         from datetime import date
-        from ginger import forms
+        from gingerdj import forms
 
 
         class DateSelectorWidget(forms.MultiWidget):
@@ -487,26 +487,26 @@ foundation for custom widgets.
     The required method :meth:`~MultiWidget.decompress` breaks up a
     ``datetime.date`` value into the day, month, and year values corresponding
     to each widget. If an invalid date was selected, such as the non-existent
-    30th February, the :class:`~ginger.forms.DateField` passes this method a
+    30th February, the :class:`~gingerdj.forms.DateField` passes this method a
     string instead, so that needs parsing. The final ``return`` handles when
     ``value`` is ``None``, meaning we don't have any defaults for our
     subwidgets.
 
     The default implementation of :meth:`~Widget.value_from_datadict` returns a
     list of values corresponding to each ``Widget``. This is appropriate when
-    using a ``MultiWidget`` with a :class:`~ginger.forms.MultiValueField`. But
-    since we want to use this widget with a :class:`~ginger.forms.DateField`,
+    using a ``MultiWidget`` with a :class:`~gingerdj.forms.MultiValueField`. But
+    since we want to use this widget with a :class:`~gingerdj.forms.DateField`,
     which takes a single value, we have overridden this method. The
     implementation here combines the data from the subwidgets into a string in
-    the format that :class:`~ginger.forms.DateField` expects.
+    the format that :class:`~gingerdj.forms.DateField` expects.
 
 .. _built-in widgets:
 
 Built-in widgets
 ================
 
-Ginger provides a representation of all the basic HTML widgets, plus some
-commonly used groups of widgets in the ``ginger.forms.widgets`` module,
+GingerDJ provides a representation of all the basic HTML widgets, plus some
+commonly used groups of widgets in the ``gingerdj.forms.widgets`` module,
 including :ref:`the input of text <text-widgets>`, :ref:`various checkboxes
 and selectors <selector-widgets>`, :ref:`uploading files <file-upload-widgets>`,
 and :ref:`handling of multi-valued input <composite-widgets>`.
@@ -524,7 +524,7 @@ These widgets make use of the HTML elements ``input`` and ``textarea``.
 .. class:: TextInput
 
     * ``input_type``: ``'text'``
-    * ``template_name``: ``'ginger/forms/widgets/text.html'``
+    * ``template_name``: ``'gingerdj/forms/widgets/text.html'``
     * Renders as: ``<input type="text" ...>``
 
 ``NumberInput``
@@ -533,12 +533,12 @@ These widgets make use of the HTML elements ``input`` and ``textarea``.
 .. class:: NumberInput
 
     * ``input_type``: ``'number'``
-    * ``template_name``: ``'ginger/forms/widgets/number.html'``
+    * ``template_name``: ``'gingerdj/forms/widgets/number.html'``
     * Renders as: ``<input type="number" ...>``
 
     Beware that not all browsers support entering localized numbers in
-    ``number`` input types. Ginger itself avoids using them for fields having
-    their :attr:`~ginger.forms.Field.localize` property set to ``True``.
+    ``number`` input types. GingerDJ itself avoids using them for fields having
+    their :attr:`~gingerdj.forms.Field.localize` property set to ``True``.
 
 ``EmailInput``
 ~~~~~~~~~~~~~~
@@ -546,7 +546,7 @@ These widgets make use of the HTML elements ``input`` and ``textarea``.
 .. class:: EmailInput
 
     * ``input_type``: ``'email'``
-    * ``template_name``: ``'ginger/forms/widgets/email.html'``
+    * ``template_name``: ``'gingerdj/forms/widgets/email.html'``
     * Renders as: ``<input type="email" ...>``
 
 ``URLInput``
@@ -555,7 +555,7 @@ These widgets make use of the HTML elements ``input`` and ``textarea``.
 .. class:: URLInput
 
     * ``input_type``: ``'url'``
-    * ``template_name``: ``'ginger/forms/widgets/url.html'``
+    * ``template_name``: ``'gingerdj/forms/widgets/url.html'``
     * Renders as: ``<input type="url" ...>``
 
 ``PasswordInput``
@@ -564,7 +564,7 @@ These widgets make use of the HTML elements ``input`` and ``textarea``.
 .. class:: PasswordInput
 
     * ``input_type``: ``'password'``
-    * ``template_name``: ``'ginger/forms/widgets/password.html'``
+    * ``template_name``: ``'gingerdj/forms/widgets/password.html'``
     * Renders as: ``<input type="password" ...>``
 
     Takes one optional argument:
@@ -580,7 +580,7 @@ These widgets make use of the HTML elements ``input`` and ``textarea``.
 .. class:: HiddenInput
 
     * ``input_type``: ``'hidden'``
-    * ``template_name``: ``'ginger/forms/widgets/hidden.html'``
+    * ``template_name``: ``'gingerdj/forms/widgets/hidden.html'``
     * Renders as: ``<input type="hidden" ...>``
 
     Note that there also is a :class:`MultipleHiddenInput` widget that
@@ -592,7 +592,7 @@ These widgets make use of the HTML elements ``input`` and ``textarea``.
 .. class:: DateInput
 
     * ``input_type``: ``'text'``
-    * ``template_name``: ``'ginger/forms/widgets/date.html'``
+    * ``template_name``: ``'gingerdj/forms/widgets/date.html'``
     * Renders as: ``<input type="text" ...>``
 
     Takes same arguments as :class:`TextInput`, with one more optional argument:
@@ -612,7 +612,7 @@ These widgets make use of the HTML elements ``input`` and ``textarea``.
 .. class:: DateTimeInput
 
     * ``input_type``: ``'text'``
-    * ``template_name``: ``'ginger/forms/widgets/datetime.html'``
+    * ``template_name``: ``'gingerdj/forms/widgets/datetime.html'``
     * Renders as: ``<input type="text" ...>``
 
     Takes same arguments as :class:`TextInput`, with one more optional argument:
@@ -636,7 +636,7 @@ These widgets make use of the HTML elements ``input`` and ``textarea``.
 .. class:: TimeInput
 
     * ``input_type``: ``'text'``
-    * ``template_name``: ``'ginger/forms/widgets/time.html'``
+    * ``template_name``: ``'gingerdj/forms/widgets/time.html'``
     * Renders as: ``<input type="text" ...>``
 
     Takes same arguments as :class:`TextInput`, with one more optional argument:
@@ -656,7 +656,7 @@ These widgets make use of the HTML elements ``input`` and ``textarea``.
 
 .. class:: Textarea
 
-    * ``template_name``: ``'ginger/forms/widgets/textarea.html'``
+    * ``template_name``: ``'gingerdj/forms/widgets/textarea.html'``
     * Renders as: ``<textarea>...</textarea>``
 
 .. _selector-widgets:
@@ -678,7 +678,7 @@ that specifies the template used to render each choice. For example, for the
 .. class:: CheckboxInput
 
     * ``input_type``: ``'checkbox'``
-    * ``template_name``: ``'ginger/forms/widgets/checkbox.html'``
+    * ``template_name``: ``'gingerdj/forms/widgets/checkbox.html'``
     * Renders as: ``<input type="checkbox" ...>``
 
     Takes one optional argument:
@@ -693,8 +693,8 @@ that specifies the template used to render each choice. For example, for the
 
 .. class:: Select
 
-    * ``template_name``: ``'ginger/forms/widgets/select.html'``
-    * ``option_template_name``: ``'ginger/forms/widgets/select_option.html'``
+    * ``template_name``: ``'gingerdj/forms/widgets/select.html'``
+    * ``option_template_name``: ``'gingerdj/forms/widgets/select_option.html'``
     * Renders as: ``<select><option ...>...</select>``
 
     .. attribute:: Select.choices
@@ -708,8 +708,8 @@ that specifies the template used to render each choice. For example, for the
 
 .. class:: NullBooleanSelect
 
-    * ``template_name``: ``'ginger/forms/widgets/select.html'``
-    * ``option_template_name``: ``'ginger/forms/widgets/select_option.html'``
+    * ``template_name``: ``'gingerdj/forms/widgets/select.html'``
+    * ``option_template_name``: ``'gingerdj/forms/widgets/select_option.html'``
 
     Select widget with options 'Unknown', 'Yes' and 'No'
 
@@ -718,8 +718,8 @@ that specifies the template used to render each choice. For example, for the
 
 .. class:: SelectMultiple
 
-    * ``template_name``: ``'ginger/forms/widgets/select.html'``
-    * ``option_template_name``: ``'ginger/forms/widgets/select_option.html'``
+    * ``template_name``: ``'gingerdj/forms/widgets/select.html'``
+    * ``option_template_name``: ``'gingerdj/forms/widgets/select_option.html'``
 
     Similar to :class:`Select`, but allows multiple selection:
     ``<select multiple>...</select>``
@@ -729,8 +729,8 @@ that specifies the template used to render each choice. For example, for the
 
 .. class:: RadioSelect
 
-    * ``template_name``: ``'ginger/forms/widgets/radio.html'``
-    * ``option_template_name``: ``'ginger/forms/widgets/radio_option.html'``
+    * ``template_name``: ``'gingerdj/forms/widgets/radio.html'``
+    * ``option_template_name``: ``'gingerdj/forms/widgets/radio_option.html'``
 
     Similar to :class:`Select`, but rendered as a list of radio buttons within
     ``<div>`` tags:
@@ -833,8 +833,8 @@ that specifies the template used to render each choice. For example, for the
 
 .. class:: CheckboxSelectMultiple
 
-    * ``template_name``: ``'ginger/forms/widgets/checkbox_select.html'``
-    * ``option_template_name``: ``'ginger/forms/widgets/checkbox_option.html'``
+    * ``template_name``: ``'gingerdj/forms/widgets/checkbox_select.html'``
+    * ``option_template_name``: ``'gingerdj/forms/widgets/checkbox_option.html'``
 
     Similar to :class:`SelectMultiple`, but rendered as a list of checkboxes:
 
@@ -867,7 +867,7 @@ File upload widgets
 
 .. class:: FileInput
 
-    * ``template_name``: ``'ginger/forms/widgets/file.html'``
+    * ``template_name``: ``'gingerdj/forms/widgets/file.html'``
     * Renders as: ``<input type="file" ...>``
 
 ``ClearableFileInput``
@@ -875,7 +875,7 @@ File upload widgets
 
 .. class:: ClearableFileInput
 
-    * ``template_name``: ``'ginger/forms/widgets/clearable_file_input.html'``
+    * ``template_name``: ``'gingerdj/forms/widgets/clearable_file_input.html'``
     * Renders as: ``<input type="file" ...>`` with an additional checkbox
       input to clear the field's value, if the field is not required and has
       initial data.
@@ -890,7 +890,7 @@ Composite widgets
 
 .. class:: MultipleHiddenInput
 
-    * ``template_name``: ``'ginger/forms/widgets/multiple_hidden.html'``
+    * ``template_name``: ``'gingerdj/forms/widgets/multiple_hidden.html'``
     * Renders as: multiple ``<input type="hidden" ...>`` tags
 
     A widget that handles multiple hidden widgets for fields that have a list
@@ -901,7 +901,7 @@ Composite widgets
 
 .. class:: SplitDateTimeWidget
 
-    * ``template_name``: ``'ginger/forms/widgets/splitdatetime.html'``
+    * ``template_name``: ``'gingerdj/forms/widgets/splitdatetime.html'``
 
     Wrapper (using :class:`MultiWidget`) around two widgets: :class:`DateInput`
     for the date, and :class:`TimeInput` for the time. Must be used with
@@ -930,7 +930,7 @@ Composite widgets
 
 .. class:: SplitHiddenDateTimeWidget
 
-    * ``template_name``: ``'ginger/forms/widgets/splithiddendatetime.html'``
+    * ``template_name``: ``'gingerdj/forms/widgets/splithiddendatetime.html'``
 
     Similar to :class:`SplitDateTimeWidget`, but uses :class:`HiddenInput` for
     both date and time.
@@ -940,9 +940,9 @@ Composite widgets
 
 .. class:: SelectDateWidget
 
-    * ``template_name``: ``'ginger/forms/widgets/select_date.html'``
+    * ``template_name``: ``'gingerdj/forms/widgets/select_date.html'``
 
-    Wrapper around three :class:`~ginger.forms.Select` widgets: one each for
+    Wrapper around three :class:`~gingerdj.forms.Select` widgets: one each for
     month, day, and year.
 
     Takes several optional arguments:
@@ -976,7 +976,7 @@ Composite widgets
 
     .. attribute:: SelectDateWidget.empty_label
 
-        If the :class:`~ginger.forms.DateField` is not required,
+        If the :class:`~gingerdj.forms.DateField` is not required,
         :class:`SelectDateWidget` will have an empty choice at the top of the
         list (which is ``---`` by default). You can change the text of this
         label with the ``empty_label`` attribute. ``empty_label`` can be a

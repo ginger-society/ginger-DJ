@@ -1,16 +1,16 @@
 from urllib.parse import urljoin
 
-from ginger.conf import settings
-from ginger.template import TemplateSyntaxError
-from ginger.templatetags.static import StaticNode
-from ginger.test import SimpleTestCase, override_settings
+from gingerdj.conf import settings
+from gingerdj.template import TemplateSyntaxError
+from gingerdj.templatetags.static import StaticNode
+from gingerdj.test import SimpleTestCase, override_settings
 
 from ..utils import setup
 
 
 @override_settings(INSTALLED_APPS=[], MEDIA_URL="media/", STATIC_URL="static/")
 class StaticTagTests(SimpleTestCase):
-    libraries = {"static": "ginger.templatetags.static"}
+    libraries = {"static": "gingerdj.templatetags.static"}
 
     @setup({"static-prefixtag01": "{% load static %}{% get_static_prefix %}"})
     def test_static_prefixtag01(self):

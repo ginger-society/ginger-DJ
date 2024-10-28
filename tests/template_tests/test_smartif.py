@@ -1,6 +1,6 @@
 import unittest
 
-from ginger.template.smartif import IfParser
+from gingerdj.template.smartif import IfParser
 
 
 class SmartIfTests(unittest.TestCase):

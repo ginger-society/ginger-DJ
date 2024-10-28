@@ -3,16 +3,16 @@ import unittest
 from collections import namedtuple
 from contextlib import contextmanager
 
-from ginger.db import connection, models
-from ginger.db.utils import ProgrammingError
-from ginger.test import TestCase
-from ginger.test.utils import garbage_collect
-from ginger.utils.version import PYPY
+from gingerdj.db import connection, models
+from gingerdj.db.utils import ProgrammingError
+from gingerdj.test import TestCase
+from gingerdj.test.utils import garbage_collect
+from gingerdj.utils.version import PYPY
 
 from ..models import Person
 
 try:
-    from ginger.db.backends.postgresql.psycopg_any import is_psycopg3
+    from gingerdj.db.backends.postgresql.psycopg_any import is_psycopg3
 except ImportError:
     is_psycopg3 = False
 

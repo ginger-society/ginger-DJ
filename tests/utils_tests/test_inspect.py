@@ -1,6 +1,6 @@
 import unittest
 
-from ginger.utils import inspect
+from gingerdj.utils import inspect
 
 
 class Person:

@@ -1,7 +1,7 @@
 from unittest import mock, skipUnless
 
-from ginger.db import OperationalError, connection
-from ginger.test import TestCase
+from gingerdj.db import OperationalError, connection
+from gingerdj.test import TestCase
 
 
 @skipUnless(connection.vendor == "sqlite", "SQLite tests.")

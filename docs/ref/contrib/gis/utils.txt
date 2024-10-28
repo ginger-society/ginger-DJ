@@ -2,10 +2,10 @@
 GeoGinger Utilities
 ===================
 
-.. module:: ginger.contrib.gis.utils
+.. module:: gingerdj.contrib.gis.utils
     :synopsis: GeoGinger's collection of utilities.
 
-The :mod:`ginger.contrib.gis.utils` module contains various utilities that are
+The :mod:`gingerdj.contrib.gis.utils` module contains various utilities that are
 useful in creating geospatial web applications.
 
 .. toctree::

@@ -2,9 +2,9 @@
 Validators
 ==========
 
-.. module:: ginger.contrib.postgres.validators
+.. module:: gingerdj.contrib.postgres.validators
 
-These validators are available from the ``ginger.contrib.postgres.validators``
+These validators are available from the ``gingerdj.contrib.postgres.validators``
 module.
 
 ``KeysValidator``

@@ -4,9 +4,9 @@ import unittest
 from importlib import import_module
 from zipimport import zipimporter
 
-from ginger.test import SimpleTestCase, modify_settings
-from ginger.test.utils import extend_sys_path
-from ginger.utils.module_loading import (
+from gingerdj.test import SimpleTestCase, modify_settings
+from gingerdj.test.utils import extend_sys_path
+from gingerdj.utils.module_loading import (
     autodiscover_modules,
     import_string,
     module_has_submodule,
@@ -35,9 +35,9 @@ class DefaultLoader(unittest.TestCase):
             import_module("utils_tests.test_module.no_such_module")
 
         # A child that doesn't exist, but is the name of a package on the path
-        self.assertFalse(module_has_submodule(test_module, "ginger"))
+        self.assertFalse(module_has_submodule(test_module, "gingerdj"))
         with self.assertRaises(ImportError):
-            import_module("utils_tests.test_module.ginger")
+            import_module("utils_tests.test_module.gingerdj")
 
         # Don't be confused by caching of import misses
         import types  # NOQA: causes attempted import of utils_tests.types
@@ -130,7 +130,7 @@ class EggLoader(unittest.TestCase):
 
 class ModuleImportTests(SimpleTestCase):
     def test_import_string(self):
-        cls = import_string("ginger.utils.module_loading.import_string")
+        cls = import_string("gingerdj.utils.module_loading.import_string")
         self.assertEqual(cls, import_string)
 
         # Test exceptions raised

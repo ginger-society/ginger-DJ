@@ -2,21 +2,21 @@
 Request and response objects
 ============================
 
-.. module:: ginger.http
+.. module:: gingerdj.http
    :synopsis: Classes dealing with HTTP requests and responses.
 
 Quick overview
 ==============
 
-Ginger uses request and response objects to pass state through the system.
+GingerDJ uses request and response objects to pass state through the system.
 
-When a page is requested, Ginger creates an :class:`HttpRequest` object that
-contains metadata about the request. Then Ginger loads the appropriate view,
+When a page is requested, GingerDJ creates an :class:`HttpRequest` object that
+contains metadata about the request. Then GingerDJ loads the appropriate view,
 passing the :class:`HttpRequest` as the first argument to the view function.
 Each view is responsible for returning an :class:`HttpResponse` object.
 
 This document explains the APIs for :class:`HttpRequest` and
-:class:`HttpResponse` objects, which are defined in the :mod:`ginger.http`
+:class:`HttpResponse` objects, which are defined in the :mod:`gingerdj.http`
 module.
 
 ``HttpRequest`` objects
@@ -127,7 +127,7 @@ All attributes should be considered read-only, unless stated otherwise.
 
     A dictionary-like object containing all uploaded files. Each key in
     ``FILES`` is the ``name`` from the ``<input type="file" name="">``. Each
-    value in ``FILES`` is an :class:`~ginger.core.files.uploadedfile.UploadedFile`.
+    value in ``FILES`` is an :class:`~gingerdj.core.files.uploadedfile.UploadedFile`.
 
     See :doc:`/topics/files` for more information.
 
@@ -201,7 +201,7 @@ All attributes should be considered read-only, unless stated otherwise.
         >>> request.headers.get("user-agent")
         Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6)
 
-    For use in, for example, Ginger templates, headers can also be looked up
+    For use in, for example, GingerDJ templates, headers can also be looked up
     using underscores in place of hyphens:
 
     .. code-block:: html+django
@@ -210,7 +210,7 @@ All attributes should be considered read-only, unless stated otherwise.
 
 .. attribute:: HttpRequest.resolver_match
 
-    An instance of :class:`~ginger.urls.ResolverMatch` representing the
+    An instance of :class:`~gingerdj.urls.ResolverMatch` representing the
     resolved URL. This attribute is only set after URL resolving took place,
     which means it's available in all views but not in middleware which are
     executed before URL resolving takes place (you can use it in
@@ -219,19 +219,19 @@ All attributes should be considered read-only, unless stated otherwise.
 Attributes set by application code
 ----------------------------------
 
-Ginger doesn't set these attributes itself but makes use of them if set by your
+GingerDJ doesn't set these attributes itself but makes use of them if set by your
 application.
 
 .. attribute:: HttpRequest.current_app
 
     The :ttag:`url` template tag will use its value as the ``current_app``
-    argument to :func:`~ginger.urls.reverse()`.
+    argument to :func:`~gingerdj.urls.reverse()`.
 
 .. attribute:: HttpRequest.urlconf
 
     This will be used as the root URLconf for the current request, overriding
     the :setting:`ROOT_URLCONF` setting. See
-    :ref:`how-ginger-processes-a-request` for details.
+    :ref:`how-gingerdj-processes-a-request` for details.
 
     ``urlconf`` can be set to ``None`` to revert any changes made by previous
     middleware and return to using the :setting:`ROOT_URLCONF`.
@@ -249,22 +249,22 @@ application.
 Attributes set by middleware
 ----------------------------
 
-Some of the middleware included in Ginger's contrib apps set attributes on the
+Some of the middleware included in GingerDJ's contrib apps set attributes on the
 request. If you don't see the attribute on a request, be sure the appropriate
 middleware class is listed in :setting:`MIDDLEWARE`.
 
 .. attribute:: HttpRequest.session
 
-    From the :class:`~ginger.contrib.sessions.middleware.SessionMiddleware`: A
+    From the :class:`~gingerdj.contrib.sessions.middleware.SessionMiddleware`: A
     readable and writable, dictionary-like object that represents the current
     session.
 
 .. attribute:: HttpRequest.site
 
-    From the :class:`~ginger.contrib.sites.middleware.CurrentSiteMiddleware`:
-    An instance of :class:`~ginger.contrib.sites.models.Site` or
-    :class:`~ginger.contrib.sites.requests.RequestSite` as returned by
-    :func:`~ginger.contrib.sites.shortcuts.get_current_site()`
+    From the :class:`~gingerdj.contrib.sites.middleware.CurrentSiteMiddleware`:
+    An instance of :class:`~gingerdj.contrib.sites.models.Site` or
+    :class:`~gingerdj.contrib.sites.requests.RequestSite` as returned by
+    :func:`~gingerdj.contrib.sites.shortcuts.get_current_site()`
     representing the current site.
 
 Methods
@@ -280,7 +280,7 @@ Methods
 
     Example: ``"127.0.0.1:8000"``
 
-    Raises ``ginger.core.exceptions.DisallowedHost`` if the host is not in
+    Raises ``gingerdj.core.exceptions.DisallowedHost`` if the host is not in
     :setting:`ALLOWED_HOSTS` or the domain name is invalid according to
     :rfc:`1034`/:rfc:`1035 <1035>`.
 
@@ -312,8 +312,8 @@ Methods
 
         This middleware should be positioned before any other middleware that
         relies on the value of :meth:`~HttpRequest.get_host()` -- for instance,
-        :class:`~ginger.middleware.common.CommonMiddleware` or
-        :class:`~ginger.middleware.csrf.CsrfViewMiddleware`.
+        :class:`~gingerdj.middleware.common.CommonMiddleware` or
+        :class:`~gingerdj.middleware.csrf.CsrfViewMiddleware`.
 
 .. method:: HttpRequest.get_port()
 
@@ -363,7 +363,7 @@ Methods
 .. method:: HttpRequest.get_signed_cookie(key, default=RAISE_ERROR, salt='', max_age=None)
 
     Returns a cookie value for a signed cookie, or raises a
-    ``ginger.core.signing.BadSignature`` exception if the signature is
+    ``gingerdj.core.signing.BadSignature`` exception if the signature is
     no longer valid. If you provide the ``default`` argument the exception
     will be suppressed and that default value will be returned instead.
 
@@ -416,10 +416,10 @@ Methods
     ``accepts()`` to return different content to API consumers.
 
     If a response varies depending on the content of the ``Accept`` header and
-    you are using some form of caching like Ginger's :mod:`cache middleware
-    <ginger.middleware.cache>`, you should decorate the view with
+    you are using some form of caching like GingerDJ's :mod:`cache middleware
+    <gingerdj.middleware.cache>`, you should decorate the view with
     :func:`vary_on_headers('Accept')
-    <ginger.views.decorators.vary.vary_on_headers>` so that the responses are
+    <gingerdj.views.decorators.vary.vary_on_headers>` so that the responses are
     properly cached.
 
 .. method:: HttpRequest.read(size=None)
@@ -449,7 +449,7 @@ Methods
 .. class:: QueryDict
 
 In an :class:`HttpRequest` object, the :attr:`~HttpRequest.GET` and
-:attr:`~HttpRequest.POST` attributes are instances of ``ginger.http.QueryDict``,
+:attr:`~HttpRequest.POST` attributes are instances of ``gingerdj.http.QueryDict``,
 a dictionary-like class customized to deal with multiple values for the same
 key. This is necessary because some HTML form elements, notably
 ``<select multiple>``, pass multiple values for the same key.
@@ -499,7 +499,7 @@ a subclass of dictionary. Exceptions are outlined here:
 
     Returns the value for the given key. If the key has more than one value,
     it returns the last value. Raises
-    ``ginger.utils.datastructures.MultiValueDictKeyError`` if the key does not
+    ``gingerdj.utils.datastructures.MultiValueDictKeyError`` if the key does not
     exist. (This is a subclass of Python's standard :exc:`KeyError`, so you can
     stick to catching ``KeyError``.)
 
@@ -662,11 +662,11 @@ In addition, ``QueryDict`` has the following methods:
 .. class:: HttpResponse
 
 In contrast to :class:`HttpRequest` objects, which are created automatically by
-Ginger, :class:`HttpResponse` objects are your responsibility. Each view you
+GingerDJ, :class:`HttpResponse` objects are your responsibility. Each view you
 write is responsible for instantiating, populating, and returning an
 :class:`HttpResponse`.
 
-The :class:`HttpResponse` class lives in the :mod:`ginger.http` module.
+The :class:`HttpResponse` class lives in the :mod:`gingerdj.http` module.
 
 Usage
 -----
@@ -679,7 +679,7 @@ or :class:`memoryview`, to the :class:`HttpResponse` constructor:
 
 .. code-block:: pycon
 
-    >>> from ginger.http import HttpResponse
+    >>> from gingerdj.http import HttpResponse
     >>> response = HttpResponse("Here's the text of the web page.")
     >>> response = HttpResponse("Text only, please.", content_type="text/plain")
     >>> response = HttpResponse(b"Bytestrings are also accepted.")
@@ -740,9 +740,9 @@ You can also set headers on instantiation:
     >>> response = HttpResponse(headers={"Age": 120})
 
 For setting the ``Cache-Control`` and ``Vary`` header fields, it is recommended
-to use the :func:`~ginger.utils.cache.patch_cache_control` and
-:func:`~ginger.utils.cache.patch_vary_headers` methods from
-:mod:`ginger.utils.cache`, since these fields can have multiple, comma-separated
+to use the :func:`~gingerdj.utils.cache.patch_cache_control` and
+:func:`~gingerdj.utils.cache.patch_vary_headers` methods from
+:mod:`gingerdj.utils.cache`, since these fields can have multiple, comma-separated
 values. The "patch" methods ensure that other values, e.g. added by a
 middleware, are not removed.
 
@@ -766,7 +766,7 @@ you might return a Microsoft Excel spreadsheet:
     ...     },
     ... )
 
-There's nothing Ginger-specific about the ``Content-Disposition`` header, but
+There's nothing GingerDJ-specific about the ``Content-Disposition`` header, but
 it's easy to forget the syntax, so we've included it here.
 
 Attributes
@@ -913,7 +913,7 @@ Methods
       accessing the protected cookie data.
     * Use ``samesite='Strict'`` or ``samesite='Lax'`` to tell the browser not
       to send this cookie when performing a cross-origin request. `SameSite`_
-      isn't supported by all browsers, so it's not a replacement for Ginger's
+      isn't supported by all browsers, so it's not a replacement for GingerDJ's
       CSRF protection, but rather a defense in depth measure.
 
       Use ``samesite='None'`` (string) to explicitly state that this cookie is
@@ -926,7 +926,7 @@ Methods
 
         :rfc:`RFC 6265 <6265#section-6.1>` states that user agents should
         support cookies of at least 4096 bytes. For many browsers this is also
-        the maximum size. Ginger will not raise an exception if there's an
+        the maximum size. GingerDJ will not raise an exception if there's an
         attempt to store a cookie of more than 4096 bytes, but many browsers
         will not set the cookie correctly.
 
@@ -995,9 +995,9 @@ Methods
 ``HttpResponse`` subclasses
 ---------------------------
 
-Ginger includes a number of ``HttpResponse`` subclasses that handle different
+GingerDJ includes a number of ``HttpResponse`` subclasses that handle different
 types of HTTP responses. Like ``HttpResponse``, these subclasses live in
-:mod:`ginger.http`.
+:mod:`gingerdj.http`.
 
 .. class:: HttpResponseRedirect
 
@@ -1054,18 +1054,18 @@ types of HTTP responses. Like ``HttpResponse``, these subclasses live in
 .. note::
 
     If a custom subclass of :class:`HttpResponse` implements a ``render``
-    method, Ginger will treat it as emulating a
-    :class:`~ginger.template.response.SimpleTemplateResponse`, and the
+    method, GingerDJ will treat it as emulating a
+    :class:`~gingerdj.template.response.SimpleTemplateResponse`, and the
     ``render`` method must itself return a valid response object.
 
 Custom response classes
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-If you find yourself needing a response class that Ginger doesn't provide, you
+If you find yourself needing a response class that GingerDJ doesn't provide, you
 can create it with the help of :py:class:`http.HTTPStatus`. For example::
 
     from http import HTTPStatus
-    from ginger.http import HttpResponse
+    from gingerdj.http import HttpResponse
 
 
     class HttpResponseNoContent(HttpResponse):
@@ -1087,7 +1087,7 @@ can create it with the help of :py:class:`http.HTTPStatus`. For example::
     JSON-serializable object.
 
     The ``encoder``, which defaults to
-    :class:`ginger.core.serializers.json.GingerJSONEncoder`, will be used to
+    :class:`gingerdj.core.serializers.json.GingerJSONEncoder`, will be used to
     serialize the data. See :ref:`JSON serialization
     <serialization-formats-json>` for more details about this serializer.
 
@@ -1106,7 +1106,7 @@ Typical usage could look like:
 
 .. code-block:: pycon
 
-    >>> from ginger.http import JsonResponse
+    >>> from gingerdj.http import JsonResponse
     >>> response = JsonResponse({"foo": "bar"})
     >>> response.content
     b'{"foo": "bar"}'
@@ -1131,9 +1131,9 @@ using non-dict objects in JSON-encoded response.
 
     Before the `5th edition of ECMAScript
     <https://262.ecma-international.org/5.1/#sec-11.1.4>`_ it was possible to
-    poison the JavaScript ``Array`` constructor. For this reason, Ginger does
+    poison the JavaScript ``Array`` constructor. For this reason, GingerDJ does
     not allow passing non-dict objects to the
-    :class:`~ginger.http.JsonResponse` constructor by default.  However, most
+    :class:`~gingerdj.http.JsonResponse` constructor by default.  However, most
     modern browsers implement ECMAScript 5 which removes this attack vector.
     Therefore it is possible to disable this security precaution.
 
@@ -1155,7 +1155,7 @@ parameter to the constructor method:
 .. class:: StreamingHttpResponse
 
 The :class:`StreamingHttpResponse` class is used to stream a response from
-Ginger to the browser.
+GingerDJ to the browser.
 
 .. admonition:: Advanced usage
 
@@ -1171,7 +1171,7 @@ content when generating the response would take too long or uses too much
 memory. For instance, it's useful for :ref:`generating large CSV files
 <streaming-csv-files>`.
 
-There are performance considerations when doing this, though. Ginger, under
+There are performance considerations when doing this, though. GingerDJ, under
 WSGI, is designed for short-lived requests. Streaming responses will tie a
 worker process for the entire duration of the response. This may result in poor
 performance.
@@ -1264,7 +1264,7 @@ Handling disconnects
 
 .. versionadded:: 5.0
 
-If the client disconnects during a streaming response, Ginger will cancel the
+If the client disconnects during a streaming response, GingerDJ will cancel the
 coroutine that is handling the response. If you want to clean up resources
 manually, you can do so by catching the ``asyncio.CancelledError``::
 
@@ -1319,7 +1319,7 @@ a file open in binary mode like so:
 
 .. code-block:: pycon
 
-    >>> from ginger.http import FileResponse
+    >>> from gingerdj.http import FileResponse
     >>> response = FileResponse(open("myfile.png", "rb"))
 
 The file will be closed automatically, so don't open it with a context manager.
@@ -1347,6 +1347,6 @@ Methods
 
 .. class:: HttpResponseBase
 
-The :class:`HttpResponseBase` class is common to all Ginger responses.
+The :class:`HttpResponseBase` class is common to all GingerDJ responses.
 It should not be used to create responses directly, but it can be
 useful for type-checking.

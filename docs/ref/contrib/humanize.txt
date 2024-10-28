@@ -1,14 +1,14 @@
 ===========================
-``ginger.contrib.humanize``
+``gingerdj.contrib.humanize``
 ===========================
 
-.. module:: ginger.contrib.humanize
-   :synopsis: A set of Ginger template filters useful for adding a "human
+.. module:: gingerdj.contrib.humanize
+   :synopsis: A set of GingerDJ template filters useful for adding a "human
               touch" to data.
 
-A set of Ginger template filters useful for adding a "human touch" to data.
+A set of GingerDJ template filters useful for adding a "human touch" to data.
 
-To activate these filters, add ``'ginger.contrib.humanize'`` to your
+To activate these filters, add ``'gingerdj.contrib.humanize'`` to your
 :setting:`INSTALLED_APPS` setting. Once you've done that, use
 ``{% load humanize %}`` in a template, and you'll have access to the following
 filters.

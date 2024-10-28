@@ -1,7 +1,7 @@
 import datetime
 import uuid
 
-from ginger.db import models
+from gingerdj.db import models
 
 
 class Author(models.Model):

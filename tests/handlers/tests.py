@@ -1,8 +1,8 @@
-from ginger.core.exceptions import ImproperlyConfigured
-from ginger.core.handlers.wsgi import WSGIHandler, WSGIRequest, get_script_name
-from ginger.core.signals import request_finished, request_started
-from ginger.db import close_old_connections, connection
-from ginger.test import (
+from gingerdj.core.exceptions import ImproperlyConfigured
+from gingerdj.core.handlers.wsgi import WSGIHandler, WSGIRequest, get_script_name
+from gingerdj.core.signals import request_finished, request_started
+from gingerdj.db import close_old_connections, connection
+from gingerdj.test import (
     AsyncRequestFactory,
     RequestFactory,
     SimpleTestCase,

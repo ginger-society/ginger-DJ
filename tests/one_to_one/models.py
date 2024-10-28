@@ -6,7 +6,7 @@ To define a one-to-one relationship, use ``OneToOneField()``.
 In this example, a ``Place`` optionally can be a ``Restaurant``.
 """
 
-from ginger.db import models
+from gingerdj.db import models
 
 
 class Place(models.Model):

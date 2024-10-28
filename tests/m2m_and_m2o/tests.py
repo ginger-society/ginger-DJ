@@ -1,5 +1,5 @@
-from ginger.db.models import Q
-from ginger.test import TestCase
+from gingerdj.db.models import Q
+from gingerdj.test import TestCase
 
 from .models import Issue, StringReferenceModel, User
 

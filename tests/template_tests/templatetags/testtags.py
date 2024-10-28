@@ -1,4 +1,4 @@
-from ginger.template import Library, Node
+from gingerdj.template import Library, Node
 
 register = Library()
 

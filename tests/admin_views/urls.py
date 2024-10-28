@@ -1,5 +1,5 @@
-from ginger.http import HttpResponse
-from ginger.urls import include, path
+from gingerdj.http import HttpResponse
+from gingerdj.urls import include, path
 
 from . import admin, customadmin, views
 from .test_autocomplete_view import site as autocomplete_site

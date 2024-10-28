@@ -1,11 +1,11 @@
 from template_tests.utils import setup
 
-from ginger.template import TemplateSyntaxError
-from ginger.test import SimpleTestCase
+from gingerdj.template import TemplateSyntaxError
+from gingerdj.test import SimpleTestCase
 
 
 class I18nGetCurrentLanguageBidiTagTests(SimpleTestCase):
-    libraries = {"i18n": "ginger.templatetags.i18n"}
+    libraries = {"i18n": "gingerdj.templatetags.i18n"}
 
     @setup({"template": "{% load i18n %} {% get_current_language_bidi %}"})
     def test_no_as_var(self):

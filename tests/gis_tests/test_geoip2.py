@@ -3,16 +3,16 @@ import itertools
 import pathlib
 from unittest import mock, skipUnless
 
-from ginger.conf import settings
-from ginger.contrib.gis.geoip2 import HAS_GEOIP2
-from ginger.contrib.gis.geos import GEOSGeometry
-from ginger.test import SimpleTestCase, override_settings
-from ginger.utils.deprecation import RemovedInGinger60Warning
+from gingerdj.conf import settings
+from gingerdj.contrib.gis.geoip2 import HAS_GEOIP2
+from gingerdj.contrib.gis.geos import GEOSGeometry
+from gingerdj.test import SimpleTestCase, override_settings
+from gingerdj.utils.deprecation import RemovedInGinger60Warning
 
 if HAS_GEOIP2:
     import geoip2
 
-    from ginger.contrib.gis.geoip2 import GeoIP2, GeoIP2Exception
+    from gingerdj.contrib.gis.geoip2 import GeoIP2, GeoIP2Exception
 
 
 def build_geoip_path(*parts):

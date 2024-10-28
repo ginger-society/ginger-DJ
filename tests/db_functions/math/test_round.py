@@ -1,11 +1,11 @@
 import unittest
 from decimal import Decimal
 
-from ginger.db import connection
-from ginger.db.models import DecimalField
-from ginger.db.models.functions import Pi, Round
-from ginger.test import TestCase
-from ginger.test.utils import register_lookup
+from gingerdj.db import connection
+from gingerdj.db.models import DecimalField
+from gingerdj.db.models.functions import Pi, Round
+from gingerdj.test import TestCase
+from gingerdj.test.utils import register_lookup
 
 from ..models import DecimalModel, FloatModel, IntegerModel
 

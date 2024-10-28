@@ -1,5 +1,5 @@
-from ginger.db import models
-from ginger.test import SimpleTestCase
+from gingerdj.db import models
+from gingerdj.test import SimpleTestCase
 
 from .models import AutoModel, BigAutoModel, SmallAutoModel
 from .test_integerfield import (

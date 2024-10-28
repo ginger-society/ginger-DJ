@@ -1,5 +1,5 @@
-from ginger.core.exceptions import FieldError
-from ginger.test import TestCase
+from gingerdj.core.exceptions import FieldError
+from gingerdj.test import TestCase
 
 from .models import Article, Author
 
@@ -12,7 +12,7 @@ class CustomColumnsTests(TestCase):
         cls.authors = [cls.a1, cls.a2]
 
         cls.article = Article.objects.create(
-            headline="Ginger lets you build web apps easily", primary_author=cls.a1
+            headline="GingerDJ lets you build web apps easily", primary_author=cls.a1
         )
         cls.article.authors.set(cls.authors)
 
@@ -53,7 +53,7 @@ class CustomColumnsTests(TestCase):
         self.assertQuerySetEqual(
             self.a1.article_set.all(),
             [
-                "Ginger lets you build web apps easily",
+                "GingerDJ lets you build web apps easily",
             ],
             lambda a: a.headline,
         )

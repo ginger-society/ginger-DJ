@@ -5,9 +5,9 @@ import sys
 from pathlib import Path
 from unittest import mock, skipUnless
 
-from ginger.db import connection
-from ginger.db.backends.mysql.client import DatabaseClient
-from ginger.test import SimpleTestCase
+from gingerdj.db import connection
+from gingerdj.db.backends.mysql.client import DatabaseClient
+from gingerdj.test import SimpleTestCase
 
 
 class MySqlDbshellCommandTestCase(SimpleTestCase):

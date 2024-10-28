@@ -3,10 +3,10 @@ import datetime
 import json
 import uuid
 
-from ginger.core.exceptions import NON_FIELD_ERRORS
-from ginger.core.files.uploadedfile import SimpleUploadedFile
-from ginger.core.validators import MaxValueValidator, RegexValidator
-from ginger.forms import (
+from gingerdj.core.exceptions import NON_FIELD_ERRORS
+from gingerdj.core.files.uploadedfile import SimpleUploadedFile
+from gingerdj.core.validators import MaxValueValidator, RegexValidator
+from gingerdj.forms import (
     BooleanField,
     CharField,
     CheckboxSelectMultiple,
@@ -37,14 +37,14 @@ from ginger.forms import (
     TimeField,
     ValidationError,
 )
-from ginger.forms.renderers import GingerTemplates, get_default_renderer
-from ginger.forms.utils import ErrorDict, ErrorList
-from ginger.http import QueryDict
-from ginger.template import Context, Template
-from ginger.test import SimpleTestCase
-from ginger.test.utils import override_settings
-from ginger.utils.datastructures import MultiValueDict
-from ginger.utils.safestring import mark_safe
+from gingerdj.forms.renderers import GingerTemplates, get_default_renderer
+from gingerdj.forms.utils import ErrorDict, ErrorList
+from gingerdj.http import QueryDict
+from gingerdj.template import Context, Template
+from gingerdj.test import SimpleTestCase
+from gingerdj.test.utils import override_settings
+from gingerdj.utils.datastructures import MultiValueDict
+from gingerdj.utils.safestring import mark_safe
 
 from . import jinja2_tests
 
@@ -456,7 +456,7 @@ class FormsTestCase(SimpleTestCase):
 
     def test_auto_id(self):
         # "auto_id" tells the Form to add an "id" attribute to each form
-        # element. If it's a string that contains '%s', Ginger will use that as
+        # element. If it's a string that contains '%s', GingerDJ will use that as
         # a format string into which the field's name will be inserted. It will
         # also put a <label> around the human-readable labels for a field.
         p = Person(auto_id="%s_id")
@@ -680,7 +680,7 @@ class FormsTestCase(SimpleTestCase):
 <option value="J">Java</option>
 </select>""",
         )
-        f = FrameworkForm({"name": "Ginger", "language": "P"}, auto_id=False)
+        f = FrameworkForm({"name": "GingerDJ", "language": "P"}, auto_id=False)
         self.assertHTMLEqual(
             str(f["language"]),
             """<select name="language">
@@ -723,7 +723,7 @@ class FormsTestCase(SimpleTestCase):
 <option value="J">Java</option>
 </select>""",
         )
-        f = FrameworkForm({"name": "Ginger", "language": "P"}, auto_id=False)
+        f = FrameworkForm({"name": "GingerDJ", "language": "P"}, auto_id=False)
         self.assertHTMLEqual(
             str(f["language"]),
             """<select class="foo" name="language">
@@ -752,7 +752,7 @@ class FormsTestCase(SimpleTestCase):
 <option value="J">Java</option>
 </select>""",
         )
-        f = FrameworkForm({"name": "Ginger", "language": "P"}, auto_id=False)
+        f = FrameworkForm({"name": "GingerDJ", "language": "P"}, auto_id=False)
         self.assertHTMLEqual(
             str(f["language"]),
             """<select class="foo" name="language">
@@ -2256,7 +2256,7 @@ class FormsTestCase(SimpleTestCase):
 
     def test_specifying_labels(self):
         # You can specify the label for a field by using the 'label' argument to a Field
-        # class. If you don't specify 'label', Ginger will use the field name with
+        # class. If you don't specify 'label', GingerDJ will use the field name with
         # underscores converted to spaces, and the initial letter capitalized.
         class UserRegistration(Form):
             username = CharField(max_length=10, label="Your username")
@@ -2332,7 +2332,7 @@ class FormsTestCase(SimpleTestCase):
             """,
         )
 
-        # If label is None, Ginger will auto-create the label from the field name. This
+        # If label is None, GingerDJ will auto-create the label from the field name. This
         # is default behavior.
         class UserRegistration(Form):
             username = CharField(max_length=10, label=None)
@@ -2406,7 +2406,7 @@ class FormsTestCase(SimpleTestCase):
         # empty dictionary). Also, the initial value is *not* used if data for a
         # particular required field isn't provided.
         class UserRegistration(Form):
-            username = CharField(max_length=10, initial="ginger")
+            username = CharField(max_length=10, initial="gingerdj")
             password = CharField(widget=PasswordInput)
 
         # Here, we're not submitting any data, so the initial value will be displayed.)
@@ -2414,7 +2414,7 @@ class FormsTestCase(SimpleTestCase):
         self.assertHTMLEqual(
             p.as_ul(),
             """
-            <li>Username: <input type="text" name="username" value="ginger"
+            <li>Username: <input type="text" name="username" value="gingerdj"
                 maxlength="10" required></li>
             <li>Password: <input type="password" name="password" required></li>
             """,
@@ -2468,11 +2468,11 @@ Password: <input type="password" name="password" aria-invalid="true" required></
             password = CharField(widget=PasswordInput)
 
         # Here, we're not submitting any data, so the initial value will be displayed.)
-        p = UserRegistration(initial={"username": "ginger"}, auto_id=False)
+        p = UserRegistration(initial={"username": "gingerdj"}, auto_id=False)
         self.assertHTMLEqual(
             p.as_ul(),
             """
-            <li>Username: <input type="text" name="username" value="ginger"
+            <li>Username: <input type="text" name="username" value="gingerdj"
                 maxlength="10" required></li>
             <li>Password: <input type="password" name="password" required></li>
             """,
@@ -2488,7 +2488,7 @@ Password: <input type="password" name="password" aria-invalid="true" required></
         )
 
         # The 'initial' parameter is meaningless if you pass data.
-        p = UserRegistration({}, initial={"username": "ginger"}, auto_id=False)
+        p = UserRegistration({}, initial={"username": "gingerdj"}, auto_id=False)
         self.assertHTMLEqual(
             p.as_ul(),
             """<li><ul class="errorlist"><li>This field is required.</li></ul>
@@ -2497,7 +2497,7 @@ required></li><li><ul class="errorlist"><li>This field is required.</li></ul>
 Password: <input type="password" name="password" aria-invalid="true" required></li>""",
         )
         p = UserRegistration(
-            {"username": ""}, initial={"username": "ginger"}, auto_id=False
+            {"username": ""}, initial={"username": "gingerdj"}, auto_id=False
         )
         self.assertHTMLEqual(
             p.as_ul(),
@@ -2507,7 +2507,7 @@ required></li><li><ul class="errorlist"><li>This field is required.</li></ul>
 Password: <input type="password" name="password" aria-invalid="true" required></li>""",
         )
         p = UserRegistration(
-            {"username": "foo"}, initial={"username": "ginger"}, auto_id=False
+            {"username": "foo"}, initial={"username": "gingerdj"}, auto_id=False
         )
         self.assertHTMLEqual(
             p.as_ul(),
@@ -2524,14 +2524,14 @@ Password: <input type="password" name="password" aria-invalid="true" required></
         # In this example, we don't provide a value for 'username', and the
         # form raises a validation error rather than using the initial value
         # for 'username'.
-        p = UserRegistration({"password": "secret"}, initial={"username": "ginger"})
+        p = UserRegistration({"password": "secret"}, initial={"username": "gingerdj"})
         self.assertEqual(p.errors["username"], ["This field is required."])
         self.assertFalse(p.is_valid())
 
         # If a Form defines 'initial' *and* 'initial' is passed as a parameter
         # to Form(), then the latter will get precedence.
         class UserRegistration(Form):
-            username = CharField(max_length=10, initial="ginger")
+            username = CharField(max_length=10, initial="gingerdj")
             password = CharField(widget=PasswordInput)
 
         p = UserRegistration(initial={"username": "babik"}, auto_id=False)
@@ -2556,7 +2556,7 @@ Password: <input type="password" name="password" aria-invalid="true" required></
 
         # We need to define functions that get called later.)
         def initial_ginger():
-            return "ginger"
+            return "gingerdj"
 
         def initial_stephane():
             return "stephane"
@@ -2575,7 +2575,7 @@ Password: <input type="password" name="password" aria-invalid="true" required></
         self.assertHTMLEqual(
             p.as_ul(),
             """
-            <li>Username: <input type="text" name="username" value="ginger"
+            <li>Username: <input type="text" name="username" value="gingerdj"
                 maxlength="10" required></li>
             <li>Password: <input type="password" name="password" required></li>
             <li>Options: <select multiple name="options" required>
@@ -2666,7 +2666,7 @@ Options: <select multiple name="options" aria-invalid="true" required>
         self.assertHTMLEqual(
             p.as_ul(),
             """
-            <li>Username: <input type="text" name="username" value="ginger"
+            <li>Username: <input type="text" name="username" value="gingerdj"
                 maxlength="10" required></li>
             <li>Password: <input type="password" name="password" required></li>
             <li>Options: <select multiple name="options" required>
@@ -4917,12 +4917,12 @@ class TemplateTests(SimpleTestCase):
             '<input type="submit" required>'
             "</form>",
         )
-        f = UserRegistration({"username": "ginger"}, auto_id=False)
+        f = UserRegistration({"username": "gingerdj"}, auto_id=False)
         self.assertHTMLEqual(
             t.render(Context({"form": f})),
             "<form>"
             "<p><label>Your username: "
-            '<input type="text" name="username" value="ginger" maxlength="10" required>'
+            '<input type="text" name="username" value="gingerdj" maxlength="10" required>'
             "</label></p>"
             '<ul class="errorlist"><li>This field is required.</li></ul><p>'
             "<label>Password: "
@@ -4937,7 +4937,7 @@ class TemplateTests(SimpleTestCase):
         )
         # Use form.[field].label to output a field's label. 'label' for a field
         # can by specified by using the 'label' argument to a Field class. If
-        # 'label' is not specified, Ginger will use the field name with
+        # 'label' is not specified, GingerDJ will use the field name with
         # underscores converted to spaces, and the initial letter capitalized.
         t = Template(
             "<form>"
@@ -5083,14 +5083,14 @@ class TemplateTests(SimpleTestCase):
             "</form>"
         )
         f = UserRegistration(
-            {"username": "ginger", "password1": "foo", "password2": "bar"},
+            {"username": "gingerdj", "password1": "foo", "password2": "bar"},
             auto_id=False,
         )
         self.assertHTMLEqual(
             t.render(Context({"form": f})),
             "<form>"
             "<p><label>Your username: "
-            '<input type="text" name="username" value="ginger" maxlength="10" required>'
+            '<input type="text" name="username" value="gingerdj" maxlength="10" required>'
             "</label></p>"
             "<p><label>Password: "
             '<input type="password" name="password1" required></label></p>'
@@ -5117,7 +5117,7 @@ class TemplateTests(SimpleTestCase):
             '<ul class="errorlist nonfield">'
             "<li>Please make sure your passwords match.</li></ul>"
             "<p><label>Your username: "
-            '<input type="text" name="username" value="ginger" maxlength="10" required>'
+            '<input type="text" name="username" value="gingerdj" maxlength="10" required>'
             "</label></p>"
             "<p><label>Password: "
             '<input type="password" name="password1" required></label></p>'

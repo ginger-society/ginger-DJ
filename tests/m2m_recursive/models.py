@@ -16,7 +16,7 @@ if there is a name clash, and tests that symmetry is preserved where
 appropriate.
 """
 
-from ginger.db import models
+from gingerdj.db import models
 
 
 class Person(models.Model):

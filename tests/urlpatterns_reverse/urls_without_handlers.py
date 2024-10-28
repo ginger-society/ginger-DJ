@@ -1,5 +1,5 @@
 # A URLconf that doesn't define any handlerXXX.
-from ginger.urls import path
+from gingerdj.urls import path
 
 from .views import bad_view, empty_view
 

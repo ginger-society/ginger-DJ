@@ -1,4 +1,4 @@
-from ginger.urls import path
+from gingerdj.urls import path
 
 from .views import LazyRedirectView, empty_view, login_required_view
 

@@ -1,8 +1,8 @@
 import uuid
 
-from ginger.core.exceptions import ValidationError
-from ginger.forms import UUIDField
-from ginger.test import SimpleTestCase
+from gingerdj.core.exceptions import ValidationError
+from gingerdj.forms import UUIDField
+from gingerdj.test import SimpleTestCase
 
 
 class UUIDFieldTest(SimpleTestCase):

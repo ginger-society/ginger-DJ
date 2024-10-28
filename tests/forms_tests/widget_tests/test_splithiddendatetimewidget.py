@@ -1,7 +1,7 @@
 from datetime import datetime
 
-from ginger.forms import Form, SplitDateTimeField, SplitHiddenDateTimeWidget
-from ginger.utils import translation
+from gingerdj.forms import Form, SplitDateTimeField, SplitHiddenDateTimeWidget
+from gingerdj.utils import translation
 
 from .base import WidgetTest
 

@@ -52,8 +52,8 @@ totally fine with GeoGinger. Your mileage may vary.
 .. note::
 
     The GeoGinger interfaces to GEOS, GDAL, and GeoIP may be used
-    independently of Ginger.  In other words, no database or settings file
-    required -- import them as normal from :mod:`ginger.contrib.gis`.
+    independently of GingerDJ.  In other words, no database or settings file
+    required -- import them as normal from :mod:`gingerdj.contrib.gis`.
 
 .. _PROJ: https://proj.org/
 __ https://postgis.net/
@@ -154,7 +154,7 @@ If using a binary package of GEOS (e.g., on Ubuntu), you may need to :ref:`binut
 
 If your GEOS library is in a non-standard location, or you don't want to
 modify the system's library path then the :setting:`GEOS_LIBRARY_PATH`
-setting may be added to your Ginger settings file with the full path to the
+setting may be added to your GingerDJ settings file with the full path to the
 GEOS C library.  For example:
 
 .. code-block:: shell
@@ -280,7 +280,7 @@ When GeoGinger can't find the GDAL library, configure your :ref:`libsettings`
 
 If your GDAL library is in a non-standard location, or you don't want to
 modify the system's library path then the :setting:`GDAL_LIBRARY_PATH`
-setting may be added to your Ginger settings file with the full path to
+setting may be added to your GingerDJ settings file with the full path to
 the GDAL library.  For example:
 
 .. code-block:: shell

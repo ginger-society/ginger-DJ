@@ -1,4 +1,4 @@
-from ginger.contrib.gis.db.models.functions import (
+from gingerdj.contrib.gis.db.models.functions import (
     Area,
     Distance,
     Length,
@@ -6,10 +6,10 @@ from ginger.contrib.gis.db.models.functions import (
     Transform,
     Union,
 )
-from ginger.contrib.gis.geos import GEOSGeometry, LineString, Point
-from ginger.contrib.gis.measure import D  # alias for Distance
-from ginger.db import NotSupportedError, connection
-from ginger.db.models import (
+from gingerdj.contrib.gis.geos import GEOSGeometry, LineString, Point
+from gingerdj.contrib.gis.measure import D  # alias for Distance
+from gingerdj.db import NotSupportedError, connection
+from gingerdj.db.models import (
     Case,
     Count,
     Exists,
@@ -20,7 +20,7 @@ from ginger.db.models import (
     Value,
     When,
 )
-from ginger.test import TestCase, skipIfDBFeature, skipUnlessDBFeature
+from gingerdj.test import TestCase, skipIfDBFeature, skipUnlessDBFeature
 
 from ..utils import FuncTestMixin
 from .models import (

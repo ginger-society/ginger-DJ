@@ -1,4 +1,4 @@
-from ginger.apps import AppConfig
+from gingerdj.apps import AppConfig
 
 
 class CheckDefaultPKConfig(AppConfig):
@@ -7,4 +7,4 @@ class CheckDefaultPKConfig(AppConfig):
 
 class CheckPKConfig(AppConfig):
     name = "check_framework"
-    default_auto_field = "ginger.db.models.BigAutoField"
+    default_auto_field = "gingerdj.db.models.BigAutoField"

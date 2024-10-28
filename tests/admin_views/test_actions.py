@@ -1,14 +1,14 @@
 import json
 
-from ginger.contrib.admin.helpers import ACTION_CHECKBOX_NAME
-from ginger.contrib.admin.views.main import IS_POPUP_VAR
-from ginger.core import mail
-from ginger.db import connection
-from ginger.template.loader import render_to_string
-from ginger.template.response import TemplateResponse
-from ginger.test import TestCase, override_settings
-from ginger.test.utils import CaptureQueriesContext
-from ginger.urls import reverse
+from gingerdj.contrib.admin.helpers import ACTION_CHECKBOX_NAME
+from gingerdj.contrib.admin.views.main import IS_POPUP_VAR
+from gingerdj.core import mail
+from gingerdj.db import connection
+from gingerdj.template.loader import render_to_string
+from gingerdj.template.response import TemplateResponse
+from gingerdj.test import TestCase, override_settings
+from gingerdj.test.utils import CaptureQueriesContext
+from gingerdj.urls import reverse
 
 from .admin import SubscriberAdmin
 from .forms import MediaActionForm

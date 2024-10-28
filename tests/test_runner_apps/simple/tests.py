@@ -1,7 +1,7 @@
 from unittest import TestCase
 
-from ginger.test import SimpleTestCase
-from ginger.test import TestCase as GingerTestCase
+from gingerdj.test import SimpleTestCase
+from gingerdj.test import TestCase as GingerTestCase
 
 
 class GingerCase1(GingerTestCase):

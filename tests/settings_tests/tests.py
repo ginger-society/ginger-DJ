@@ -4,10 +4,10 @@ import unittest
 from types import ModuleType, SimpleNamespace
 from unittest import mock
 
-from ginger.conf import ENVIRONMENT_VARIABLE, LazySettings, Settings, settings
-from ginger.core.exceptions import ImproperlyConfigured
-from ginger.http import HttpRequest
-from ginger.test import (
+from gingerdj.conf import ENVIRONMENT_VARIABLE, LazySettings, Settings, settings
+from gingerdj.core.exceptions import ImproperlyConfigured
+from gingerdj.http import HttpRequest
+from gingerdj.test import (
     SimpleTestCase,
     TestCase,
     TransactionTestCase,
@@ -15,8 +15,8 @@ from ginger.test import (
     override_settings,
     signals,
 )
-from ginger.test.utils import requires_tz_support
-from ginger.urls import clear_script_prefix, set_script_prefix
+from gingerdj.test.utils import requires_tz_support
+from gingerdj.urls import clear_script_prefix, set_script_prefix
 
 
 @modify_settings(ITEMS={"prepend": ["b"], "append": ["d"], "remove": ["a", "e"]})
@@ -217,7 +217,7 @@ class SettingsTests(SimpleTestCase):
         self.assertTrue(issubclass(decorated, SimpleTestCase))
 
         with self.assertRaisesMessage(
-            Exception, "Only subclasses of Ginger SimpleTestCase"
+            Exception, "Only subclasses of GingerDJ SimpleTestCase"
         ):
             decorated = override_settings(TEST="override")(UnittestTestCaseSubclass)
 
@@ -333,7 +333,7 @@ class SettingsTests(SimpleTestCase):
             getattr(s, "foo")
 
     @requires_tz_support
-    @mock.patch("ginger.conf.global_settings.TIME_ZONE", "test")
+    @mock.patch("gingerdj.conf.global_settings.TIME_ZONE", "test")
     def test_incorrect_timezone(self):
         with self.assertRaisesMessage(ValueError, "Incorrect timezone setting: test"):
             settings._setup()

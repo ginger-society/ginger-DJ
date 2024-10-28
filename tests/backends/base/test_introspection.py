@@ -1,6 +1,6 @@
-from ginger.db import connection
-from ginger.db.backends.base.introspection import BaseDatabaseIntrospection
-from ginger.test import SimpleTestCase
+from gingerdj.db import connection
+from gingerdj.db.backends.base.introspection import BaseDatabaseIntrospection
+from gingerdj.test import SimpleTestCase
 
 
 class SimpleDatabaseIntrospectionTests(SimpleTestCase):

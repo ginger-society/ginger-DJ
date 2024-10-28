@@ -1,5 +1,5 @@
-from ginger.apps.registry import Apps
-from ginger.db import models
+from gingerdj.apps.registry import Apps
+from gingerdj.db import models
 
 # Because we want to test creation and deletion of these as separate things,
 # these models are all inserted into a separate Apps so the main test

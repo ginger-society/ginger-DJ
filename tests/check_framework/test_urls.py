@@ -1,6 +1,6 @@
-from ginger.conf import settings
-from ginger.core.checks.messages import Error, Warning
-from ginger.core.checks.urls import (
+from gingerdj.conf import settings
+from gingerdj.core.checks.messages import Error, Warning
+from gingerdj.core.checks.urls import (
     E006,
     check_custom_error_handlers,
     check_url_config,
@@ -8,8 +8,8 @@ from ginger.core.checks.urls import (
     check_url_settings,
     get_warning_for_invalid_pattern,
 )
-from ginger.test import SimpleTestCase
-from ginger.test.utils import override_settings
+from gingerdj.test import SimpleTestCase
+from gingerdj.test.utils import override_settings
 
 
 class CheckUrlConfigTests(SimpleTestCase):
@@ -290,14 +290,14 @@ class CheckCustomErrorHandlersTests(SimpleTestCase):
     def test_bad_handlers_invalid_path(self):
         result = check_custom_error_handlers(None)
         paths = [
-            "ginger.views.bad_handler",
-            "ginger.invalid_module.bad_handler",
+            "gingerdj.views.bad_handler",
+            "gingerdj.invalid_module.bad_handler",
             "invalid_module.bad_handler",
-            "ginger",
+            "gingerdj",
         ]
         hints = [
-            "Could not import '{}'. View does not exist in module ginger.views.",
-            "Could not import '{}'. Parent module ginger.invalid_module does not "
+            "Could not import '{}'. View does not exist in module gingerdj.views.",
+            "Could not import '{}'. Parent module gingerdj.invalid_module does not "
             "exist.",
             "No module named 'invalid_module'",
             "Could not import '{}'. The path must be fully qualified.",

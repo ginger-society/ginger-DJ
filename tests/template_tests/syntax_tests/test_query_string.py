@@ -1,6 +1,6 @@
-from ginger.http import QueryDict
-from ginger.template import RequestContext
-from ginger.test import RequestFactory, SimpleTestCase
+from gingerdj.http import QueryDict
+from gingerdj.template import RequestContext
+from gingerdj.test import RequestFactory, SimpleTestCase
 
 from ..utils import setup
 

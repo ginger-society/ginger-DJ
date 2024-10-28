@@ -1,11 +1,11 @@
-from ginger.http import HttpResponse
-from ginger.test import RequestFactory, SimpleTestCase
-from ginger.test.utils import override_settings
+from gingerdj.http import HttpResponse
+from gingerdj.test import RequestFactory, SimpleTestCase
+from gingerdj.test.utils import override_settings
 
 
 class SecurityMiddlewareTest(SimpleTestCase):
     def middleware(self, *args, **kwargs):
-        from ginger.middleware.security import SecurityMiddleware
+        from gingerdj.middleware.security import SecurityMiddleware
 
         return SecurityMiddleware(self.response(*args, **kwargs))
 

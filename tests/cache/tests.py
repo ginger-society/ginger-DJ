@@ -14,9 +14,9 @@ import unittest
 from pathlib import Path
 from unittest import mock, skipIf
 
-from ginger.conf import settings
-from ginger.core import management, signals
-from ginger.core.cache import (
+from gingerdj.conf import settings
+from gingerdj.core import management, signals
+from gingerdj.core.cache import (
     DEFAULT_CACHE_ALIAS,
     CacheHandler,
     CacheKeyWarning,
@@ -24,43 +24,43 @@ from ginger.core.cache import (
     cache,
     caches,
 )
-from ginger.core.cache.backends.base import InvalidCacheBackendError
-from ginger.core.cache.backends.redis import RedisCacheClient
-from ginger.core.cache.utils import make_template_fragment_key
-from ginger.db import close_old_connections, connection, connections
-from ginger.db.backends.utils import CursorWrapper
-from ginger.http import (
+from gingerdj.core.cache.backends.base import InvalidCacheBackendError
+from gingerdj.core.cache.backends.redis import RedisCacheClient
+from gingerdj.core.cache.utils import make_template_fragment_key
+from gingerdj.db import close_old_connections, connection, connections
+from gingerdj.db.backends.utils import CursorWrapper
+from gingerdj.http import (
     HttpRequest,
     HttpResponse,
     HttpResponseNotModified,
     StreamingHttpResponse,
 )
-from ginger.middleware.cache import (
+from gingerdj.middleware.cache import (
     CacheMiddleware,
     FetchFromCacheMiddleware,
     UpdateCacheMiddleware,
 )
-from ginger.middleware.csrf import CsrfViewMiddleware
-from ginger.template import engines
-from ginger.template.context_processors import csrf
-from ginger.template.response import TemplateResponse
-from ginger.test import (
+from gingerdj.middleware.csrf import CsrfViewMiddleware
+from gingerdj.template import engines
+from gingerdj.template.context_processors import csrf
+from gingerdj.template.response import TemplateResponse
+from gingerdj.test import (
     RequestFactory,
     SimpleTestCase,
     TestCase,
     TransactionTestCase,
     override_settings,
 )
-from ginger.test.signals import setting_changed
-from ginger.test.utils import CaptureQueriesContext
-from ginger.utils import timezone, translation
-from ginger.utils.cache import (
+from gingerdj.test.signals import setting_changed
+from gingerdj.test.utils import CaptureQueriesContext
+from gingerdj.utils import timezone, translation
+from gingerdj.utils.cache import (
     get_cache_key,
     learn_cache_key,
     patch_cache_control,
     patch_vary_headers,
 )
-from ginger.views.decorators.cache import cache_control, cache_page
+from gingerdj.views.decorators.cache import cache_control, cache_page
 
 from .models import Poll, expensive_calculation
 

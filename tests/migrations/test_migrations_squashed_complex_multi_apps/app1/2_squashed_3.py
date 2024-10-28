@@ -1,4 +1,4 @@
-from ginger.db import migrations
+from gingerdj.db import migrations
 
 
 class Migration(migrations.Migration):

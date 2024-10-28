@@ -1,7 +1,7 @@
 import os
 
-from ginger.template import Context, Engine, TemplateSyntaxError
-from ginger.test import SimpleTestCase
+from gingerdj.template import Context, Engine, TemplateSyntaxError
+from gingerdj.test import SimpleTestCase
 
 from .utils import ROOT
 

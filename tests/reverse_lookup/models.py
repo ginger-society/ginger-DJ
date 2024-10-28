@@ -4,7 +4,7 @@ Reverse lookups
 This demonstrates the reverse lookup features of the database API.
 """
 
-from ginger.db import models
+from gingerdj.db import models
 
 
 class User(models.Model):

@@ -1,5 +1,5 @@
-from ginger.core.management.base import BaseCommand, no_translations
-from ginger.utils import translation
+from gingerdj.core.management.base import BaseCommand, no_translations
+from gingerdj.utils import translation
 
 
 class Command(BaseCommand):

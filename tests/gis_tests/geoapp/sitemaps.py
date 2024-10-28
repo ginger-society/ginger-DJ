@@ -1,4 +1,4 @@
-from ginger.contrib.gis.sitemaps import KMLSitemap, KMZSitemap
+from gingerdj.contrib.gis.sitemaps import KMLSitemap, KMZSitemap
 
 from .models import City, Country
 

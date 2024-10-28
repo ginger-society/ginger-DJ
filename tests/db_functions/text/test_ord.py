@@ -1,7 +1,7 @@
-from ginger.db.models import CharField, Value
-from ginger.db.models.functions import Left, Ord
-from ginger.test import TestCase
-from ginger.test.utils import register_lookup
+from gingerdj.db.models import CharField, Value
+from gingerdj.db.models.functions import Left, Ord
+from gingerdj.test import TestCase
+from gingerdj.test.utils import register_lookup
 
 from ..models import Author
 

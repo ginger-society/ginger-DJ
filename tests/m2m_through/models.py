@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from ginger.db import models
+from gingerdj.db import models
 
 
 # M2M described on one of the models

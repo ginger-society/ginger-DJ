@@ -1,6 +1,6 @@
 import binascii
 
-from ginger.contrib.gis.geos import (
+from gingerdj.contrib.gis.geos import (
     GEOSGeometry,
     Point,
     Polygon,
@@ -9,8 +9,8 @@ from ginger.contrib.gis.geos import (
     WKTReader,
     WKTWriter,
 )
-from ginger.contrib.gis.geos.libgeos import geos_version_tuple
-from ginger.test import SimpleTestCase
+from gingerdj.contrib.gis.geos.libgeos import geos_version_tuple
+from gingerdj.test import SimpleTestCase
 
 
 class GEOSIOTest(SimpleTestCase):

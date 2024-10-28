@@ -1,10 +1,10 @@
-from ginger import forms
-from ginger.core.exceptions import ImproperlyConfigured
-from ginger.test import SimpleTestCase, TestCase, override_settings
-from ginger.test.client import RequestFactory
-from ginger.urls import reverse
-from ginger.views.generic.base import View
-from ginger.views.generic.edit import CreateView, FormMixin, ModelFormMixin
+from gingerdj import forms
+from gingerdj.core.exceptions import ImproperlyConfigured
+from gingerdj.test import SimpleTestCase, TestCase, override_settings
+from gingerdj.test.client import RequestFactory
+from gingerdj.urls import reverse
+from gingerdj.views.generic.base import View
+from gingerdj.views.generic.edit import CreateView, FormMixin, ModelFormMixin
 
 from . import views
 from .forms import AuthorForm

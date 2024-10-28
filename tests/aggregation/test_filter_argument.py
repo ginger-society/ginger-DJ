@@ -1,7 +1,7 @@
 import datetime
 from decimal import Decimal
 
-from ginger.db.models import (
+from gingerdj.db.models import (
     Avg,
     Case,
     Count,
@@ -16,8 +16,8 @@ from ginger.db.models import (
     Variance,
     When,
 )
-from ginger.test import TestCase
-from ginger.test.utils import Approximate
+from gingerdj.test import TestCase
+from gingerdj.test.utils import Approximate
 
 from .models import Author, Book, Publisher
 
@@ -33,7 +33,7 @@ class FilteredAggregateTests(TestCase):
         )
         cls.b1 = Book.objects.create(
             isbn="159059725",
-            name="The Definitive Guide to Ginger: Web Development Done Right",
+            name="The Definitive Guide to GingerDJ: Web Development Done Right",
             pages=447,
             rating=4.5,
             price=Decimal("30.00"),
@@ -43,7 +43,7 @@ class FilteredAggregateTests(TestCase):
         )
         cls.b2 = Book.objects.create(
             isbn="067232959",
-            name="Sams Teach Yourself Ginger in 24 Hours",
+            name="Sams Teach Yourself GingerDJ in 24 Hours",
             pages=528,
             rating=3.0,
             price=Decimal("23.09"),
@@ -53,7 +53,7 @@ class FilteredAggregateTests(TestCase):
         )
         cls.b3 = Book.objects.create(
             isbn="159059996",
-            name="Practical Ginger Projects",
+            name="Practical GingerDJ Projects",
             pages=600,
             rating=4.5,
             price=Decimal("29.69"),

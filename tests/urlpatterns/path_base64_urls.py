@@ -1,4 +1,4 @@
-from ginger.urls import include, path, register_converter
+from gingerdj.urls import include, path, register_converter
 
 from . import converters, views
 

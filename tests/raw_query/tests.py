@@ -1,9 +1,9 @@
 from datetime import date
 from decimal import Decimal
 
-from ginger.core.exceptions import FieldDoesNotExist
-from ginger.db.models.query import RawQuerySet
-from ginger.test import TestCase, skipUnlessDBFeature
+from gingerdj.core.exceptions import FieldDoesNotExist
+from gingerdj.db.models.query import RawQuerySet
+from gingerdj.test import TestCase, skipUnlessDBFeature
 
 from .models import (
     Author,

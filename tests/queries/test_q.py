@@ -1,5 +1,5 @@
-from ginger.core.exceptions import FieldError
-from ginger.db.models import (
+from gingerdj.core.exceptions import FieldError
+from gingerdj.db.models import (
     BooleanField,
     Exists,
     ExpressionWrapper,
@@ -8,10 +8,10 @@ from ginger.db.models import (
     Q,
     Value,
 )
-from ginger.db.models.expressions import NegatedExpression, RawSQL
-from ginger.db.models.functions import Lower
-from ginger.db.models.sql.where import NothingNode
-from ginger.test import SimpleTestCase, TestCase
+from gingerdj.db.models.expressions import NegatedExpression, RawSQL
+from gingerdj.db.models.functions import Lower
+from gingerdj.db.models.sql.where import NothingNode
+from gingerdj.test import SimpleTestCase, TestCase
 
 from .models import Tag
 
@@ -92,7 +92,7 @@ class QTests(SimpleTestCase):
     def test_deconstruct(self):
         q = Q(price__gt=F("discounted_price"))
         path, args, kwargs = q.deconstruct()
-        self.assertEqual(path, "ginger.db.models.Q")
+        self.assertEqual(path, "gingerdj.db.models.Q")
         self.assertEqual(args, (("price__gt", F("discounted_price")),))
         self.assertEqual(kwargs, {})
 
@@ -293,7 +293,7 @@ class QCheckTests(TestCase):
         return True.
         """
         q = Q(RawSQL("price > %s", params=(20,), output_field=BooleanField()))
-        with self.assertLogs("ginger.db.models", "WARNING") as cm:
+        with self.assertLogs("gingerdj.db.models", "WARNING") as cm:
             self.assertIs(q.check({"price": 10}), True)
         self.assertIn(
             f"Got a database error calling check() on {q!r}: ",

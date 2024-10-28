@@ -1,9 +1,9 @@
-from ginger.contrib import admin
-from ginger.contrib.admin.decorators import register
-from ginger.contrib.admin.exceptions import AlreadyRegistered, NotRegistered
-from ginger.contrib.admin.sites import site
-from ginger.core.exceptions import ImproperlyConfigured
-from ginger.test import SimpleTestCase
+from gingerdj.contrib import admin
+from gingerdj.contrib.admin.decorators import register
+from gingerdj.contrib.admin.exceptions import AlreadyRegistered, NotRegistered
+from gingerdj.contrib.admin.sites import site
+from gingerdj.core.exceptions import ImproperlyConfigured
+from gingerdj.test import SimpleTestCase
 
 from .models import Location, Person, Place, Traveler
 

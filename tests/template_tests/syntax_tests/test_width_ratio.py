@@ -1,5 +1,5 @@
-from ginger.template import TemplateSyntaxError
-from ginger.test import SimpleTestCase
+from gingerdj.template import TemplateSyntaxError
+from gingerdj.test import SimpleTestCase
 
 from ..utils import setup
 

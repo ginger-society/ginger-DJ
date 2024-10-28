@@ -6,7 +6,7 @@ Glossary
 
     concrete model
         A non-abstract (:attr:`abstract=False
-        <ginger.db.models.Options.abstract>`) model.
+        <gingerdj.db.models.Options.abstract>`) model.
 
     field
         An attribute on a :term:`model`; a given field usually maps directly to
@@ -27,20 +27,20 @@ Glossary
 
     MTV
         "Model-template-view"; a software pattern, similar in style to MVC, but
-        a better description of the way Ginger does things.
+        a better description of the way GingerDJ does things.
 
         See :ref:`the FAQ entry <faq-mtv>`.
 
     MVC
-        `Model-view-controller`__; a software pattern. Ginger :ref:`follows MVC
+        `Model-view-controller`__; a software pattern. GingerDJ :ref:`follows MVC
         to some extent <faq-mtv>`.
 
         __ https://en.wikipedia.org/wiki/Model-view-controller
 
     project
         A Python package -- i.e. a directory of code -- that contains all the
-        settings for an instance of Ginger. This would include database
-        configuration, Ginger-specific options and application-specific
+        settings for an instance of GingerDJ. This would include database
+        configuration, GingerDJ-specific options and application-specific
         settings.
 
     property
@@ -62,7 +62,7 @@ Glossary
 
         .. parsed-literal::
 
-            https://www.ginger.gloportal.dev/weblog/2008/apr/12/**spring**/
+            https://www.gingerdj.gloportal.dev/weblog/2008/apr/12/**spring**/
 
         the last bit (``spring``) is the slug.
 

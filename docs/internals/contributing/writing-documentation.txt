@@ -3,7 +3,7 @@ Writing documentation
 =====================
 
 We place high importance on the consistency and readability of documentation.
-After all, Ginger was created in a journalism environment! So we treat our
+After all, GingerDJ was created in a journalism environment! So we treat our
 documentation like we treat our code: we aim to improve it as often as
 possible.
 
@@ -18,11 +18,11 @@ Documentation changes generally come in two forms:
 This section explains how writers can craft their documentation changes
 in the most useful and least error-prone ways.
 
-The Ginger documentation process
+The GingerDJ documentation process
 ================================
 
-Though Ginger's documentation is intended to be read as HTML at
-https://docs.ginger.gloportal.dev/, we edit it as a collection of plain text files
+Though GingerDJ's documentation is intended to be read as HTML at
+https://docs.gingerdj.gloportal.dev/, we edit it as a collection of plain text files
 written in the reStructuredText markup language for maximum flexibility.
 
 We work from the development version of the repository because it has the
@@ -33,7 +33,7 @@ merger, to the last release branch. This is because it's advantageous to
 have the docs for the last release be up-to-date and correct (see
 :ref:`differences-between-doc-versions`).
 
-Ginger's documentation uses the Sphinx__ documentation system, which in turn
+GingerDJ's documentation uses the Sphinx__ documentation system, which in turn
 is based on docutils__. The basic idea is that lightly-formatted plain-text
 documentation is transformed into HTML, PDF, and any other output format.
 
@@ -41,7 +41,7 @@ __ https://www.sphinx-doc.org/
 __ https://docutils.sourceforge.io/
 
 Sphinx includes a ``sphinx-build`` command for turning reStructuredText into
-other formats, e.g., HTML and PDF. This command is configurable, but the Ginger
+other formats, e.g., HTML and PDF. This command is configurable, but the GingerDJ
 documentation includes a ``Makefile`` that provides a shorter ``make html``
 command.
 
@@ -73,12 +73,12 @@ The documentation is organized into several categories:
   that they already know.
 
 * :doc:`Reference guides </ref/index>` contain technical references for APIs.
-  They describe the functioning of Ginger's internal machinery and instruct in
+  They describe the functioning of GingerDJ's internal machinery and instruct in
   its use.
 
   Keep reference material tightly focused on the subject. Assume that the
   reader already understands the basic concepts involved but needs to know or
-  be reminded of how Ginger does it.
+  be reminded of how GingerDJ does it.
 
   Reference guides aren't the place for general explanation. If you find
   yourself explaining basic concepts, you may want to move that material to a
@@ -89,10 +89,10 @@ The documentation is organized into several categories:
 
   What matters most in a how-to guide is what a user wants to achieve.
   A how-to should always be result-oriented rather than focused on internal
-  details of how Ginger implements whatever is being discussed.
+  details of how GingerDJ implements whatever is being discussed.
 
   These guides are more advanced than tutorials and assume some knowledge about
-  how Ginger works. Assume that the reader has followed the tutorials and don't
+  how GingerDJ works. Assume that the reader has followed the tutorials and don't
   hesitate to refer the reader back to the appropriate tutorial rather than
   repeat the same material.
 
@@ -120,7 +120,7 @@ We can build HTML output from the ``docs`` directory:
 Your locally-built documentation will be accessible at
 ``_build/html/index.html`` and it can be viewed in any web browser, though it
 will be themed differently than the documentation at
-`docs.ginger.gloportal.dev <https://docs.ginger.gloportal.dev/>`_. This is OK! If
+`docs.gingerdj.gloportal.dev <https://docs.gingerdj.gloportal.dev/>`_. This is OK! If
 your changes look good on your local machine, they'll look good on the website.
 
 Making edits to the documentation
@@ -202,8 +202,8 @@ Commonly used terms
 Here are some style guidelines on commonly used terms throughout the
 documentation:
 
-* **Ginger** -- when referring to the framework, capitalize Ginger. It is
-  lowercase only in Python code and in the ginger.gloportal.dev logo.
+* **GingerDJ** -- when referring to the framework, capitalize GingerDJ. It is
+  lowercase only in Python code and in the gingerdj.gloportal.dev logo.
 
 * **email** -- no hyphen.
 
@@ -228,7 +228,7 @@ documentation:
 
 * **website** -- use one word, without capitalization.
 
-Ginger-specific terminology
+GingerDJ-specific terminology
 ===========================
 
 * **model** -- it's not capitalized.
@@ -310,10 +310,10 @@ documentation:
   also need to define a reference to the documentation for that environment
   variable using :rst:dir:`.. envvar:: <envvar>`.
 
-Ginger-specific markup
+GingerDJ-specific markup
 ======================
 
-Besides :ref:`Sphinx's built-in markup <sphinx:rst-index>`, Ginger's docs
+Besides :ref:`Sphinx's built-in markup <sphinx:rst-index>`, GingerDJ's docs
 define some extra description units:
 
 * Settings:
@@ -348,19 +348,19 @@ define some extra description units:
 
   To link, use ``:lookup:`exact```.
 
-* ``ginger-admin`` commands:
+* ``gingerdj-admin`` commands:
 
   .. code-block:: rst
 
-        .. ginger-admin:: migrate
+        .. gingerdj-admin:: migrate
 
   To link, use ``:djadmin:`migrate```.
 
-* ``ginger-admin`` command-line options:
+* ``gingerdj-admin`` command-line options:
 
   .. code-block:: rst
 
-        .. ginger-admin-option:: --traceback
+        .. gingerdj-admin-option:: --traceback
 
   To link, use ``:option:`command_name --traceback``` (or omit ``command_name``
   for the options shared by all commands like ``--verbosity``).
@@ -371,8 +371,8 @@ define some extra description units:
 
         :ticket:`12345`
 
-Ginger's documentation uses a custom ``console`` directive for documenting
-command-line examples involving ``ginger-admin``, ``manage.py``, ``python``,
+GingerDJ's documentation uses a custom ``console`` directive for documenting
+command-line examples involving ``gingerdj-admin``, ``manage.py``, ``python``,
 etc.). In the HTML documentation, it renders a two-tab UI, with one tab showing
 a Unix-style command prompt and a second tab showing a Windows prompt.
 
@@ -427,7 +427,7 @@ Documenting new features
 Our policy for new features is:
 
     All documentation of new features should be written in a way that
-    clearly designates the features that are only available in the Ginger
+    clearly designates the features that are only available in the GingerDJ
     development version. Assume documentation readers are using the latest
     release, not the development version.
 
@@ -464,10 +464,10 @@ something like this:
 
 Put the changed annotation notes at the bottom of a section, not the top.
 
-Also, avoid referring to a specific version of Ginger outside a
+Also, avoid referring to a specific version of GingerDJ outside a
 ``versionadded`` or ``versionchanged`` block. Even inside a block, it's often
-redundant to do so as these annotations render as "New in Ginger A.B:" and
-"Changed in Ginger A.B", respectively.
+redundant to do so as these annotations render as "New in GingerDJ A.B:" and
+"Changed in GingerDJ A.B", respectively.
 
 If a function, attribute, etc. is added, it's also okay to use a
 ``versionadded`` annotation like this:
@@ -557,13 +557,13 @@ example:
     Default: ``[]`` (Empty list)
 
     A list of all the people who get code error notifications. When
-    ``DEBUG=False`` and a view raises an exception, Ginger will email these people
+    ``DEBUG=False`` and a view raises an exception, GingerDJ will email these people
     with the full exception information. Each member of the list should be a tuple
     of (Full name, email address). Example::
 
         [("John", "john@example.com"), ("Mary", "mary@example.com")]
 
-    Note that Ginger will email *all* of these people whenever an error happens.
+    Note that GingerDJ will email *all* of these people whenever an error happens.
     See :doc:`/howto/error-reporting` for more information.
 
   This marks up the following header as the "canonical" target for the
@@ -575,21 +575,21 @@ That's basically how everything fits together.
 Translating documentation
 =========================
 
-See :ref:`Localizing the Ginger documentation <translating-documentation>` if
+See :ref:`Localizing the GingerDJ documentation <translating-documentation>` if
 you'd like to help translate the documentation into another language.
 
 .. _ginger-admin-manpage:
 
-``ginger-admin`` man page
+``gingerdj-admin`` man page
 =========================
 
 Sphinx can generate a manual page for the
-:doc:`ginger-admin </ref/ginger-admin>` command. This is configured in
+:doc:`gingerdj-admin </ref/gingerdj-admin>` command. This is configured in
 ``docs/conf.py``. Unlike other documentation output, this man page should be
-included in the Ginger repository and the releases as
-``docs/man/ginger-admin.1``. There isn't a need to update this file when
+included in the GingerDJ repository and the releases as
+``docs/man/gingerdj-admin.1``. There isn't a need to update this file when
 updating the documentation, as it's updated once as part of the release process.
 
 To generate an updated version of the man page, run ``make man`` in the
 ``docs`` directory. The new man page will be written in
-``docs/_build/man/ginger-admin.1``.
+``docs/_build/man/gingerdj-admin.1``.

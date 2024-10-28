@@ -4,8 +4,8 @@ Various complex queries that have been problematic in the past.
 
 import datetime
 
-from ginger.db import models
-from ginger.db.models.functions import Now
+from gingerdj.db import models
+from gingerdj.db.models.functions import Now
 
 
 class DumbCategory(models.Model):

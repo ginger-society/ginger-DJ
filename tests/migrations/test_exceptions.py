@@ -1,5 +1,5 @@
-from ginger.db.migrations.exceptions import NodeNotFoundError
-from ginger.test import SimpleTestCase
+from gingerdj.db.migrations.exceptions import NodeNotFoundError
+from gingerdj.test import SimpleTestCase
 
 
 class ExceptionTests(SimpleTestCase):

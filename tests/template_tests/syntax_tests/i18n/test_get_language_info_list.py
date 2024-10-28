@@ -1,6 +1,6 @@
-from ginger.template import TemplateSyntaxError
-from ginger.test import SimpleTestCase
-from ginger.utils import translation
+from gingerdj.template import TemplateSyntaxError
+from gingerdj.test import SimpleTestCase
+from gingerdj.utils import translation
 
 from ...utils import setup
 
@@ -8,7 +8,7 @@ from ...utils import setup
 class GetLanguageInfoListTests(SimpleTestCase):
     libraries = {
         "custom": "template_tests.templatetags.custom",
-        "i18n": "ginger.templatetags.i18n",
+        "i18n": "gingerdj.templatetags.i18n",
     }
 
     @setup(

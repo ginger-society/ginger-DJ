@@ -1,7 +1,7 @@
-from ginger.apps import apps
-from ginger.conf import settings
-from ginger.db import connection
-from ginger.test import TransactionTestCase, skipIfDBFeature, skipUnlessDBFeature
+from gingerdj.apps import apps
+from gingerdj.conf import settings
+from gingerdj.db import connection
+from gingerdj.test import TransactionTestCase, skipIfDBFeature, skipUnlessDBFeature
 
 from .models.tablespaces import (
     Article,

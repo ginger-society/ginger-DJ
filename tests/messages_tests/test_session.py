@@ -1,9 +1,9 @@
-from ginger.contrib.messages import Message, constants
-from ginger.contrib.messages.storage.session import SessionStorage
-from ginger.core.exceptions import ImproperlyConfigured
-from ginger.http import HttpRequest
-from ginger.test import TestCase
-from ginger.utils.safestring import SafeData, mark_safe
+from gingerdj.contrib.messages import Message, constants
+from gingerdj.contrib.messages.storage.session import SessionStorage
+from gingerdj.core.exceptions import ImproperlyConfigured
+from gingerdj.http import HttpRequest
+from gingerdj.test import TestCase
+from gingerdj.utils.safestring import SafeData, mark_safe
 
 from .base import BaseTests
 
@@ -58,6 +58,6 @@ class SessionTests(BaseTests, TestCase):
         the message storage.
         """
         storage = self.get_storage()
-        message = Message(constants.DEBUG, mark_safe("<b>Hello Ginger!</b>"))
+        message = Message(constants.DEBUG, mark_safe("<b>Hello GingerDJ!</b>"))
         set_session_data(storage, [message])
         self.assertIsInstance(list(storage)[0].message, SafeData)

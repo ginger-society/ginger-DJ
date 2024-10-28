@@ -10,7 +10,7 @@ in the application directory, or in one of the directories named in the
 
 import uuid
 
-from ginger.db import models
+from gingerdj.db import models
 
 
 class Category(models.Model):
@@ -50,13 +50,11 @@ class Blog(models.Model):
 
 class Tag(models.Model):
     name = models.CharField(max_length=100)
-   
+
     tagged_id = models.PositiveIntegerField(default=0)
 
     def __str__(self):
-        return 'tagged "%s"' % (
-            self.name,
-        )
+        return 'tagged "%s"' % (self.name,)
 
 
 class PersonManager(models.Manager):
@@ -101,8 +99,10 @@ class VisaManager(models.Manager):
 class Visa(models.Model):
     person = models.ForeignKey(Person, models.CASCADE)
     objects = VisaManager()
+
     def __str__(self):
         return self.person.name
+
 
 class Book(models.Model):
     name = models.CharField(max_length=100)

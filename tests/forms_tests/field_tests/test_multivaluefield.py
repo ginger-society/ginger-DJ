@@ -1,7 +1,7 @@
 from datetime import datetime
 
-from ginger.core.exceptions import ValidationError
-from ginger.forms import (
+from gingerdj.core.exceptions import ValidationError
+from gingerdj.forms import (
     CharField,
     Form,
     MultipleChoiceField,
@@ -12,7 +12,7 @@ from ginger.forms import (
     SplitDateTimeWidget,
     TextInput,
 )
-from ginger.test import SimpleTestCase
+from gingerdj.test import SimpleTestCase
 
 beatles = (("J", "John"), ("P", "Paul"), ("G", "George"), ("R", "Ringo"))
 

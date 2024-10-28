@@ -1,9 +1,9 @@
 import datetime
 import pickle
 
-import ginger
-from ginger.db import models
-from ginger.test import TestCase
+import gingerdj
+from gingerdj.db import models
+from gingerdj.test import TestCase
 
 from .models import (
     BinaryFieldModel,
@@ -325,22 +325,22 @@ class PickleabilityTestCase(TestCase):
     def test_missing_ginger_version_unpickling(self):
         """
         #21430 -- Verifies a warning is raised for querysets that are
-        unpickled without a Ginger version
+        unpickled without a GingerDJ version
         """
         qs = Group.missing_ginger_version_objects.all()
-        msg = "Pickled queryset instance's Ginger version is not specified."
+        msg = "Pickled queryset instance's GingerDJ version is not specified."
         with self.assertRaisesMessage(RuntimeWarning, msg):
             pickle.loads(pickle.dumps(qs))
 
     def test_unsupported_unpickle(self):
         """
         #21430 -- Verifies a warning is raised for querysets that are
-        unpickled with a different Ginger version than the current
+        unpickled with a different GingerDJ version than the current
         """
         qs = Group.previous_ginger_version_objects.all()
         msg = (
-            "Pickled queryset instance's Ginger version 1.0 does not match "
-            "the current version %s." % ginger.__version__
+            "Pickled queryset instance's GingerDJ version 1.0 does not match "
+            "the current version %s." % gingerdj.__version__
         )
         with self.assertRaisesMessage(RuntimeWarning, msg):
             pickle.loads(pickle.dumps(qs))

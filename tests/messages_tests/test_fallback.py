@@ -1,9 +1,9 @@
 import random
 
-from ginger.contrib.messages import constants
-from ginger.contrib.messages.storage.fallback import CookieStorage, FallbackStorage
-from ginger.test import SimpleTestCase
-from ginger.utils.crypto import get_random_string
+from gingerdj.contrib.messages import constants
+from gingerdj.contrib.messages.storage.fallback import CookieStorage, FallbackStorage
+from gingerdj.test import SimpleTestCase
+from gingerdj.utils.crypto import get_random_string
 
 from .base import BaseTests
 from .test_cookie import set_cookie_data, stored_cookie_messages_count

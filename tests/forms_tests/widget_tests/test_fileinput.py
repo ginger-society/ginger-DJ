@@ -1,6 +1,6 @@
-from ginger.core.files.uploadedfile import SimpleUploadedFile
-from ginger.forms import FileField, FileInput, Form
-from ginger.utils.datastructures import MultiValueDict
+from gingerdj.core.files.uploadedfile import SimpleUploadedFile
+from gingerdj.forms import FileField, FileInput, Form
+from gingerdj.utils.datastructures import MultiValueDict
 
 from .base import WidgetTest
 

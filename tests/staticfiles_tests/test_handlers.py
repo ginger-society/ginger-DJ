@@ -1,6 +1,6 @@
-from ginger.contrib.staticfiles.handlers import ASGIStaticFilesHandler
-from ginger.core.handlers.asgi import ASGIHandler
-from ginger.test import AsyncRequestFactory
+from gingerdj.contrib.staticfiles.handlers import ASGIStaticFilesHandler
+from gingerdj.core.handlers.asgi import ASGIHandler
+from gingerdj.test import AsyncRequestFactory
 
 from .cases import StaticFilesTestCase
 

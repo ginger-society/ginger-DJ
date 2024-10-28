@@ -1,9 +1,9 @@
 import os
 from functools import wraps
 
-from ginger.template.engine import Engine
-from ginger.test.utils import override_settings
-from ginger.utils.safestring import mark_safe
+from gingerdj.template.engine import Engine
+from gingerdj.test.utils import override_settings
+from gingerdj.utils.safestring import mark_safe
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 TEMPLATE_DIR = os.path.join(ROOT, "templates")
@@ -35,16 +35,16 @@ def setup(templates, *args, test_once=False):
 
     loaders = [
         (
-            "ginger.template.loaders.cached.Loader",
+            "gingerdj.template.loaders.cached.Loader",
             [
-                ("ginger.template.loaders.locmem.Loader", templates),
+                ("gingerdj.template.loaders.locmem.Loader", templates),
             ],
         ),
     ]
 
     def decorator(func):
         # Make Engine.get_default() raise an exception to ensure that tests
-        # are properly isolated from Ginger's global settings.
+        # are properly isolated from GingerDJ's global settings.
         @override_settings(TEMPLATES=None)
         @wraps(func)
         def inner(self):

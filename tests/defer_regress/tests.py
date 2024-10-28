@@ -1,8 +1,8 @@
 from operator import attrgetter
 
-from ginger.db import models
-from ginger.db.models import Count
-from ginger.test import TestCase
+from gingerdj.db import models
+from gingerdj.db.models import Count
+from gingerdj.test import TestCase
 
 from .models import (
     Base,
@@ -74,7 +74,6 @@ class DeferRegressionTest(TestCase):
             ],
             attrgetter("name"),
         )
-
 
         # Regression for #10733 - only() can be used on a model with two
         # foreign keys.

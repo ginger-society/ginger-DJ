@@ -1,9 +1,9 @@
 from asgiref.sync import iscoroutinefunction
 
-from ginger.http import HttpRequest, HttpResponse
-from ginger.middleware.clickjacking import XFrameOptionsMiddleware
-from ginger.test import SimpleTestCase
-from ginger.views.decorators.clickjacking import (
+from gingerdj.http import HttpRequest, HttpResponse
+from gingerdj.middleware.clickjacking import XFrameOptionsMiddleware
+from gingerdj.test import SimpleTestCase
+from gingerdj.views.decorators.clickjacking import (
     xframe_options_deny,
     xframe_options_exempt,
     xframe_options_sameorigin,

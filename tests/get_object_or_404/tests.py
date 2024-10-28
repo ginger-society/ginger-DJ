@@ -1,7 +1,7 @@
-from ginger.db.models import Q
-from ginger.http import Http404
-from ginger.shortcuts import get_list_or_404, get_object_or_404
-from ginger.test import TestCase
+from gingerdj.db.models import Q
+from gingerdj.http import Http404
+from gingerdj.shortcuts import get_list_or_404, get_object_or_404
+from gingerdj.test import TestCase
 
 from .models import Article, Author
 

@@ -1,21 +1,21 @@
 import decimal
 from unittest import mock
 
-from ginger.core.management.color import no_style
-from ginger.db import NotSupportedError, connection, transaction
-from ginger.db.backends.base.operations import BaseDatabaseOperations
-from ginger.db.models import DurationField
-from ginger.db.models.expressions import Col
-from ginger.db.models.lookups import Exact
-from ginger.test import (
+from gingerdj.core.management.color import no_style
+from gingerdj.db import NotSupportedError, connection, transaction
+from gingerdj.db.backends.base.operations import BaseDatabaseOperations
+from gingerdj.db.models import DurationField
+from gingerdj.db.models.expressions import Col
+from gingerdj.db.models.lookups import Exact
+from gingerdj.test import (
     SimpleTestCase,
     TestCase,
     TransactionTestCase,
     override_settings,
     skipIfDBFeature,
 )
-from ginger.utils import timezone
-from ginger.utils.deprecation import RemovedInGinger60Warning
+from gingerdj.utils import timezone
+from gingerdj.utils.deprecation import RemovedInGinger60Warning
 
 from ..models import Author, Book
 
@@ -93,7 +93,7 @@ class SimpleDatabaseOperationTests(SimpleTestCase):
         self.assertIsNone(self.ops.adapt_datetimefield_value(None))
 
     def test_adapt_timefield_value(self):
-        msg = "Ginger does not support timezone-aware times."
+        msg = "GingerDJ does not support timezone-aware times."
         with self.assertRaisesMessage(ValueError, msg):
             self.ops.adapt_timefield_value(timezone.make_aware(timezone.now()))
 

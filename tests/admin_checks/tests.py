@@ -1,10 +1,10 @@
-from ginger import forms
-from ginger.contrib import admin
-from ginger.contrib.admin import AdminSite
-from ginger.contrib.messages.middleware import MessageMiddleware
-from ginger.contrib.sessions.middleware import SessionMiddleware
-from ginger.core import checks
-from ginger.test import SimpleTestCase, override_settings
+from gingerdj import forms
+from gingerdj.contrib import admin
+from gingerdj.contrib.admin import AdminSite
+from gingerdj.contrib.messages.middleware import MessageMiddleware
+from gingerdj.contrib.sessions.middleware import SessionMiddleware
+from gingerdj.core import checks
+from gingerdj.test import SimpleTestCase, override_settings
 
 from .models import Album, Author, Book, City, Influence, Song, State, TwoAlbumFKAndAnE
 
@@ -59,8 +59,8 @@ class SessionMiddlewareSubclass(SessionMiddleware):
 @override_settings(
     SILENCED_SYSTEM_CHECKS=["fields.W342"],  # ForeignKey(unique=True)
     INSTALLED_APPS=[
-        "ginger.contrib.admin",
-        "ginger.contrib.messages",
+        "gingerdj.contrib.admin",
+        "gingerdj.contrib.messages",
         "admin_checks",
     ],
 )
@@ -76,12 +76,12 @@ class SystemChecksTestCase(SimpleTestCase):
         finally:
             admin.site.unregister(Song)
 
-    @override_settings(INSTALLED_APPS=["ginger.contrib.admin"])
+    @override_settings(INSTALLED_APPS=["gingerdj.contrib.admin"])
     def test_apps_dependencies(self):
         errors = admin.checks.check_dependencies()
         expected = [
             checks.Error(
-                "'ginger.contrib.messages' must be in INSTALLED_APPS in order "
+                "'gingerdj.contrib.messages' must be in INSTALLED_APPS in order "
                 "to use the admin application.",
                 id="admin.E406",
             ),
@@ -94,7 +94,7 @@ class SystemChecksTestCase(SimpleTestCase):
             admin.checks.check_dependencies(),
             [
                 checks.Error(
-                    "A 'ginger.template.backends.ginger.GingerTemplates' "
+                    "A 'gingerdj.template.backends.gingerdj.GingerTemplates' "
                     "instance must be configured in TEMPLATES in order to use "
                     "the admin application.",
                     id="admin.E403",
@@ -105,7 +105,7 @@ class SystemChecksTestCase(SimpleTestCase):
     @override_settings(
         TEMPLATES=[
             {
-                "BACKEND": "ginger.template.backends.ginger.GingerTemplates",
+                "BACKEND": "gingerdj.template.backends.gingerdj.GingerTemplates",
                 "DIRS": [],
                 "APP_DIRS": True,
                 "OPTIONS": {
@@ -117,13 +117,13 @@ class SystemChecksTestCase(SimpleTestCase):
     def test_context_processor_dependencies(self):
         expected = [
             checks.Error(
-                "'ginger.contrib.messages.context_processors.messages' must "
+                "'gingerdj.contrib.messages.context_processors.messages' must "
                 "be enabled in GingerTemplates (TEMPLATES) in order to use "
                 "the admin application.",
                 id="admin.E404",
             ),
             checks.Warning(
-                "'ginger.template.context_processors.request' must be enabled "
+                "'gingerdj.template.context_processors.request' must be enabled "
                 "in GingerTemplates (TEMPLATES) in order to use the admin "
                 "navigation sidebar.",
                 id="admin.W411",
@@ -139,13 +139,13 @@ class SystemChecksTestCase(SimpleTestCase):
         AUTHENTICATION_BACKENDS=["admin_checks.tests.ModelBackendSubclass"],
         TEMPLATES=[
             {
-                "BACKEND": "ginger.template.backends.ginger.GingerTemplates",
+                "BACKEND": "gingerdj.template.backends.gingerdj.GingerTemplates",
                 "DIRS": [],
                 "APP_DIRS": True,
                 "OPTIONS": {
                     "context_processors": [
-                        "ginger.template.context_processors.request",
-                        "ginger.contrib.messages.context_processors.messages",
+                        "gingerdj.template.context_processors.request",
+                        "gingerdj.contrib.messages.context_processors.messages",
                     ],
                 },
             }
@@ -154,26 +154,24 @@ class SystemChecksTestCase(SimpleTestCase):
     def test_context_processor_dependencies_model_backend_subclass(self):
         self.assertEqual(
             admin.checks.check_dependencies(),
-            [
-               
-            ],
+            [],
         )
 
     @override_settings(
         TEMPLATES=[
             {
-                "BACKEND": "ginger.template.backends.dummy.TemplateStrings",
+                "BACKEND": "gingerdj.template.backends.dummy.TemplateStrings",
                 "DIRS": [],
                 "APP_DIRS": True,
             },
             {
-                "BACKEND": "ginger.template.backends.ginger.GingerTemplates",
+                "BACKEND": "gingerdj.template.backends.gingerdj.GingerTemplates",
                 "DIRS": [],
                 "APP_DIRS": True,
                 "OPTIONS": {
                     "context_processors": [
-                        "ginger.template.context_processors.request",
-                        "ginger.contrib.messages.context_processors.messages",
+                        "gingerdj.template.context_processors.request",
+                        "gingerdj.contrib.messages.context_processors.messages",
                     ],
                 },
             },
@@ -187,7 +185,7 @@ class SystemChecksTestCase(SimpleTestCase):
         errors = admin.checks.check_dependencies()
         expected = [
             checks.Error(
-                "'ginger.contrib.messages.middleware.MessageMiddleware' "
+                "'gingerdj.contrib.messages.middleware.MessageMiddleware' "
                 "must be in MIDDLEWARE in order to use the admin application.",
                 id="admin.E409",
             ),
@@ -206,9 +204,9 @@ class SystemChecksTestCase(SimpleTestCase):
 
     @override_settings(
         MIDDLEWARE=[
-            "ginger.contrib.does.not.Exist",
-            "ginger.contrib.messages.middleware.MessageMiddleware",
-            "ginger.contrib.sessions.middleware.SessionMiddleware",
+            "gingerdj.contrib.does.not.Exist",
+            "gingerdj.contrib.messages.middleware.MessageMiddleware",
+            "gingerdj.contrib.sessions.middleware.SessionMiddleware",
         ]
     )
     def test_admin_check_ignores_import_error_in_middleware(self):

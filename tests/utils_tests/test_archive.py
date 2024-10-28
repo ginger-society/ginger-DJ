@@ -4,9 +4,9 @@ import sys
 import tempfile
 import unittest
 
-from ginger.core.exceptions import SuspiciousOperation
-from ginger.test import SimpleTestCase
-from ginger.utils import archive
+from gingerdj.core.exceptions import SuspiciousOperation
+from gingerdj.test import SimpleTestCase
+from gingerdj.utils import archive
 
 try:
     import bz2  # NOQA

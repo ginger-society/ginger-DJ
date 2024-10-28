@@ -1,8 +1,8 @@
 from datetime import datetime
 from operator import attrgetter
 
-from ginger.core.exceptions import FieldError
-from ginger.db.models import (
+from gingerdj.core.exceptions import FieldError
+from gingerdj.db.models import (
     CharField,
     Count,
     DateTimeField,
@@ -13,8 +13,8 @@ from ginger.db.models import (
     Subquery,
     Value,
 )
-from ginger.db.models.functions import Length, Upper
-from ginger.test import TestCase
+from gingerdj.db.models.functions import Length, Upper
+from gingerdj.test import TestCase
 
 from .models import (
     Article,

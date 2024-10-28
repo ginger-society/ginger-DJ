@@ -2,8 +2,8 @@ from datetime import date
 from decimal import Decimal
 from unittest import mock
 
-from ginger.db import connection, transaction
-from ginger.db.models import (
+from gingerdj.db import connection, transaction
+from gingerdj.db.models import (
     BooleanField,
     Case,
     Count,
@@ -16,10 +16,10 @@ from ginger.db.models import (
     Value,
     When,
 )
-from ginger.db.models.functions import Concat
-from ginger.db.models.lookups import Exact, IStartsWith
-from ginger.test import TestCase
-from ginger.test.testcases import skipUnlessDBFeature
+from gingerdj.db.models.functions import Concat
+from gingerdj.db.models.lookups import Exact, IStartsWith
+from gingerdj.test import TestCase
+from gingerdj.test.testcases import skipUnlessDBFeature
 
 from .models import (
     Author,

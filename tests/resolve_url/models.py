@@ -2,7 +2,7 @@
 Regression tests for the resolve_url function.
 """
 
-from ginger.db import models
+from gingerdj.db import models
 
 
 class UnimportantThing(models.Model):

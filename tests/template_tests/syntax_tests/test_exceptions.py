@@ -1,5 +1,5 @@
-from ginger.template import TemplateDoesNotExist, TemplateSyntaxError
-from ginger.test import SimpleTestCase
+from gingerdj.template import TemplateDoesNotExist, TemplateSyntaxError
+from gingerdj.test import SimpleTestCase
 
 from ..utils import setup
 from .test_extends import inheritance_templates

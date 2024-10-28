@@ -4,8 +4,8 @@ import sys
 import unittest
 import warnings
 
-from ginger.test import TestCase
-from ginger.utils.functional import LazyObject, SimpleLazyObject, empty
+from gingerdj.test import TestCase
+from gingerdj.utils.functional import LazyObject, SimpleLazyObject, empty
 
 from .models import Category, CategoryInfo
 

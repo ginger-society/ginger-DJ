@@ -1,15 +1,15 @@
 import os
 
-from ginger.conf import settings
-from ginger.core.exceptions import ImproperlyConfigured
-from ginger.http import HttpResponse, HttpResponsePermanentRedirect
-from ginger.middleware.locale import LocaleMiddleware
-from ginger.template import Context, Template
-from ginger.test import SimpleTestCase, override_settings
-from ginger.test.client import RequestFactory
-from ginger.test.utils import override_script_prefix
-from ginger.urls import clear_url_caches, resolve, reverse, translate_url
-from ginger.utils import translation
+from gingerdj.conf import settings
+from gingerdj.core.exceptions import ImproperlyConfigured
+from gingerdj.http import HttpResponse, HttpResponsePermanentRedirect
+from gingerdj.middleware.locale import LocaleMiddleware
+from gingerdj.template import Context, Template
+from gingerdj.test import SimpleTestCase, override_settings
+from gingerdj.test.client import RequestFactory
+from gingerdj.test.utils import override_script_prefix
+from gingerdj.urls import clear_url_caches, resolve, reverse, translate_url
+from gingerdj.utils import translation
 
 
 class PermanentRedirectLocaleMiddleWare(LocaleMiddleware):
@@ -28,17 +28,17 @@ class PermanentRedirectLocaleMiddleWare(LocaleMiddleware):
         ("pt-br", "Brazilian Portuguese"),
     ],
     MIDDLEWARE=[
-        "ginger.middleware.locale.LocaleMiddleware",
-        "ginger.middleware.common.CommonMiddleware",
+        "gingerdj.middleware.locale.LocaleMiddleware",
+        "gingerdj.middleware.common.CommonMiddleware",
     ],
     ROOT_URLCONF="i18n.patterns.urls.default",
     TEMPLATES=[
         {
-            "BACKEND": "ginger.template.backends.ginger.GingerTemplates",
+            "BACKEND": "gingerdj.template.backends.gingerdj.GingerTemplates",
             "DIRS": [os.path.join(os.path.dirname(__file__), "templates")],
             "OPTIONS": {
                 "context_processors": [
-                    "ginger.template.context_processors.i18n",
+                    "gingerdj.template.context_processors.i18n",
                 ],
             },
         }
@@ -299,7 +299,6 @@ class URLRedirectTests(URLTestCaseBase):
 
         response = self.client.get(response.headers["location"])
         self.assertEqual(response.status_code, 200)
-
 
 
 class URLVaryAcceptLanguageTests(URLTestCaseBase):

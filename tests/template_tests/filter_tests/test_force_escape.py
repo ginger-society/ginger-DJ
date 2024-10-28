@@ -1,6 +1,6 @@
-from ginger.template.defaultfilters import force_escape
-from ginger.test import SimpleTestCase
-from ginger.utils.safestring import SafeData
+from gingerdj.template.defaultfilters import force_escape
+from gingerdj.test import SimpleTestCase
+from gingerdj.utils.safestring import SafeData
 
 from ..utils import setup
 

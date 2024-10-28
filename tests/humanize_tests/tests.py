@@ -1,13 +1,13 @@
 import datetime
 from decimal import Decimal
 
-from ginger.contrib.humanize.templatetags import humanize
-from ginger.template import Context, Template, defaultfilters
-from ginger.test import SimpleTestCase, modify_settings, override_settings
-from ginger.utils import translation
-from ginger.utils.html import escape
-from ginger.utils.timezone import get_fixed_timezone
-from ginger.utils.translation import gettext as _
+from gingerdj.contrib.humanize.templatetags import humanize
+from gingerdj.template import Context, Template, defaultfilters
+from gingerdj.test import SimpleTestCase, modify_settings, override_settings
+from gingerdj.utils import translation
+from gingerdj.utils.html import escape
+from gingerdj.utils.timezone import get_fixed_timezone
+from gingerdj.utils.translation import gettext as _
 
 # Mock out datetime in some tests so they don't fail occasionally when they
 # run too slow. Use a fixed datetime for datetime.now(). DST change in
@@ -26,7 +26,7 @@ class MockDateTime(datetime.datetime):
             return now.replace(tzinfo=tz) + tz.utcoffset(now)
 
 
-@modify_settings(INSTALLED_APPS={"append": "ginger.contrib.humanize"})
+@modify_settings(INSTALLED_APPS={"append": "gingerdj.contrib.humanize"})
 class HumanizeTests(SimpleTestCase):
     def humanize_tester(
         self, test_list, result_list, method, normalize_result_func=escape

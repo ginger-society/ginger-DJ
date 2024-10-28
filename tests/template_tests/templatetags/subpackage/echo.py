@@ -1,4 +1,4 @@
-from ginger import template
+from gingerdj import template
 
 register = template.Library()
 

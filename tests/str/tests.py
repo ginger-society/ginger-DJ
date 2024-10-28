@@ -1,8 +1,8 @@
 import datetime
 
-from ginger.db import models
-from ginger.test import TestCase
-from ginger.test.utils import isolate_apps
+from gingerdj.db import models
+from gingerdj.test import TestCase
+from gingerdj.test.utils import isolate_apps
 
 from .models import InternationalArticle
 

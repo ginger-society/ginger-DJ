@@ -1,6 +1,6 @@
-from ginger.core.management import call_command
-from ginger.db import connection
-from ginger.test import TransactionTestCase
+from gingerdj.core.management import call_command
+from gingerdj.db import connection
+from gingerdj.test import TransactionTestCase
 
 
 class MigrateTests(TransactionTestCase):

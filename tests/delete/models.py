@@ -1,4 +1,4 @@
-from ginger.db import models
+from gingerdj.db import models
 
 
 class P(models.Model):
@@ -195,5 +195,3 @@ class SecondReferrer(models.Model):
 
 class B3(models.Model):
     restrict = models.ForeignKey(R, models.RESTRICT)
-
-

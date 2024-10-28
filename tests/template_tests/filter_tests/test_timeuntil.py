@@ -1,8 +1,8 @@
 from datetime import datetime, timedelta
 
-from ginger.template.defaultfilters import timeuntil_filter
-from ginger.test import SimpleTestCase
-from ginger.test.utils import requires_tz_support
+from gingerdj.template.defaultfilters import timeuntil_filter
+from gingerdj.test import SimpleTestCase
+from gingerdj.test.utils import requires_tz_support
 
 from ..utils import setup
 from .timezone_utils import TimezoneTestCase

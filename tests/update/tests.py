@@ -1,11 +1,11 @@
 import unittest
 
-from ginger.core.exceptions import FieldError
-from ginger.db import IntegrityError, connection, transaction
-from ginger.db.models import Case, CharField, Count, F, IntegerField, Max, When
-from ginger.db.models.functions import Abs, Concat, Lower
-from ginger.test import TestCase
-from ginger.test.utils import register_lookup
+from gingerdj.core.exceptions import FieldError
+from gingerdj.db import IntegrityError, connection, transaction
+from gingerdj.db.models import Case, CharField, Count, F, IntegerField, Max, When
+from gingerdj.db.models.functions import Abs, Concat, Lower
+from gingerdj.test import TestCase
+from gingerdj.test.utils import register_lookup
 
 from .models import (
     A,
@@ -159,7 +159,7 @@ class AdvancedTests(TestCase):
     def test_update_m2m_field(self):
         msg = (
             "Cannot update model field "
-            "<ginger.db.models.fields.related.ManyToManyField: m2m_foo> "
+            "<gingerdj.db.models.fields.related.ManyToManyField: m2m_foo> "
             "(only non-relations and foreign keys permitted)."
         )
         with self.assertRaisesMessage(FieldError, msg):

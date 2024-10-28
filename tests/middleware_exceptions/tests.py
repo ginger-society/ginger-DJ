@@ -1,7 +1,7 @@
-from ginger.conf import settings
-from ginger.core.exceptions import MiddlewareNotUsed
-from ginger.http import HttpResponse
-from ginger.test import RequestFactory, SimpleTestCase, override_settings
+from gingerdj.conf import settings
+from gingerdj.core.exceptions import MiddlewareNotUsed
+from gingerdj.http import HttpResponse
+from gingerdj.test import RequestFactory, SimpleTestCase, override_settings
 
 from . import middleware as mw
 
@@ -169,7 +169,7 @@ class MyMiddlewareWithExceptionMessage:
 @override_settings(
     DEBUG=True,
     ROOT_URLCONF="middleware_exceptions.urls",
-    MIDDLEWARE=["ginger.middleware.common.CommonMiddleware"],
+    MIDDLEWARE=["gingerdj.middleware.common.CommonMiddleware"],
 )
 class MiddlewareNotUsedTests(SimpleTestCase):
     rf = RequestFactory()
@@ -181,7 +181,7 @@ class MiddlewareNotUsedTests(SimpleTestCase):
 
     @override_settings(MIDDLEWARE=["middleware_exceptions.tests.MyMiddleware"])
     def test_log(self):
-        with self.assertLogs("ginger.request", "DEBUG") as cm:
+        with self.assertLogs("gingerdj.request", "DEBUG") as cm:
             self.client.get("/middleware_exceptions/view/")
         self.assertEqual(
             cm.records[0].getMessage(),
@@ -192,7 +192,7 @@ class MiddlewareNotUsedTests(SimpleTestCase):
         MIDDLEWARE=["middleware_exceptions.tests.MyMiddlewareWithExceptionMessage"]
     )
     def test_log_custom_message(self):
-        with self.assertLogs("ginger.request", "DEBUG") as cm:
+        with self.assertLogs("gingerdj.request", "DEBUG") as cm:
             self.client.get("/middleware_exceptions/view/")
         self.assertEqual(
             cm.records[0].getMessage(),
@@ -205,7 +205,7 @@ class MiddlewareNotUsedTests(SimpleTestCase):
         MIDDLEWARE=["middleware_exceptions.tests.MyMiddleware"],
     )
     def test_do_not_log_when_debug_is_false(self):
-        with self.assertNoLogs("ginger.request", "DEBUG"):
+        with self.assertNoLogs("gingerdj.request", "DEBUG"):
             self.client.get("/middleware_exceptions/view/")
 
     @override_settings(
@@ -215,7 +215,7 @@ class MiddlewareNotUsedTests(SimpleTestCase):
         ]
     )
     async def test_async_and_sync_middleware_chain_async_call(self):
-        with self.assertLogs("ginger.request", "DEBUG") as cm:
+        with self.assertLogs("gingerdj.request", "DEBUG") as cm:
             response = await self.async_client.get("/middleware_exceptions/view/")
         self.assertEqual(response.content, b"OK")
         self.assertEqual(response.status_code, 200)
@@ -259,7 +259,7 @@ class MiddlewareSyncAsyncTests(SimpleTestCase):
         ]
     )
     def test_async_middleware(self):
-        with self.assertLogs("ginger.request", "DEBUG") as cm:
+        with self.assertLogs("gingerdj.request", "DEBUG") as cm:
             response = self.client.get("/middleware_exceptions/view/")
         self.assertEqual(response.status_code, 402)
         self.assertEqual(
@@ -288,7 +288,7 @@ class MiddlewareSyncAsyncTests(SimpleTestCase):
         ]
     )
     async def test_sync_middleware_async(self):
-        with self.assertLogs("ginger.request", "DEBUG") as cm:
+        with self.assertLogs("gingerdj.request", "DEBUG") as cm:
             response = await self.async_client.get("/middleware_exceptions/view/")
         self.assertEqual(response.status_code, 402)
         self.assertEqual(
@@ -303,7 +303,7 @@ class MiddlewareSyncAsyncTests(SimpleTestCase):
         ]
     )
     async def test_async_middleware_async(self):
-        with self.assertLogs("ginger.request", "WARNING") as cm:
+        with self.assertLogs("gingerdj.request", "WARNING") as cm:
             response = await self.async_client.get("/middleware_exceptions/view/")
         self.assertEqual(response.status_code, 402)
         self.assertEqual(

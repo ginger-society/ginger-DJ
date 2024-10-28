@@ -1,4 +1,4 @@
-from ginger.contrib.gis.db import models
+from gingerdj.contrib.gis.db import models
 
 
 class RasterModel(models.Model):

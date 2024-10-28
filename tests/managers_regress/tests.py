@@ -1,7 +1,7 @@
-from ginger.db import models
-from ginger.template import Context, Template
-from ginger.test import SimpleTestCase, TestCase, override_settings
-from ginger.test.utils import isolate_apps
+from gingerdj.db import models
+from gingerdj.template import Context, Template
+from gingerdj.test import SimpleTestCase, TestCase, override_settings
+from gingerdj.test.utils import isolate_apps
 
 from .models import (
     AbstractBase1,

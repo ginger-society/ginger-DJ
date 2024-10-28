@@ -15,7 +15,7 @@ from the default generated name, use the ``db_table`` parameter on the
 
 """
 
-from ginger.db import models
+from gingerdj.db import models
 
 
 class Author(models.Model):

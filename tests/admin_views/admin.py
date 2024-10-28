@@ -2,19 +2,19 @@ import datetime
 from io import StringIO
 from wsgiref.util import FileWrapper
 
-from ginger import forms
-from ginger.contrib import admin
-from ginger.contrib.admin import BooleanFieldListFilter
-from ginger.contrib.admin.views.main import ChangeList
-from ginger.core.exceptions import ValidationError
-from ginger.core.mail import EmailMessage
-from ginger.db import models
-from ginger.forms.models import BaseModelFormSet
-from ginger.http import HttpResponse, JsonResponse, StreamingHttpResponse
-from ginger.urls import path
-from ginger.utils.html import format_html
-from ginger.utils.safestring import mark_safe
-from ginger.views.decorators.common import no_append_slash
+from gingerdj import forms
+from gingerdj.contrib import admin
+from gingerdj.contrib.admin import BooleanFieldListFilter
+from gingerdj.contrib.admin.views.main import ChangeList
+from gingerdj.core.exceptions import ValidationError
+from gingerdj.core.mail import EmailMessage
+from gingerdj.db import models
+from gingerdj.forms.models import BaseModelFormSet
+from gingerdj.http import HttpResponse, JsonResponse, StreamingHttpResponse
+from gingerdj.urls import path
+from gingerdj.utils.html import format_html
+from gingerdj.utils.safestring import mark_safe
+from gingerdj.views.decorators.common import no_append_slash
 
 from .forms import MediaActionForm
 from .models import (
@@ -170,7 +170,7 @@ class ChapterXtra1Admin(admin.ModelAdmin):
         "chap__book",
         "chap__book__name",
         "chap__book__promo",
-        "chap__book__promo__name"
+        "chap__book__promo__name",
     )
 
 
@@ -401,7 +401,7 @@ def external_mail(modeladmin, request, selected):
 
 @admin.action(description="Redirect to (Awesome action)")
 def redirect_to(modeladmin, request, selected):
-    from ginger.http import HttpResponseRedirect
+    from gingerdj.http import HttpResponseRedirect
 
     return HttpResponseRedirect("/some-where-else/")
 
@@ -655,7 +655,10 @@ class PizzaAdmin(admin.ModelAdmin):
 
 
 class ReadOnlyRelatedFieldAdmin(admin.ModelAdmin):
-    readonly_fields = ("chapter", "language",)
+    readonly_fields = (
+        "chapter",
+        "language",
+    )
 
 
 class StudentAdmin(admin.ModelAdmin):

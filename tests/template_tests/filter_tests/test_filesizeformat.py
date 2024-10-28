@@ -1,6 +1,6 @@
-from ginger.template.defaultfilters import filesizeformat
-from ginger.test import SimpleTestCase
-from ginger.utils import translation
+from gingerdj.template.defaultfilters import filesizeformat
+from gingerdj.test import SimpleTestCase
+from gingerdj.utils import translation
 
 
 class FunctionTests(SimpleTestCase):

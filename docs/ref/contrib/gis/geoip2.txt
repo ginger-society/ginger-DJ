@@ -2,7 +2,7 @@
 Geolocation with GeoIP2
 =======================
 
-.. module:: ginger.contrib.gis.geoip2
+.. module:: gingerdj.contrib.gis.geoip2
     :synopsis: Python interface for MaxMind's GeoIP2 databases.
 
 The :class:`GeoIP2` object is a wrapper for the `MaxMind geoip2 Python
@@ -30,7 +30,7 @@ Here is an example of its usage:
 
 .. code-block:: pycon
 
-    >>> from ginger.contrib.gis.geoip2 import GeoIP2
+    >>> from gingerdj.contrib.gis.geoip2 import GeoIP2
     >>> g = GeoIP2()
     >>> g.country("google.com")
     {'continent_code': 'NA',
@@ -119,7 +119,7 @@ All the following querying routines may take an instance of
 :class:`~ipaddress.IPv4Address` or :class:`~ipaddress.IPv6Address`, a string IP
 address, or a fully qualified domain name (FQDN). For example,
 ``IPv4Address("205.186.163.125")``, ``"205.186.163.125"``, and
-``"ginger.gloportal.dev"`` would all be valid query parameters.
+``"gingerdj.gloportal.dev"`` would all be valid query parameters.
 
 .. method:: GeoIP2.city(query)
 
@@ -160,7 +160,7 @@ Returns a coordinate tuple of (latitude, longitude),
 
 .. method:: GeoIP2.geos(query)
 
-Returns a :class:`~ginger.contrib.gis.geos.Point` object corresponding to the
+Returns a :class:`~gingerdj.contrib.gis.geos.Point` object corresponding to the
 query.
 
 Settings

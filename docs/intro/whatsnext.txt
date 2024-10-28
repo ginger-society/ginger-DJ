@@ -3,7 +3,7 @@ What to read next
 =================
 
 So you've read all the :doc:`introductory material </intro/index>` and have
-decided you'd like to keep using Ginger. We've only just scratched the surface
+decided you'd like to keep using GingerDJ. We've only just scratched the surface
 with this intro (in fact, if you've read every single word, you've read about
 5% of the overall documentation).
 
@@ -13,7 +13,7 @@ Well, we've always been big fans of learning by doing. At this point you should
 know enough to start a project of your own and start fooling around. As you need
 to learn new tricks, come back to the documentation.
 
-We've put a lot of effort into making Ginger's documentation useful, clear and
+We've put a lot of effort into making GingerDJ's documentation useful, clear and
 as complete as possible. The rest of this document explains more about how the
 documentation works so that you can get the most out of it.
 
@@ -23,7 +23,7 @@ to write a document about how to read the document about documentation.)
 Finding documentation
 =====================
 
-Ginger's got a *lot* of documentation -- almost 450,000 words and counting --
+GingerDJ's got a *lot* of documentation -- almost 450,000 words and counting --
 so finding what you need can sometimes be tricky. A good place to start
 is the :ref:`genindex`. We also recommend using the builtin search feature.
 
@@ -32,35 +32,35 @@ Or you can just browse around!
 How the documentation is organized
 ==================================
 
-Ginger's main documentation is broken up into "chunks" designed to fill
+GingerDJ's main documentation is broken up into "chunks" designed to fill
 different needs:
 
 * The :doc:`introductory material </intro/index>` is designed for people new
-  to Ginger -- or to web development in general. It doesn't cover anything
+  to GingerDJ -- or to web development in general. It doesn't cover anything
   in depth, but instead gives a high-level overview of how developing in
-  Ginger "feels".
+  GingerDJ "feels".
 
 * The :doc:`topic guides </topics/index>`, on the other hand, dive deep into
-  individual parts of Ginger. There are complete guides to Ginger's
+  individual parts of GingerDJ. There are complete guides to GingerDJ's
   :doc:`model system </topics/db/index>`, :doc:`template engine
   </topics/templates>`, :doc:`forms framework </topics/forms/index>`, and much
   more.
 
   This is probably where you'll want to spend most of your time; if you work
   your way through these guides you should come out knowing pretty much
-  everything there is to know about Ginger.
+  everything there is to know about GingerDJ.
 
 * Web development is often broad, not deep -- problems span many domains.
   We've written a set of :doc:`how-to guides </howto/index>` that answer
   common "How do I ...?" questions. Here you'll find information about
-  :doc:`generating PDFs with Ginger </howto/outputting-pdf>`, :doc:`writing
+  :doc:`generating PDFs with GingerDJ </howto/outputting-pdf>`, :doc:`writing
   custom template tags </howto/custom-template-tags>`, and more.
 
   Answers to really common questions can also be found in the :doc:`FAQ
   </faq/index>`.
 
 * The guides and how-to's don't cover every single class, function, and
-  method available in Ginger -- that would be overwhelming when you're
+  method available in GingerDJ -- that would be overwhelming when you're
   trying to learn. Instead, details about individual classes, functions,
   methods, and modules are kept in the :doc:`reference </ref/index>`. This is
   where you'll turn to find the details of a particular function or
@@ -73,14 +73,14 @@ different needs:
 
 * Finally, there's some "specialized" documentation not usually relevant to
   most developers. This includes the :doc:`internals documentation </internals/index>` for those who want to add
-  code to Ginger itself, and a :doc:`few other things that don't fit elsewhere
+  code to GingerDJ itself, and a :doc:`few other things that don't fit elsewhere
   </misc/index>`.
 
 
 How documentation is updated
 ============================
 
-Just as the Ginger code base is developed and improved on a daily basis, our
+Just as the GingerDJ code base is developed and improved on a daily basis, our
 documentation is consistently improving. We improve documentation for several
 reasons:
 
@@ -89,74 +89,74 @@ reasons:
 * To add information and/or examples to existing sections that need to be
   expanded.
 
-* To document Ginger features that aren't yet documented. (The list of
+* To document GingerDJ features that aren't yet documented. (The list of
   such features is shrinking but exists nonetheless.)
 
 * To add documentation for new features as new features get added, or as
-  Ginger APIs or behaviors change.
+  GingerDJ APIs or behaviors change.
 
-Ginger's documentation is kept in the same source control system as its code. It
+GingerDJ's documentation is kept in the same source control system as its code. It
 lives in the :source:`docs` directory of our Git repository. Each document
 online is a separate text file in the repository.
 
 Where to get it
 ===============
 
-You can read Ginger documentation in several ways. They are, in order of
+You can read GingerDJ documentation in several ways. They are, in order of
 preference:
 
 On the web
 ----------
 
-The most recent version of the Ginger documentation lives at
-https://docs.ginger.gloportal.dev/en/dev/. These HTML pages are generated
+The most recent version of the GingerDJ documentation lives at
+https://docs.gingerdj.gloportal.dev/en/dev/. These HTML pages are generated
 automatically from the text files in source control. That means they reflect the
-"latest and greatest" in Ginger -- they include the very latest corrections and
-additions, and they discuss the latest Ginger features, which may only be
-available to users of the Ginger development version. (See
+"latest and greatest" in GingerDJ -- they include the very latest corrections and
+additions, and they discuss the latest GingerDJ features, which may only be
+available to users of the GingerDJ development version. (See
 :ref:`differences-between-doc-versions` below.)
 
 We encourage you to help improve the docs by submitting changes, corrections and
-suggestions in the `ticket system`_. The Ginger developers actively monitor the
+suggestions in the `ticket system`_. The GingerDJ developers actively monitor the
 ticket system and use your feedback to improve the documentation for everybody.
 
 Note, however, that tickets should explicitly relate to the documentation,
 rather than asking broad tech-support questions. If you need help with your
-particular Ginger setup, try the |ginger-users| mailing list or the `#ginger
+particular GingerDJ setup, try the |gingerdj-users| mailing list or the `#gingerdj
 IRC channel`_ instead.
 
-.. _ticket system: https://code.ginger.gloportal.dev/
-.. _#ginger IRC channel: https://web.libera.chat/#ginger
+.. _ticket system: https://code.gingerdj.gloportal.dev/
+.. _#gingerdj IRC channel: https://web.libera.chat/#gingerdj
 
 In plain text
 -------------
 
-For offline reading, or just for convenience, you can read the Ginger
+For offline reading, or just for convenience, you can read the GingerDJ
 documentation in plain text.
 
-If you're using an official release of Ginger, the zipped package (tarball) of
+If you're using an official release of GingerDJ, the zipped package (tarball) of
 the code includes a ``docs/`` directory, which contains all the documentation
 for that release.
 
-If you're using the development version of Ginger (aka the main branch), the
+If you're using the development version of GingerDJ (aka the main branch), the
 ``docs/`` directory contains all of the documentation. You can update your
 Git checkout to get the latest changes.
 
 One low-tech way of taking advantage of the text documentation is by using the
 Unix ``grep`` utility to search for a phrase in all of the documentation. For
 example, this will show you each mention of the phrase "max_length" in any
-Ginger document:
+GingerDJ document:
 
 .. console::
 
-    $ grep -r max_length /path/to/ginger/docs/
+    $ grep -r max_length /path/to/gingerdj/docs/
 
 As HTML, locally
 ----------------
 
 You can get a local copy of the HTML documentation following a few steps:
 
-* Ginger's documentation uses a system called Sphinx__ to convert from
+* GingerDJ's documentation uses a system called Sphinx__ to convert from
   plain text to HTML. You'll need to install Sphinx by either downloading
   and installing the package from the Sphinx website, or with ``pip``:
 
@@ -168,7 +168,7 @@ You can get a local copy of the HTML documentation following a few steps:
 
   .. code-block:: console
 
-        $ cd path/to/ginger/docs
+        $ cd path/to/gingerdj/docs
         $ make html
 
   You'll need `GNU Make`__ installed for this.
@@ -177,7 +177,7 @@ You can get a local copy of the HTML documentation following a few steps:
 
   .. code-block:: bat
 
-        cd path\to\ginger\docs
+        cd path\to\gingerdj\docs
         make.bat html
 
 * The HTML documentation will be placed in ``docs/_build/html``.
@@ -192,30 +192,30 @@ Differences between versions
 
 The text documentation in the main branch of the Git repository contains the
 "latest and greatest" changes and additions. These changes include
-documentation of new features targeted for Ginger's next :term:`feature
+documentation of new features targeted for GingerDJ's next :term:`feature
 release <Feature release>`. For that reason, it's worth pointing out our policy
-to highlight recent changes and additions to Ginger.
+to highlight recent changes and additions to GingerDJ.
 
 We follow this policy:
 
-* The development documentation at https://docs.ginger.gloportal.dev/en/dev/ is
+* The development documentation at https://docs.gingerdj.gloportal.dev/en/dev/ is
   from the main branch. These docs correspond to the latest feature release,
   plus whatever features have been added/changed in the framework since then.
 
-* As we add features to Ginger's development version, we update the
+* As we add features to GingerDJ's development version, we update the
   documentation in the same Git commit transaction.
 
 * To distinguish feature changes/additions in the docs, we use the phrase:
-  "New in Ginger Development version" for the version of Ginger that hasn't
+  "New in GingerDJ Development version" for the version of GingerDJ that hasn't
   been released yet, or "New in version X.Y" for released versions.
 
 * Documentation fixes and improvements may be backported to the last release
-  branch, at the discretion of the merger, however, once a version of Ginger is
+  branch, at the discretion of the merger, however, once a version of GingerDJ is
   :ref:`no longer supported<supported-versions-policy>`, that version of the
   docs won't get any further updates.
 
 * The `main documentation web page`_ includes links to documentation for
   previous versions. Be sure you are using the version of the docs
-  corresponding to the version of Ginger you are using!
+  corresponding to the version of GingerDJ you are using!
 
-.. _main documentation web page: https://docs.ginger.gloportal.dev/en/dev/
+.. _main documentation web page: https://docs.gingerdj.gloportal.dev/en/dev/

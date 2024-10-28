@@ -1,7 +1,7 @@
-from ginger.contrib.flatpages.models import FlatPage
-from ginger.contrib.sites.models import Site
-from ginger.template import Context, Template, TemplateSyntaxError
-from ginger.test import TestCase
+from gingerdj.contrib.flatpages.models import FlatPage
+from gingerdj.contrib.sites.models import Site
+from gingerdj.template import Context, Template, TemplateSyntaxError
+from gingerdj.test import TestCase
 
 
 class FlatpageTemplateTagTests(TestCase):
@@ -69,7 +69,6 @@ class FlatpageTemplateTagTests(TestCase):
             "{% endfor %}"
         ).render(Context())
         self.assertEqual(out, "A Nested Flatpage,")
-
 
     def test_get_flatpages_with_variable_prefix(self):
         "The prefix for the flatpage template tag can be a template variable"

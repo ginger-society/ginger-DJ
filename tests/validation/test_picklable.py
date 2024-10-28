@@ -1,7 +1,7 @@
 import pickle
 from unittest import TestCase
 
-from ginger.core.exceptions import ValidationError
+from gingerdj.core.exceptions import ValidationError
 
 
 class PickableValidationErrorTestCase(TestCase):

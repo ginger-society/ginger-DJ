@@ -1,7 +1,7 @@
 import unittest
 from unittest import mock
 
-from ginger.core.exceptions import ValidationError
+from gingerdj.core.exceptions import ValidationError
 
 
 class TestValidationError(unittest.TestCase):

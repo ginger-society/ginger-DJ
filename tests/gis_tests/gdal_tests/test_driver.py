@@ -1,7 +1,7 @@
 import unittest
 from unittest import mock
 
-from ginger.contrib.gis.gdal import Driver, GDALException
+from gingerdj.contrib.gis.gdal import Driver, GDALException
 
 valid_drivers = (
     # vector
@@ -54,8 +54,8 @@ class DriverTest(unittest.TestCase):
             dr = Driver(alias)
             self.assertEqual(full_name, str(dr))
 
-    @mock.patch("ginger.contrib.gis.gdal.driver.capi.get_driver_count")
-    @mock.patch("ginger.contrib.gis.gdal.driver.capi.register_all")
+    @mock.patch("gingerdj.contrib.gis.gdal.driver.capi.get_driver_count")
+    @mock.patch("gingerdj.contrib.gis.gdal.driver.capi.register_all")
     def test_registered(self, reg, count):
         """
         Prototypes are registered only if the driver count is zero.

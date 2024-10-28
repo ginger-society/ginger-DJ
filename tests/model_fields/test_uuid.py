@@ -1,11 +1,11 @@
 import json
 import uuid
 
-from ginger.core import exceptions, serializers
-from ginger.db import IntegrityError, connection, models
-from ginger.db.models import CharField, F, Value
-from ginger.db.models.functions import Concat, Repeat
-from ginger.test import (
+from gingerdj.core import exceptions, serializers
+from gingerdj.db import IntegrityError, connection, models
+from gingerdj.db.models import CharField, F, Value
+from gingerdj.db.models.functions import Concat, Repeat
+from gingerdj.test import (
     SimpleTestCase,
     TestCase,
     TransactionTestCase,

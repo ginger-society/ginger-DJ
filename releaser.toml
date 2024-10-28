@@ -5,12 +5,12 @@ take_snapshots = false
 [version]
 channel = "Final"
 major = 5
-minor = 5
-patch = 3
+minor = 7
+patch = 0
 revision = 0
 
 [[references]]
-file_name = "ginger/__init__.py"
+file_name = "gingerdj/__init__.py"
 output_type = "Tuple"
 variable = "VERSION"
 

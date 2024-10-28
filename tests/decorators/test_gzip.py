@@ -1,8 +1,8 @@
 from asgiref.sync import iscoroutinefunction
 
-from ginger.http import HttpRequest, HttpResponse
-from ginger.test import SimpleTestCase
-from ginger.views.decorators.gzip import gzip_page
+from gingerdj.http import HttpRequest, HttpResponse
+from gingerdj.test import SimpleTestCase
+from gingerdj.views.decorators.gzip import gzip_page
 
 
 class GzipPageTests(SimpleTestCase):

@@ -1,5 +1,5 @@
-from ginger.forms import Form, NullBooleanField, NullBooleanSelect
-from ginger.utils import translation
+from gingerdj.forms import Form, NullBooleanField, NullBooleanSelect
+from gingerdj.utils import translation
 
 from .base import WidgetTest
 

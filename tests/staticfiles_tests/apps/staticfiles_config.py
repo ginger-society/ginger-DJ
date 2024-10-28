@@ -1,4 +1,4 @@
-from ginger.contrib.staticfiles.apps import StaticFilesConfig
+from gingerdj.contrib.staticfiles.apps import StaticFilesConfig
 
 
 class IgnorePatternsAppConfig(StaticFilesConfig):

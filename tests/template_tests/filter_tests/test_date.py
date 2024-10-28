@@ -1,8 +1,8 @@
 from datetime import datetime, time
 
-from ginger.template.defaultfilters import date
-from ginger.test import SimpleTestCase
-from ginger.utils import timezone, translation
+from gingerdj.template.defaultfilters import date
+from gingerdj.test import SimpleTestCase
+from gingerdj.utils import timezone, translation
 
 from ..utils import setup
 from .timezone_utils import TimezoneTestCase

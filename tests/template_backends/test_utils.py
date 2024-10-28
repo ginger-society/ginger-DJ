@@ -1,6 +1,6 @@
-from ginger.core.exceptions import ImproperlyConfigured
-from ginger.template import engines
-from ginger.test import SimpleTestCase, override_settings
+from gingerdj.core.exceptions import ImproperlyConfigured
+from gingerdj.template import engines
+from gingerdj.test import SimpleTestCase, override_settings
 
 
 class TemplateUtilsTests(SimpleTestCase):
@@ -18,7 +18,7 @@ class TemplateUtilsTests(SimpleTestCase):
     @override_settings(
         TEMPLATES=[
             {
-                "BACKEND": "ginger.template.backends.ginger.GingerTemplates",
+                "BACKEND": "gingerdj.template.backends.gingerdj.GingerTemplates",
                 # Incorrect: APP_DIRS and loaders are mutually incompatible.
                 "APP_DIRS": True,
                 "OPTIONS": {"loaders": []},
@@ -39,16 +39,16 @@ class TemplateUtilsTests(SimpleTestCase):
     @override_settings(
         TEMPLATES=[
             {
-                "BACKEND": "ginger.template.backends.ginger.GingerTemplates",
+                "BACKEND": "gingerdj.template.backends.gingerdj.GingerTemplates",
             },
             {
-                "BACKEND": "ginger.template.backends.ginger.GingerTemplates",
+                "BACKEND": "gingerdj.template.backends.gingerdj.GingerTemplates",
             },
         ]
     )
     def test_backend_names_must_be_unique(self):
         msg = (
-            "Template engine aliases aren't unique, duplicates: ginger. Set "
+            "Template engine aliases aren't unique, duplicates: gingerdj. Set "
             "a unique NAME for each engine in settings.TEMPLATES."
         )
         with self.assertRaisesMessage(ImproperlyConfigured, msg):

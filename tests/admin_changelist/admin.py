@@ -1,5 +1,5 @@
-from ginger.contrib import admin
-from ginger.core.paginator import Paginator
+from gingerdj.contrib import admin
+from gingerdj.core.paginator import Paginator
 
 from .models import Band, Child, Event, GrandChild, Parent, Swallow
 
@@ -202,5 +202,3 @@ class UnescapedTitleFilter(admin.SimpleListFilter):
             return queryset.filter(is_active=True)
         else:
             return queryset.filter(is_active=False)
-
-

@@ -1,10 +1,10 @@
 import io
 
-from ginger.conf import settings
-from ginger.core.cache import cache
-from ginger.http import HttpResponse
-from ginger.http.response import HttpResponseBase
-from ginger.test import SimpleTestCase
+from gingerdj.conf import settings
+from gingerdj.core.cache import cache
+from gingerdj.http import HttpResponse
+from gingerdj.http.response import HttpResponseBase
+from gingerdj.test import SimpleTestCase
 
 UTF8 = "utf-8"
 ISO88591 = "iso-8859-1"

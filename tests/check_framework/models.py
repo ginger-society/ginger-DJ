@@ -1,5 +1,5 @@
-from ginger.core.checks import register
-from ginger.db import models
+from gingerdj.core.checks import register
+from gingerdj.db import models
 
 
 class SimpleModel(models.Model):

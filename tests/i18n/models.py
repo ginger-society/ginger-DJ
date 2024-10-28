@@ -1,7 +1,7 @@
 from datetime import datetime
 
-from ginger.db import models
-from ginger.utils.translation import gettext_lazy as _
+from gingerdj.db import models
+from gingerdj.utils.translation import gettext_lazy as _
 
 
 class TestModel(models.Model):

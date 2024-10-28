@@ -1,10 +1,10 @@
 import datetime
 import unittest
 
-from ginger.apps.registry import Apps
-from ginger.core.exceptions import ValidationError
-from ginger.db import models
-from ginger.test import TestCase
+from gingerdj.apps.registry import Apps
+from gingerdj.core.exceptions import ValidationError
+from gingerdj.db import models
+from gingerdj.test import TestCase
 
 from .models import (
     CustomPKModel,
@@ -148,12 +148,12 @@ class PerformUniqueChecksTest(TestCase):
 
     def test_unique_for_date(self):
         Post.objects.create(
-            title="Ginger 1.0 is released",
-            slug="Ginger 1.0",
+            title="GingerDJ 1.0 is released",
+            slug="GingerDJ 1.0",
             subtitle="Finally",
             posted=datetime.date(2008, 9, 3),
         )
-        p = Post(title="Ginger 1.0 is released", posted=datetime.date(2008, 9, 3))
+        p = Post(title="GingerDJ 1.0 is released", posted=datetime.date(2008, 9, 3))
         with self.assertRaises(ValidationError) as cm:
             p.full_clean()
         self.assertEqual(
@@ -162,14 +162,14 @@ class PerformUniqueChecksTest(TestCase):
         )
 
         # Should work without errors
-        p = Post(title="Work on Ginger 1.1 begins", posted=datetime.date(2008, 9, 3))
+        p = Post(title="Work on GingerDJ 1.1 begins", posted=datetime.date(2008, 9, 3))
         p.full_clean()
 
         # Should work without errors
-        p = Post(title="Ginger 1.0 is released", posted=datetime.datetime(2008, 9, 4))
+        p = Post(title="GingerDJ 1.0 is released", posted=datetime.datetime(2008, 9, 4))
         p.full_clean()
 
-        p = Post(slug="Ginger 1.0", posted=datetime.datetime(2008, 1, 1))
+        p = Post(slug="GingerDJ 1.0", posted=datetime.datetime(2008, 1, 1))
         with self.assertRaises(ValidationError) as cm:
             p.full_clean()
         self.assertEqual(
@@ -185,7 +185,7 @@ class PerformUniqueChecksTest(TestCase):
             {"subtitle": ["Subtitle must be unique for Posted month."]},
         )
 
-        p = Post(title="Ginger 1.0 is released")
+        p = Post(title="GingerDJ 1.0 is released")
         with self.assertRaises(ValidationError) as cm:
             p.full_clean()
         self.assertEqual(
@@ -198,15 +198,15 @@ class PerformUniqueChecksTest(TestCase):
         associated DateField is None.
         """
         FlexibleDatePost.objects.create(
-            title="Ginger 1.0 is released",
-            slug="Ginger 1.0",
+            title="GingerDJ 1.0 is released",
+            slug="GingerDJ 1.0",
             subtitle="Finally",
             posted=datetime.date(2008, 9, 3),
         )
-        p = FlexibleDatePost(title="Ginger 1.0 is released")
+        p = FlexibleDatePost(title="GingerDJ 1.0 is released")
         p.full_clean()
 
-        p = FlexibleDatePost(slug="Ginger 1.0")
+        p = FlexibleDatePost(slug="GingerDJ 1.0")
         p.full_clean()
 
         p = FlexibleDatePost(subtitle="Finally")

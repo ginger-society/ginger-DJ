@@ -2,13 +2,13 @@ from unittest import mock
 
 from asgiref.sync import markcoroutinefunction
 
-from ginger import dispatch
-from ginger.apps.registry import Apps
-from ginger.db import models
-from ginger.db.models import signals
-from ginger.dispatch import receiver
-from ginger.test import SimpleTestCase, TestCase
-from ginger.test.utils import isolate_apps
+from gingerdj import dispatch
+from gingerdj.apps.registry import Apps
+from gingerdj.db import models
+from gingerdj.db.models import signals
+from gingerdj.dispatch import receiver
+from gingerdj.test import SimpleTestCase, TestCase
+from gingerdj.test.utils import isolate_apps
 
 from .models import Author, Book, Car, Page, Person
 

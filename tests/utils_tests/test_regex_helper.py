@@ -1,8 +1,8 @@
 import re
 import unittest
 
-from ginger.test import SimpleTestCase
-from ginger.utils import regex_helper
+from gingerdj.test import SimpleTestCase
+from gingerdj.utils import regex_helper
 
 
 class NormalizeTests(unittest.TestCase):

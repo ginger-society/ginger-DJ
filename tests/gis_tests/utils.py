@@ -3,9 +3,9 @@ import unittest
 from functools import wraps
 from unittest import mock
 
-from ginger.conf import settings
-from ginger.db import DEFAULT_DB_ALIAS, connection
-from ginger.db.models import Func
+from gingerdj.conf import settings
+from gingerdj.db import DEFAULT_DB_ALIAS, connection
+from gingerdj.db.models import Func
 
 
 def skipUnlessGISLookup(*gis_lookups):

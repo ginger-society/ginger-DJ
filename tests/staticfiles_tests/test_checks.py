@@ -1,11 +1,11 @@
 from pathlib import Path
 from unittest import mock
 
-from ginger.conf import DEFAULT_STORAGE_ALIAS, STATICFILES_STORAGE_ALIAS, settings
-from ginger.contrib.staticfiles.checks import E005, check_finders, check_storages
-from ginger.contrib.staticfiles.finders import BaseFinder, get_finder
-from ginger.core.checks import Error, Warning
-from ginger.test import SimpleTestCase, override_settings
+from gingerdj.conf import DEFAULT_STORAGE_ALIAS, STATICFILES_STORAGE_ALIAS, settings
+from gingerdj.contrib.staticfiles.checks import E005, check_finders, check_storages
+from gingerdj.contrib.staticfiles.finders import BaseFinder, get_finder
+from gingerdj.core.checks import Error, Warning
+from gingerdj.test import SimpleTestCase, override_settings
 
 from .cases import CollectionTestCase
 from .settings import TEST_ROOT
@@ -47,7 +47,7 @@ class FindersCheckTests(CollectionTestCase):
 
             return [Finder1(), Finder2(), Finder3(), Finder4()]
 
-        with mock.patch("ginger.contrib.staticfiles.checks.get_finders", get_finders):
+        with mock.patch("gingerdj.contrib.staticfiles.checks.get_finders", get_finders):
             errors = check_finders(None)
             self.assertEqual(errors, [error1, error2, error3])
 
@@ -130,7 +130,7 @@ class FindersCheckTests(CollectionTestCase):
                 ],
             )
             # Nonexistent directories are skipped.
-            finder = get_finder("ginger.contrib.staticfiles.finders.FileSystemFinder")
+            finder = get_finder("gingerdj.contrib.staticfiles.finders.FileSystemFinder")
             self.assertEqual(list(finder.list(None)), [])
 
 
@@ -143,7 +143,7 @@ class StoragesCheckTests(SimpleTestCase):
     @override_settings(
         STORAGES={
             DEFAULT_STORAGE_ALIAS: {
-                "BACKEND": "ginger.core.files.storage.FileSystemStorage",
+                "BACKEND": "gingerdj.core.files.storage.FileSystemStorage",
             },
             "example": {
                 "BACKEND": "ignore.me",
@@ -157,7 +157,7 @@ class StoragesCheckTests(SimpleTestCase):
     @override_settings(
         STORAGES={
             STATICFILES_STORAGE_ALIAS: {
-                "BACKEND": "ginger.contrib.staticfiles.storage.StaticFilesStorage",
+                "BACKEND": "gingerdj.contrib.staticfiles.storage.StaticFilesStorage",
             },
         }
     )

@@ -1,5 +1,5 @@
-from ginger.forms.models import ModelForm, inlineformset_factory
-from ginger.test import TestCase, skipUnlessDBFeature
+from gingerdj.forms.models import ModelForm, inlineformset_factory
+from gingerdj.test import TestCase, skipUnlessDBFeature
 
 from .models import Child, Parent, Poem, Poet, School
 

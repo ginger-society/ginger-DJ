@@ -2,9 +2,9 @@ import unittest
 from io import StringIO
 from unittest import mock
 
-from ginger.db import DatabaseError, connection
-from ginger.db.backends.oracle.creation import DatabaseCreation
-from ginger.test import TestCase
+from gingerdj.db import DatabaseError, connection
+from gingerdj.db.backends.oracle.creation import DatabaseCreation
+from gingerdj.test import TestCase
 
 
 @unittest.skipUnless(connection.vendor == "oracle", "Oracle tests")

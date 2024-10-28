@@ -4,17 +4,17 @@ from copy import copy
 from decimal import Decimal
 from pathlib import Path
 
-from ginger.conf import settings
-from ginger.contrib.gis.gdal import DataSource
-from ginger.contrib.gis.utils.layermapping import (
+from gingerdj.conf import settings
+from gingerdj.contrib.gis.gdal import DataSource
+from gingerdj.contrib.gis.utils.layermapping import (
     InvalidDecimal,
     InvalidString,
     LayerMapError,
     LayerMapping,
     MissingForeignKey,
 )
-from ginger.db import connection
-from ginger.test import TestCase, override_settings
+from gingerdj.db import connection
+from gingerdj.test import TestCase, override_settings
 
 from .models import (
     City,

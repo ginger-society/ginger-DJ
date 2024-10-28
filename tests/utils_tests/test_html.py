@@ -1,11 +1,11 @@
 import os
 from datetime import datetime
 
-from ginger.core.serializers.json import GingerJSONEncoder
-from ginger.test import SimpleTestCase
-from ginger.utils.deprecation import RemovedInGinger60Warning
-from ginger.utils.functional import lazystr
-from ginger.utils.html import (
+from gingerdj.core.serializers.json import GingerJSONEncoder
+from gingerdj.test import SimpleTestCase
+from gingerdj.utils.deprecation import RemovedInGinger60Warning
+from gingerdj.utils.functional import lazystr
+from gingerdj.utils.html import (
     conditional_escape,
     escape,
     escapejs,
@@ -18,7 +18,7 @@ from ginger.utils.html import (
     strip_tags,
     urlize,
 )
-from ginger.utils.safestring import mark_safe
+from gingerdj.utils.safestring import mark_safe
 
 
 class TestUtilsHtml(SimpleTestCase):
@@ -252,15 +252,15 @@ class TestUtilsHtml(SimpleTestCase):
             ("http://example.com/?x=1&y=2+3&z=", "http://example.com/?x=1&y=2+3&z="),
             ("http://example.com/?x=<>\"'", "http://example.com/?x=%3C%3E%22%27"),
             (
-                "http://example.com/?q=http://example.com/?x=1%26q=ginger",
+                "http://example.com/?q=http://example.com/?x=1%26q=gingerdj",
                 "http://example.com/?q=http%3A%2F%2Fexample.com%2F%3Fx%3D1%26q%3D"
-                "ginger",
+                "gingerdj",
             ),
             (
                 "http://example.com/?q=http%3A%2F%2Fexample.com%2F%3Fx%3D1%26q%3D"
-                "ginger",
+                "gingerdj",
                 "http://example.com/?q=http%3A%2F%2Fexample.com%2F%3Fx%3D1%26q%3D"
-                "ginger",
+                "gingerdj",
             ),
             ("http://.www.f oo.bar/", "http://.www.f%20oo.bar/"),
         )

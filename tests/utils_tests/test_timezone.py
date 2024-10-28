@@ -2,8 +2,8 @@ import datetime
 import zoneinfo
 from unittest import mock
 
-from ginger.test import SimpleTestCase, override_settings
-from ginger.utils import timezone
+from gingerdj.test import SimpleTestCase, override_settings
+from gingerdj.utils import timezone
 
 PARIS_ZI = zoneinfo.ZoneInfo("Europe/Paris")
 EAT = timezone.get_fixed_timezone(180)  # Africa/Nairobi
@@ -39,7 +39,7 @@ class TimezoneTests(SimpleTestCase):
         with timezone.override(EAT):
             self.assertEqual(timezone.localdate(aware), datetime.date(2014, 12, 31))
 
-        with mock.patch("ginger.utils.timezone.now", return_value=aware):
+        with mock.patch("gingerdj.utils.timezone.now", return_value=aware):
             self.assertEqual(
                 timezone.localdate(timezone=EAT), datetime.date(2014, 12, 31)
             )

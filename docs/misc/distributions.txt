@@ -1,33 +1,33 @@
 ===================================
-Third-party distributions of Ginger
+Third-party distributions of GingerDJ
 ===================================
 
-Many third-party distributors are now providing versions of Ginger integrated
+Many third-party distributors are now providing versions of GingerDJ integrated
 with their package-management systems. These can make installation and upgrading
-much easier for users of Ginger since the integration includes the ability to
-automatically install dependencies (like database adapters) that Ginger
+much easier for users of GingerDJ since the integration includes the ability to
+automatically install dependencies (like database adapters) that GingerDJ
 requires.
 
-Typically, these packages are based on the latest stable release of Ginger, so
-if you want to use the development version of Ginger you'll need to follow the
+Typically, these packages are based on the latest stable release of GingerDJ, so
+if you want to use the development version of GingerDJ you'll need to follow the
 instructions for :ref:`installing the development version
 <installing-development-version>` from our Git repository.
 
 If you're using Linux or a Unix installation, such as OpenSolaris,
-check with your distributor to see if they already package Ginger. If
+check with your distributor to see if they already package GingerDJ. If
 you're using a Linux distro and don't know how to find out if a package
-is available, then now is a good time to learn.  The Ginger Wiki contains
+is available, then now is a good time to learn.  The GingerDJ Wiki contains
 a list of `Third Party Distributions`_ to help you out.
 
-.. _`Third Party Distributions`: https://code.ginger.gloportal.dev/wiki/Distributions
+.. _`Third Party Distributions`: https://code.gingerdj.gloportal.dev/wiki/Distributions
 
 
 For distributors
 ================
 
-If you'd like to package Ginger for distribution, we'd be happy to help out!
-Please join the |ginger-developers| mailing list and introduce yourself.
+If you'd like to package GingerDJ for distribution, we'd be happy to help out!
+Please join the |gingerdj-developers| mailing list and introduce yourself.
 
-We also encourage all distributors to subscribe to the |ginger-announce| mailing
-list, which is a (very) low-traffic list for announcing new releases of Ginger
+We also encourage all distributors to subscribe to the |gingerdj-announce| mailing
+list, which is a (very) low-traffic list for announcing new releases of GingerDJ
 and important bugfixes.

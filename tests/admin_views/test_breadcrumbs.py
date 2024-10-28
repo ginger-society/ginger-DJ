@@ -1,5 +1,5 @@
-from ginger.test import TestCase, override_settings
-from ginger.urls import reverse
+from gingerdj.test import TestCase, override_settings
+from gingerdj.urls import reverse
 
 
 @override_settings(ROOT_URLCONF="admin_views.urls")

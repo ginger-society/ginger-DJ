@@ -6,12 +6,12 @@ import zipfile
 from pathlib import Path
 from unittest import mock
 
-from ginger.contrib.gis.gdal import GDAL_VERSION, GDALRaster, SpatialReference
-from ginger.contrib.gis.gdal.error import GDALException
-from ginger.contrib.gis.gdal.raster.band import GDALBand
-from ginger.contrib.gis.shortcuts import numpy
-from ginger.core.files.temp import NamedTemporaryFile
-from ginger.test import SimpleTestCase
+from gingerdj.contrib.gis.gdal import GDAL_VERSION, GDALRaster, SpatialReference
+from gingerdj.contrib.gis.gdal.error import GDALException
+from gingerdj.contrib.gis.gdal.raster.band import GDALBand
+from gingerdj.contrib.gis.shortcuts import numpy
+from gingerdj.core.files.temp import NamedTemporaryFile
+from gingerdj.test import SimpleTestCase
 
 from ..data.rasters.textrasters import JSON_RASTER
 
@@ -354,7 +354,11 @@ class GDALRasterTests(SimpleTestCase):
         )
         # Set metadata on raster and on a band.
         metadata = {
-            "DEFAULT": {"OWNER": "Ginger", "VERSION": "1.0", "AREA_OR_POINT": "Point"},
+            "DEFAULT": {
+                "OWNER": "GingerDJ",
+                "VERSION": "1.0",
+                "AREA_OR_POINT": "Point",
+            },
         }
         source.metadata = metadata
         source.bands[0].metadata = metadata

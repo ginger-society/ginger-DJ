@@ -1,9 +1,9 @@
 from datetime import datetime
 
-from ginger.core.exceptions import FieldError
-from ginger.db import DEFAULT_DB_ALIAS, connection
-from ginger.db.models import BooleanField, CharField, F, Q
-from ginger.db.models.expressions import (
+from gingerdj.core.exceptions import FieldError
+from gingerdj.db import DEFAULT_DB_ALIAS, connection
+from gingerdj.db.models import BooleanField, CharField, F, Q
+from gingerdj.db.models.expressions import (
     Col,
     Exists,
     ExpressionWrapper,
@@ -11,14 +11,14 @@ from ginger.db.models.expressions import (
     RawSQL,
     Value,
 )
-from ginger.db.models.fields.related_lookups import RelatedIsNull
-from ginger.db.models.functions import Lower
-from ginger.db.models.lookups import Exact, GreaterThan, IsNull, LessThan
-from ginger.db.models.sql.constants import SINGLE
-from ginger.db.models.sql.query import JoinPromoter, Query, get_field_names_from_opts
-from ginger.db.models.sql.where import AND, OR
-from ginger.test import SimpleTestCase, TestCase, skipUnlessDBFeature
-from ginger.test.utils import register_lookup
+from gingerdj.db.models.fields.related_lookups import RelatedIsNull
+from gingerdj.db.models.functions import Lower
+from gingerdj.db.models.lookups import Exact, GreaterThan, IsNull, LessThan
+from gingerdj.db.models.sql.constants import SINGLE
+from gingerdj.db.models.sql.query import JoinPromoter, Query, get_field_names_from_opts
+from gingerdj.db.models.sql.where import AND, OR
+from gingerdj.test import SimpleTestCase, TestCase, skipUnlessDBFeature
+from gingerdj.test.utils import register_lookup
 
 from .models import Author, Item, ObjectC, Ranking
 

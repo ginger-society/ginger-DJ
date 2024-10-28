@@ -17,7 +17,7 @@ A simple view
 
 Here's a view that returns the current date and time, as an HTML document::
 
-    from ginger.http import HttpResponse
+    from gingerdj.http import HttpResponse
     import datetime
 
 
@@ -28,26 +28,26 @@ Here's a view that returns the current date and time, as an HTML document::
 
 Let's step through this code one line at a time:
 
-* First, we import the class :class:`~ginger.http.HttpResponse` from the
-  :mod:`ginger.http` module, along with Python's ``datetime`` library.
+* First, we import the class :class:`~gingerdj.http.HttpResponse` from the
+  :mod:`gingerdj.http` module, along with Python's ``datetime`` library.
 
 * Next, we define a function called ``current_datetime``. This is the view
-  function. Each view function takes an :class:`~ginger.http.HttpRequest`
+  function. Each view function takes an :class:`~gingerdj.http.HttpRequest`
   object as its first parameter, which is typically named ``request``.
 
   Note that the name of the view function doesn't matter; it doesn't have to
-  be named in a certain way in order for Ginger to recognize it. We're
+  be named in a certain way in order for GingerDJ to recognize it. We're
   calling it ``current_datetime`` here, because that name clearly indicates
   what it does.
 
-* The view returns an :class:`~ginger.http.HttpResponse` object that
+* The view returns an :class:`~gingerdj.http.HttpResponse` object that
   contains the generated response. Each view function is responsible for
-  returning an :class:`~ginger.http.HttpResponse` object. (There are
+  returning an :class:`~gingerdj.http.HttpResponse` object. (There are
   exceptions, but we'll get to those later.)
 
-.. admonition:: Ginger's Time Zone
+.. admonition:: GingerDJ's Time Zone
 
-    Ginger includes a :setting:`TIME_ZONE` setting that defaults to
+    GingerDJ includes a :setting:`TIME_ZONE` setting that defaults to
     ``America/Chicago``. This probably isn't where you live, so you might want
     to change it in your settings file.
 
@@ -61,15 +61,15 @@ date and time. To display this view at a particular URL, you'll need to create a
 Returning errors
 ================
 
-Ginger provides help for returning HTTP error codes. There are subclasses of
-:class:`~ginger.http.HttpResponse` for a number of common HTTP status codes
+GingerDJ provides help for returning HTTP error codes. There are subclasses of
+:class:`~gingerdj.http.HttpResponse` for a number of common HTTP status codes
 other than 200 (which means *"OK"*). You can find the full list of available
 subclasses in the :ref:`request/response <ref-httpresponse-subclasses>`
 documentation. Return an instance of one of those subclasses instead of a
-normal :class:`~ginger.http.HttpResponse` in order to signify an error. For
+normal :class:`~gingerdj.http.HttpResponse` in order to signify an error. For
 example::
 
-    from ginger.http import HttpResponse, HttpResponseNotFound
+    from gingerdj.http import HttpResponse, HttpResponseNotFound
 
 
     def my_view(request):
@@ -81,11 +81,11 @@ example::
 
 There isn't a specialized subclass for every possible HTTP response code,
 since many of them aren't going to be that common. However, as documented in
-the :class:`~ginger.http.HttpResponse` documentation, you can also pass the
-HTTP status code into the constructor for :class:`~ginger.http.HttpResponse`
+the :class:`~gingerdj.http.HttpResponse` documentation, you can also pass the
+HTTP status code into the constructor for :class:`~gingerdj.http.HttpResponse`
 to create a return class for any status code you like. For example::
 
-    from ginger.http import HttpResponse
+    from gingerdj.http import HttpResponse
 
 
     def my_view(request):
@@ -100,22 +100,22 @@ to handle those errors.
 The ``Http404`` exception
 -------------------------
 
-.. class:: ginger.http.Http404()
+.. class:: gingerdj.http.Http404()
 
-When you return an error such as :class:`~ginger.http.HttpResponseNotFound`,
+When you return an error such as :class:`~gingerdj.http.HttpResponseNotFound`,
 you're responsible for defining the HTML of the resulting error page::
 
     return HttpResponseNotFound("<h1>Page not found</h1>")
 
 For convenience, and because it's a good idea to have a consistent 404 error page
-across your site, Ginger provides an ``Http404`` exception. If you raise
-``Http404`` at any point in a view function, Ginger will catch it and return the
+across your site, GingerDJ provides an ``Http404`` exception. If you raise
+``Http404`` at any point in a view function, GingerDJ will catch it and return the
 standard error page for your application, along with an HTTP error code 404.
 
 Example usage::
 
-    from ginger.http import Http404
-    from ginger.shortcuts import render
+    from gingerdj.http import Http404
+    from gingerdj.shortcuts import render
     from polls.models import Poll
 
 
@@ -126,7 +126,7 @@ Example usage::
             raise Http404("Poll does not exist")
         return render(request, "polls/detail.html", {"poll": p})
 
-In order to show customized HTML when Ginger returns a 404, you can create an
+In order to show customized HTML when GingerDJ returns a 404, you can create an
 HTML template named ``404.html`` and place it in the top level of your
 template tree. This template will then be served when :setting:`DEBUG` is set
 to ``False``.
@@ -141,28 +141,28 @@ template.
 Customizing error views
 =======================
 
-The default error views in Ginger should suffice for most web applications,
+The default error views in GingerDJ should suffice for most web applications,
 but can easily be overridden if you need any custom behavior. Specify the
 handlers as seen below in your URLconf (setting them anywhere else will have no
 effect).
 
-The :func:`~ginger.views.defaults.page_not_found` view is overridden by
-:data:`~ginger.conf.urls.handler404`::
+The :func:`~gingerdj.views.defaults.page_not_found` view is overridden by
+:data:`~gingerdj.conf.urls.handler404`::
 
     handler404 = "mysite.views.my_custom_page_not_found_view"
 
-The :func:`~ginger.views.defaults.server_error` view is overridden by
-:data:`~ginger.conf.urls.handler500`::
+The :func:`~gingerdj.views.defaults.server_error` view is overridden by
+:data:`~gingerdj.conf.urls.handler500`::
 
     handler500 = "mysite.views.my_custom_error_view"
 
-The :func:`~ginger.views.defaults.permission_denied` view is overridden by
-:data:`~ginger.conf.urls.handler403`::
+The :func:`~gingerdj.views.defaults.permission_denied` view is overridden by
+:data:`~gingerdj.conf.urls.handler403`::
 
     handler403 = "mysite.views.my_custom_permission_denied_view"
 
-The :func:`~ginger.views.defaults.bad_request` view is overridden by
-:data:`~ginger.conf.urls.handler400`::
+The :func:`~gingerdj.views.defaults.bad_request` view is overridden by
+:data:`~gingerdj.conf.urls.handler400`::
 
     handler400 = "mysite.views.my_custom_bad_request_view"
 
@@ -177,10 +177,10 @@ Testing custom error views
 To test the response of a custom error handler, raise the appropriate exception
 in a test view. For example::
 
-    from ginger.core.exceptions import PermissionDenied
-    from ginger.http import HttpResponse
-    from ginger.test import SimpleTestCase, override_settings
-    from ginger.urls import path
+    from gingerdj.core.exceptions import PermissionDenied
+    from gingerdj.http import HttpResponse
+    from gingerdj.test import SimpleTestCase, override_settings
+    from gingerdj.urls import path
 
 
     def response_error_handler(request, exception=None):
@@ -213,14 +213,14 @@ Async views
 
 As well as being synchronous functions, views can also be asynchronous
 ("async") functions, normally defined using Python's ``async def`` syntax.
-Ginger will automatically detect these and run them in an async context.
+GingerDJ will automatically detect these and run them in an async context.
 However, you will need to use an async server based on ASGI to get their
 performance benefits.
 
 Here's an example of an async view::
 
     import datetime
-    from ginger.http import HttpResponse
+    from gingerdj.http import HttpResponse
 
 
     async def current_datetime(request):
@@ -228,5 +228,5 @@ Here's an example of an async view::
         html = "<html><body>It is now %s.</body></html>" % now
         return HttpResponse(html)
 
-You can read more about Ginger's async support, and how to best use async
+You can read more about GingerDJ's async support, and how to best use async
 views, in :doc:`/topics/async`.

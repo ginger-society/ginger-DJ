@@ -1,4 +1,4 @@
-from ginger.db import models
+from gingerdj.db import models
 
 
 class Square(models.Model):
@@ -58,7 +58,7 @@ class VeryLongModelNameZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ(models.Model):
 
 class Tag(models.Model):
     name = models.CharField(max_length=30)
-   
+
     object_id = models.PositiveIntegerField()
 
 

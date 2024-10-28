@@ -7,4 +7,4 @@ install some requirements and run the tests::
     $ ./runtests.py
 
 For more information about the test suite, see
-https://docs.ginger.gloportal.dev/en/dev/internals/contributing/writing-code/unit-tests/.
+https://docs.gingerdj.gloportal.dev/en/dev/internals/contributing/writing-code/unit-tests/.

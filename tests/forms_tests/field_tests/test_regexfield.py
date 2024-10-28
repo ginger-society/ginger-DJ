@@ -1,8 +1,8 @@
 import re
 
-from ginger.core.exceptions import ValidationError
-from ginger.forms import RegexField
-from ginger.test import SimpleTestCase
+from gingerdj.core.exceptions import ValidationError
+from gingerdj.forms import RegexField
+from gingerdj.test import SimpleTestCase
 
 
 class RegexFieldTest(SimpleTestCase):

@@ -1,10 +1,10 @@
 from operator import attrgetter
 
-from ginger.core.exceptions import FieldError, ValidationError
-from ginger.db import connection, models
-from ginger.db.models.query_utils import DeferredAttribute
-from ginger.test import SimpleTestCase, TestCase
-from ginger.test.utils import CaptureQueriesContext, isolate_apps
+from gingerdj.core.exceptions import FieldError, ValidationError
+from gingerdj.db import connection, models
+from gingerdj.db.models.query_utils import DeferredAttribute
+from gingerdj.test import SimpleTestCase, TestCase
+from gingerdj.test.utils import CaptureQueriesContext, isolate_apps
 
 from .models import (
     Base,
@@ -86,7 +86,7 @@ class ModelInheritanceTests(TestCase):
         post.attached_comment_set.create(content="Save $ on V1agr@", is_spam=True)
         post.attached_link_set.create(
             content="The web framework for perfections with deadlines.",
-            url="http://www.ginger.gloportal.dev/",
+            url="http://www.gingerdj.gloportal.dev/",
         )
 
         # The Post model doesn't have an attribute called

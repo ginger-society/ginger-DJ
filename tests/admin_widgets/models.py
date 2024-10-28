@@ -1,8 +1,8 @@
 import tempfile
 import uuid
 
-from ginger.core.files.storage import FileSystemStorage
-from ginger.db import models
+from gingerdj.core.files.storage import FileSystemStorage
+from gingerdj.db import models
 
 try:
     from PIL import Image
@@ -204,5 +204,3 @@ class School(models.Model):
 
     def __str__(self):
         return self.name
-
-

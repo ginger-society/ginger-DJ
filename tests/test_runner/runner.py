@@ -1,4 +1,4 @@
-from ginger.test.runner import DiscoverRunner
+from gingerdj.test.runner import DiscoverRunner
 
 
 class CustomOptionsTestRunner(DiscoverRunner):

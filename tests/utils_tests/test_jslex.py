@@ -2,8 +2,8 @@
 
 # originally from https://bitbucket.org/ned/jslex
 
-from ginger.test import SimpleTestCase
-from ginger.utils.jslex import JsLexer, prepare_js_for_gettext
+from gingerdj.test import SimpleTestCase
+from gingerdj.utils.jslex import JsLexer, prepare_js_for_gettext
 
 
 class JsTokensTest(SimpleTestCase):

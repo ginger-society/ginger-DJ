@@ -1,4 +1,4 @@
-from ginger.urls import path
+from gingerdj.urls import path
 
 from . import admin as tz_admin  # NOQA: register tz_admin
 

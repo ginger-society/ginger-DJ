@@ -1,8 +1,8 @@
-from ginger.http import HttpResponse
-from ginger.template import engines
-from ginger.template.response import TemplateResponse
-from ginger.test import RequestFactory, SimpleTestCase
-from ginger.utils.decorators import decorator_from_middleware
+from gingerdj.http import HttpResponse
+from gingerdj.template import engines
+from gingerdj.template.response import TemplateResponse
+from gingerdj.test import RequestFactory, SimpleTestCase
+from gingerdj.utils.decorators import decorator_from_middleware
 
 
 class ProcessViewMiddleware:
@@ -56,7 +56,7 @@ full_dec = decorator_from_middleware(FullMiddleware)
 class DecoratorFromMiddlewareTests(SimpleTestCase):
     """
     Tests for view decorators created using
-    ``ginger.utils.decorators.decorator_from_middleware``.
+    ``gingerdj.utils.decorators.decorator_from_middleware``.
     """
 
     rf = RequestFactory()
@@ -80,7 +80,7 @@ class DecoratorFromMiddlewareTests(SimpleTestCase):
 
         @full_dec
         def normal_view(request):
-            template = engines["ginger"].from_string("Hello world")
+            template = engines["gingerdj"].from_string("Hello world")
             return HttpResponse(template.render())
 
         request = self.rf.get("/")
@@ -99,7 +99,7 @@ class DecoratorFromMiddlewareTests(SimpleTestCase):
 
         @full_dec
         def template_response_view(request):
-            template = engines["ginger"].from_string("Hello world")
+            template = engines["gingerdj"].from_string("Hello world")
             return TemplateResponse(request, template)
 
         request = self.rf.get("/")

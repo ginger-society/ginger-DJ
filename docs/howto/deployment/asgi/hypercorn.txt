@@ -1,5 +1,5 @@
 ================================
-How to use Ginger with Hypercorn
+How to use GingerDJ with Hypercorn
 ================================
 
 Hypercorn_ is an ASGI server that supports HTTP/1, HTTP/2, and HTTP/3
@@ -14,7 +14,7 @@ You can install Hypercorn with ``pip``:
 
     python -m pip install hypercorn
 
-Running Ginger in Hypercorn
+Running GingerDJ in Hypercorn
 ===========================
 
 When Hypercorn is installed, a ``hypercorn`` command is available
@@ -22,7 +22,7 @@ which runs ASGI applications. Hypercorn needs to be called with the
 location of a module containing an ASGI application object, followed
 by what the application is called (separated by a colon).
 
-For a typical Ginger project, invoking Hypercorn would look like:
+For a typical GingerDJ project, invoking Hypercorn would look like:
 
 .. code-block:: shell
 

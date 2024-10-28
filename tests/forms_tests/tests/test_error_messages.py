@@ -1,6 +1,6 @@
-from ginger.core.exceptions import ValidationError
-from ginger.core.files.uploadedfile import SimpleUploadedFile
-from ginger.forms import (
+from gingerdj.core.exceptions import ValidationError
+from gingerdj.core.files.uploadedfile import SimpleUploadedFile
+from gingerdj.forms import (
     BooleanField,
     CharField,
     ChoiceField,
@@ -22,10 +22,10 @@ from ginger.forms import (
     URLField,
     utils,
 )
-from ginger.template import Context, Template
-from ginger.test import SimpleTestCase, TestCase, ignore_warnings
-from ginger.utils.deprecation import RemovedInGinger60Warning
-from ginger.utils.safestring import mark_safe
+from gingerdj.template import Context, Template
+from gingerdj.test import SimpleTestCase, TestCase, ignore_warnings
+from gingerdj.utils.deprecation import RemovedInGinger60Warning
+from gingerdj.utils.safestring import mark_safe
 
 from ..models import ChoiceModel
 
@@ -173,9 +173,9 @@ class FormsErrorMessagesTestCase(SimpleTestCase, AssertFormErrorsMixin):
         self.assertFormErrors(["REQUIRED"], f.clean, "")
         self.assertFormErrors(["INVALID"], f.clean, "abc.c")
         self.assertFormErrors(
-            ['"http://ginger.gloportal.dev" has more than 17 characters.'],
+            ['"http://gingerdj.gloportal.dev" has more than 17 characters.'],
             f.clean,
-            "ginger.gloportal.dev",
+            "gingerdj.gloportal.dev",
         )
 
     def test_booleanfield(self):

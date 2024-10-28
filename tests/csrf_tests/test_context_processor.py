@@ -1,6 +1,6 @@
-from ginger.http import HttpRequest
-from ginger.template.context_processors import csrf
-from ginger.test import SimpleTestCase
+from gingerdj.http import HttpRequest
+from gingerdj.template.context_processors import csrf
+from gingerdj.test import SimpleTestCase
 
 from .tests import CsrfFunctionTestMixin
 

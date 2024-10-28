@@ -1,6 +1,6 @@
 from io import StringIO
 
-from ginger.core.management import call_command
+from gingerdj.core.management import call_command
 
 from . import PostgreSQLTestCase
 
@@ -21,15 +21,15 @@ class InspectDBTests(PostgreSQLTestCase):
         self.assertFieldsInModel(
             "postgres_tests_rangesmodel",
             [
-                "ints = ginger.contrib.postgres.fields.IntegerRangeField(blank=True, "
+                "ints = gingerdj.contrib.postgres.fields.IntegerRangeField(blank=True, "
                 "null=True)",
-                "bigints = ginger.contrib.postgres.fields.BigIntegerRangeField("
+                "bigints = gingerdj.contrib.postgres.fields.BigIntegerRangeField("
                 "blank=True, null=True)",
-                "decimals = ginger.contrib.postgres.fields.DecimalRangeField("
+                "decimals = gingerdj.contrib.postgres.fields.DecimalRangeField("
                 "blank=True, null=True)",
-                "timestamps = ginger.contrib.postgres.fields.DateTimeRangeField("
+                "timestamps = gingerdj.contrib.postgres.fields.DateTimeRangeField("
                 "blank=True, null=True)",
-                "dates = ginger.contrib.postgres.fields.DateRangeField(blank=True, "
+                "dates = gingerdj.contrib.postgres.fields.DateRangeField(blank=True, "
                 "null=True)",
             ],
         )

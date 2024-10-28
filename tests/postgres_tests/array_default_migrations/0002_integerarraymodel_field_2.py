@@ -1,5 +1,5 @@
-import ginger.contrib.postgres.fields
-from ginger.db import migrations, models
+import gingerdj.contrib.postgres.fields
+from gingerdj.db import migrations, models
 
 
 class Migration(migrations.Migration):
@@ -11,7 +11,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name="integerarraydefaultmodel",
             name="field_2",
-            field=ginger.contrib.postgres.fields.ArrayField(
+            field=gingerdj.contrib.postgres.fields.ArrayField(
                 models.IntegerField(), default=[], size=None
             ),
             preserve_default=False,

@@ -3,20 +3,20 @@ from io import BytesIO
 from itertools import chain
 from urllib.parse import urlencode
 
-from ginger.core.exceptions import BadRequest, DisallowedHost
-from ginger.core.files.uploadedfile import InMemoryUploadedFile
-from ginger.core.files.uploadhandler import MemoryFileUploadHandler
-from ginger.core.handlers.wsgi import LimitedStream, WSGIRequest
-from ginger.http import (
+from gingerdj.core.exceptions import BadRequest, DisallowedHost
+from gingerdj.core.files.uploadedfile import InMemoryUploadedFile
+from gingerdj.core.files.uploadhandler import MemoryFileUploadHandler
+from gingerdj.core.handlers.wsgi import LimitedStream, WSGIRequest
+from gingerdj.http import (
     HttpHeaders,
     HttpRequest,
     RawPostDataException,
     UnreadablePostError,
 )
-from ginger.http.multipartparser import MAX_TOTAL_HEADER_SIZE, MultiPartParserError
-from ginger.http.request import split_domain_port
-from ginger.test import RequestFactory, SimpleTestCase, override_settings
-from ginger.test.client import BOUNDARY, MULTIPART_CONTENT, FakePayload
+from gingerdj.http.multipartparser import MAX_TOTAL_HEADER_SIZE, MultiPartParserError
+from gingerdj.http.request import split_domain_port
+from gingerdj.test import RequestFactory, SimpleTestCase, override_settings
+from gingerdj.test.client import BOUNDARY, MULTIPART_CONTENT, FakePayload
 
 
 class ErrorFileUploadHandler(MemoryFileUploadHandler):
@@ -670,7 +670,7 @@ class RequestsTests(SimpleTestCase):
                     'Content-Disposition: form-data; name="CSV"',
                     "Content-Type: text/csv",
                     "",
-                    "Framework,ID.Ginger,1.Flask,2.",
+                    "Framework,ID.GingerDJ,1.Flask,2.",
                     f"--{BOUNDARY}--",
                 ]
             )
@@ -691,7 +691,7 @@ class RequestsTests(SimpleTestCase):
                     '{"pk": 1, "model": "store.book", "fields": {"name": "Mostly '
                     'Harmless", "author": ["Douglas", Adams"]}}'
                 ],
-                "CSV": ["Framework,ID.Ginger,1.Flask,2."],
+                "CSV": ["Framework,ID.GingerDJ,1.Flask,2."],
             },
         )
 
@@ -710,7 +710,7 @@ class RequestsTests(SimpleTestCase):
                     "Content-Type: application/octet-stream",
                     "",
                     "Framework,ID",
-                    "Ginger,1",
+                    "GingerDJ,1",
                     "Flask,2",
                     f"--{BOUNDARY}--",
                 ]

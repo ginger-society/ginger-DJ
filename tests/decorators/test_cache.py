@@ -2,10 +2,10 @@ from unittest import mock
 
 from asgiref.sync import iscoroutinefunction
 
-from ginger.http import HttpRequest, HttpResponse
-from ginger.test import SimpleTestCase
-from ginger.utils.decorators import method_decorator
-from ginger.views.decorators.cache import cache_control, cache_page, never_cache
+from gingerdj.http import HttpRequest, HttpResponse
+from gingerdj.test import SimpleTestCase
+from gingerdj.utils.decorators import method_decorator
+from gingerdj.views.decorators.cache import cache_control, cache_page, never_cache
 
 
 class HttpRequestProxy:

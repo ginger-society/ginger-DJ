@@ -2,7 +2,7 @@
 Coding style
 ============
 
-Please follow these coding standards when writing code for inclusion in Ginger.
+Please follow these coding standards when writing code for inclusion in GingerDJ.
 
 .. _coding-style-pre-commit:
 
@@ -47,7 +47,7 @@ Python style
 
   Use :pypi:`flake8` to check for problems in this area. Note that our
   ``setup.cfg`` file contains some excluded files (deprecated modules we don't
-  care about cleaning up and some third-party code that Ginger vendors) as well
+  care about cleaning up and some third-party code that GingerDJ vendors) as well
   as some excluded errors that we don't consider as gross violations. Remember
   that :pep:`8` is only a guide, so respect the style of the surrounding code
   as a primary goal.
@@ -101,8 +101,8 @@ Python style
 * In docstrings, follow the style of existing docstrings and :pep:`257`.
 
 * In tests, use
-  :meth:`~ginger.test.SimpleTestCase.assertRaisesMessage` and
-  :meth:`~ginger.test.SimpleTestCase.assertWarnsMessage`
+  :meth:`~gingerdj.test.SimpleTestCase.assertRaisesMessage` and
+  :meth:`~gingerdj.test.SimpleTestCase.assertWarnsMessage`
   instead of :meth:`~unittest.TestCase.assertRaises` and
   :meth:`~unittest.TestCase.assertWarns` so you can check the
   exception or warning message. Use :meth:`~unittest.TestCase.assertRaisesRegex`
@@ -148,10 +148,10 @@ Imports
       import module  # isort:skip
 
 * Put imports in these groups: future, standard library, third-party libraries,
-  other Ginger components, local Ginger component, try/excepts. Sort lines in
+  other GingerDJ components, local GingerDJ component, try/excepts. Sort lines in
   each group alphabetically by the full module name. Place all ``import module``
   statements before ``from module import objects`` in each section. Use absolute
-  imports for other Ginger components and relative imports for local components.
+  imports for other GingerDJ components and relative imports for local components.
 
 * On each line, alphabetize the items with the upper case items grouped before
   the lowercase items.
@@ -166,7 +166,7 @@ Imports
   For example (comments are for explanatory purposes only):
 
   .. code-block:: python
-      :caption: ``ginger/contrib/admin/example.py``
+      :caption: ``gingerdj/contrib/admin/example.py``
 
       # future
       from __future__ import unicode_literals
@@ -178,9 +178,9 @@ Imports
       # third-party
       import bcrypt
 
-      # Ginger
-      from ginger.http import Http404
-      from ginger.http.response import (
+      # GingerDJ
+      from gingerdj.http import Http404
+      from gingerdj.http.response import (
           Http404,
           HttpResponse,
           HttpResponseNotAllowed,
@@ -188,7 +188,7 @@ Imports
           cookie,
       )
 
-      # local Ginger
+      # local GingerDJ
       from .models import LogEntry
 
       # try/except
@@ -205,16 +205,16 @@ Imports
 * Use convenience imports whenever available. For example, do this
   ::
 
-      from ginger.views import View
+      from gingerdj.views import View
 
   instead of::
 
-      from ginger.views.generic.base import View
+      from gingerdj.views.generic.base import View
 
 Template style
 ==============
 
-Follow the below rules in Ginger template code.
+Follow the below rules in GingerDJ template code.
 
 * ``{% extends %}`` should be the first non-comment line.
 
@@ -361,7 +361,7 @@ Follow the below rules in Ginger template code.
 View style
 ==========
 
-* In Ginger views, the first parameter in a view function should be called
+* In GingerDJ views, the first parameter in a view function should be called
   ``request``.
 
   Do this::
@@ -441,10 +441,10 @@ Model style
             UP = "U", "Up"
             DOWN = "D", "Down"
 
-Use of ``ginger.conf.settings``
+Use of ``gingerdj.conf.settings``
 ===============================
 
-Modules should not in general use settings stored in ``ginger.conf.settings``
+Modules should not in general use settings stored in ``gingerdj.conf.settings``
 at the top level (i.e. evaluated when the module is imported). The explanation
 for this is as follows:
 
@@ -452,7 +452,7 @@ Manual configuration of settings (i.e. not relying on the
 :envvar:`GINGER_SETTINGS_MODULE` environment variable) is allowed and possible
 as follows::
 
-    from ginger.conf import settings
+    from gingerdj.conf import settings
 
     settings.configure({}, SOME_SETTING="foo")
 
@@ -463,8 +463,8 @@ already been configured).
 
 So, if there is a module containing some code as follows::
 
-    from ginger.conf import settings
-    from ginger.urls import get_callable
+    from gingerdj.conf import settings
+    from gingerdj.urls import get_callable
 
     default_foo_view = get_callable(settings.FOO_VIEW)
 
@@ -474,8 +474,8 @@ level is incompatible with the ability to configure the settings object
 manually, or makes it very difficult in some circumstances.
 
 Instead of the above code, a level of laziness or indirection must be used,
-such as ``ginger.utils.functional.LazyObject``,
-``ginger.utils.functional.lazy()`` or ``lambda``.
+such as ``gingerdj.utils.functional.LazyObject``,
+``gingerdj.utils.functional.lazy()`` or ``lambda``.
 
 Miscellaneous
 =============
@@ -495,7 +495,7 @@ Miscellaneous
   highlight them in diff outputs.
 
 * Please don't put your name in the code you contribute. Our policy is to
-  keep contributors' names in the ``AUTHORS`` file distributed with Ginger
+  keep contributors' names in the ``AUTHORS`` file distributed with GingerDJ
   -- not scattered throughout the codebase itself. Feel free to include a
   change to the ``AUTHORS`` file in your patch if you make more than a
   single trivial change.
@@ -503,7 +503,7 @@ Miscellaneous
 JavaScript style
 ================
 
-For details about the JavaScript code style used by Ginger, see
+For details about the JavaScript code style used by GingerDJ, see
 :doc:`javascript`.
 
 .. _black: https://black.readthedocs.io/en/stable/

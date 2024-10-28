@@ -1,5 +1,5 @@
 ==========
-Ginger FAQ
+GingerDJ FAQ
 ==========
 
 .. toctree::

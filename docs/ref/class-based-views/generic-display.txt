@@ -8,7 +8,7 @@ many projects they are typically the most commonly used views.
 ``DetailView``
 ==============
 
-.. class:: ginger.views.generic.detail.DetailView
+.. class:: gingerdj.views.generic.detail.DetailView
 
     While this view is executing, ``self.object`` will contain the object that
     the view is operating upon.
@@ -17,30 +17,30 @@ many projects they are typically the most commonly used views.
 
     This view inherits methods and attributes from the following views:
 
-    * :class:`ginger.views.generic.detail.SingleObjectTemplateResponseMixin`
-    * :class:`ginger.views.generic.base.TemplateResponseMixin`
-    * :class:`ginger.views.generic.detail.BaseDetailView`
-    * :class:`ginger.views.generic.detail.SingleObjectMixin`
-    * :class:`ginger.views.generic.base.View`
+    * :class:`gingerdj.views.generic.detail.SingleObjectTemplateResponseMixin`
+    * :class:`gingerdj.views.generic.base.TemplateResponseMixin`
+    * :class:`gingerdj.views.generic.detail.BaseDetailView`
+    * :class:`gingerdj.views.generic.detail.SingleObjectMixin`
+    * :class:`gingerdj.views.generic.base.View`
 
     **Method Flowchart**
 
-    #. :meth:`~ginger.views.generic.base.View.setup()`
-    #. :meth:`~ginger.views.generic.base.View.dispatch()`
-    #. :meth:`~ginger.views.generic.base.View.http_method_not_allowed()`
-    #. :meth:`~ginger.views.generic.base.TemplateResponseMixin.get_template_names()`
-    #. :meth:`~ginger.views.generic.detail.SingleObjectMixin.get_slug_field()`
-    #. :meth:`~ginger.views.generic.detail.SingleObjectMixin.get_queryset()`
-    #. :meth:`~ginger.views.generic.detail.SingleObjectMixin.get_object()`
-    #. :meth:`~ginger.views.generic.detail.SingleObjectMixin.get_context_object_name()`
-    #. :meth:`~ginger.views.generic.detail.SingleObjectMixin.get_context_data()`
-    #. :meth:`~ginger.views.generic.detail.BaseDetailView.get`
-    #. :meth:`~ginger.views.generic.base.TemplateResponseMixin.render_to_response()`
+    #. :meth:`~gingerdj.views.generic.base.View.setup()`
+    #. :meth:`~gingerdj.views.generic.base.View.dispatch()`
+    #. :meth:`~gingerdj.views.generic.base.View.http_method_not_allowed()`
+    #. :meth:`~gingerdj.views.generic.base.TemplateResponseMixin.get_template_names()`
+    #. :meth:`~gingerdj.views.generic.detail.SingleObjectMixin.get_slug_field()`
+    #. :meth:`~gingerdj.views.generic.detail.SingleObjectMixin.get_queryset()`
+    #. :meth:`~gingerdj.views.generic.detail.SingleObjectMixin.get_object()`
+    #. :meth:`~gingerdj.views.generic.detail.SingleObjectMixin.get_context_object_name()`
+    #. :meth:`~gingerdj.views.generic.detail.SingleObjectMixin.get_context_data()`
+    #. :meth:`~gingerdj.views.generic.detail.BaseDetailView.get`
+    #. :meth:`~gingerdj.views.generic.base.TemplateResponseMixin.render_to_response()`
 
     **Example myapp/views.py**::
 
-        from ginger.utils import timezone
-        from ginger.views.generic.detail import DetailView
+        from gingerdj.utils import timezone
+        from gingerdj.views.generic.detail import DetailView
 
         from articles.models import Article
 
@@ -55,7 +55,7 @@ many projects they are typically the most commonly used views.
 
     **Example myapp/urls.py**::
 
-        from ginger.urls import path
+        from gingerdj.urls import path
 
         from article.views import ArticleDetailView
 
@@ -73,19 +73,19 @@ many projects they are typically the most commonly used views.
         <p>Published: {{ object.pub_date|date }}</p>
         <p>Date: {{ now|date }}</p>
 
-.. class:: ginger.views.generic.detail.BaseDetailView
+.. class:: gingerdj.views.generic.detail.BaseDetailView
 
     A base view for displaying a single object. It is not intended to be used
     directly, but rather as a parent class of the
-    :class:`ginger.views.generic.detail.DetailView` or other views representing
+    :class:`gingerdj.views.generic.detail.DetailView` or other views representing
     details of a single object.
 
     **Ancestors (MRO)**
 
     This view inherits methods and attributes from the following views:
 
-    * :class:`ginger.views.generic.detail.SingleObjectMixin`
-    * :class:`ginger.views.generic.base.View`
+    * :class:`gingerdj.views.generic.detail.SingleObjectMixin`
+    * :class:`gingerdj.views.generic.base.View`
 
     **Methods**
 
@@ -96,7 +96,7 @@ many projects they are typically the most commonly used views.
 ``ListView``
 ============
 
-.. class:: ginger.views.generic.list.ListView
+.. class:: gingerdj.views.generic.list.ListView
 
     A page representing a list of objects.
 
@@ -108,28 +108,28 @@ many projects they are typically the most commonly used views.
 
     This view inherits methods and attributes from the following views:
 
-    * :class:`ginger.views.generic.list.MultipleObjectTemplateResponseMixin`
-    * :class:`ginger.views.generic.base.TemplateResponseMixin`
-    * :class:`ginger.views.generic.list.BaseListView`
-    * :class:`ginger.views.generic.list.MultipleObjectMixin`
-    * :class:`ginger.views.generic.base.View`
+    * :class:`gingerdj.views.generic.list.MultipleObjectTemplateResponseMixin`
+    * :class:`gingerdj.views.generic.base.TemplateResponseMixin`
+    * :class:`gingerdj.views.generic.list.BaseListView`
+    * :class:`gingerdj.views.generic.list.MultipleObjectMixin`
+    * :class:`gingerdj.views.generic.base.View`
 
     **Method Flowchart**
 
-    #. :meth:`~ginger.views.generic.base.View.setup()`
-    #. :meth:`~ginger.views.generic.base.View.dispatch()`
-    #. :meth:`~ginger.views.generic.base.View.http_method_not_allowed()`
-    #. :meth:`~ginger.views.generic.base.TemplateResponseMixin.get_template_names()`
-    #. :meth:`~ginger.views.generic.list.MultipleObjectMixin.get_queryset()`
-    #. :meth:`~ginger.views.generic.list.MultipleObjectMixin.get_context_object_name()`
-    #. :meth:`~ginger.views.generic.list.MultipleObjectMixin.get_context_data()`
-    #. :meth:`~ginger.views.generic.list.BaseListView.get`
-    #. :meth:`~ginger.views.generic.base.TemplateResponseMixin.render_to_response()`
+    #. :meth:`~gingerdj.views.generic.base.View.setup()`
+    #. :meth:`~gingerdj.views.generic.base.View.dispatch()`
+    #. :meth:`~gingerdj.views.generic.base.View.http_method_not_allowed()`
+    #. :meth:`~gingerdj.views.generic.base.TemplateResponseMixin.get_template_names()`
+    #. :meth:`~gingerdj.views.generic.list.MultipleObjectMixin.get_queryset()`
+    #. :meth:`~gingerdj.views.generic.list.MultipleObjectMixin.get_context_object_name()`
+    #. :meth:`~gingerdj.views.generic.list.MultipleObjectMixin.get_context_data()`
+    #. :meth:`~gingerdj.views.generic.list.BaseListView.get`
+    #. :meth:`~gingerdj.views.generic.base.TemplateResponseMixin.render_to_response()`
 
     **Example views.py**::
 
-        from ginger.utils import timezone
-        from ginger.views.generic.list import ListView
+        from gingerdj.utils import timezone
+        from gingerdj.views.generic.list import ListView
 
         from articles.models import Article
 
@@ -145,7 +145,7 @@ many projects they are typically the most commonly used views.
 
     **Example myapp/urls.py**::
 
-        from ginger.urls import path
+        from gingerdj.urls import path
 
         from article.views import ArticleListView
 
@@ -169,26 +169,26 @@ many projects they are typically the most commonly used views.
     If you're using pagination, you can adapt the :ref:`example template from
     the pagination docs <paginating-a-list-view>`.
 
-.. class:: ginger.views.generic.list.BaseListView
+.. class:: gingerdj.views.generic.list.BaseListView
 
     A base view for displaying a list of objects. It is not intended to be used
     directly, but rather as a parent class of the
-    :class:`ginger.views.generic.list.ListView` or other views representing
+    :class:`gingerdj.views.generic.list.ListView` or other views representing
     lists of objects.
 
     **Ancestors (MRO)**
 
     This view inherits methods and attributes from the following views:
 
-    * :class:`ginger.views.generic.list.MultipleObjectMixin`
-    * :class:`ginger.views.generic.base.View`
+    * :class:`gingerdj.views.generic.list.MultipleObjectMixin`
+    * :class:`gingerdj.views.generic.base.View`
 
     **Methods**
 
     .. method:: get(request, *args, **kwargs)
 
         Adds ``object_list`` to the context. If
-        :attr:`~ginger.views.generic.list.MultipleObjectMixin.allow_empty`
+        :attr:`~gingerdj.views.generic.list.MultipleObjectMixin.allow_empty`
         is True then display an empty list. If
-        :attr:`~ginger.views.generic.list.MultipleObjectMixin.allow_empty` is
+        :attr:`~gingerdj.views.generic.list.MultipleObjectMixin.allow_empty` is
         False then raise a 404 error.

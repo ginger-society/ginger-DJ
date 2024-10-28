@@ -1,1 +1,1 @@
-from ginger.db import modelz  # NOQA
+from gingerdj.db import modelz  # NOQA

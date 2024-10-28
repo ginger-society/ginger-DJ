@@ -2,12 +2,12 @@
 ******** Models for test_data.py ***********
 The following classes are for testing basic data marshalling, including
 NULL values, where allowed.
-The basic idea is to have a model for each Ginger data type.
+The basic idea is to have a model for each GingerDJ data type.
 """
 
 import uuid
 
-from ginger.db import models
+from gingerdj.db import models
 
 from .base import BaseModel
 
@@ -102,14 +102,12 @@ class Tag(models.Model):
     data = models.SlugField()
     object_id = models.PositiveIntegerField()
 
-
     class Meta:
         ordering = ["data"]
 
 
 class GenericData(models.Model):
     data = models.CharField(max_length=30)
-
 
 
 # The following test classes are all for validation

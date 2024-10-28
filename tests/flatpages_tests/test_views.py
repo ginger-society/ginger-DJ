@@ -1,7 +1,7 @@
-from ginger.conf import settings
-from ginger.contrib.flatpages.models import FlatPage
-from ginger.contrib.sites.models import Site
-from ginger.test import TestCase, modify_settings, override_settings
+from gingerdj.conf import settings
+from gingerdj.contrib.flatpages.models import FlatPage
+from gingerdj.contrib.sites.models import Site
+from gingerdj.test import TestCase, modify_settings, override_settings
 
 from .settings import FLATPAGES_TEMPLATES
 
@@ -51,14 +51,14 @@ class TestDataMixin:
         cls.fp4.sites.add(cls.site1)
 
 
-@modify_settings(INSTALLED_APPS={"append": "ginger.contrib.flatpages"})
+@modify_settings(INSTALLED_APPS={"append": "gingerdj.contrib.flatpages"})
 @override_settings(
     LOGIN_URL="/accounts/login/",
     MIDDLEWARE=[
-        "ginger.middleware.common.CommonMiddleware",
-        "ginger.middleware.csrf.CsrfViewMiddleware",
-        "ginger.contrib.messages.middleware.MessageMiddleware",
-        # no 'ginger.contrib.flatpages.middleware.FlatpageFallbackMiddleware'
+        "gingerdj.middleware.common.CommonMiddleware",
+        "gingerdj.middleware.csrf.CsrfViewMiddleware",
+        "gingerdj.contrib.messages.middleware.MessageMiddleware",
+        # no 'gingerdj.contrib.flatpages.middleware.FlatpageFallbackMiddleware'
     ],
     ROOT_URLCONF="flatpages_tests.urls",
     TEMPLATES=FLATPAGES_TEMPLATES,
@@ -110,15 +110,15 @@ class FlatpageViewTests(TestDataMixin, TestCase):
         self.assertContains(response, "<p>Isn't it special!</p>")
 
 
-@modify_settings(INSTALLED_APPS={"append": "ginger.contrib.flatpages"})
+@modify_settings(INSTALLED_APPS={"append": "gingerdj.contrib.flatpages"})
 @override_settings(
     APPEND_SLASH=True,
     LOGIN_URL="/accounts/login/",
     MIDDLEWARE=[
-        "ginger.middleware.common.CommonMiddleware",
-        "ginger.middleware.csrf.CsrfViewMiddleware",
-        "ginger.contrib.messages.middleware.MessageMiddleware",
-        # no 'ginger.contrib.flatpages.middleware.FlatpageFallbackMiddleware'
+        "gingerdj.middleware.common.CommonMiddleware",
+        "gingerdj.middleware.csrf.CsrfViewMiddleware",
+        "gingerdj.contrib.messages.middleware.MessageMiddleware",
+        # no 'gingerdj.contrib.flatpages.middleware.FlatpageFallbackMiddleware'
     ],
     ROOT_URLCONF="flatpages_tests.urls",
     TEMPLATES=FLATPAGES_TEMPLATES,

@@ -1,15 +1,15 @@
-"""Tests for ginger.db.backends.utils"""
+"""Tests for gingerdj.db.backends.utils"""
 
 from decimal import Decimal, Rounded
 
-from ginger.db import NotSupportedError, connection
-from ginger.db.backends.utils import (
+from gingerdj.db import NotSupportedError, connection
+from gingerdj.db.backends.utils import (
     format_number,
     split_identifier,
     split_tzname_delta,
     truncate_name,
 )
-from ginger.test import (
+from gingerdj.test import (
     SimpleTestCase,
     TransactionTestCase,
     skipIfDBFeature,

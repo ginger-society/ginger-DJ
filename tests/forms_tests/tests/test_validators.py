@@ -2,10 +2,10 @@ import re
 import types
 from unittest import TestCase
 
-from ginger import forms
-from ginger.core import validators
-from ginger.core.exceptions import ValidationError
-from ginger.core.files.uploadedfile import SimpleUploadedFile
+from gingerdj import forms
+from gingerdj.core import validators
+from gingerdj.core.exceptions import ValidationError
+from gingerdj.core.files.uploadedfile import SimpleUploadedFile
 
 
 class TestFieldWithValidators(TestCase):

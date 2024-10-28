@@ -3,12 +3,12 @@ import math
 import re
 from decimal import Decimal
 
-from ginger.contrib.gis.db.models import GeometryField, PolygonField, functions
-from ginger.contrib.gis.geos import GEOSGeometry, LineString, Point, Polygon, fromstr
-from ginger.contrib.gis.measure import Area
-from ginger.db import NotSupportedError, connection
-from ginger.db.models import IntegerField, Sum, Value
-from ginger.test import TestCase, skipUnlessDBFeature
+from gingerdj.contrib.gis.db.models import GeometryField, PolygonField, functions
+from gingerdj.contrib.gis.geos import GEOSGeometry, LineString, Point, Polygon, fromstr
+from gingerdj.contrib.gis.measure import Area
+from gingerdj.db import NotSupportedError, connection
+from gingerdj.db.models import IntegerField, Sum, Value
+from gingerdj.test import TestCase, skipUnlessDBFeature
 
 from ..utils import FuncTestMixin
 from .models import City, Country, CountryWebMercator, ManyPointModel, State, Track
@@ -16,7 +16,7 @@ from .models import City, Country, CountryWebMercator, ManyPointModel, State, Tr
 
 class GISFunctionsTests(FuncTestMixin, TestCase):
     """
-    Testing functions from ginger/contrib/gis/db/models/functions.py.
+    Testing functions from gingerdj/contrib/gis/db/models/functions.py.
     Area/Distance/Length/Perimeter are tested in distapp/tests.
 
     Please keep the tests in function's alphabetic order.

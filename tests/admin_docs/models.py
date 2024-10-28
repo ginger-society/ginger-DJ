@@ -1,9 +1,9 @@
 """
-Models for testing various aspects of the ginger.contrib.admindocs app.
+Models for testing various aspects of the gingerdj.contrib.admindocs app.
 """
 
-from ginger.db import models
-from ginger.utils.functional import cached_property
+from gingerdj.db import models
+from gingerdj.utils.functional import cached_property
 
 
 class Company(models.Model):

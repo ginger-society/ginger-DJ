@@ -1,21 +1,25 @@
 import unittest
 from decimal import Decimal
 
-from ginger.db import connection
-from ginger.db.backends.signals import connection_created
-from ginger.db.migrations.writer import MigrationWriter
-from ginger.test import TestCase
-from ginger.test.utils import CaptureQueriesContext, modify_settings, override_settings
+from gingerdj.db import connection
+from gingerdj.db.backends.signals import connection_created
+from gingerdj.db.migrations.writer import MigrationWriter
+from gingerdj.test import TestCase
+from gingerdj.test.utils import (
+    CaptureQueriesContext,
+    modify_settings,
+    override_settings,
+)
 
 try:
-    from ginger.contrib.postgres.fields import (
+    from gingerdj.contrib.postgres.fields import (
         DateRangeField,
         DateTimeRangeField,
         DecimalRangeField,
         IntegerRangeField,
     )
-    from ginger.contrib.postgres.signals import get_hstore_oids
-    from ginger.db.backends.postgresql.psycopg_any import (
+    from gingerdj.contrib.postgres.signals import get_hstore_oids
+    from gingerdj.db.backends.postgresql.psycopg_any import (
         DateRange,
         DateTimeRange,
         DateTimeTZRange,
@@ -30,20 +34,20 @@ except ImportError:
 class PostgresConfigTests(TestCase):
     def test_install_app_no_warning(self):
         # Clear cache to force queries when (re)initializing the
-        # "ginger.contrib.postgres" app.
+        # "gingerdj.contrib.postgres" app.
         get_hstore_oids.cache_clear()
         with CaptureQueriesContext(connection) as captured_queries:
-            with override_settings(INSTALLED_APPS=["ginger.contrib.postgres"]):
+            with override_settings(INSTALLED_APPS=["gingerdj.contrib.postgres"]):
                 pass
         self.assertGreaterEqual(len(captured_queries), 1)
 
     def test_register_type_handlers_connection(self):
-        from ginger.contrib.postgres.signals import register_type_handlers
+        from gingerdj.contrib.postgres.signals import register_type_handlers
 
         self.assertNotIn(
             register_type_handlers, connection_created._live_receivers(None)[0]
         )
-        with modify_settings(INSTALLED_APPS={"append": "ginger.contrib.postgres"}):
+        with modify_settings(INSTALLED_APPS={"append": "gingerdj.contrib.postgres"}):
             self.assertIn(
                 register_type_handlers, connection_created._live_receivers(None)[0]
             )
@@ -71,7 +75,9 @@ class PostgresConfigTests(TestCase):
 
         assertNotSerializable()
         import_name = "psycopg.types.range" if is_psycopg3 else "psycopg2.extras"
-        with self.modify_settings(INSTALLED_APPS={"append": "ginger.contrib.postgres"}):
+        with self.modify_settings(
+            INSTALLED_APPS={"append": "gingerdj.contrib.postgres"}
+        ):
             for default, test_field in tests:
                 with self.subTest(default=default):
                     field = test_field(default=default)
@@ -79,7 +85,7 @@ class PostgresConfigTests(TestCase):
                     self.assertEqual(
                         imports,
                         {
-                            "import ginger.contrib.postgres.fields.ranges",
+                            "import gingerdj.contrib.postgres.fields.ranges",
                             f"import {import_name}",
                         },
                     )

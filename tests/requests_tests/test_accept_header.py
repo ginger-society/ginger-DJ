@@ -1,7 +1,7 @@
 from unittest import TestCase
 
-from ginger.http import HttpRequest
-from ginger.http.request import MediaType
+from gingerdj.http import HttpRequest
+from gingerdj.http.request import MediaType
 
 
 class MediaTypeTests(TestCase):

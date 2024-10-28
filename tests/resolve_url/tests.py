@@ -1,6 +1,6 @@
-from ginger.shortcuts import resolve_url
-from ginger.test import SimpleTestCase, override_settings
-from ginger.urls import NoReverseMatch, reverse_lazy
+from gingerdj.shortcuts import resolve_url
+from gingerdj.test import SimpleTestCase, override_settings
+from gingerdj.urls import NoReverseMatch, reverse_lazy
 
 from .models import UnimportantThing
 from .urls import some_view

@@ -1,16 +1,16 @@
 import unittest
 import uuid
 
-from ginger.core.checks import Error
-from ginger.core.checks import Warning as GingerWarning
-from ginger.db import connection, models
-from ginger.db.models.functions import Coalesce, LPad, Pi
-from ginger.test import SimpleTestCase, TestCase, skipIfDBFeature, skipUnlessDBFeature
-from ginger.test.utils import isolate_apps, override_settings
-from ginger.utils.functional import lazy
-from ginger.utils.timezone import now
-from ginger.utils.translation import gettext_lazy as _
-from ginger.utils.version import get_docs_version
+from gingerdj.core.checks import Error
+from gingerdj.core.checks import Warning as GingerWarning
+from gingerdj.db import connection, models
+from gingerdj.db.models.functions import Coalesce, LPad, Pi
+from gingerdj.test import SimpleTestCase, TestCase, skipIfDBFeature, skipUnlessDBFeature
+from gingerdj.test.utils import isolate_apps, override_settings
+from gingerdj.utils.functional import lazy
+from gingerdj.utils.timezone import now
+from gingerdj.utils.translation import gettext_lazy as _
+from gingerdj.utils.version import get_docs_version
 
 
 @isolate_apps("invalid_models_tests")
@@ -27,7 +27,7 @@ class AutoFieldTests(SimpleTestCase):
         class Model(models.Model):
             field = models.AutoField(primary_key=False)
 
-            # Prevent Ginger from autocreating `id` AutoField, which would
+            # Prevent GingerDJ from autocreating `id` AutoField, which would
             # result in an error, because a model must have exactly one
             # AutoField.
             another = models.IntegerField(primary_key=True)
@@ -429,7 +429,7 @@ class CharFieldTests(TestCase):
 
     @unittest.skipUnless(connection.vendor == "mysql", "Test valid only for MySQL")
     def test_too_long_char_field_under_mysql(self):
-        from ginger.db.backends.mysql.validation import DatabaseValidation
+        from gingerdj.db.backends.mysql.validation import DatabaseValidation
 
         class Model(models.Model):
             field = models.CharField(unique=True, max_length=256)
@@ -443,7 +443,7 @@ class CharFieldTests(TestCase):
                     "%s may not allow unique CharFields to have a max_length > "
                     "255." % connection.display_name,
                     hint=(
-                        "See: https://docs.ginger.gloportal.dev/en/%s/ref/databases/"
+                        "See: https://docs.gingerdj.gloportal.dev/en/%s/ref/databases/"
                         "#mysql-character-fields" % get_docs_version()
                     ),
                     obj=field,
@@ -532,7 +532,7 @@ class DateFieldTests(SimpleTestCase):
                     hint="It seems you set a fixed date / time / datetime "
                     "value as default for this field. This may not be "
                     "what you want. If you want to have the current date "
-                    "as default, use `ginger.utils.timezone.now`",
+                    "as default, use `gingerdj.utils.timezone.now`",
                     obj=field_dt,
                     id="fields.W161",
                 ),
@@ -541,7 +541,7 @@ class DateFieldTests(SimpleTestCase):
                     hint="It seems you set a fixed date / time / datetime "
                     "value as default for this field. This may not be "
                     "what you want. If you want to have the current date "
-                    "as default, use `ginger.utils.timezone.now`",
+                    "as default, use `gingerdj.utils.timezone.now`",
                     obj=field_d,
                     id="fields.W161",
                 ),
@@ -577,7 +577,7 @@ class DateTimeFieldTests(SimpleTestCase):
                     hint="It seems you set a fixed date / time / datetime "
                     "value as default for this field. This may not be "
                     "what you want. If you want to have the current date "
-                    "as default, use `ginger.utils.timezone.now`",
+                    "as default, use `gingerdj.utils.timezone.now`",
                     obj=field_dt,
                     id="fields.W161",
                 ),
@@ -586,7 +586,7 @@ class DateTimeFieldTests(SimpleTestCase):
                     hint="It seems you set a fixed date / time / datetime "
                     "value as default for this field. This may not be "
                     "what you want. If you want to have the current date "
-                    "as default, use `ginger.utils.timezone.now`",
+                    "as default, use `gingerdj.utils.timezone.now`",
                     obj=field_d,
                     id="fields.W161",
                 ),
@@ -914,7 +914,7 @@ class TimeFieldTests(SimpleTestCase):
                     hint="It seems you set a fixed date / time / datetime "
                     "value as default for this field. This may not be "
                     "what you want. If you want to have the current date "
-                    "as default, use `ginger.utils.timezone.now`",
+                    "as default, use `gingerdj.utils.timezone.now`",
                     obj=fields[0],
                     id="fields.W161",
                 ),
@@ -923,7 +923,7 @@ class TimeFieldTests(SimpleTestCase):
                     hint="It seems you set a fixed date / time / datetime "
                     "value as default for this field. This may not be "
                     "what you want. If you want to have the current date "
-                    "as default, use `ginger.utils.timezone.now`",
+                    "as default, use `gingerdj.utils.timezone.now`",
                     obj=fields[1],
                     id="fields.W161",
                 ),
@@ -933,7 +933,7 @@ class TimeFieldTests(SimpleTestCase):
                         "It seems you set a fixed date / time / datetime value as "
                         "default for this field. This may not be what you want. "
                         "If you want to have the current date as default, use "
-                        "`ginger.utils.timezone.now`"
+                        "`gingerdj.utils.timezone.now`"
                     ),
                     obj=fields[2],
                     id="fields.W161",

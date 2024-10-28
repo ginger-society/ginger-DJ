@@ -2,8 +2,8 @@ import datetime
 import uuid
 from decimal import Decimal
 
-from ginger.db import models
-from ginger.utils import timezone
+from gingerdj.db import models
+from gingerdj.utils import timezone
 
 try:
     from PIL import Image

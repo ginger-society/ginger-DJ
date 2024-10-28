@@ -4,12 +4,12 @@ from os import path
 from unittest import mock
 from urllib.parse import quote
 
-from ginger.conf.urls.static import static
-from ginger.core.exceptions import ImproperlyConfigured
-from ginger.http import FileResponse, HttpResponseNotModified
-from ginger.test import SimpleTestCase, override_settings
-from ginger.utils.http import http_date
-from ginger.views.static import directory_index, was_modified_since
+from gingerdj.conf.urls.static import static
+from gingerdj.core.exceptions import ImproperlyConfigured
+from gingerdj.http import FileResponse, HttpResponseNotModified
+from gingerdj.test import SimpleTestCase, override_settings
+from gingerdj.utils.http import http_date
+from gingerdj.views.static import directory_index, was_modified_since
 
 from .. import urls
 from ..urls import media_dir
@@ -17,7 +17,7 @@ from ..urls import media_dir
 
 @override_settings(DEBUG=True, ROOT_URLCONF="view_tests.urls")
 class StaticTests(SimpleTestCase):
-    """Tests ginger views in ginger/views/static.py"""
+    """Tests gingerdj views in gingerdj/views/static.py"""
 
     prefix = "site_media"
 
@@ -76,7 +76,7 @@ class StaticTests(SimpleTestCase):
         response = self.client.get(
             "/%s/%s" % (self.prefix, file_name),
             headers={
-                # This is 24h before max Unix time. Remember to fix Ginger and
+                # This is 24h before max Unix time. Remember to fix GingerDJ and
                 # update this test well before 2038 :)
                 "if-modified-since": "Mon, 18 Jan 2038 05:14:07 GMT"
             },
@@ -136,11 +136,11 @@ class StaticTests(SimpleTestCase):
     @override_settings(
         TEMPLATES=[
             {
-                "BACKEND": "ginger.template.backends.ginger.GingerTemplates",
+                "BACKEND": "gingerdj.template.backends.gingerdj.GingerTemplates",
                 "OPTIONS": {
                     "loaders": [
                         (
-                            "ginger.template.loaders.locmem.Loader",
+                            "gingerdj.template.loaders.locmem.Loader",
                             {
                                 "static/directory_index.html": "Test index",
                             },
@@ -160,7 +160,7 @@ class StaticTests(SimpleTestCase):
         be opened as utf-8 charset as is the default specified on template
         engines.
         """
-        from ginger.views.static import Path
+        from gingerdj.views.static import Path
 
         with mock.patch.object(Path, "open") as m:
             directory_index(mock.MagicMock(), mock.MagicMock())

@@ -4,7 +4,7 @@ Using properties on models
 Use properties on models just like on any other Python object.
 """
 
-from ginger.db import models
+from gingerdj.db import models
 
 
 class Person(models.Model):

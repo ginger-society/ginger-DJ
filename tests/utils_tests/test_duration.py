@@ -1,8 +1,8 @@
 import datetime
 import unittest
 
-from ginger.utils.dateparse import parse_duration
-from ginger.utils.duration import (
+from gingerdj.utils.dateparse import parse_duration
+from gingerdj.utils.duration import (
     duration_iso_string,
     duration_microseconds,
     duration_string,

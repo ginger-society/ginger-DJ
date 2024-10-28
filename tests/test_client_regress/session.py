@@ -1,4 +1,4 @@
-from ginger.contrib.sessions.backends.base import SessionBase
+from gingerdj.contrib.sessions.backends.base import SessionBase
 
 
 class SessionStore(SessionBase):

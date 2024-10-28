@@ -1,4 +1,4 @@
-from ginger.forms import (
+from gingerdj.forms import (
     CharField,
     ChoiceField,
     Form,
@@ -7,9 +7,9 @@ from ginger.forms import (
     Select,
     TextInput,
 )
-from ginger.test import SimpleTestCase
-from ginger.utils import translation
-from ginger.utils.translation import gettext_lazy
+from gingerdj.test import SimpleTestCase
+from gingerdj.utils import translation
+from gingerdj.utils.translation import gettext_lazy
 
 from . import jinja2_tests
 

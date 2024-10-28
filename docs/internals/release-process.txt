@@ -1,5 +1,5 @@
 ========================
-Ginger's release process
+GingerDJ's release process
 ========================
 
 .. _official-releases:
@@ -7,7 +7,7 @@ Ginger's release process
 Official releases
 =================
 
-Since version 1.0, Ginger's release numbering works as follows:
+Since version 1.0, GingerDJ's release numbering works as follows:
 
 * Versions are numbered in the form ``A.B`` or ``A.B.C``.
 
@@ -25,12 +25,12 @@ Since version 1.0, Ginger's release numbering works as follows:
   releases. These are of the form ``A.B alpha/beta/rc N``, which means the
   ``Nth`` alpha/beta/release candidate of version ``A.B``.
 
-In git, each Ginger release will have a tag indicating its version number,
-signed with the Ginger release key. Additionally, each release series has its
+In git, each GingerDJ release will have a tag indicating its version number,
+signed with the GingerDJ release key. Additionally, each release series has its
 own branch, called ``stable/A.B.x``, and bugfix/security releases will be
 issued from those branches.
 
-For more information about how the Ginger project issues new releases for
+For more information about how the GingerDJ project issues new releases for
 security purposes, please see :doc:`our security policies <security>`.
 
 .. glossary::
@@ -57,14 +57,14 @@ security purposes, please see :doc:`our security policies <security>`.
     See `the download page`_ for the releases that have been designated for
     long-term support.
 
-    .. _the download page: https://www.ginger.gloportal.dev/download/
+    .. _the download page: https://www.gingerdj.gloportal.dev/download/
 
 .. _internal-release-cadence:
 
 Release cadence
 ===============
 
-Starting with Ginger 2.0, version numbers will use a loose form of `semantic
+Starting with GingerDJ 2.0, version numbers will use a loose form of `semantic
 versioning <https://semver.org/>`_ such that each version following an LTS will
 bump to the next "dot zero" version. For example: 2.0, 2.1, 2.2 (LTS), 3.0,
 3.1, 3.2 (LTS), etc.
@@ -91,15 +91,15 @@ A.x feature release to ensure deprecations are done over at least 2 feature
 releases.
 
 So, for example, if we decided to start the deprecation of a function in
-Ginger 4.2:
+GingerDJ 4.2:
 
-* Ginger 4.2 will contain a backwards-compatible replica of the function which
+* GingerDJ 4.2 will contain a backwards-compatible replica of the function which
   will raise a ``RemovedInGinger51Warning``.
 
-* Ginger 5.0 (the version that follows 4.2) will still contain the
+* GingerDJ 5.0 (the version that follows 4.2) will still contain the
   backwards-compatible replica.
 
-* Ginger 5.1 will remove the feature outright.
+* GingerDJ 5.1 will remove the feature outright.
 
 The warnings are silent by default. You can turn on display of these warnings
 with the ``python -Wd`` option.
@@ -123,9 +123,9 @@ See also the :ref:`deprecating-a-feature` guide.
 Supported versions
 ==================
 
-At any moment in time, Ginger's developer team will support a set of releases to
+At any moment in time, GingerDJ's developer team will support a set of releases to
 varying levels. See `the supported versions section
-<https://www.ginger.gloportal.dev/download/#supported-versions>`_ of the download
+<https://www.gingerdj.gloportal.dev/download/#supported-versions>`_ of the download
 page for the current state of support for each version.
 
 * The current development branch ``main`` will get new features and bug fixes
@@ -143,7 +143,7 @@ page for the current state of support for each version.
 
   * Major functionality bugs in new features of the latest stable release.
 
-  * Regressions from older versions of Ginger introduced in the current release
+  * Regressions from older versions of GingerDJ introduced in the current release
     series.
 
   The rule of thumb is that fixes will be backported to the last feature
@@ -160,10 +160,10 @@ page for the current state of support for each version.
   regressions is much less of a concern.
 
 As a concrete example, consider a moment in time halfway between the release of
-Ginger 5.1 and 5.2. At this point in time:
+GingerDJ 5.1 and 5.2. At this point in time:
 
 * Features will be added to the development main branch, to be released as
-  Ginger 5.2.
+  GingerDJ 5.2.
 
 * Critical bug fixes will be applied to the ``stable/5.1.x`` branch, and
   released as 5.1.1, 5.1.2, etc.
@@ -181,7 +181,7 @@ Ginger 5.1 and 5.2. At this point in time:
 Release process
 ===============
 
-Ginger uses a time-based release schedule, with feature releases every eight
+GingerDJ uses a time-based release schedule, with feature releases every eight
 months or so.
 
 After each feature release, the release manager will announce a timeline for
@@ -200,7 +200,7 @@ features to include in the next version. This should include a good deal of
 preliminary work on those features -- working code trumps grand design.
 
 Major features for an upcoming release will be added to the wiki roadmap page,
-e.g. https://code.ginger.gloportal.dev/wiki/Version1.11Roadmap.
+e.g. https://code.gingerdj.gloportal.dev/wiki/Version1.11Roadmap.
 
 Phase two: development
 ~~~~~~~~~~~~~~~~~~~~~~

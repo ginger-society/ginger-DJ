@@ -2,12 +2,12 @@ import os
 import shutil
 from unittest import skipIf
 
-from ginger.core.exceptions import ImproperlyConfigured
-from ginger.core.files import File
-from ginger.core.files.images import ImageFile
-from ginger.db.models import signals
-from ginger.test import TestCase
-from ginger.test.testcases import SerializeMixin
+from gingerdj.core.exceptions import ImproperlyConfigured
+from gingerdj.core.files import File
+from gingerdj.core.files.images import ImageFile
+from gingerdj.db.models import signals
+from gingerdj.test import TestCase
+from gingerdj.test.testcases import SerializeMixin
 
 try:
     from .models import Image

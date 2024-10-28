@@ -1,8 +1,8 @@
 import gzip
 
-from ginger.http import HttpRequest, HttpResponse, StreamingHttpResponse
-from ginger.test import SimpleTestCase
-from ginger.test.client import conditional_content_removal
+from gingerdj.http import HttpRequest, HttpResponse, StreamingHttpResponse
+from gingerdj.test import SimpleTestCase
+from gingerdj.test.client import conditional_content_removal
 
 
 class ConditionalContentTests(SimpleTestCase):

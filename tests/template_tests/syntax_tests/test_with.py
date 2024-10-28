@@ -1,6 +1,6 @@
-from ginger.template import TemplateSyntaxError
-from ginger.template.defaulttags import WithNode
-from ginger.test import SimpleTestCase
+from gingerdj.template import TemplateSyntaxError
+from gingerdj.template.defaulttags import WithNode
+from gingerdj.test import SimpleTestCase
 
 from ..utils import setup
 

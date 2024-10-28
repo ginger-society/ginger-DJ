@@ -1,6 +1,6 @@
 from operator import attrgetter
 
-from ginger.test.testcases import TestCase
+from gingerdj.test.testcases import TestCase
 
 from .models import Address, Contact, Customer
 

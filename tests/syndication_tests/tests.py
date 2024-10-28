@@ -1,13 +1,13 @@
 import datetime
 from xml.dom import minidom
 
-from ginger.contrib.sites.models import Site
-from ginger.contrib.syndication import views
-from ginger.core.exceptions import ImproperlyConfigured
-from ginger.test import TestCase, override_settings
-from ginger.test.utils import requires_tz_support
-from ginger.utils import timezone
-from ginger.utils.feedgenerator import (
+from gingerdj.contrib.sites.models import Site
+from gingerdj.contrib.syndication import views
+from gingerdj.core.exceptions import ImproperlyConfigured
+from gingerdj.test import TestCase, override_settings
+from gingerdj.test.utils import requires_tz_support
+from gingerdj.utils import timezone
+from gingerdj.utils.feedgenerator import (
     Atom1Feed,
     Rss201rev2Feed,
     rfc2822_date,
@@ -141,7 +141,7 @@ class SyndicationFeedTest(FeedTestCase):
                 "copyright": "Copyright (c) 2007, Sally Smith",
             },
         )
-        self.assertCategories(chan, ["python", "ginger"])
+        self.assertCategories(chan, ["python", "gingerdj"])
 
         # Ensure the content of the channel is correct
         self.assertChildNodeContent(
@@ -329,7 +329,7 @@ class SyndicationFeedTest(FeedTestCase):
                 "link": "http://example.com/blog/",
             },
         )
-        self.assertCategories(chan, ["python", "ginger"])
+        self.assertCategories(chan, ["python", "gingerdj"])
 
         # Check feed_url is passed
         self.assertEqual(
@@ -462,7 +462,7 @@ class SyndicationFeedTest(FeedTestCase):
         feed = minidom.parseString(response.content).firstChild
 
         self.assertEqual(feed.nodeName, "feed")
-        self.assertEqual(feed.getAttribute("ginger"), "rocks")
+        self.assertEqual(feed.getAttribute("gingerdj"), "rocks")
         self.assertChildNodes(
             feed,
             [
@@ -678,16 +678,16 @@ class SyndicationFeedTest(FeedTestCase):
                 "https://example.com/foo/?arg=value",
             ),
             (
-                ("example.com", "http://ginger.gloportal.dev/doc/"),
-                "http://ginger.gloportal.dev/doc/",
+                ("example.com", "http://gingerdj.gloportal.dev/doc/"),
+                "http://gingerdj.gloportal.dev/doc/",
             ),
             (
-                ("example.com", "https://ginger.gloportal.dev/doc/"),
-                "https://ginger.gloportal.dev/doc/",
+                ("example.com", "https://gingerdj.gloportal.dev/doc/"),
+                "https://gingerdj.gloportal.dev/doc/",
             ),
             (
-                ("example.com", "mailto:uhoh@ginger.gloportal.dev"),
-                "mailto:uhoh@ginger.gloportal.dev",
+                ("example.com", "mailto:uhoh@gingerdj.gloportal.dev"),
+                "mailto:uhoh@gingerdj.gloportal.dev",
             ),
             (
                 ("example.com", "//example.com/foo/?arg=value"),

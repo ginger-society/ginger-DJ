@@ -11,9 +11,9 @@ import datetime
 import decimal
 import uuid
 
-from ginger.core import serializers
-from ginger.db import connection, models
-from ginger.test import TestCase
+from gingerdj.core import serializers
+from gingerdj.db import connection, models
+from gingerdj.test import TestCase
 
 from .models import (
     Anchor,

@@ -1,12 +1,12 @@
-from ginger.contrib.gis.gdal import (
+from gingerdj.contrib.gis.gdal import (
     AxisOrder,
     CoordTransform,
     GDALException,
     SpatialReference,
     SRSException,
 )
-from ginger.contrib.gis.geos import GEOSGeometry
-from ginger.test import SimpleTestCase
+from gingerdj.contrib.gis.geos import GEOSGeometry
+from gingerdj.test import SimpleTestCase
 
 
 class TestSRS:

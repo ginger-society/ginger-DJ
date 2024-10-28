@@ -2,7 +2,7 @@
 Various edge-cases for model managers.
 """
 
-from ginger.db import models
+from gingerdj.db import models
 
 
 class OnlyFred(models.Manager):
@@ -114,7 +114,7 @@ class Child7(Parent):
 
 # RelatedManagers
 class RelatedModel(models.Model):
-   
+
     exact = models.BooleanField(null=True)
 
     def __str__(self):

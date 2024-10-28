@@ -11,34 +11,37 @@ from unittest import mock, skipIf, skipUnless
 
 from asgiref.sync import async_to_sync, iscoroutinefunction
 
-from ginger.core import mail
-from ginger.core.files.uploadedfile import SimpleUploadedFile
-from ginger.db import DatabaseError, connection
-from ginger.http import Http404, HttpRequest, HttpResponse
-from ginger.shortcuts import render
-from ginger.template import TemplateDoesNotExist
-from ginger.test import RequestFactory, SimpleTestCase, override_settings
-from ginger.test.utils import LoggingCaptureMixin
-from ginger.urls import path, reverse
-from ginger.urls.converters import IntConverter
-from ginger.utils.functional import SimpleLazyObject
-from ginger.utils.regex_helper import _lazy_re_compile
-from ginger.utils.safestring import mark_safe
-from ginger.utils.version import PY311
-from ginger.views.debug import (
+from gingerdj.core import mail
+from gingerdj.core.files.uploadedfile import SimpleUploadedFile
+from gingerdj.db import DatabaseError, connection
+from gingerdj.http import Http404, HttpRequest, HttpResponse
+from gingerdj.shortcuts import render
+from gingerdj.template import TemplateDoesNotExist
+from gingerdj.test import RequestFactory, SimpleTestCase, override_settings
+from gingerdj.test.utils import LoggingCaptureMixin
+from gingerdj.urls import path, reverse
+from gingerdj.urls.converters import IntConverter
+from gingerdj.utils.functional import SimpleLazyObject
+from gingerdj.utils.regex_helper import _lazy_re_compile
+from gingerdj.utils.safestring import mark_safe
+from gingerdj.utils.version import PY311
+from gingerdj.views.debug import (
     CallableSettingWrapper,
     ExceptionCycleWarning,
     ExceptionReporter,
 )
-from ginger.views.debug import Path as DebugPath
-from ginger.views.debug import (
+from gingerdj.views.debug import Path as DebugPath
+from gingerdj.views.debug import (
     SafeExceptionReporterFilter,
     default_urlconf,
     get_default_exception_reporter_filter,
     technical_404_response,
     technical_500_response,
 )
-from ginger.views.decorators.debug import sensitive_post_parameters, sensitive_variables
+from gingerdj.views.decorators.debug import (
+    sensitive_post_parameters,
+    sensitive_variables,
+)
 
 from ..views import (
     async_sensitive_method_view,
@@ -84,27 +87,27 @@ class CallableSettingWrapperTests(SimpleTestCase):
 @override_settings(DEBUG=True, ROOT_URLCONF="view_tests.urls")
 class DebugViewTests(SimpleTestCase):
     def test_files(self):
-        with self.assertLogs("ginger.request", "ERROR"):
+        with self.assertLogs("gingerdj.request", "ERROR"):
             response = self.client.get("/raises/")
         self.assertEqual(response.status_code, 500)
 
         data = {
             "file_data.txt": SimpleUploadedFile("file_data.txt", b"haha"),
         }
-        with self.assertLogs("ginger.request", "ERROR"):
+        with self.assertLogs("gingerdj.request", "ERROR"):
             response = self.client.post("/raises/", data)
         self.assertContains(response, "file_data.txt", status_code=500)
         self.assertNotContains(response, "haha", status_code=500)
 
     def test_400(self):
         # When DEBUG=True, technical_500_template() is called.
-        with self.assertLogs("ginger.security", "WARNING"):
+        with self.assertLogs("gingerdj.security", "WARNING"):
             response = self.client.get("/raises400/")
         self.assertContains(response, '<div class="context" id="', status_code=400)
 
     def test_400_bad_request(self):
         # When DEBUG=True, technical_500_template() is called.
-        with self.assertLogs("ginger.request", "WARNING") as cm:
+        with self.assertLogs("gingerdj.request", "WARNING") as cm:
             response = self.client.get("/raises400_bad_request/")
         self.assertContains(response, '<div class="context" id="', status_code=400)
         self.assertEqual(
@@ -116,7 +119,7 @@ class DebugViewTests(SimpleTestCase):
     @override_settings(
         TEMPLATES=[
             {
-                "BACKEND": "ginger.template.backends.ginger.GingerTemplates",
+                "BACKEND": "gingerdj.template.backends.gingerdj.GingerTemplates",
             }
         ]
     )
@@ -128,11 +131,11 @@ class DebugViewTests(SimpleTestCase):
     @override_settings(
         TEMPLATES=[
             {
-                "BACKEND": "ginger.template.backends.ginger.GingerTemplates",
+                "BACKEND": "gingerdj.template.backends.gingerdj.GingerTemplates",
                 "OPTIONS": {
                     "loaders": [
                         (
-                            "ginger.template.loaders.locmem.Loader",
+                            "gingerdj.template.loaders.locmem.Loader",
                             {
                                 "403.html": (
                                     "This is a test template for a 403 error "
@@ -174,7 +177,7 @@ class DebugViewTests(SimpleTestCase):
             status_code=404,
         )
         self.assertContains(
-            response, "Ginger tried these URL patterns", status_code=404
+            response, "GingerDJ tried these URL patterns", status_code=404
         )
         self.assertContains(
             response,
@@ -243,7 +246,7 @@ class DebugViewTests(SimpleTestCase):
         )
 
     def test_technical_500(self):
-        with self.assertLogs("ginger.request", "ERROR"):
+        with self.assertLogs("gingerdj.request", "ERROR"):
             response = self.client.get("/raises500/")
         self.assertContains(response, '<header id="summary">', status_code=500)
         self.assertContains(response, '<main id="info">', status_code=500)
@@ -254,7 +257,7 @@ class DebugViewTests(SimpleTestCase):
             status_code=500,
             html=True,
         )
-        with self.assertLogs("ginger.request", "ERROR"):
+        with self.assertLogs("gingerdj.request", "ERROR"):
             response = self.client.get("/raises500/", headers={"accept": "text/plain"})
         self.assertContains(
             response,
@@ -263,7 +266,7 @@ class DebugViewTests(SimpleTestCase):
         )
 
     def test_classbased_technical_500(self):
-        with self.assertLogs("ginger.request", "ERROR"):
+        with self.assertLogs("gingerdj.request", "ERROR"):
             response = self.client.get("/classbased500/")
         self.assertContains(
             response,
@@ -272,7 +275,7 @@ class DebugViewTests(SimpleTestCase):
             status_code=500,
             html=True,
         )
-        with self.assertLogs("ginger.request", "ERROR"):
+        with self.assertLogs("gingerdj.request", "ERROR"):
             response = self.client.get(
                 "/classbased500/", headers={"accept": "text/plain"}
             )
@@ -288,7 +291,7 @@ class DebugViewTests(SimpleTestCase):
         be localized.
         """
         with self.settings(DEBUG=True):
-            with self.assertLogs("ginger.request", "ERROR"):
+            with self.assertLogs("gingerdj.request", "ERROR"):
                 response = self.client.get("/raises500/")
             # We look for a HTML fragment of the form
             # '<div class="context" id="c38123208">',
@@ -306,7 +309,7 @@ class DebugViewTests(SimpleTestCase):
             )
 
     def test_template_exceptions(self):
-        with self.assertLogs("ginger.request", "ERROR"):
+        with self.assertLogs("gingerdj.request", "ERROR"):
             try:
                 self.client.get(reverse("template_exception"))
             except Exception:
@@ -323,7 +326,7 @@ class DebugViewTests(SimpleTestCase):
         "Raises OSError instead of TemplateDoesNotExist on Windows.",
     )
     def test_safestring_in_exception(self):
-        with self.assertLogs("ginger.request", "ERROR"):
+        with self.assertLogs("gingerdj.request", "ERROR"):
             response = self.client.get("/safestring_exception/")
             self.assertNotContains(
                 response,
@@ -350,13 +353,13 @@ class DebugViewTests(SimpleTestCase):
                     TEMPLATES=[
                         {
                             "BACKEND": (
-                                "ginger.template.backends.ginger.GingerTemplates"
+                                "gingerdj.template.backends.gingerdj.GingerTemplates"
                             ),
                             "DIRS": [tempdir],
                         }
                     ]
                 ),
-                self.assertLogs("ginger.request", "ERROR"),
+                self.assertLogs("gingerdj.request", "ERROR"),
             ):
                 response = self.client.get(
                     reverse(
@@ -372,7 +375,7 @@ class DebugViewTests(SimpleTestCase):
             # Assert as HTML.
             self.assertContains(
                 response,
-                "<li><code>ginger.template.loaders.filesystem.Loader</code>: "
+                "<li><code>gingerdj.template.loaders.filesystem.Loader</code>: "
                 "%s (Source does not exist)</li>"
                 % os.path.join(tempdir, "notfound.html"),
                 status_code=500,
@@ -383,7 +386,7 @@ class DebugViewTests(SimpleTestCase):
         """
         Make sure if you don't specify a template, the debug view doesn't blow up.
         """
-        with self.assertLogs("ginger.request", "ERROR"):
+        with self.assertLogs("gingerdj.request", "ERROR"):
             with self.assertRaises(TemplateDoesNotExist):
                 self.client.get("/render_no_template/")
 
@@ -432,7 +435,7 @@ class DebugViewTests(SimpleTestCase):
             self.assertContains(response, "Page not found", status_code=404)
 
     def test_exception_reporter_from_request(self):
-        with self.assertLogs("ginger.request", "ERROR"):
+        with self.assertLogs("gingerdj.request", "ERROR"):
             response = self.client.get("/custom_reporter_class_view/")
         self.assertContains(response, "custom traceback text", status_code=500)
 
@@ -440,7 +443,7 @@ class DebugViewTests(SimpleTestCase):
         DEFAULT_EXCEPTION_REPORTER="view_tests.views.CustomExceptionReporter"
     )
     def test_exception_reporter_from_settings(self):
-        with self.assertLogs("ginger.request", "ERROR"):
+        with self.assertLogs("gingerdj.request", "ERROR"):
             response = self.client.get("/raises500/")
         self.assertContains(response, "custom traceback text", status_code=500)
 
@@ -448,7 +451,7 @@ class DebugViewTests(SimpleTestCase):
         DEFAULT_EXCEPTION_REPORTER="view_tests.views.TemplateOverrideExceptionReporter"
     )
     def test_template_override_exception_reporter(self):
-        with self.assertLogs("ginger.request", "ERROR"):
+        with self.assertLogs("gingerdj.request", "ERROR"):
             response = self.client.get("/raises500/")
         self.assertContains(
             response,
@@ -457,7 +460,7 @@ class DebugViewTests(SimpleTestCase):
             html=True,
         )
 
-        with self.assertLogs("ginger.request", "ERROR"):
+        with self.assertLogs("gingerdj.request", "ERROR"):
             response = self.client.get("/raises500/", headers={"accept": "text/plain"})
         self.assertContains(response, "Oh dear, an error occurred!", status_code=500)
 
@@ -488,20 +491,20 @@ class DebugViewQueriesAllowedTests(SimpleTestCase):
     # No template directories are configured, so no templates will be found.
     TEMPLATES=[
         {
-            "BACKEND": "ginger.template.backends.dummy.TemplateStrings",
+            "BACKEND": "gingerdj.template.backends.dummy.TemplateStrings",
         }
     ],
 )
 class NonGingerTemplatesDebugViewTests(SimpleTestCase):
     def test_400(self):
         # When DEBUG=True, technical_500_template() is called.
-        with self.assertLogs("ginger.security", "WARNING"):
+        with self.assertLogs("gingerdj.security", "WARNING"):
             response = self.client.get("/raises400/")
         self.assertContains(response, '<div class="context" id="', status_code=400)
 
     def test_400_bad_request(self):
         # When DEBUG=True, technical_500_template() is called.
-        with self.assertLogs("ginger.request", "WARNING") as cm:
+        with self.assertLogs("gingerdj.request", "WARNING") as cm:
             response = self.client.get("/raises400_bad_request/")
         self.assertContains(response, '<div class="context" id="', status_code=400)
         self.assertEqual(
@@ -522,7 +525,7 @@ class NonGingerTemplatesDebugViewTests(SimpleTestCase):
         url = reverse(
             "raises_template_does_not_exist", kwargs={"path": "notfound.html"}
         )
-        with self.assertLogs("ginger.request", "ERROR"):
+        with self.assertLogs("gingerdj.request", "ERROR"):
             response = self.client.get(url)
         self.assertContains(response, '<div class="context" id="', status_code=500)
 
@@ -909,7 +912,7 @@ class ExceptionReporterTests(SimpleTestCase):
         except Exception:
             exc_type, exc_value, tb = sys.exc_info()
         with mock.patch(
-            "ginger.views.debug.ExceptionReporter._get_source",
+            "gingerdj.views.debug.ExceptionReporter._get_source",
             return_value=["wrong source"],
         ):
             request = self.rf.get("/test_view/")

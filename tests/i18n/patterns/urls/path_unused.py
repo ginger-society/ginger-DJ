@@ -1,5 +1,5 @@
-from ginger.urls import re_path
-from ginger.views.generic import TemplateView
+from gingerdj.urls import re_path
+from gingerdj.views.generic import TemplateView
 
 view = TemplateView.as_view(template_name="dummy.html")
 

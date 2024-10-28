@@ -1,11 +1,11 @@
 import datetime
 import zoneinfo
 
-from ginger.test import TestCase
-from ginger.test.utils import override_settings, requires_tz_support
-from ginger.utils import timezone, translation
-from ginger.utils.timesince import timesince, timeuntil
-from ginger.utils.translation import npgettext_lazy
+from gingerdj.test import TestCase
+from gingerdj.test.utils import override_settings, requires_tz_support
+from gingerdj.utils import timezone, translation
+from gingerdj.utils.timesince import timesince, timeuntil
+from gingerdj.utils.translation import npgettext_lazy
 
 
 class TimesinceTests(TestCase):

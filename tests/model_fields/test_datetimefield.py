@@ -1,9 +1,14 @@
 import datetime
 
-from ginger.db import models
-from ginger.test import SimpleTestCase, TestCase, override_settings, skipUnlessDBFeature
-from ginger.test.utils import requires_tz_support
-from ginger.utils import timezone
+from gingerdj.db import models
+from gingerdj.test import (
+    SimpleTestCase,
+    TestCase,
+    override_settings,
+    skipUnlessDBFeature,
+)
+from gingerdj.test.utils import requires_tz_support
+from gingerdj.utils import timezone
 
 from .models import DateTimeModel
 

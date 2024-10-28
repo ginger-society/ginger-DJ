@@ -1,5 +1,5 @@
-from ginger.test import SimpleTestCase
-from ginger.test.testcases import SerializeMixin
+from gingerdj.test import SimpleTestCase
+from gingerdj.test.testcases import SerializeMixin
 
 
 class TestSerializeMixin(SimpleTestCase):

@@ -1,7 +1,7 @@
 from unittest import TestCase
 
-from ginger.core.exceptions import ValidationError
-from ginger.db import models
+from gingerdj.core.exceptions import ValidationError
+from gingerdj.db import models
 
 
 class ValidationMessagesTest(TestCase):

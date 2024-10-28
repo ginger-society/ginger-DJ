@@ -1,4 +1,4 @@
-from ginger.db import migrations, models
+from gingerdj.db import migrations, models
 
 
 def raise_error(apps, schema_editor):

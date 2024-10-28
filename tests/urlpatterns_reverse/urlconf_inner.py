@@ -1,6 +1,6 @@
-from ginger.http import HttpResponse
-from ginger.template import Context, Template
-from ginger.urls import path
+from gingerdj.http import HttpResponse
+from gingerdj.template import Context, Template
+from gingerdj.urls import path
 
 
 def inner_view(request):

@@ -1,10 +1,10 @@
-from ginger.conf import settings
-from ginger.contrib.sites.managers import CurrentSiteManager
-from ginger.contrib.sites.models import Site
-from ginger.core import checks
-from ginger.db import models
-from ginger.test import SimpleTestCase, TestCase
-from ginger.test.utils import isolate_apps
+from gingerdj.conf import settings
+from gingerdj.contrib.sites.managers import CurrentSiteManager
+from gingerdj.contrib.sites.models import Site
+from gingerdj.core import checks
+from gingerdj.db import models
+from gingerdj.test import SimpleTestCase, TestCase
+from gingerdj.test.utils import isolate_apps
 
 from .models import CustomArticle, ExclusiveArticle, SyndicatedArticle
 

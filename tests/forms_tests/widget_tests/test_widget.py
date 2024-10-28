@@ -1,5 +1,5 @@
-from ginger.forms import Widget
-from ginger.forms.widgets import Input
+from gingerdj.forms import Widget
+from gingerdj.forms.widgets import Input
 
 from .base import WidgetTest
 

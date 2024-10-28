@@ -1,9 +1,9 @@
 from unittest import SkipTest
 
-from ginger.core import validators
-from ginger.core.exceptions import ValidationError
-from ginger.db import IntegrityError, connection, models
-from ginger.test import SimpleTestCase, TestCase
+from gingerdj.core import validators
+from gingerdj.core.exceptions import ValidationError
+from gingerdj.db import IntegrityError, connection, models
+from gingerdj.test import SimpleTestCase, TestCase
 
 from .models import (
     BigIntegerModel,

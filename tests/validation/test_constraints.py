@@ -1,5 +1,5 @@
-from ginger.core.exceptions import ValidationError
-from ginger.test import TestCase, skipUnlessDBFeature
+from gingerdj.core.exceptions import ValidationError
+from gingerdj.test import TestCase, skipUnlessDBFeature
 
 from .models import (
     ChildProduct,

@@ -2,7 +2,7 @@
 Regression tests for defer() / only() behavior.
 """
 
-from ginger.db import models
+from gingerdj.db import models
 
 
 class Item(models.Model):

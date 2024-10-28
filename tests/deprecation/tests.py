@@ -1,7 +1,7 @@
 import warnings
 
-from ginger.test import SimpleTestCase
-from ginger.utils.deprecation import (
+from gingerdj.test import SimpleTestCase
+from gingerdj.utils.deprecation import (
     DeprecationInstanceCheck,
     RemovedAfterNextVersionWarning,
     RemovedInNextVersionWarning,

@@ -1,8 +1,8 @@
 import os
 
-from ginger.apps import apps
-from ginger.test import SimpleTestCase
-from ginger.test.utils import extend_sys_path
+from gingerdj.apps import apps
+from gingerdj.test import SimpleTestCase
+from gingerdj.test.utils import extend_sys_path
 
 
 class EggLoadingTest(SimpleTestCase):

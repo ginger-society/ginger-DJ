@@ -1,15 +1,15 @@
 ========================================
-How to upgrade Ginger to a newer version
+How to upgrade GingerDJ to a newer version
 ========================================
 
-While it can be a complex process at times, upgrading to the latest Ginger
+While it can be a complex process at times, upgrading to the latest GingerDJ
 version has several benefits:
 
 * New features and improvements are added.
 * Bugs are fixed.
-* Older version of Ginger will eventually no longer receive security updates.
+* Older version of GingerDJ will eventually no longer receive security updates.
   (see :ref:`supported-versions-policy`).
-* Upgrading as each new Ginger release is available makes future upgrades less
+* Upgrading as each new GingerDJ release is available makes future upgrades less
   painful by keeping your code base up to date.
 
 Here are some things to consider to help make your upgrade process as smooth as
@@ -19,16 +19,16 @@ Dependencies
 ============
 
 In most cases it will be necessary to upgrade to the latest version of your
-Ginger-related dependencies as well. If the Ginger version was recently
+GingerDJ-related dependencies as well. If the GingerDJ version was recently
 released or if some of your dependencies are not well-maintained, some of your
-dependencies may not yet support the new Ginger version. In these cases you may
+dependencies may not yet support the new GingerDJ version. In these cases you may
 have to wait until new versions of your dependencies are released.
 
 Resolving deprecation warnings
 ==============================
 
 Before upgrading, it's a good idea to resolve any deprecation warnings raised
-by your project while using your current version of Ginger. Fixing these
+by your project while using your current version of GingerDJ. Fixing these
 warnings before upgrading ensures that you're informed about areas of the code
 that need altering.
 
@@ -40,7 +40,7 @@ environment variable. For example, to show warnings while running tests:
 
     $ python -Wa manage.py test
 
-If you're not using the Ginger test runner, you may need to also ensure that
+If you're not using the GingerDJ test runner, you may need to also ensure that
 any console output is not captured which would hide deprecation warnings. For
 example, if you use `pytest <https://docs.pytest.org/>`__:
 
@@ -48,27 +48,27 @@ example, if you use `pytest <https://docs.pytest.org/>`__:
 
     $ PYTHONWARNINGS=always pytest tests --capture=no
 
-Resolve any deprecation warnings with your current version of Ginger before
+Resolve any deprecation warnings with your current version of GingerDJ before
 continuing the upgrade process.
 
 Third party applications might use deprecated APIs in order to support multiple
-versions of Ginger, so deprecation warnings in packages you've installed don't
+versions of GingerDJ, so deprecation warnings in packages you've installed don't
 necessarily indicate a problem. If a package doesn't support the latest version
-of Ginger, consider raising an issue or sending a pull request for it.
+of GingerDJ, consider raising an issue or sending a pull request for it.
 
 Installation
 ============
 
-Once you're ready, it is time to :doc:`install the new Ginger version
+Once you're ready, it is time to :doc:`install the new GingerDJ version
 </topics/install>`. If you are using a :mod:`virtual environment <venv>` and it
 is a major upgrade, you might want to set up a new environment with all the
 dependencies first.
 
-If you installed Ginger with pip_, you can use the ``--upgrade`` or ``-U`` flag:
+If you installed GingerDJ with pip_, you can use the ``--upgrade`` or ``-U`` flag:
 
 .. console::
 
-   $ python -m pip install -U Ginger
+   $ python -m pip install -U GingerDJ
 
 .. _pip: https://pip.pypa.io/
 
@@ -86,20 +86,20 @@ use the flag if you test your app manually using ``manage.py runserver``):
 
 After you have run the tests, fix any failures. While you have the release
 notes fresh in your mind, it may also be a good time to take advantage of new
-features in Ginger by refactoring your code to eliminate any deprecation
+features in GingerDJ by refactoring your code to eliminate any deprecation
 warnings.
 
 Deployment
 ==========
 
 When you are sufficiently confident your app works with the new version of
-Ginger, you're ready to go ahead and :doc:`deploy </howto/deployment/index>`
-your upgraded Ginger project.
+GingerDJ, you're ready to go ahead and :doc:`deploy </howto/deployment/index>`
+your upgraded GingerDJ project.
 
-If you are using caching provided by Ginger, you should consider clearing your
+If you are using caching provided by GingerDJ, you should consider clearing your
 cache after upgrading. Otherwise you may run into problems, for example, if you
 are caching pickled objects as these objects are not guaranteed to be
-pickle-compatible across Ginger versions. A past instance of incompatibility
-was caching pickled :class:`~ginger.http.HttpResponse` objects, either
-directly or indirectly via the :func:`~ginger.views.decorators.cache.cache_page`
+pickle-compatible across GingerDJ versions. A past instance of incompatibility
+was caching pickled :class:`~gingerdj.http.HttpResponse` objects, either
+directly or indirectly via the :func:`~gingerdj.views.decorators.cache.cache_page`
 decorator.

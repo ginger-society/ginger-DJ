@@ -5,15 +5,19 @@ from unittest import mock
 
 from admin_scripts.tests import AdminScriptTestCase
 
-from ginger.conf import settings
-from ginger.core import mail
-from ginger.core.exceptions import DisallowedHost, PermissionDenied, SuspiciousOperation
-from ginger.core.files.temp import NamedTemporaryFile
-from ginger.core.management import color
-from ginger.http.multipartparser import MultiPartParserError
-from ginger.test import RequestFactory, SimpleTestCase, override_settings
-from ginger.test.utils import LoggingCaptureMixin
-from ginger.utils.log import (
+from gingerdj.conf import settings
+from gingerdj.core import mail
+from gingerdj.core.exceptions import (
+    DisallowedHost,
+    PermissionDenied,
+    SuspiciousOperation,
+)
+from gingerdj.core.files.temp import NamedTemporaryFile
+from gingerdj.core.management import color
+from gingerdj.http.multipartparser import MultiPartParserError
+from gingerdj.test import RequestFactory, SimpleTestCase, override_settings
+from gingerdj.test.utils import LoggingCaptureMixin
+from gingerdj.utils.log import (
     DEFAULT_LOGGING,
     AdminEmailHandler,
     CallbackFilter,
@@ -21,7 +25,7 @@ from ginger.utils.log import (
     RequireDebugTrue,
     ServerFormatter,
 )
-from ginger.views.debug import ExceptionReporter
+from gingerdj.views.debug import ExceptionReporter
 
 from . import views
 from .logconfig import MyEmailBackend
@@ -66,7 +70,7 @@ class DefaultLoggingTests(
 ):
     def test_ginger_logger(self):
         """
-        The 'ginger' base logger only output anything when DEBUG=True.
+        The 'gingerdj' base logger only output anything when DEBUG=True.
         """
         self.logger.error("Hey, this is an error.")
         self.assertEqual(self.logger_output.getvalue(), "")
@@ -93,7 +97,7 @@ class DefaultLoggingTests(
 
 class LoggingAssertionMixin:
     def assertLogsRequest(
-        self, url, level, msg, status_code, logger="ginger.request", exc_class=None
+        self, url, level, msg, status_code, logger="gingerdj.request", exc_class=None
     ):
         with self.assertLogs(logger, level) as cm:
             try:
@@ -190,8 +194,8 @@ class HandlerLoggingTests(
     USE_I18N=True,
     LANGUAGES=[("en", "English")],
     MIDDLEWARE=[
-        "ginger.middleware.locale.LocaleMiddleware",
-        "ginger.middleware.common.CommonMiddleware",
+        "gingerdj.middleware.locale.LocaleMiddleware",
+        "gingerdj.middleware.common.CommonMiddleware",
     ],
     ROOT_URLCONF="logging_tests.urls_i18n",
 )
@@ -233,7 +237,7 @@ class CallbackFilterTest(SimpleTestCase):
 
 
 class AdminEmailHandlerTest(SimpleTestCase):
-    logger = logging.getLogger("ginger")
+    logger = logging.getLogger("gingerdj")
     request_factory = RequestFactory()
 
     def get_admin_email_handler(self, logger):
@@ -389,7 +393,7 @@ class AdminEmailHandlerTest(SimpleTestCase):
         self.assertEqual(len(mail.outbox), 1)
         msg = mail.outbox[0]
         self.assertEqual(msg.to, ["admin@example.com"])
-        self.assertEqual(msg.subject, "[Ginger] ERROR (EXTERNAL IP): message")
+        self.assertEqual(msg.subject, "[GingerDJ] ERROR (EXTERNAL IP): message")
         self.assertIn("Report at %s" % url_path, msg.body)
 
     @override_settings(
@@ -465,7 +469,7 @@ class AdminEmailHandlerTest(SimpleTestCase):
         handler.emit(record)
         self.assertEqual(len(mail.outbox), 1)
         msg = mail.outbox[0]
-        self.assertEqual(msg.subject, "[Ginger] ERROR: message")
+        self.assertEqual(msg.subject, "[GingerDJ] ERROR: message")
         self.assertEqual(len(msg.alternatives), 1)
         body_html = str(msg.alternatives[0][0])
         self.assertIn('<div id="traceback">', body_html)
@@ -527,11 +531,11 @@ dictConfig.called = False
 
 class SetupConfigureLogging(SimpleTestCase):
     """
-    Calling ginger.setup() initializes the logging configuration.
+    Calling gingerdj.setup() initializes the logging configuration.
     """
 
     def test_configure_initializes_logging(self):
-        from ginger import setup
+        from gingerdj import setup
 
         try:
             with override_settings(
@@ -552,7 +556,7 @@ class SecurityLoggerTest(LoggingAssertionMixin, SimpleTestCase):
             level="ERROR",
             msg="dubious",
             status_code=400,
-            logger="ginger.security.SuspiciousOperation",
+            logger="gingerdj.security.SuspiciousOperation",
             exc_class=SuspiciousOperation,
         )
 
@@ -562,7 +566,7 @@ class SecurityLoggerTest(LoggingAssertionMixin, SimpleTestCase):
             level="ERROR",
             msg="dubious",
             status_code=400,
-            logger="ginger.security.DisallowedHost",
+            logger="gingerdj.security.DisallowedHost",
             exc_class=DisallowedHost,
         )
 
@@ -644,7 +648,7 @@ class LogFormattersTests(SimpleTestCase):
     def test_server_formatter_default_format(self):
         server_time = "2016-09-25 10:20:30"
         log_msg = "log message"
-        logger = logging.getLogger("ginger.server")
+        logger = logging.getLogger("gingerdj.server")
 
         @contextmanager
         def patch_ginger_server_logger():

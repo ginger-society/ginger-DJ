@@ -1,7 +1,7 @@
-from ginger.apps import apps
-from ginger.db import models
-from ginger.test import SimpleTestCase, TestCase
-from ginger.test.utils import isolate_apps
+from gingerdj.apps import apps
+from gingerdj.db import models
+from gingerdj.test import SimpleTestCase, TestCase
+from gingerdj.test.utils import isolate_apps
 
 from .models import ManyToMany
 

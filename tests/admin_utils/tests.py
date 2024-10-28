@@ -1,11 +1,11 @@
 from datetime import datetime
 from decimal import Decimal
 
-from ginger import forms
-from ginger.conf import settings
-from ginger.contrib import admin
-from ginger.contrib.admin import helpers
-from ginger.contrib.admin.utils import (
+from gingerdj import forms
+from gingerdj.conf import settings
+from gingerdj.contrib import admin
+from gingerdj.contrib.admin import helpers
+from gingerdj.contrib.admin.utils import (
     NestedObjects,
     build_q_object_from_lookup_parameters,
     display_for_field,
@@ -17,11 +17,11 @@ from ginger.contrib.admin.utils import (
     lookup_field,
     quote,
 )
-from ginger.core.validators import EMPTY_VALUES
-from ginger.db import DEFAULT_DB_ALIAS, models
-from ginger.test import SimpleTestCase, TestCase, override_settings
-from ginger.utils.formats import localize
-from ginger.utils.safestring import mark_safe
+from gingerdj.core.validators import EMPTY_VALUES
+from gingerdj.db import DEFAULT_DB_ALIAS, models
+from gingerdj.test import SimpleTestCase, TestCase, override_settings
+from gingerdj.utils.formats import localize
+from gingerdj.utils.safestring import mark_safe
 
 from .models import Article, Car, Count, Event, EventGuide, Location, Site, Vehicle
 

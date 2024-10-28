@@ -1,9 +1,9 @@
-from ginger import forms
-from ginger.contrib import admin
-from ginger.contrib.admin.widgets import AutocompleteSelect
-from ginger.forms import ModelChoiceField
-from ginger.test import TestCase, override_settings
-from ginger.utils import translation
+from gingerdj import forms
+from gingerdj.contrib import admin
+from gingerdj.contrib.admin.widgets import AutocompleteSelect
+from gingerdj.forms import ModelChoiceField
+from gingerdj.test import TestCase, override_settings
+from gingerdj.utils import translation
 
 from .models import Album, Band, ReleaseEvent, VideoStream
 

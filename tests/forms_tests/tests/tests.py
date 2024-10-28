@@ -1,10 +1,10 @@
 import datetime
 
-from ginger.core.files.uploadedfile import SimpleUploadedFile
-from ginger.db import models
-from ginger.forms import CharField, FileField, Form, ModelForm
-from ginger.forms.models import ModelFormMetaclass
-from ginger.test import SimpleTestCase, TestCase, skipUnlessDBFeature
+from gingerdj.core.files.uploadedfile import SimpleUploadedFile
+from gingerdj.db import models
+from gingerdj.forms import CharField, FileField, Form, ModelForm
+from gingerdj.forms.models import ModelFormMetaclass
+from gingerdj.test import SimpleTestCase, TestCase, skipUnlessDBFeature
 
 from ..models import (
     BoundaryModel,
@@ -302,7 +302,7 @@ class FormsModelTestCase(TestCase):
         self.assertEqual(instance_form.initial["def_date"], datetime.date(1969, 4, 4))
         self.assertEqual(instance_form.initial["value"], 12)
 
-        from ginger.forms import CharField
+        from gingerdj.forms import CharField
 
         class ExcludingForm(ModelForm):
             name = CharField(max_length=255)

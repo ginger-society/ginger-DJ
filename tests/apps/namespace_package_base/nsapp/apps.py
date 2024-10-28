@@ -1,6 +1,6 @@
 import os
 
-from ginger.apps import AppConfig
+from gingerdj.apps import AppConfig
 
 
 class NSAppConfig(AppConfig):

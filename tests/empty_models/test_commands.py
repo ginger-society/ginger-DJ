@@ -1,7 +1,7 @@
 import io
 
-from ginger.core.management import call_command
-from ginger.test import TestCase
+from gingerdj.core.management import call_command
+from gingerdj.test import TestCase
 
 
 class CoreCommandsNoOutputTests(TestCase):

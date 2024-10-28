@@ -1,6 +1,6 @@
 import datetime
 
-from ginger.test import TestCase
+from gingerdj.test import TestCase
 
 from .models import Order, RevisionableModel, TestObject
 
@@ -66,7 +66,6 @@ class ExtraRegressTests(TestCase):
             transform=lambda r: (r.title, r.base.title),
             ordered=False,
         )
-
 
     def test_regression_8039(self):
         """

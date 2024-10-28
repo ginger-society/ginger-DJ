@@ -1,6 +1,6 @@
 import copy
 
-from ginger.forms.widgets import ChoiceWidget
+from gingerdj.forms.widgets import ChoiceWidget
 
 from .base import WidgetTest
 

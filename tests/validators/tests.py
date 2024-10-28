@@ -4,9 +4,9 @@ from datetime import datetime, timedelta
 from decimal import Decimal
 from unittest import TestCase, mock
 
-from ginger.core.exceptions import ValidationError
-from ginger.core.files.base import ContentFile
-from ginger.core.validators import (
+from gingerdj.core.exceptions import ValidationError
+from gingerdj.core.files.base import ContentFile
+from gingerdj.core.validators import (
     BaseValidator,
     DecimalValidator,
     EmailValidator,
@@ -30,7 +30,7 @@ from ginger.core.validators import (
     validate_slug,
     validate_unicode_slug,
 )
-from ginger.test import SimpleTestCase
+from gingerdj.test import SimpleTestCase
 
 try:
     from PIL import Image  # noqa
@@ -43,8 +43,8 @@ NOW = datetime.now()
 EXTENDED_SCHEMES = ["http", "https", "ftp", "ftps", "git", "file", "git+ssh"]
 
 VALID_URLS = [
-    "http://www.ginger.gloportal.dev/",
-    "HTTP://WWW.ginger.gloportal.dev/",
+    "http://www.gingerdj.gloportal.dev/",
+    "HTTP://WWW.gingerdj.gloportal.dev/",
     "http://localhost/",
     "http://example.com/",
     "http://example.com:0",
@@ -117,7 +117,7 @@ VALID_URLS = [
     "http://foo.com/unicode_(✪)_in_parens",
     "http://foo.com/(something)?after=parens",
     "http://☺.damowmow.com/",
-    "http://ginger.gloportal.dev/events/#&product=browser",
+    "http://gingerdj.gloportal.dev/events/#&product=browser",
     "http://j.mp",
     "ftp://foo.bar/baz",
     "http://foo.bar/?q=Test%20URL-encoded%20stuff",
@@ -253,13 +253,13 @@ INVALID_URLS = [
     "http://foo:bar/baz@example.com",
     "http://invalid-.com/?m=foo@example.com",
     # Newlines and tabs are not accepted.
-    "http://www.ginger.gloportal.dev/\n",
+    "http://www.gingerdj.gloportal.dev/\n",
     "http://[::ffff:192.9.5.5]\n",
-    "http://www.ginger.gloportal.dev/\r",
+    "http://www.gingerdj.gloportal.dev/\r",
     "http://[::ffff:192.9.5.5]\r",
-    "http://www.ginger\rproject.com/",
+    "http://www.gingerdj\rproject.com/",
     "http://[::\rffff:192.9.5.5]",
-    "http://\twww.ginger.gloportal.dev/",
+    "http://\twww.gingerdj.gloportal.dev/",
     "http://\t[::ffff:192.9.5.5]",
     # Trailing junk does not take forever to reject.
     "http://www.asdasdasdasdsadfm.com.br ",
@@ -376,7 +376,7 @@ TEST_DATA = [
     (validate_ipv4_address, "1.02.3.4", ValidationError),
     (validate_ipv4_address, "1.2.03.4", ValidationError),
     (validate_ipv4_address, "1.2.3.04", ValidationError),
-    # validate_ipv6_address uses ginger.utils.ipv6, which
+    # validate_ipv6_address uses gingerdj.utils.ipv6, which
     # is tested in much greater detail in its own testcase
     (validate_ipv6_address, "fe80::1", None),
     (validate_ipv6_address, "::1", None),
@@ -678,9 +678,9 @@ class TestValidators(SimpleTestCase):
             16, message='"%(value)s" has more than %(limit_value)d characters.'
         )
         with self.assertRaisesMessage(
-            ValidationError, '"ginger.gloportal.dev" has more than 16 characters.'
+            ValidationError, '"gingerdj.gloportal.dev" has more than 16 characters.'
         ):
-            v("ginger.gloportal.dev")
+            v("gingerdj.gloportal.dev")
 
 
 class TestValidatorEquality(TestCase):

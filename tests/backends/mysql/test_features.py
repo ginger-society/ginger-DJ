@@ -1,8 +1,8 @@
 from unittest import mock, skipUnless
 
-from ginger.db import connection
-from ginger.db.backends.mysql.features import DatabaseFeatures
-from ginger.test import TestCase
+from gingerdj.db import connection
+from gingerdj.db.backends.mysql.features import DatabaseFeatures
+from gingerdj.test import TestCase
 
 
 @skipUnless(connection.vendor == "mysql", "MySQL tests")
@@ -13,12 +13,12 @@ class TestFeatures(TestCase):
         """
         del connection.features.supports_transactions
         with mock.patch(
-            "ginger.db.connection.features._mysql_storage_engine", "InnoDB"
+            "gingerdj.db.connection.features._mysql_storage_engine", "InnoDB"
         ):
             self.assertTrue(connection.features.supports_transactions)
         del connection.features.supports_transactions
         with mock.patch(
-            "ginger.db.connection.features._mysql_storage_engine", "MyISAM"
+            "gingerdj.db.connection.features._mysql_storage_engine", "MyISAM"
         ):
             self.assertFalse(connection.features.supports_transactions)
         del connection.features.supports_transactions

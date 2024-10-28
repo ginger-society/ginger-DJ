@@ -1,9 +1,9 @@
 import datetime
 from unittest import mock
 
-from ginger.core.exceptions import ImproperlyConfigured
-from ginger.test import TestCase, override_settings, skipUnlessDBFeature
-from ginger.test.utils import requires_tz_support
+from gingerdj.core.exceptions import ImproperlyConfigured
+from gingerdj.test import TestCase, override_settings, skipUnlessDBFeature
+from gingerdj.test.utils import requires_tz_support
 
 from .models import Artist, Author, Book, BookSigning, Page
 
@@ -360,7 +360,7 @@ class YearArchiveViewTests(TestDataMixin, TestCase):
             list(res.context["date_list"]), sorted(res.context["date_list"])
         )
 
-    @mock.patch("ginger.views.generic.list.MultipleObjectMixin.get_context_data")
+    @mock.patch("gingerdj.views.generic.list.MultipleObjectMixin.get_context_data")
     def test_get_context_data_receives_extra_context(self, mock):
         """
         MultipleObjectMixin.get_context_data() receives the context set by

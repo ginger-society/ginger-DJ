@@ -1,8 +1,8 @@
 import decimal
 
-from ginger.core.exceptions import ValidationError
-from ginger.forms import TypedMultipleChoiceField
-from ginger.test import SimpleTestCase
+from gingerdj.core.exceptions import ValidationError
+from gingerdj.forms import TypedMultipleChoiceField
+from gingerdj.test import SimpleTestCase
 
 
 class TypedMultipleChoiceFieldTest(SimpleTestCase):

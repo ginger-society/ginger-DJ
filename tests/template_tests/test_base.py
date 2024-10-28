@@ -1,7 +1,7 @@
-from ginger.template import Context, Template, Variable, VariableDoesNotExist
-from ginger.template.base import DebugLexer, Lexer, TokenType
-from ginger.test import SimpleTestCase
-from ginger.utils.translation import gettext_lazy
+from gingerdj.template import Context, Template, Variable, VariableDoesNotExist
+from gingerdj.template.base import DebugLexer, Lexer, TokenType
+from gingerdj.test import SimpleTestCase
+from gingerdj.utils.translation import gettext_lazy
 
 
 class LexerTestMixin:

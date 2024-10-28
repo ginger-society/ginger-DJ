@@ -1,8 +1,8 @@
 from unittest import mock
 
-from ginger.db import connection, transaction
-from ginger.test import TestCase, skipIfDBFeature, skipUnlessDBFeature
-from ginger.utils.deprecation import RemovedInGinger60Warning
+from gingerdj.db import connection, transaction
+from gingerdj.test import TestCase, skipIfDBFeature, skipUnlessDBFeature
+from gingerdj.utils.deprecation import RemovedInGinger60Warning
 
 from .models import (
     Article,
@@ -25,7 +25,7 @@ class ManyToManyTests(TestCase):
         cls.p4 = Publication.objects.create(title="Highlights for Children")
 
         cls.a1 = Article.objects.create(
-            headline="Ginger lets you build web apps easily"
+            headline="GingerDJ lets you build web apps easily"
         )
         cls.a1.publications.add(cls.p1)
 
@@ -40,10 +40,10 @@ class ManyToManyTests(TestCase):
 
     def test_add(self):
         # Create an Article.
-        a5 = Article(headline="Ginger lets you create web apps easily")
+        a5 = Article(headline="GingerDJ lets you create web apps easily")
         # You can't associate it with a Publication until it's been saved.
         msg = (
-            '"<Article: Ginger lets you create web apps easily>" needs to have '
+            '"<Article: GingerDJ lets you create web apps easily>" needs to have '
             'a value for field "id" before this many-to-many relationship can be used.'
         )
         with self.assertRaisesMessage(ValueError, msg):
@@ -67,7 +67,7 @@ class ManyToManyTests(TestCase):
 
         # Adding an object of the wrong type raises TypeError
         msg = (
-            "'Publication' instance expected, got <Article: Ginger lets you create web "
+            "'Publication' instance expected, got <Article: GingerDJ lets you create web "
             "apps easily>"
         )
         with self.assertRaisesMessage(TypeError, msg):
@@ -82,7 +82,7 @@ class ManyToManyTests(TestCase):
         )
 
     def test_add_remove_set_by_pk(self):
-        a5 = Article.objects.create(headline="Ginger lets you create web apps easily")
+        a5 = Article.objects.create(headline="GingerDJ lets you create web apps easily")
         a5.publications.add(self.p1.pk)
         self.assertSequenceEqual(a5.publications.all(), [self.p1])
         a5.publications.set([self.p2.pk])
@@ -93,7 +93,7 @@ class ManyToManyTests(TestCase):
     def test_add_remove_set_by_to_field(self):
         user_1 = User.objects.create(username="Jean")
         user_2 = User.objects.create(username="Joe")
-        a5 = Article.objects.create(headline="Ginger lets you create web apps easily")
+        a5 = Article.objects.create(headline="GingerDJ lets you create web apps easily")
         a5.authors.add(user_1.username)
         self.assertSequenceEqual(a5.authors.all(), [user_1])
         a5.authors.set([user_2.username])
@@ -341,7 +341,7 @@ class ManyToManyTests(TestCase):
         )
 
         # Bulk delete some articles - references to deleted objects should go
-        q = Article.objects.filter(headline__startswith="Ginger")
+        q = Article.objects.filter(headline__startswith="GingerDJ")
         self.assertSequenceEqual(q, [self.a1])
         q.delete()
         # After the delete, the QuerySet cache needs to be cleared,
@@ -479,7 +479,7 @@ class ManyToManyTests(TestCase):
         self.p1.article_set.set([self.a1, self.a2])
 
         qs = self.p1.article_set.filter(
-            headline="Ginger lets you build web apps easily"
+            headline="GingerDJ lets you build web apps easily"
         )
         self.p1.article_set.set(qs)
 
@@ -524,7 +524,7 @@ class ManyToManyTests(TestCase):
     def test_create_after_prefetch(self):
         a4 = Article.objects.prefetch_related("publications").get(id=self.a4.id)
         self.assertSequenceEqual(a4.publications.all(), [self.p2])
-        p5 = a4.publications.create(title="Ginger beats")
+        p5 = a4.publications.create(title="GingerDJ beats")
         self.assertCountEqual(a4.publications.all(), [self.p2, p5])
 
     def test_set_after_prefetch(self):
@@ -609,7 +609,7 @@ class ManyToManyQueryTests(TestCase):
     @classmethod
     def setUpTestData(cls):
         cls.article = Article.objects.create(
-            headline="Ginger lets you build Web apps easily"
+            headline="GingerDJ lets you build Web apps easily"
         )
         cls.nullable_target_article = NullableTargetArticle.objects.create(
             headline="The python is good"

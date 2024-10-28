@@ -2,14 +2,14 @@ import datetime
 from io import StringIO
 from unittest import mock
 
-from ginger.core.management.base import OutputWrapper
-from ginger.db.migrations.questioner import (
+from gingerdj.core.management.base import OutputWrapper
+from gingerdj.db.migrations.questioner import (
     InteractiveMigrationQuestioner,
     MigrationQuestioner,
 )
-from ginger.db.models import NOT_PROVIDED
-from ginger.test import SimpleTestCase
-from ginger.test.utils import override_settings
+from gingerdj.db.models import NOT_PROVIDED
+from gingerdj.test import SimpleTestCase
+from gingerdj.test.utils import override_settings
 
 
 class QuestionerTests(SimpleTestCase):

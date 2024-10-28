@@ -1,5 +1,5 @@
-from ginger.urls import include, path
-from ginger.views.generic import RedirectView
+from gingerdj.urls import include, path
+from gingerdj.views.generic import RedirectView
 
 from . import views
 

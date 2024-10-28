@@ -2,11 +2,11 @@ import decimal
 import json
 import re
 
-from ginger.core import serializers
-from ginger.core.serializers.base import DeserializationError
-from ginger.db import models
-from ginger.test import TestCase, TransactionTestCase
-from ginger.test.utils import isolate_apps
+from gingerdj.core import serializers
+from gingerdj.core.serializers.base import DeserializationError
+from gingerdj.db import models
+from gingerdj.test import TestCase, TransactionTestCase
+from gingerdj.test.utils import isolate_apps
 
 from .models import Score
 from .tests import SerializersTestBase, SerializersTransactionTestBase

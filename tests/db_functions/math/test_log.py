@@ -1,8 +1,8 @@
 import math
 from decimal import Decimal
 
-from ginger.db.models.functions import Log
-from ginger.test import TestCase
+from gingerdj.db.models.functions import Log
+from gingerdj.test import TestCase
 
 from ..models import DecimalModel, FloatModel, IntegerModel
 

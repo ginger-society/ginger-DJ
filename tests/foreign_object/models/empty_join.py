@@ -1,7 +1,7 @@
-from ginger.db import models
-from ginger.db.models.fields.related import ReverseManyToOneDescriptor
-from ginger.db.models.lookups import StartsWith
-from ginger.db.models.query_utils import PathInfo
+from gingerdj.db import models
+from gingerdj.db.models.fields.related import ReverseManyToOneDescriptor
+from gingerdj.db.models.lookups import StartsWith
+from gingerdj.db.models.query_utils import PathInfo
 
 
 class CustomForeignObjectRel(models.ForeignObjectRel):

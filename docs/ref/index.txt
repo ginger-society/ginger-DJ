@@ -12,7 +12,7 @@ API Reference
    contrib/index
    csrf
    databases
-   ginger-admin
+   gingerdj-admin
    exceptions
    files/index
    forms/index

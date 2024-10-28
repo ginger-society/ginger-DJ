@@ -2,7 +2,7 @@
 GeoGinger Forms API
 ===================
 
-.. module:: ginger.contrib.gis.forms
+.. module:: gingerdj.contrib.gis.forms
     :synopsis: GeoGinger forms API.
 
 GeoGinger provides some specialized form fields and widgets in order to visually
@@ -82,7 +82,7 @@ Form field classes
 Form widgets
 ============
 
-.. module:: ginger.contrib.gis.forms.widgets
+.. module:: gingerdj.contrib.gis.forms.widgets
     :synopsis: GeoGinger widgets API.
 
 GeoGinger form widgets allow you to display and edit geographic data on a
@@ -94,7 +94,7 @@ Widget attributes
 -----------------
 
 GeoGinger widgets are template-based, so their attributes are mostly different
-from other Ginger widget attributes.
+from other GingerDJ widget attributes.
 
 
 .. attribute:: BaseGeometryWidget.geom_type
@@ -119,10 +119,10 @@ from other Ginger widget attributes.
 
     The template used to render the map widget.
 
-You can pass widget attributes in the same manner that for any other Ginger
+You can pass widget attributes in the same manner that for any other GingerDJ
 widget. For example::
 
-    from ginger.contrib.gis import forms
+    from gingerdj.contrib.gis import forms
 
 
     class MyGeoForm(forms.Form):

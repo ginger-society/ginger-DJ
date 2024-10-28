@@ -1,8 +1,8 @@
 from datetime import date, datetime, timedelta
 from operator import attrgetter
 
-from ginger.db import IntegrityError
-from ginger.test import TestCase
+from gingerdj.db import IntegrityError
+from gingerdj.test import TestCase
 
 from .models import (
     CustomMembership,

@@ -1,4 +1,4 @@
-from ginger.test import SimpleTestCase, override_settings
+from gingerdj.test import SimpleTestCase, override_settings
 
 from ..utils import setup
 
@@ -15,7 +15,7 @@ class DebugTests(SimpleTestCase):
     def test_modules(self):
         output = self.engine.render_to_string("modules", {})
         self.assertIn(
-            "&#x27;ginger&#x27;: &lt;module &#x27;ginger&#x27; ",
+            "&#x27;gingerdj&#x27;: &lt;module &#x27;gingerdj&#x27; ",
             output,
         )
 

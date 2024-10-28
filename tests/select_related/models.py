@@ -7,7 +7,7 @@ isn't always a good idea, so the ``depth`` argument control how many "levels"
 the select-related behavior will traverse.
 """
 
-from ginger.db import models
+from gingerdj.db import models
 
 # Who remembers high school biology?
 
@@ -72,7 +72,6 @@ class Pizza(models.Model):
 class TaggedItem(models.Model):
     tag = models.CharField(max_length=30)
 
-  
     object_id = models.PositiveIntegerField()
 
 

@@ -11,13 +11,13 @@ Settings
 
     Be careful when you override settings, especially when the default value
     is a non-empty list or dictionary, such as :setting:`STATICFILES_FINDERS`.
-    Make sure you keep the components required by the features of Ginger you
+    Make sure you keep the components required by the features of GingerDJ you
     wish to use.
 
 Core Settings
 =============
 
-Here's a list of settings available in Ginger core and their default values.
+Here's a list of settings available in GingerDJ core and their default values.
 Settings provided by contrib apps are listed below, followed by a topical index
 of the core settings. For introductory material, see the :doc:`settings topic
 guide </topics/settings>`.
@@ -49,8 +49,8 @@ case of the actual model class name.
 Default: ``[]`` (Empty list)
 
 A list of all the people who get code error notifications. When
-:setting:`DEBUG=False <DEBUG>` and :class:`~ginger.utils.log.AdminEmailHandler`
-is configured in :setting:`LOGGING` (done by default), Ginger emails these
+:setting:`DEBUG=False <DEBUG>` and :class:`~gingerdj.utils.log.AdminEmailHandler`
+is configured in :setting:`LOGGING` (done by default), GingerDJ emails these
 people the details of exceptions raised in the request/response cycle.
 
 Each item in the list should be a tuple of (Full name, email address). Example::
@@ -64,7 +64,7 @@ Each item in the list should be a tuple of (Full name, email address). Example::
 
 Default: ``[]`` (Empty list)
 
-A list of strings representing the host/domain names that this Ginger site can
+A list of strings representing the host/domain names that this GingerDJ site can
 serve. This is a security measure to prevent :ref:`HTTP Host header attacks
 <host-headers-virtual-hosting>`, which are possible even under many
 seemingly-safe web server configurations.
@@ -79,16 +79,16 @@ responsible to provide your own validation of the ``Host`` header (perhaps in a
 middleware; if so this middleware must be listed first in
 :setting:`MIDDLEWARE`).
 
-Ginger also allows the `fully qualified domain name (FQDN)`_ of any entries.
-Some browsers include a trailing dot in the ``Host`` header which Ginger
+GingerDJ also allows the `fully qualified domain name (FQDN)`_ of any entries.
+Some browsers include a trailing dot in the ``Host`` header which GingerDJ
 strips when performing host validation.
 
 .. _`fully qualified domain name (FQDN)`: https://en.wikipedia.org/wiki/Fully_qualified_domain_name
 
 If the ``Host`` header (or ``X-Forwarded-Host`` if
 :setting:`USE_X_FORWARDED_HOST` is enabled) does not match any value in this
-list, the :meth:`ginger.http.HttpRequest.get_host()` method will raise
-:exc:`~ginger.core.exceptions.SuspiciousOperation`.
+list, the :meth:`gingerdj.http.HttpRequest.get_host()` method will raise
+:exc:`~gingerdj.core.exceptions.SuspiciousOperation`.
 
 When :setting:`DEBUG` is ``True`` and ``ALLOWED_HOSTS`` is empty, the host
 is validated against ``['.localhost', '127.0.0.1', '[::1]']``.
@@ -96,7 +96,7 @@ is validated against ``['.localhost', '127.0.0.1', '[::1]']``.
 ``ALLOWED_HOSTS`` is also :ref:`checked when running tests
 <topics-testing-advanced-multiple-hosts>`.
 
-This validation only applies via :meth:`~ginger.http.HttpRequest.get_host()`;
+This validation only applies via :meth:`~gingerdj.http.HttpRequest.get_host()`;
 if your code accesses the ``Host`` header directly from ``request.META`` you
 are bypassing this security protection.
 
@@ -113,7 +113,7 @@ same URL with a slash appended. Note that the redirect may cause any data
 submitted in a POST request to be lost.
 
 The :setting:`APPEND_SLASH` setting is only used if
-:class:`~ginger.middleware.common.CommonMiddleware` is installed
+:class:`~gingerdj.middleware.common.CommonMiddleware` is installed
 (see :doc:`/topics/http/middleware`). See also :setting:`PREPEND_WWW`.
 
 .. setting:: CACHES
@@ -125,12 +125,12 @@ Default::
 
     {
         "default": {
-            "BACKEND": "ginger.core.cache.backends.locmem.LocMemCache",
+            "BACKEND": "gingerdj.core.cache.backends.locmem.LocMemCache",
         }
     }
 
 A dictionary containing the settings for all caches to be used with
-Ginger. It is a nested dictionary whose contents maps cache aliases
+GingerDJ. It is a nested dictionary whose contents maps cache aliases
 to a dictionary containing the options for an individual cache.
 
 The :setting:`CACHES` setting must configure a ``default`` cache;
@@ -148,15 +148,15 @@ Default: ``''`` (Empty string)
 
 The cache backend to use. The built-in cache backends are:
 
-* ``'ginger.core.cache.backends.db.DatabaseCache'``
-* ``'ginger.core.cache.backends.dummy.DummyCache'``
-* ``'ginger.core.cache.backends.filebased.FileBasedCache'``
-* ``'ginger.core.cache.backends.locmem.LocMemCache'``
-* ``'ginger.core.cache.backends.memcached.PyMemcacheCache'``
-* ``'ginger.core.cache.backends.memcached.PyLibMCCache'``
-* ``'ginger.core.cache.backends.redis.RedisCache'``
+* ``'gingerdj.core.cache.backends.db.DatabaseCache'``
+* ``'gingerdj.core.cache.backends.dummy.DummyCache'``
+* ``'gingerdj.core.cache.backends.filebased.FileBasedCache'``
+* ``'gingerdj.core.cache.backends.locmem.LocMemCache'``
+* ``'gingerdj.core.cache.backends.memcached.PyMemcacheCache'``
+* ``'gingerdj.core.cache.backends.memcached.PyLibMCCache'``
+* ``'gingerdj.core.cache.backends.redis.RedisCache'``
 
-You can use a cache backend that doesn't ship with Ginger by setting
+You can use a cache backend that doesn't ship with GingerDJ by setting
 :setting:`BACKEND <CACHES-BACKEND>` to a fully-qualified path of a cache
 backend class (i.e. ``mypackage.backends.whatever.WhateverCache``).
 
@@ -186,7 +186,7 @@ information.
 Default: ``''`` (Empty string)
 
 A string that will be automatically included (prepended by default) to
-all cache keys used by the Ginger server.
+all cache keys used by the GingerDJ server.
 
 See the :ref:`cache documentation <cache_key_prefixing>` for more information.
 
@@ -203,7 +203,7 @@ name for a local memory cache. e.g.::
 
     CACHES = {
         "default": {
-            "BACKEND": "ginger.core.cache.backends.filebased.FileBasedCache",
+            "BACKEND": "gingerdj.core.cache.backends.filebased.FileBasedCache",
             "LOCATION": "/var/tmp/ginger_cache",
         }
     }
@@ -240,7 +240,7 @@ causes keys to immediately expire (effectively "don't cache").
 
 Default: ``1``
 
-The default version number for cache keys generated by the Ginger server.
+The default version number for cache keys generated by the GingerDJ server.
 
 See the :ref:`cache documentation <cache_versioning>` for more information.
 
@@ -314,7 +314,7 @@ site request forgery protection.  It should be set to a string such as
 ``".example.com"`` to allow a POST request from a form on one subdomain to be
 accepted by a view served from another subdomain.
 
-Please note that the presence of this setting does not imply that Ginger's CSRF
+Please note that the presence of this setting does not imply that GingerDJ's CSRF
 protection is safe from cross-subdomain attacks by default - please see the
 :ref:`CSRF limitations <csrf-limitations>` section.
 
@@ -363,9 +363,9 @@ your application). See :doc:`/ref/csrf`.
 Default: ``'/'``
 
 The path set on the CSRF cookie. This should either match the URL path of your
-Ginger installation or be a parent of that path.
+GingerDJ installation or be a parent of that path.
 
-This is useful if you have multiple Ginger instances running under the same
+This is useful if you have multiple GingerDJ instances running under the same
 hostname. They can use different cookie paths, and each instance will only see
 its own CSRF cookie.
 
@@ -400,16 +400,16 @@ cookie is only sent with an HTTPS connection.
 Default: ``False``
 
 Whether to store the CSRF token in the user's session instead of in a cookie.
-It requires the use of :mod:`ginger.contrib.sessions`.
+It requires the use of :mod:`gingerdj.contrib.sessions`.
 
-Storing the CSRF token in a cookie (Ginger's default) is safe, but storing it
+Storing the CSRF token in a cookie (GingerDJ's default) is safe, but storing it
 in the session is common practice in other web frameworks and therefore
 sometimes demanded by security auditors.
 
 Since the :ref:`default error views <error-views>` require the CSRF token,
-:class:`~ginger.contrib.sessions.middleware.SessionMiddleware` must appear in
+:class:`~gingerdj.contrib.sessions.middleware.SessionMiddleware` must appear in
 :setting:`MIDDLEWARE` before any middleware that may raise an exception to
-trigger an error view (such as :exc:`~ginger.core.exceptions.PermissionDenied`)
+trigger an error view (such as :exc:`~gingerdj.core.exceptions.PermissionDenied`)
 if you're using ``CSRF_USE_SESSIONS``. See :ref:`middleware-ordering`.
 
 .. setting:: CSRF_FAILURE_VIEW
@@ -417,7 +417,7 @@ if you're using ``CSRF_USE_SESSIONS``. See :ref:`middleware-ordering`.
 ``CSRF_FAILURE_VIEW``
 ---------------------
 
-Default: ``'ginger.views.csrf.csrf_failure'``
+Default: ``'gingerdj.views.csrf.csrf_failure'``
 
 A dotted path to the view function to be used when an incoming request is
 rejected by the :doc:`CSRF protection </ref/csrf>`. The function should have
@@ -427,9 +427,9 @@ this signature::
 
 where ``reason`` is a short message (intended for developers or logging, not
 for end users) indicating the reason the request was rejected. It should return
-an :class:`~ginger.http.HttpResponseForbidden`.
+an :class:`~gingerdj.http.HttpResponseForbidden`.
 
-``ginger.views.csrf.csrf_failure()`` accepts an additional ``template_name``
+``gingerdj.views.csrf.csrf_failure()`` accepts an additional ``template_name``
 parameter that defaults to ``'403_csrf.html'``. If a template with that name
 exists, it will be used to render the page.
 
@@ -457,10 +457,10 @@ Default: ``[]`` (Empty list)
 
 A list of trusted origins for unsafe requests (e.g. ``POST``).
 
-For requests that include the ``Origin`` header, Ginger's CSRF protection
+For requests that include the ``Origin`` header, GingerDJ's CSRF protection
 requires that header match the origin present in the ``Host`` header.
 
-For a :meth:`secure <ginger.http.HttpRequest.is_secure>` unsafe
+For a :meth:`secure <gingerdj.http.HttpRequest.is_secure>` unsafe
 request that doesn't include the ``Origin`` header, the request must have a
 ``Referer`` header that matches the origin present in the ``Host`` header.
 
@@ -482,7 +482,7 @@ of ``example.com``.
 Default: ``{}`` (Empty dictionary)
 
 A dictionary containing the settings for all databases to be used with
-Ginger. It is a nested dictionary whose contents map a database alias
+GingerDJ. It is a nested dictionary whose contents map a database alias
 to a dictionary containing the options for an individual database.
 
 The :setting:`DATABASES` setting must configure a ``default`` database;
@@ -493,7 +493,7 @@ SQLite. This can be configured using the following::
 
     DATABASES = {
         "default": {
-            "ENGINE": "ginger.db.backends.sqlite3",
+            "ENGINE": "gingerdj.db.backends.sqlite3",
             "NAME": "mydatabase",
         }
     }
@@ -505,7 +505,7 @@ other database types. This example is for PostgreSQL::
 
     DATABASES = {
         "default": {
-            "ENGINE": "ginger.db.backends.postgresql",
+            "ENGINE": "gingerdj.db.backends.postgresql",
             "NAME": "mydatabase",
             "USER": "mydatabaseuser",
             "PASSWORD": "mypassword",
@@ -534,7 +534,7 @@ Set this to ``True`` to wrap each view in a transaction on this database. See
 
 Default: ``True``
 
-Set this to ``False`` if you want to :ref:`disable Ginger's transaction
+Set this to ``False`` if you want to :ref:`disable GingerDJ's transaction
 management <deactivate-transaction-management>` and implement your own.
 
 .. setting:: DATABASE-ENGINE
@@ -546,12 +546,12 @@ Default: ``''`` (Empty string)
 
 The database backend to use. The built-in database backends are:
 
-* ``'ginger.db.backends.postgresql'``
-* ``'ginger.db.backends.mysql'``
-* ``'ginger.db.backends.sqlite3'``
-* ``'ginger.db.backends.oracle'``
+* ``'gingerdj.db.backends.postgresql'``
+* ``'gingerdj.db.backends.mysql'``
+* ``'gingerdj.db.backends.sqlite3'``
+* ``'gingerdj.db.backends.oracle'``
 
-You can use a database backend that doesn't ship with Ginger by setting
+You can use a database backend that doesn't ship with GingerDJ by setting
 ``ENGINE`` to a fully-qualified path (i.e. ``mypackage.backends.whatever``).
 
 .. setting:: HOST
@@ -600,7 +600,7 @@ file. When specifying the path, always use forward slashes, even on Windows
 Default: ``0``
 
 The lifetime of a database connection, as an integer of seconds. Use ``0`` to
-close database connections at the end of each request — Ginger's historical
+close database connections at the end of each request — GingerDJ's historical
 behavior — and ``None`` for unlimited :ref:`persistent database connections
 <persistent-database-connections>`.
 
@@ -670,13 +670,13 @@ returns aware datetimes with the timezone set to this option's value if not
 When :setting:`USE_TZ` is ``False``, it is an error to set this option.
 
 * If the database backend doesn't support time zones (e.g. SQLite, MySQL,
-  Oracle), Ginger reads and writes datetimes in local time according to this
+  Oracle), GingerDJ reads and writes datetimes in local time according to this
   option if it is set and in UTC if it isn't.
 
   Changing the connection time zone changes how datetimes are read from and
   written to the database.
 
-  * If Ginger manages the database and you don't have a strong reason to do
+  * If GingerDJ manages the database and you don't have a strong reason to do
     otherwise, you should leave this option unset. It's best to store datetimes
     in UTC because it avoids ambiguous or nonexistent datetimes during daylight
     saving time changes. Also, receiving datetimes in UTC keeps datetime
@@ -685,7 +685,7 @@ When :setting:`USE_TZ` is ``False``, it is an error to set this option.
 
   * If you're connecting to a third-party database that stores datetimes in a
     local time rather than UTC, then you must set this option to the
-    appropriate time zone. Likewise, if Ginger manages the database but
+    appropriate time zone. Likewise, if GingerDJ manages the database but
     third-party systems connect to the same database and expect to find
     datetimes in local time, then you must set this option.
 
@@ -745,7 +745,7 @@ Here's an example with a test database configuration::
 
     DATABASES = {
         "default": {
-            "ENGINE": "ginger.db.backends.postgresql",
+            "ENGINE": "gingerdj.db.backends.postgresql",
             "USER": "mydatabaseuser",
             "NAME": "mydatabase",
             "TEST": {
@@ -818,8 +818,8 @@ Default: ``None``
 
 The alias of the database that this database should mirror during
 testing. It depends on transactions and therefore must be used within
-:class:`~ginger.test.TransactionTestCase` instead of
-:class:`~ginger.test.TestCase`.
+:class:`~gingerdj.test.TransactionTestCase` instead of
+:class:`~gingerdj.test.TestCase`.
 
 This setting exists to allow for testing of primary/replica
 (referred to as master/slave by some databases)
@@ -888,7 +888,7 @@ Default: ``None``
 This is an Oracle-specific setting.
 
 The username to use when connecting to the Oracle database that will be used
-when running tests. If not provided, Ginger will use ``'test_' + USER``.
+when running tests. If not provided, GingerDJ will use ``'test_' + USER``.
 
 .. setting:: TEST_PASSWD
 
@@ -900,7 +900,7 @@ Default: ``None``
 This is an Oracle-specific setting.
 
 The password to use when connecting to the Oracle database that will be used
-when running tests. If not provided, Ginger will generate a random password.
+when running tests. If not provided, GingerDJ will generate a random password.
 
 .. setting:: TEST_ORACLE_MANAGED_FILES
 
@@ -924,7 +924,7 @@ Default: ``None``
 This is an Oracle-specific setting.
 
 The name of the tablespace that will be used when running tests. If not
-provided, Ginger will use ``'test_' + USER``.
+provided, GingerDJ will use ``'test_' + USER``.
 
 .. setting:: TEST_TBLSPACE_TMP
 
@@ -936,7 +936,7 @@ Default: ``None``
 This is an Oracle-specific setting.
 
 The name of the temporary tablespace that will be used when running tests. If
-not provided, Ginger will use ``'test_' + USER + '_temp'``.
+not provided, GingerDJ will use ``'test_' + USER + '_temp'``.
 
 .. setting:: DATAFILE
 
@@ -947,7 +947,7 @@ Default: ``None``
 
 This is an Oracle-specific setting.
 
-The name of the datafile to use for the TBLSPACE. If not provided, Ginger will
+The name of the datafile to use for the TBLSPACE. If not provided, GingerDJ will
 use ``TBLSPACE + '.dbf'``.
 
 .. setting:: DATAFILE_TMP
@@ -959,7 +959,7 @@ Default: ``None``
 
 This is an Oracle-specific setting.
 
-The name of the datafile to use for the TBLSPACE_TMP. If not provided, Ginger
+The name of the datafile to use for the TBLSPACE_TMP. If not provided, GingerDJ
 will use ``TBLSPACE_TMP + '.dbf'``.
 
 .. setting:: DATAFILE_MAXSIZE
@@ -1036,7 +1036,7 @@ The amount by which the DATAFILE_TMP is extended when more space is required.
 Default: ``2621440`` (i.e. 2.5 MB).
 
 The maximum size in bytes that a request body may be before a
-:exc:`~ginger.core.exceptions.SuspiciousOperation` (``RequestDataTooBig``) is
+:exc:`~gingerdj.core.exceptions.SuspiciousOperation` (``RequestDataTooBig``) is
 raised. The check is done when accessing ``request.body`` or ``request.POST``
 and is calculated against the total request size excluding any file upload
 data. You can set this to ``None`` to disable the check. Applications that are
@@ -1058,7 +1058,7 @@ See also :setting:`FILE_UPLOAD_MAX_MEMORY_SIZE`.
 Default: ``1000``
 
 The maximum number of parameters that may be received via GET or POST before a
-:exc:`~ginger.core.exceptions.SuspiciousOperation` (``TooManyFields``) is
+:exc:`~gingerdj.core.exceptions.SuspiciousOperation` (``TooManyFields``) is
 raised. You can set this to ``None`` to disable the check. Applications that
 are expected to receive an unusually large number of form fields should tune
 this setting.
@@ -1078,7 +1078,7 @@ Default: ``100``
 
 The maximum number of files that may be received via POST in a
 ``multipart/form-data`` encoded request before a
-:exc:`~ginger.core.exceptions.SuspiciousOperation` (``TooManyFiles``) is
+:exc:`~gingerdj.core.exceptions.SuspiciousOperation` (``TooManyFiles``) is
 raised. You can set this to ``None`` to disable the check. Applications that
 are expected to receive an unusually large number of file fields should tune
 this setting.
@@ -1201,12 +1201,12 @@ A boolean that turns on/off debug mode.
 Never deploy a site into production with :setting:`DEBUG` turned on.
 
 One of the main features of debug mode is the display of detailed error pages.
-If your app raises an exception when :setting:`DEBUG` is ``True``, Ginger will
+If your app raises an exception when :setting:`DEBUG` is ``True``, GingerDJ will
 display a detailed traceback, including a lot of metadata about your
-environment, such as all the currently defined Ginger settings (from
+environment, such as all the currently defined GingerDJ settings (from
 ``settings.py``).
 
-As a security measure, Ginger will *not* include settings that might be
+As a security measure, GingerDJ will *not* include settings that might be
 sensitive, such as :setting:`SECRET_KEY`. Specifically, it will exclude any
 setting whose name includes any of the following:
 
@@ -1225,7 +1225,7 @@ that are inappropriate for public consumption. File paths, configuration
 options and the like all give attackers extra information about your server.
 
 It is also important to remember that when running with :setting:`DEBUG`
-turned on, Ginger will remember every SQL query it executes. This is useful
+turned on, GingerDJ will remember every SQL query it executes. This is useful
 when you're debugging, but it'll rapidly consume memory on a production server.
 
 Finally, if :setting:`DEBUG` is ``False``, you also need to properly set
@@ -1234,7 +1234,7 @@ requests being returned as "Bad Request (400)".
 
 .. note::
 
-    The default :file:`settings.py` file created by :djadmin:`ginger-admin
+    The default :file:`settings.py` file created by :djadmin:`gingerdj-admin
     startproject <startproject>` sets ``DEBUG = True`` for convenience.
 
 .. setting:: DEBUG_PROPAGATE_EXCEPTIONS
@@ -1244,13 +1244,13 @@ requests being returned as "Bad Request (400)".
 
 Default: ``False``
 
-If set to ``True``, Ginger's exception handling of view functions
-(:data:`~ginger.conf.urls.handler500`, or the debug view if :setting:`DEBUG`
-is ``True``) and logging of 500 responses (:ref:`ginger-request-logger`) is
+If set to ``True``, GingerDJ's exception handling of view functions
+(:data:`~gingerdj.conf.urls.handler500`, or the debug view if :setting:`DEBUG`
+is ``True``) and logging of 500 responses (:ref:`gingerdj-request-logger`) is
 skipped and exceptions propagate upward.
 
 This can be useful for some test setups. It shouldn't be used on a live site
-unless you want your web server (instead of Ginger) to generate "Internal
+unless you want your web server (instead of GingerDJ) to generate "Internal
 Server Error" responses. In that case, make sure your server doesn't show the
 stack trace or other sensitive information in the response.
 
@@ -1274,10 +1274,10 @@ See also :setting:`NUMBER_GROUPING`, :setting:`THOUSAND_SEPARATOR` and
 ``DEFAULT_AUTO_FIELD``
 ----------------------
 
-Default: ``'``:class:`ginger.db.models.AutoField`\ ``'``
+Default: ``'``:class:`gingerdj.db.models.AutoField`\ ``'``
 
 Default primary key field type to use for models that don't have a field with
-:attr:`primary_key=True <ginger.db.models.Field.primary_key>`.
+:attr:`primary_key=True <gingerdj.db.models.Field.primary_key>`.
 
 .. admonition:: Migrating auto-created through tables
 
@@ -1293,7 +1293,7 @@ Default primary key field type to use for models that don't have a field with
     key of the auto-created through table will not be migrated.
 
     In order to address this, you should add a
-    :class:`~ginger.db.migrations.operations.RunSQL` operation to your
+    :class:`~gingerdj.db.migrations.operations.RunSQL` operation to your
     migrations to perform the required ``ALTER TABLE`` step. You can check the
     existing table name through ``sqlmigrate``, ``dbshell``, or with the
     field’s ``remote_field.through._meta.db_table`` property.
@@ -1319,10 +1319,10 @@ manually specified. Used when constructing the ``Content-Type`` header.
 ``DEFAULT_EXCEPTION_REPORTER``
 ------------------------------
 
-Default: ``'``:class:`ginger.views.debug.ExceptionReporter`\ ``'``
+Default: ``'``:class:`gingerdj.views.debug.ExceptionReporter`\ ``'``
 
 Default exception reporter class to be used if none has been assigned to the
-:class:`~ginger.http.HttpRequest` instance yet. See
+:class:`~gingerdj.http.HttpRequest` instance yet. See
 :ref:`custom-error-reports`.
 
 .. setting:: DEFAULT_EXCEPTION_REPORTER_FILTER
@@ -1330,10 +1330,10 @@ Default exception reporter class to be used if none has been assigned to the
 ``DEFAULT_EXCEPTION_REPORTER_FILTER``
 -------------------------------------
 
-Default: ``'``:class:`ginger.views.debug.SafeExceptionReporterFilter`\ ``'``
+Default: ``'``:class:`gingerdj.views.debug.SafeExceptionReporterFilter`\ ``'``
 
 Default exception reporter filter class to be used if none has been assigned to
-the :class:`~ginger.http.HttpRequest` instance yet.
+the :class:`~gingerdj.http.HttpRequest` instance yet.
 See :ref:`Filtering error reports<filtering-error-reports>`.
 
 .. setting:: DEFAULT_FROM_EMAIL
@@ -1387,7 +1387,7 @@ This is only used if ``CommonMiddleware`` is installed (see
 ``EMAIL_BACKEND``
 -----------------
 
-Default: ``'``:class:`ginger.core.mail.backends.smtp.EmailBackend`\ ``'``
+Default: ``'``:class:`gingerdj.core.mail.backends.smtp.EmailBackend`\ ``'``
 
 The backend to use for sending emails. For the list of available backends see
 :ref:`topic-email-backends`.
@@ -1423,7 +1423,7 @@ Default: ``''`` (Empty string)
 Password to use for the SMTP server defined in :setting:`EMAIL_HOST`. This
 setting is used in conjunction with :setting:`EMAIL_HOST_USER` when
 authenticating to the SMTP server. If either of these settings is empty,
-Ginger won't attempt authentication.
+GingerDJ won't attempt authentication.
 
 See also :setting:`EMAIL_HOST_USER`.
 
@@ -1435,7 +1435,7 @@ See also :setting:`EMAIL_HOST_USER`.
 Default: ``''`` (Empty string)
 
 Username to use for the SMTP server defined in :setting:`EMAIL_HOST`.
-If empty, Ginger won't attempt authentication.
+If empty, GingerDJ won't attempt authentication.
 
 See also :setting:`EMAIL_HOST_PASSWORD`.
 
@@ -1453,10 +1453,10 @@ Port to use for the SMTP server defined in :setting:`EMAIL_HOST`.
 ``EMAIL_SUBJECT_PREFIX``
 ------------------------
 
-Default: ``'[Ginger] '``
+Default: ``'[GingerDJ] '``
 
-Subject-line prefix for email messages sent with ``ginger.core.mail.mail_admins``
-or ``ginger.core.mail.mail_managers``. You'll probably want to include the
+Subject-line prefix for email messages sent with ``gingerdj.core.mail.mail_admins``
+or ``gingerdj.core.mail.mail_managers``. You'll probably want to include the
 trailing space.
 
 .. setting:: EMAIL_USE_LOCALTIME
@@ -1542,12 +1542,12 @@ attempt.
 Default::
 
     [
-        "ginger.core.files.uploadhandler.MemoryFileUploadHandler",
-        "ginger.core.files.uploadhandler.TemporaryFileUploadHandler",
+        "gingerdj.core.files.uploadhandler.MemoryFileUploadHandler",
+        "gingerdj.core.files.uploadhandler.TemporaryFileUploadHandler",
     ]
 
 A list of handlers to use for uploading. Changing this setting allows complete
-customization -- even replacement -- of Ginger's upload process.
+customization -- even replacement -- of GingerDJ's upload process.
 
 See :doc:`/topics/files` for details.
 
@@ -1620,7 +1620,7 @@ Default: ``None``
 
 The directory to store data to (typically files larger than
 :setting:`FILE_UPLOAD_MAX_MEMORY_SIZE`) temporarily while uploading files.
-If ``None``, Ginger will use the standard temporary directory for the operating
+If ``None``, GingerDJ will use the standard temporary directory for the operating
 system. For example, this will default to ``/tmp`` on \*nix-style operating
 systems.
 
@@ -1666,7 +1666,7 @@ If not ``None``, this will be used as the value of the ``SCRIPT_NAME``
 environment variable in any HTTP request. This setting can be used to override
 the server-provided value of ``SCRIPT_NAME``, which may be a rewritten version
 of the preferred value or not supplied at all. It is also used by
-:func:`ginger.setup()` to set the URL resolver script prefix outside of the
+:func:`gingerdj.setup()` to set the URL resolver script prefix outside of the
 request/response cycle (e.g. in management commands and standalone scripts) to
 generate correct URLs when ``FORCE_SCRIPT_NAME`` is provided.
 
@@ -1675,15 +1675,15 @@ generate correct URLs when ``FORCE_SCRIPT_NAME`` is provided.
 ``FORM_RENDERER``
 -----------------
 
-Default: ``'``:class:`ginger.forms.renderers.GingerTemplates`\ ``'``
+Default: ``'``:class:`gingerdj.forms.renderers.GingerTemplates`\ ``'``
 
 The class that renders forms and form widgets. It must implement
 :ref:`the low-level render API <low-level-widget-render-api>`. Included form
 renderers are:
 
-* ``'``:class:`ginger.forms.renderers.GingerTemplates`\ ``'``
-* ``'``:class:`ginger.forms.renderers.Jinja2`\ ``'``
-* ``'``:class:`ginger.forms.renderers.TemplatesSetting`\ ``'``
+* ``'``:class:`gingerdj.forms.renderers.GingerTemplates`\ ``'``
+* ``'``:class:`gingerdj.forms.renderers.Jinja2`\ ``'``
+* ``'``:class:`gingerdj.forms.renderers.TemplatesSetting`\ ``'``
 
 .. setting:: FORMS_URLFIELD_ASSUME_HTTPS
 
@@ -1697,7 +1697,7 @@ Default: ``False``
 
 Set this transitional setting to ``True`` to opt into using ``"https"`` as the
 new default value of :attr:`URLField.assume_scheme
-<ginger.forms.URLField.assume_scheme>` during the Ginger 5.x release cycle.
+<gingerdj.forms.URLField.assume_scheme>` during the GingerDJ 5.x release cycle.
 
 .. setting:: FORMAT_MODULE_PATH
 
@@ -1707,7 +1707,7 @@ new default value of :attr:`URLField.assume_scheme
 Default: ``None``
 
 A full Python path to a Python package that contains custom format definitions
-for project locales. If not ``None``, Ginger will check for a ``formats.py``
+for project locales. If not ``None``, GingerDJ will check for a ``formats.py``
 file, under the directory named as the current locale, and will use the
 formats defined in this file.
 
@@ -1716,7 +1716,7 @@ named using :term:`locale name` notation, for example ``de``, ``pt_BR``,
 ``en_US``, etc.
 
 For example, if :setting:`FORMAT_MODULE_PATH` is set to ``mysite.formats``,
-and current language is ``en`` (English), Ginger will expect a directory tree
+and current language is ``en`` (English), GingerDJ will expect a directory tree
 like:
 
 .. code-block:: text
@@ -1735,7 +1735,7 @@ You can also set this setting to a list of Python paths, for example::
         "some_app.formats",
     ]
 
-When Ginger searches for a certain format, it will go through all given Python
+When GingerDJ searches for a certain format, it will go through all given Python
 paths until it finds a module that actually defines the given format. This
 means that formats defined in packages farther up in the list will take
 precedence over the same formats in packages farther down.
@@ -1767,12 +1767,12 @@ Default: ``[]`` (Empty list)
 List of compiled regular expression objects describing URLs that should be
 ignored when reporting HTTP 404 errors via email (see
 :doc:`/howto/error-reporting`). Regular expressions are matched against
-:meth:`request's full paths <ginger.http.HttpRequest.get_full_path>` (including
+:meth:`request's full paths <gingerdj.http.HttpRequest.get_full_path>` (including
 query string, if any). Use this if your site does not provide a commonly
 requested file such as ``favicon.ico`` or ``robots.txt``.
 
 This is only used if
-:class:`~ginger.middleware.common.BrokenLinkEmailsMiddleware` is enabled (see
+:class:`~gingerdj.middleware.common.BrokenLinkEmailsMiddleware` is enabled (see
 :doc:`/topics/http/middleware`).
 
 .. setting:: INSTALLED_APPS
@@ -1783,7 +1783,7 @@ This is only used if
 Default: ``[]`` (Empty list)
 
 A list of strings designating all applications that are enabled in this
-Ginger installation. Each string should be a dotted Python path to:
+GingerDJ installation. Each string should be a dotted Python path to:
 
 * an application configuration class (preferred), or
 * a package containing an application.
@@ -1793,12 +1793,12 @@ Ginger installation. Each string should be a dotted Python path to:
 .. admonition:: Use the application registry for introspection
 
     Your code should never access :setting:`INSTALLED_APPS` directly. Use
-    :attr:`ginger.apps.apps` instead.
+    :attr:`gingerdj.apps.apps` instead.
 
 .. admonition:: Application names and labels must be unique in
                 :setting:`INSTALLED_APPS`
 
-    Application :attr:`names <ginger.apps.AppConfig.name>` — the dotted Python
+    Application :attr:`names <gingerdj.apps.AppConfig.name>` — the dotted Python
     path to the application package — must be unique. There is no way to
     include the same application twice, short of duplicating its code under
     another name.
@@ -1819,12 +1819,12 @@ Default: ``[]`` (Empty list)
 
 A list of IP addresses, as strings, that:
 
-* Allow the :func:`~ginger.template.debug` context processor
+* Allow the :func:`~gingerdj.template.debug` context processor
   to add some variables to the template context.
 * Can use the :ref:`admindocs bookmarklets <admindocs-bookmarklets>` even if
   not logged in as a staff user.
 * Are marked as "internal" (as opposed to "EXTERNAL") in
-  :class:`~ginger.utils.log.AdminEmailHandler` emails.
+  :class:`~gingerdj.utils.log.AdminEmailHandler` emails.
 
 .. setting:: LANGUAGE_CODE
 
@@ -1849,7 +1849,7 @@ It serves two purposes:
   website. It also provides the fallback translation when a translation for a
   given literal doesn't exist for the user's preferred language.
 
-See :ref:`how-ginger-discovers-language-preference` for more details.
+See :ref:`how-gingerdj-discovers-language-preference` for more details.
 
 .. _list of language identifiers: http://www.i18nguy.com/unicode/language-identifiers.html
 
@@ -1915,9 +1915,9 @@ application). See :doc:`/topics/i18n/index`.
 Default: ``'/'``
 
 The path set on the language cookie. This should either match the URL path of your
-Ginger installation or be a parent of that path.
+GingerDJ installation or be a parent of that path.
 
-This is useful if you have multiple Ginger instances running under the same
+This is useful if you have multiple GingerDJ instances running under the same
 hostname. They can use different cookie paths and each instance will only see
 its own language cookie.
 
@@ -1961,7 +1961,7 @@ ensure that the cookie is only sent under an HTTPS connection.
 Default: A list of all available languages. This list is continually growing
 and including a copy here would inevitably become rapidly out of date. You can
 see the current list of translated languages by looking in
-:source:`ginger/conf/global_settings.py`.
+:source:`gingerdj/conf/global_settings.py`.
 
 The list is a list of 2-tuples in the format
 (:term:`language code<language code>`, ``language name``) -- for example,
@@ -1970,15 +1970,15 @@ This specifies which languages are available for language selection. See
 :doc:`/topics/i18n/index`.
 
 Generally, the default value should suffice. Only set this setting if you want
-to restrict language selection to a subset of the Ginger-provided languages.
+to restrict language selection to a subset of the GingerDJ-provided languages.
 
 If you define a custom :setting:`LANGUAGES` setting, you can mark the
 language names as translation strings using the
-:func:`~ginger.utils.translation.gettext_lazy` function.
+:func:`~gingerdj.utils.translation.gettext_lazy` function.
 
 Here's a sample settings file::
 
-    from ginger.utils.translation import gettext_lazy as _
+    from gingerdj.utils.translation import gettext_lazy as _
 
     LANGUAGES = [
         ("de", _("German")),
@@ -1992,13 +1992,13 @@ Here's a sample settings file::
 
 Default: A list of all language codes that are written right-to-left. You can
 see the current list of these languages by looking in
-:source:`ginger/conf/global_settings.py`.
+:source:`gingerdj/conf/global_settings.py`.
 
 The list contains :term:`language codes<language code>` for languages that are
 written right-to-left.
 
 Generally, the default value should suffice. Only set this setting if you want
-to restrict language selection to a subset of the Ginger-provided languages.
+to restrict language selection to a subset of the GingerDJ-provided languages.
 If you define a custom :setting:`LANGUAGES` setting, the list of bidirectional
 languages may contain language codes which are not enabled on a given site.
 
@@ -2009,8 +2009,8 @@ languages may contain language codes which are not enabled on a given site.
 
 Default: ``[]`` (Empty list)
 
-A list of directories where Ginger looks for translation files.
-See :ref:`how-ginger-discovers-translations`.
+A list of directories where GingerDJ looks for translation files.
+See :ref:`how-gingerdj-discovers-translations`.
 
 Example::
 
@@ -2019,7 +2019,7 @@ Example::
         "/var/local/translations/locale",
     ]
 
-Ginger will look within each of these paths for the ``<locale_code>/LC_MESSAGES``
+GingerDJ will look within each of these paths for the ``<locale_code>/LC_MESSAGES``
 directories containing the actual translation files.
 
 .. setting:: LOGGING
@@ -2038,7 +2038,7 @@ errors to an email log handler when :setting:`DEBUG` is ``False``. See also
 :ref:`configuring-logging`.
 
 You can see the default logging configuration by looking in
-:source:`ginger/utils/log.py`.
+:source:`gingerdj/utils/log.py`.
 
 .. setting:: LOGGING_CONFIG
 
@@ -2048,7 +2048,7 @@ You can see the default logging configuration by looking in
 Default: ``'logging.config.dictConfig'``
 
 A path to a callable that will be used to configure logging in the
-Ginger project. Points at an instance of Python's :ref:`dictConfig
+GingerDJ project. Points at an instance of Python's :ref:`dictConfig
 <logging-config-dictschema>` configuration method by default.
 
 If you set :setting:`LOGGING_CONFIG` to ``None``, the logging
@@ -2063,7 +2063,7 @@ Default: ``[]`` (Empty list)
 
 A list in the same format as :setting:`ADMINS` that specifies who should get
 broken link notifications when
-:class:`~ginger.middleware.common.BrokenLinkEmailsMiddleware` is enabled.
+:class:`~gingerdj.middleware.common.BrokenLinkEmailsMiddleware` is enabled.
 
 .. setting:: MEDIA_ROOT
 
@@ -2101,7 +2101,7 @@ to a non-empty value. You will need to :ref:`configure these files to be served
 environments.
 
 If you want to use ``{{ MEDIA_URL }}`` in your templates, add
-``'ginger.template.context_processors.media'`` in the ``'context_processors'``
+``'gingerdj.template.context_processors.media'`` in the ``'context_processors'``
 option of :setting:`TEMPLATES`.
 
 Example: ``"https://media.example.com/"``
@@ -2121,7 +2121,7 @@ Example: ``"https://media.example.com/"``
 
     If :setting:`MEDIA_URL` is a relative path, then it will be prefixed by the
     server-provided value of ``SCRIPT_NAME`` (or ``/`` if not set). This makes
-    it easier to serve a Ginger application in a subpath without adding an
+    it easier to serve a GingerDJ application in a subpath without adding an
     extra configuration to the settings.
 
 .. setting:: MIDDLEWARE
@@ -2154,7 +2154,7 @@ the ``blog.db_migrations`` package.
 If you provide the ``app_label`` argument, :djadmin:`makemigrations` will
 automatically create the package if it doesn't already exist.
 
-When you supply ``None`` as a value for an app, Ginger will consider the app as
+When you supply ``None`` as a value for an app, GingerDJ will consider the app as
 an app without migrations regardless of an existing ``migrations`` submodule.
 This can be used, for example, in a test settings file to skip migrations while
 testing (tables will still be created for the apps' models). To disable
@@ -2171,11 +2171,11 @@ app.
 
 Default: ``'F j'``
 
-The default formatting to use for date fields on Ginger admin change-list
+The default formatting to use for date fields on GingerDJ admin change-list
 pages -- and, possibly, by other parts of the system -- in cases when only the
 month and day are displayed.
 
-For example, when a Ginger admin change-list page is being filtered by a date
+For example, when a GingerDJ admin change-list page is being filtered by a date
 drilldown, the header for a given day displays the day and month. Different
 locales have different formats. For example, U.S. English would say
 "January 1," whereas Spanish might say "1 Enero."
@@ -2227,7 +2227,7 @@ See also :setting:`DECIMAL_SEPARATOR`, :setting:`THOUSAND_SEPARATOR` and
 Default: ``False``
 
 Whether to prepend the "www." subdomain to URLs that don't have it. This is only
-used if :class:`~ginger.middleware.common.CommonMiddleware` is installed
+used if :class:`~gingerdj.middleware.common.CommonMiddleware` is installed
 (see :doc:`/topics/http/middleware`). See also :setting:`APPEND_SLASH`.
 
 .. setting:: ROOT_URLCONF
@@ -2240,7 +2240,7 @@ Default: Not defined
 A string representing the full Python import path to your root URLconf, for
 example ``"mygingerapps.urls"``. Can be overridden on a per-request basis by
 setting the attribute ``urlconf`` on the incoming ``HttpRequest``
-object. See :ref:`how-ginger-processes-a-request` for details.
+object. See :ref:`how-gingerdj-processes-a-request` for details.
 
 .. setting:: SECRET_KEY
 
@@ -2249,35 +2249,35 @@ object. See :ref:`how-ginger-processes-a-request` for details.
 
 Default: ``''`` (Empty string)
 
-A secret key for a particular Ginger installation. This is used to provide
+A secret key for a particular GingerDJ installation. This is used to provide
 :doc:`cryptographic signing </topics/signing>`, and should be set to a unique,
 unpredictable value.
 
-:djadmin:`ginger-admin startproject <startproject>` automatically adds a
+:djadmin:`gingerdj-admin startproject <startproject>` automatically adds a
 randomly-generated ``SECRET_KEY`` to each new project.
 
 Uses of the key shouldn't assume that it's text or bytes. Every use should go
-through :func:`~ginger.utils.encoding.force_str` or
-:func:`~ginger.utils.encoding.force_bytes` to convert it to the desired type.
+through :func:`~gingerdj.utils.encoding.force_str` or
+:func:`~gingerdj.utils.encoding.force_bytes` to convert it to the desired type.
 
-Ginger will refuse to start if :setting:`SECRET_KEY` is not set.
+GingerDJ will refuse to start if :setting:`SECRET_KEY` is not set.
 
 .. warning::
 
     **Keep this value secret.**
 
-    Running Ginger with a known :setting:`SECRET_KEY` defeats many of Ginger's
+    Running GingerDJ with a known :setting:`SECRET_KEY` defeats many of GingerDJ's
     security protections, and can lead to privilege escalation and remote code
     execution vulnerabilities.
 
 The secret key is used for:
 
 * All :doc:`sessions </topics/http/sessions>` if you are using
-  any other session backend than ``ginger.contrib.sessions.backends.cache``,
+  any other session backend than ``gingerdj.contrib.sessions.backends.cache``,
   or are using the default
 * All :doc:`messages </ref/contrib/messages>` if you are using
-  :class:`~ginger.contrib.messages.storage.cookie.CookieStorage` or
-  :class:`~ginger.contrib.messages.storage.fallback.FallbackStorage`.
+  :class:`~gingerdj.contrib.messages.storage.cookie.CookieStorage` or
+  :class:`~gingerdj.contrib.messages.storage.fallback.FallbackStorage`.
 * Any usage of :doc:`cryptographic signing </topics/signing>`, unless a
   different key is provided.
 
@@ -2289,7 +2289,7 @@ passwords of users and key rotation will not affect them.
 
 .. note::
 
-    The default :file:`settings.py` file created by :djadmin:`ginger-admin
+    The default :file:`settings.py` file created by :djadmin:`gingerdj-admin
     startproject <startproject>` creates a unique ``SECRET_KEY`` for
     convenience.
 
@@ -2300,7 +2300,7 @@ passwords of users and key rotation will not affect them.
 
 Default: ``[]``
 
-A list of fallback secret keys for a particular Ginger installation. These are
+A list of fallback secret keys for a particular GingerDJ installation. These are
 used to allow rotation of the ``SECRET_KEY``.
 
 In order to rotate your secret keys, set a new ``SECRET_KEY`` and move the
@@ -2318,8 +2318,8 @@ expire the sessions, password reset tokens, and so on, that make use of them.
     allowing for key rotation.
 
 Uses of the secret key values shouldn't assume that they are text or bytes.
-Every use should go through :func:`~ginger.utils.encoding.force_str` or
-:func:`~ginger.utils.encoding.force_bytes` to convert it to the desired type.
+Every use should go through :func:`~gingerdj.utils.encoding.force_str` or
+:func:`~gingerdj.utils.encoding.force_bytes` to convert it to the desired type.
 
 .. setting:: SECURE_CONTENT_TYPE_NOSNIFF
 
@@ -2328,7 +2328,7 @@ Every use should go through :func:`~ginger.utils.encoding.force_str` or
 
 Default: ``True``
 
-If ``True``, the :class:`~ginger.middleware.security.SecurityMiddleware`
+If ``True``, the :class:`~gingerdj.middleware.security.SecurityMiddleware`
 sets the :ref:`x-content-type-options` header on all responses that do not
 already have it.
 
@@ -2340,7 +2340,7 @@ already have it.
 Default: ``'same-origin'``
 
 Unless set to ``None``, the
-:class:`~ginger.middleware.security.SecurityMiddleware` sets the
+:class:`~gingerdj.middleware.security.SecurityMiddleware` sets the
 :ref:`cross-origin-opener-policy` header on all responses that do not already
 have it to the value provided.
 
@@ -2351,7 +2351,7 @@ have it to the value provided.
 
 Default: ``False``
 
-If ``True``, the :class:`~ginger.middleware.security.SecurityMiddleware` adds
+If ``True``, the :class:`~gingerdj.middleware.security.SecurityMiddleware` adds
 the ``includeSubDomains`` directive to the :ref:`http-strict-transport-security`
 header. It has no effect unless :setting:`SECURE_HSTS_SECONDS` is set to a
 non-zero value.
@@ -2368,7 +2368,7 @@ non-zero value.
 
 Default: ``False``
 
-If ``True``, the :class:`~ginger.middleware.security.SecurityMiddleware` adds
+If ``True``, the :class:`~gingerdj.middleware.security.SecurityMiddleware` adds
 the ``preload`` directive to the :ref:`http-strict-transport-security`
 header. It has no effect unless :setting:`SECURE_HSTS_SECONDS` is set to a
 non-zero value.
@@ -2381,7 +2381,7 @@ non-zero value.
 Default: ``0``
 
 If set to a non-zero integer value, the
-:class:`~ginger.middleware.security.SecurityMiddleware` sets the
+:class:`~gingerdj.middleware.security.SecurityMiddleware` sets the
 :ref:`http-strict-transport-security` header on all responses that do not
 already have it.
 
@@ -2401,27 +2401,27 @@ is secure. This controls the behavior of the request object's ``is_secure()``
 method.
 
 By default, ``is_secure()`` determines if a request is secure by confirming
-that a requested URL uses ``https://``. This method is important for Ginger's
+that a requested URL uses ``https://``. This method is important for GingerDJ's
 CSRF protection, and it may be used by your own code or third-party apps.
 
-If your Ginger app is behind a proxy, though, the proxy may be "swallowing"
+If your GingerDJ app is behind a proxy, though, the proxy may be "swallowing"
 whether the original request uses HTTPS or not. If there is a non-HTTPS
-connection between the proxy and Ginger then ``is_secure()`` would always
+connection between the proxy and GingerDJ then ``is_secure()`` would always
 return ``False`` -- even for requests that were made via HTTPS by the end user.
-In contrast, if there is an HTTPS connection between the proxy and Ginger then
+In contrast, if there is an HTTPS connection between the proxy and GingerDJ then
 ``is_secure()`` would always return ``True`` -- even for requests that were
 made originally via HTTP.
 
 In this situation, configure your proxy to set a custom HTTP header that tells
-Ginger whether the request came in via HTTPS, and set
-``SECURE_PROXY_SSL_HEADER`` so that Ginger knows what header to look for.
+GingerDJ whether the request came in via HTTPS, and set
+``SECURE_PROXY_SSL_HEADER`` so that GingerDJ knows what header to look for.
 
 Set a tuple with two elements -- the name of the header to look for and the
 required value. For example::
 
     SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
-This tells Ginger to trust the ``X-Forwarded-Proto`` header that comes from our
+This tells GingerDJ to trust the ``X-Forwarded-Proto`` header that comes from our
 proxy and that the request is guaranteed to be secure (i.e., it originally came
 in via HTTPS) when:
 
@@ -2433,7 +2433,7 @@ You should *only* set this setting if you control your proxy or have some other
 guarantee that it sets/strips this header appropriately.
 
 Note that the header needs to be in the format as used by ``request.META`` --
-all caps and likely starting with ``HTTP_``. (Remember, Ginger automatically
+all caps and likely starting with ``HTTP_``. (Remember, GingerDJ automatically
 adds ``'HTTP_'`` to the start of x-header names before making the header
 available in ``request.META``.)
 
@@ -2445,12 +2445,12 @@ available in ``request.META``.)
     Make sure ALL of the following are true before setting this (assuming the
     values from the example above):
 
-    * Your Ginger app is behind a proxy.
+    * Your GingerDJ app is behind a proxy.
     * Your proxy strips the ``X-Forwarded-Proto`` header from all incoming
       requests, even when it contains a comma-separated list of protocols. In
       other words, if end users include that header in their requests, the
       proxy will discard it.
-    * Your proxy sets the ``X-Forwarded-Proto`` header and sends it to Ginger,
+    * Your proxy sets the ``X-Forwarded-Proto`` header and sends it to GingerDJ,
       but only for requests that originally come in via HTTPS.
 
     If any of those are not true, you should keep this setting set to ``None``
@@ -2465,7 +2465,7 @@ Default: ``[]`` (Empty list)
 
 If a URL path matches a regular expression in this list, the request will not be
 redirected to HTTPS. The
-:class:`~ginger.middleware.security.SecurityMiddleware` strips leading slashes
+:class:`~gingerdj.middleware.security.SecurityMiddleware` strips leading slashes
 from URL paths, so patterns shouldn't include them, e.g.
 ``SECURE_REDIRECT_EXEMPT = [r'^no-ssl/$', …]``. If
 :setting:`SECURE_SSL_REDIRECT` is ``False``, this setting has no effect.
@@ -2477,7 +2477,7 @@ from URL paths, so patterns shouldn't include them, e.g.
 
 Default: ``'same-origin'``
 
-If configured, the :class:`~ginger.middleware.security.SecurityMiddleware` sets
+If configured, the :class:`~gingerdj.middleware.security.SecurityMiddleware` sets
 the :ref:`referrer-policy` header on all responses that do not already have it
 to the value provided.
 
@@ -2500,7 +2500,7 @@ setting has no effect.
 
 Default: ``False``
 
-If ``True``, the :class:`~ginger.middleware.security.SecurityMiddleware`
+If ``True``, the :class:`~gingerdj.middleware.security.SecurityMiddleware`
 :ref:`redirects <ssl-redirect>` all non-HTTPS requests to HTTPS (except for
 those URLs matching a regular expression listed in
 :setting:`SECURE_REDIRECT_EXEMPT`).
@@ -2541,7 +2541,7 @@ protocol.
 .. admonition:: Why are my emails sent from a different address?
 
     This address is used only for error messages. It is *not* the address that
-    regular email messages sent with :meth:`~ginger.core.mail.send_mail()`
+    regular email messages sent with :meth:`~gingerdj.core.mail.send_mail()`
     come from; for that, see :setting:`DEFAULT_FROM_EMAIL`.
 
 .. setting:: SHORT_DATE_FORMAT
@@ -2577,7 +2577,7 @@ See also :setting:`DATE_FORMAT` and :setting:`SHORT_DATE_FORMAT`.
 ``SIGNING_BACKEND``
 -------------------
 
-Default: ``'ginger.core.signing.TimestampSigner'``
+Default: ``'gingerdj.core.signing.TimestampSigner'``
 
 The backend used for signing cookies and other data.
 
@@ -2605,14 +2605,14 @@ Default::
 
     {
         "default": {
-            "BACKEND": "ginger.core.files.storage.FileSystemStorage",
+            "BACKEND": "gingerdj.core.files.storage.FileSystemStorage",
         },
         "staticfiles": {
-            "BACKEND": "ginger.contrib.staticfiles.storage.StaticFilesStorage",
+            "BACKEND": "gingerdj.contrib.staticfiles.storage.StaticFilesStorage",
         },
     }
 
-A dictionary containing the settings for all storages to be used with Ginger.
+A dictionary containing the settings for all storages to be used with GingerDJ.
 It is a nested dictionary whose contents map a storage alias to a dictionary
 containing the options for an individual storage.
 
@@ -2620,10 +2620,10 @@ Storages can have any alias you choose. However, there are two aliases with
 special significance:
 
 * ``default`` for :doc:`managing files </topics/files>`.
-  ``'``:class:`ginger.core.files.storage.FileSystemStorage`\ ``'`` is the
+  ``'``:class:`gingerdj.core.files.storage.FileSystemStorage`\ ``'`` is the
   default storage engine.
 * ``staticfiles`` for :doc:`managing static files </ref/contrib/staticfiles>`.
-  ``'``:class:`ginger.contrib.staticfiles.storage.StaticFilesStorage`\ ``'`` is
+  ``'``:class:`gingerdj.contrib.staticfiles.storage.StaticFilesStorage`\ ``'`` is
   the default storage engine.
 
 The following is an example ``settings.py`` snippet defining a custom file
@@ -2632,7 +2632,7 @@ storage called ``example``::
     STORAGES = {
         # ...
         "example": {
-            "BACKEND": "ginger.core.files.storage.FileSystemStorage",
+            "BACKEND": "gingerdj.core.files.storage.FileSystemStorage",
             "OPTIONS": {
                 "location": "/example",
                 "base_url": "/example/",
@@ -2643,7 +2643,7 @@ storage called ``example``::
 ``OPTIONS`` are passed to the ``BACKEND`` on initialization in ``**kwargs``.
 
 A ready-to-use instance of the storage backends can be retrieved from
-:data:`ginger.core.files.storage.storages`. Use a key corresponding to the
+:data:`gingerdj.core.files.storage.storages`. Use a key corresponding to the
 backend definition in :setting:`STORAGES`.
 
 .. admonition:: Is my value merged with the default value?
@@ -2659,15 +2659,15 @@ backend definition in :setting:`STORAGES`.
 Default: ``[]`` (Empty list)
 
 A list containing the settings for all template engines to be used with
-Ginger. Each item of the list is a dictionary containing the options for an
+GingerDJ. Each item of the list is a dictionary containing the options for an
 individual engine.
 
-Here's a setup that tells the Ginger template engine to load templates from the
+Here's a setup that tells the GingerDJ template engine to load templates from the
 ``templates`` subdirectory inside each installed application::
 
     TEMPLATES = [
         {
-            "BACKEND": "ginger.template.backends.ginger.GingerTemplates",
+            "BACKEND": "gingerdj.template.backends.gingerdj.GingerTemplates",
             "APP_DIRS": True,
         },
     ]
@@ -2683,10 +2683,10 @@ Default: Not defined
 
 The template backend to use. The built-in template backends are:
 
-* ``'ginger.template.backends.ginger.GingerTemplates'``
-* ``'ginger.template.backends.jinja2.Jinja2'``
+* ``'gingerdj.template.backends.gingerdj.GingerTemplates'``
+* ``'gingerdj.template.backends.jinja2.Jinja2'``
 
-You can use a template backend that doesn't ship with Ginger by setting
+You can use a template backend that doesn't ship with GingerDJ by setting
 ``BACKEND`` to a fully-qualified path (i.e. ``'mypackage.whatever.Backend'``).
 
 .. setting:: TEMPLATES-NAME
@@ -2727,7 +2727,7 @@ applications.
 
 .. note::
 
-    The default :file:`settings.py` file created by :djadmin:`ginger-admin
+    The default :file:`settings.py` file created by :djadmin:`gingerdj-admin
     startproject <startproject>` sets ``'APP_DIRS': True``.
 
 .. setting:: TEMPLATES-OPTIONS
@@ -2739,8 +2739,8 @@ Default: ``{}`` (Empty dict)
 
 Extra parameters to pass to the template backend. Available parameters vary
 depending on the template backend. See
-:class:`~ginger.template.backends.ginger.GingerTemplates` and
-:class:`~ginger.template.backends.jinja2.Jinja2` for the options of the
+:class:`~gingerdj.template.backends.gingerdj.GingerTemplates` and
+:class:`~gingerdj.template.backends.jinja2.Jinja2` for the options of the
 built-in backends.
 
 .. setting:: TEST_RUNNER
@@ -2748,7 +2748,7 @@ built-in backends.
 ``TEST_RUNNER``
 ---------------
 
-Default: ``'ginger.test.runner.DiscoverRunner'``
+Default: ``'gingerdj.test.runner.DiscoverRunner'``
 
 The name of the class to use for starting the test suite. See
 :ref:`other-testing-frameworks`.
@@ -2761,14 +2761,14 @@ The name of the class to use for starting the test suite. See
 Default: ``[]`` (Empty list)
 
 In order to restore the database state between tests for
-``TransactionTestCase``\s and database backends without transactions, Ginger
+``TransactionTestCase``\s and database backends without transactions, GingerDJ
 will :ref:`serialize the contents of all apps <test-case-serialized-rollback>`
 when it starts the test run so it can then reload from that copy before running
 tests that need it.
 
 This slows down the startup time of the test runner; if you have apps that
 you know don't need this feature, you can add their full names in here (e.g.
-``'ginger.contrib.contenttypes'``) to exclude them from this serialization
+``'gingerdj.contrib.contenttypes'``) to exclude them from this serialization
 process.
 
 .. setting:: THOUSAND_SEPARATOR
@@ -2835,33 +2835,33 @@ A string representing the time zone for this installation. See the `list of
 time zones`_.
 
 .. note::
-    Since Ginger was first released with the :setting:`TIME_ZONE` set to
+    Since GingerDJ was first released with the :setting:`TIME_ZONE` set to
     ``'America/Chicago'``, the global setting (used if nothing is defined in
     your project's ``settings.py``) remains ``'America/Chicago'`` for backwards
     compatibility. New project templates default to ``'UTC'``.
 
 Note that this isn't necessarily the time zone of the server. For example, one
-server may serve multiple Ginger-powered sites, each with a separate time zone
+server may serve multiple GingerDJ-powered sites, each with a separate time zone
 setting.
 
-When :setting:`USE_TZ` is ``False``, this is the time zone in which Ginger
+When :setting:`USE_TZ` is ``False``, this is the time zone in which GingerDJ
 will store all datetimes. When :setting:`USE_TZ` is ``True``, this is the
-default time zone that Ginger will use to display datetimes in templates and
+default time zone that GingerDJ will use to display datetimes in templates and
 to interpret datetimes entered in forms.
 
-On Unix environments (where :func:`time.tzset` is implemented), Ginger sets the
+On Unix environments (where :func:`time.tzset` is implemented), GingerDJ sets the
 ``os.environ['TZ']`` variable to the time zone you specify in the
 :setting:`TIME_ZONE` setting. Thus, all your views and models will
-automatically operate in this time zone. However, Ginger won't set the ``TZ``
+automatically operate in this time zone. However, GingerDJ won't set the ``TZ``
 environment variable if you're using the manual configuration option as
 described in :ref:`manually configuring settings
-<settings-without-ginger-settings-module>`. If Ginger doesn't set the ``TZ``
+<settings-without-gingerdj-settings-module>`. If GingerDJ doesn't set the ``TZ``
 environment variable, it's up to you to ensure your processes are running in
 the correct environment.
 
 .. note::
-    Ginger cannot reliably use alternate time zones in a Windows environment.
-    If you're running Ginger on Windows, :setting:`TIME_ZONE` must be set to
+    GingerDJ cannot reliably use alternate time zones in a Windows environment.
+    If you're running GingerDJ on Windows, :setting:`TIME_ZONE` must be set to
     match the system time zone.
 
 .. _list of time zones: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
@@ -2873,16 +2873,16 @@ the correct environment.
 
 Default: ``True``
 
-A boolean that specifies whether Ginger's translation system should be enabled.
+A boolean that specifies whether GingerDJ's translation system should be enabled.
 This provides a way to turn it off, for performance. If this is set to
-``False``, Ginger will make some optimizations so as not to load the
+``False``, GingerDJ will make some optimizations so as not to load the
 translation machinery.
 
 See also :setting:`LANGUAGE_CODE` and :setting:`USE_TZ`.
 
 .. note::
 
-    The default :file:`settings.py` file created by :djadmin:`ginger-admin
+    The default :file:`settings.py` file created by :djadmin:`gingerdj-admin
     startproject <startproject>` includes ``USE_I18N = True`` for convenience.
 
 .. setting:: USE_THOUSAND_SEPARATOR
@@ -2893,7 +2893,7 @@ See also :setting:`LANGUAGE_CODE` and :setting:`USE_TZ`.
 Default: ``False``
 
 A boolean that specifies whether to display numbers using a thousand separator.
-When set to ``True``, Ginger will format numbers using the
+When set to ``True``, GingerDJ will format numbers using the
 :setting:`NUMBER_GROUPING` and :setting:`THOUSAND_SEPARATOR` settings. The
 latter two settings may also be dictated by the locale, which takes precedence.
 
@@ -2908,9 +2908,9 @@ See also :setting:`DECIMAL_SEPARATOR`, :setting:`NUMBER_GROUPING` and
 Default: ``True``
 
 A boolean that specifies if datetimes will be timezone-aware by default or not.
-If this is set to ``True``, Ginger will use timezone-aware datetimes internally.
+If this is set to ``True``, GingerDJ will use timezone-aware datetimes internally.
 
-When ``USE_TZ`` is False, Ginger will use naive datetimes in local time, except
+When ``USE_TZ`` is False, GingerDJ will use naive datetimes in local time, except
 when parsing ISO 8601 formatted strings, where timezone information will always
 be retained if present.
 
@@ -2955,15 +2955,15 @@ enabled if a proxy which sets this header is in use.
 
 Default: ``None``
 
-The full Python path of the WSGI application object that Ginger's built-in
-servers (e.g. :djadmin:`runserver`) will use. The :djadmin:`ginger-admin
+The full Python path of the WSGI application object that GingerDJ's built-in
+servers (e.g. :djadmin:`runserver`) will use. The :djadmin:`gingerdj-admin
 startproject <startproject>` management command will create a standard
 ``wsgi.py`` file with an ``application`` callable in it, and point this setting
 to that ``application``.
 
-If not set, the return value of ``ginger.core.wsgi.get_wsgi_application()``
+If not set, the return value of ``gingerdj.core.wsgi.get_wsgi_application()``
 will be used. In this case, the behavior of :djadmin:`runserver` will be
-identical to previous Ginger versions.
+identical to previous GingerDJ versions.
 
 .. setting:: YEAR_MONTH_FORMAT
 
@@ -2972,11 +2972,11 @@ identical to previous Ginger versions.
 
 Default: ``'F Y'``
 
-The default formatting to use for date fields on Ginger admin change-list
+The default formatting to use for date fields on GingerDJ admin change-list
 pages -- and, possibly, by other parts of the system -- in cases when only the
 year and month are displayed.
 
-For example, when a Ginger admin change-list page is being filtered by a date
+For example, when a GingerDJ admin change-list page is being filtered by a date
 drilldown, the header for a given month displays the month and the year.
 Different locales have different formats. For example, U.S. English would say
 "January 2006," whereas another locale might say "2006/January."
@@ -2996,7 +2996,7 @@ and :setting:`MONTH_DAY_FORMAT`.
 Default: ``'DENY'``
 
 The default value for the X-Frame-Options header used by
-:class:`~ginger.middleware.clickjacking.XFrameOptionsMiddleware`. See the
+:class:`~gingerdj.middleware.clickjacking.XFrameOptionsMiddleware`. See the
 :doc:`clickjacking protection </ref/clickjacking/>` documentation.
 
 .. setting:: LOGOUT_REDIRECT_URL
@@ -3028,7 +3028,7 @@ The number of seconds a password reset link is valid for.
 Messages
 ========
 
-Settings for :mod:`ginger.contrib.messages`.
+Settings for :mod:`gingerdj.contrib.messages`.
 
 .. setting:: MESSAGE_LEVEL
 
@@ -3046,7 +3046,7 @@ framework. See :ref:`message levels <message-level>` for more details.
    the built-in constants, you must import the constants module directly to
    avoid the potential for circular imports, e.g.::
 
-       from ginger.contrib.messages import constants as message_constants
+       from gingerdj.contrib.messages import constants as message_constants
 
        MESSAGE_LEVEL = message_constants.DEBUG
 
@@ -3059,19 +3059,19 @@ framework. See :ref:`message levels <message-level>` for more details.
 ``MESSAGE_STORAGE``
 -------------------
 
-Default: ``'ginger.contrib.messages.storage.fallback.FallbackStorage'``
+Default: ``'gingerdj.contrib.messages.storage.fallback.FallbackStorage'``
 
-Controls where Ginger stores message data. Valid values are:
+Controls where GingerDJ stores message data. Valid values are:
 
-* ``'ginger.contrib.messages.storage.fallback.FallbackStorage'``
-* ``'ginger.contrib.messages.storage.session.SessionStorage'``
-* ``'ginger.contrib.messages.storage.cookie.CookieStorage'``
+* ``'gingerdj.contrib.messages.storage.fallback.FallbackStorage'``
+* ``'gingerdj.contrib.messages.storage.session.SessionStorage'``
+* ``'gingerdj.contrib.messages.storage.cookie.CookieStorage'``
 
 See :ref:`message storage backends <message-storage-backends>` for more details.
 
 The backends that use cookies --
-:class:`~ginger.contrib.messages.storage.cookie.CookieStorage` and
-:class:`~ginger.contrib.messages.storage.fallback.FallbackStorage` --
+:class:`~gingerdj.contrib.messages.storage.cookie.CookieStorage` and
+:class:`~gingerdj.contrib.messages.storage.fallback.FallbackStorage` --
 use the value of :setting:`SESSION_COOKIE_DOMAIN`, :setting:`SESSION_COOKIE_SECURE`
 and :setting:`SESSION_COOKIE_HTTPONLY` when setting their cookies.
 
@@ -3101,7 +3101,7 @@ to override. See :ref:`message-displaying` above for more details.
    the built-in constants, you must import the ``constants`` module directly to
    avoid the potential for circular imports, e.g.::
 
-       from ginger.contrib.messages import constants as message_constants
+       from gingerdj.contrib.messages import constants as message_constants
 
        MESSAGE_TAGS = {message_constants.INFO: ""}
 
@@ -3114,7 +3114,7 @@ to override. See :ref:`message-displaying` above for more details.
 Sessions
 ========
 
-Settings for :mod:`ginger.contrib.sessions`.
+Settings for :mod:`gingerdj.contrib.sessions`.
 
 .. setting:: SESSION_CACHE_ALIAS
 
@@ -3156,7 +3156,7 @@ standard domain cookies, existing user cookies will be set to the old
 domain. This may result in them being unable to log in as long as these cookies
 persist.
 
-This setting also affects cookies set by :mod:`ginger.contrib.messages`.
+This setting also affects cookies set by :mod:`gingerdj.contrib.messages`.
 
 .. setting:: SESSION_COOKIE_HTTPONLY
 
@@ -3198,9 +3198,9 @@ The name of the cookie to use for sessions. This can be whatever you want
 Default: ``'/'``
 
 The path set on the session cookie. This should either match the URL path of your
-Ginger installation or be parent of that path.
+GingerDJ installation or be parent of that path.
 
-This is useful if you have multiple Ginger instances running under the same
+This is useful if you have multiple GingerDJ instances running under the same
 hostname. They can use different cookie paths, and each instance will only see
 its own session cookie.
 
@@ -3268,15 +3268,15 @@ the user's session.
 ``SESSION_ENGINE``
 ------------------
 
-Default: ``'ginger.contrib.sessions.backends.db'``
+Default: ``'gingerdj.contrib.sessions.backends.db'``
 
-Controls where Ginger stores session data. Included engines are:
+Controls where GingerDJ stores session data. Included engines are:
 
-* ``'ginger.contrib.sessions.backends.db'``
-* ``'ginger.contrib.sessions.backends.file'``
-* ``'ginger.contrib.sessions.backends.cache'``
-* ``'ginger.contrib.sessions.backends.cached_db'``
-* ``'ginger.contrib.sessions.backends.signed_cookies'``
+* ``'gingerdj.contrib.sessions.backends.db'``
+* ``'gingerdj.contrib.sessions.backends.file'``
+* ``'gingerdj.contrib.sessions.backends.cache'``
+* ``'gingerdj.contrib.sessions.backends.cached_db'``
+* ``'gingerdj.contrib.sessions.backends.signed_cookies'``
 
 See :ref:`configuring-sessions` for more details.
 
@@ -3298,8 +3298,8 @@ Whether to expire the session when the user closes their browser. See
 Default: ``None``
 
 If you're using file-based session storage, this sets the directory in
-which Ginger will store session data. When the default value (``None``) is
-used, Ginger will use the standard temporary directory for the system.
+which GingerDJ will store session data. When the default value (``None``) is
+used, GingerDJ will use the standard temporary directory for the system.
 
 
 .. setting:: SESSION_SAVE_EVERY_REQUEST
@@ -3319,19 +3319,19 @@ sessions won't be created, even if this setting is active.
 ``SESSION_SERIALIZER``
 ----------------------
 
-Default: ``'ginger.contrib.sessions.serializers.JSONSerializer'``
+Default: ``'gingerdj.contrib.sessions.serializers.JSONSerializer'``
 
 Full import path of a serializer class to use for serializing session data.
 Included serializer is:
 
-* ``'ginger.contrib.sessions.serializers.JSONSerializer'``
+* ``'gingerdj.contrib.sessions.serializers.JSONSerializer'``
 
 See :ref:`session_serialization` for details.
 
 Sites
 =====
 
-Settings for :mod:`ginger.contrib.sites`.
+Settings for :mod:`gingerdj.contrib.sites`.
 
 .. setting:: SITE_ID
 
@@ -3350,7 +3350,7 @@ and a single database can manage content for multiple sites.
 Static Files
 ============
 
-Settings for :mod:`ginger.contrib.staticfiles`.
+Settings for :mod:`gingerdj.contrib.staticfiles`.
 
 .. setting:: STATIC_ROOT
 
@@ -3406,7 +3406,7 @@ You may need to :ref:`configure these files to be served in development
 
     If :setting:`STATIC_URL` is a relative path, then it will be prefixed by
     the server-provided value of ``SCRIPT_NAME`` (or ``/`` if not set). This
-    makes it easier to serve a Ginger application in a subpath without adding
+    makes it easier to serve a GingerDJ application in a subpath without adding
     an extra configuration to the settings.
 
 .. setting:: STATICFILES_DIRS
@@ -3467,22 +3467,22 @@ This would allow you to refer to the local file
 Default::
 
     [
-        "ginger.contrib.staticfiles.finders.FileSystemFinder",
-        "ginger.contrib.staticfiles.finders.AppDirectoriesFinder",
+        "gingerdj.contrib.staticfiles.finders.FileSystemFinder",
+        "gingerdj.contrib.staticfiles.finders.AppDirectoriesFinder",
     ]
 
 The list of finder backends that know how to find static files in
 various locations.
 
 The default will find files stored in the :setting:`STATICFILES_DIRS` setting
-(using ``ginger.contrib.staticfiles.finders.FileSystemFinder``) and in a
+(using ``gingerdj.contrib.staticfiles.finders.FileSystemFinder``) and in a
 ``static`` subdirectory of each app (using
-``ginger.contrib.staticfiles.finders.AppDirectoriesFinder``). If multiple
+``gingerdj.contrib.staticfiles.finders.AppDirectoriesFinder``). If multiple
 files with the same name are present, the first file that is found will be
 used.
 
 One finder is disabled by default:
-``ginger.contrib.staticfiles.finders.DefaultStorageFinder``. If added to
+``gingerdj.contrib.staticfiles.finders.DefaultStorageFinder``. If added to
 your :setting:`STATICFILES_FINDERS` setting, it will look for static files in
 the default file storage as defined by the ``default`` key in the
 :setting:`STORAGES` setting.

@@ -4,9 +4,9 @@ from decimal import Decimal
 from operator import attrgetter, itemgetter
 from uuid import UUID
 
-from ginger.core.exceptions import FieldError
-from ginger.db import connection
-from ginger.db.models import (
+from gingerdj.core.exceptions import FieldError
+from gingerdj.db import connection
+from gingerdj.db.models import (
     BinaryField,
     BooleanField,
     Case,
@@ -23,7 +23,7 @@ from ginger.db.models import (
     Value,
     When,
 )
-from ginger.test import SimpleTestCase, TestCase
+from gingerdj.test import SimpleTestCase, TestCase
 
 from .models import CaseTestModel, Client, FKCaseTestModel, O2OCaseTestModel
 

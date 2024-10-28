@@ -2,7 +2,7 @@
 Query Expressions
 =================
 
-.. currentmodule:: ginger.db.models
+.. currentmodule:: gingerdj.db.models
 
 Query expressions describe a value or a computation that can be used as part of
 an update, create, filter, order by, annotation, or aggregate. When an
@@ -14,7 +14,7 @@ to form more complex computations.
 Supported arithmetic
 ====================
 
-Ginger supports negation, addition, subtraction, multiplication, division,
+GingerDJ supports negation, addition, subtraction, multiplication, division,
 modulo arithmetic, and the power operator on query expressions, using Python
 constants, variables, and even other expressions.
 
@@ -24,7 +24,7 @@ Output field
 ============
 
 Many of the expressions documented in this section support an optional
-``output_field`` parameter. If given, Ginger will load the value into that
+``output_field`` parameter. If given, GingerDJ will load the value into that
 field after retrieving it from the database.
 
 ``output_field`` takes a model field instance, like ``IntegerField()`` or
@@ -32,7 +32,7 @@ field after retrieving it from the database.
 ``max_length``, since field arguments relate to data validation which will not
 be performed on the expression's output value.
 
-``output_field`` is only required when Ginger is unable to automatically
+``output_field`` is only required when GingerDJ is unable to automatically
 determine the result's field type, such as complex expressions that mix field
 types. For example, adding a ``DecimalField()`` and a ``FloatField()`` requires
 an output field, like ``output_field=FloatField()``.
@@ -42,9 +42,9 @@ Some examples
 
 .. code-block:: pycon
 
-    >>> from ginger.db.models import Count, F, Value
-    >>> from ginger.db.models.functions import Length, Upper
-    >>> from ginger.db.models.lookups import GreaterThan
+    >>> from gingerdj.db.models import Count, F, Value
+    >>> from gingerdj.db.models.functions import Length, Upper
+    >>> from gingerdj.db.models.lookups import GreaterThan
 
     # Find companies that have more employees than chairs.
     >>> Company.objects.filter(num_employees__gt=F("num_chairs"))
@@ -86,13 +86,13 @@ Some examples
     >>> Company.objects.order_by(Length("name").asc())
     >>> Company.objects.order_by(Length("name").desc())
     # or using the double underscore lookup syntax.
-    >>> from ginger.db.models import CharField
-    >>> from ginger.db.models.functions import Length
+    >>> from gingerdj.db.models import CharField
+    >>> from gingerdj.db.models.functions import Length
     >>> CharField.register_lookup(Length)
     >>> Company.objects.order_by("name__length")
 
     # Boolean expression can be used directly in filters.
-    >>> from ginger.db.models import Exists, OuterRef
+    >>> from gingerdj.db.models import Exists, OuterRef
     >>> Company.objects.filter(
     ...     Exists(Employee.objects.filter(company=OuterRef("pk"), salary__gt=10))
     ... )
@@ -109,9 +109,9 @@ Built-in Expressions
 
 .. note::
 
-    These expressions are defined in ``ginger.db.models.expressions`` and
-    ``ginger.db.models.aggregates``, but for convenience they're available and
-    usually imported from :mod:`ginger.db.models`.
+    These expressions are defined in ``gingerdj.db.models.expressions`` and
+    ``gingerdj.db.models.aggregates``, but for convenience they're available and
+    usually imported from :mod:`gingerdj.db.models`.
 
 ``F()`` expressions
 -------------------
@@ -123,7 +123,7 @@ model field, or annotated column. It makes it possible to refer to model field
 values and perform database operations using them without actually having to
 pull them out of the database into Python memory.
 
-Instead, Ginger uses the ``F()`` object to generate an SQL expression that
+Instead, GingerDJ uses the ``F()`` object to generate an SQL expression that
 describes the required operation at the database level.
 
 Let's try this with an example. Normally, one might do something like this::
@@ -137,7 +137,7 @@ Here, we have pulled the value of ``reporter.stories_filed`` from the database
 into memory and manipulated it using familiar Python operators, and then saved
 the object back to the database. But instead we could also have done::
 
-    from ginger.db.models import F
+    from gingerdj.db.models import F
 
     reporter = Reporters.objects.get(name="Tintin")
     reporter.stories_filed = F("stories_filed") + 1
@@ -147,14 +147,14 @@ Although ``reporter.stories_filed = F('stories_filed') + 1`` looks like a
 normal Python assignment of value to an instance attribute, in fact it's an SQL
 construct describing an operation on the database.
 
-When Ginger encounters an instance of ``F()``, it overrides the standard Python
+When GingerDJ encounters an instance of ``F()``, it overrides the standard Python
 operators to create an encapsulated SQL expression; in this case, one which
 instructs the database to increment the database field represented by
 ``reporter.stories_filed``.
 
 Whatever value is or was on ``reporter.stories_filed``, Python never gets to
 know about it - it is dealt with entirely by the database. All Python does,
-through Ginger's ``F()`` class, is create the SQL syntax to refer to the field
+through GingerDJ's ``F()`` class, is create the SQL syntax to refer to the field
 and describe the operation.
 
 To access the new value saved this way, the object must be reloaded::
@@ -171,7 +171,7 @@ the two queries we were using above - the ``get()`` and the
     reporter = Reporters.objects.filter(name="Tintin")
     reporter.update(stories_filed=F("stories_filed") + 1)
 
-We can also use :meth:`~ginger.db.models.query.QuerySet.update()` to increment
+We can also use :meth:`~gingerdj.db.models.query.QuerySet.update()` to increment
 the field value on multiple objects - which could be very much faster than
 pulling them all into Python from the database, looping over them, incrementing
 the field value of each one, and saving each one back to the database::
@@ -191,7 +191,7 @@ Slicing ``F()`` expressions
 .. versionadded:: 5.1
 
 For string-based fields, text-based fields, and
-:class:`~ginger.contrib.postgres.fields.ArrayField`, you can use Python's
+:class:`~gingerdj.contrib.postgres.fields.ArrayField`, you can use Python's
 array-slicing syntax. The indices are 0-based and the ``step`` argument to
 ``slice`` is not supported. For example:
 
@@ -262,11 +262,11 @@ different fields with arithmetic::
     company = Company.objects.annotate(chairs_needed=F("num_employees") - F("num_chairs"))
 
 If the fields that you're combining are of different types you'll need to tell
-Ginger what kind of field will be returned. Most expressions support
+GingerDJ what kind of field will be returned. Most expressions support
 :ref:`output_field<output-field>` for this case, but since ``F()`` does not, you
 will need to wrap the expression with :class:`ExpressionWrapper`::
 
-    from ginger.db.models import DateTimeField, ExpressionWrapper, F
+    from gingerdj.db.models import DateTimeField, ExpressionWrapper, F
 
     Ticket.objects.annotate(
         expires=ExpressionWrapper(
@@ -297,7 +297,7 @@ a field's null values. By default, the ordering depends on your database.
 For example, to sort companies that haven't been contacted (``last_contacted``
 is null) after companies that have been contacted::
 
-    from ginger.db.models import F
+    from gingerdj.db.models import F
 
     Company.objects.order_by(F("last_contacted").desc(nulls_last=True))
 
@@ -308,7 +308,7 @@ Using ``F()`` with logical operations
 the inversion operator ``~F()``. For example, to swap the activation status of
 companies::
 
-    from ginger.db.models import F
+    from gingerdj.db.models import F
 
     Company.objects.update(is_active=~F("is_active"))
 
@@ -321,7 +321,7 @@ companies::
 database functions like ``COALESCE`` and ``LOWER``, or aggregates like ``SUM``.
 They can be used directly::
 
-    from ginger.db.models import F, Func
+    from gingerdj.db.models import F, Func
 
     queryset.annotate(field_lower=Func(F("field"), function="LOWER"))
 
@@ -389,7 +389,7 @@ The ``Func`` API is as follows:
         customize the SQL as needed. For example:
 
         .. code-block:: python
-            :caption: ``ginger/db/models/functions.py``
+            :caption: ``gingerdj/db/models/functions.py``
 
             class ConcatPair(Func):
                 ...
@@ -442,7 +442,7 @@ like ``Sum()`` and ``Count()``, inherit from ``Aggregate()``.
 Since ``Aggregate``\s are expressions and wrap expressions, you can represent
 some complex computations::
 
-    from ginger.db.models import Count
+    from gingerdj.db.models import Count
 
     Company.objects.annotate(
         managers_required=(Count("num_employees") / 4) + Count("num_managers")
@@ -467,7 +467,7 @@ The ``Aggregate`` API is as follows:
     .. attribute:: window_compatible
 
         Defaults to ``True`` since most aggregate functions can be used as the
-        source expression in :class:`~ginger.db.models.expressions.Window`.
+        source expression in :class:`~gingerdj.db.models.expressions.Window`.
 
     .. attribute:: allow_distinct
 
@@ -489,12 +489,12 @@ should be invoked for each distinct value of ``expressions`` (or set of
 values, for multiple ``expressions``). The argument is only supported on
 aggregates that have :attr:`~Aggregate.allow_distinct` set to ``True``.
 
-The ``filter`` argument takes a :class:`Q object <ginger.db.models.Q>` that's
+The ``filter`` argument takes a :class:`Q object <gingerdj.db.models.Q>` that's
 used to filter the rows that are aggregated. See :ref:`conditional-aggregation`
 and :ref:`filtering-on-annotations` for example usage.
 
 The ``default`` argument takes a value that will be passed along with the
-aggregate to :class:`~ginger.db.models.functions.Coalesce`. This is useful for
+aggregate to :class:`~gingerdj.db.models.functions.Coalesce`. This is useful for
 specifying a value to be returned other than ``None`` when the queryset (or
 grouping) contains no entries.
 
@@ -508,7 +508,7 @@ You can create your own aggregate functions, too. At a minimum, you need to
 define ``function``, but you can also completely customize the SQL that is
 generated. Here's a brief example::
 
-    from ginger.db.models import Aggregate
+    from gingerdj.db.models import Aggregate
 
 
     class Sum(Aggregate):
@@ -532,20 +532,20 @@ boolean, or string within an expression, you can wrap that value within a
 ``Value()``.
 
 You will rarely need to use ``Value()`` directly. When you write the expression
-``F('field') + 1``, Ginger implicitly wraps the ``1`` in a ``Value()``,
+``F('field') + 1``, GingerDJ implicitly wraps the ``1`` in a ``Value()``,
 allowing simple values to be used in more complex expressions. You will need to
 use ``Value()`` when you want to pass a string to an expression. Most
 expressions interpret a string argument as the name of a field, like
 ``Lower('name')``.
 
 The ``value`` argument describes the value to be included in the expression,
-such as ``1``, ``True``, or ``None``. Ginger knows how to convert these Python
+such as ``1``, ``True``, or ``None``. GingerDJ knows how to convert these Python
 values into their corresponding database type.
 
 If no :ref:`output_field<output-field>` is specified, it will be inferred from
 the type of the provided ``value`` for many common types. For example, passing
 an instance of :py:class:`datetime.datetime` as ``value`` defaults
-``output_field`` to :class:`~ginger.db.models.DateTimeField`.
+``output_field`` to :class:`~gingerdj.db.models.DateTimeField`.
 
 ``ExpressionWrapper()`` expressions
 -----------------------------------
@@ -562,7 +562,7 @@ Conditional expressions
 -----------------------
 
 Conditional expressions allow you to use :keyword:`if` ... :keyword:`elif` ...
-:keyword:`else` logic in queries. Ginger natively supports SQL ``CASE``
+:keyword:`else` logic in queries. GingerDJ natively supports SQL ``CASE``
 expressions. For more details see :doc:`conditional-expressions`.
 
 ``Subquery()`` expressions
@@ -578,7 +578,7 @@ newest comment on that post:
 
 .. code-block:: pycon
 
-    >>> from ginger.db.models import OuterRef, Subquery
+    >>> from gingerdj.db.models import OuterRef, Subquery
     >>> newest = Comment.objects.filter(post=OuterRef("pk")).order_by("-created_at")
     >>> Post.objects.annotate(newest_commenter_email=Subquery(newest.values("email")[:1]))
 
@@ -596,7 +596,7 @@ On PostgreSQL, the SQL looks like:
 .. note::
 
     The examples in this section are designed to show how to force
-    Ginger to execute a subquery. In some cases it may be possible to
+    GingerDJ to execute a subquery. In some cases it may be possible to
     write an equivalent queryset that performs the same task more
     clearly or efficiently.
 
@@ -629,7 +629,7 @@ all comments for posts published within the last day:
 .. code-block:: pycon
 
     >>> from datetime import timedelta
-    >>> from ginger.utils import timezone
+    >>> from gingerdj.utils import timezone
     >>> one_day_ago = timezone.now() - timedelta(days=1)
     >>> posts = Post.objects.filter(published_at__gte=one_day_ago)
     >>> Comment.objects.filter(post__in=Subquery(posts.values("pk")))
@@ -669,9 +669,9 @@ within the last day:
 
 .. code-block:: pycon
 
-    >>> from ginger.db.models import Exists, OuterRef
+    >>> from gingerdj.db.models import Exists, OuterRef
     >>> from datetime import timedelta
-    >>> from ginger.utils import timezone
+    >>> from gingerdj.utils import timezone
     >>> one_day_ago = timezone.now() - timedelta(days=1)
     >>> recent_comments = Comment.objects.filter(
     ...     post=OuterRef("pk"),
@@ -704,7 +704,7 @@ Filtering on a ``Subquery()`` or ``Exists()`` expressions
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ``Subquery()`` that returns a boolean value and ``Exists()`` may be used as a
-``condition`` in :class:`~ginger.db.models.expressions.When` expressions, or to
+``condition`` in :class:`~gingerdj.db.models.expressions.When` expressions, or to
 directly filter a queryset:
 
 .. code-block:: pycon
@@ -727,13 +727,13 @@ length is greater than the total length of all combined comments:
 
 .. code-block:: pycon
 
-    >>> from ginger.db.models import OuterRef, Subquery, Sum
+    >>> from gingerdj.db.models import OuterRef, Subquery, Sum
     >>> comments = Comment.objects.filter(post=OuterRef("pk")).order_by().values("post")
     >>> total_comments = comments.annotate(total=Sum("length")).values("total")
     >>> Post.objects.filter(length__gt=Subquery(total_comments))
 
 The initial ``filter(...)`` limits the subquery to the relevant parameters.
-``order_by()`` removes the default :attr:`~ginger.db.models.Options.ordering`
+``order_by()`` removes the default :attr:`~gingerdj.db.models.Options.ordering`
 (if any) on the ``Comment`` model. ``values('post')`` aggregates comments by
 ``Post``. Finally, ``annotate(...)`` performs the aggregation. The order in
 which these queryset methods are applied is important. In this case, since the
@@ -746,7 +746,7 @@ there is an ``OuterRef``, this will not be possible to resolve).
 Raw SQL expressions
 -------------------
 
-.. currentmodule:: ginger.db.models.expressions
+.. currentmodule:: gingerdj.db.models.expressions
 
 .. class:: RawSQL(sql, params, output_field=None)
 
@@ -755,7 +755,7 @@ In these edge cases, use the ``RawSQL`` expression. For example:
 
 .. code-block:: pycon
 
-    >>> from ginger.db.models.expressions import RawSQL
+    >>> from gingerdj.db.models.expressions import RawSQL
     >>> queryset.annotate(val=RawSQL("select col from sometable where othercol = %s", (param,)))
 
 These extra lookups may not be portable to different database engines (because
@@ -781,7 +781,7 @@ should avoid them if possible.
 
         RawSQL("select col from sometable where othercol = '%s'")  # unsafe!
 
-    You can read more about how Ginger's :ref:`SQL injection protection
+    You can read more about how GingerDJ's :ref:`SQL injection protection
     <sql-injection-protection>` works.
 
 Window functions
@@ -792,7 +792,7 @@ normal aggregation function which computes a final result for each set defined
 by the group by, window functions operate on :ref:`frames <window-frames>` and
 partitions, and compute the result for each row.
 
-You can specify multiple windows in the same query which in Ginger ORM would be
+You can specify multiple windows in the same query which in GingerDJ ORM would be
 equivalent to including multiple expressions in a :doc:`QuerySet.annotate()
 </topics/db/aggregation>` call. The ORM doesn't make use of named windows,
 instead they are part of the selected columns.
@@ -819,8 +819,8 @@ The :ref:`output_field<output-field>` is specified either as an argument or by
 the expression.
 
 The ``order_by`` argument accepts an expression on which you can call
-:meth:`~ginger.db.models.Expression.asc` and
-:meth:`~ginger.db.models.Expression.desc`, a string of a field name (with an
+:meth:`~gingerdj.db.models.Expression.asc` and
+:meth:`~gingerdj.db.models.Expression.desc`, a string of a field name (with an
 optional ``"-"`` prefix which indicates descending order), or a tuple or list
 of strings and/or expressions. The ordering controls the order in which the
 expression is applied. For example, if you sum over the rows in a partition,
@@ -835,7 +835,7 @@ the same studio in the same genre and release year:
 
 .. code-block:: pycon
 
-    >>> from ginger.db.models import Avg, F, Window
+    >>> from gingerdj.db.models import Avg, F, Window
     >>> Movie.objects.annotate(
     ...     avg_rating=Window(
     ...         expression=Avg("rating"),
@@ -855,7 +855,7 @@ to reduce repetition:
 
 .. code-block:: pycon
 
-    >>> from ginger.db.models import Avg, F, Max, Min, Window
+    >>> from gingerdj.db.models import Avg, F, Max, Min, Window
     >>> window = {
     ...     "partition_by": [F("studio"), F("genre")],
     ...     "order_by": "released__year",
@@ -894,11 +894,11 @@ from groups to be included:
     NotImplementedError: Heterogeneous disjunctive predicates against window functions
     are not implemented when performing conditional aggregation.
 
-Among Ginger's built-in database backends, MySQL, PostgreSQL, and Oracle
+Among GingerDJ's built-in database backends, MySQL, PostgreSQL, and Oracle
 support window expressions. Support for different window expression features
 varies among the different databases. For example, the options in
-:meth:`~ginger.db.models.Expression.asc` and
-:meth:`~ginger.db.models.Expression.desc` may not be supported. Consult the
+:meth:`~gingerdj.db.models.Expression.asc` and
+:meth:`~gingerdj.db.models.Expression.desc` may not be supported. Consult the
 documentation for your database as needed.
 
 .. _window-frames:
@@ -995,7 +995,7 @@ with the average rating of a movie's two prior and two following peers:
 
 .. code-block:: pycon
 
-    >>> from ginger.db.models import Avg, F, RowRange, Window
+    >>> from gingerdj.db.models import Avg, F, RowRange, Window
     >>> Movie.objects.annotate(
     ...     avg_rating=Window(
     ...         expression=Avg("rating"),
@@ -1013,7 +1013,7 @@ released between twelve months before and twelve months after each movie:
 
 .. code-block:: pycon
 
-    >>> from ginger.db.models import Avg, F, ValueRange, Window
+    >>> from gingerdj.db.models import Avg, F, ValueRange, Window
     >>> Movie.objects.annotate(
     ...     avg_rating=Window(
     ...         expression=Avg("rating"),
@@ -1028,7 +1028,7 @@ released between twelve months before and twelve months after each movie:
     Support for positive integer ``start`` and negative integer ``end`` was
     added for ``RowRange``.
 
-.. currentmodule:: ginger.db.models
+.. currentmodule:: gingerdj.db.models
 
 Technical Information
 =====================
@@ -1036,7 +1036,7 @@ Technical Information
 Below you'll find technical implementation details that may be useful to
 library authors. The technical API and examples below will help with
 creating generic query expressions that can extend the built-in functionality
-that Ginger provides.
+that GingerDJ provides.
 
 Expression API
 --------------
@@ -1055,35 +1055,35 @@ calling the appropriate methods on the wrapped expression.
 
         .. versionadded:: 5.0
 
-        Tells Ginger that this expression can be used in
+        Tells GingerDJ that this expression can be used in
         :attr:`Field.db_default`. Defaults to ``False``.
 
     .. attribute:: contains_aggregate
 
-        Tells Ginger that this expression contains an aggregate and that a
+        Tells GingerDJ that this expression contains an aggregate and that a
         ``GROUP BY`` clause needs to be added to the query.
 
     .. attribute:: contains_over_clause
 
-        Tells Ginger that this expression contains a
-        :class:`~ginger.db.models.expressions.Window` expression. It's used,
+        Tells GingerDJ that this expression contains a
+        :class:`~gingerdj.db.models.expressions.Window` expression. It's used,
         for example, to disallow window function expressions in queries that
         modify data.
 
     .. attribute:: filterable
 
-        Tells Ginger that this expression can be referenced in
+        Tells GingerDJ that this expression can be referenced in
         :meth:`.QuerySet.filter`. Defaults to ``True``.
 
     .. attribute:: window_compatible
 
-        Tells Ginger that this expression can be used as the source expression
-        in :class:`~ginger.db.models.expressions.Window`. Defaults to
+        Tells GingerDJ that this expression can be used as the source expression
+        in :class:`~gingerdj.db.models.expressions.Window`. Defaults to
         ``False``.
 
     .. attribute:: empty_result_set_value
 
-        Tells Ginger which value should be returned when the expression is used
+        Tells GingerDJ which value should be returned when the expression is used
         to apply a function over an empty result set. Defaults to
         :py:data:`NotImplemented` which forces the expression to be computed on
         the database.
@@ -1173,7 +1173,7 @@ calling the appropriate methods on the wrapped expression.
         implementing ``NULLS LAST`` would change its value to be
         ``NULLS FIRST``. Modifications are only required for expressions that
         implement sort order like ``OrderBy``. This method is called when
-        :meth:`~ginger.db.models.query.QuerySet.reverse()` is called on a
+        :meth:`~gingerdj.db.models.query.QuerySet.reverse()` is called on a
         queryset.
 
 Writing your own Query Expressions
@@ -1191,7 +1191,7 @@ We'll start by defining the template to be used for SQL generation and
 an ``__init__()`` method to set some attributes::
 
   import copy
-  from ginger.db.models import Expression
+  from gingerdj.db.models import Expression
 
 
   class Coalesce(Expression):
@@ -1208,7 +1208,7 @@ an ``__init__()`` method to set some attributes::
 
 We do some basic validation on the parameters, including requiring at least 2
 columns or values, and ensuring they are expressions. We are requiring
-:ref:`output_field<output-field>` here so that Ginger knows what kind of model
+:ref:`output_field<output-field>` here so that GingerDJ knows what kind of model
 field to assign the eventual result to.
 
 Now we implement the preprocessing and validation. Since we do not have
@@ -1277,7 +1277,7 @@ Let's see how it works:
 
 .. code-block:: pycon
 
-    >>> from ginger.db.models import F, Value, CharField
+    >>> from gingerdj.db.models import F, Value, CharField
     >>> qs = Company.objects.annotate(
     ...     tagline=Coalesce(
     ...         [F("motto"), F("ticker_name"), F("description"), Value("No Tagline")],
@@ -1290,7 +1290,7 @@ Let's see how it works:
     Google: Do No Evil
     Apple: AAPL
     Yahoo: Internet Company
-    Ginger Society: No Tagline
+    GingerDJ Society: No Tagline
 
 .. _avoiding-sql-injection-in-query-expressions:
 
@@ -1305,7 +1305,7 @@ they must not contain untrusted user input.
 For example, if ``substring`` is user-provided, this function is vulnerable to
 SQL injection::
 
-    from ginger.db.models import Func
+    from gingerdj.db.models import Func
 
 
     class Position(Func):
@@ -1344,7 +1344,7 @@ Let's say we're writing a backend for Microsoft's SQL Server which uses the SQL
 We'll monkey patch a new method called ``as_sqlserver()`` onto the ``Length``
 class::
 
-    from ginger.db.models.functions import Length
+    from gingerdj.db.models.functions import Length
 
 
     def sqlserver_length(self, compiler, connection):
@@ -1355,7 +1355,7 @@ class::
 
 You can also customize the SQL using the ``template`` parameter of ``as_sql()``.
 
-We use ``as_sqlserver()`` because ``ginger.db.connection.vendor`` returns
+We use ``as_sqlserver()`` because ``gingerdj.db.connection.vendor`` returns
 ``sqlserver`` for the backend.
 
 Third-party backends can register their functions in the top level
@@ -1363,4 +1363,4 @@ Third-party backends can register their functions in the top level
 file (or package) that is imported from the top level ``__init__.py``.
 
 For user projects wishing to patch the backend that they're using, this code
-should live in an :meth:`AppConfig.ready()<ginger.apps.AppConfig.ready>` method.
+should live in an :meth:`AppConfig.ready()<gingerdj.apps.AppConfig.ready>` method.

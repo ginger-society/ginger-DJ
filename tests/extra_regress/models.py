@@ -1,7 +1,7 @@
 import copy
 import datetime
 
-from ginger.db import models
+from gingerdj.db import models
 
 
 class RevisionableModel(models.Model):

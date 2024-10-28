@@ -1,4 +1,4 @@
-from ginger.core.management.base import LabelCommand
+from gingerdj.core.management.base import LabelCommand
 
 
 class Command(LabelCommand):

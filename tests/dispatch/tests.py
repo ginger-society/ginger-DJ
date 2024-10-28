@@ -1,9 +1,9 @@
 import weakref
 from types import TracebackType
 
-from ginger.dispatch import Signal, receiver
-from ginger.test import SimpleTestCase
-from ginger.test.utils import garbage_collect, override_settings
+from gingerdj.dispatch import Signal, receiver
+from gingerdj.test import SimpleTestCase
+from gingerdj.test.utils import garbage_collect, override_settings
 
 
 def receiver_1_arg(val, **kwargs):
@@ -157,7 +157,7 @@ class DispatcherTests(SimpleTestCase):
 
         a_signal.connect(fails)
         try:
-            with self.assertLogs("ginger.dispatch", "ERROR") as cm:
+            with self.assertLogs("gingerdj.dispatch", "ERROR") as cm:
                 result = a_signal.send_robust(sender=self, val="test")
             err = result[0][1]
             self.assertIsInstance(err, ValueError)

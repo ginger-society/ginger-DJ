@@ -1,6 +1,6 @@
-from ginger.urls import path, re_path
-from ginger.views.decorators.cache import cache_page
-from ginger.views.generic import TemplateView, dates
+from gingerdj.urls import path, re_path
+from gingerdj.views.decorators.cache import cache_page
+from gingerdj.views.generic import TemplateView, dates
 
 from . import views
 from .models import Book

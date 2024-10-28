@@ -1,14 +1,14 @@
 =========================
-Ginger shortcut functions
+GingerDJ shortcut functions
 =========================
 
-.. module:: ginger.shortcuts
+.. module:: gingerdj.shortcuts
    :synopsis:
-       Convenience shortcuts that span multiple levels of Ginger's MVC stack.
+       Convenience shortcuts that span multiple levels of GingerDJ's MVC stack.
 
 .. index:: shortcuts
 
-The package ``ginger.shortcuts`` collects helper functions and classes that
+The package ``gingerdj.shortcuts`` collects helper functions and classes that
 "span" multiple levels of MVC. In other words, these functions/classes
 introduce controlled coupling for convenience's sake.
 
@@ -18,11 +18,11 @@ introduce controlled coupling for convenience's sake.
 .. function:: render(request, template_name, context=None, content_type=None, status=None, using=None)
 
    Combines a given template with a given context dictionary and returns an
-   :class:`~ginger.http.HttpResponse` object with that rendered text.
+   :class:`~gingerdj.http.HttpResponse` object with that rendered text.
 
-   Ginger does not provide a shortcut function which returns a
-   :class:`~ginger.template.response.TemplateResponse` because the constructor
-   of :class:`~ginger.template.response.TemplateResponse` offers the same level
+   GingerDJ does not provide a shortcut function which returns a
+   :class:`~gingerdj.template.response.TemplateResponse` because the constructor
+   of :class:`~gingerdj.template.response.TemplateResponse` offers the same level
    of convenience as :func:`render()`.
 
 Required arguments
@@ -62,7 +62,7 @@ Example
 The following example renders the template ``myapp/index.html`` with the
 MIME type :mimetype:`application/xhtml+xml`::
 
-    from ginger.shortcuts import render
+    from gingerdj.shortcuts import render
 
 
     def my_view(request):
@@ -78,8 +78,8 @@ MIME type :mimetype:`application/xhtml+xml`::
 
 This example is equivalent to::
 
-    from ginger.http import HttpResponse
-    from ginger.template import loader
+    from gingerdj.http import HttpResponse
+    from gingerdj.template import loader
 
 
     def my_view(request):
@@ -93,15 +93,15 @@ This example is equivalent to::
 
 .. function:: redirect(to, *args, permanent=False, **kwargs)
 
-   Returns an :class:`~ginger.http.HttpResponseRedirect` to the appropriate URL
+   Returns an :class:`~gingerdj.http.HttpResponseRedirect` to the appropriate URL
    for the arguments passed.
 
    The arguments could be:
 
-   * A model: the model's :meth:`~ginger.db.models.Model.get_absolute_url()`
+   * A model: the model's :meth:`~gingerdj.db.models.Model.get_absolute_url()`
      function will be called.
 
-   * A view name, possibly with arguments: :func:`~ginger.urls.reverse` will be
+   * A view name, possibly with arguments: :func:`~gingerdj.urls.reverse` will be
      used to reverse-resolve the name.
 
    * An absolute or relative URL, which will be used as-is for the redirect
@@ -116,10 +116,10 @@ Examples
 You can use the :func:`redirect` function in a number of ways.
 
 #. By passing some object; that object's
-   :meth:`~ginger.db.models.Model.get_absolute_url` method will be called
+   :meth:`~gingerdj.db.models.Model.get_absolute_url` method will be called
    to figure out the redirect URL::
 
-        from ginger.shortcuts import redirect
+        from gingerdj.shortcuts import redirect
 
 
         def my_view(request):
@@ -129,7 +129,7 @@ You can use the :func:`redirect` function in a number of ways.
 
 #. By passing the name of a view and optionally some positional or
    keyword arguments; the URL will be reverse resolved using the
-   :func:`~ginger.urls.reverse` method::
+   :func:`~gingerdj.urls.reverse` method::
 
         def my_view(request):
             ...
@@ -166,21 +166,21 @@ will be returned::
 
     *Asynchronous version*: ``aget_object_or_404()``
 
-    Calls :meth:`~ginger.db.models.query.QuerySet.get()` on a given model
-    manager, but it raises :class:`~ginger.http.Http404` instead of the model's
-    :class:`~ginger.db.models.Model.DoesNotExist` exception.
+    Calls :meth:`~gingerdj.db.models.query.QuerySet.get()` on a given model
+    manager, but it raises :class:`~gingerdj.http.Http404` instead of the model's
+    :class:`~gingerdj.db.models.Model.DoesNotExist` exception.
 
 Arguments
 ---------
 
 ``klass``
-    A :class:`~ginger.db.models.Model` class,
-    a :class:`~ginger.db.models.Manager`,
-    or a :class:`~ginger.db.models.query.QuerySet` instance from which to get
+    A :class:`~gingerdj.db.models.Model` class,
+    a :class:`~gingerdj.db.models.Manager`,
+    or a :class:`~gingerdj.db.models.query.QuerySet` instance from which to get
     the object.
 
 ``*args``
-    :class:`Q objects <ginger.db.models.Q>`.
+    :class:`Q objects <gingerdj.db.models.Q>`.
 
 ``**kwargs``
     Lookup parameters, which should be in the format accepted by ``get()`` and
@@ -192,7 +192,7 @@ Example
 The following example gets the object with the primary key of 1 from
 ``MyModel``::
 
-    from ginger.shortcuts import get_object_or_404
+    from gingerdj.shortcuts import get_object_or_404
 
 
     def my_view(request):
@@ -200,7 +200,7 @@ The following example gets the object with the primary key of 1 from
 
 This example is equivalent to::
 
-    from ginger.http import Http404
+    from gingerdj.http import Http404
 
 
     def my_view(request):
@@ -209,9 +209,9 @@ This example is equivalent to::
         except MyModel.DoesNotExist:
             raise Http404("No MyModel matches the given query.")
 
-The most common use case is to pass a :class:`~ginger.db.models.Model`, as
+The most common use case is to pass a :class:`~gingerdj.db.models.Model`, as
 shown above. However, you can also pass a
-:class:`~ginger.db.models.query.QuerySet` instance::
+:class:`~gingerdj.db.models.query.QuerySet` instance::
 
     queryset = Book.objects.filter(title__startswith="M")
     get_object_or_404(queryset, pk=1)
@@ -223,20 +223,20 @@ The above example is a bit contrived since it's equivalent to doing::
 but it can be useful if you are passed the ``queryset`` variable from somewhere
 else.
 
-Finally, you can also use a :class:`~ginger.db.models.Manager`. This is useful
+Finally, you can also use a :class:`~gingerdj.db.models.Manager`. This is useful
 for example if you have a
 :ref:`custom manager<custom-managers>`::
 
     get_object_or_404(Book.dahl_objects, title="Matilda")
 
 You can also use
-:class:`related managers<ginger.db.models.fields.related.RelatedManager>`::
+:class:`related managers<gingerdj.db.models.fields.related.RelatedManager>`::
 
     author = Author.objects.get(name="Roald Dahl")
     get_object_or_404(author.book_set, title="Matilda")
 
 Note: As with ``get()``, a
-:class:`~ginger.core.exceptions.MultipleObjectsReturned` exception
+:class:`~gingerdj.core.exceptions.MultipleObjectsReturned` exception
 will be raised if more than one object is found.
 
 .. versionchanged:: 5.0
@@ -251,20 +251,20 @@ will be raised if more than one object is found.
 
     *Asynchronous version*: ``aget_list_or_404()``
 
-    Returns the result of :meth:`~ginger.db.models.query.QuerySet.filter()` on
-    a given model manager cast to a list, raising :class:`~ginger.http.Http404`
+    Returns the result of :meth:`~gingerdj.db.models.query.QuerySet.filter()` on
+    a given model manager cast to a list, raising :class:`~gingerdj.http.Http404`
     if the resulting list is empty.
 
 Arguments
 ---------
 
 ``klass``
-    A :class:`~ginger.db.models.Model`, :class:`~ginger.db.models.Manager` or
-    :class:`~ginger.db.models.query.QuerySet` instance from which to get the
+    A :class:`~gingerdj.db.models.Model`, :class:`~gingerdj.db.models.Manager` or
+    :class:`~gingerdj.db.models.query.QuerySet` instance from which to get the
     list.
 
 ``*args``
-    :class:`Q objects <ginger.db.models.Q>`.
+    :class:`Q objects <gingerdj.db.models.Q>`.
 
 ``**kwargs``
     Lookup parameters, which should be in the format accepted by ``get()`` and
@@ -275,7 +275,7 @@ Example
 
 The following example gets all published objects from ``MyModel``::
 
-    from ginger.shortcuts import get_list_or_404
+    from gingerdj.shortcuts import get_list_or_404
 
 
     def my_view(request):
@@ -283,7 +283,7 @@ The following example gets all published objects from ``MyModel``::
 
 This example is equivalent to::
 
-    from ginger.http import Http404
+    from gingerdj.http import Http404
 
 
     def my_view(request):

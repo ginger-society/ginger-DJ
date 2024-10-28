@@ -1,5 +1,5 @@
-from ginger.contrib.gis.db import models
-from ginger.db import connection, migrations
+from gingerdj.contrib.gis.db import models
+from gingerdj.db import connection, migrations
 
 ops = [
     migrations.CreateModel(

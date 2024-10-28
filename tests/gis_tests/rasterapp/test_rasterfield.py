@@ -1,16 +1,16 @@
 import json
 
-from ginger.contrib.gis.db.models.fields import BaseSpatialField
-from ginger.contrib.gis.db.models.functions import Distance
-from ginger.contrib.gis.db.models.lookups import DistanceLookupBase, GISLookup
-from ginger.contrib.gis.gdal import GDALRaster
-from ginger.contrib.gis.geos import GEOSGeometry
-from ginger.contrib.gis.measure import D
-from ginger.contrib.gis.shortcuts import numpy
-from ginger.db import connection
-from ginger.db.models import F, Func, Q
-from ginger.test import TransactionTestCase, skipUnlessDBFeature
-from ginger.test.utils import CaptureQueriesContext
+from gingerdj.contrib.gis.db.models.fields import BaseSpatialField
+from gingerdj.contrib.gis.db.models.functions import Distance
+from gingerdj.contrib.gis.db.models.lookups import DistanceLookupBase, GISLookup
+from gingerdj.contrib.gis.gdal import GDALRaster
+from gingerdj.contrib.gis.geos import GEOSGeometry
+from gingerdj.contrib.gis.measure import D
+from gingerdj.contrib.gis.shortcuts import numpy
+from gingerdj.db import connection
+from gingerdj.db.models import F, Func, Q
+from gingerdj.test import TransactionTestCase, skipUnlessDBFeature
+from gingerdj.test.utils import CaptureQueriesContext
 
 from ..data.rasters.textrasters import JSON_RASTER
 from .models import RasterModel, RasterRelatedModel
@@ -170,7 +170,9 @@ class RasterFieldTest(TransactionTestCase):
         unprojected coordinate systems. This test just checks that the lookup
         can be called, but doesn't check if the result makes logical sense.
         """
-        from ginger.contrib.gis.db.backends.postgis.operations import PostGISOperations
+        from gingerdj.contrib.gis.db.backends.postgis.operations import (
+            PostGISOperations,
+        )
 
         # Create test raster and geom.
         rast = GDALRaster(json.loads(JSON_RASTER))

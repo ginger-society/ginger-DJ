@@ -1,6 +1,6 @@
 import decimal
 
-from ginger.db import models
+from gingerdj.db import models
 
 
 class Cash(decimal.Decimal):

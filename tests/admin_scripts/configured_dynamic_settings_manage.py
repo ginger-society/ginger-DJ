@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 import sys
 
-from ginger.conf import global_settings, settings
-from ginger.core.management import execute_from_command_line
+from gingerdj.conf import global_settings, settings
+from gingerdj.core.management import execute_from_command_line
 
 
 class Settings:

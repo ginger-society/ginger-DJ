@@ -1,5 +1,5 @@
-from ginger.contrib import messages
-from ginger.test import RequestFactory, SimpleTestCase
+from gingerdj.contrib import messages
+from gingerdj.test import RequestFactory, SimpleTestCase
 
 from .utils import DummyStorage
 
@@ -28,7 +28,7 @@ class ApiTests(SimpleTestCase):
     def test_middleware_missing(self):
         msg = (
             "You cannot add messages without installing "
-            "ginger.contrib.messages.middleware.MessageMiddleware"
+            "gingerdj.contrib.messages.middleware.MessageMiddleware"
         )
         with self.assertRaisesMessage(messages.MessageFailure, msg):
             messages.add_message(self.request, messages.DEBUG, "some message")
@@ -55,7 +55,7 @@ class CustomRequest:
 class CustomRequestApiTests(ApiTests):
     """
     add_message() should use ducktyping to allow request wrappers such as the
-    one in Ginger REST framework.
+    one in GingerDJ REST framework.
     """
 
     def setUp(self):

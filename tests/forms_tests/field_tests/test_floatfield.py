@@ -1,10 +1,10 @@
-from ginger.core.exceptions import ValidationError
-from ginger.forms import FloatField, NumberInput
-from ginger.test import SimpleTestCase
-from ginger.test.selenium import SeleniumTestCase
-from ginger.test.utils import override_settings
-from ginger.urls import reverse
-from ginger.utils import formats, translation
+from gingerdj.core.exceptions import ValidationError
+from gingerdj.forms import FloatField, NumberInput
+from gingerdj.test import SimpleTestCase
+from gingerdj.test.selenium import SeleniumTestCase
+from gingerdj.test.utils import override_settings
+from gingerdj.urls import reverse
+from gingerdj.utils import formats, translation
 
 from . import FormFieldAssertionsMixin
 

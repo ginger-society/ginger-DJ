@@ -2,7 +2,7 @@
 File handling
 =============
 
-.. module:: ginger.core.files
+.. module:: gingerdj.core.files
    :synopsis: File handling and storage
 
 .. toctree::

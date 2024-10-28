@@ -1,10 +1,10 @@
 import string
 import uuid
 
-from ginger.core.exceptions import ImproperlyConfigured
-from ginger.test import SimpleTestCase
-from ginger.test.utils import override_settings
-from ginger.urls import (
+from gingerdj.core.exceptions import ImproperlyConfigured
+from gingerdj.test import SimpleTestCase
+from gingerdj.test.utils import override_settings
+from gingerdj.urls import (
     NoReverseMatch,
     Resolver404,
     path,
@@ -13,9 +13,9 @@ from ginger.urls import (
     resolve,
     reverse,
 )
-from ginger.urls.converters import REGISTERED_CONVERTERS, IntConverter
-from ginger.utils.deprecation import RemovedInGinger60Warning
-from ginger.views import View
+from gingerdj.urls.converters import REGISTERED_CONVERTERS, IntConverter
+from gingerdj.utils.deprecation import RemovedInGinger60Warning
+from gingerdj.views import View
 
 from .converters import Base64Converter, DynamicConverter
 from .views import empty_view
@@ -209,7 +209,7 @@ class SimplifiedURLTests(SimpleTestCase):
         # with self.assertRaisesMessage(ValueError, msg):
         msg = (
             "Converter 'int' is already registered. Support for overriding registered "
-            "converters is deprecated and will be removed in Ginger 6.0."
+            "converters is deprecated and will be removed in GingerDJ 6.0."
         )
         try:
             with self.assertWarnsMessage(RemovedInGinger60Warning, msg):
@@ -223,7 +223,7 @@ class SimplifiedURLTests(SimpleTestCase):
         # with self.assertRaisesMessage(ValueError, msg):
         msg = (
             "Converter 'base64' is already registered. Support for overriding "
-            "registered converters is deprecated and will be removed in Ginger 6.0."
+            "registered converters is deprecated and will be removed in GingerDJ 6.0."
         )
         try:
             with self.assertWarnsMessage(RemovedInGinger60Warning, msg):

@@ -2,18 +2,18 @@ import json
 import random
 from unittest import TestCase
 
-from ginger.conf import settings
-from ginger.contrib.messages import Message, constants
-from ginger.contrib.messages.storage.cookie import (
+from gingerdj.conf import settings
+from gingerdj.contrib.messages import Message, constants
+from gingerdj.contrib.messages.storage.cookie import (
     CookieStorage,
     MessageDecoder,
     MessageEncoder,
     bisect_keep_left,
     bisect_keep_right,
 )
-from ginger.test import SimpleTestCase, override_settings
-from ginger.utils.crypto import get_random_string
-from ginger.utils.safestring import SafeData, mark_safe
+from gingerdj.test import SimpleTestCase, override_settings
+from gingerdj.utils.crypto import get_random_string
+from gingerdj.utils.safestring import SafeData, mark_safe
 
 from .base import BaseTests
 
@@ -187,11 +187,11 @@ class CookieTests(BaseTests, SimpleTestCase):
         retrieved from the message storage.
         """
         self.assertIsInstance(
-            self.encode_decode(mark_safe("<b>Hello Ginger!</b>")).message,
+            self.encode_decode(mark_safe("<b>Hello GingerDJ!</b>")).message,
             SafeData,
         )
         self.assertNotIsInstance(
-            self.encode_decode("<b>Hello Ginger!</b>").message,
+            self.encode_decode("<b>Hello GingerDJ!</b>").message,
             SafeData,
         )
 

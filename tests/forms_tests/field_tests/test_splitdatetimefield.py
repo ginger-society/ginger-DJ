@@ -1,9 +1,9 @@
 import datetime
 
-from ginger.core.exceptions import ValidationError
-from ginger.forms import Form, SplitDateTimeField
-from ginger.forms.widgets import SplitDateTimeWidget
-from ginger.test import SimpleTestCase
+from gingerdj.core.exceptions import ValidationError
+from gingerdj.forms import Form, SplitDateTimeField
+from gingerdj.forms.widgets import SplitDateTimeWidget
+from gingerdj.test import SimpleTestCase
 
 
 class SplitDateTimeFieldTest(SimpleTestCase):

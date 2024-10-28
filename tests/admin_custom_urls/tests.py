@@ -1,8 +1,8 @@
-from ginger.contrib.admin.utils import quote
-from ginger.contrib.admin.views.main import IS_POPUP_VAR
-from ginger.template.response import TemplateResponse
-from ginger.test import TestCase, override_settings
-from ginger.urls import reverse
+from gingerdj.contrib.admin.utils import quote
+from gingerdj.contrib.admin.views.main import IS_POPUP_VAR
+from gingerdj.template.response import TemplateResponse
+from gingerdj.test import TestCase, override_settings
+from gingerdj.urls import reverse
 
 from .models import Action, Car, Person
 

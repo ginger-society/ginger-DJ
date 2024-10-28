@@ -1,5 +1,5 @@
-from ginger.contrib.gis.geos import LineString
-from ginger.test import SimpleTestCase
+from gingerdj.contrib.gis.geos import LineString
+from gingerdj.test import SimpleTestCase
 
 
 class GEOSCoordSeqTest(SimpleTestCase):

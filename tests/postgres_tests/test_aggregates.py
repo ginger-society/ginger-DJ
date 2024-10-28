@@ -1,5 +1,5 @@
-from ginger.db import connection, transaction
-from ginger.db.models import (
+from gingerdj.db import connection, transaction
+from gingerdj.db.models import (
     CharField,
     F,
     Func,
@@ -11,17 +11,17 @@ from ginger.db.models import (
     Value,
     Window,
 )
-from ginger.db.models.fields.json import KeyTextTransform, KeyTransform
-from ginger.db.models.functions import Cast, Concat, Substr
-from ginger.test import skipUnlessDBFeature
-from ginger.test.utils import Approximate
-from ginger.utils import timezone
+from gingerdj.db.models.fields.json import KeyTextTransform, KeyTransform
+from gingerdj.db.models.functions import Cast, Concat, Substr
+from gingerdj.test import skipUnlessDBFeature
+from gingerdj.test.utils import Approximate
+from gingerdj.utils import timezone
 
 from . import PostgreSQLTestCase
 from .models import AggregateTestModel, HotelReservation, Room, StatTestModel
 
 try:
-    from ginger.contrib.postgres.aggregates import (
+    from gingerdj.contrib.postgres.aggregates import (
         ArrayAgg,
         BitAnd,
         BitOr,
@@ -43,7 +43,7 @@ try:
         StatAggregate,
         StringAgg,
     )
-    from ginger.contrib.postgres.fields import ArrayField
+    from gingerdj.contrib.postgres.fields import ArrayField
 except ImportError:
     pass  # psycopg2 is not installed
 

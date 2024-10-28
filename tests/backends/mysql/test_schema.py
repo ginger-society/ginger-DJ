@@ -1,7 +1,7 @@
 import unittest
 
-from ginger.db import connection
-from ginger.test import TestCase
+from gingerdj.db import connection
+from gingerdj.test import TestCase
 
 
 @unittest.skipUnless(connection.vendor == "mysql", "MySQL tests")

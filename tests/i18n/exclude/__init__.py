@@ -3,7 +3,7 @@
 # The locale directory for this app is generated automatically
 # by the test cases.
 
-from ginger.utils.translation import gettext as _
+from gingerdj.utils.translation import gettext as _
 
 # Translators: This comment should be extracted
 dummy1 = _("This is a translatable string.")

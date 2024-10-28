@@ -2,11 +2,11 @@
 ``contrib`` packages
 ====================
 
-Ginger aims to follow Python's :ref:`"batteries included" philosophy
+GingerDJ aims to follow Python's :ref:`"batteries included" philosophy
 <tut-batteries-included>`. It ships with a variety of extra, optional tools
 that solve common web development problems.
 
-This code lives in :source:`ginger/contrib` in the Ginger distribution. This document
+This code lives in :source:`gingerdj/contrib` in the GingerDJ distribution. This document
 gives a rundown of the packages in ``contrib``, along with any dependencies
 those packages have.
 
@@ -14,7 +14,7 @@ those packages have.
 
     For most of these add-ons -- specifically, the add-ons that include either
     models or template tags -- you'll need to add the package name (e.g.,
-    ``'ginger.contrib.redirects'``) to your :setting:`INSTALLED_APPS` setting
+    ``'gingerdj.contrib.redirects'``) to your :setting:`INSTALLED_APPS` setting
     and rerun ``manage.py migrate``.
 
 .. toctree::
@@ -35,7 +35,7 @@ those packages have.
 ``admin``
 =========
 
-The automatic Ginger administrative interface. For more information, see
+The automatic GingerDJ administrative interface. For more information, see
 :doc:`Tutorial 2 </intro/tutorial02>` and the
 :doc:`admin documentation </ref/contrib/admin/index>`.
 
@@ -52,7 +52,7 @@ Requires the sites_ contrib package to be installed as well.
 ``gis``
 =======
 
-A world-class geospatial framework built on top of Ginger, that enables
+A world-class geospatial framework built on top of GingerDJ, that enables
 storage, manipulation and display of spatial data.
 
 See the :doc:`/ref/contrib/gis/index` documentation for more.
@@ -60,7 +60,7 @@ See the :doc:`/ref/contrib/gis/index` documentation for more.
 ``humanize``
 ============
 
-A set of Ginger template filters useful for adding a "human touch" to data.
+A set of GingerDJ template filters useful for adding a "human touch" to data.
 
 See the :doc:`humanize documentation </ref/contrib/humanize>`.
 
@@ -97,7 +97,7 @@ See the :doc:`sessions documentation </topics/http/sessions>`.
 =========
 
 A light framework that lets you operate multiple websites off of the same
-database and Ginger installation. It gives you hooks for associating objects to
+database and GingerDJ installation. It gives you hooks for associating objects to
 one or more sites.
 
 See the :doc:`sites documentation </ref/contrib/sites>`.
@@ -120,4 +120,4 @@ Other add-ons
 =============
 
 If you have an idea for functionality to include in ``contrib``, let us know!
-Code it up, and post it to the |ginger-users| mailing list.
+Code it up, and post it to the |gingerdj-users| mailing list.

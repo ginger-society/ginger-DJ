@@ -1,6 +1,6 @@
-from ginger.template.defaultfilters import length
-from ginger.test import SimpleTestCase
-from ginger.utils.safestring import mark_safe
+from gingerdj.template.defaultfilters import length
+from gingerdj.test import SimpleTestCase
+from gingerdj.utils.safestring import mark_safe
 
 from ..utils import setup
 
@@ -25,13 +25,13 @@ class LengthTests(SimpleTestCase):
 
     @setup({"length04": "{{ string|length }}"})
     def test_length04(self):
-        output = self.engine.render_to_string("length04", {"string": "ginger"})
+        output = self.engine.render_to_string("length04", {"string": "gingerdj"})
         self.assertEqual(output, "6")
 
     @setup({"length05": "{% if string|length == 6 %}Pass{% endif %}"})
     def test_length05(self):
         output = self.engine.render_to_string(
-            "length05", {"string": mark_safe("ginger")}
+            "length05", {"string": mark_safe("gingerdj")}
         )
         self.assertEqual(output, "Pass")
 

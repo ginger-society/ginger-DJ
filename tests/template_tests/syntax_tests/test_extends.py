@@ -1,7 +1,7 @@
-from ginger.template import NodeList, TemplateSyntaxError
-from ginger.template.base import Node
-from ginger.template.loader_tags import ExtendsNode
-from ginger.test import SimpleTestCase
+from gingerdj.template import NodeList, TemplateSyntaxError
+from gingerdj.template.base import Node
+from gingerdj.template.loader_tags import ExtendsNode
+from gingerdj.test import SimpleTestCase
 
 from ..utils import setup
 

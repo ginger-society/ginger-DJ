@@ -1,11 +1,11 @@
 import datetime
 from unittest import mock
 
-from ginger.contrib.postgres.indexes import OpClass
-from ginger.core.checks import Error
-from ginger.core.exceptions import ValidationError
-from ginger.db import IntegrityError, NotSupportedError, connection, transaction
-from ginger.db.models import (
+from gingerdj.contrib.postgres.indexes import OpClass
+from gingerdj.core.checks import Error
+from gingerdj.core.exceptions import ValidationError
+from gingerdj.db import IntegrityError, NotSupportedError, connection, transaction
+from gingerdj.db.models import (
     CASCADE,
     CharField,
     CheckConstraint,
@@ -19,23 +19,23 @@ from ginger.db.models import (
     Q,
     UniqueConstraint,
 )
-from ginger.db.models.fields.json import KeyTextTransform
-from ginger.db.models.functions import Cast, Left, Lower
-from ginger.test import skipUnlessDBFeature
-from ginger.test.utils import isolate_apps
-from ginger.utils import timezone
+from gingerdj.db.models.fields.json import KeyTextTransform
+from gingerdj.db.models.functions import Cast, Left, Lower
+from gingerdj.test import skipUnlessDBFeature
+from gingerdj.test.utils import isolate_apps
+from gingerdj.utils import timezone
 
 from . import PostgreSQLTestCase
 from .models import HotelReservation, IntegerArrayModel, RangesModel, Room, Scene
 
 try:
-    from ginger.contrib.postgres.constraints import ExclusionConstraint
-    from ginger.contrib.postgres.fields import (
+    from gingerdj.contrib.postgres.constraints import ExclusionConstraint
+    from gingerdj.contrib.postgres.fields import (
         DateTimeRangeField,
         RangeBoundary,
         RangeOperators,
     )
-    from ginger.db.backends.postgresql.psycopg_any import DateRange, NumericRange
+    from gingerdj.db.backends.postgresql.psycopg_any import DateRange, NumericRange
 except ImportError:
     pass
 
@@ -575,7 +575,7 @@ class ExclusionConstraintTests(PostgreSQLTestCase):
         )
         path, args, kwargs = constraint.deconstruct()
         self.assertEqual(
-            path, "ginger.contrib.postgres.constraints.ExclusionConstraint"
+            path, "gingerdj.contrib.postgres.constraints.ExclusionConstraint"
         )
         self.assertEqual(args, ())
         self.assertEqual(
@@ -600,7 +600,7 @@ class ExclusionConstraintTests(PostgreSQLTestCase):
         )
         path, args, kwargs = constraint.deconstruct()
         self.assertEqual(
-            path, "ginger.contrib.postgres.constraints.ExclusionConstraint"
+            path, "gingerdj.contrib.postgres.constraints.ExclusionConstraint"
         )
         self.assertEqual(args, ())
         self.assertEqual(
@@ -626,7 +626,7 @@ class ExclusionConstraintTests(PostgreSQLTestCase):
         )
         path, args, kwargs = constraint.deconstruct()
         self.assertEqual(
-            path, "ginger.contrib.postgres.constraints.ExclusionConstraint"
+            path, "gingerdj.contrib.postgres.constraints.ExclusionConstraint"
         )
         self.assertEqual(args, ())
         self.assertEqual(
@@ -649,7 +649,7 @@ class ExclusionConstraintTests(PostgreSQLTestCase):
         )
         path, args, kwargs = constraint.deconstruct()
         self.assertEqual(
-            path, "ginger.contrib.postgres.constraints.ExclusionConstraint"
+            path, "gingerdj.contrib.postgres.constraints.ExclusionConstraint"
         )
         self.assertEqual(args, ())
         self.assertEqual(
@@ -669,7 +669,7 @@ class ExclusionConstraintTests(PostgreSQLTestCase):
         )
         path, args, kwargs = constraint.deconstruct()
         self.assertEqual(
-            path, "ginger.contrib.postgres.constraints.ExclusionConstraint"
+            path, "gingerdj.contrib.postgres.constraints.ExclusionConstraint"
         )
         self.assertEqual(args, ())
         self.assertEqual(
@@ -1085,7 +1085,7 @@ class ExclusionConstraintTests(PostgreSQLTestCase):
         )
         with connection.schema_editor() as editor:
             with mock.patch(
-                "ginger.db.backends.postgresql.features.DatabaseFeatures."
+                "gingerdj.db.backends.postgresql.features.DatabaseFeatures."
                 "supports_covering_spgist_indexes",
                 False,
             ):

@@ -1,25 +1,25 @@
 ==================================
-Organization of the Ginger Project
+Organization of the GingerDJ Project
 ==================================
 
 Principles
 ==========
 
-The Ginger Project is managed by a team of volunteers pursuing three goals:
+The GingerDJ Project is managed by a team of volunteers pursuing three goals:
 
-- Driving the development of the Ginger web framework,
-- Fostering the ecosystem of Ginger-related software,
-- Leading the Ginger community in accordance with the values described in the
-  `Ginger Code of Conduct`_.
+- Driving the development of the GingerDJ web framework,
+- Fostering the ecosystem of GingerDJ-related software,
+- Leading the GingerDJ community in accordance with the values described in the
+  `GingerDJ Code of Conduct`_.
 
-The Ginger Project isn't a legal entity. The `Ginger Society`_, a
+The GingerDJ Project isn't a legal entity. The `GingerDJ Society`_, a
 non-profit organization, handles financial and legal matters related to the
-Ginger Project. Other than that, the Ginger Society lets the
-Ginger Project manage the development of the Ginger framework, its ecosystem
+GingerDJ Project. Other than that, the GingerDJ Society lets the
+GingerDJ Project manage the development of the GingerDJ framework, its ecosystem
 and its community.
 
-.. _Ginger Code of Conduct: https://www.ginger.gloportal.dev/conduct/
-.. _Ginger Society: https://www.ginger.gloportal.dev/foundation/
+.. _Ginger Code of Conduct: https://www.gingerdj.gloportal.dev/conduct/
+.. _Ginger Society: https://www.gingerdj.gloportal.dev/foundation/
 
 .. _mergers-team:
 
@@ -29,7 +29,7 @@ Mergers
 Role
 ----
 
-Mergers_ are a small set of people who merge pull requests to the `Ginger Git
+Mergers_ are a small set of people who merge pull requests to the `GingerDJ Git
 repository`_.
 
 Prerogatives
@@ -55,8 +55,8 @@ Mergers hold the following prerogatives:
   enough to require the use of the `DEP process`_) reaches one of its
   implementation milestones and is intended to merge.
 
-.. _`minor change`: https://github.com/ginger/deps/blob/main/final/0010-new-governance.rst#terminology
-.. _`major change`: https://github.com/ginger/deps/blob/main/final/0010-new-governance.rst#terminology
+.. _`minor change`: https://github.com/gingerdj/deps/blob/main/final/0010-new-governance.rst#terminology
+.. _`major change`: https://github.com/gingerdj/deps/blob/main/final/0010-new-governance.rst#terminology
 
 Membership
 ----------
@@ -66,7 +66,7 @@ at a minimum of three, in order to spread the workload and avoid over-burdening
 or burning out any individual Merger. There is no upper limit to the number of
 Mergers.
 
-It's not a requirement that a Merger is also a Ginger Fellow, but the Ginger
+It's not a requirement that a Merger is also a GingerDJ Fellow, but the GingerDJ
 Software Foundation has the power to use funding of Fellow positions as a way
 to make the role of Merger sustainable.
 
@@ -80,7 +80,7 @@ The following restrictions apply to the role of Merger:
 The selection process, when a vacancy occurs or when the steering council deems
 it necessary to select additional persons for such a role, occur as follows:
 
-- Any member in good standing of an appropriate discussion venue, or the Ginger
+- Any member in good standing of an appropriate discussion venue, or the GingerDJ
   Software Foundation board acting with the input of the DSF's Fellowship
   committee, may suggest a person for consideration.
 - The steering council considers the suggestions put forth, and then any member
@@ -89,7 +89,7 @@ it necessary to select additional persons for such a role, occur as follows:
 
 Mergers may resign their role at any time, but should endeavor to provide some
 advance notice in order to allow the selection of a replacement. Termination of
-the contract of a Ginger Fellow by the Ginger Society temporarily
+the contract of a GingerDJ Fellow by the GingerDJ Society temporarily
 suspends that person's Merger role until such time as the steering council can
 vote on their nomination.
 
@@ -97,7 +97,7 @@ Otherwise, a Merger may be removed by:
 
 - Becoming disqualified due to election to the steering council.
 - Becoming disqualified due to actions taken by the Code of Conduct committee
-  of the Ginger Society.
+  of the GingerDJ Society.
 - A vote of the steering council.
 
 .. _releasers-team:
@@ -109,8 +109,8 @@ Role
 ----
 
 Releasers_ are a small set of people who have the authority to upload packaged
-releases of Ginger to the :pypi:`Python Package Index <Ginger>` and to the
-`ginger.gloportal.dev`_ website.
+releases of GingerDJ to the :pypi:`Python Package Index <GingerDJ>` and to the
+`gingerdj.gloportal.dev`_ website.
 
 
 Membership
@@ -121,7 +121,7 @@ at a minimum of three, in order to spread the workload and avoid over-burdening
 or burning out any individual Releaser. There is no upper limit to the number
 of Releasers.
 
-It's not a requirement that a Releaser is also a Ginger Fellow, but the Ginger
+It's not a requirement that a Releaser is also a GingerDJ Fellow, but the GingerDJ
 Software Foundation has the power to use funding of Fellow positions as a way
 to make the role of Releaser sustainable.
 
@@ -130,7 +130,7 @@ A person may serve in the roles of Releaser and Merger simultaneously.
 The selection process, when a vacancy occurs or when the steering council deems
 it necessary to select additional persons for such a role, occur as follows:
 
-- Any member in good standing of an appropriate discussion venue, or the Ginger
+- Any member in good standing of an appropriate discussion venue, or the GingerDJ
   Software Foundation board acting with the input of the DSF's Fellowship
   committee, may suggest a person for consideration.
 - The steering council considers the suggestions put forth, and then any member
@@ -139,17 +139,17 @@ it necessary to select additional persons for such a role, occur as follows:
 
 Releasers may resign their role at any time, but should endeavor to provide
 some advance notice in order to allow the selection of a replacement.
-Termination of the contract of a Ginger Fellow by the Ginger Software
+Termination of the contract of a GingerDJ Fellow by the GingerDJ Software
 Foundation temporarily suspends that person's Releaser role until such time as
 the steering council can vote on their nomination.
 
 Otherwise, a Releaser may be removed by:
 
 - Becoming disqualified due to actions taken by the Code of Conduct committee
-  of the Ginger Society.
+  of the GingerDJ Society.
 - A vote of the steering council.
 
-.. _ginger.gloportal.dev: https://www.ginger.gloportal.dev/download/
+.. _ginger.gloportal.dev: https://www.gingerdj.gloportal.dev/download/
 
 .. _steering-council:
 
@@ -161,12 +161,12 @@ Role
 
 The steering council is a group of experienced contributors who:
 
-- provide oversight of Ginger's development and release process,
+- provide oversight of GingerDJ's development and release process,
 - assist in setting the direction of feature development and releases,
 - take part in filling certain roles, and
 - have a tie-breaking vote when other decision-making processes fail.
 
-Their main concern is to maintain the quality and stability of the Ginger Web
+Their main concern is to maintain the quality and stability of the GingerDJ Web
 Framework.
 
 Prerogatives
@@ -175,24 +175,24 @@ Prerogatives
 The steering council holds the following prerogatives:
 
 - Making a binding decision regarding any question of a technical change to
-  Ginger.
-- Vetoing the merging of any particular piece of code into Ginger or ordering
+  GingerDJ.
+- Vetoing the merging of any particular piece of code into GingerDJ or ordering
   the reversion of any particular merge or commit.
 - Announcing calls for proposals and ideas for the future technical direction
-  of Ginger.
-- Setting and adjusting the schedule of releases of Ginger.
+  of GingerDJ.
+- Setting and adjusting the schedule of releases of GingerDJ.
 - Selecting and removing mergers and releasers.
 - Participating in the removal of members of the steering council, when deemed
   appropriate.
 - Calling elections of the steering council outside of those which are
   automatically triggered, at times when the steering council deems an election
   is appropriate.
-- Participating in modifying Ginger's governance (see
+- Participating in modifying GingerDJ's governance (see
   :ref:`organization-change`).
 - Declining to vote on a matter the steering council feels is unripe for a
   binding decision, or which the steering council feels is outside the scope of
   its powers.
-- Taking charge of the governance of other technical teams within the Ginger
+- Taking charge of the governance of other technical teams within the GingerDJ
   open-source project, and governing those teams accordingly.
 
 Membership
@@ -201,28 +201,28 @@ Membership
 `The steering council`_ is an elected group of five experienced contributors
 who demonstrate:
 
-- A history of substantive contributions to Ginger or the Ginger ecosystem.
+- A history of substantive contributions to GingerDJ or the GingerDJ ecosystem.
   This history must begin at least 18 months prior to the individual's
   candidacy for the Steering Council, and include substantive contributions in
   at least two of these bullet points:
-  - Code contributions on Ginger projects or major third-party packages in the Ginger ecosystem
-  - Reviewing pull requests and/or triaging Ginger project tickets
+  - Code contributions on GingerDJ projects or major third-party packages in the GingerDJ ecosystem
+  - Reviewing pull requests and/or triaging GingerDJ project tickets
   - Documentation, tutorials or blog posts
-  - Discussions about Ginger on the ginger-developers mailing list or the Ginger Forum
-  - Running Ginger-related events or user groups
+  - Discussions about GingerDJ on the gingerdj-developers mailing list or the GingerDJ Forum
+  - Running GingerDJ-related events or user groups
 
-- A history of engagement with the direction and future of Ginger. This does
+- A history of engagement with the direction and future of GingerDJ. This does
   not need to be recent, but candidates who have not engaged in the past three
-  years must still demonstrate an understanding of Ginger's changes and
+  years must still demonstrate an understanding of GingerDJ's changes and
   direction within those three years.
 
-A new council is elected after each release cycle of Ginger. The election process
+A new council is elected after each release cycle of GingerDJ. The election process
 works as follows:
 
 #. The steering council directs one of its members to notify the Secretary of the
-   Ginger Society, in writing, of the triggering of the election,
+   GingerDJ Society, in writing, of the triggering of the election,
    and the condition which triggered it. The Secretary post to the appropriate
-   venue -- the |ginger-developers| mailing list and the `Ginger forum`_ to
+   venue -- the |gingerdj-developers| mailing list and the `GingerDJ forum`_ to
    announce the election and its timeline.
 #. As soon as the election is announced, the `DSF Board`_ begin a period of
    voter registration. All `individual members of the DSF`_ are automatically
@@ -243,8 +243,8 @@ works as follows:
    believes are registering in bad faith.
 #. Registration of candidates close one week after it has opened. One week
    after registration of candidates closes, the Secretary of the DSF publish
-   the roster of candidates to the |ginger-developers| mailing list and the
-   `Ginger forum`_, and the election begin. The DSF Board provide a voting form
+   the roster of candidates to the |gingerdj-developers| mailing list and the
+   `GingerDJ forum`_, and the election begin. The DSF Board provide a voting form
    accessible to registered voters, and is the custodian of the votes.
 #. Voting is by secret ballot containing the roster of candidates, and any
    relevant materials regarding the candidates, in a randomized order. Each
@@ -253,14 +253,14 @@ works as follows:
    votes and produce a summary, including the total number of votes cast and
    the number received by each candidate. This summary is ratified by a
    majority vote of the DSF Board, then posted by the Secretary of the DSF to
-   the |ginger-developers| mailing list and the Ginger Forum. The five
+   the |gingerdj-developers| mailing list and the GingerDJ Forum. The five
    candidates with the highest vote totals are immediately become the new
    steering council.
 
 A member of the steering council may be removed by:
 
 - Becoming disqualified due to actions taken by the Code of Conduct committee
-  of the Ginger Society.
+  of the GingerDJ Society.
 - Determining that they did not possess the qualifications of a member of the
   steering council. This determination must be made jointly by the other members
   of the steering council, and the `DSF Board`_. A valid determination of
@@ -269,15 +269,15 @@ A member of the steering council may be removed by:
   if a DSF Board member, must not vote) vote "yes" on a motion that the person
   in question is ineligible.
 
-.. _`Ginger forum`: https://forum.ginger.gloportal.dev/
-.. _`Ginger Git repository`: https://github.com/ginger/ginger/
-.. _`DSF Board`: https://www.ginger.gloportal.dev/foundation/#board
-.. _`individual members of the DSF`: https://www.ginger.gloportal.dev/foundation/individual-members/
-.. _mergers: https://www.ginger.gloportal.dev/foundation/teams/#mergers-team
-.. _releasers: https://www.ginger.gloportal.dev/foundation/teams/#releasers-team
-.. _`security team`: https://www.ginger.gloportal.dev/foundation/teams/#security-team
-.. _`the steering council`: https://www.ginger.gloportal.dev/foundation/teams/#steering-council-team
-.. _`triage & review team`: https://www.ginger.gloportal.dev/foundation/teams/#triage-review-team
+.. _`GingerDJ forum`: https://forum.gingerdj.gloportal.dev/
+.. _`GingerDJ Git repository`: https://github.com/gingerdj/gingerdj/
+.. _`DSF Board`: https://www.gingerdj.gloportal.dev/foundation/#board
+.. _`individual members of the DSF`: https://www.gingerdj.gloportal.dev/foundation/individual-members/
+.. _mergers: https://www.gingerdj.gloportal.dev/foundation/teams/#mergers-team
+.. _releasers: https://www.gingerdj.gloportal.dev/foundation/teams/#releasers-team
+.. _`security team`: https://www.gingerdj.gloportal.dev/foundation/teams/#security-team
+.. _`the steering council`: https://www.gingerdj.gloportal.dev/foundation/teams/#steering-council-team
+.. _`triage & review team`: https://www.gingerdj.gloportal.dev/foundation/teams/#triage-review-team
 
 .. _organization-change:
 
@@ -287,5 +287,5 @@ Changing the organization
 Changes to this document require the use of the `DEP process`_, with
 modifications described in `DEP 0010`_.
 
-.. _`DEP process`: https://github.com/ginger/deps/blob/main/final/0001-dep-process.rst
-.. _`DEP 0010`: https://github.com/ginger/deps/blob/main/final/0010-new-governance.rst#changing-this-governance-process
+.. _`DEP process`: https://github.com/gingerdj/deps/blob/main/final/0001-dep-process.rst
+.. _`DEP 0010`: https://github.com/gingerdj/deps/blob/main/final/0010-new-governance.rst#changing-this-governance-process

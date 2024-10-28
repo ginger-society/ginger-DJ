@@ -1,11 +1,11 @@
 import re
 
-from ginger.contrib.gis import forms
-from ginger.contrib.gis.forms import BaseGeometryWidget, OpenLayersWidget
-from ginger.contrib.gis.geos import GEOSGeometry
-from ginger.core.exceptions import ValidationError
-from ginger.test import SimpleTestCase, override_settings
-from ginger.utils.html import escape
+from gingerdj.contrib.gis import forms
+from gingerdj.contrib.gis.forms import BaseGeometryWidget, OpenLayersWidget
+from gingerdj.contrib.gis.geos import GEOSGeometry
+from gingerdj.core.exceptions import ValidationError
+from gingerdj.test import SimpleTestCase, override_settings
+from gingerdj.utils.html import escape
 
 
 class GeometryFieldTest(SimpleTestCase):
@@ -154,7 +154,7 @@ class GeometryFieldTest(SimpleTestCase):
             }
         )
 
-        with self.assertLogs("ginger.contrib.gis", "ERROR") as logger_calls:
+        with self.assertLogs("gingerdj.contrib.gis", "ERROR") as logger_calls:
             output = str(form)
 
         # The first point can't use assertInHTML() due to non-deterministic

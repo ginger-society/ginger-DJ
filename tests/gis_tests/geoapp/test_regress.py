@@ -1,9 +1,9 @@
 from datetime import datetime
 
-from ginger.contrib.gis.db.models import Extent
-from ginger.contrib.gis.shortcuts import render_to_kmz
-from ginger.db.models import Count, Min
-from ginger.test import TestCase, skipUnlessDBFeature
+from gingerdj.contrib.gis.db.models import Extent
+from gingerdj.contrib.gis.shortcuts import render_to_kmz
+from gingerdj.db.models import Count, Min
+from gingerdj.test import TestCase, skipUnlessDBFeature
 
 from .models import City, PennsylvaniaCity, State, Truth
 

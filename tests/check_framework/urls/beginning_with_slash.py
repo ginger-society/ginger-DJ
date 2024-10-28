@@ -1,4 +1,4 @@
-from ginger.urls import path, re_path
+from gingerdj.urls import path, re_path
 
 urlpatterns = [
     path("/path-starting-with-slash/", lambda x: x),

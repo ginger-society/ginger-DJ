@@ -1,5 +1,5 @@
-from ginger.apps import apps
-from ginger.test import SimpleTestCase
+from gingerdj.apps import apps
+from gingerdj.test import SimpleTestCase
 
 
 class NoModelTests(SimpleTestCase):

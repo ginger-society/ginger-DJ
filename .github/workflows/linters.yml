@@ -51,7 +51,7 @@ jobs:
         uses: liskin/gh-problem-matcher-wrap@e7b7beaaafa52524748b31a381160759d68d61fb
         with:
           linters: isort
-          run: isort --check --diff ginger tests scripts
+          run: isort --check --diff gingerdj tests scripts
 
   black:
     runs-on: ubuntu-latest

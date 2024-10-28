@@ -1,6 +1,6 @@
 import datetime
 
-from ginger.test import TestCase, skipIfDBFeature
+from gingerdj.test import TestCase, skipIfDBFeature
 
 from .models import Donut, RumBaba
 

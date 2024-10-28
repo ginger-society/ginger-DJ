@@ -3,7 +3,7 @@ Deploying GeoGinger
 ===================
 
 Basically, the deployment of a GeoGinger application is not different from
-the deployment of a normal Ginger application. Please consult Ginger's
+the deployment of a normal GingerDJ application. Please consult GingerDJ's
 :doc:`deployment documentation </howto/deployment/index>`.
 
 .. warning::

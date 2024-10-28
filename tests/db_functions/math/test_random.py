@@ -1,5 +1,5 @@
-from ginger.db.models.functions import Random
-from ginger.test import TestCase
+from gingerdj.db.models.functions import Random
+from gingerdj.test import TestCase
 
 from ..models import FloatModel
 

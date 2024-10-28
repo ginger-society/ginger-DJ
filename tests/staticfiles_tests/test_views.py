@@ -1,8 +1,8 @@
 import posixpath
 from urllib.parse import quote
 
-from ginger.conf import settings
-from ginger.test import override_settings
+from gingerdj.conf import settings
+from gingerdj.test import override_settings
 
 from .cases import StaticFilesTestCase, TestDefaults
 

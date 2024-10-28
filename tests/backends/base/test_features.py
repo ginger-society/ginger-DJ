@@ -1,5 +1,5 @@
-from ginger.db import connection
-from ginger.test import SimpleTestCase
+from gingerdj.db import connection
+from gingerdj.test import SimpleTestCase
 
 
 class TestDatabaseFeatures(SimpleTestCase):

@@ -1,13 +1,13 @@
 """
 Serialization
 
-``ginger.core.serializers`` provides interfaces to converting Ginger
+``gingerdj.core.serializers`` provides interfaces to converting GingerDJ
 ``QuerySet`` objects to and from "flat" data (i.e. strings).
 """
 
 from decimal import Decimal
 
-from ginger.db import models
+from gingerdj.db import models
 
 
 class CategoryMetaDataManager(models.Manager):

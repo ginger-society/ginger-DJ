@@ -1,6 +1,6 @@
-from ginger.db import connection, models
-from ginger.db.backends.utils import truncate_name
-from ginger.test import TestCase
+from gingerdj.db import connection, models
+from gingerdj.db.backends.utils import truncate_name
+from gingerdj.test import TestCase
 
 from .models.article import Article, Site
 from .models.publication import Publication

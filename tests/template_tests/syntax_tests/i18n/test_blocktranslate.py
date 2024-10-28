@@ -4,13 +4,13 @@ from functools import partial, wraps
 
 from asgiref.local import Local
 
-from ginger.template import Context, Template, TemplateSyntaxError
-from ginger.template.base import Token, TokenType
-from ginger.templatetags.i18n import BlockTranslateNode
-from ginger.test import SimpleTestCase, override_settings
-from ginger.utils import translation
-from ginger.utils.safestring import mark_safe
-from ginger.utils.translation import trans_real
+from gingerdj.template import Context, Template, TemplateSyntaxError
+from gingerdj.template.base import Token, TokenType
+from gingerdj.templatetags.i18n import BlockTranslateNode
+from gingerdj.test import SimpleTestCase, override_settings
+from gingerdj.utils import translation
+from gingerdj.utils.safestring import mark_safe
+from gingerdj.utils.translation import trans_real
 
 from ...utils import setup as base_setup
 from .base import MultipleLocaleActivationTestCase, extended_locale_paths, here
@@ -48,7 +48,7 @@ def setup(templates, *args, **kwargs):
 
 
 class I18nBlockTransTagTests(SimpleTestCase):
-    libraries = {"i18n": "ginger.templatetags.i18n"}
+    libraries = {"i18n": "gingerdj.templatetags.i18n"}
 
     @setup(
         {

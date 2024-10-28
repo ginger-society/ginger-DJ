@@ -1,6 +1,6 @@
-from ginger.template.defaultfilters import default
-from ginger.test import SimpleTestCase
-from ginger.utils.safestring import mark_safe
+from gingerdj.template.defaultfilters import default
+from gingerdj.test import SimpleTestCase
+from gingerdj.utils.safestring import mark_safe
 
 from ..utils import setup
 

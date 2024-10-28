@@ -1,5 +1,5 @@
-from ginger.forms import CharField, Form, NumberInput
-from ginger.test import override_settings
+from gingerdj.forms import CharField, Form, NumberInput
+from gingerdj.test import override_settings
 
 from .base import WidgetTest
 

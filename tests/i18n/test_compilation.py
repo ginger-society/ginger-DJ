@@ -7,13 +7,19 @@ from pathlib import Path
 from subprocess import run
 from unittest import mock
 
-from ginger.core.management import CommandError, call_command, execute_from_command_line
-from ginger.core.management.commands.makemessages import Command as MakeMessagesCommand
-from ginger.core.management.utils import find_command
-from ginger.test import SimpleTestCase, override_settings
-from ginger.test.utils import captured_stderr, captured_stdout
-from ginger.utils import translation
-from ginger.utils.translation import gettext
+from gingerdj.core.management import (
+    CommandError,
+    call_command,
+    execute_from_command_line,
+)
+from gingerdj.core.management.commands.makemessages import (
+    Command as MakeMessagesCommand,
+)
+from gingerdj.core.management.utils import find_command
+from gingerdj.test import SimpleTestCase, override_settings
+from gingerdj.test.utils import captured_stderr, captured_stdout
+from gingerdj.utils import translation
+from gingerdj.utils.translation import gettext
 
 from .utils import RunInTmpDirMixin, copytree
 
@@ -27,8 +33,8 @@ class MessageCompilationTests(RunInTmpDirMixin, SimpleTestCase):
 
 class PoFileTests(MessageCompilationTests):
     LOCALE = "es_AR"
-    MO_FILE = "locale/%s/LC_MESSAGES/ginger.mo" % LOCALE
-    MO_FILE_EN = "locale/en/LC_MESSAGES/ginger.mo"
+    MO_FILE = "locale/%s/LC_MESSAGES/gingerdj.mo" % LOCALE
+    MO_FILE_EN = "locale/en/LC_MESSAGES/gingerdj.mo"
 
     def test_bom_rejection(self):
         stderr = StringIO()
@@ -73,7 +79,7 @@ class PoFileContentsTests(MessageCompilationTests):
     # Ticket #11240
 
     LOCALE = "fr"
-    MO_FILE = "locale/%s/LC_MESSAGES/ginger.mo" % LOCALE
+    MO_FILE = "locale/%s/LC_MESSAGES/gingerdj.mo" % LOCALE
 
     def test_percent_symbol_in_po_file(self):
         call_command("compilemessages", locale=[self.LOCALE], verbosity=0)
@@ -87,8 +93,8 @@ class MultipleLocaleCompilationTests(MessageCompilationTests):
     def setUp(self):
         super().setUp()
         localedir = os.path.join(self.test_dir, "locale")
-        self.MO_FILE_HR = os.path.join(localedir, "hr/LC_MESSAGES/ginger.mo")
-        self.MO_FILE_FR = os.path.join(localedir, "fr/LC_MESSAGES/ginger.mo")
+        self.MO_FILE_HR = os.path.join(localedir, "hr/LC_MESSAGES/gingerdj.mo")
+        self.MO_FILE_FR = os.path.join(localedir, "fr/LC_MESSAGES/gingerdj.mo")
 
     def test_one_locale(self):
         with override_settings(LOCALE_PATHS=[os.path.join(self.test_dir, "locale")]):
@@ -107,7 +113,7 @@ class MultipleLocaleCompilationTests(MessageCompilationTests):
 class ExcludedLocaleCompilationTests(MessageCompilationTests):
     work_subdir = "exclude"
 
-    MO_FILE = "locale/%s/LC_MESSAGES/ginger.mo"
+    MO_FILE = "locale/%s/LC_MESSAGES/gingerdj.mo"
 
     def setUp(self):
         super().setUp()
@@ -118,7 +124,7 @@ class ExcludedLocaleCompilationTests(MessageCompilationTests):
             # `call_command` bypasses the parser; by calling
             # `execute_from_command_line` with the help subcommand we
             # ensure that there are no issues with the parser itself.
-            execute_from_command_line(["ginger-admin", "help", "compilemessages"])
+            execute_from_command_line(["gingerdj-admin", "help", "compilemessages"])
 
     def test_one_locale_excluded(self):
         call_command("compilemessages", exclude=["it"], verbosity=0)
@@ -155,7 +161,7 @@ class ExcludedLocaleCompilationTests(MessageCompilationTests):
 class IgnoreDirectoryCompilationTests(MessageCompilationTests):
     # Reuse the exclude directory since it contains some locale fixtures.
     work_subdir = "exclude"
-    MO_FILE = "%s/%s/LC_MESSAGES/ginger.mo"
+    MO_FILE = "%s/%s/LC_MESSAGES/gingerdj.mo"
     CACHE_DIR = Path("cache") / "locale"
     NESTED_DIR = Path("outdated") / "v1" / "locale"
 
@@ -220,7 +226,7 @@ class IgnoreDirectoryCompilationTests(MessageCompilationTests):
             [("exclude/somedir/locale/LC_MESSAGES", [], ["it.po"])],
         ]
 
-        module_path = "ginger.core.management.commands.compilemessages"
+        module_path = "gingerdj.core.management.commands.compilemessages"
         with mock.patch(f"{module_path}.os.walk", side_effect=os_walk_results):
             with mock.patch(f"{module_path}.os.path.isdir", return_value=True):
                 with mock.patch(
@@ -266,7 +272,7 @@ class CompilationErrorHandling(MessageCompilationTests):
         env = os.environ.copy()
         env.update({"LC_ALL": "C"})
         with mock.patch(
-            "ginger.core.management.utils.run",
+            "gingerdj.core.management.utils.run",
             lambda *args, **kwargs: run(*args, env=env, **kwargs),
         ):
             cmd = MakeMessagesCommand()
@@ -284,8 +290,8 @@ class CompilationErrorHandling(MessageCompilationTests):
 
 class ProjectAndAppTests(MessageCompilationTests):
     LOCALE = "ru"
-    PROJECT_MO_FILE = "locale/%s/LC_MESSAGES/ginger.mo" % LOCALE
-    APP_MO_FILE = "app_with_locale/locale/%s/LC_MESSAGES/ginger.mo" % LOCALE
+    PROJECT_MO_FILE = "locale/%s/LC_MESSAGES/gingerdj.mo" % LOCALE
+    APP_MO_FILE = "app_with_locale/locale/%s/LC_MESSAGES/gingerdj.mo" % LOCALE
 
 
 class FuzzyTranslationTest(ProjectAndAppTests):
@@ -323,4 +329,4 @@ class PathLibLocaleCompilationTests(MessageCompilationTests):
     def test_locale_paths_pathlib(self):
         with override_settings(LOCALE_PATHS=[Path(self.test_dir) / "canned_locale"]):
             call_command("compilemessages", locale=["fr"], verbosity=0)
-            self.assertTrue(os.path.exists("canned_locale/fr/LC_MESSAGES/ginger.mo"))
+            self.assertTrue(os.path.exists("canned_locale/fr/LC_MESSAGES/gingerdj.mo"))

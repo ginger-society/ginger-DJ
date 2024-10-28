@@ -2,10 +2,10 @@
 Migrations
 ==========
 
-.. module:: ginger.db.migrations
-   :synopsis: Schema migration support for Ginger models
+.. module:: gingerdj.db.migrations
+   :synopsis: Schema migration support for GingerDJ models
 
-Migrations are Ginger's way of propagating changes you make to your models
+Migrations are GingerDJ's way of propagating changes you make to your models
 (adding a field, deleting a model, etc.) into your database schema. They're
 designed to be mostly automatic, but you'll need to know when to make
 migrations, when to run them, and the common problems you might run into.
@@ -14,7 +14,7 @@ The Commands
 ============
 
 There are several commands which you will use to interact with migrations
-and Ginger's handling of database schema:
+and GingerDJ's handling of database schema:
 
 * :djadmin:`migrate`, which is responsible for applying and unapplying
   migrations.
@@ -47,7 +47,7 @@ Migrations will run the same way on the same dataset and produce consistent
 results, meaning that what you see in development and staging is, under the
 same circumstances, exactly what will happen in production.
 
-Ginger will make migrations for any change to your models or fields - even
+GingerDJ will make migrations for any change to your models or fields - even
 options that don't affect the database - as the only way it can reconstruct
 a field correctly is to have all the changes in the history, and you might
 need those options in some data migrations later on (for example, if you've
@@ -56,7 +56,7 @@ set custom validators).
 Backend Support
 ===============
 
-Migrations are supported on all backends that Ginger ships with, as well
+Migrations are supported on all backends that GingerDJ ships with, as well
 as any third-party backends if they have programmed in support for schema
 alteration (done via the :doc:`SchemaEditor </ref/schema-editor>` class).
 
@@ -92,7 +92,7 @@ will fail to be created under MySQL.
 SQLite
 ------
 
-SQLite has very little built-in schema alteration support, and so Ginger
+SQLite has very little built-in schema alteration support, and so GingerDJ
 attempts to emulate it by:
 
 * Creating a new table with the new schema
@@ -103,14 +103,14 @@ attempts to emulate it by:
 This process generally works well, but it can be slow and occasionally
 buggy. It is not recommended that you run and migrate SQLite in a
 production environment unless you are very aware of the risks and
-its limitations; the support Ginger ships with is designed to allow
+its limitations; the support GingerDJ ships with is designed to allow
 developers to use SQLite on their local machines to develop less complex
-Ginger projects without the need for a full database.
+GingerDJ projects without the need for a full database.
 
 Workflow
 ========
 
-Ginger can create migrations for you. Make changes to your models - say, add a
+GingerDJ can create migrations for you. Make changes to your models - say, add a
 field and remove a model - and then run :djadmin:`makemigrations`:
 
 .. code-block:: shell
@@ -159,13 +159,13 @@ come across situations where you and another developer have both committed
 a migration to the same app at the same time, resulting in two migrations
 with the same number.
 
-Don't worry - the numbers are just there for developers' reference, Ginger
+Don't worry - the numbers are just there for developers' reference, GingerDJ
 just cares that each migration has a different name. Migrations specify which
 other migrations they depend on - including earlier migrations in the same
 app - in the file, so it's possible to detect when there's two new migrations
 for the same app that aren't ordered.
 
-When this happens, Ginger will prompt you and give you some options. If it
+When this happens, GingerDJ will prompt you and give you some options. If it
 thinks it's safe enough, it will offer to automatically linearize the two
 migrations for you. If not, you'll have to go in and modify the migrations
 yourself - don't worry, this isn't difficult, and is explained more in
@@ -182,15 +182,15 @@ then all operations will run without a transaction.
 You can prevent a migration from running in a transaction by setting the
 ``atomic`` attribute to ``False``. For example::
 
-    from ginger.db import migrations
+    from gingerdj.db import migrations
 
 
     class Migration(migrations.Migration):
         atomic = False
 
 It's also possible to execute parts of the migration inside a transaction using
-:func:`~ginger.db.transaction.atomic()` or by passing ``atomic=True`` to
-:class:`~ginger.db.migrations.operations.RunPython`. See
+:func:`~gingerdj.db.transaction.atomic()` or by passing ``atomic=True`` to
+:class:`~gingerdj.db.migrations.operations.RunPython`. See
 :ref:`non-atomic-migrations` for more details.
 
 Dependencies
@@ -222,7 +222,7 @@ it's not supported.
 Swappable dependencies
 ----------------------
 
-.. function:: ginger.db.migrations.swappable_dependency(value)
+.. function:: gingerdj.db.migrations.swappable_dependency(value)
 
 The ``swappable_dependency()`` function is used in migrations to declare
 "swappable" dependencies on migrations in the app of the swapped-in model,
@@ -248,7 +248,7 @@ agreed-upon object layout, written in a declarative style.
 
 A basic migration file looks like this::
 
-    from ginger.db import migrations, models
+    from gingerdj.db import migrations, models
 
 
     class Migration(migrations.Migration):
@@ -259,8 +259,8 @@ A basic migration file looks like this::
             migrations.AddField("Author", "rating", models.IntegerField(default=0)),
         ]
 
-What Ginger looks for when it loads a migration file (as a Python module) is
-a subclass of ``ginger.db.migrations.Migration`` called ``Migration``. It then
+What GingerDJ looks for when it loads a migration file (as a Python module) is
+a subclass of ``gingerdj.db.migrations.Migration`` called ``Migration``. It then
 inspects this object for four attributes, only two of which are used
 most of the time:
 
@@ -269,12 +269,12 @@ most of the time:
   migration does.
 
 The operations are the key; they are a set of declarative instructions which
-tell Ginger what schema changes need to be made. Ginger scans them and
+tell GingerDJ what schema changes need to be made. GingerDJ scans them and
 builds an in-memory representation of all of the schema changes to all apps,
 and uses this to generate the SQL which makes the schema changes.
 
 That in-memory structure is also used to work out what the differences are
-between your models and the current state of your migrations; Ginger runs
+between your models and the current state of your migrations; GingerDJ runs
 through all the changes, in order, on an in-memory set of models to come
 up with the state of your models last time you ran ``makemigrations``. It
 then uses these models to compare against the ones in your ``models.py`` files
@@ -300,7 +300,7 @@ Model managers
 --------------
 
 You can optionally serialize managers into migrations and have them available
-in :class:`~ginger.db.migrations.operations.RunPython` operations. This is done
+in :class:`~gingerdj.db.migrations.operations.RunPython` operations. This is done
 by defining a ``use_in_migrations`` attribute on the manager class::
 
     class MyManager(models.Manager):
@@ -310,7 +310,7 @@ by defining a ``use_in_migrations`` attribute on the manager class::
     class MyModel(models.Model):
         objects = MyManager()
 
-If you are using the :meth:`~ginger.db.models.from_queryset` function to
+If you are using the :meth:`~gingerdj.db.models.from_queryset` function to
 dynamically generate a manager class, you need to inherit from the generated
 class to make it importable::
 
@@ -340,10 +340,10 @@ it has no dependencies on any other migration in the same app).
 
 When the :option:`migrate --fake-initial` option is used, these initial
 migrations are treated specially. For an initial migration that creates one or
-more tables (``CreateModel`` operation), Ginger checks that all of those tables
+more tables (``CreateModel`` operation), GingerDJ checks that all of those tables
 already exist in the database and fake-applies the migration if so. Similarly,
 for an initial migration that adds one or more fields (``AddField`` operation),
-Ginger checks that all of the respective columns already exist in the database
+GingerDJ checks that all of the respective columns already exist in the database
 and fake-applies the migration if so. Without ``--fake-initial``, initial
 migrations are treated no differently from any other migration.
 
@@ -356,7 +356,7 @@ As previously discussed, you may need to linearize migrations manually when two
 development branches are joined. While editing migration dependencies, you can
 inadvertently create an inconsistent history state where a migration has been
 applied but some of its dependencies haven't. This is a strong indication that
-the dependencies are incorrect, so Ginger will refuse to run migrations or make
+the dependencies are incorrect, so GingerDJ will refuse to run migrations or make
 new migrations until it's fixed. When using multiple databases, you can use the
 :meth:`allow_migrate` method of :ref:`database routers
 <topics-db-multi-db-routing>` to control which databases
@@ -369,7 +369,7 @@ New apps come preconfigured to accept migrations, and so you can add migrations
 by running :djadmin:`makemigrations` once you've made some changes.
 
 If your app already has models and database tables, and doesn't have migrations
-yet (for example, you created it against a previous Ginger version), you'll
+yet (for example, you created it against a previous GingerDJ version), you'll
 need to convert it to use migrations by running:
 
 .. code-block:: shell
@@ -377,7 +377,7 @@ need to convert it to use migrations by running:
     $ python manage.py makemigrations your_app_label
 
 This will make a new initial migration for your app. Now, run ``python
-manage.py migrate --fake-initial``, and Ginger will detect that you have an
+manage.py migrate --fake-initial``, and GingerDJ will detect that you have an
 initial migration *and* that the tables it wants to create already exist, and
 will mark the migration as already applied. (Without the :option:`migrate
 --fake-initial` flag, the command would error out because the tables it wants
@@ -387,9 +387,9 @@ Note that this only works given two things:
 
 * You have not changed your models since you made their tables. For migrations
   to work, you must make the initial migration *first* and then make changes,
-  as Ginger compares changes against migration files, not the database.
+  as GingerDJ compares changes against migration files, not the database.
 
-* You have not manually edited your database - Ginger won't be able to detect
+* You have not manually edited your database - GingerDJ won't be able to detect
   that your database doesn't match your models, you'll just get errors when
   migrations try to modify those tables.
 
@@ -434,16 +434,16 @@ Attempting to reverse such migrations will raise ``IrreversibleError``:
     Running migrations:
       Rendering model states... DONE
       Unapplying books.0003_auto...Traceback (most recent call last):
-    ginger.db.migrations.exceptions.IrreversibleError: Operation <RunSQL  sql='DROP TABLE demo_books'> in books.0003_auto is not reversible
+    gingerdj.db.migrations.exceptions.IrreversibleError: Operation <RunSQL  sql='DROP TABLE demo_books'> in books.0003_auto is not reversible
 
 .. _historical-models:
 
 Historical models
 =================
 
-When you run migrations, Ginger is working from historical versions of your
+When you run migrations, GingerDJ is working from historical versions of your
 models stored in the migration files. If you write Python code using the
-:class:`~ginger.db.migrations.operations.RunPython` operation, or if you have
+:class:`~gingerdj.db.migrations.operations.RunPython` operation, or if you have
 ``allow_migrate`` methods on your database routers, you **need to use** these
 historical model versions rather than importing them directly.
 
@@ -495,7 +495,7 @@ Similar to the "references to historical functions" considerations described in
 the previous section, removing custom model fields from your project or
 third-party app will cause a problem if they are referenced in old migrations.
 
-To help with this situation, Ginger provides some model field attributes to
+To help with this situation, GingerDJ provides some model field attributes to
 assist with model field deprecation using the :doc:`system checks framework
 </topics/checks>`.
 
@@ -506,14 +506,14 @@ similar to the following::
         system_check_deprecated_details = {
             "msg": (
                 "IPAddressField has been deprecated. Support for it (except "
-                "in historical migrations) will be removed in Ginger 1.9."
+                "in historical migrations) will be removed in GingerDJ 1.9."
             ),
             "hint": "Use GenericIPAddressField instead.",  # optional
             "id": "fields.W900",  # pick a unique ID for your field.
         }
 
 After a deprecation period of your choosing (two or three feature releases for
-fields in Ginger itself), change the ``system_check_deprecated_details``
+fields in GingerDJ itself), change the ``system_check_deprecated_details``
 attribute to ``system_check_removed_details`` and update the dictionary similar
 to::
 
@@ -544,13 +544,13 @@ the data in the database itself, in conjunction with the schema if you want.
 Migrations that alter data are usually called "data migrations"; they're best
 written as separate migrations, sitting alongside your schema migrations.
 
-Ginger can't automatically generate data migrations for you, as it does with
+GingerDJ can't automatically generate data migrations for you, as it does with
 schema migrations, but it's not very hard to write them. Migration files in
-Ginger are made up of :doc:`Operations </ref/migration-operations>`, and
+GingerDJ are made up of :doc:`Operations </ref/migration-operations>`, and
 the main operation you use for data migrations is
-:class:`~ginger.db.migrations.operations.RunPython`.
+:class:`~gingerdj.db.migrations.operations.RunPython`.
 
-To start, make an empty migration file you can work from (Ginger will put
+To start, make an empty migration file you can work from (GingerDJ will put
 the file in the right place, suggest a name, and add dependencies for you):
 
 .. code-block:: shell
@@ -559,8 +559,8 @@ the file in the right place, suggest a name, and add dependencies for you):
 
 Then, open up the file; it should look something like this::
 
-    # Generated by Ginger A.B on YYYY-MM-DD HH:MM
-    from ginger.db import migrations
+    # Generated by GingerDJ A.B on YYYY-MM-DD HH:MM
+    from gingerdj.db import migrations
 
 
     class Migration(migrations.Migration):
@@ -571,8 +571,8 @@ Then, open up the file; it should look something like this::
         operations = []
 
 Now, all you need to do is create a new function and have
-:class:`~ginger.db.migrations.operations.RunPython` use it.
-:class:`~ginger.db.migrations.operations.RunPython` expects a callable as its argument
+:class:`~gingerdj.db.migrations.operations.RunPython` use it.
+:class:`~gingerdj.db.migrations.operations.RunPython` expects a callable as its argument
 which takes two arguments - the first is an :doc:`app registry
 </ref/applications/>` that has the historical versions of all your models
 loaded into it to match where in your history the migration sits, and the
@@ -585,7 +585,7 @@ values of ``first_name`` and ``last_name`` (we've come to our senses and
 realized that not everyone has first and last names). All we need to do is use
 the historical model and iterate over the rows::
 
-    from ginger.db import migrations
+    from gingerdj.db import migrations
 
 
     def combine_names(apps, schema_editor):
@@ -610,7 +610,7 @@ Once that's done, we can run ``python manage.py migrate`` as normal and the
 data migration will run in place alongside other migrations.
 
 You can pass a second callable to
-:class:`~ginger.db.migrations.operations.RunPython` to run whatever logic you
+:class:`~gingerdj.db.migrations.operations.RunPython` to run whatever logic you
 want executed when migrating backwards. If this callable is omitted, migrating
 backwards will raise an exception.
 
@@ -661,23 +661,23 @@ several hundred migrations to just a few, and that's where squashing comes in.
 Squashing is the act of reducing an existing set of many migrations down to
 one (or sometimes a few) migrations which still represent the same changes.
 
-Ginger does this by taking all of your existing migrations, extracting their
+GingerDJ does this by taking all of your existing migrations, extracting their
 ``Operation``\s and putting them all in sequence, and then running an optimizer
 over them to try and reduce the length of the list - for example, it knows
-that :class:`~ginger.db.migrations.operations.CreateModel` and
-:class:`~ginger.db.migrations.operations.DeleteModel` cancel each other out,
-and it knows that :class:`~ginger.db.migrations.operations.AddField` can be
-rolled into :class:`~ginger.db.migrations.operations.CreateModel`.
+that :class:`~gingerdj.db.migrations.operations.CreateModel` and
+:class:`~gingerdj.db.migrations.operations.DeleteModel` cancel each other out,
+and it knows that :class:`~gingerdj.db.migrations.operations.AddField` can be
+rolled into :class:`~gingerdj.db.migrations.operations.CreateModel`.
 
 Once the operation sequence has been reduced as much as possible - the amount
 possible depends on how closely intertwined your models are and if you have
-any :class:`~ginger.db.migrations.operations.RunSQL`
-or :class:`~ginger.db.migrations.operations.RunPython` operations (which can't
-be optimized through unless they are marked as ``elidable``) - Ginger will then
+any :class:`~gingerdj.db.migrations.operations.RunSQL`
+or :class:`~gingerdj.db.migrations.operations.RunPython` operations (which can't
+be optimized through unless they are marked as ``elidable``) - GingerDJ will then
 write it back out into a new set of migration files.
 
 These files are marked to say they replace the previously-squashed migrations,
-so they can coexist with the old migration files, and Ginger will intelligently
+so they can coexist with the old migration files, and GingerDJ will intelligently
 switch between them depending where you are in the history. If you're still
 part-way through the set of migrations that you squashed, it will keep using
 them until it hits the end and then switch to the squashed history, while new
@@ -713,7 +713,7 @@ app label and migration name you want to squash up to, and it'll get to work:
 Use the :option:`squashmigrations --squashed-name` option if you want to set
 the name of the squashed migration rather than use an autogenerated one.
 
-Note that model interdependencies in Ginger can get very complex, and squashing
+Note that model interdependencies in GingerDJ can get very complex, and squashing
 may result in migrations that do not run; either mis-optimized (in which case
 you can try again with ``--no-optimize``, though you should also report an issue),
 or with a ``CircularDependencyError``, in which case you can manually resolve it.
@@ -722,7 +722,7 @@ To manually resolve a ``CircularDependencyError``, break out one of
 the ForeignKeys in the circular dependency loop into a separate
 migration, and move the dependency on the other app with it. If you're unsure,
 see how :djadmin:`makemigrations` deals with the problem when asked to create
-brand new migrations from your models. In a future release of Ginger,
+brand new migrations from your models. In a future release of GingerDJ,
 :djadmin:`squashmigrations` will be updated to attempt to resolve these errors
 itself.
 
@@ -737,7 +737,7 @@ You must then transition the squashed migration to a normal migration by:
 - Updating all migrations that depend on the deleted migrations to depend on
   the squashed migration instead.
 - Removing the ``replaces`` attribute in the ``Migration`` class of the
-  squashed migration (this is how Ginger tells that it is a squashed migration).
+  squashed migration (this is how GingerDJ tells that it is a squashed migration).
 
 .. note::
     Once you've squashed a migration, you should not then re-squash that squashed
@@ -746,7 +746,7 @@ You must then transition the squashed migration to a normal migration by:
 .. admonition:: Pruning references to deleted migrations
 
     If it is likely that you may reuse the name of a deleted migration in the
-    future, you should remove references to it from Ginger’s migrations table
+    future, you should remove references to it from GingerDJ’s migrations table
     with the :option:`migrate --prune` option.
 
 .. _migration-serializing:
@@ -755,15 +755,15 @@ Serializing values
 ==================
 
 Migrations are Python files containing the old definitions of your models
-- thus, to write them, Ginger must take the current state of your models and
+- thus, to write them, GingerDJ must take the current state of your models and
 serialize them out into a file.
 
-While Ginger can serialize most things, there are some things that we just
+While GingerDJ can serialize most things, there are some things that we just
 can't serialize out into a valid Python representation - there's no Python
 standard for how a value can be turned back into code (``repr()`` only works
 for basic values, and doesn't specify import paths).
 
-Ginger can serialize the following:
+GingerDJ can serialize the following:
 
 - ``int``, ``float``, ``bool``, ``str``, ``bytes``, ``None``, ``NoneType``
 - ``list``, ``set``, ``tuple``, ``dict``, ``range``.
@@ -781,7 +781,7 @@ Ginger can serialize the following:
   converted to ``str`` or ``bytes`` using :func:`os.fspath`.
 - ``LazyObject`` instances which wrap a serializable value.
 - Enumeration types (e.g. ``TextChoices`` or ``IntegerChoices``) instances.
-- Any Ginger field
+- Any GingerDJ field
 - Any function or method reference (e.g. ``datetime.datetime.today``) (must be
   in module's top-level scope)
 
@@ -799,7 +799,7 @@ Ginger can serialize the following:
     Serialization support for functions decorated with :func:`functools.cache`
     or :func:`functools.lru_cache` was added.
 
-Ginger cannot serialize:
+GingerDJ cannot serialize:
 
 - Nested classes
 - Arbitrary class instances (e.g. ``MyClass(4.3, 5.7)``)
@@ -811,13 +811,13 @@ Custom serializers
 ------------------
 
 You can serialize other types by writing a custom serializer. For example, if
-Ginger didn't serialize :class:`~decimal.Decimal` by default, you could do
+GingerDJ didn't serialize :class:`~decimal.Decimal` by default, you could do
 this::
 
     from decimal import Decimal
 
-    from ginger.db.migrations.serializer import BaseSerializer
-    from ginger.db.migrations.writer import MigrationWriter
+    from gingerdj.db.migrations.serializer import BaseSerializer
+    from gingerdj.db.migrations.writer import MigrationWriter
 
 
     class DecimalSerializer(BaseSerializer):
@@ -839,7 +839,7 @@ the migration.
 Adding a ``deconstruct()`` method
 ---------------------------------
 
-You can let Ginger serialize your own custom class instances by giving the class
+You can let GingerDJ serialize your own custom class instances by giving the class
 a ``deconstruct()`` method. It takes no arguments, and should return a tuple
 of three things ``(path, args, kwargs)``:
 
@@ -859,19 +859,19 @@ of three things ``(path, args, kwargs)``:
     :ref:`for custom fields <custom-field-deconstruct-method>` which returns a
     tuple of four items.
 
-Ginger will write out the value as an instantiation of your class with the
-given arguments, similar to the way it writes out references to Ginger fields.
+GingerDJ will write out the value as an instantiation of your class with the
+given arguments, similar to the way it writes out references to GingerDJ fields.
 
 To prevent a new migration from being created each time
 :djadmin:`makemigrations` is run, you should also add a ``__eq__()`` method to
-the decorated class. This function will be called by Ginger's migration
+the decorated class. This function will be called by GingerDJ's migration
 framework to detect changes between states.
 
 As long as all of the arguments to your class' constructor are themselves
 serializable, you can use the ``@deconstructible`` class decorator from
-``ginger.utils.deconstruct`` to add the ``deconstruct()`` method::
+``gingerdj.utils.deconstruct`` to add the ``deconstruct()`` method::
 
-    from ginger.utils.deconstruct import deconstructible
+    from gingerdj.utils.deconstruct import deconstructible
 
 
     @deconstructible
@@ -888,19 +888,19 @@ The decorator adds logic to capture and preserve the arguments on their
 way into your constructor, and then returns those arguments exactly when
 deconstruct() is called.
 
-Supporting multiple Ginger versions
+Supporting multiple GingerDJ versions
 ===================================
 
 If you are the maintainer of a third-party app with models, you may need to
-ship migrations that support multiple Ginger versions. In this case, you should
-always run :djadmin:`makemigrations` **with the lowest Ginger version you wish
+ship migrations that support multiple GingerDJ versions. In this case, you should
+always run :djadmin:`makemigrations` **with the lowest GingerDJ version you wish
 to support**.
 
 The migrations system will maintain backwards-compatibility according to the
-same policy as the rest of Ginger, so migration files generated on Ginger X.Y
-should run unchanged on Ginger X.Y+1. The migrations system does not promise
+same policy as the rest of GingerDJ, so migration files generated on GingerDJ X.Y
+should run unchanged on GingerDJ X.Y+1. The migrations system does not promise
 forwards-compatibility, however. New features may be added, and migration files
-generated with newer versions of Ginger may not work on older versions.
+generated with newer versions of GingerDJ may not work on older versions.
 
 .. seealso::
 

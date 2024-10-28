@@ -1,6 +1,6 @@
-from ginger.core.exceptions import FieldError
-from ginger.db.models import FilteredRelation
-from ginger.test import SimpleTestCase, TestCase
+from gingerdj.core.exceptions import FieldError
+from gingerdj.db.models import FilteredRelation
+from gingerdj.test import SimpleTestCase, TestCase
 
 from .models import (
     AdvancedUserStat,
@@ -110,15 +110,16 @@ class ReverseSelectRelatedTestCase(TestCase):
 
     def test_nullable_relation(self):
         im = Image.objects.create(name="imag1")
-        p1 = Product.objects.create(name="Ginger Plushie", image=im)
-        p2 = Product.objects.create(name="Talking Ginger Plushie")
+        p1 = Product.objects.create(name="GingerDJ Plushie", image=im)
+        p2 = Product.objects.create(name="Talking GingerDJ Plushie")
 
         with self.assertNumQueries(1):
             result = sorted(
                 Product.objects.select_related("image"), key=lambda x: x.name
             )
             self.assertEqual(
-                [p.name for p in result], ["Ginger Plushie", "Talking Ginger Plushie"]
+                [p.name for p in result],
+                ["GingerDJ Plushie", "Talking GingerDJ Plushie"],
             )
 
             self.assertEqual(p1.image, im)

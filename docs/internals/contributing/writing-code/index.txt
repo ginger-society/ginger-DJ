@@ -2,13 +2,13 @@
 Contributing code
 =================
 
-So you'd like to write some code, documentation or tests to improve Ginger?
-There are several ways you can help Ginger's development.
+So you'd like to write some code, documentation or tests to improve GingerDJ?
+There are several ways you can help GingerDJ's development.
 
 Tutorials
 =========
 
-The Ginger tutorial contains a whole section that walks you step-by-step
+The GingerDJ tutorial contains a whole section that walks you step-by-step
 through the contributing code process.
 
 .. toctree::
@@ -25,9 +25,9 @@ our documentation also contains useful guidance on specific topics:
 .. toctree::
    :maxdepth: 1
 
-   How to submit a patch to Ginger for new and/or fixed behavior <submitting-patches>
+   How to submit a patch to GingerDJ for new and/or fixed behavior <submitting-patches>
    How to write and run tests </topics/testing/overview>
-   How to run Ginger's unit tests <unit-tests>
+   How to run GingerDJ's unit tests <unit-tests>
    How to work with Git and GitHub <working-with-git>
 
 Related topics
@@ -48,4 +48,4 @@ recommended for those contributors looking to make a contribution.
 
 * Browse `easy pickings`_ tickets.
 
-.. _easy pickings: https://code.ginger.gloportal.dev/query?status=!closed&easy=1
+.. _easy pickings: https://code.gingerdj.gloportal.dev/query?status=!closed&easy=1

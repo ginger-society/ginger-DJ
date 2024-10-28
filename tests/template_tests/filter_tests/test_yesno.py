@@ -1,5 +1,5 @@
-from ginger.template.defaultfilters import yesno
-from ginger.test import SimpleTestCase
+from gingerdj.template.defaultfilters import yesno
+from gingerdj.test import SimpleTestCase
 
 from ..utils import setup
 

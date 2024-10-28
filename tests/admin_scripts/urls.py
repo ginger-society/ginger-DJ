@@ -1,7 +1,7 @@
 import os
 
-from ginger.urls import path
-from ginger.views.static import serve
+from gingerdj.urls import path
+from gingerdj.views.static import serve
 
 here = os.path.dirname(__file__)
 

@@ -1,3 +1,3 @@
-from ginger.utils.translation import gettext as _
+from gingerdj.utils.translation import gettext as _
 
 string = _("This app has a locale directory")

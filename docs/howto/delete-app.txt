@@ -1,8 +1,8 @@
 ==================================
-How to delete a Ginger application
+How to delete a GingerDJ application
 ==================================
 
-Ginger provides the ability to group sets of features into Python packages
+GingerDJ provides the ability to group sets of features into Python packages
 called :doc:`applications</ref/applications/>`. When requirements change, apps
 may become obsolete or unnecessary. The following steps will help you delete an
 application safely.
@@ -22,7 +22,7 @@ application safely.
 #. Apply migrations locally, runs tests, and verify the correctness of your
    project.
 
-#. Deploy/release your updated Ginger project.
+#. Deploy/release your updated GingerDJ project.
 
 #. Remove the app from :setting:`INSTALLED_APPS`.
 

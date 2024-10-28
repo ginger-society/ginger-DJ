@@ -1,8 +1,8 @@
 from unittest import mock
 
-from ginger.db import connections, models
-from ginger.test import SimpleTestCase
-from ginger.test.utils import isolate_apps, override_settings
+from gingerdj.db import connections, models
+from gingerdj.test import SimpleTestCase
+from gingerdj.test.utils import isolate_apps, override_settings
 
 
 class TestRouter:

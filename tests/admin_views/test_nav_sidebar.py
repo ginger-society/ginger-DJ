@@ -1,7 +1,7 @@
-from ginger.contrib import admin
-from ginger.contrib.admin.tests import AdminSeleniumTestCase
-from ginger.test import TestCase, override_settings
-from ginger.urls import path, reverse
+from gingerdj.contrib import admin
+from gingerdj.contrib.admin.tests import AdminSeleniumTestCase
+from gingerdj.test import TestCase, override_settings
+from gingerdj.urls import path, reverse
 
 from .models import Héllo
 
@@ -51,25 +51,22 @@ class AdminSidebarTests(TestCase):
     @override_settings(
         TEMPLATES=[
             {
-                "BACKEND": "ginger.template.backends.ginger.GingerTemplates",
+                "BACKEND": "gingerdj.template.backends.gingerdj.GingerTemplates",
                 "DIRS": [],
                 "APP_DIRS": True,
                 "OPTIONS": {
                     "context_processors": [
-                        "ginger.contrib.messages.context_processors.messages",
+                        "gingerdj.contrib.messages.context_processors.messages",
                     ],
                 },
             }
         ]
     )
-
     def test_sidebar_model_name_non_ascii(self):
         url = reverse("test_with_sidebar:admin_views_héllo_changelist")
         response = self.client.get(url)
-        self.assertContains(
-            response, 'Start typing to filter'
-        )
-        self.assertContains(response, 'admin_views-héllo')
+        self.assertContains(response, "Start typing to filter")
+        self.assertContains(response, "admin_views-héllo")
 
 
 @override_settings(ROOT_URLCONF="admin_views.test_nav_sidebar")
@@ -78,7 +75,7 @@ class SeleniumTests(AdminSeleniumTestCase):
 
     def setUp(self):
         self.selenium.execute_script(
-            "localStorage.removeItem('ginger.admin.navSidebarIsOpen')"
+            "localStorage.removeItem('gingerdj.admin.navSidebarIsOpen')"
         )
 
     def test_sidebar_starts_open(self):
@@ -121,7 +118,7 @@ class SeleniumTests(AdminSeleniumTestCase):
         )
         self.assertIsNone(
             self.selenium.execute_script(
-                "return localStorage.getItem('ginger.admin.navSidebarIsOpen')"
+                "return localStorage.getItem('gingerdj.admin.navSidebarIsOpen')"
             )
         )
         toggle_button = self.selenium.find_element(
@@ -130,7 +127,7 @@ class SeleniumTests(AdminSeleniumTestCase):
         toggle_button.click()
         self.assertEqual(
             self.selenium.execute_script(
-                "return localStorage.getItem('ginger.admin.navSidebarIsOpen')"
+                "return localStorage.getItem('gingerdj.admin.navSidebarIsOpen')"
             ),
             "false",
         )
@@ -153,7 +150,7 @@ class SeleniumTests(AdminSeleniumTestCase):
         self.assertTrue(nav_sidebar.is_displayed())
         self.assertEqual(
             self.selenium.execute_script(
-                "return localStorage.getItem('ginger.admin.navSidebarIsOpen')"
+                "return localStorage.getItem('gingerdj.admin.navSidebarIsOpen')"
             ),
             "true",
         )
@@ -170,7 +167,7 @@ class SeleniumTests(AdminSeleniumTestCase):
             self.live_server_url + reverse("test_with_sidebar:auth_user_changelist")
         )
         filter_value_script = (
-            "return sessionStorage.getItem('ginger.admin.navSidebarFilterValue')"
+            "return sessionStorage.getItem('gingerdj.admin.navSidebarFilterValue')"
         )
         self.assertIsNone(self.selenium.execute_script(filter_value_script))
         filter_input = self.selenium.find_element(By.CSS_SELECTOR, "#nav-filter")

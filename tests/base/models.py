@@ -1,4 +1,4 @@
-from ginger.db import models
+from gingerdj.db import models
 
 # The models definitions below used to crash. Generating models dynamically
 # at runtime is a bad idea because it pollutes the app registry. This doesn't

@@ -1,4 +1,4 @@
-from ginger.db import migrations
+from gingerdj.db import migrations
 
 
 def grow_tail(x, y):

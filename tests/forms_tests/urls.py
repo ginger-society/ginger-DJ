@@ -1,4 +1,4 @@
-from ginger.urls import path
+from gingerdj.urls import path
 
 from .views import ArticleFormView, form_view
 

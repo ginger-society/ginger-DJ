@@ -1,6 +1,6 @@
-from ginger.core.signing import b64_decode
-from ginger.test import TestCase, override_settings
-from ginger.urls import reverse
+from gingerdj.core.signing import b64_decode
+from gingerdj.test import TestCase, override_settings
+from gingerdj.urls import reverse
 
 from .models import SomeObject
 from .urls import ContactFormViewWithMsg, DeleteFormViewWithMsg

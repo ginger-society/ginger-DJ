@@ -5,7 +5,7 @@ To define a many-to-one relationship that can have a null foreign key, use
 ``ForeignKey()`` with ``null=True`` .
 """
 
-from ginger.db import models
+from gingerdj.db import models
 
 
 class Reporter(models.Model):

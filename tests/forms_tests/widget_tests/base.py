@@ -1,5 +1,5 @@
-from ginger.forms.renderers import GingerTemplates, Jinja2
-from ginger.test import SimpleTestCase
+from gingerdj.forms.renderers import GingerTemplates, Jinja2
+from gingerdj.test import SimpleTestCase
 
 try:
     import jinja2
@@ -27,9 +27,9 @@ class WidgetTest(SimpleTestCase):
             output = widget.render(
                 name, value, attrs=attrs, renderer=self.jinja2_renderer, **kwargs
             )
-            # Ginger escapes quotes with '&quot;' while Jinja2 uses '&#34;'.
+            # GingerDJ escapes quotes with '&quot;' while Jinja2 uses '&#34;'.
             output = output.replace("&#34;", "&quot;")
-            # Ginger escapes single quotes with '&#x27;' while Jinja2 uses '&#39;'.
+            # GingerDJ escapes single quotes with '&#x27;' while Jinja2 uses '&#39;'.
             output = output.replace("&#39;", "&#x27;")
             assertEqual(output, html)
 

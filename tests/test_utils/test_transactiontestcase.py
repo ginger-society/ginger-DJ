@@ -1,8 +1,8 @@
 from unittest import mock
 
-from ginger.db import connections
-from ginger.test import TestCase, TransactionTestCase, override_settings
-from ginger.test.testcases import DatabaseOperationForbidden
+from gingerdj.db import connections
+from gingerdj.test import TestCase, TransactionTestCase, override_settings
+from gingerdj.test.testcases import DatabaseOperationForbidden
 
 from .models import Car
 
@@ -24,7 +24,7 @@ class TestSerializedRollbackInhibitsPostMigrate(TransactionTestCase):
     def tearDown(self):
         self.available_apps = ["test_utils"]
 
-    @mock.patch("ginger.test.testcases.call_command")
+    @mock.patch("gingerdj.test.testcases.call_command")
     def test(self, call_command):
         # with a mocked call_command(), this doesn't have any effect.
         self._fixture_teardown()

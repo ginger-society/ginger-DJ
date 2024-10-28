@@ -1,23 +1,23 @@
 import math
 from decimal import Decimal
 
-from ginger.core.exceptions import FieldDoesNotExist
-from ginger.db import IntegrityError, connection, migrations, models, transaction
-from ginger.db.migrations.migration import Migration
-from ginger.db.migrations.operations.base import Operation
-from ginger.db.migrations.operations.fields import FieldOperation
-from ginger.db.migrations.state import ModelState, ProjectState
-from ginger.db.models import F
-from ginger.db.models.expressions import Value
-from ginger.db.models.functions import Abs, Pi
-from ginger.db.transaction import atomic
-from ginger.test import (
+from gingerdj.core.exceptions import FieldDoesNotExist
+from gingerdj.db import IntegrityError, connection, migrations, models, transaction
+from gingerdj.db.migrations.migration import Migration
+from gingerdj.db.migrations.operations.base import Operation
+from gingerdj.db.migrations.operations.fields import FieldOperation
+from gingerdj.db.migrations.state import ModelState, ProjectState
+from gingerdj.db.models import F
+from gingerdj.db.models.expressions import Value
+from gingerdj.db.models.functions import Abs, Pi
+from gingerdj.db.transaction import atomic
+from gingerdj.test import (
     SimpleTestCase,
     override_settings,
     skipIfDBFeature,
     skipUnlessDBFeature,
 )
-from ginger.test.utils import CaptureQueriesContext
+from gingerdj.test.utils import CaptureQueriesContext
 
 from .models import FoodManager, FoodQuerySet, UnicodeModel
 from .test_base import OperationTestBase
@@ -142,7 +142,7 @@ class OperationTests(OperationTestBase):
                 ),
             )
         message = (
-            "Found duplicate value <class 'ginger.db.models.base.Model'> in "
+            "Found duplicate value <class 'gingerdj.db.models.base.Model'> in "
             "CreateModel bases argument."
         )
         with self.assertRaisesMessage(ValueError, message):
@@ -4925,14 +4925,14 @@ class OperationTests(OperationTestBase):
             "INSERT INTO i_love_ponies (id, special_thing) "
             "VALUES (1, 'i love ponies'); -- this is magic!\n"
             "INSERT INTO i_love_ponies (id, special_thing) "
-            "VALUES (2, 'i love ginger');\n"
+            "VALUES (2, 'i love gingerdj');\n"
             "UPDATE i_love_ponies SET special_thing = 'Ponies' "
             "WHERE special_thing LIKE '%%ponies';"
-            "UPDATE i_love_ponies SET special_thing = 'Ginger' "
-            "WHERE special_thing LIKE '%ginger';",
+            "UPDATE i_love_ponies SET special_thing = 'GingerDJ' "
+            "WHERE special_thing LIKE '%gingerdj';",
             # Run delete queries to test for parameter substitution failure
             # reported in #23426
-            "DELETE FROM i_love_ponies WHERE special_thing LIKE '%Ginger%';"
+            "DELETE FROM i_love_ponies WHERE special_thing LIKE '%GingerDJ%';"
             "DELETE FROM i_love_ponies WHERE special_thing LIKE '%%Ponies%%';"
             "DROP TABLE i_love_ponies",
             state_operations=[
@@ -4968,7 +4968,7 @@ class OperationTests(OperationTestBase):
             cursor.execute("SELECT COUNT(*) FROM i_love_ponies")
             self.assertEqual(cursor.fetchall()[0][0], 2)
             cursor.execute(
-                "SELECT COUNT(*) FROM i_love_ponies WHERE special_thing = 'Ginger'"
+                "SELECT COUNT(*) FROM i_love_ponies WHERE special_thing = 'GingerDJ'"
             )
             self.assertEqual(cursor.fetchall()[0][0], 1)
             cursor.execute(
@@ -5007,7 +5007,7 @@ class OperationTests(OperationTestBase):
         param_operation = migrations.RunSQL(
             # forwards
             (
-                "INSERT INTO i_love_ponies (id, special_thing) VALUES (1, 'Ginger');",
+                "INSERT INTO i_love_ponies (id, special_thing) VALUES (1, 'GingerDJ');",
                 [
                     "INSERT INTO i_love_ponies (id, special_thing) VALUES (2, %s);",
                     ["Ponies"],
@@ -5022,7 +5022,7 @@ class OperationTests(OperationTestBase):
             ),
             # backwards
             [
-                "DELETE FROM i_love_ponies WHERE special_thing = 'Ginger';",
+                "DELETE FROM i_love_ponies WHERE special_thing = 'GingerDJ';",
                 ["DELETE FROM i_love_ponies WHERE special_thing = 'Ponies';", None],
                 (
                     "DELETE FROM i_love_ponies WHERE id = %s OR special_thing = %s;",
@@ -5533,7 +5533,7 @@ class OperationTests(OperationTestBase):
             Article = models.get_model("test_article", "Article")
             Blog = models.get_model("test_blog", "Blog")
             blog2 = Blog.objects.create(name="Frameworks", id=target_value)
-            Article.objects.create(name="Ginger", blog=blog2)
+            Article.objects.create(name="GingerDJ", blog=blog2)
             Article.objects.create(id=target_value, name="Ginger2", blog=blog2)
 
         create_blog = migrations.CreateModel(

@@ -4,7 +4,7 @@
 
 import unittest
 
-from ginger.contrib.gis.geos import (
+from gingerdj.contrib.gis.geos import (
     LinearRing,
     LineString,
     MultiPoint,

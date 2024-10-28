@@ -1,10 +1,10 @@
 from urllib.parse import urljoin
 
-from ginger.conf import STATICFILES_STORAGE_ALIAS
-from ginger.contrib.staticfiles import storage
-from ginger.forms import Media
-from ginger.templatetags.static import static
-from ginger.test import SimpleTestCase, override_settings
+from gingerdj.conf import STATICFILES_STORAGE_ALIAS
+from gingerdj.contrib.staticfiles import storage
+from gingerdj.forms import Media
+from gingerdj.templatetags.static import static
+from gingerdj.test import SimpleTestCase, override_settings
 
 
 class StaticTestStorage(storage.StaticFilesStorage):
@@ -13,7 +13,7 @@ class StaticTestStorage(storage.StaticFilesStorage):
 
 
 @override_settings(
-    INSTALLED_APPS=("ginger.contrib.staticfiles",),
+    INSTALLED_APPS=("gingerdj.contrib.staticfiles",),
     STORAGES={
         STATICFILES_STORAGE_ALIAS: {
             "BACKEND": "staticfiles_tests.test_forms.StaticTestStorage",

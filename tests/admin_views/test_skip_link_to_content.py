@@ -1,6 +1,6 @@
-from ginger.contrib.admin.tests import AdminSeleniumTestCase
-from ginger.test import override_settings
-from ginger.urls import reverse
+from gingerdj.contrib.admin.tests import AdminSeleniumTestCase
+from gingerdj.test import override_settings
+from gingerdj.urls import reverse
 
 
 @override_settings(ROOT_URLCONF="admin_views.urls")
@@ -84,7 +84,7 @@ class SeleniumTests(AdminSeleniumTestCase):
         # The 2nd TAB will focus the page title.
         body.send_keys(Keys.TAB)
         ginger_administration_title = self.selenium.find_element(
-            By.LINK_TEXT, "Ginger administration"
+            By.LINK_TEXT, "GingerDJ administration"
         )
         self.assertFalse(skip_link.is_displayed())  # `skip link` disappear.
         self.assertEqual(

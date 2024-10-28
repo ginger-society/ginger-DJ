@@ -2,10 +2,10 @@
 Signals
 =======
 
-.. module:: ginger.dispatch
+.. module:: gingerdj.dispatch
    :synopsis: Signal dispatch
 
-Ginger includes a "signal dispatcher" which helps decoupled applications get
+GingerDJ includes a "signal dispatcher" which helps decoupled applications get
 notified when actions occur elsewhere in the framework. In a nutshell, signals
 allow certain *senders* to notify a set of *receivers* that some action has
 taken place. They're especially useful when many pieces of code may be
@@ -14,8 +14,8 @@ interested in the same events.
 For example, a third-party app can register to be notified of settings
 changes::
 
-    from ginger.apps import AppConfig
-    from ginger.core.signals import setting_changed
+    from gingerdj.apps import AppConfig
+    from gingerdj.core.signals import setting_changed
 
 
     def my_callback(sender, **kwargs):
@@ -28,7 +28,7 @@ changes::
         def ready(self):
             setting_changed.connect(my_callback)
 
-Ginger's :doc:`built-in signals </ref/signals>` let user code get notified of
+GingerDJ's :doc:`built-in signals </ref/signals>` let user code get notified of
 certain actions.
 
 You can also define and send your own custom signals. See
@@ -58,7 +58,7 @@ the order they were registered.
     :param sender: Specifies a particular sender to receive signals from. See
         :ref:`connecting-to-specific-signals` for more information.
 
-    :param weak: Ginger stores signal handlers as weak references by
+    :param weak: GingerDJ stores signal handlers as weak references by
         default. Thus, if your receiver is a local function, it may be
         garbage collected. To prevent this, pass ``weak=False`` when you call
         the signal's ``connect()`` method.
@@ -69,7 +69,7 @@ the order they were registered.
 
 Let's see how this works by registering a signal that
 gets called after each HTTP request is finished. We'll be connecting to the
-:data:`~ginger.core.signals.request_finished` signal.
+:data:`~gingerdj.core.signals.request_finished` signal.
 
 .. _receiver-functions:
 
@@ -88,11 +88,11 @@ keyword arguments (``**kwargs``); all signal handlers must take these arguments.
 We'll look at senders :ref:`a bit later <connecting-to-specific-signals>`, but
 right now look at the ``**kwargs`` argument. All signals send keyword
 arguments, and may change those keyword arguments at any time. In the case of
-:data:`~ginger.core.signals.request_finished`, it's documented as sending no
+:data:`~gingerdj.core.signals.request_finished`, it's documented as sending no
 arguments, which means we might be tempted to write our signal handling as
 ``my_callback(sender)``.
 
-This would be wrong -- in fact, Ginger will throw an error if you do so. That's
+This would be wrong -- in fact, GingerDJ will throw an error if you do so. That's
 because at any point arguments could get added to the signal and your receiver
 must be able to handle those new arguments.
 
@@ -119,7 +119,7 @@ Connecting receiver functions
 There are two ways you can connect a receiver to a signal. You can take the
 manual connect route::
 
-    from ginger.core.signals import request_finished
+    from gingerdj.core.signals import request_finished
 
     request_finished.connect(my_callback)
 
@@ -133,8 +133,8 @@ Alternatively, you can use a :func:`receiver` decorator:
 
 Here's how you connect with the decorator::
 
-    from ginger.core.signals import request_finished
-    from ginger.dispatch import receiver
+    from gingerdj.core.signals import request_finished
+    from gingerdj.dispatch import receiver
 
 
     @receiver(request_finished)
@@ -151,14 +151,14 @@ Now, our ``my_callback`` function will be called each time a request finishes.
 
     In practice, signal handlers are usually defined in a ``signals``
     submodule of the application they relate to. Signal receivers are
-    connected in the :meth:`~ginger.apps.AppConfig.ready` method of your
+    connected in the :meth:`~gingerdj.apps.AppConfig.ready` method of your
     application :ref:`configuration class <configuring-applications-ref>`. If
     you're using the :func:`receiver` decorator, import the ``signals``
-    submodule inside :meth:`~ginger.apps.AppConfig.ready`, this will implicitly
+    submodule inside :meth:`~gingerdj.apps.AppConfig.ready`, this will implicitly
     connect signal handlers::
 
-        from ginger.apps import AppConfig
-        from ginger.core.signals import request_finished
+        from gingerdj.apps import AppConfig
+        from gingerdj.core.signals import request_finished
 
 
         class MyAppConfig(AppConfig):
@@ -173,7 +173,7 @@ Now, our ``my_callback`` function will be called each time a request finishes.
 
 .. note::
 
-    The :meth:`~ginger.apps.AppConfig.ready` method may be executed more than
+    The :meth:`~gingerdj.apps.AppConfig.ready` method may be executed more than
     once during testing, so you may want to :ref:`guard your signals from
     duplication <preventing-duplicate-signals>`, especially if you're planning
     to send them within tests.
@@ -185,17 +185,17 @@ Connecting to signals sent by specific senders
 
 Some signals get sent many times, but you'll only be interested in receiving a
 certain subset of those signals. For example, consider the
-:data:`ginger.db.models.signals.pre_save` signal sent before a model gets saved.
+:data:`gingerdj.db.models.signals.pre_save` signal sent before a model gets saved.
 Most of the time, you don't need to know when *any* model gets saved -- just
 when one *specific* model is saved.
 
 In these cases, you can register to receive signals sent only by particular
-senders. In the case of :data:`ginger.db.models.signals.pre_save`, the sender
+senders. In the case of :data:`gingerdj.db.models.signals.pre_save`, the sender
 will be the model class being saved, so you can indicate that you only want
 signals sent by some model::
 
-    from ginger.db.models.signals import pre_save
-    from ginger.dispatch import receiver
+    from gingerdj.db.models.signals import pre_save
+    from gingerdj.dispatch import receiver
     from myapp.models import MyModel
 
 
@@ -217,7 +217,7 @@ Preventing duplicate signals
 In some circumstances, the code connecting receivers to signals may run
 multiple times. This can cause your receiver function to be registered more
 than once, and thus called as many times for a signal event. For example, the
-:meth:`~ginger.apps.AppConfig.ready` method may be executed more than once
+:meth:`~gingerdj.apps.AppConfig.ready` method may be executed more than once
 during testing. More generally, this occurs everywhere your project imports the
 module where you define the signals, because signal registration runs as many
 times as it is imported.
@@ -229,7 +229,7 @@ identifier will usually be a string, although any hashable object will
 suffice. The end result is that your receiver function will only be
 bound to the signal once for each unique ``dispatch_uid`` value::
 
-    from ginger.core.signals import request_finished
+    from gingerdj.core.signals import request_finished
 
     request_finished.connect(my_callback, dispatch_uid="my_unique_identifier")
 
@@ -252,13 +252,13 @@ Defining signals
 
 .. class:: Signal()
 
-All signals are :class:`ginger.dispatch.Signal` instances.
+All signals are :class:`gingerdj.dispatch.Signal` instances.
 
 For example::
 
-    import ginger.dispatch
+    import gingerdj.dispatch
 
-    pizza_done = ginger.dispatch.Signal()
+    pizza_done = gingerdj.dispatch.Signal()
 
 This declares a ``pizza_done`` signal.
 
@@ -267,7 +267,7 @@ This declares a ``pizza_done`` signal.
 Sending signals
 ---------------
 
-There are two ways to send signals synchronously in Ginger.
+There are two ways to send signals synchronously in GingerDJ.
 
 .. method:: Signal.send(sender, **kwargs)
 .. method:: Signal.send_robust(sender, **kwargs)

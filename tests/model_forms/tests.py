@@ -3,29 +3,29 @@ import os
 from decimal import Decimal
 from unittest import mock, skipUnless
 
-from ginger import forms
-from ginger.core.exceptions import (
+from gingerdj import forms
+from gingerdj.core.exceptions import (
     NON_FIELD_ERRORS,
     FieldError,
     ImproperlyConfigured,
     ValidationError,
 )
-from ginger.core.files.uploadedfile import SimpleUploadedFile
-from ginger.db import connection, models
-from ginger.db.models.query import EmptyQuerySet
-from ginger.forms.models import (
+from gingerdj.core.files.uploadedfile import SimpleUploadedFile
+from gingerdj.db import connection, models
+from gingerdj.db.models.query import EmptyQuerySet
+from gingerdj.forms.models import (
     ModelFormMetaclass,
     construct_instance,
     fields_for_model,
     model_to_dict,
     modelform_factory,
 )
-from ginger.template import Context, Template
-from ginger.test import SimpleTestCase, TestCase, ignore_warnings, skipUnlessDBFeature
-from ginger.test.utils import isolate_apps
-from ginger.utils.choices import BlankChoiceIterator
-from ginger.utils.deprecation import RemovedInGinger60Warning
-from ginger.utils.version import PYPY
+from gingerdj.template import Context, Template
+from gingerdj.test import SimpleTestCase, TestCase, ignore_warnings, skipUnlessDBFeature
+from gingerdj.test.utils import isolate_apps
+from gingerdj.utils.choices import BlankChoiceIterator
+from gingerdj.utils.deprecation import RemovedInGinger60Warning
+from gingerdj.utils.version import PYPY
 
 from .models import (
     Article,
@@ -1268,22 +1268,24 @@ class UniqueTest(TestCase):
 
     def test_unique_for_date(self):
         p = Post.objects.create(
-            title="Ginger 1.0 is released",
-            slug="Ginger 1.0",
+            title="GingerDJ 1.0 is released",
+            slug="GingerDJ 1.0",
             subtitle="Finally",
             posted=datetime.date(2008, 9, 3),
         )
-        form = PostForm({"title": "Ginger 1.0 is released", "posted": "2008-09-03"})
+        form = PostForm({"title": "GingerDJ 1.0 is released", "posted": "2008-09-03"})
         self.assertFalse(form.is_valid())
         self.assertEqual(len(form.errors), 1)
         self.assertEqual(
             form.errors["title"], ["Title must be unique for Posted date."]
         )
-        form = PostForm({"title": "Work on Ginger 1.1 begins", "posted": "2008-09-03"})
+        form = PostForm(
+            {"title": "Work on GingerDJ 1.1 begins", "posted": "2008-09-03"}
+        )
         self.assertTrue(form.is_valid())
-        form = PostForm({"title": "Ginger 1.0 is released", "posted": "2008-09-04"})
+        form = PostForm({"title": "GingerDJ 1.0 is released", "posted": "2008-09-04"})
         self.assertTrue(form.is_valid())
-        form = PostForm({"slug": "Ginger 1.0", "posted": "2008-01-01"})
+        form = PostForm({"slug": "GingerDJ 1.0", "posted": "2008-01-01"})
         self.assertFalse(form.is_valid())
         self.assertEqual(len(form.errors), 1)
         self.assertEqual(form.errors["slug"], ["Slug must be unique for Posted year."])
@@ -1294,13 +1296,13 @@ class UniqueTest(TestCase):
         )
         data = {
             "subtitle": "Finally",
-            "title": "Ginger 1.0 is released",
-            "slug": "Ginger 1.0",
+            "title": "GingerDJ 1.0 is released",
+            "slug": "GingerDJ 1.0",
             "posted": "2008-09-03",
         }
         form = PostForm(data, instance=p)
         self.assertTrue(form.is_valid())
-        form = PostForm({"title": "Ginger 1.0 is released"})
+        form = PostForm({"title": "GingerDJ 1.0 is released"})
         self.assertFalse(form.is_valid())
         self.assertEqual(len(form.errors), 1)
         self.assertEqual(form.errors["posted"], ["This field is required."])
@@ -1318,18 +1320,18 @@ class UniqueTest(TestCase):
                 fields = "__all__"
 
         DateTimePost.objects.create(
-            title="Ginger 1.0 is released",
-            slug="Ginger 1.0",
+            title="GingerDJ 1.0 is released",
+            slug="GingerDJ 1.0",
             subtitle="Finally",
             posted=datetime.datetime(2008, 9, 3, 10, 10, 1),
         )
         # 'title' has unique_for_date='posted'
         form = DateTimePostForm(
-            {"title": "Ginger 1.0 is released", "posted": "2008-09-03"}
+            {"title": "GingerDJ 1.0 is released", "posted": "2008-09-03"}
         )
         self.assertTrue(form.is_valid())
         # 'slug' has unique_for_year='posted'
-        form = DateTimePostForm({"slug": "Ginger 1.0", "posted": "2008-01-01"})
+        form = DateTimePostForm({"slug": "GingerDJ 1.0", "posted": "2008-01-01"})
         self.assertTrue(form.is_valid())
         # 'subtitle' has unique_for_month='posted'
         form = DateTimePostForm({"subtitle": "Finally", "posted": "2008-09-30"})
@@ -1337,13 +1339,13 @@ class UniqueTest(TestCase):
 
     def test_inherited_unique_for_date(self):
         p = Post.objects.create(
-            title="Ginger 1.0 is released",
-            slug="Ginger 1.0",
+            title="GingerDJ 1.0 is released",
+            slug="GingerDJ 1.0",
             subtitle="Finally",
             posted=datetime.date(2008, 9, 3),
         )
         form = DerivedPostForm(
-            {"title": "Ginger 1.0 is released", "posted": "2008-09-03"}
+            {"title": "GingerDJ 1.0 is released", "posted": "2008-09-03"}
         )
         self.assertFalse(form.is_valid())
         self.assertEqual(len(form.errors), 1)
@@ -1351,14 +1353,14 @@ class UniqueTest(TestCase):
             form.errors["title"], ["Title must be unique for Posted date."]
         )
         form = DerivedPostForm(
-            {"title": "Work on Ginger 1.1 begins", "posted": "2008-09-03"}
+            {"title": "Work on GingerDJ 1.1 begins", "posted": "2008-09-03"}
         )
         self.assertTrue(form.is_valid())
         form = DerivedPostForm(
-            {"title": "Ginger 1.0 is released", "posted": "2008-09-04"}
+            {"title": "GingerDJ 1.0 is released", "posted": "2008-09-04"}
         )
         self.assertTrue(form.is_valid())
-        form = DerivedPostForm({"slug": "Ginger 1.0", "posted": "2008-01-01"})
+        form = DerivedPostForm({"slug": "GingerDJ 1.0", "posted": "2008-01-01"})
         self.assertFalse(form.is_valid())
         self.assertEqual(len(form.errors), 1)
         self.assertEqual(form.errors["slug"], ["Slug must be unique for Posted year."])
@@ -1369,8 +1371,8 @@ class UniqueTest(TestCase):
         )
         data = {
             "subtitle": "Finally",
-            "title": "Ginger 1.0 is released",
-            "slug": "Ginger 1.0",
+            "title": "GingerDJ 1.0 is released",
+            "slug": "GingerDJ 1.0",
             "posted": "2008-09-03",
         }
         form = DerivedPostForm(data, instance=p)
@@ -1383,22 +1385,22 @@ class UniqueTest(TestCase):
                 fields = "__all__"
 
         p = FlexibleDatePost.objects.create(
-            title="Ginger 1.0 is released",
-            slug="Ginger 1.0",
+            title="GingerDJ 1.0 is released",
+            slug="GingerDJ 1.0",
             subtitle="Finally",
             posted=datetime.date(2008, 9, 3),
         )
 
-        form = FlexDatePostForm({"title": "Ginger 1.0 is released"})
+        form = FlexDatePostForm({"title": "GingerDJ 1.0 is released"})
         self.assertTrue(form.is_valid())
-        form = FlexDatePostForm({"slug": "Ginger 1.0"})
+        form = FlexDatePostForm({"slug": "GingerDJ 1.0"})
         self.assertTrue(form.is_valid())
         form = FlexDatePostForm({"subtitle": "Finally"})
         self.assertTrue(form.is_valid())
         data = {
             "subtitle": "Finally",
-            "title": "Ginger 1.0 is released",
-            "slug": "Ginger 1.0",
+            "title": "GingerDJ 1.0 is released",
+            "slug": "GingerDJ 1.0",
         }
         form = FlexDatePostForm(data, instance=p)
         self.assertTrue(form.is_valid())
@@ -1448,13 +1450,13 @@ class UniqueTest(TestCase):
                 }
 
         Post.objects.create(
-            title="Ginger 1.0 is released",
-            slug="Ginger 1.0",
+            title="GingerDJ 1.0 is released",
+            slug="GingerDJ 1.0",
             subtitle="Finally",
             posted=datetime.date(2008, 9, 3),
         )
         form = CustomPostForm(
-            {"title": "Ginger 1.0 is released", "posted": "2008-09-03"}
+            {"title": "GingerDJ 1.0 is released", "posted": "2008-09-03"}
         )
         self.assertEqual(len(form.errors), 1)
         self.assertEqual(
@@ -2606,7 +2608,7 @@ class FileAndImageFieldTests(TestCase):
         instance = f.save()
         self.assertEqual(instance.file.name, "tests/test1.txt")
 
-        # Delete the current file since this is not done by Ginger.
+        # Delete the current file since this is not done by GingerDJ.
         instance.file.delete()
 
         # Override the file by uploading a new one.
@@ -2619,7 +2621,7 @@ class FileAndImageFieldTests(TestCase):
         instance = f.save()
         self.assertEqual(instance.file.name, "tests/test2.txt")
 
-        # Delete the current file since this is not done by Ginger.
+        # Delete the current file since this is not done by GingerDJ.
         instance.file.delete()
         instance.delete()
 
@@ -2649,7 +2651,7 @@ class FileAndImageFieldTests(TestCase):
         self.assertEqual(instance.description, "New Description")
         self.assertEqual(instance.file.name, "tests/test3.txt")
 
-        # Delete the current file since this is not done by Ginger.
+        # Delete the current file since this is not done by GingerDJ.
         instance.file.delete()
         instance.delete()
 
@@ -2734,7 +2736,7 @@ class FileAndImageFieldTests(TestCase):
         self.assertEqual(instance.width, 16)
         self.assertEqual(instance.height, 16)
 
-        # Delete the current file since this is not done by Ginger, but don't save
+        # Delete the current file since this is not done by GingerDJ, but don't save
         # because the dimension fields are not null=True.
         instance.image.delete(save=False)
         f = ImageFileForm(
@@ -2760,7 +2762,7 @@ class FileAndImageFieldTests(TestCase):
         self.assertEqual(instance.height, 16)
         self.assertEqual(instance.width, 16)
 
-        # Delete the current file since this is not done by Ginger, but don't save
+        # Delete the current file since this is not done by GingerDJ, but don't save
         # because the dimension fields are not null=True.
         instance.image.delete(save=False)
         # Override the file by uploading a new one.
@@ -2776,7 +2778,7 @@ class FileAndImageFieldTests(TestCase):
         self.assertEqual(instance.height, 32)
         self.assertEqual(instance.width, 48)
 
-        # Delete the current file since this is not done by Ginger, but don't save
+        # Delete the current file since this is not done by GingerDJ, but don't save
         # because the dimension fields are not null=True.
         instance.image.delete(save=False)
         instance.delete()
@@ -2791,7 +2793,7 @@ class FileAndImageFieldTests(TestCase):
         self.assertEqual(instance.height, 32)
         self.assertEqual(instance.width, 48)
 
-        # Delete the current file since this is not done by Ginger, but don't save
+        # Delete the current file since this is not done by GingerDJ, but don't save
         # because the dimension fields are not null=True.
         instance.image.delete(save=False)
         instance.delete()
@@ -2832,7 +2834,7 @@ class FileAndImageFieldTests(TestCase):
         self.assertEqual(instance.width, 16)
         self.assertEqual(instance.height, 16)
 
-        # Delete the current file since this is not done by Ginger.
+        # Delete the current file since this is not done by GingerDJ.
         instance.image.delete()
         instance.delete()
 
@@ -2928,7 +2930,7 @@ class ModelOtherFieldTests(SimpleTestCase):
 
     def test_url_modelform_assume_scheme_warning(self):
         msg = (
-            "The default scheme will be changed from 'http' to 'https' in Ginger "
+            "The default scheme will be changed from 'http' to 'https' in GingerDJ "
             "6.0. Pass the forms.URLField.assume_scheme argument to silence this "
             "warning, or set the FORMS_URLFIELD_ASSUME_HTTPS transitional setting to "
             "True to opt into using 'https' as the new default scheme."

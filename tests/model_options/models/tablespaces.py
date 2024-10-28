@@ -1,6 +1,6 @@
-from ginger.db import models
+from gingerdj.db import models
 
-# Since the test database doesn't have tablespaces, it's impossible for Ginger
+# Since the test database doesn't have tablespaces, it's impossible for GingerDJ
 # to create the tables for models where db_tablespace is set. To avoid this
 # problem, we mark the models as unmanaged, and temporarily revert them to
 # managed during each test. We also set them to use the same tables as the

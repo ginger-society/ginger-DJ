@@ -1,6 +1,6 @@
-from ginger.template.defaultfilters import escapejs_filter
-from ginger.test import SimpleTestCase
-from ginger.utils.functional import lazy
+from gingerdj.template.defaultfilters import escapejs_filter
+from gingerdj.test import SimpleTestCase
+from gingerdj.utils.functional import lazy
 
 from ..utils import setup
 

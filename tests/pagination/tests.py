@@ -3,14 +3,14 @@ import unittest.mock
 import warnings
 from datetime import datetime
 
-from ginger.core.paginator import (
+from gingerdj.core.paginator import (
     EmptyPage,
     InvalidPage,
     PageNotAnInteger,
     Paginator,
     UnorderedObjectListWarning,
 )
-from ginger.test import SimpleTestCase, TestCase
+from gingerdj.test import SimpleTestCase, TestCase
 
 from .custom import ValidAdjacentNumsPaginator
 from .models import Article
@@ -487,7 +487,7 @@ class PaginationTests(SimpleTestCase):
 
 class ModelPaginationTests(TestCase):
     """
-    Test pagination with Ginger model instances
+    Test pagination with GingerDJ model instances
     """
 
     @classmethod

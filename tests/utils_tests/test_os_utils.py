@@ -2,8 +2,8 @@ import os
 import unittest
 from pathlib import Path
 
-from ginger.core.exceptions import SuspiciousFileOperation
-from ginger.utils._os import safe_join, to_path
+from gingerdj.core.exceptions import SuspiciousFileOperation
+from gingerdj.utils._os import safe_join, to_path
 
 
 class SafeJoinTests(unittest.TestCase):

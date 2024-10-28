@@ -1,9 +1,9 @@
 from functools import update_wrapper
 
-from ginger.contrib import admin
-from ginger.db import models
-from ginger.http import HttpResponseRedirect
-from ginger.urls import reverse
+from gingerdj.contrib import admin
+from gingerdj.db import models
+from gingerdj.http import HttpResponseRedirect
+from gingerdj.urls import reverse
 
 
 class Action(models.Model):
@@ -33,7 +33,7 @@ class ActionAdmin(admin.ModelAdmin):
     def get_urls(self):
         # Add the URL of our custom 'add_view' view to the front of the URLs
         # list.  Remove the existing one(s) first
-        from ginger.urls import re_path
+        from gingerdj.urls import re_path
 
         def wrap(view):
             def wrapper(*args, **kwargs):

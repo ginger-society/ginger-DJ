@@ -1,4 +1,4 @@
-from ginger.shortcuts import render
+from gingerdj.shortcuts import render
 
 
 def render_view(request):

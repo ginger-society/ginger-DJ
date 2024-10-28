@@ -1,5 +1,5 @@
-from ginger.urls import include, path
+from gingerdj.urls import include, path
 
 urlpatterns = [
-    path("flatpage", include("ginger.contrib.flatpages.urls")),
+    path("flatpage", include("gingerdj.contrib.flatpages.urls")),
 ]

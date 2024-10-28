@@ -1,5 +1,5 @@
-from ginger.contrib import admin
-from ginger.test import TestCase
+from gingerdj.contrib import admin
+from gingerdj.test import TestCase
 
 from .models import Band
 
@@ -8,6 +8,7 @@ class AdminActionsTests(TestCase):
     @classmethod
     def setUpTestData(cls):
         pass
+
     def test_get_actions_respects_permissions(self):
         class MockRequest:
             pass

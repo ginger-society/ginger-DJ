@@ -5,13 +5,13 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from ginger.core.exceptions import SuspiciousFileOperation
-from ginger.core.files import File, temp
-from ginger.core.files.base import ContentFile
-from ginger.core.files.uploadedfile import TemporaryUploadedFile
-from ginger.db import IntegrityError, models
-from ginger.test import TestCase, override_settings
-from ginger.test.utils import isolate_apps
+from gingerdj.core.exceptions import SuspiciousFileOperation
+from gingerdj.core.files import File, temp
+from gingerdj.core.files.base import ContentFile
+from gingerdj.core.files.uploadedfile import TemporaryUploadedFile
+from gingerdj.db import IntegrityError, models
+from gingerdj.test import TestCase, override_settings
+from gingerdj.test.utils import isolate_apps
 
 from .models import Document
 

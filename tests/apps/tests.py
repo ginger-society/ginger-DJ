@@ -1,19 +1,19 @@
 import os
 from unittest.mock import patch
 
-import ginger
-from ginger.apps import AppConfig, apps
-from ginger.apps.registry import Apps
-from ginger.contrib.admin.models import LogEntry
-from ginger.core.exceptions import AppRegistryNotReady, ImproperlyConfigured
-from ginger.db import connections, models
-from ginger.test import (
+import gingerdj
+from gingerdj.apps import AppConfig, apps
+from gingerdj.apps.registry import Apps
+from gingerdj.contrib.admin.models import LogEntry
+from gingerdj.core.exceptions import AppRegistryNotReady, ImproperlyConfigured
+from gingerdj.db import connections, models
+from gingerdj.test import (
     SimpleTestCase,
     TransactionTestCase,
     override_settings,
     skipUnlessDBFeature,
 )
-from ginger.test.utils import extend_sys_path, isolate_apps
+from gingerdj.test.utils import extend_sys_path, isolate_apps
 
 from .models import SoAlternative, TotallyNormal, new_apps
 from .one_config_app.apps import OneConfig
@@ -25,12 +25,12 @@ from .two_configs_one_default_app.apps import TwoConfig
 SOME_INSTALLED_APPS = [
     "apps.apps.MyAdmin",
     "apps.apps.MyAuth",
-    "ginger.contrib.messages",
-    "ginger.contrib.staticfiles",
+    "gingerdj.contrib.messages",
+    "gingerdj.contrib.staticfiles",
 ]
 
 SOME_INSTALLED_APPS_NAMES = [
-    "ginger.contrib.admin",
+    "gingerdj.contrib.admin",
 ] + SOME_INSTALLED_APPS[2:]
 
 HERE = os.path.dirname(__file__)
@@ -158,10 +158,10 @@ class AppsTests(SimpleTestCase):
         Tests apps.get_app_config().
         """
         app_config = apps.get_app_config("admin")
-        self.assertEqual(app_config.name, "ginger.contrib.admin")
+        self.assertEqual(app_config.name, "gingerdj.contrib.admin")
 
         app_config = apps.get_app_config("staticfiles")
-        self.assertEqual(app_config.name, "ginger.contrib.staticfiles")
+        self.assertEqual(app_config.name, "gingerdj.contrib.staticfiles")
 
         with self.assertRaises(LookupError):
             apps.get_app_config("admindocs")
@@ -171,8 +171,8 @@ class AppsTests(SimpleTestCase):
         """
         Tests apps.is_installed().
         """
-        self.assertIs(apps.is_installed("ginger.contrib.admin"), True)
-        self.assertIs(apps.is_installed("ginger.contrib.staticfiles"), True)
+        self.assertIs(apps.is_installed("gingerdj.contrib.admin"), True)
+        self.assertIs(apps.is_installed("gingerdj.contrib.staticfiles"), True)
 
     @override_settings(INSTALLED_APPS=SOME_INSTALLED_APPS)
     def test_get_model(self):
@@ -472,25 +472,25 @@ class AppConfigTests(SimpleTestCase):
 
     @override_settings(
         INSTALLED_APPS=["apps.apps.ModelPKAppsConfig"],
-        DEFAULT_AUTO_FIELD="ginger.db.models.SmallAutoField",
+        DEFAULT_AUTO_FIELD="gingerdj.db.models.SmallAutoField",
     )
     def test_app_default_auto_field(self):
         apps_config = apps.get_app_config("apps")
         self.assertEqual(
             apps_config.default_auto_field,
-            "ginger.db.models.BigAutoField",
+            "gingerdj.db.models.BigAutoField",
         )
         self.assertIs(apps_config._is_default_auto_field_overridden, True)
 
     @override_settings(
         INSTALLED_APPS=["apps.apps.PlainAppsConfig"],
-        DEFAULT_AUTO_FIELD="ginger.db.models.SmallAutoField",
+        DEFAULT_AUTO_FIELD="gingerdj.db.models.SmallAutoField",
     )
     def test_default_auto_field_setting(self):
         apps_config = apps.get_app_config("apps")
         self.assertEqual(
             apps_config.default_auto_field,
-            "ginger.db.models.SmallAutoField",
+            "gingerdj.db.models.SmallAutoField",
         )
         self.assertIs(apps_config._is_default_auto_field_overridden, False)
 
@@ -604,7 +604,7 @@ class QueryPerformingAppTests(TransactionTestCase):
         try:
             with patch.multiple(apps, ready=False, loading=False, app_configs={}):
                 with self.assertWarnsMessage(RuntimeWarning, self.expected_msg):
-                    ginger.setup()
+                    gingerdj.setup()
 
                 app_config = apps.get_app_config("query_performing_app")
                 return app_config.query_results

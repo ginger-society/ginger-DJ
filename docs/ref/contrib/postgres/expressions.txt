@@ -2,22 +2,22 @@
 PostgreSQL specific query expressions
 =====================================
 
-.. module:: ginger.contrib.postgres.expressions
+.. module:: gingerdj.contrib.postgres.expressions
    :synopsis: PostgreSQL specific query expressions
 
 These expressions are available from the
-``ginger.contrib.postgres.expressions`` module.
+``gingerdj.contrib.postgres.expressions`` module.
 
 ``ArraySubquery()`` expressions
 ===============================
 
 .. class:: ArraySubquery(queryset)
 
-``ArraySubquery`` is a :class:`~ginger.db.models.Subquery` that uses the
+``ArraySubquery`` is a :class:`~gingerdj.db.models.Subquery` that uses the
 PostgreSQL ``ARRAY`` constructor to build a list of values from the queryset,
 which must use :meth:`.QuerySet.values` to return only a single column.
 
-This class differs from :class:`~ginger.contrib.postgres.aggregates.ArrayAgg`
+This class differs from :class:`~gingerdj.contrib.postgres.aggregates.ArrayAgg`
 in the way that it does not act as an aggregate function and does not require
 an SQL ``GROUP BY`` clause to build the list of values.
 
@@ -26,9 +26,9 @@ objects:
 
 .. code-block:: pycon
 
-    >>> from ginger.db.models import OuterRef
-    >>> from ginger.db.models.functions import JSONObject
-    >>> from ginger.contrib.postgres.expressions import ArraySubquery
+    >>> from gingerdj.db.models import OuterRef
+    >>> from gingerdj.db.models.functions import JSONObject
+    >>> from gingerdj.contrib.postgres.expressions import ArraySubquery
     >>> books = Book.objects.filter(author=OuterRef("pk")).values(
     ...     json=JSONObject(title="title", pages="pages")
     ... )

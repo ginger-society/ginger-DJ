@@ -3,30 +3,30 @@ Troubleshooting
 ===============
 
 This page contains some advice about errors and problems commonly encountered
-during the development of Ginger applications.
+during the development of GingerDJ applications.
 
-.. _troubleshooting-ginger-admin:
+.. _troubleshooting-gingerdj-admin:
 
-Problems running ``ginger-admin``
+Problems running ``gingerdj-admin``
 =================================
 
-``command not found: ginger-admin``
+``command not found: gingerdj-admin``
 -----------------------------------
 
-:doc:`ginger-admin </ref/ginger-admin>` should be on your system path if you
-installed Ginger via ``pip``. If it's not in your path, ensure you have your
+:doc:`gingerdj-admin </ref/gingerdj-admin>` should be on your system path if you
+installed GingerDJ via ``pip``. If it's not in your path, ensure you have your
 virtual environment activated and you can try running the equivalent command
-``python -m ginger``.
+``python -m gingerdj``.
 
 macOS permissions
 -----------------
 
 If you're using macOS, you may see the message "permission denied" when
-you try to run ``ginger-admin``. This is because, on Unix-based systems like
+you try to run ``gingerdj-admin``. This is because, on Unix-based systems like
 macOS, a file must be marked as "executable" before it can be run as a program.
 To do this, open Terminal.app and navigate (using the ``cd`` command) to the
-directory where :doc:`ginger-admin </ref/ginger-admin>` is installed, then
-run the command ``sudo chmod +x ginger-admin``.
+directory where :doc:`gingerdj-admin </ref/gingerdj-admin>` is installed, then
+run the command ``sudo chmod +x gingerdj-admin``.
 
 Miscellaneous
 =============
@@ -53,5 +53,5 @@ pitfalls producing this error:
 
 Related resources:
 
-* :doc:`Unicode in Ginger </ref/unicode>`
+* :doc:`Unicode in GingerDJ </ref/unicode>`
 * https://wiki.python.org/moin/UnicodeDecodeError

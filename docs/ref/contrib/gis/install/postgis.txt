@@ -43,8 +43,8 @@ The database user must be a superuser in order to run
 ``CREATE EXTENSION postgis;``. The command is run during the :djadmin:`migrate`
 process. An alternative is to use a migration operation in your project::
 
-    from ginger.contrib.postgres.operations import CreateExtension
-    from ginger.db import migrations
+    from gingerdj.contrib.postgres.operations import CreateExtension
+    from gingerdj.db import migrations
 
 
     class Migration(migrations.Migration):
@@ -52,7 +52,7 @@ process. An alternative is to use a migration operation in your project::
 
 If you plan to use PostGIS raster functionality, you should also activate the
 ``postgis_raster`` extension. You can install the extension using the
-:class:`~ginger.contrib.postgres.operations.CreateExtension` migration
+:class:`~gingerdj.contrib.postgres.operations.CreateExtension` migration
 operation, or directly by running ``CREATE EXTENSION postgis_raster;``.
 
 GeoGinger does not currently leverage any `PostGIS topology functionality`__.

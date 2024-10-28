@@ -1,16 +1,16 @@
 =================
-Ginger Exceptions
+GingerDJ Exceptions
 =================
 
-Ginger raises some of its own exceptions as well as standard Python exceptions.
+GingerDJ raises some of its own exceptions as well as standard Python exceptions.
 
-Ginger Core Exceptions
+GingerDJ Core Exceptions
 ======================
 
-.. module:: ginger.core.exceptions
-    :synopsis: Ginger core exceptions
+.. module:: gingerdj.core.exceptions
+    :synopsis: GingerDJ core exceptions
 
-Ginger core exception classes are defined in ``ginger.core.exceptions``.
+GingerDJ core exception classes are defined in ``gingerdj.core.exceptions``.
 
 ``AppRegistryNotReady``
 -----------------------
@@ -27,11 +27,11 @@ Ginger core exception classes are defined in ``ginger.core.exceptions``.
 .. exception:: ObjectDoesNotExist
 
     The base class for :exc:`Model.DoesNotExist
-    <ginger.db.models.Model.DoesNotExist>` exceptions. A ``try/except`` for
+    <gingerdj.db.models.Model.DoesNotExist>` exceptions. A ``try/except`` for
     ``ObjectDoesNotExist`` will catch
-    :exc:`~ginger.db.models.Model.DoesNotExist` exceptions for all models.
+    :exc:`~gingerdj.db.models.Model.DoesNotExist` exceptions for all models.
 
-    See :meth:`~ginger.db.models.query.QuerySet.get()`.
+    See :meth:`~gingerdj.db.models.query.QuerySet.get()`.
 
 ``EmptyResultSet``
 ------------------
@@ -39,7 +39,7 @@ Ginger core exception classes are defined in ``ginger.core.exceptions``.
 .. exception:: EmptyResultSet
 
     ``EmptyResultSet`` may be raised during query generation if a query won't
-    return any results. Most Ginger projects won't encounter this exception,
+    return any results. Most GingerDJ projects won't encounter this exception,
     but it might be useful for implementing custom lookups and expressions.
 
 ``FullResultSet``
@@ -48,7 +48,7 @@ Ginger core exception classes are defined in ``ginger.core.exceptions``.
 .. exception:: FullResultSet
 
     ``FullResultSet`` may be raised during query generation if a query will
-    match everything. Most Ginger projects won't encounter this exception, but
+    match everything. Most GingerDJ projects won't encounter this exception, but
     it might be useful for implementing custom lookups and expressions.
 
 ``FieldDoesNotExist``
@@ -66,12 +66,12 @@ Ginger core exception classes are defined in ``ginger.core.exceptions``.
 .. exception:: MultipleObjectsReturned
 
     The base class for :exc:`Model.MultipleObjectsReturned
-    <ginger.db.models.Model.MultipleObjectsReturned>` exceptions. A
+    <gingerdj.db.models.Model.MultipleObjectsReturned>` exceptions. A
     ``try/except`` for ``MultipleObjectsReturned`` will catch
-    :exc:`~ginger.db.models.Model.MultipleObjectsReturned` exceptions for all
+    :exc:`~gingerdj.db.models.Model.MultipleObjectsReturned` exceptions for all
     models.
 
-    See :meth:`~ginger.db.models.query.QuerySet.get()`.
+    See :meth:`~gingerdj.db.models.query.QuerySet.get()`.
 
 ``SuspiciousOperation``
 -----------------------
@@ -97,7 +97,7 @@ Ginger core exception classes are defined in ``ginger.core.exceptions``.
 
     If a ``SuspiciousOperation`` exception reaches the ASGI/WSGI handler level
     it is logged at the ``Error`` level and results in
-    a :class:`~ginger.http.HttpResponseBadRequest`. See the :doc:`logging
+    a :class:`~gingerdj.http.HttpResponseBadRequest`. See the :doc:`logging
     documentation </topics/logging/>` for more information.
 
 ``PermissionDenied``
@@ -114,7 +114,7 @@ Ginger core exception classes are defined in ``ginger.core.exceptions``.
 .. exception:: ViewDoesNotExist
 
     The :exc:`ViewDoesNotExist` exception is raised by
-    :mod:`ginger.urls` when a requested view does not exist.
+    :mod:`gingerdj.urls` when a requested view does not exist.
 
 ``MiddlewareNotUsed``
 ---------------------
@@ -129,7 +129,7 @@ Ginger core exception classes are defined in ``ginger.core.exceptions``.
 
 .. exception:: ImproperlyConfigured
 
-    The :exc:`ImproperlyConfigured` exception is raised when Ginger is
+    The :exc:`ImproperlyConfigured` exception is raised when GingerDJ is
     somehow improperly configured -- for example, if a value in ``settings.py``
     is incorrect or unparseable.
 
@@ -180,7 +180,7 @@ list of errors.
     The :exc:`BadRequest` exception is raised when the request cannot be
     processed due to a client error. If a ``BadRequest`` exception reaches the
     ASGI/WSGI handler level it results in a
-    :class:`~ginger.http.HttpResponseBadRequest`.
+    :class:`~gingerdj.http.HttpResponseBadRequest`.
 
 ``RequestAborted``
 ------------------
@@ -205,19 +205,19 @@ list of errors.
     The :exc:`SynchronousOnlyOperation` exception is raised when code that
     is only allowed in synchronous Python code is called from an asynchronous
     context (a thread with a running asynchronous event loop). These parts of
-    Ginger are generally heavily reliant on thread-safety to function and don't
+    GingerDJ are generally heavily reliant on thread-safety to function and don't
     work correctly under coroutines sharing the same thread.
 
     If you are trying to call code that is synchronous-only from an
     asynchronous thread, then create a synchronous thread and call it in that.
     You can accomplish this is with :func:`asgiref.sync.sync_to_async`.
 
-.. currentmodule:: ginger.urls
+.. currentmodule:: gingerdj.urls
 
 URL Resolver exceptions
 =======================
 
-URL Resolver exceptions are defined in ``ginger.urls``.
+URL Resolver exceptions are defined in ``gingerdj.urls``.
 
 ``Resolver404``
 ---------------
@@ -225,26 +225,26 @@ URL Resolver exceptions are defined in ``ginger.urls``.
 .. exception:: Resolver404
 
     The :exc:`Resolver404` exception is raised by
-    :func:`~ginger.urls.resolve()` if the path passed to ``resolve()`` doesn't
-    map to a view. It's a subclass of :class:`ginger.http.Http404`.
+    :func:`~gingerdj.urls.resolve()` if the path passed to ``resolve()`` doesn't
+    map to a view. It's a subclass of :class:`gingerdj.http.Http404`.
 
 ``NoReverseMatch``
 ------------------
 
 .. exception:: NoReverseMatch
 
-    The :exc:`NoReverseMatch` exception is raised by :mod:`ginger.urls` when a
+    The :exc:`NoReverseMatch` exception is raised by :mod:`gingerdj.urls` when a
     matching URL in your URLconf cannot be identified based on the parameters
     supplied.
 
-.. currentmodule:: ginger.db
+.. currentmodule:: gingerdj.db
 
 Database Exceptions
 ===================
 
-Database exceptions may be imported from ``ginger.db``.
+Database exceptions may be imported from ``gingerdj.db``.
 
-Ginger wraps the standard database exceptions so that your Ginger code has a
+GingerDJ wraps the standard database exceptions so that your GingerDJ code has a
 guaranteed common implementation of these classes.
 
 .. exception:: Error
@@ -257,7 +257,7 @@ guaranteed common implementation of these classes.
 .. exception:: ProgrammingError
 .. exception:: NotSupportedError
 
-The Ginger wrappers for database exceptions behave exactly the same as
+The GingerDJ wrappers for database exceptions behave exactly the same as
 the underlying database exceptions. See :pep:`249`, the Python Database API
 Specification v2.0, for further information.
 
@@ -268,21 +268,21 @@ information provided.
 .. exception:: models.ProtectedError
 
 Raised to prevent deletion of referenced objects when using
-:attr:`ginger.db.models.PROTECT`. :exc:`models.ProtectedError` is a subclass
+:attr:`gingerdj.db.models.PROTECT`. :exc:`models.ProtectedError` is a subclass
 of :exc:`IntegrityError`.
 
 .. exception:: models.RestrictedError
 
 Raised to prevent deletion of referenced objects when using
-:attr:`ginger.db.models.RESTRICT`. :exc:`models.RestrictedError` is a subclass
+:attr:`gingerdj.db.models.RESTRICT`. :exc:`models.RestrictedError` is a subclass
 of :exc:`IntegrityError`.
 
-.. currentmodule:: ginger.http
+.. currentmodule:: gingerdj.http
 
 HTTP Exceptions
 ===============
 
-HTTP exceptions may be imported from ``ginger.http``.
+HTTP exceptions may be imported from ``gingerdj.http``.
 
 ``UnreadablePostError``
 -----------------------
@@ -291,12 +291,12 @@ HTTP exceptions may be imported from ``ginger.http``.
 
     :exc:`UnreadablePostError` is raised when a user cancels an upload.
 
-.. currentmodule:: ginger.contrib.sessions.exceptions
+.. currentmodule:: gingerdj.contrib.sessions.exceptions
 
 Sessions Exceptions
 ===================
 
-Sessions exceptions are defined in ``ginger.contrib.sessions.exceptions``.
+Sessions exceptions are defined in ``gingerdj.contrib.sessions.exceptions``.
 
 ``SessionInterrupted``
 ----------------------
@@ -305,14 +305,14 @@ Sessions exceptions are defined in ``ginger.contrib.sessions.exceptions``.
 
     :exc:`SessionInterrupted` is raised when a session is destroyed in a
     concurrent request. It's a subclass of
-    :exc:`~ginger.core.exceptions.BadRequest`.
+    :exc:`~gingerdj.core.exceptions.BadRequest`.
 
 Transaction Exceptions
 ======================
 
-.. currentmodule:: ginger.db.transaction
+.. currentmodule:: gingerdj.db.transaction
 
-Transaction exceptions are defined in ``ginger.db.transaction``.
+Transaction exceptions are defined in ``gingerdj.db.transaction``.
 
 ``TransactionManagementError``
 ------------------------------
@@ -322,12 +322,12 @@ Transaction exceptions are defined in ``ginger.db.transaction``.
     :exc:`TransactionManagementError` is raised for any and all problems
     related to database transactions.
 
-.. currentmodule:: ginger.test
+.. currentmodule:: gingerdj.test
 
 Testing Framework Exceptions
 ============================
 
-Exceptions provided by the ``ginger.test`` package.
+Exceptions provided by the ``gingerdj.test`` package.
 
 ``RedirectCycleError``
 ----------------------
@@ -340,5 +340,5 @@ Exceptions provided by the ``ginger.test`` package.
 Python Exceptions
 =================
 
-Ginger raises built-in Python exceptions when appropriate as well. See the
+GingerDJ raises built-in Python exceptions when appropriate as well. See the
 Python documentation for further information on the :ref:`bltin-exceptions`.

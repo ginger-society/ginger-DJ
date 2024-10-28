@@ -1,15 +1,15 @@
 """
 A subset of the tests in tests/servers/tests exercising
-ginger.contrib.staticfiles.testing.StaticLiveServerTestCase instead of
-ginger.test.LiveServerTestCase.
+gingerdj.contrib.staticfiles.testing.StaticLiveServerTestCase instead of
+gingerdj.test.LiveServerTestCase.
 """
 
 import os
 from urllib.request import urlopen
 
-from ginger.contrib.staticfiles.testing import StaticLiveServerTestCase
-from ginger.core.exceptions import ImproperlyConfigured
-from ginger.test import modify_settings, override_settings
+from gingerdj.contrib.staticfiles.testing import StaticLiveServerTestCase
+from gingerdj.core.exceptions import ImproperlyConfigured
+from gingerdj.test import modify_settings, override_settings
 
 TEST_ROOT = os.path.dirname(__file__)
 TEST_SETTINGS = {

@@ -1,6 +1,6 @@
-from ginger.db.models import F, Value
-from ginger.db.models.functions import Concat, Replace
-from ginger.test import TestCase
+from gingerdj.db.models import F, Value
+from gingerdj.db.models.functions import Concat, Replace
+from gingerdj.test import TestCase
 
 from ..models import Author
 

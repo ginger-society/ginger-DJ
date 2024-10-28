@@ -6,25 +6,25 @@ Reporting bugs and requesting features
 
     Please report security issues **only** to
     security@gingersociety.org.  This is a private list only open to
-    long-time, highly trusted Ginger developers, and its archives are
+    long-time, highly trusted GingerDJ developers, and its archives are
     not public. For further details, please see :doc:`our security
     policies </internals/security>`.
 
 Otherwise, before reporting a bug or requesting a new feature on the
-`ticket tracker <https://code.ginger.gloportal.dev/>`_, consider these points:
+`ticket tracker <https://code.gingerdj.gloportal.dev/>`_, consider these points:
 
 * Check that someone hasn't already filed the bug or feature request by
   `searching`_ or running `custom queries`_ in the ticket tracker.
 
 * Don't use the ticket system to ask support questions. Use the
-  |ginger-users| list or the `#ginger`_ IRC channel for that.
+  |gingerdj-users| list or the `#gingerdj`_ IRC channel for that.
 
 * Don't reopen issues that have been marked "wontfix" without finding consensus
-  to do so on the `Ginger Forum`_ or |ginger-developers| list.
+  to do so on the `GingerDJ Forum`_ or |gingerdj-developers| list.
 
 * Don't use the ticket tracker for lengthy discussions, because they're
   likely to get lost. If a particular ticket is controversial, please move the
-  discussion to the `Ginger Forum`_ or |ginger-developers| list.
+  discussion to the `GingerDJ Forum`_ or |gingerdj-developers| list.
 
 .. _reporting-bugs:
 
@@ -39,7 +39,7 @@ particular:
 * **Do** read the :doc:`FAQ </faq/index>` to see if your issue might
   be a well-known question.
 
-* **Do** ask on |ginger-users| or `#ginger`_ *first* if you're not sure if
+* **Do** ask on |gingerdj-users| or `#gingerdj`_ *first* if you're not sure if
   what you're seeing is a bug.
 
 * **Do** write complete, reproducible, specific bug reports. You must
@@ -49,8 +49,8 @@ particular:
   small test case is the best way to report a bug, as it gives us a
   helpful way to confirm the bug quickly.
 
-* **Don't** post to |ginger-developers| only to announce that you have filed a
-  bug report. All the tickets are mailed to another list, |ginger-updates|,
+* **Don't** post to |gingerdj-developers| only to announce that you have filed a
+  bug report. All the tickets are mailed to another list, |gingerdj-updates|,
   which is tracked by developers and interested community members; we see them
   as they are filed.
 
@@ -71,7 +71,7 @@ are a few additional guidelines to follow:
   capturing a *brief* screencast. If your software permits it, capture only
   the relevant area of the screen.
 
-* If you're offering a patch that changes the look or behavior of Ginger's
+* If you're offering a patch that changes the look or behavior of GingerDJ's
   UI, you **must** attach before *and* after screenshots/screencasts.
   Tickets lacking these are difficult for triagers to assess quickly.
 
@@ -85,19 +85,19 @@ are a few additional guidelines to follow:
 Requesting features
 ===================
 
-We're always trying to make Ginger better, and your feature requests are a key
+We're always trying to make GingerDJ better, and your feature requests are a key
 part of that. Here are some tips on how to make a request most effectively:
 
-* Make sure the feature actually requires changes in Ginger's core. If your
+* Make sure the feature actually requires changes in GingerDJ's core. If your
   idea can be developed as an independent application or module — for
   instance, you want to support another database engine — we'll probably
   suggest that you develop it independently. Then, if your project gathers
-  sufficient community support, we may consider it for inclusion in Ginger.
+  sufficient community support, we may consider it for inclusion in GingerDJ.
 
-* First request the feature on the `Ginger Forum`_ or |ginger-developers| list,
+* First request the feature on the `GingerDJ Forum`_ or |gingerdj-developers| list,
   not in the ticket tracker. It'll get read more closely if it's on the mailing
   list. This is even more important for large-scale feature requests. We like
-  to discuss any big changes to Ginger's core before actually working on them.
+  to discuss any big changes to GingerDJ's core before actually working on them.
 
 * Describe clearly and concisely what the missing feature is and how you'd
   like to see it implemented. Include example code (non-functional is OK)
@@ -112,7 +112,7 @@ create a ticket. Include a link to the discussion in the ticket description.
 
 As with most open-source projects, code talks. If you are willing to write the
 code for the feature yourself or, even better, if you've already written it,
-it's much more likely to be accepted. Fork Ginger on GitHub, create a feature
+it's much more likely to be accepted. Fork GingerDJ on GitHub, create a feature
 branch, and show us your work!
 
 See also: :ref:`documenting-new-features`.
@@ -123,7 +123,7 @@ How we make decisions
 =====================
 
 Whenever possible, we strive for a rough consensus. To that end, we'll often
-have informal votes on |ginger-developers| or the Ginger Forum about a feature.
+have informal votes on |gingerdj-developers| or the GingerDJ Forum about a feature.
 In these votes we follow the voting style invented by Apache and used on Python
 itself, where votes are given as +1, +0, -0, or -1.
 Roughly translated, these votes mean:
@@ -158,9 +158,9 @@ Since this process allows any steering council member to veto a proposal, a
 convert that "-1" into at least a "+0".
 
 Votes on technical matters should be announced and held in public on the
-|ginger-developers| mailing list or on the `Ginger Forum`_.
+|gingerdj-developers| mailing list or on the `GingerDJ Forum`_.
 
-.. _searching: https://code.ginger.gloportal.dev/search
-.. _custom queries: https://code.ginger.gloportal.dev/query
-.. _#ginger: https://web.libera.chat/#ginger
-.. _Ginger Forum: https://forum.ginger.gloportal.dev/
+.. _searching: https://code.gingerdj.gloportal.dev/search
+.. _custom queries: https://code.gingerdj.gloportal.dev/query
+.. _#gingerdj: https://web.libera.chat/#gingerdj
+.. _Ginger Forum: https://forum.gingerdj.gloportal.dev/

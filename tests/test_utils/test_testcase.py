@@ -1,9 +1,9 @@
 import pickle
 from functools import wraps
 
-from ginger.db import IntegrityError, connections, transaction
-from ginger.test import TestCase, skipUnlessDBFeature
-from ginger.test.testcases import (
+from gingerdj.db import IntegrityError, connections, transaction
+from gingerdj.test import TestCase, skipUnlessDBFeature
+from gingerdj.test.testcases import (
     DatabaseOperationForbidden,
     SimpleTestCase,
     TestData,

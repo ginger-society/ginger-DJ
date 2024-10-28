@@ -1,7 +1,7 @@
-from ginger.db import connection
-from ginger.db.models import Value
-from ginger.db.models.functions import Length, Repeat
-from ginger.test import TestCase
+from gingerdj.db import connection
+from gingerdj.db.models import Value
+from gingerdj.db.models.functions import Length, Repeat
+from gingerdj.test import TestCase
 
 from ..models import Author
 

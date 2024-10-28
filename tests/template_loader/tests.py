@@ -1,24 +1,24 @@
-from ginger.template import TemplateDoesNotExist
-from ginger.template.loader import get_template, render_to_string, select_template
-from ginger.test import SimpleTestCase, override_settings
-from ginger.test.client import RequestFactory
+from gingerdj.template import TemplateDoesNotExist
+from gingerdj.template.loader import get_template, render_to_string, select_template
+from gingerdj.test import SimpleTestCase, override_settings
+from gingerdj.test.client import RequestFactory
 
 
 @override_settings(
     TEMPLATES=[
         {
-            "BACKEND": "ginger.template.backends.dummy.TemplateStrings",
+            "BACKEND": "gingerdj.template.backends.dummy.TemplateStrings",
             "APP_DIRS": True,
         },
         {
-            "BACKEND": "ginger.template.backends.ginger.GingerTemplates",
+            "BACKEND": "gingerdj.template.backends.gingerdj.GingerTemplates",
             "OPTIONS": {
                 "context_processors": [
-                    "ginger.template.context_processors.request",
+                    "gingerdj.template.context_processors.request",
                 ],
                 "loaders": [
-                    "ginger.template.loaders.filesystem.Loader",
-                    "ginger.template.loaders.app_directories.Loader",
+                    "gingerdj.template.loaders.filesystem.Loader",
+                    "gingerdj.template.loaders.app_directories.Loader",
                 ],
             },
         },
@@ -31,11 +31,11 @@ class TemplateLoaderTests(SimpleTestCase):
 
     def test_get_template_second_engine(self):
         template = get_template("template_loader/goodbye.html")
-        self.assertEqual(template.render(), "Goodbye! (Ginger templates)\n")
+        self.assertEqual(template.render(), "Goodbye! (GingerDJ templates)\n")
 
     def test_get_template_using_engine(self):
-        template = get_template("template_loader/hello.html", using="ginger")
-        self.assertEqual(template.render(), "Hello! (Ginger templates)\n")
+        template = get_template("template_loader/hello.html", using="gingerdj")
+        self.assertEqual(template.render(), "Hello! (GingerDJ templates)\n")
 
     def test_get_template_not_found(self):
         with self.assertRaises(TemplateDoesNotExist) as e:
@@ -44,7 +44,7 @@ class TemplateLoaderTests(SimpleTestCase):
             e.exception.chain[-1].tried[0][0].template_name,
             "template_loader/unknown.html",
         )
-        self.assertEqual(e.exception.chain[-1].backend.name, "ginger")
+        self.assertEqual(e.exception.chain[-1].backend.name, "gingerdj")
 
     def test_select_template_first_engine(self):
         template = select_template(
@@ -56,14 +56,14 @@ class TemplateLoaderTests(SimpleTestCase):
         template = select_template(
             ["template_loader/unknown.html", "template_loader/goodbye.html"]
         )
-        self.assertEqual(template.render(), "Goodbye! (Ginger templates)\n")
+        self.assertEqual(template.render(), "Goodbye! (GingerDJ templates)\n")
 
     def test_select_template_using_engine(self):
         template = select_template(
             ["template_loader/unknown.html", "template_loader/hello.html"],
-            using="ginger",
+            using="gingerdj",
         )
-        self.assertEqual(template.render(), "Hello! (Ginger templates)\n")
+        self.assertEqual(template.render(), "Hello! (GingerDJ templates)\n")
 
     def test_select_template_empty(self):
         with self.assertRaises(TemplateDoesNotExist):
@@ -92,13 +92,13 @@ class TemplateLoaderTests(SimpleTestCase):
             e.exception.chain[-1].tried[0][0].template_name,
             "template_loader/missing.html",
         )
-        self.assertEqual(e.exception.chain[-1].backend.name, "ginger")
+        self.assertEqual(e.exception.chain[-1].backend.name, "gingerdj")
 
     def test_select_template_tries_all_engines_before_names(self):
         template = select_template(
             ["template_loader/goodbye.html", "template_loader/hello.html"]
         )
-        self.assertEqual(template.render(), "Goodbye! (Ginger templates)\n")
+        self.assertEqual(template.render(), "Goodbye! (GingerDJ templates)\n")
 
     def test_render_to_string_first_engine(self):
         content = render_to_string("template_loader/hello.html")
@@ -106,7 +106,7 @@ class TemplateLoaderTests(SimpleTestCase):
 
     def test_render_to_string_second_engine(self):
         content = render_to_string("template_loader/goodbye.html")
-        self.assertEqual(content, "Goodbye! (Ginger templates)\n")
+        self.assertEqual(content, "Goodbye! (GingerDJ templates)\n")
 
     def test_render_to_string_with_request(self):
         request = RequestFactory().get("/foobar/")
@@ -114,8 +114,8 @@ class TemplateLoaderTests(SimpleTestCase):
         self.assertEqual(content, "/foobar/\n")
 
     def test_render_to_string_using_engine(self):
-        content = render_to_string("template_loader/hello.html", using="ginger")
-        self.assertEqual(content, "Hello! (Ginger templates)\n")
+        content = render_to_string("template_loader/hello.html", using="gingerdj")
+        self.assertEqual(content, "Hello! (GingerDJ templates)\n")
 
     def test_render_to_string_not_found(self):
         with self.assertRaises(TemplateDoesNotExist) as e:
@@ -124,7 +124,7 @@ class TemplateLoaderTests(SimpleTestCase):
             e.exception.chain[-1].tried[0][0].template_name,
             "template_loader/unknown.html",
         )
-        self.assertEqual(e.exception.chain[-1].backend.name, "ginger")
+        self.assertEqual(e.exception.chain[-1].backend.name, "gingerdj")
 
     def test_render_to_string_with_list_first_engine(self):
         content = render_to_string(
@@ -136,14 +136,14 @@ class TemplateLoaderTests(SimpleTestCase):
         content = render_to_string(
             ["template_loader/unknown.html", "template_loader/goodbye.html"]
         )
-        self.assertEqual(content, "Goodbye! (Ginger templates)\n")
+        self.assertEqual(content, "Goodbye! (GingerDJ templates)\n")
 
     def test_render_to_string_with_list_using_engine(self):
         content = render_to_string(
             ["template_loader/unknown.html", "template_loader/hello.html"],
-            using="ginger",
+            using="gingerdj",
         )
-        self.assertEqual(content, "Hello! (Ginger templates)\n")
+        self.assertEqual(content, "Hello! (GingerDJ templates)\n")
 
     def test_render_to_string_with_list_empty(self):
         with self.assertRaises(TemplateDoesNotExist):
@@ -163,7 +163,7 @@ class TemplateLoaderTests(SimpleTestCase):
             e.exception.chain[1].tried[0][0].template_name,
             "template_loader/unknown.html",
         )
-        self.assertEqual(e.exception.chain[1].backend.name, "ginger")
+        self.assertEqual(e.exception.chain[1].backend.name, "gingerdj")
         self.assertEqual(
             e.exception.chain[2].tried[0][0].template_name,
             "template_loader/missing.html",
@@ -173,10 +173,10 @@ class TemplateLoaderTests(SimpleTestCase):
             e.exception.chain[3].tried[0][0].template_name,
             "template_loader/missing.html",
         )
-        self.assertEqual(e.exception.chain[3].backend.name, "ginger")
+        self.assertEqual(e.exception.chain[3].backend.name, "gingerdj")
 
     def test_render_to_string_with_list_tries_all_engines_before_names(self):
         content = render_to_string(
             ["template_loader/goodbye.html", "template_loader/hello.html"]
         )
-        self.assertEqual(content, "Goodbye! (Ginger templates)\n")
+        self.assertEqual(content, "Goodbye! (GingerDJ templates)\n")

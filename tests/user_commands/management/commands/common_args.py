@@ -1,6 +1,6 @@
 from argparse import ArgumentError
 
-from ginger.core.management.base import BaseCommand, CommandError
+from gingerdj.core.management.base import BaseCommand, CommandError
 
 
 class Command(BaseCommand):

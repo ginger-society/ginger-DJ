@@ -41,14 +41,14 @@ Two points to keep in mind:
 
 * The JavaScript code must go in a template block if you are inheriting
   ``admin/change_form.html`` or it won't be rendered in the final HTML.
-* ``{{ block.super }}`` is added because Ginger's
+* ``{{ block.super }}`` is added because GingerDJ's
   ``admin_change_form_document_ready`` block contains JavaScript code to handle
   various operations in the change form and we need that to be rendered too.
 
-Supporting versions of Ginger older than 4.1
+Supporting versions of GingerDJ older than 4.1
 --------------------------------------------
 
-If your event listener still has to support older versions of Ginger you have
+If your event listener still has to support older versions of GingerDJ you have
 to use jQuery to register your event listener. jQuery handles JavaScript events
 but the reverse isn't true.
 
@@ -63,10 +63,10 @@ to the old listener signature as follows:
 
     $(document).on('formset:added', (event, $row, formsetName) => {
         if (event.detail && event.detail.formsetName) {
-            // Ginger >= 4.1
+            // GingerDJ >= 4.1
             handleFormsetAdded(event.target, event.detail.formsetName)
         } else {
-            // Ginger < 4.1, use $row and formsetName
+            // GingerDJ < 4.1, use $row and formsetName
             handleFormsetAdded($row.get(0), formsetName)
         }
     })

@@ -1,5 +1,5 @@
 # Should not be processed by `black`.
-Ginger<4.2
-environs[ginger]
+GingerDJ<4.2
+environs[gingerdj]
 psycopg2-binary
-ginger-extensions
+gingerdj-extensions

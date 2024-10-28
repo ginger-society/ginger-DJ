@@ -1,9 +1,9 @@
 import hashlib
 import os
 
-from ginger.core.files.uploadedfile import UploadedFile
-from ginger.core.files.uploadhandler import TemporaryFileUploadHandler
-from ginger.http import HttpResponse, HttpResponseServerError, JsonResponse
+from gingerdj.core.files.uploadedfile import UploadedFile
+from gingerdj.core.files.uploadhandler import TemporaryFileUploadHandler
+from gingerdj.http import HttpResponse, HttpResponseServerError, JsonResponse
 
 from .models import FileModel
 from .tests import UNICODE_FILENAME, UPLOAD_FOLDER

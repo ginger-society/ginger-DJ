@@ -4,10 +4,10 @@ import tempfile
 import unittest
 from contextlib import contextmanager
 
-from ginger.template import TemplateDoesNotExist
-from ginger.template.engine import Engine
-from ginger.test import SimpleTestCase, override_settings
-from ginger.utils.functional import lazystr
+from gingerdj.template import TemplateDoesNotExist
+from gingerdj.template.engine import Engine
+from gingerdj.test import SimpleTestCase, override_settings
+from gingerdj.utils.functional import lazystr
 
 from .utils import TEMPLATE_DIR
 
@@ -18,9 +18,9 @@ class CachedLoaderTests(SimpleTestCase):
             dirs=[TEMPLATE_DIR],
             loaders=[
                 (
-                    "ginger.template.loaders.cached.Loader",
+                    "gingerdj.template.loaders.cached.Loader",
                     [
-                        "ginger.template.loaders.filesystem.Loader",
+                        "gingerdj.template.loaders.filesystem.Loader",
                     ],
                 ),
             ],
@@ -122,7 +122,7 @@ class FileSystemLoaderTests(SimpleTestCase):
     @classmethod
     def setUpClass(cls):
         cls.engine = Engine(
-            dirs=[TEMPLATE_DIR], loaders=["ginger.template.loaders.filesystem.Loader"]
+            dirs=[TEMPLATE_DIR], loaders=["gingerdj.template.loaders.filesystem.Loader"]
         )
         super().setUpClass()
 
@@ -155,12 +155,12 @@ class FileSystemLoaderTests(SimpleTestCase):
         self.assertEqual(template.origin.template_name, "index.html")
         self.assertEqual(template.origin.loader, self.engine.template_loaders[0])
         self.assertEqual(
-            template.origin.loader_name, "ginger.template.loaders.filesystem.Loader"
+            template.origin.loader_name, "gingerdj.template.loaders.filesystem.Loader"
         )
 
     def test_loaders_dirs(self):
         engine = Engine(
-            loaders=[("ginger.template.loaders.filesystem.Loader", [TEMPLATE_DIR])]
+            loaders=[("gingerdj.template.loaders.filesystem.Loader", [TEMPLATE_DIR])]
         )
         template = engine.get_template("index.html")
         self.assertEqual(template.origin.name, os.path.join(TEMPLATE_DIR, "index.html"))
@@ -169,7 +169,7 @@ class FileSystemLoaderTests(SimpleTestCase):
         """An empty dirs list in loaders overrides top level dirs."""
         engine = Engine(
             dirs=[TEMPLATE_DIR],
-            loaders=[("ginger.template.loaders.filesystem.Loader", [])],
+            loaders=[("gingerdj.template.loaders.filesystem.Loader", [])],
         )
         with self.assertRaises(TemplateDoesNotExist):
             engine.get_template("index.html")
@@ -238,7 +238,7 @@ class AppDirectoriesLoaderTests(SimpleTestCase):
     @classmethod
     def setUpClass(cls):
         cls.engine = Engine(
-            loaders=["ginger.template.loaders.app_directories.Loader"],
+            loaders=["gingerdj.template.loaders.app_directories.Loader"],
         )
         super().setUpClass()
 
@@ -261,7 +261,7 @@ class LocmemLoaderTests(SimpleTestCase):
         cls.engine = Engine(
             loaders=[
                 (
-                    "ginger.template.loaders.locmem.Loader",
+                    "gingerdj.template.loaders.locmem.Loader",
                     {
                         "index.html": "index",
                     },

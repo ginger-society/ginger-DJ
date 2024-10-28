@@ -1,10 +1,10 @@
 from unittest import mock
 
-from ginger.core import checks
-from ginger.core.checks import Error, Warning
-from ginger.db import models
-from ginger.test import SimpleTestCase, TestCase, skipUnlessDBFeature
-from ginger.test.utils import (
+from gingerdj.core import checks
+from gingerdj.core.checks import Error, Warning
+from gingerdj.db import models
+from gingerdj.test import SimpleTestCase, TestCase, skipUnlessDBFeature
+from gingerdj.test.utils import (
     isolate_apps,
     modify_settings,
     override_settings,
@@ -414,27 +414,27 @@ class ConstraintNameTests(TestCase):
 
 
 def mocked_is_overridden(self, setting):
-    # Force treating DEFAULT_AUTO_FIELD = 'ginger.db.models.AutoField' as a not
+    # Force treating DEFAULT_AUTO_FIELD = 'gingerdj.db.models.AutoField' as a not
     # overridden setting.
     return (
         setting != "DEFAULT_AUTO_FIELD"
-        or self.DEFAULT_AUTO_FIELD != "ginger.db.models.AutoField"
+        or self.DEFAULT_AUTO_FIELD != "gingerdj.db.models.AutoField"
     )
 
 
-@mock.patch("ginger.conf.UserSettingsHolder.is_overridden", mocked_is_overridden)
-@override_settings(DEFAULT_AUTO_FIELD="ginger.db.models.AutoField")
+@mock.patch("gingerdj.conf.UserSettingsHolder.is_overridden", mocked_is_overridden)
+@override_settings(DEFAULT_AUTO_FIELD="gingerdj.db.models.AutoField")
 @isolate_apps("check_framework.apps.CheckDefaultPKConfig", attr_name="apps")
 @override_system_checks([checks.model_checks.check_all_models])
 class ModelDefaultAutoFieldTests(SimpleTestCase):
     msg = (
         "Auto-created primary key used when not defining a primary key type, "
-        "by default 'ginger.db.models.AutoField'."
+        "by default 'gingerdj.db.models.AutoField'."
     )
     hint = (
         "Configure the DEFAULT_AUTO_FIELD setting or the "
         "CheckDefaultPKConfig.default_auto_field attribute to point to a "
-        "subclass of AutoField, e.g. 'ginger.db.models.BigAutoField'."
+        "subclass of AutoField, e.g. 'gingerdj.db.models.BigAutoField'."
     )
 
     def test_auto_created_pk(self):
@@ -524,7 +524,7 @@ class ModelDefaultAutoFieldTests(SimpleTestCase):
             ],
         )
 
-    @override_settings(DEFAULT_AUTO_FIELD="ginger.db.models.BigAutoField")
+    @override_settings(DEFAULT_AUTO_FIELD="gingerdj.db.models.BigAutoField")
     def test_default_auto_field_setting(self):
         class Model(models.Model):
             pass

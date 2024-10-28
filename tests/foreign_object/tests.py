@@ -3,12 +3,12 @@ import datetime
 import pickle
 from operator import attrgetter
 
-from ginger.core.exceptions import FieldError
-from ginger.db import models
-from ginger.test import SimpleTestCase, TestCase, skipUnlessDBFeature
-from ginger.test.utils import isolate_apps
-from ginger.utils import translation
-from ginger.utils.deprecation import RemovedInGinger60Warning
+from gingerdj.core.exceptions import FieldError
+from gingerdj.db import models
+from gingerdj.test import SimpleTestCase, TestCase, skipUnlessDBFeature
+from gingerdj.test.utils import isolate_apps
+from gingerdj.utils import translation
+from gingerdj.utils.deprecation import RemovedInGinger60Warning
 
 from .models import (
     Article,

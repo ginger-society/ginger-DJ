@@ -1,11 +1,11 @@
 =============================================
-``ginger.urls`` functions for use in URLconfs
+``gingerdj.urls`` functions for use in URLconfs
 =============================================
 
-.. module:: ginger.urls.conf
+.. module:: gingerdj.urls.conf
     :synopsis: Functions for use in URLconfs.
 
-.. currentmodule:: ginger.urls
+.. currentmodule:: gingerdj.urls
 
 ``path()``
 ==========
@@ -14,7 +14,7 @@
 
 Returns an element for inclusion in ``urlpatterns``. For example::
 
-    from ginger.urls import include, path
+    from gingerdj.urls import include, path
 
     urlpatterns = [
         path("index/", views.index, name="main-view"),
@@ -26,7 +26,7 @@ Returns an element for inclusion in ``urlpatterns``. For example::
     ]
 
 The ``route`` argument should be a string or
-:func:`~ginger.utils.translation.gettext_lazy()` (see
+:func:`~gingerdj.utils.translation.gettext_lazy()` (see
 :ref:`translating-urlpatterns`) that contains a URL pattern. The string
 may contain angle brackets (like ``<username>`` above) to capture part of the
 URL and send it as a keyword argument to the view. The angle brackets may
@@ -34,11 +34,11 @@ include a converter specification (like the ``int`` part of ``<int:section>``)
 which limits the characters matched and may also change the type of the
 variable passed to the view. For example, ``<int:section>`` matches a string
 of decimal digits and converts the value to an ``int``. See
-:ref:`how-ginger-processes-a-request` for more details.
+:ref:`how-gingerdj-processes-a-request` for more details.
 
 The ``view`` argument is a view function or the result of
-:meth:`~ginger.views.generic.base.View.as_view` for class-based views. It can
-also be an :func:`ginger.urls.include`.
+:meth:`~gingerdj.views.generic.base.View.as_view` for class-based views. It can
+also be an :func:`gingerdj.urls.include`.
 
 The ``kwargs`` argument allows you to pass additional arguments to the view
 function or method. See :ref:`views-extra-options` for an example.
@@ -53,7 +53,7 @@ argument is useful.
 
 Returns an element for inclusion in ``urlpatterns``. For example::
 
-    from ginger.urls import include, re_path
+    from gingerdj.urls import include, re_path
 
     urlpatterns = [
         re_path(r"^index/$", views.index, name="index"),
@@ -63,7 +63,7 @@ Returns an element for inclusion in ``urlpatterns``. For example::
     ]
 
 The ``route`` argument should be a string or
-:func:`~ginger.utils.translation.gettext_lazy()` (see
+:func:`~gingerdj.utils.translation.gettext_lazy()` (see
 :ref:`translating-urlpatterns`) that contains a regular expression compatible
 with Python's :py:mod:`re` module. Strings typically use raw string syntax
 (``r''``) so that they can contain sequences like ``\d`` without the need to
@@ -73,11 +73,11 @@ if the groups are named, and as positional arguments otherwise. The values are
 passed as strings, without any type conversion.
 
 When a ``route`` ends with ``$`` the whole requested URL, matching against
-:attr:`~ginger.http.HttpRequest.path_info`, must match the regular expression
+:attr:`~gingerdj.http.HttpRequest.path_info`, must match the regular expression
 pattern (:py:func:`re.fullmatch` is used).
 
 The ``view``, ``kwargs`` and ``name`` arguments are the same as for
-:func:`~ginger.urls.path()`.
+:func:`~gingerdj.urls.path()`.
 
 ``include()``
 =============
@@ -102,7 +102,7 @@ The ``view``, ``kwargs`` and ``name`` arguments are the same as for
     :arg module: URLconf module (or module name)
     :arg namespace: Instance namespace for the URL entries being included
     :type namespace: str
-    :arg pattern_list: Iterable of :func:`~ginger.urls.path` and/or :func:`~ginger.urls.re_path` instances.
+    :arg pattern_list: Iterable of :func:`~gingerdj.urls.path` and/or :func:`~gingerdj.urls.re_path` instances.
     :arg app_namespace: Application namespace for the URL entries being included
     :type app_namespace: str
 
@@ -113,7 +113,7 @@ See :ref:`including-other-urlconfs` and :ref:`namespaces-and-include`.
 
 .. function:: register_converter(converter, type_name)
 
-The function for registering a converter for use in :func:`~ginger.urls.path()`
+The function for registering a converter for use in :func:`~gingerdj.urls.path()`
 ``route``\s.
 
 The ``converter`` argument is a converter class, and ``type_name`` is the
@@ -125,20 +125,20 @@ converter name to use in path patterns. See
     Overriding existing converters is deprecated.
 
 ==================================================
-``ginger.conf.urls`` functions for use in URLconfs
+``gingerdj.conf.urls`` functions for use in URLconfs
 ==================================================
 
-.. module:: ginger.conf.urls
+.. module:: gingerdj.conf.urls
 
 ``static()``
 ============
 
-.. function:: static.static(prefix, view=ginger.views.static.serve, **kwargs)
+.. function:: static.static(prefix, view=gingerdj.views.static.serve, **kwargs)
 
 Helper function to return a URL pattern for serving files in debug mode::
 
-    from ginger.conf import settings
-    from ginger.conf.urls.static import static
+    from gingerdj.conf import settings
+    from gingerdj.conf.urls.static import static
 
     urlpatterns = [
         # ... the rest of your URLconf goes here ...
@@ -153,9 +153,9 @@ A callable, or a string representing the full Python import path to the view
 that should be called if the HTTP client has sent a request that caused an error
 condition and a response with a status code of 400.
 
-By default, this is :func:`ginger.views.defaults.bad_request`. If you
+By default, this is :func:`gingerdj.views.defaults.bad_request`. If you
 implement a custom view, be sure it accepts ``request`` and ``exception``
-arguments and returns an :class:`~ginger.http.HttpResponseBadRequest`.
+arguments and returns an :class:`~gingerdj.http.HttpResponseBadRequest`.
 
 ``handler403``
 ==============
@@ -166,9 +166,9 @@ A callable, or a string representing the full Python import path to the view
 that should be called if the user doesn't have the permissions required to
 access a resource.
 
-By default, this is :func:`ginger.views.defaults.permission_denied`. If you
+By default, this is :func:`gingerdj.views.defaults.permission_denied`. If you
 implement a custom view, be sure it accepts ``request`` and ``exception``
-arguments and returns an :class:`~ginger.http.HttpResponseForbidden`.
+arguments and returns an :class:`~gingerdj.http.HttpResponseForbidden`.
 
 ``handler404``
 ==============
@@ -178,9 +178,9 @@ arguments and returns an :class:`~ginger.http.HttpResponseForbidden`.
 A callable, or a string representing the full Python import path to the view
 that should be called if none of the URL patterns match.
 
-By default, this is :func:`ginger.views.defaults.page_not_found`. If you
+By default, this is :func:`gingerdj.views.defaults.page_not_found`. If you
 implement a custom view, be sure it accepts ``request`` and ``exception``
-arguments and returns an :class:`~ginger.http.HttpResponseNotFound`.
+arguments and returns an :class:`~gingerdj.http.HttpResponseNotFound`.
 
 ``handler500``
 ==============
@@ -191,6 +191,6 @@ A callable, or a string representing the full Python import path to the view
 that should be called in case of server errors. Server errors happen when you
 have runtime errors in view code.
 
-By default, this is :func:`ginger.views.defaults.server_error`. If you
+By default, this is :func:`gingerdj.views.defaults.server_error`. If you
 implement a custom view, be sure it accepts a ``request`` argument and returns
-an :class:`~ginger.http.HttpResponseServerError`.
+an :class:`~gingerdj.http.HttpResponseServerError`.

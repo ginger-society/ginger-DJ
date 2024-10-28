@@ -2,7 +2,7 @@
 GeoGinger's admin site
 ======================
 
-.. module:: ginger.contrib.gis.admin
+.. module:: gingerdj.contrib.gis.admin
     :synopsis: GeoGinger's extensions to the admin site.
 
 ``GISModelAdmin``
@@ -13,8 +13,8 @@ GeoGinger's admin site
     .. attribute:: gis_widget
 
         The widget class to be used for
-        :class:`~ginger.contrib.gis.db.models.GeometryField`. Defaults to
-        :class:`~ginger.contrib.gis.forms.widgets.OSMWidget`.
+        :class:`~gingerdj.contrib.gis.db.models.GeometryField`. Defaults to
+        :class:`~gingerdj.contrib.gis.forms.widgets.OSMWidget`.
 
     .. attribute:: gis_widget_kwargs
 

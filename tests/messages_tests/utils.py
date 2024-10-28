@@ -1,4 +1,4 @@
-from ginger.contrib.messages import Message
+from gingerdj.contrib.messages import Message
 
 
 class DummyStorage:

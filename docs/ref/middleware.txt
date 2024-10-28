@@ -2,10 +2,10 @@
 Middleware
 ==========
 
-.. module:: ginger.middleware
-   :synopsis: Ginger's built-in middleware classes.
+.. module:: gingerdj.middleware
+   :synopsis: GingerDJ's built-in middleware classes.
 
-This document explains all middleware components that come with Ginger. For
+This document explains all middleware components that come with GingerDJ. For
 information on how to use them and how to write your own middleware, see
 the :doc:`middleware usage guide </topics/http/middleware>`.
 
@@ -15,21 +15,21 @@ Available middleware
 Cache middleware
 ----------------
 
-.. module:: ginger.middleware.cache
+.. module:: gingerdj.middleware.cache
    :synopsis: Middleware for the site-wide cache.
 
 .. class:: UpdateCacheMiddleware
 
 .. class:: FetchFromCacheMiddleware
 
-Enable the site-wide cache. If these are enabled, each Ginger-powered page will
+Enable the site-wide cache. If these are enabled, each GingerDJ-powered page will
 be cached for as long as the :setting:`CACHE_MIDDLEWARE_SECONDS` setting
 defines. See the :doc:`cache documentation </topics/cache>`.
 
 "Common" middleware
 -------------------
 
-.. module:: ginger.middleware.common
+.. module:: gingerdj.middleware.common
    :synopsis: Middleware adding "common" conveniences for perfectionists.
 
 .. class:: CommonMiddleware
@@ -45,7 +45,7 @@ Adds a few conveniences for perfectionists:
   If :setting:`APPEND_SLASH` is ``True`` and the initial URL doesn't end
   with a slash, and it is not found in the URLconf, then a new URL is
   formed by appending a slash at the end. If this new URL is found in the
-  URLconf, then Ginger redirects the request to this new URL. Otherwise,
+  URLconf, then GingerDJ redirects the request to this new URL. Otherwise,
   the initial URL is processed as usual.
 
   For example, ``foo.com/bar`` will be redirected to ``foo.com/bar/`` if
@@ -62,10 +62,10 @@ Adds a few conveniences for perfectionists:
   normalize URLs.
 
   If necessary, individual views may be excluded from the ``APPEND_SLASH``
-  behavior using the :func:`~ginger.views.decorators.common.no_append_slash`
+  behavior using the :func:`~gingerdj.views.decorators.common.no_append_slash`
   decorator::
 
-    from ginger.views.decorators.common import no_append_slash
+    from gingerdj.views.decorators.common import no_append_slash
 
 
     @no_append_slash
@@ -77,7 +77,7 @@ Adds a few conveniences for perfectionists:
 
 .. attribute:: CommonMiddleware.response_redirect_class
 
-Defaults to :class:`~ginger.http.HttpResponsePermanentRedirect`. Subclass
+Defaults to :class:`~gingerdj.http.HttpResponsePermanentRedirect`. Subclass
 ``CommonMiddleware`` and override the attribute to customize the redirects
 issued by the middleware.
 
@@ -89,7 +89,7 @@ issued by the middleware.
 GZip middleware
 ---------------
 
-.. module:: ginger.middleware.gzip
+.. module:: gingerdj.middleware.gzip
    :synopsis: Middleware to serve GZipped content for performance.
 
 .. class:: GZipMiddleware
@@ -106,7 +106,7 @@ GZip middleware
     ``GZipMiddleware``) are used on a website, the site may become exposed to a
     number of possible attacks.
 
-    To mitigate attacks, Ginger implements a technique called *Heal The Breach
+    To mitigate attacks, GingerDJ implements a technique called *Heal The Breach
     (HTB)*. It adds up to 100 bytes (see
     :attr:`.max_random_bytes`) of random bytes to each response
     to make the attacks less effective.
@@ -118,7 +118,7 @@ GZip middleware
     .. _breachattack.com: https://www.breachattack.com/
     .. _Heal The Breach (HTB) paper: https://ieeexplore.ieee.org/document/9754554
 
-The ``ginger.middleware.gzip.GZipMiddleware`` compresses content for browsers
+The ``gingerdj.middleware.gzip.GZipMiddleware`` compresses content for browsers
 that understand GZip compression (all modern browsers).
 
 This middleware should be placed before any other middleware that need to
@@ -137,12 +137,12 @@ If the response has an ``ETag`` header, the ETag is made weak to comply with
 :rfc:`9110#section-8.8.1`.
 
 You can apply GZip compression to individual views using the
-:func:`~ginger.views.decorators.gzip.gzip_page()` decorator.
+:func:`~gingerdj.views.decorators.gzip.gzip_page()` decorator.
 
 Conditional GET middleware
 --------------------------
 
-.. module:: ginger.middleware.http
+.. module:: gingerdj.middleware.http
    :synopsis: Middleware handling advanced HTTP features.
 
 .. class:: ConditionalGetMiddleware
@@ -151,12 +151,12 @@ Handles conditional GET operations. If the response doesn't have an ``ETag``
 header, the middleware adds one if needed. If the response has an ``ETag`` or
 ``Last-Modified`` header, and the request has ``If-None-Match`` or
 ``If-Modified-Since``, the response is replaced by an
-:class:`~ginger.http.HttpResponseNotModified`.
+:class:`~gingerdj.http.HttpResponseNotModified`.
 
 Locale middleware
 -----------------
 
-.. module:: ginger.middleware.locale
+.. module:: gingerdj.middleware.locale
    :synopsis: Middleware to enable language selection based on the request.
 
 .. class:: LocaleMiddleware
@@ -167,14 +167,14 @@ content for each user. See the :doc:`internationalization documentation
 
 .. attribute:: LocaleMiddleware.response_redirect_class
 
-Defaults to :class:`~ginger.http.HttpResponseRedirect`. Subclass
+Defaults to :class:`~gingerdj.http.HttpResponseRedirect`. Subclass
 ``LocaleMiddleware`` and override the attribute to customize the redirects
 issued by the middleware.
 
 Message middleware
 ------------------
 
-.. module:: ginger.contrib.messages.middleware
+.. module:: gingerdj.contrib.messages.middleware
    :synopsis: Message middleware.
 
 .. class:: MessageMiddleware
@@ -187,19 +187,19 @@ Enables cookie- and session-based message support. See the
 Security middleware
 -------------------
 
-.. module:: ginger.middleware.security
+.. module:: gingerdj.middleware.security
     :synopsis: Security middleware.
 
 .. warning::
     If your deployment situation allows, it's usually a good idea to have your
     front-end web server perform the functionality provided by the
     ``SecurityMiddleware``. That way, if there are requests that aren't served
-    by Ginger (such as static media or user-uploaded files), they will have
-    the same protections as requests to your Ginger application.
+    by GingerDJ (such as static media or user-uploaded files), they will have
+    the same protections as requests to your GingerDJ application.
 
 .. class:: SecurityMiddleware
 
-The ``ginger.middleware.security.SecurityMiddleware`` provides several security
+The ``gingerdj.middleware.security.SecurityMiddleware`` provides several security
 enhancements to the request/response cycle. Each one can be independently
 enabled or disabled with a setting.
 
@@ -259,7 +259,7 @@ If you wish to submit your site to the `browser preload list`_, set the
 .. note::
     If you are deployed behind a load-balancer or reverse-proxy server, and the
     ``Strict-Transport-Security`` header is not being added to your responses,
-    it may be because Ginger doesn't realize that it's on a secure connection;
+    it may be because GingerDJ doesn't realize that it's on a secure connection;
     you may need to set the :setting:`SECURE_PROXY_SSL_HEADER` setting.
 
 __ https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security
@@ -308,7 +308,7 @@ for:
   served via HTTPS, but the page being linked to is not served via HTTPS.
 
 .. warning::
-    When your site is served via HTTPS, :ref:`Ginger's CSRF protection system
+    When your site is served via HTTPS, :ref:`GingerDJ's CSRF protection system
     <how-csrf-works>` requires the ``Referer`` header to be present, so
     completely disabling the ``Referer`` header will interfere with CSRF
     protection. To gain most of the benefits of disabling ``Referer`` headers
@@ -417,11 +417,11 @@ the `X-Content-Type-Options: nosniff`__ header.  ``SecurityMiddleware`` will
 do this for all responses if the :setting:`SECURE_CONTENT_TYPE_NOSNIFF` setting
 is ``True``.
 
-Note that in most deployment situations where Ginger isn't involved in serving
+Note that in most deployment situations where GingerDJ isn't involved in serving
 user-uploaded files, this setting won't help you. For example, if your
 :setting:`MEDIA_URL` is served directly by your front-end web server (nginx,
 Apache, etc.) then you'd want to set this header there. On the other hand, if
-you are using Ginger to do something like require authorization in order to
+you are using GingerDJ to do something like require authorization in order to
 download files and you cannot set the header using your web server, this
 setting will be useful.
 
@@ -443,7 +443,7 @@ connections to HTTPS.
 .. note::
 
     For performance reasons, it's preferable to do these redirects outside of
-    Ginger, in a front-end load balancer or reverse-proxy server such as
+    GingerDJ, in a front-end load balancer or reverse-proxy server such as
     `nginx`_. :setting:`SECURE_SSL_REDIRECT` is intended for the deployment
     situations where this isn't an option.
 
@@ -456,7 +456,7 @@ in the :setting:`SECURE_REDIRECT_EXEMPT` setting.
 
 .. note::
     If you are deployed behind a load-balancer or reverse-proxy server and
-    Ginger can't seem to tell when a request actually is already secure, you
+    GingerDJ can't seem to tell when a request actually is already secure, you
     may need to set the :setting:`SECURE_PROXY_SSL_HEADER` setting.
 
 .. _nginx: https://nginx.org/
@@ -464,7 +464,7 @@ in the :setting:`SECURE_REDIRECT_EXEMPT` setting.
 Session middleware
 ------------------
 
-.. module:: ginger.contrib.sessions.middleware
+.. module:: gingerdj.contrib.sessions.middleware
    :synopsis: Session middleware.
 
 .. class:: SessionMiddleware
@@ -475,7 +475,7 @@ Enables session support. See the :doc:`session documentation
 Site middleware
 ---------------
 
-.. module:: ginger.contrib.sites.middleware
+.. module:: gingerdj.contrib.sites.middleware
   :synopsis: Site middleware.
 
 .. class:: CurrentSiteMiddleware
@@ -486,7 +486,7 @@ Adds the ``site`` attribute representing the current site to every incoming
 CSRF protection middleware
 --------------------------
 
-.. currentmodule:: ginger.middleware.csrf
+.. currentmodule:: gingerdj.middleware.csrf
 
 .. class:: CsrfViewMiddleware
 
@@ -497,7 +497,7 @@ fields to POST forms and checking requests for the correct value. See the
 ``X-Frame-Options`` middleware
 ------------------------------
 
-.. currentmodule:: ginger.middleware.clickjacking
+.. currentmodule:: gingerdj.middleware.clickjacking
 
 .. class:: XFrameOptionsMiddleware
 
@@ -508,34 +508,34 @@ Simple :doc:`clickjacking protection via the X-Frame-Options header </ref/clickj
 Middleware ordering
 ===================
 
-Here are some hints about the ordering of various Ginger middleware classes:
+Here are some hints about the ordering of various GingerDJ middleware classes:
 
-#. :class:`~ginger.middleware.security.SecurityMiddleware`
+#. :class:`~gingerdj.middleware.security.SecurityMiddleware`
 
    It should go near the top of the list if you're going to turn on the SSL
    redirect as that avoids running through a bunch of other unnecessary
    middleware.
 
-#. :class:`~ginger.middleware.cache.UpdateCacheMiddleware`
+#. :class:`~gingerdj.middleware.cache.UpdateCacheMiddleware`
 
    Before those that modify the ``Vary`` header (``SessionMiddleware``,
    ``GZipMiddleware``, ``LocaleMiddleware``).
 
-#. :class:`~ginger.middleware.gzip.GZipMiddleware`
+#. :class:`~gingerdj.middleware.gzip.GZipMiddleware`
 
    Before any middleware that may change or use the response body.
 
    After ``UpdateCacheMiddleware``: Modifies ``Vary`` header.
 
-#. :class:`~ginger.contrib.sessions.middleware.SessionMiddleware`
+#. :class:`~gingerdj.contrib.sessions.middleware.SessionMiddleware`
 
    Before any middleware that may raise an exception to trigger an error
-   view (such as :exc:`~ginger.core.exceptions.PermissionDenied`) if you're
+   view (such as :exc:`~gingerdj.core.exceptions.PermissionDenied`) if you're
    using :setting:`CSRF_USE_SESSIONS`.
 
    After ``UpdateCacheMiddleware``: Modifies ``Vary`` header.
 
-#. :class:`~ginger.middleware.http.ConditionalGetMiddleware`
+#. :class:`~gingerdj.middleware.http.ConditionalGetMiddleware`
 
    Before any middleware that may change the response (it sets the ``ETag``
    header).
@@ -543,12 +543,12 @@ Here are some hints about the ordering of various Ginger middleware classes:
    After ``GZipMiddleware`` so it won't calculate an ``ETag`` header on gzipped
    contents.
 
-#. :class:`~ginger.middleware.locale.LocaleMiddleware`
+#. :class:`~gingerdj.middleware.locale.LocaleMiddleware`
 
    One of the topmost, after ``SessionMiddleware`` (uses session data) and
    ``UpdateCacheMiddleware`` (modifies ``Vary`` header).
 
-#. :class:`~ginger.middleware.common.CommonMiddleware`
+#. :class:`~gingerdj.middleware.common.CommonMiddleware`
 
    Before any middleware that may change the response (it sets the
    ``Content-Length`` header). A middleware that appears before
@@ -559,26 +559,26 @@ Here are some hints about the ordering of various Ginger middleware classes:
 
    After ``SessionMiddleware`` if you're using :setting:`CSRF_USE_SESSIONS`.
 
-#. :class:`~ginger.middleware.csrf.CsrfViewMiddleware`
+#. :class:`~gingerdj.middleware.csrf.CsrfViewMiddleware`
 
    Before any view middleware that assumes that CSRF attacks have been dealt
    with.
 
    After ``SessionMiddleware`` if you're using :setting:`CSRF_USE_SESSIONS`.
 
-#. :class:`~ginger.contrib.messages.middleware.MessageMiddleware`
+#. :class:`~gingerdj.contrib.messages.middleware.MessageMiddleware`
 
    After ``SessionMiddleware``: can use session-based storage.
 
-#. :class:`~ginger.middleware.cache.FetchFromCacheMiddleware`
+#. :class:`~gingerdj.middleware.cache.FetchFromCacheMiddleware`
 
    After any middleware that modifies the ``Vary`` header: that header is used
    to pick a value for the cache hash-key.
 
-#. :class:`~ginger.contrib.flatpages.middleware.FlatpageFallbackMiddleware`
+#. :class:`~gingerdj.contrib.flatpages.middleware.FlatpageFallbackMiddleware`
 
    Should be near the bottom as it's a last-resort type of middleware.
 
-#. :class:`~ginger.contrib.redirects.middleware.RedirectFallbackMiddleware`
+#. :class:`~gingerdj.contrib.redirects.middleware.RedirectFallbackMiddleware`
 
    Should be near the bottom as it's a last-resort type of middleware.

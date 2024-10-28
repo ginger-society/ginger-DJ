@@ -2,7 +2,7 @@
 Tests for built in Function expressions.
 """
 
-from ginger.db import models
+from gingerdj.db import models
 
 
 class Author(models.Model):

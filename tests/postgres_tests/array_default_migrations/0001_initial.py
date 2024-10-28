@@ -1,5 +1,5 @@
-import ginger.contrib.postgres.fields
-from ginger.db import migrations, models
+import gingerdj.contrib.postgres.fields
+from gingerdj.db import migrations, models
 
 
 class Migration(migrations.Migration):
@@ -20,7 +20,7 @@ class Migration(migrations.Migration):
                 ),
                 (
                     "field",
-                    ginger.contrib.postgres.fields.ArrayField(
+                    gingerdj.contrib.postgres.fields.ArrayField(
                         models.IntegerField(), size=None
                     ),
                 ),

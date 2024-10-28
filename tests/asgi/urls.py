@@ -2,9 +2,9 @@ import asyncio
 import threading
 import time
 
-from ginger.http import FileResponse, HttpResponse, StreamingHttpResponse
-from ginger.urls import path
-from ginger.views.decorators.csrf import csrf_exempt
+from gingerdj.http import FileResponse, HttpResponse, StreamingHttpResponse
+from gingerdj.urls import path
+from gingerdj.views.decorators.csrf import csrf_exempt
 
 
 def hello(request):

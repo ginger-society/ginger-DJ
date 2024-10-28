@@ -1,4 +1,4 @@
-from ginger.db import DEFAULT_DB_ALIAS
+from gingerdj.db import DEFAULT_DB_ALIAS
 
 
 class TestRouter:

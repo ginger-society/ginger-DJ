@@ -1,8 +1,8 @@
 import datetime
 
-from ginger.db import connection
-from ginger.test import TestCase, skipUnlessDBFeature
-from ginger.test.utils import CaptureQueriesContext
+from gingerdj.db import connection
+from gingerdj.test import TestCase, skipUnlessDBFeature
+from gingerdj.test.utils import CaptureQueriesContext
 
 from .models import DumbCategory, NonIntegerPKReturningModel, ReturningModel
 

@@ -1,7 +1,7 @@
 import asyncio
 
-from ginger.core.cache import CacheKeyWarning, cache
-from ginger.test import SimpleTestCase, override_settings
+from gingerdj.core.cache import CacheKeyWarning, cache
+from gingerdj.test import SimpleTestCase, override_settings
 
 from .tests import KEY_ERRORS_WITH_MEMCACHED_MSG
 

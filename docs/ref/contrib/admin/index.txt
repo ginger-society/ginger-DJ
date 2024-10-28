@@ -1,11 +1,11 @@
 =====================
-The Ginger admin site
+The GingerDJ admin site
 =====================
 
-.. module:: ginger.contrib.admin
-   :synopsis: Ginger's admin site.
+.. module:: gingerdj.contrib.admin
+   :synopsis: GingerDJ's admin site.
 
-One of the most powerful parts of Ginger is the automatic admin interface. It
+One of the most powerful parts of GingerDJ is the automatic admin interface. It
 reads metadata from your models to provide a quick, model-centric interface
 where trusted users can manage content on your site. The admin's recommended
 use is limited to an organization's internal management tool. It's not intended
@@ -16,7 +16,7 @@ hooks exclusively. If you need to provide a more process-centric interface
 that abstracts away the implementation details of database tables and fields,
 then it's probably time to write your own views.
 
-In this document we discuss how to activate, use, and customize Ginger's admin
+In this document we discuss how to activate, use, and customize GingerDJ's admin
 interface.
 
 Overview
@@ -27,19 +27,19 @@ The admin is enabled in the default project template used by
 
 If you're not using the default project template, here are the requirements:
 
-#. Add ``'ginger.contrib.admin'`` and its dependencies -
-   :mod:`ginger.contrib.messages` - to your
+#. Add ``'gingerdj.contrib.admin'`` and its dependencies -
+   :mod:`gingerdj.contrib.messages` - to your
    :setting:`INSTALLED_APPS` setting.
 
-#. Configure a :class:`~ginger.template.backends.ginger.GingerTemplates`
+#. Configure a :class:`~gingerdj.template.backends.gingerdj.GingerTemplates`
    backend in your :setting:`TEMPLATES` setting with
-   ``ginger.template.context_processors.request``, and
-   ``ginger.contrib.messages.context_processors.messages`` in
+   ``gingerdj.template.context_processors.request``, and
+   ``gingerdj.contrib.messages.context_processors.messages`` in
    the ``'context_processors'`` option of :setting:`OPTIONS
    <TEMPLATES-OPTIONS>`.
 
 #. If you've customized the :setting:`MIDDLEWARE` setting,
-   :class:`ginger.contrib.messages.middleware.MessageMiddleware` must be
+   :class:`gingerdj.contrib.messages.middleware.MessageMiddleware` must be
    included.
 
 #. :ref:`Hook the admin's URLs into your URLconf
@@ -79,7 +79,7 @@ Other topics
     interface. Usually, these are stored in a file named ``admin.py`` in your
     application. Let's take a look at an example of the ``ModelAdmin``::
 
-        from ginger.contrib import admin
+        from gingerdj.contrib import admin
         from myapp.models import Author
 
 
@@ -98,7 +98,7 @@ Other topics
         model class without providing a ``ModelAdmin`` description. The
         preceding example could be simplified to::
 
-            from ginger.contrib import admin
+            from gingerdj.contrib import admin
             from myapp.models import Author
 
             admin.site.register(Author)
@@ -106,11 +106,11 @@ Other topics
 The ``register`` decorator
 --------------------------
 
-.. function:: register(*models, site=ginger.contrib.admin.sites.site)
+.. function:: register(*models, site=gingerdj.contrib.admin.sites.site)
 
     There is also a decorator for registering your ``ModelAdmin`` classes::
 
-        from ginger.contrib import admin
+        from gingerdj.contrib import admin
         from .models import Author
 
 
@@ -122,7 +122,7 @@ The ``register`` decorator
     If you're using a custom :class:`AdminSite`, pass it using the ``site`` keyword
     argument::
 
-        from ginger.contrib import admin
+        from gingerdj.contrib import admin
         from .models import Author, Editor, Reader
         from myproject.admin_site import custom_admin_site
 
@@ -139,25 +139,25 @@ The ``register`` decorator
 Discovery of admin files
 ------------------------
 
-When you put ``'ginger.contrib.admin'`` in your :setting:`INSTALLED_APPS`
-setting, Ginger automatically looks for an ``admin`` module in each
+When you put ``'gingerdj.contrib.admin'`` in your :setting:`INSTALLED_APPS`
+setting, GingerDJ automatically looks for an ``admin`` module in each
 application and imports it.
 
 .. class:: apps.AdminConfig
 
-    This is the default :class:`~ginger.apps.AppConfig` class for the admin.
-    It calls :func:`~ginger.contrib.admin.autodiscover()` when Ginger starts.
+    This is the default :class:`~gingerdj.apps.AppConfig` class for the admin.
+    It calls :func:`~gingerdj.contrib.admin.autodiscover()` when GingerDJ starts.
 
 .. class:: apps.SimpleAdminConfig
 
-    This class works like :class:`~ginger.contrib.admin.apps.AdminConfig`,
-    except it doesn't call :func:`~ginger.contrib.admin.autodiscover()`.
+    This class works like :class:`~gingerdj.contrib.admin.apps.AdminConfig`,
+    except it doesn't call :func:`~gingerdj.contrib.admin.autodiscover()`.
 
     .. attribute:: default_site
 
         A dotted import path to the default admin site's class or to a callable
         that returns a site instance. Defaults to
-        ``'ginger.contrib.admin.sites.AdminSite'``. See
+        ``'gingerdj.contrib.admin.sites.AdminSite'``. See
         :ref:`overriding-default-admin-site` for usage.
 
 .. function:: autodiscover
@@ -166,13 +166,13 @@ application and imports it.
     application. Such modules are expected to register models with the admin.
 
     Typically you won't need to call this function directly as
-    :class:`~ginger.contrib.admin.apps.AdminConfig` calls it when Ginger starts.
+    :class:`~gingerdj.contrib.admin.apps.AdminConfig` calls it when GingerDJ starts.
 
 If you are using a custom ``AdminSite``, it is common to import all of the
 ``ModelAdmin`` subclasses into your code and register them to the custom
 ``AdminSite``. In that case, in order to disable auto-discovery, you should
-put ``'ginger.contrib.admin.apps.SimpleAdminConfig'`` instead of
-``'ginger.contrib.admin'`` in your :setting:`INSTALLED_APPS` setting.
+put ``'gingerdj.contrib.admin.apps.SimpleAdminConfig'`` instead of
+``'gingerdj.contrib.admin'`` in your :setting:`INSTALLED_APPS` setting.
 
 ``ModelAdmin`` options
 ----------------------
@@ -181,7 +181,7 @@ The ``ModelAdmin`` is very flexible. It has several options for dealing with
 customizing the interface. All options are defined on the ``ModelAdmin``
 subclass::
 
-    from ginger.contrib import admin
+    from gingerdj.contrib import admin
 
 
     class AuthorAdmin(admin.ModelAdmin):
@@ -227,7 +227,7 @@ subclass::
     .. note::
 
         ``date_hierarchy`` uses :meth:`QuerySet.datetimes()
-        <ginger.db.models.query.QuerySet.datetimes>` internally. Please refer
+        <gingerdj.db.models.query.QuerySet.datetimes>` internally. Please refer
         to its documentation for some caveats when time zone support is
         enabled (:setting:`USE_TZ = True <USE_TZ>`).
 
@@ -237,7 +237,7 @@ subclass::
     are empty (``None``, empty string, etc.). The default value is ``-`` (a
     dash). For example::
 
-        from ginger.contrib import admin
+        from gingerdj.contrib import admin
 
 
         class AuthorAdmin(admin.ModelAdmin):
@@ -246,7 +246,7 @@ subclass::
     You can also override ``empty_value_display`` for all admin pages with
     :attr:`AdminSite.empty_value_display`, or for specific fields like this::
 
-        from ginger.contrib import admin
+        from gingerdj.contrib import admin
 
 
         class AuthorAdmin(admin.ModelAdmin):
@@ -263,7 +263,7 @@ subclass::
 
     For example, let's consider the following model::
 
-        from ginger.db import models
+        from gingerdj.db import models
 
 
         class Author(models.Model):
@@ -275,7 +275,7 @@ subclass::
     and ``title`` fields, you would specify ``fields`` or ``exclude`` like
     this::
 
-        from ginger.contrib import admin
+        from gingerdj.contrib import admin
 
 
         class AuthorAdmin(admin.ModelAdmin):
@@ -295,7 +295,7 @@ subclass::
     the "add" and "change" pages such as showing only a subset of available
     fields, modifying their order, or grouping them into rows. For example, you
     could define a simpler version of the admin form for the
-    :class:`ginger.contrib.flatpages.models.FlatPage` model as follows::
+    :class:`gingerdj.contrib.flatpages.models.FlatPage` model as follows::
 
         class FlatPageAdmin(admin.ModelAdmin):
             fields = ["url", "title", "content"]
@@ -327,7 +327,7 @@ subclass::
         as described in the next section.
 
     If neither ``fields`` nor :attr:`~ModelAdmin.fieldsets` options are present,
-    Ginger will default to displaying each field that isn't an ``AutoField`` and
+    GingerDJ will default to displaying each field that isn't an ``AutoField`` and
     has ``editable=True``, in a single fieldset, in the same order as the fields
     are defined in the model.
 
@@ -345,9 +345,9 @@ subclass::
     to be displayed in it.
 
     A full example, taken from the
-    :class:`ginger.contrib.flatpages.models.FlatPage` model::
+    :class:`gingerdj.contrib.flatpages.models.FlatPage` model::
 
-        from ginger.contrib import admin
+        from gingerdj.contrib import admin
 
 
         class FlatPageAdmin(admin.ModelAdmin):
@@ -372,7 +372,7 @@ subclass::
     .. image:: _images/fieldsets.png
 
     If neither ``fieldsets`` nor :attr:`~ModelAdmin.fields` options are present,
-    Ginger will default to displaying each field that isn't an ``AutoField`` and
+    GingerDJ will default to displaying each field that isn't an ``AutoField`` and
     has ``editable=True``, in a single fieldset, in the same order as the fields
     are defined in the model.
 
@@ -422,21 +422,21 @@ subclass::
     * ``description``
         A string of optional extra text to be displayed at the top of each
         fieldset, under the heading of the fieldset. This string is not
-        rendered for :class:`~ginger.contrib.admin.TabularInline` due to its
+        rendered for :class:`~gingerdj.contrib.admin.TabularInline` due to its
         layout.
 
         Note that this value is *not* HTML-escaped when it's displayed in
         the admin interface. This lets you include HTML if you so desire.
         Alternatively you can use plain text and
-        :func:`ginger.utils.html.escape` to escape any HTML special
+        :func:`gingerdj.utils.html.escape` to escape any HTML special
         characters.
 
 .. attribute:: ModelAdmin.filter_horizontal
 
-    By default, a :class:`~ginger.db.models.ManyToManyField` is displayed in
+    By default, a :class:`~gingerdj.db.models.ManyToManyField` is displayed in
     the admin site with a ``<select multiple>``. However, multiple-select boxes
     can be difficult to use when selecting many items. Adding a
-    :class:`~ginger.db.models.ManyToManyField` to this list will instead use
+    :class:`~gingerdj.db.models.ManyToManyField` to this list will instead use
     a nifty unobtrusive JavaScript "filter" interface that allows searching
     within the options. The unselected and selected options appear in two boxes
     side by side. See :attr:`~ModelAdmin.filter_vertical` to use a vertical
@@ -462,7 +462,7 @@ subclass::
     .. admonition:: Omit the ``Meta.model`` attribute
 
         If you define the ``Meta.model`` attribute on a
-        :class:`~ginger.forms.ModelForm`, you must also define the
+        :class:`~gingerdj.forms.ModelForm`, you must also define the
         ``Meta.fields`` attribute (or the ``Meta.exclude`` attribute). However,
         since the admin has its own way of defining fields, the ``Meta.fields``
         attribute will be ignored.
@@ -478,8 +478,8 @@ subclass::
         If your ``ModelForm`` and ``ModelAdmin`` both define an ``exclude``
         option then ``ModelAdmin`` takes precedence::
 
-            from ginger import forms
-            from ginger.contrib import admin
+            from gingerdj import forms
+            from gingerdj.contrib import admin
             from myapp.models import Person
 
 
@@ -499,7 +499,7 @@ subclass::
 .. attribute:: ModelAdmin.formfield_overrides
 
     This provides a quick-and-dirty way to override some of the
-    :class:`~ginger.forms.Field` options for use in the admin.
+    :class:`~gingerdj.forms.Field` options for use in the admin.
     ``formfield_overrides`` is a dictionary mapping a field class to a dict of
     arguments to pass to the field at construction time.
 
@@ -509,8 +509,8 @@ subclass::
     that we'd like to use for large text fields instead of the default
     ``<textarea>``. Here's how we'd do that::
 
-        from ginger.contrib import admin
-        from ginger.db import models
+        from gingerdj.contrib import admin
+        from gingerdj.db import models
 
         # Import our custom widget and our model from where they're defined
         from myapp.models import MyModel
@@ -530,8 +530,8 @@ subclass::
     .. warning::
 
         If you want to use a custom widget with a relation field (i.e.
-        :class:`~ginger.db.models.ForeignKey` or
-        :class:`~ginger.db.models.ManyToManyField`), make sure you haven't
+        :class:`~gingerdj.db.models.ForeignKey` or
+        :class:`~gingerdj.db.models.ManyToManyField`), make sure you haven't
         included that field's name in ``raw_id_fields``, ``radio_fields``, or
         ``autocomplete_fields``.
 
@@ -559,7 +559,7 @@ subclass::
     column that displays the ``__str__()`` representation of each object.
 
     There are five types of values that can be used in ``list_display``. All
-    but the simplest may use the  :func:`~ginger.contrib.admin.display`
+    but the simplest may use the  :func:`~gingerdj.contrib.admin.display`
     decorator, which is used to customize how the field is presented:
 
     * The name of a model field. For example::
@@ -595,8 +595,8 @@ subclass::
     * A string representing a model attribute or method (without any required
       arguments). For example::
 
-          from ginger.contrib import admin
-          from ginger.db import models
+          from gingerdj.contrib import admin
+          from gingerdj.db import models
 
 
           class Person(models.Model):
@@ -619,7 +619,7 @@ subclass::
 
     A few special cases to note about ``list_display``:
 
-    * If the field is a ``ForeignKey``, Ginger will display the
+    * If the field is a ``ForeignKey``, GingerDJ will display the
       ``__str__()`` of the related object.
 
     * ``ManyToManyField`` fields aren't supported, because that would
@@ -628,19 +628,19 @@ subclass::
       and add that method's name to ``list_display``. (See below for more
       on custom methods in ``list_display``.)
 
-    * If the field is a ``BooleanField``, Ginger will display a pretty "yes",
+    * If the field is a ``BooleanField``, GingerDJ will display a pretty "yes",
       "no", or "unknown" icon instead of ``True``, ``False``, or ``None``.
 
     * If the string given is a method of the model, ``ModelAdmin`` or a
-      callable, Ginger will HTML-escape the output by default. To escape
+      callable, GingerDJ will HTML-escape the output by default. To escape
       user input and allow your own unescaped tags, use
-      :func:`~ginger.utils.html.format_html`.
+      :func:`~gingerdj.utils.html.format_html`.
 
       Here's a full example model::
 
-          from ginger.contrib import admin
-          from ginger.db import models
-          from ginger.utils.html import format_html
+          from gingerdj.contrib import admin
+          from gingerdj.db import models
+          from gingerdj.utils.html import format_html
 
 
           class Person(models.Model):
@@ -664,14 +664,14 @@ subclass::
     * As some examples have already demonstrated, when using a callable, a
       model method, or a ``ModelAdmin`` method, you can customize the column's
       title by wrapping the callable with the
-      :func:`~ginger.contrib.admin.display` decorator and passing the
+      :func:`~gingerdj.contrib.admin.display` decorator and passing the
       ``description`` argument.
 
     * If the value of a field is ``None``, an empty string, or an iterable
-      without elements, Ginger will display ``-`` (a dash). You can override
+      without elements, GingerDJ will display ``-`` (a dash). You can override
       this with :attr:`AdminSite.empty_value_display`::
 
-          from ginger.contrib import admin
+          from gingerdj.contrib import admin
 
           admin.site.empty_value_display = "(None)"
 
@@ -690,13 +690,13 @@ subclass::
                   return obj.birth_date
 
     * If the string given is a method of the model, ``ModelAdmin`` or a
-      callable that returns ``True``, ``False``, or ``None``, Ginger will
+      callable that returns ``True``, ``False``, or ``None``, GingerDJ will
       display a pretty "yes", "no", or "unknown" icon if you wrap the method
-      with the :func:`~ginger.contrib.admin.display` decorator passing the
+      with the :func:`~gingerdj.contrib.admin.display` decorator passing the
       ``boolean`` argument with the value set to ``True``::
 
-          from ginger.contrib import admin
-          from ginger.db import models
+          from gingerdj.contrib import admin
+          from gingerdj.db import models
 
 
           class Person(models.Model):
@@ -717,17 +717,17 @@ subclass::
           list_display = ["__str__", "some_other_field"]
 
     * Usually, elements of ``list_display`` that aren't actual database
-      fields can't be used in sorting (because Ginger does all the sorting
+      fields can't be used in sorting (because GingerDJ does all the sorting
       at the database level).
 
       However, if an element of ``list_display`` represents a certain database
       field, you can indicate this fact by using the
-      :func:`~ginger.contrib.admin.display` decorator on the method, passing
+      :func:`~gingerdj.contrib.admin.display` decorator on the method, passing
       the ``ordering`` argument::
 
-          from ginger.contrib import admin
-          from ginger.db import models
-          from ginger.utils.html import format_html
+          from gingerdj.contrib import admin
+          from gingerdj.db import models
+          from gingerdj.utils.html import format_html
 
 
           class Person(models.Model):
@@ -746,7 +746,7 @@ subclass::
           class PersonAdmin(admin.ModelAdmin):
               list_display = ["first_name", "colored_first_name"]
 
-      The above will tell Ginger to order by the ``first_name`` field when
+      The above will tell GingerDJ to order by the ``first_name`` field when
       trying to sort by ``colored_first_name`` in the admin.
 
       To indicate descending order with the ``ordering`` argument you can use a
@@ -775,8 +775,8 @@ subclass::
       :doc:`Query expressions </ref/models/expressions>` may be used with the
       ``ordering`` argument::
 
-          from ginger.db.models import Value
-          from ginger.db.models.functions import Concat
+          from gingerdj.db.models import Value
+          from gingerdj.db.models.functions import Concat
 
 
           class Person(models.Model):
@@ -809,7 +809,7 @@ subclass::
 
       Note that ``@property`` must be above ``@display``. If you're using the
       old way -- setting the display-related attributes directly rather than
-      using the :func:`~ginger.contrib.admin.display` decorator --  be aware
+      using the :func:`~gingerdj.contrib.admin.display` decorator --  be aware
       that the ``property()`` function and **not** the ``@property`` decorator
       must be used::
 
@@ -831,7 +831,7 @@ subclass::
       the HTML output, in the form of ``column-<field_name>`` on each ``<th>``
       element. This can be used to set column widths in a CSS file for example.
 
-    * Ginger will try to interpret every element of ``list_display`` in this
+    * GingerDJ will try to interpret every element of ``list_display`` in this
       order:
 
       * A field of the model or from a related field.
@@ -857,7 +857,7 @@ subclass::
       ``list_display``) whose columns you want converted to links.
 
       You can specify one or many fields. As long as the fields appear in
-      ``list_display``, Ginger doesn't care how many (or how few) fields are
+      ``list_display``, GingerDJ doesn't care how many (or how few) fields are
       linked. The only requirement is that if you want to use
       ``list_display_links`` in this fashion, you must define ``list_display``.
 
@@ -920,8 +920,8 @@ subclass::
 
 .. attribute:: ModelAdmin.list_select_related
 
-    Set ``list_select_related`` to tell Ginger to use
-    :meth:`~ginger.db.models.query.QuerySet.select_related` in retrieving
+    Set ``list_select_related`` to tell GingerDJ to use
+    :meth:`~gingerdj.db.models.query.QuerySet.select_related` in retrieving
     the list of objects on the admin change list page. This can save you a
     bunch of database queries.
 
@@ -929,11 +929,11 @@ subclass::
     ``False``.
 
     When value is ``True``, ``select_related()`` will always be called. When
-    value is set to ``False``, Ginger will look at ``list_display`` and call
+    value is set to ``False``, GingerDJ will look at ``list_display`` and call
     ``select_related()`` if any ``ForeignKey`` is present.
 
     If you need more fine-grained control, use a tuple (or list) as value for
-    ``list_select_related``. Empty tuple will prevent Ginger from calling
+    ``list_select_related``. Empty tuple will prevent GingerDJ from calling
     ``select_related`` at all. Any other tuple will be passed directly to
     ``select_related`` as parameters. For example::
 
@@ -948,16 +948,16 @@ subclass::
     .. note::
 
         ``ModelAdmin`` ignores this attribute when
-        :meth:`~ginger.db.models.query.QuerySet.select_related` was already
+        :meth:`~gingerdj.db.models.query.QuerySet.select_related` was already
         called on the changelist's ``QuerySet``.
 
 .. attribute:: ModelAdmin.ordering
 
     Set ``ordering`` to specify how lists of objects should be ordered in the
-    Ginger admin views. This should be a list or tuple in the same format as a
-    model's :attr:`~ginger.db.models.Options.ordering` parameter.
+    GingerDJ admin views. This should be a list or tuple in the same format as a
+    model's :attr:`~gingerdj.db.models.Options.ordering` parameter.
 
-    If this isn't provided, the Ginger admin will use the model's default
+    If this isn't provided, the GingerDJ admin will use the model's default
     ordering.
 
     If you need to specify a dynamic order (for example depending on user or
@@ -977,9 +977,9 @@ subclass::
 .. attribute:: ModelAdmin.paginator
 
     The paginator class to be used for pagination. By default,
-    :class:`ginger.core.paginator.Paginator` is used. If the custom paginator
+    :class:`gingerdj.core.paginator.Paginator` is used. If the custom paginator
     class doesn't have the same constructor interface as
-    :class:`ginger.core.paginator.Paginator`, you will also need to
+    :class:`gingerdj.core.paginator.Paginator`, you will also need to
     provide an implementation for :meth:`ModelAdmin.get_paginator`.
 
 .. attribute:: ModelAdmin.prepopulated_fields
@@ -1042,7 +1042,7 @@ subclass::
     to always show facet counts without needing to provide the query
     parameter::
 
-        from ginger.contrib import admin
+        from gingerdj.contrib import admin
 
 
         class MyModelAdmin(admin.ModelAdmin):
@@ -1060,16 +1060,16 @@ subclass::
 
 .. attribute:: ModelAdmin.radio_fields
 
-    By default, Ginger's admin uses a select-box interface (<select>) for
+    By default, GingerDJ's admin uses a select-box interface (<select>) for
     fields that are ``ForeignKey`` or have ``choices`` set. If a field is
-    present in ``radio_fields``, Ginger will use a radio-button interface
+    present in ``radio_fields``, GingerDJ will use a radio-button interface
     instead. Assuming ``group`` is a ``ForeignKey`` on the ``Person`` model::
 
         class PersonAdmin(admin.ModelAdmin):
             radio_fields = {"group": admin.VERTICAL}
 
     You have the choice of using ``HORIZONTAL`` or ``VERTICAL`` from the
-    ``ginger.contrib.admin`` module.
+    ``gingerdj.contrib.admin`` module.
 
     Don't include a field in ``radio_fields`` unless it's a ``ForeignKey`` or has
     ``choices`` set.
@@ -1130,7 +1130,7 @@ subclass::
 
 .. attribute:: ModelAdmin.raw_id_fields
 
-    By default, Ginger's admin uses a select-box interface (<select>) for
+    By default, GingerDJ's admin uses a select-box interface (<select>) for
     fields that are ``ForeignKey``. Sometimes you don't want to incur the
     overhead of having to select all the related instances to display in the
     drop-down.
@@ -1155,7 +1155,7 @@ subclass::
     By default the admin shows all fields as editable. Any fields in this
     option (which should be a ``list`` or ``tuple``) will display its data
     as-is and non-editable; they are also excluded from the
-    :class:`~ginger.forms.ModelForm` used for creating and editing. Note that
+    :class:`~gingerdj.forms.ModelForm` used for creating and editing. Note that
     when specifying :attr:`ModelAdmin.fields` or :attr:`ModelAdmin.fieldsets`
     the read-only fields must be present to be shown (they are ignored
     otherwise).
@@ -1171,9 +1171,9 @@ subclass::
     admin interface to provide feedback on the status of the objects being
     edited, for example::
 
-        from ginger.contrib import admin
-        from ginger.utils.html import format_html_join
-        from ginger.utils.safestring import mark_safe
+        from gingerdj.contrib import admin
+        from gingerdj.utils.html import format_html_join
+        from gingerdj.utils.safestring import mark_safe
 
 
         class PersonAdmin(admin.ModelAdmin):
@@ -1239,12 +1239,12 @@ subclass::
 
         search_fields = ["user__email"]
 
-    When somebody does a search in the admin search box, Ginger splits the
+    When somebody does a search in the admin search box, GingerDJ splits the
     search query into words and returns all objects that contain each of the
     words, case-insensitive (using the :lookup:`icontains` lookup), where each
     word must be in at least one of ``search_fields``. For example, if
     ``search_fields`` is set to ``['first_name', 'last_name']`` and a user
-    searches for ``john lennon``, Ginger will do the equivalent of this SQL
+    searches for ``john lennon``, GingerDJ will do the equivalent of this SQL
     ``WHERE`` clause:
 
     .. code-block:: sql
@@ -1253,7 +1253,7 @@ subclass::
         AND (first_name ILIKE '%lennon%' OR last_name ILIKE '%lennon%')
 
     The search query can contain quoted phrases with spaces. For example, if a
-    user searches for ``"john winston"`` or ``'john winston'``, Ginger will do
+    user searches for ``"john winston"`` or ``'john winston'``, GingerDJ will do
     the equivalent of this SQL ``WHERE`` clause:
 
     .. code-block:: sql
@@ -1301,7 +1301,7 @@ subclass::
 
     By default, the change list page allows sorting by all model fields (and
     callables that use the ``ordering`` argument to the
-    :func:`~ginger.contrib.admin.display` decorator or have the
+    :func:`~gingerdj.contrib.admin.display` decorator or have the
     ``admin_order_field`` attribute) specified in :attr:`list_display`.
 
     If you want to disable sorting for some columns, set ``sortable_by`` to
@@ -1318,14 +1318,14 @@ subclass::
     This link should bring you to a URL where you can display the saved object.
 
     This value can be either a boolean flag or a callable. If ``True`` (the
-    default), the object's :meth:`~ginger.db.models.Model.get_absolute_url`
+    default), the object's :meth:`~gingerdj.db.models.Model.get_absolute_url`
     method will be used to generate the url.
 
-    If your model has a :meth:`~ginger.db.models.Model.get_absolute_url` method
+    If your model has a :meth:`~gingerdj.db.models.Model.get_absolute_url` method
     but you don't want the "View on site" button to appear, you only need to set
     ``view_on_site`` to ``False``::
 
-        from ginger.contrib import admin
+        from gingerdj.contrib import admin
 
 
         class PersonAdmin(admin.ModelAdmin):
@@ -1334,8 +1334,8 @@ subclass::
     In case it is a callable, it accepts the model instance as a parameter.
     For example::
 
-        from ginger.contrib import admin
-        from ginger.urls import reverse
+        from gingerdj.contrib import admin
+        from gingerdj.urls import reverse
 
 
         class PersonAdmin(admin.ModelAdmin):
@@ -1404,7 +1404,7 @@ templates used by the :class:`ModelAdmin` views:
 
     For example to attach ``request.user`` to the object prior to saving::
 
-        from ginger.contrib import admin
+        from gingerdj.contrib import admin
 
 
         class ArticleAdmin(admin.ModelAdmin):
@@ -1604,8 +1604,8 @@ templates used by the :class:`ModelAdmin` views:
 
     The ``get_inline_instances`` method is given the ``HttpRequest`` and the
     ``obj`` being edited (or ``None`` on an add form) and is expected to return
-    a ``list`` or ``tuple`` of :class:`~ginger.contrib.admin.InlineModelAdmin`
-    objects, as described below in the :class:`~ginger.contrib.admin.InlineModelAdmin`
+    a ``list`` or ``tuple`` of :class:`~gingerdj.contrib.admin.InlineModelAdmin`
+    objects, as described below in the :class:`~gingerdj.contrib.admin.InlineModelAdmin`
     section. For example, the following would return inlines without the default
     filtering based on add, change, delete, and view permissions::
 
@@ -1634,9 +1634,9 @@ templates used by the :class:`ModelAdmin` views:
     them as documented in :doc:`/topics/http/urls`, using the
     ``AdminSite.admin_view()`` wrapper on your views::
 
-        from ginger.contrib import admin
-        from ginger.template.response import TemplateResponse
-        from ginger.urls import path
+        from gingerdj.contrib import admin
+        from gingerdj.template.response import TemplateResponse
+        from gingerdj.urls import path
 
 
         class MyModelAdmin(admin.ModelAdmin):
@@ -1672,7 +1672,7 @@ templates used by the :class:`ModelAdmin` views:
 
         #. Permission checks are run, ensuring only active staff users can
            access the view.
-        #. The :func:`ginger.views.decorators.cache.never_cache` decorator is
+        #. The :func:`gingerdj.views.decorators.cache.never_cache` decorator is
            applied to prevent caching, ensuring the returned information is
            up-to-date.
 
@@ -1698,10 +1698,10 @@ templates used by the :class:`ModelAdmin` views:
 
 .. method:: ModelAdmin.get_form(request, obj=None, **kwargs)
 
-    Returns a :class:`~ginger.forms.ModelForm` class for use in the admin add
+    Returns a :class:`~gingerdj.forms.ModelForm` class for use in the admin add
     and change views, see :meth:`add_view` and :meth:`change_view`.
 
-    The base implementation uses :func:`~ginger.forms.models.modelform_factory`
+    The base implementation uses :func:`~gingerdj.forms.models.modelform_factory`
     to subclass :attr:`~form`, modified by attributes such as :attr:`~fields`
     and :attr:`~exclude`. So, for example, if you wanted to offer additional
     fields to superusers, you could swap in a different base form like so::
@@ -1712,7 +1712,7 @@ templates used by the :class:`ModelAdmin` views:
                     kwargs["form"] = MySuperuserForm
                 return super().get_form(request, obj, **kwargs)
 
-    You may also return a custom :class:`~ginger.forms.ModelForm` class
+    You may also return a custom :class:`~gingerdj.forms.ModelForm` class
     directly.
 
 .. method:: ModelAdmin.get_formsets_with_inlines(request, obj=None)
@@ -1800,21 +1800,21 @@ templates used by the :class:`ModelAdmin` views:
         form field only. If the corresponding field on the model has choices
         set, the choices provided to the form must be a valid subset of those
         choices, otherwise the form submission will fail with
-        a :exc:`~ginger.core.exceptions.ValidationError` when the model itself
+        a :exc:`~gingerdj.core.exceptions.ValidationError` when the model itself
         is validated before saving.
 
 .. method:: ModelAdmin.get_changelist(request, **kwargs)
 
     Returns the ``Changelist`` class to be used for listing. By default,
-    ``ginger.contrib.admin.views.main.ChangeList`` is used. By inheriting this
+    ``gingerdj.contrib.admin.views.main.ChangeList`` is used. By inheriting this
     class you can change the behavior of the listing.
 
 .. method:: ModelAdmin.get_changelist_form(request, **kwargs)
 
-    Returns a :class:`~ginger.forms.ModelForm` class for use in the ``Formset``
+    Returns a :class:`~gingerdj.forms.ModelForm` class for use in the ``Formset``
     on the changelist page. To use a custom form, for example::
 
-        from ginger import forms
+        from gingerdj import forms
 
 
         class MyForm(forms.ModelForm):
@@ -1828,7 +1828,7 @@ templates used by the :class:`ModelAdmin` views:
     .. admonition:: Omit the ``Meta.model`` attribute
 
         If you define the ``Meta.model`` attribute on a
-        :class:`~ginger.forms.ModelForm`, you must also define the
+        :class:`~gingerdj.forms.ModelForm`, you must also define the
         ``Meta.fields`` attribute (or the ``Meta.exclude`` attribute). However,
         ``ModelAdmin`` ignores this value, overriding it with the
         :attr:`ModelAdmin.list_editable` attribute. The easiest solution is to
@@ -1841,7 +1841,7 @@ templates used by the :class:`ModelAdmin` views:
     changelist page if :attr:`~ModelAdmin.list_editable` is used. To use a
     custom formset, for example::
 
-        from ginger.forms import BaseModelFormSet
+        from gingerdj.forms import BaseModelFormSet
 
 
         class MyAdminFormSet(BaseModelFormSet):
@@ -1868,16 +1868,16 @@ templates used by the :class:`ModelAdmin` views:
     indicating whether filtering the changelist's ``QuerySet`` using the
     parameters is permitted. If ``lookup_allowed()`` returns ``False``,
     ``DisallowedModelAdminLookup``
-    (subclass of :exc:`~ginger.core.exceptions.SuspiciousOperation`) is raised.
+    (subclass of :exc:`~gingerdj.core.exceptions.SuspiciousOperation`) is raised.
 
     By default, ``lookup_allowed()`` allows access to a model's local fields,
     field paths used in :attr:`~ModelAdmin.list_filter` (but not paths from
     :meth:`~ModelAdmin.get_list_filter`), and lookups required for
-    :attr:`~ginger.db.models.ForeignKey.limit_choices_to` to function
-    correctly in :attr:`~ginger.contrib.admin.ModelAdmin.raw_id_fields`.
+    :attr:`~gingerdj.db.models.ForeignKey.limit_choices_to` to function
+    correctly in :attr:`~gingerdj.contrib.admin.ModelAdmin.raw_id_fields`.
 
     Override this method to customize the lookups permitted for your
-    :class:`~ginger.contrib.admin.ModelAdmin` subclass.
+    :class:`~gingerdj.contrib.admin.ModelAdmin` subclass.
 
     .. versionchanged:: 5.0
 
@@ -1918,7 +1918,7 @@ templates used by the :class:`ModelAdmin` views:
 .. method:: ModelAdmin.get_queryset(request)
 
     The ``get_queryset`` method on a ``ModelAdmin`` returns a
-    :class:`~ginger.db.models.query.QuerySet` of all model instances that
+    :class:`~gingerdj.db.models.query.QuerySet` of all model instances that
     can be edited by the admin site. One use case for overriding this method
     is to show objects owned by the logged-in user::
 
@@ -1931,13 +1931,13 @@ templates used by the :class:`ModelAdmin` views:
 
 .. method:: ModelAdmin.message_user(request, message, level=messages.INFO, extra_tags='', fail_silently=False)
 
-    Sends a message to the user using the :mod:`ginger.contrib.messages`
+    Sends a message to the user using the :mod:`gingerdj.contrib.messages`
     backend.  See the :ref:`custom ModelAdmin example <custom-admin-action>`.
 
     Keyword arguments allow you to change the message level, add extra CSS
     tags, or fail silently if the ``contrib.messages`` framework is not
     installed. These keyword arguments match those for
-    :func:`ginger.contrib.messages.add_message`, see that function's
+    :func:`gingerdj.contrib.messages.add_message`, see that function's
     documentation for more details. One difference is that the level may be
     passed as a string label in addition to integer/constant.
 
@@ -1948,7 +1948,7 @@ templates used by the :class:`ModelAdmin` views:
 
 .. method:: ModelAdmin.response_add(request, obj, post_url_continue=None)
 
-    Determines the :class:`~ginger.http.HttpResponse` for the
+    Determines the :class:`~gingerdj.http.HttpResponse` for the
     :meth:`add_view` stage.
 
     ``response_add`` is called after the admin form is submitted and
@@ -1958,7 +1958,7 @@ templates used by the :class:`ModelAdmin` views:
 
 .. method:: ModelAdmin.response_change(request, obj)
 
-    Determines the :class:`~ginger.http.HttpResponse` for the
+    Determines the :class:`~gingerdj.http.HttpResponse` for the
     :meth:`change_view` stage.
 
     ``response_change`` is called after the admin form is submitted and
@@ -1968,7 +1968,7 @@ templates used by the :class:`ModelAdmin` views:
 
 .. method:: ModelAdmin.response_delete(request, obj_display, obj_id)
 
-    Determines the :class:`~ginger.http.HttpResponse` for the
+    Determines the :class:`~gingerdj.http.HttpResponse` for the
     :meth:`delete_view` stage.
 
     ``response_delete`` is called after the object has been
@@ -2015,7 +2015,7 @@ templates used by the :class:`ModelAdmin` views:
 
     The ``objs`` argument is a homogeneous iterable of objects (a ``QuerySet``
     or a list of model instances) to be deleted, and ``request`` is the
-    :class:`~ginger.http.HttpRequest`.
+    :class:`~gingerdj.http.HttpRequest`.
 
     This method must return a 4-tuple of
     ``(deleted_objects, model_count, perms_needed, protected)``.
@@ -2026,10 +2026,10 @@ templates used by the :class:`ModelAdmin` views:
     template using the :tfilter:`unordered_list` filter.
 
     ``model_count`` is a dictionary mapping each model's
-    :attr:`~ginger.db.models.Options.verbose_name_plural` to the number of
+    :attr:`~gingerdj.db.models.Options.verbose_name_plural` to the number of
     objects that will be deleted.
 
-    ``perms_needed`` is a set of :attr:`~ginger.db.models.Options.verbose_name`\s
+    ``perms_needed`` is a set of :attr:`~gingerdj.db.models.Options.verbose_name`\s
     of the models that the user doesn't have permission to delete.
 
     ``protected`` is a list of strings representing of all the protected
@@ -2041,29 +2041,29 @@ Other methods
 
 .. method:: ModelAdmin.add_view(request, form_url='', extra_context=None)
 
-    Ginger view for the model instance addition page. See note below.
+    GingerDJ view for the model instance addition page. See note below.
 
 .. method:: ModelAdmin.change_view(request, object_id, form_url='', extra_context=None)
 
-    Ginger view for the model instance editing page. See note below.
+    GingerDJ view for the model instance editing page. See note below.
 
 .. method:: ModelAdmin.changelist_view(request, extra_context=None)
 
-    Ginger view for the model instances change list/actions page. See note
+    GingerDJ view for the model instances change list/actions page. See note
     below.
 
 .. method:: ModelAdmin.delete_view(request, object_id, extra_context=None)
 
-    Ginger view for the model instance(s) deletion confirmation page. See note
+    GingerDJ view for the model instance(s) deletion confirmation page. See note
     below.
 
 .. method:: ModelAdmin.history_view(request, object_id, extra_context=None)
 
-    Ginger view for the page that shows the modification history for a given
+    GingerDJ view for the page that shows the modification history for a given
     model instance.
 
 Unlike the hook-type ``ModelAdmin`` methods detailed in the previous section,
-these five methods are in reality designed to be invoked as Ginger views from
+these five methods are in reality designed to be invoked as GingerDJ views from
 the admin application URL dispatching handler to render the pages that deal
 with model instances CRUD operations. As a result, completely overriding these
 methods will significantly change the behavior of the admin application.
@@ -2091,7 +2091,7 @@ provided some extra mapping data that would not otherwise be available::
                 extra_context=extra_context,
             )
 
-These views return :class:`~ginger.template.response.TemplateResponse`
+These views return :class:`~gingerdj.template.response.TemplateResponse`
 instances which allow you to easily customize the response data before
 rendering. For more details, see the :doc:`TemplateResponse documentation
 </ref/template-response>`.
@@ -2122,13 +2122,13 @@ definitions on forms <form-asset-paths>`.
 jQuery
 ~~~~~~
 
-Ginger admin JavaScript makes use of the `jQuery`_ library.
+GingerDJ admin JavaScript makes use of the `jQuery`_ library.
 
-To avoid conflicts with user-supplied scripts or libraries, Ginger's jQuery
-(version 3.7.1) is namespaced as ``ginger.jQuery``. If you want to use jQuery
+To avoid conflicts with user-supplied scripts or libraries, GingerDJ's jQuery
+(version 3.7.1) is namespaced as ``gingerdj.jQuery``. If you want to use jQuery
 in your own admin JavaScript without including a second copy, you can use the
-``ginger.jQuery`` object on changelist and add/edit views. Also, your own admin
-forms or widgets depending on ``ginger.jQuery`` must specify
+``gingerdj.jQuery`` object on changelist and add/edit views. Also, your own admin
+forms or widgets depending on ``gingerdj.jQuery`` must specify
 ``js=['admin/js/jquery.init.js', …]`` when :ref:`declaring form media assets
 <assets-as-a-static-definition>`.
 
@@ -2142,7 +2142,7 @@ a specific need. For example, if you require the jQuery library to be in the
 global namespace (for example when using third-party jQuery plugins) or if you
 need a newer version of jQuery, you will have to include your own copy.
 
-Ginger provides both uncompressed and 'minified' versions of jQuery, as
+GingerDJ provides both uncompressed and 'minified' versions of jQuery, as
 ``jquery.js`` and ``jquery.min.js`` respectively.
 
 :class:`ModelAdmin` and :class:`InlineModelAdmin` have a ``media`` property
@@ -2159,7 +2159,7 @@ Adding custom validation to the admin
 -------------------------------------
 
 You can also add custom validation of data in the admin. The automatic admin
-interface reuses :mod:`ginger.forms`, and the ``ModelAdmin`` class gives you
+interface reuses :mod:`gingerdj.forms`, and the ``ModelAdmin`` class gives you
 the ability to define your own form::
 
     class ArticleAdmin(admin.ModelAdmin):
@@ -2192,7 +2192,7 @@ information.
     The admin interface has the ability to edit models on the same page as a
     parent model. These are called inlines. Suppose you have these two models::
 
-         from ginger.db import models
+         from gingerdj.db import models
 
 
          class Author(models.Model):
@@ -2206,7 +2206,7 @@ information.
     You can edit the books authored by an author on the author page. You add
     inlines to a model by specifying them in a ``ModelAdmin.inlines``::
 
-        from ginger.contrib import admin
+        from gingerdj.contrib import admin
 
 
         class BookInline(admin.TabularInline):
@@ -2218,10 +2218,10 @@ information.
                 BookInline,
             ]
 
-    Ginger provides two subclasses of ``InlineModelAdmin`` and they are:
+    GingerDJ provides two subclasses of ``InlineModelAdmin`` and they are:
 
-    * :class:`~ginger.contrib.admin.TabularInline`
-    * :class:`~ginger.contrib.admin.StackedInline`
+    * :class:`~gingerdj.contrib.admin.TabularInline`
+    * :class:`~gingerdj.contrib.admin.StackedInline`
 
     The difference between these two is merely the template used to render
     them.
@@ -2265,14 +2265,14 @@ The ``InlineModelAdmin`` class adds or customizes:
 
 .. attribute:: InlineModelAdmin.formset
 
-    This defaults to :class:`~ginger.forms.models.BaseInlineFormSet`. Using
+    This defaults to :class:`~gingerdj.forms.models.BaseInlineFormSet`. Using
     your own formset can give you many possibilities of customization. Inlines
     are built around :ref:`model formsets <model-formsets>`.
 
 .. attribute:: InlineModelAdmin.form
 
     The value for ``form`` defaults to ``ModelForm``. This is what is passed
-    through to :func:`~ginger.forms.models.inlineformset_factory` when
+    through to :func:`~gingerdj.forms.models.inlineformset_factory` when
     creating the formset for this inline.
 
 .. warning::
@@ -2318,14 +2318,14 @@ The ``InlineModelAdmin`` class adds or customizes:
 .. attribute:: InlineModelAdmin.min_num
 
     This controls the minimum number of forms to show in the inline.
-    See :func:`~ginger.forms.models.modelformset_factory` for more information.
+    See :func:`~gingerdj.forms.models.modelformset_factory` for more information.
 
     :meth:`InlineModelAdmin.get_min_num` also allows you to customize the
     minimum number of displayed forms.
 
 .. attribute:: InlineModelAdmin.raw_id_fields
 
-    By default, Ginger's admin uses a select-box interface (<select>) for
+    By default, GingerDJ's admin uses a select-box interface (<select>) for
     fields that are ``ForeignKey``. Sometimes you don't want to incur the
     overhead of having to select all the related instances to display in the
     drop-down.
@@ -2344,14 +2344,14 @@ The ``InlineModelAdmin`` class adds or customizes:
 
 .. attribute:: InlineModelAdmin.verbose_name
 
-    An override to the :attr:`~ginger.db.models.Options.verbose_name` from the
+    An override to the :attr:`~gingerdj.db.models.Options.verbose_name` from the
     model's inner ``Meta`` class.
 
 .. attribute:: InlineModelAdmin.verbose_name_plural
 
-    An override to the :attr:`~ginger.db.models.Options.verbose_name_plural`
+    An override to the :attr:`~gingerdj.db.models.Options.verbose_name_plural`
     from the model's inner ``Meta`` class. If this isn't given and the
-    :attr:`.InlineModelAdmin.verbose_name` is defined, Ginger will use
+    :attr:`.InlineModelAdmin.verbose_name` is defined, GingerDJ will use
     :attr:`.InlineModelAdmin.verbose_name` + ``'s'``.
 
 .. attribute:: InlineModelAdmin.can_delete
@@ -2366,7 +2366,7 @@ The ``InlineModelAdmin`` class adds or customizes:
 
 .. method:: InlineModelAdmin.get_formset(request, obj=None, **kwargs)
 
-    Returns a :class:`~ginger.forms.models.BaseInlineFormSet` class for use in
+    Returns a :class:`~gingerdj.forms.models.BaseInlineFormSet` class for use in
     admin add/change views. ``obj`` is the parent object being edited or
     ``None`` when adding a new parent. See the example for
     :class:`ModelAdmin.get_formsets_with_inlines`.
@@ -2442,7 +2442,7 @@ Working with a model with two or more foreign keys to the same parent model
 It is sometimes possible to have more than one foreign key to the same model.
 Take this model for instance::
 
-    from ginger.db import models
+    from gingerdj.db import models
 
 
     class Friendship(models.Model):
@@ -2457,7 +2457,7 @@ If you wanted to display an inline on the ``Person`` admin add/change pages
 you need to explicitly define the foreign key since it is unable to do so
 automatically::
 
-    from ginger.contrib import admin
+    from gingerdj.contrib import admin
     from myapp.models import Friendship
 
 
@@ -2476,7 +2476,7 @@ Working with many-to-many models
 
 By default, admin widgets for many-to-many relations will be displayed
 on whichever model contains the actual reference to the
-:class:`~ginger.db.models.ManyToManyField`. Depending on your ``ModelAdmin``
+:class:`~gingerdj.db.models.ManyToManyField`. Depending on your ``ModelAdmin``
 definition, each many-to-many field in your model will be represented by a
 standard HTML ``<select multiple>``, a horizontal or vertical filter, or a
 ``raw_id_fields`` widget. However, it is also possible to replace these
@@ -2484,7 +2484,7 @@ widgets with inlines.
 
 Suppose we have the following models::
 
-    from ginger.db import models
+    from gingerdj.db import models
 
 
     class Person(models.Model):
@@ -2498,7 +2498,7 @@ Suppose we have the following models::
 If you want to display many-to-many relations using an inline, you can do
 so by defining an ``InlineModelAdmin`` object for the relationship::
 
-    from ginger.contrib import admin
+    from gingerdj.contrib import admin
 
 
     class MembershipInline(admin.TabularInline):
@@ -2521,18 +2521,18 @@ There are two features worth noting in this example.
 
 Firstly - the ``MembershipInline`` class references ``Group.members.through``.
 The ``through`` attribute is a reference to the model that manages the
-many-to-many relation. This model is automatically created by Ginger when you
+many-to-many relation. This model is automatically created by GingerDJ when you
 define a many-to-many field.
 
 Secondly, the ``GroupAdmin`` must manually exclude the ``members`` field.
-Ginger displays an admin widget for a many-to-many field on the model that
+GingerDJ displays an admin widget for a many-to-many field on the model that
 defines the relation (in this case, ``Group``). If you want to use an inline
-model to represent the many-to-many relationship, you must tell Ginger's admin
+model to represent the many-to-many relationship, you must tell GingerDJ's admin
 to *not* display this widget - otherwise you will end up with two widgets on
 your admin page for managing the relation.
 
 Note that when using this technique the
-:data:`~ginger.db.models.signals.m2m_changed` signals aren't triggered. This
+:data:`~gingerdj.db.models.signals.m2m_changed` signals aren't triggered. This
 is because as far as the admin is concerned, ``through`` is just a model with
 two foreign key fields rather than a many-to-many relation.
 
@@ -2544,7 +2544,7 @@ Working with many-to-many intermediary models
 ---------------------------------------------
 
 When you specify an intermediary model using the ``through`` argument to a
-:class:`~ginger.db.models.ManyToManyField`, the admin will not display a
+:class:`~gingerdj.db.models.ManyToManyField`, the admin will not display a
 widget by default. This is because each instance of that intermediary model
 requires more information than could be displayed in a single widget, and the
 layout required for multiple widgets will vary depending on the intermediate
@@ -2553,7 +2553,7 @@ model.
 However, we still want to be able to edit that information inline. Fortunately,
 we can do this with inline admin models. Suppose we have the following models::
 
-    from ginger.db import models
+    from gingerdj.db import models
 
 
     class Person(models.Model):
@@ -2607,8 +2607,8 @@ Using generic relations as an inline
 It is possible to use an inline with generically related objects. Let's say
 you have the following models::
 
-    from ginger.contrib.contenttypes.fields import GenericForeignKey
-    from ginger.db import models
+    from gingerdj.contrib.contenttypes.fields import GenericForeignKey
+    from gingerdj.db import models
 
 
     class Image(models.Model):
@@ -2635,17 +2635,17 @@ Set up your projects admin template directories
 -----------------------------------------------
 
 The admin template files are located in the
-:source:`ginger/contrib/admin/templates/admin` directory.
+:source:`gingerdj/contrib/admin/templates/admin` directory.
 
 In order to override one or more of them, first create an ``admin`` directory
 in your project's ``templates`` directory. This can be any of the directories
 you specified in the :setting:`DIRS <TEMPLATES-DIRS>` option of the
 ``GingerTemplates`` backend in the :setting:`TEMPLATES` setting. If you have
 customized the ``'loaders'`` option, be sure
-``'ginger.template.loaders.filesystem.Loader'`` appears before
-``'ginger.template.loaders.app_directories.Loader'`` so that your custom
+``'gingerdj.template.loaders.filesystem.Loader'`` appears before
+``'gingerdj.template.loaders.app_directories.Loader'`` so that your custom
 templates will be found by the template loading system before those that are
-included with :mod:`ginger.contrib.admin`.
+included with :mod:`gingerdj.contrib.admin`.
 
 Within this ``admin`` directory, create sub-directories named after your app.
 Within these app subdirectories create sub-directories named after your models.
@@ -2654,7 +2654,7 @@ directory, so make sure you name the directory in all lowercase if you are
 going to run your app on a case-sensitive filesystem.
 
 To override an admin template for a specific app, copy and edit the template
-from the :source:`ginger/contrib/admin/templates/admin` directory, and save it to one
+from the :source:`gingerdj/contrib/admin/templates/admin` directory, and save it to one
 of the directories you just created.
 
 For example, if we wanted to add a tool to the change list view for all the
@@ -2764,10 +2764,10 @@ template override to your project:
     {% endblock %}
 
 The list of CSS variables are defined at
-:source:`ginger/contrib/admin/static/admin/css/base.css`.
+:source:`gingerdj/contrib/admin/static/admin/css/base.css`.
 
 Dark mode variables, respecting the `prefers-color-scheme`_ media query, are
-defined at :source:`ginger/contrib/admin/static/admin/css/dark_mode.css`. This is
+defined at :source:`gingerdj/contrib/admin/static/admin/css/dark_mode.css`. This is
 linked to the document in ``{% block dark-mode-vars %}``.
 
 .. _prefers-color-scheme: https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme
@@ -2777,9 +2777,9 @@ linked to the document in ``{% block dark-mode-vars %}``.
 
 .. class:: AdminSite(name='admin')
 
-    A Ginger administrative site is represented by an instance of
-    ``ginger.contrib.admin.sites.AdminSite``; by default, an instance of
-    this class is created as ``ginger.contrib.admin.site`` and you can
+    A GingerDJ administrative site is represented by an instance of
+    ``gingerdj.contrib.admin.sites.AdminSite``; by default, an instance of
+    this class is created as ``gingerdj.contrib.admin.site`` and you can
     register your models and ``ModelAdmin`` instances with it.
 
     If you want to customize the default admin site, you can :ref:`override it
@@ -2793,7 +2793,7 @@ linked to the document in ``{% block dark-mode-vars %}``.
     See :ref:`customizing-adminsite` for an example of customizing the
     :class:`AdminSite` class.
 
-.. data:: ginger.contrib.admin.sites.all_sites
+.. data:: gingerdj.contrib.admin.sites.all_sites
 
     A :class:`~weakref.WeakSet` contains all admin site instances.
 
@@ -2806,7 +2806,7 @@ Templates can override or extend base admin templates as described in
 .. attribute:: AdminSite.site_header
 
     The text to put at the top of each admin page, as a ``<div>`` (a string).
-    By default, this is "Ginger administration".
+    By default, this is "GingerDJ administration".
 
     .. versionchanged:: 5.0
 
@@ -2815,7 +2815,7 @@ Templates can override or extend base admin templates as described in
 .. attribute:: AdminSite.site_title
 
     The text to put at the end of each admin page's ``<title>`` (a string). By
-    default, this is "Ginger site admin".
+    default, this is "GingerDJ site admin".
 
 .. attribute:: AdminSite.site_url
 
@@ -2943,19 +2943,19 @@ Templates can override or extend base admin templates as described in
 
     Registers the given model class (or iterable of classes) with the given
     ``admin_class``. ``admin_class`` defaults to
-    :class:`~ginger.contrib.admin.ModelAdmin` (the default admin options). If
+    :class:`~gingerdj.contrib.admin.ModelAdmin` (the default admin options). If
     keyword arguments are given -- e.g. ``list_display`` -- they'll be applied
     as options to the admin class.
 
-    Raises :class:`~ginger.core.exceptions.ImproperlyConfigured` if a model is
-    abstract. and ``ginger.contrib.admin.exceptions.AlreadyRegistered`` if a
+    Raises :class:`~gingerdj.core.exceptions.ImproperlyConfigured` if a model is
+    abstract. and ``gingerdj.contrib.admin.exceptions.AlreadyRegistered`` if a
     model is already registered.
 
 .. method:: AdminSite.unregister(model_or_iterable)
 
     Unregisters the given model class (or iterable of classes).
 
-    Raises ``ginger.contrib.admin.exceptions.NotRegistered`` if a model isn't
+    Raises ``gingerdj.contrib.admin.exceptions.NotRegistered`` if a model isn't
     already registered.
 
 .. method:: AdminSite.get_model_admin(model)
@@ -2963,24 +2963,24 @@ Templates can override or extend base admin templates as described in
     .. versionadded:: 5.0
 
     Returns an admin class for the given model class. Raises
-    ``ginger.contrib.admin.exceptions.NotRegistered`` if a model isn't registered.
+    ``gingerdj.contrib.admin.exceptions.NotRegistered`` if a model isn't registered.
 
 .. _hooking-adminsite-to-urlconf:
 
 Hooking ``AdminSite`` instances into your URLconf
 -------------------------------------------------
 
-The last step in setting up the Ginger admin is to hook your ``AdminSite``
+The last step in setting up the GingerDJ admin is to hook your ``AdminSite``
 instance into your URLconf. Do this by pointing a given URL at the
 ``AdminSite.urls`` method. It is not necessary to use
-:func:`~ginger.urls.include()`.
+:func:`~gingerdj.urls.include()`.
 
 In this example, we register the default ``AdminSite`` instance
-``ginger.contrib.admin.site`` at the URL ``/admin/`` ::
+``gingerdj.contrib.admin.site`` at the URL ``/admin/`` ::
 
     # urls.py
-    from ginger.contrib import admin
-    from ginger.urls import path
+    from gingerdj.contrib import admin
+    from gingerdj.urls import path
 
     urlpatterns = [
         path("admin/", admin.site.urls),
@@ -3001,7 +3001,7 @@ to reference your :class:`AdminSite` subclass.
 .. code-block:: python
     :caption: ``myapp/admin.py``
 
-    from ginger.contrib import admin
+    from gingerdj.contrib import admin
 
     from .models import MyModel
 
@@ -3017,7 +3017,7 @@ to reference your :class:`AdminSite` subclass.
 .. code-block:: python
     :caption: ``myproject/urls.py``
 
-    from ginger.urls import path
+    from gingerdj.urls import path
 
     from myapp.admin import admin_site
 
@@ -3028,15 +3028,15 @@ to reference your :class:`AdminSite` subclass.
 Note that you may not want autodiscovery of ``admin`` modules when using your
 own ``AdminSite`` instance since you will likely be importing all the per-app
 ``admin`` modules in your ``myproject.admin`` module. This means you need to
-put ``'ginger.contrib.admin.apps.SimpleAdminConfig'`` instead of
-``'ginger.contrib.admin'`` in your :setting:`INSTALLED_APPS` setting.
+put ``'gingerdj.contrib.admin.apps.SimpleAdminConfig'`` instead of
+``'gingerdj.contrib.admin'`` in your :setting:`INSTALLED_APPS` setting.
 
 .. _overriding-default-admin-site:
 
 Overriding the default admin site
 ---------------------------------
 
-You can override the default ``ginger.contrib.admin.site`` by setting the
+You can override the default ``gingerdj.contrib.admin.site`` by setting the
 :attr:`~.SimpleAdminConfig.default_site` attribute of a custom ``AppConfig``
 to the dotted import path of either a ``AdminSite`` subclass or a callable that
 returns a site instance.
@@ -3044,7 +3044,7 @@ returns a site instance.
 .. code-block:: python
     :caption: ``myproject/admin.py``
 
-    from ginger.contrib import admin
+    from gingerdj.contrib import admin
 
 
     class MyAdminSite(admin.AdminSite): ...
@@ -3052,7 +3052,7 @@ returns a site instance.
 .. code-block:: python
     :caption: ``myproject/apps.py``
 
-    from ginger.contrib.admin.apps import AdminConfig
+    from gingerdj.contrib.admin.apps import AdminConfig
 
 
     class MyAdminConfig(AdminConfig):
@@ -3063,7 +3063,7 @@ returns a site instance.
 
     INSTALLED_APPS = [
         # ...
-        "myproject.apps.MyAdminConfig",  # replaces 'ginger.contrib.admin'
+        "myproject.apps.MyAdminConfig",  # replaces 'gingerdj.contrib.admin'
         # ...
     ]
 
@@ -3072,7 +3072,7 @@ returns a site instance.
 Multiple admin sites in the same URLconf
 ----------------------------------------
 
-You can create multiple instances of the admin site on the same Ginger-powered
+You can create multiple instances of the admin site on the same GingerDJ-powered
 website. Create multiple instances of ``AdminSite`` and place each one at a
 different URL.
 
@@ -3082,7 +3082,7 @@ separate versions of the admin site -- using the ``AdminSite`` instances
 respectively::
 
     # urls.py
-    from ginger.urls import path
+    from gingerdj.urls import path
     from myproject.admin import advanced_site, basic_site
 
     urlpatterns = [
@@ -3099,10 +3099,10 @@ Adding views to admin sites
 ---------------------------
 
 Just like :class:`ModelAdmin`, :class:`AdminSite` provides a
-:meth:`~ginger.contrib.admin.ModelAdmin.get_urls()` method
+:meth:`~gingerdj.contrib.admin.ModelAdmin.get_urls()` method
 that can be overridden to define additional views for the site. To add
 a new view to your admin site, extend the base
-:meth:`~ginger.contrib.admin.ModelAdmin.get_urls()` method to include
+:meth:`~gingerdj.contrib.admin.ModelAdmin.get_urls()` method to include
 a pattern for your new view.
 
 .. note::
@@ -3122,9 +3122,9 @@ your password?" link to appear on the default admin log-in page under the
 password box.
 
 
-.. currentmodule:: ginger.contrib.admin.models
+.. currentmodule:: gingerdj.contrib.admin.models
 
-.. currentmodule:: ginger.contrib.admin
+.. currentmodule:: gingerdj.contrib.admin
 
 .. _admin-reverse-urls:
 
@@ -3132,7 +3132,7 @@ Reversing admin URLs
 ====================
 
 When an :class:`AdminSite` is deployed, the views provided by that site are
-accessible using Ginger's :ref:`URL reversing system <naming-url-patterns>`.
+accessible using GingerDJ's :ref:`URL reversing system <naming-url-patterns>`.
 
 The :class:`AdminSite` provides the following named URL patterns:
 
@@ -3178,7 +3178,7 @@ call:
 
 .. code-block:: pycon
 
-    >>> from ginger.urls import reverse
+    >>> from gingerdj.urls import reverse
     >>> c = Choice.objects.get(...)
     >>> change_url = reverse("admin:polls_choice_change", args=(c.id,))
 
@@ -3198,7 +3198,7 @@ if you specifically wanted the admin view from the admin instance named
 For more details, see the documentation on :ref:`reversing namespaced URLs
 <topics-http-reversing-url-namespaces>`.
 
-To allow easier reversing of the admin urls in templates, Ginger provides an
+To allow easier reversing of the admin urls in templates, GingerDJ provides an
 ``admin_urlname`` filter which takes an action as argument:
 
 .. code-block:: html+django
@@ -3219,8 +3219,8 @@ The ``display`` decorator
 
     This decorator can be used for setting specific attributes on custom
     display functions that can be used with
-    :attr:`~ginger.contrib.admin.ModelAdmin.list_display` or
-    :attr:`~ginger.contrib.admin.ModelAdmin.readonly_fields`::
+    :attr:`~gingerdj.contrib.admin.ModelAdmin.list_display` or
+    :attr:`~gingerdj.contrib.admin.ModelAdmin.readonly_fields`::
 
         @admin.display(
             boolean=True,
@@ -3256,7 +3256,7 @@ The ``display`` decorator
 
     In this case it will add no attributes to the function.
 
-.. currentmodule:: ginger.contrib.admin.views.decorators
+.. currentmodule:: gingerdj.contrib.admin.views.decorators
 
 The ``staff_member_required`` decorator
 =======================================
@@ -3276,7 +3276,7 @@ The ``staff_member_required`` decorator
 
     Example usage::
 
-        from ginger.contrib.admin.views.decorators import staff_member_required
+        from gingerdj.contrib.admin.views.decorators import staff_member_required
 
 
         @staff_member_required

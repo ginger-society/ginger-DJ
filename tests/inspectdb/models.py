@@ -1,6 +1,6 @@
-from ginger.db import connection, models
-from ginger.db.models.functions import Lower
-from ginger.utils.functional import SimpleLazyObject
+from gingerdj.db import connection, models
+from gingerdj.db.models.functions import Lower
+from gingerdj.utils.functional import SimpleLazyObject
 
 
 class People(models.Model):

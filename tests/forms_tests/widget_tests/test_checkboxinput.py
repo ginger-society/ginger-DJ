@@ -1,4 +1,4 @@
-from ginger.forms import BooleanField, CheckboxInput, Form
+from gingerdj.forms import BooleanField, CheckboxInput, Form
 
 from .base import WidgetTest
 

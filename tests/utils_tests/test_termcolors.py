@@ -1,6 +1,6 @@
 import unittest
 
-from ginger.utils.termcolors import (
+from gingerdj.utils.termcolors import (
     DARK_PALETTE,
     DEFAULT_PALETTE,
     LIGHT_PALETTE,

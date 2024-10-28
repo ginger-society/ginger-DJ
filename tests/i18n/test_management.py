@@ -1,7 +1,7 @@
 import os
 
-from ginger.core.management.commands.makemessages import TranslatableFile
-from ginger.test import SimpleTestCase
+from gingerdj.core.management.commands.makemessages import TranslatableFile
+from gingerdj.test import SimpleTestCase
 
 
 class TranslatableFileTests(SimpleTestCase):

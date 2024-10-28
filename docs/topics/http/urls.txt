@@ -3,7 +3,7 @@ URL dispatcher
 ==============
 
 A clean, elegant URL scheme is an important detail in a high-quality web
-application. Ginger lets you design URLs however you want, with no framework
+application. GingerDJ lets you design URLs however you want, with no framework
 limitations.
 
 See `Cool URIs don't change`_, by World Wide Web creator Tim Berners-Lee, for
@@ -22,47 +22,47 @@ This mapping can be as short or as long as needed. It can reference other
 mappings. And, because it's pure Python code, it can be constructed
 dynamically.
 
-Ginger also provides a way to translate URLs according to the active
+GingerDJ also provides a way to translate URLs according to the active
 language. See the :ref:`internationalization documentation
 <url-internationalization>` for more information.
 
-.. _how-ginger-processes-a-request:
+.. _how-gingerdj-processes-a-request:
 
-How Ginger processes a request
+How GingerDJ processes a request
 ==============================
 
-When a user requests a page from your Ginger-powered site, this is the
+When a user requests a page from your GingerDJ-powered site, this is the
 algorithm the system follows to determine which Python code to execute:
 
-#. Ginger determines the root URLconf module to use. Ordinarily,
+#. GingerDJ determines the root URLconf module to use. Ordinarily,
    this is the value of the :setting:`ROOT_URLCONF` setting, but if the incoming
-   ``HttpRequest`` object has a :attr:`~ginger.http.HttpRequest.urlconf`
+   ``HttpRequest`` object has a :attr:`~gingerdj.http.HttpRequest.urlconf`
    attribute (set by middleware), its value will be used in place of the
    :setting:`ROOT_URLCONF` setting.
 
-#. Ginger loads that Python module and looks for the variable
+#. GingerDJ loads that Python module and looks for the variable
    ``urlpatterns``. This should be a :term:`sequence` of
-   :func:`ginger.urls.path` and/or :func:`ginger.urls.re_path` instances.
+   :func:`gingerdj.urls.path` and/or :func:`gingerdj.urls.re_path` instances.
 
-#. Ginger runs through each URL pattern, in order, and stops at the first
+#. GingerDJ runs through each URL pattern, in order, and stops at the first
    one that matches the requested URL, matching against
-   :attr:`~ginger.http.HttpRequest.path_info`.
+   :attr:`~gingerdj.http.HttpRequest.path_info`.
 
-#. Once one of the URL patterns matches, Ginger imports and calls the given
+#. Once one of the URL patterns matches, GingerDJ imports and calls the given
    view, which is a Python function (or a :doc:`class-based view
    </topics/class-based-views/index>`). The view gets passed the following
    arguments:
 
-   * An instance of :class:`~ginger.http.HttpRequest`.
+   * An instance of :class:`~gingerdj.http.HttpRequest`.
    * If the matched URL pattern contained no named groups, then the
      matches from the regular expression are provided as positional arguments.
    * The keyword arguments are made up of any named parts matched by the
      path expression that are provided, overridden by any arguments specified
-     in the optional ``kwargs`` argument to :func:`ginger.urls.path` or
-     :func:`ginger.urls.re_path`.
+     in the optional ``kwargs`` argument to :func:`gingerdj.urls.path` or
+     :func:`gingerdj.urls.re_path`.
 
 #. If no URL pattern matches, or if an exception is raised during any
-   point in this process, Ginger invokes an appropriate
+   point in this process, GingerDJ invokes an appropriate
    error-handling view. See `Error handling`_ below.
 
 Example
@@ -70,7 +70,7 @@ Example
 
 Here's a sample URLconf::
 
-    from ginger.urls import path
+    from gingerdj.urls import path
 
     from . import views
 
@@ -95,21 +95,21 @@ Notes:
 Example requests:
 
 * A request to ``/articles/2005/03/`` would match the third entry in the
-  list. Ginger would call the function
+  list. GingerDJ would call the function
   ``views.month_archive(request, year=2005, month=3)``.
 
 * ``/articles/2003/`` would match the first pattern in the list, not the
   second one, because the patterns are tested in order, and the first one
   is the first test to pass. Feel free to exploit the ordering to insert
-  special cases like this. Here, Ginger would call the function
+  special cases like this. Here, GingerDJ would call the function
   ``views.special_case_2003(request)``
 
 * ``/articles/2003`` would not match any of these patterns, because each
   pattern requires that the URL end with a slash.
 
-* ``/articles/2003/03/building-a-ginger-site/`` would match the final
-  pattern. Ginger would call the function
-  ``views.article_detail(request, year=2003, month=3, slug="building-a-ginger-site")``.
+* ``/articles/2003/03/building-a-gingerdj-site/`` would match the final
+  pattern. GingerDJ would call the function
+  ``views.article_detail(request, year=2003, month=3, slug="building-a-gingerdj-site")``.
 
 Path converters
 ===============
@@ -123,7 +123,7 @@ The following path converters are available by default:
 
 * ``slug`` - Matches any slug string consisting of ASCII letters or numbers,
   plus the hyphen and underscore characters. For example,
-  ``building-your-1st-ginger-site``.
+  ``building-your-1st-gingerdj-site``.
 
 * ``uuid`` - Matches a formatted UUID. To prevent multiple URLs from mapping to
   the same page, dashes must be included and letters must be lowercase. For
@@ -154,8 +154,8 @@ A converter is a class that includes the following:
 * A ``to_url(self, value)`` method, which handles converting the Python type
   into a string to be used in the URL. It should raise ``ValueError`` if it
   can't convert the given value. A ``ValueError`` is interpreted as no match
-  and as a consequence :func:`~ginger.urls.reverse` will raise
-  :class:`~ginger.urls.NoReverseMatch` unless another URL pattern matches.
+  and as a consequence :func:`~gingerdj.urls.reverse` will raise
+  :class:`~gingerdj.urls.NoReverseMatch` unless another URL pattern matches.
 
 For example::
 
@@ -169,9 +169,9 @@ For example::
             return "%04d" % value
 
 Register custom converter classes in your URLconf using
-:func:`~ginger.urls.register_converter`::
+:func:`~gingerdj.urls.register_converter`::
 
-    from ginger.urls import path, register_converter
+    from gingerdj.urls import path, register_converter
 
     from . import converters, views
 
@@ -185,7 +185,7 @@ Register custom converter classes in your URLconf using
 
 .. deprecated:: 5.1
 
-    Overriding existing converters with ``ginger.urls.register_converter()`` is
+    Overriding existing converters with ``gingerdj.urls.register_converter()`` is
     deprecated.
 
 Using regular expressions
@@ -193,7 +193,7 @@ Using regular expressions
 
 If the paths and converters syntax isn't sufficient for defining your URL
 patterns, you can also use regular expressions. To do so, use
-:func:`~ginger.urls.re_path` instead of :func:`~ginger.urls.path`.
+:func:`~gingerdj.urls.re_path` instead of :func:`~gingerdj.urls.path`.
 
 In Python regular expressions, the syntax for named regular expression groups
 is ``(?P<name>pattern)``, where ``name`` is the name of the group and
@@ -201,7 +201,7 @@ is ``(?P<name>pattern)``, where ``name`` is the name of the group and
 
 Here's the example URLconf from earlier, rewritten using regular expressions::
 
-    from ginger.urls import path, re_path
+    from gingerdj.urls import path, re_path
 
     from . import views
 
@@ -224,8 +224,8 @@ This accomplishes roughly the same thing as the previous example, except:
 * Each captured argument is sent to the view as a string, regardless of what
   sort of match the regular expression makes.
 
-When switching from using :func:`~ginger.urls.path` to
-:func:`~ginger.urls.re_path` or vice versa, it's particularly important to be
+When switching from using :func:`~gingerdj.urls.path` to
+:func:`~gingerdj.urls.re_path` or vice versa, it's particularly important to be
 aware that the type of the view arguments may change, and so you may need to
 adapt your views.
 
@@ -246,12 +246,12 @@ passed to the view function.
 Nested arguments
 ----------------
 
-Regular expressions allow nested arguments, and Ginger will resolve them and
-pass them to the view. When reversing, Ginger will try to fill in all outer
+Regular expressions allow nested arguments, and GingerDJ will resolve them and
+pass them to the view. When reversing, GingerDJ will try to fill in all outer
 captured arguments, ignoring any nested captured arguments. Consider the
 following URL patterns which optionally take a page argument::
 
-    from ginger.urls import re_path
+    from gingerdj.urls import re_path
 
     urlpatterns = [
         re_path(r"^blog/(page-([0-9]+)/)?$", blog_articles),  # bad
@@ -302,7 +302,7 @@ A convenient trick is to specify default parameters for your views' arguments.
 Here's an example URLconf and view::
 
     # URLconf
-    from ginger.urls import path
+    from gingerdj.urls import path
 
     from . import views
 
@@ -326,21 +326,21 @@ default argument for ``num``, ``1``. If the second pattern matches,
 Performance
 ===========
 
-Ginger processes regular expressions in the ``urlpatterns`` list which is
+GingerDJ processes regular expressions in the ``urlpatterns`` list which is
 compiled the first time it's accessed. Subsequent requests use the cached
 configuration via the URL resolver.
 
 Syntax of the ``urlpatterns`` variable
 ======================================
 
-``urlpatterns`` should be a :term:`sequence` of :func:`~ginger.urls.path`
-and/or :func:`~ginger.urls.re_path` instances.
+``urlpatterns`` should be a :term:`sequence` of :func:`~gingerdj.urls.path`
+and/or :func:`~gingerdj.urls.re_path` instances.
 
 Error handling
 ==============
 
-When Ginger can't find a match for the requested URL, or when an exception is
-raised, Ginger invokes an error-handling view.
+When GingerDJ can't find a match for the requested URL, or when an exception is
+raised, GingerDJ invokes an error-handling view.
 
 The views to use for these cases are specified by four variables. Their
 default values should suffice for most projects, but further customization is
@@ -357,10 +357,10 @@ to the view that should be called to handle the error condition at hand.
 
 The variables are:
 
-* ``handler400`` -- See :data:`ginger.conf.urls.handler400`.
-* ``handler403`` -- See :data:`ginger.conf.urls.handler403`.
-* ``handler404`` -- See :data:`ginger.conf.urls.handler404`.
-* ``handler500`` -- See :data:`ginger.conf.urls.handler500`.
+* ``handler400`` -- See :data:`gingerdj.conf.urls.handler400`.
+* ``handler403`` -- See :data:`gingerdj.conf.urls.handler403`.
+* ``handler404`` -- See :data:`gingerdj.conf.urls.handler404`.
+* ``handler500`` -- See :data:`gingerdj.conf.urls.handler500`.
 
 .. _including-other-urlconfs:
 
@@ -370,10 +370,10 @@ Including other URLconfs
 At any point, your ``urlpatterns`` can "include" other URLconf modules. This
 essentially "roots" a set of URLs below other ones.
 
-For example, here's an excerpt of the URLconf for the `Ginger website`_
+For example, here's an excerpt of the URLconf for the `GingerDJ website`_
 itself. It includes a number of other URLconfs::
 
-    from ginger.urls import include, path
+    from gingerdj.urls import include, path
 
     urlpatterns = [
         # ... snip ...
@@ -382,14 +382,14 @@ itself. It includes a number of other URLconfs::
         # ... snip ...
     ]
 
-Whenever Ginger encounters :func:`~ginger.urls.include()`, it chops off
+Whenever GingerDJ encounters :func:`~gingerdj.urls.include()`, it chops off
 whatever part of the URL matched up to that point and sends the remaining
 string to the included URLconf for further processing.
 
 Another possibility is to include additional URL patterns by using a list of
-:func:`~ginger.urls.path` instances. For example, consider this URLconf::
+:func:`~gingerdj.urls.path` instances. For example, consider this URLconf::
 
-    from ginger.urls import include, path
+    from gingerdj.urls import include, path
 
     from apps.main import views as main_views
     from credit import views as credit_views
@@ -407,12 +407,12 @@ Another possibility is to include additional URL patterns by using a list of
     ]
 
 In this example, the ``/credit/reports/`` URL will be handled by the
-``credit_views.report()`` Ginger view.
+``credit_views.report()`` GingerDJ view.
 
 This can be used to remove redundancy from URLconfs where a single pattern
 prefix is used repeatedly. For example, consider this URLconf::
 
-    from ginger.urls import path
+    from gingerdj.urls import path
     from . import views
 
     urlpatterns = [
@@ -425,7 +425,7 @@ prefix is used repeatedly. For example, consider this URLconf::
 We can improve this by stating the common path prefix only once and grouping
 the suffixes that differ::
 
-    from ginger.urls import include, path
+    from gingerdj.urls import include, path
     from . import views
 
     urlpatterns = [
@@ -442,7 +442,7 @@ the suffixes that differ::
         ),
     ]
 
-.. _`Ginger website`: https://www.ginger.gloportal.dev/
+.. _`GingerDJ website`: https://www.gingerdj.gloportal.dev/
 
 Captured parameters
 -------------------
@@ -451,14 +451,14 @@ An included URLconf receives any captured parameters from parent URLconfs, so
 the following example is valid::
 
     # In settings/urls/main.py
-    from ginger.urls import include, path
+    from gingerdj.urls import include, path
 
     urlpatterns = [
         path("<username>/blog/", include("foo.urls.blog")),
     ]
 
     # In foo/urls/blog.py
-    from ginger.urls import path
+    from gingerdj.urls import path
     from . import views
 
     urlpatterns = [
@@ -477,20 +477,20 @@ Passing extra options to view functions
 URLconfs have a hook that lets you pass extra arguments to your view functions,
 as a Python dictionary.
 
-The :func:`~ginger.urls.path` function can take an optional third argument
+The :func:`~gingerdj.urls.path` function can take an optional third argument
 which should be a dictionary of extra keyword arguments to pass to the view
 function.
 
 For example::
 
-    from ginger.urls import path
+    from gingerdj.urls import path
     from . import views
 
     urlpatterns = [
         path("blog/<int:year>/", views.year_archive, {"foo": "bar"}),
     ]
 
-In this example, for a request to ``/blog/2005/``, Ginger will call
+In this example, for a request to ``/blog/2005/``, GingerDJ will call
 ``views.year_archive(request, year=2005, foo='bar')``.
 
 This technique is used in the
@@ -507,7 +507,7 @@ options to views.
 Passing extra options to ``include()``
 --------------------------------------
 
-Similarly, you can pass extra options to :func:`~ginger.urls.include` and
+Similarly, you can pass extra options to :func:`~gingerdj.urls.include` and
 each line in the included URLconf will be passed the extra options.
 
 For example, these two URLconf sets are functionally identical:
@@ -515,14 +515,14 @@ For example, these two URLconf sets are functionally identical:
 Set one::
 
     # main.py
-    from ginger.urls import include, path
+    from gingerdj.urls import include, path
 
     urlpatterns = [
         path("blog/", include("inner"), {"blog_id": 3}),
     ]
 
     # inner.py
-    from ginger.urls import path
+    from gingerdj.urls import path
     from mysite import views
 
     urlpatterns = [
@@ -533,7 +533,7 @@ Set one::
 Set two::
 
     # main.py
-    from ginger.urls import include, path
+    from gingerdj.urls import include, path
     from mysite import views
 
     urlpatterns = [
@@ -541,7 +541,7 @@ Set two::
     ]
 
     # inner.py
-    from ginger.urls import path
+    from gingerdj.urls import path
 
     urlpatterns = [
         path("archive/", views.archive, {"blog_id": 3}),
@@ -556,7 +556,7 @@ every view in the included URLconf accepts the extra options you're passing.
 Reverse resolution of URLs
 ==========================
 
-A common need when working on a Ginger project is the possibility to obtain URLs
+A common need when working on a GingerDJ project is the possibility to obtain URLs
 in their final forms either for embedding in generated content (views and assets
 URLs, URLs shown to the user, etc.) or for handling of the navigation flow on
 the server side (redirections, etc.)
@@ -575,37 +575,37 @@ identification (e.g. the name) of the view in charge of handling it. Other
 pieces of information that necessarily must participate in the lookup of the
 right URL are the types (positional, keyword) and values of the view arguments.
 
-Ginger provides a solution such that the URL mapper is the only repository of
+GingerDJ provides a solution such that the URL mapper is the only repository of
 the URL design. You feed it with your URLconf and then it can be used in both
 directions:
 
-* Starting with a URL requested by the user/browser, it calls the right Ginger
+* Starting with a URL requested by the user/browser, it calls the right GingerDJ
   view providing any arguments it might need with their values as extracted from
   the URL.
 
-* Starting with the identification of the corresponding Ginger view plus the
+* Starting with the identification of the corresponding GingerDJ view plus the
   values of arguments that would be passed to it, obtain the associated URL.
 
 The first one is the usage we've been discussing in the previous sections. The
 second one is what is known as *reverse resolution of URLs*, *reverse URL
 matching*, *reverse URL lookup*, or simply *URL reversing*.
 
-Ginger provides tools for performing URL reversing that match the different
+GingerDJ provides tools for performing URL reversing that match the different
 layers where URLs are needed:
 
 * In templates: Using the :ttag:`url` template tag.
 
-* In Python code: Using the :func:`~ginger.urls.reverse` function.
+* In Python code: Using the :func:`~gingerdj.urls.reverse` function.
 
-* In higher level code related to handling of URLs of Ginger model instances:
-  The :meth:`~ginger.db.models.Model.get_absolute_url` method.
+* In higher level code related to handling of URLs of GingerDJ model instances:
+  The :meth:`~gingerdj.db.models.Model.get_absolute_url` method.
 
 Examples
 --------
 
 Consider again this URLconf entry::
 
-    from ginger.urls import path
+    from gingerdj.urls import path
 
     from . import views
 
@@ -632,8 +632,8 @@ You can obtain these in template code by using:
 
 Or in Python code::
 
-    from ginger.http import HttpResponseRedirect
-    from ginger.urls import reverse
+    from gingerdj.http import HttpResponseRedirect
+    from gingerdj.urls import reverse
 
 
     def redirect_to_year(request):
@@ -649,7 +649,7 @@ change the entry in the URLconf.
 In some scenarios where views are of a generic nature, a many-to-one
 relationship might exist between URLs and views. For these cases the view name
 isn't a good enough identifier for it when comes the time of reversing
-URLs. Read the next section to know about the solution Ginger provides for this.
+URLs. Read the next section to know about the solution GingerDJ provides for this.
 
 .. _naming-url-patterns:
 
@@ -663,7 +663,7 @@ characters you like. You are not restricted to valid Python names.
 When naming URL patterns, choose names that are unlikely to clash with other
 applications' choice of names. If you call your URL pattern ``comment``
 and another application does the same thing, the URL that
-:func:`~ginger.urls.reverse()` finds depends on whichever pattern is last in
+:func:`~gingerdj.urls.reverse()` finds depends on whichever pattern is last in
 your project's ``urlpatterns`` list.
 
 Putting a prefix on your URL names, perhaps derived from the application
@@ -671,7 +671,7 @@ name (such as ``myapp-comment`` instead of ``comment``), decreases the chance
 of collision.
 
 You may also use the same name for multiple URL patterns if they differ in
-their arguments. In addition to the URL name, :func:`~ginger.urls.reverse()`
+their arguments. In addition to the URL name, :func:`~gingerdj.urls.reverse()`
 matches the number of arguments and the names of the keyword arguments. Path
 converters can also raise ``ValueError`` to indicate no match, see
 :ref:`registering-custom-path-converters` for details.
@@ -692,9 +692,9 @@ instances of an application are deployed. In other words, since multiple
 instances of a single application will share named URLs, namespaces provide a
 way to tell these named URLs apart.
 
-Ginger applications that make proper use of URL namespacing can be deployed
-more than once for a particular site. For example :mod:`ginger.contrib.admin`
-has an :class:`~ginger.contrib.admin.AdminSite` class which allows you to
+GingerDJ applications that make proper use of URL namespacing can be deployed
+more than once for a particular site. For example :mod:`gingerdj.contrib.admin`
+has an :class:`~gingerdj.contrib.admin.AdminSite` class which allows you to
 :ref:`deploy more than one instance of the admin <multiple-admin-sites>`.  In a
 later example, we'll discuss the idea of deploying the polls application from
 the tutorial in two different locations so we can serve the same functionality
@@ -707,14 +707,14 @@ A URL namespace comes in two parts, both of which are strings:
   application namespace
     This describes the name of the application that is being deployed. Every
     instance of a single application will have the same application namespace.
-    For example, Ginger's admin application has the somewhat predictable
+    For example, GingerDJ's admin application has the somewhat predictable
     application namespace of ``'admin'``.
 
   instance namespace
     This identifies a specific instance of an application. Instance namespaces
     should be unique across your entire project. However, an instance namespace
     can be the same as the application namespace. This is used to specify a
-    default instance of an application. For example, the default Ginger admin
+    default instance of an application. For example, the default GingerDJ admin
     instance has an instance namespace of ``'admin'``.
 
 Namespaced URLs are specified using the ``':'`` operator. For example, the main
@@ -730,34 +730,34 @@ defined within the top-level namespace ``'sports'``.
 Reversing namespaced URLs
 -------------------------
 
-When given a namespaced URL (e.g. ``'polls:index'``) to resolve, Ginger splits
+When given a namespaced URL (e.g. ``'polls:index'``) to resolve, GingerDJ splits
 the fully qualified name into parts and then tries the following lookup:
 
-#. First, Ginger looks for a matching :term:`application namespace` (in this
+#. First, GingerDJ looks for a matching :term:`application namespace` (in this
    example, ``'polls'``). This will yield a list of instances of that
    application.
 
-#. If there is a current application defined, Ginger finds and returns the URL
+#. If there is a current application defined, GingerDJ finds and returns the URL
    resolver for that instance. The current application can be specified with
-   the ``current_app`` argument to the :func:`~ginger.urls.reverse()`
+   the ``current_app`` argument to the :func:`~gingerdj.urls.reverse()`
    function.
 
    The :ttag:`url` template tag uses the namespace of the currently resolved
    view as the current application in a
-   :class:`~ginger.template.RequestContext`. You can override this default by
+   :class:`~gingerdj.template.RequestContext`. You can override this default by
    setting the current application on the :attr:`request.current_app
-   <ginger.http.HttpRequest.current_app>` attribute.
+   <gingerdj.http.HttpRequest.current_app>` attribute.
 
-#. If there is no current application, Ginger looks for a default
+#. If there is no current application, GingerDJ looks for a default
    application instance. The default application instance is the instance
    that has an :term:`instance namespace` matching the :term:`application
    namespace` (in this example, an instance of ``polls`` called ``'polls'``).
 
-#. If there is no default application instance, Ginger will pick the last
+#. If there is no default application instance, GingerDJ will pick the last
    deployed instance of the application, whatever its instance name may be.
 
 #. If the provided namespace doesn't match an :term:`application namespace` in
-   step 1, Ginger will attempt a direct lookup of the namespace as an
+   step 1, GingerDJ will attempt a direct lookup of the namespace as an
    :term:`instance namespace`.
 
 If there are nested namespaces, these steps are repeated for each part of the
@@ -776,7 +776,7 @@ displaying polls.
 .. code-block:: python
     :caption: ``urls.py``
 
-    from ginger.urls import include, path
+    from gingerdj.urls import include, path
 
     urlpatterns = [
         path("author-polls/", include("polls.urls", namespace="author-polls")),
@@ -786,7 +786,7 @@ displaying polls.
 .. code-block:: python
     :caption: ``polls/urls.py``
 
-    from ginger.urls import path
+    from gingerdj.urls import path
 
     from . import views
 
@@ -839,13 +839,13 @@ Application namespaces of included URLconfs can be specified in two ways.
 
 Firstly, you can set an ``app_name`` attribute in the included URLconf module,
 at the same level as the ``urlpatterns`` attribute. You have to pass the actual
-module, or a string reference to the module, to :func:`~ginger.urls.include`,
+module, or a string reference to the module, to :func:`~gingerdj.urls.include`,
 not the list of ``urlpatterns`` itself.
 
 .. code-block:: python
     :caption: ``polls/urls.py``
 
-    from ginger.urls import path
+    from gingerdj.urls import path
 
     from . import views
 
@@ -859,7 +859,7 @@ not the list of ``urlpatterns`` itself.
 .. code-block:: python
     :caption: ``urls.py``
 
-    from ginger.urls import include, path
+    from gingerdj.urls import include, path
 
     urlpatterns = [
         path("polls/", include("polls.urls")),
@@ -868,8 +868,8 @@ not the list of ``urlpatterns`` itself.
 The URLs defined in ``polls.urls`` will have an application namespace ``polls``.
 
 Secondly, you can include an object that contains embedded namespace data. If
-you ``include()`` a list of :func:`~ginger.urls.path` or
-:func:`~ginger.urls.re_path` instances, the URLs contained in that object
+you ``include()`` a list of :func:`~gingerdj.urls.path` or
+:func:`~gingerdj.urls.re_path` instances, the URLs contained in that object
 will be added to the global namespace. However, you can also ``include()`` a
 2-tuple containing:
 
@@ -879,7 +879,7 @@ will be added to the global namespace. However, you can also ``include()`` a
 
 For example::
 
-    from ginger.urls import include, path
+    from gingerdj.urls import include, path
 
     from . import views
 
@@ -899,6 +899,6 @@ This will include the nominated URL patterns into the given application
 namespace.
 
 The instance namespace can be specified using the ``namespace`` argument to
-:func:`~ginger.urls.include`. If the instance namespace is not specified,
+:func:`~gingerdj.urls.include`. If the instance namespace is not specified,
 it will default to the included URLconf's application namespace. This means
 it will also be the default instance for that namespace.

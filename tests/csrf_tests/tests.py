@@ -1,10 +1,10 @@
 import re
 
-from ginger.conf import settings
-from ginger.contrib.sessions.backends.cache import SessionStore
-from ginger.core.exceptions import ImproperlyConfigured
-from ginger.http import HttpRequest, HttpResponse, UnreadablePostError
-from ginger.middleware.csrf import (
+from gingerdj.conf import settings
+from gingerdj.contrib.sessions.backends.cache import SessionStore
+from gingerdj.core.exceptions import ImproperlyConfigured
+from gingerdj.http import HttpRequest, HttpResponse, UnreadablePostError
+from gingerdj.middleware.csrf import (
     CSRF_ALLOWED_CHARS,
     CSRF_SECRET_LENGTH,
     CSRF_SESSION_KEY,
@@ -22,8 +22,8 @@ from ginger.middleware.csrf import (
     get_token,
     rotate_token,
 )
-from ginger.test import SimpleTestCase, override_settings
-from ginger.views.decorators.csrf import csrf_exempt, requires_csrf_token
+from gingerdj.test import SimpleTestCase, override_settings
+from gingerdj.views.decorators.csrf import csrf_exempt, requires_csrf_token
 
 from .views import (
     ensure_csrf_cookie_view,
@@ -343,7 +343,7 @@ class CsrfViewMiddlewareTestMixin(CsrfFunctionTestMixin):
         req = self._get_request(method="POST", cookie=cookie)
         mw = CsrfViewMiddleware(post_form_view)
         mw.process_request(req)
-        with self.assertLogs("ginger.security.csrf", "WARNING") as cm:
+        with self.assertLogs("gingerdj.security.csrf", "WARNING") as cm:
             resp = mw.process_view(req, post_form_view, (), {})
         self.assertEqual(403, resp.status_code)
         self.assertEqual(cm.records[0].getMessage(), "Forbidden (%s): " % expected)
@@ -369,7 +369,7 @@ class CsrfViewMiddlewareTestMixin(CsrfFunctionTestMixin):
         )
         mw = CsrfViewMiddleware(post_form_view)
         mw.process_request(req)
-        with self.assertLogs("ginger.security.csrf", "WARNING") as cm:
+        with self.assertLogs("gingerdj.security.csrf", "WARNING") as cm:
             resp = mw.process_view(req, post_form_view, (), {})
         self.assertEqual(403, resp.status_code)
         self.assertEqual(resp["Content-Type"], "text/html; charset=utf-8")
@@ -476,7 +476,7 @@ class CsrfViewMiddlewareTestMixin(CsrfFunctionTestMixin):
         """
         req = self._get_request(method="PUT")
         mw = CsrfViewMiddleware(post_form_view)
-        with self.assertLogs("ginger.security.csrf", "WARNING") as cm:
+        with self.assertLogs("gingerdj.security.csrf", "WARNING") as cm:
             resp = mw.process_view(req, post_form_view, (), {})
         self.assertEqual(403, resp.status_code)
         self.assertEqual(
@@ -484,7 +484,7 @@ class CsrfViewMiddlewareTestMixin(CsrfFunctionTestMixin):
         )
 
         req = self._get_request(method="DELETE")
-        with self.assertLogs("ginger.security.csrf", "WARNING") as cm:
+        with self.assertLogs("gingerdj.security.csrf", "WARNING") as cm:
             resp = mw.process_view(req, post_form_view, (), {})
         self.assertEqual(403, resp.status_code)
         self.assertEqual(
@@ -857,7 +857,7 @@ class CsrfViewMiddlewareTestMixin(CsrfFunctionTestMixin):
         """
         ensure_csrf_cookie() doesn't log warnings (#19436).
         """
-        with self.assertNoLogs("ginger.security.csrf", "WARNING"):
+        with self.assertNoLogs("gingerdj.security.csrf", "WARNING"):
             req = self._get_request()
             ensure_csrf_cookie_view(req)
 
@@ -875,7 +875,7 @@ class CsrfViewMiddlewareTestMixin(CsrfFunctionTestMixin):
         req = self._get_POST_request_with_token(request_class=PostErrorRequest)
         req.post_error = UnreadablePostError("Error reading input data.")
         mw.process_request(req)
-        with self.assertLogs("ginger.security.csrf", "WARNING") as cm:
+        with self.assertLogs("gingerdj.security.csrf", "WARNING") as cm:
             resp = mw.process_view(req, post_form_view, (), {})
         self.assertEqual(resp.status_code, 403)
         self.assertEqual(
@@ -904,7 +904,7 @@ class CsrfViewMiddlewareTestMixin(CsrfFunctionTestMixin):
         mw = CsrfViewMiddleware(post_form_view)
         self._check_referer_rejects(mw, req)
         self.assertIs(mw._origin_verified(req), False)
-        with self.assertLogs("ginger.security.csrf", "WARNING") as cm:
+        with self.assertLogs("gingerdj.security.csrf", "WARNING") as cm:
             response = mw.process_view(req, post_form_view, (), {})
         self.assertEqual(response.status_code, 403)
         msg = REASON_BAD_ORIGIN % req.META["HTTP_ORIGIN"]
@@ -919,7 +919,7 @@ class CsrfViewMiddlewareTestMixin(CsrfFunctionTestMixin):
         mw = CsrfViewMiddleware(post_form_view)
         self._check_referer_rejects(mw, req)
         self.assertIs(mw._origin_verified(req), False)
-        with self.assertLogs("ginger.security.csrf", "WARNING") as cm:
+        with self.assertLogs("gingerdj.security.csrf", "WARNING") as cm:
             response = mw.process_view(req, post_form_view, (), {})
         self.assertEqual(response.status_code, 403)
         msg = REASON_BAD_ORIGIN % req.META["HTTP_ORIGIN"]
@@ -935,7 +935,7 @@ class CsrfViewMiddlewareTestMixin(CsrfFunctionTestMixin):
         mw = CsrfViewMiddleware(post_form_view)
         self._check_referer_rejects(mw, req)
         self.assertIs(mw._origin_verified(req), False)
-        with self.assertLogs("ginger.security.csrf", "WARNING") as cm:
+        with self.assertLogs("gingerdj.security.csrf", "WARNING") as cm:
             response = mw.process_view(req, post_form_view, (), {})
         self.assertEqual(response.status_code, 403)
         msg = REASON_BAD_ORIGIN % req.META["HTTP_ORIGIN"]
@@ -962,7 +962,7 @@ class CsrfViewMiddlewareTestMixin(CsrfFunctionTestMixin):
         mw = CsrfViewMiddleware(post_form_view)
         self._check_referer_rejects(mw, req)
         self.assertIs(mw._origin_verified(req), False)
-        with self.assertLogs("ginger.security.csrf", "WARNING") as cm:
+        with self.assertLogs("gingerdj.security.csrf", "WARNING") as cm:
             response = mw.process_view(req, post_form_view, (), {})
         self.assertEqual(response.status_code, 403)
         msg = REASON_BAD_ORIGIN % req.META["HTTP_ORIGIN"]
@@ -988,7 +988,7 @@ class CsrfViewMiddlewareTestMixin(CsrfFunctionTestMixin):
         mw = CsrfViewMiddleware(post_form_view)
         self._check_referer_rejects(mw, req)
         self.assertIs(mw._origin_verified(req), False)
-        with self.assertLogs("ginger.security.csrf", "WARNING") as cm:
+        with self.assertLogs("gingerdj.security.csrf", "WARNING") as cm:
             response = mw.process_view(req, post_form_view, (), {})
         self.assertEqual(response.status_code, 403)
         msg = REASON_BAD_ORIGIN % req.META["HTTP_ORIGIN"]

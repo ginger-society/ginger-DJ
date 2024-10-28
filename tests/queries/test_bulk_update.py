@@ -1,10 +1,10 @@
 import datetime
 
-from ginger.core.exceptions import FieldDoesNotExist
-from ginger.db.models import F
-from ginger.db.models.functions import Lower
-from ginger.db.utils import IntegrityError
-from ginger.test import TestCase, override_settings, skipUnlessDBFeature
+from gingerdj.core.exceptions import FieldDoesNotExist
+from gingerdj.db.models import F
+from gingerdj.db.models.functions import Lower
+from gingerdj.db.utils import IntegrityError
+from gingerdj.test import TestCase, override_settings, skipUnlessDBFeature
 
 from .models import (
     Article,

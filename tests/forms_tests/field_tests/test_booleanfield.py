@@ -1,8 +1,8 @@
 import pickle
 
-from ginger.core.exceptions import ValidationError
-from ginger.forms import BooleanField
-from ginger.test import SimpleTestCase
+from gingerdj.core.exceptions import ValidationError
+from gingerdj.forms import BooleanField
+from gingerdj.test import SimpleTestCase
 
 
 class BooleanFieldTest(SimpleTestCase):
@@ -18,7 +18,7 @@ class BooleanFieldTest(SimpleTestCase):
         self.assertTrue(f.clean(1))
         with self.assertRaisesMessage(ValidationError, "'This field is required.'"):
             f.clean(0)
-        self.assertTrue(f.clean("Ginger rocks"))
+        self.assertTrue(f.clean("GingerDJ rocks"))
         self.assertTrue(f.clean("True"))
         with self.assertRaisesMessage(ValidationError, "'This field is required.'"):
             f.clean("False")
@@ -33,7 +33,7 @@ class BooleanFieldTest(SimpleTestCase):
         self.assertIs(f.clean(0), False)
         self.assertIs(f.clean("1"), True)
         self.assertIs(f.clean("0"), False)
-        self.assertIs(f.clean("Ginger rocks"), True)
+        self.assertIs(f.clean("GingerDJ rocks"), True)
         self.assertIs(f.clean("False"), False)
         self.assertIs(f.clean("false"), False)
         self.assertIs(f.clean("FaLsE"), False)

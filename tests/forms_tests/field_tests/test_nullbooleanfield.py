@@ -1,5 +1,5 @@
-from ginger.forms import Form, HiddenInput, NullBooleanField, RadioSelect
-from ginger.test import SimpleTestCase
+from gingerdj.forms import Form, HiddenInput, NullBooleanField, RadioSelect
+from gingerdj.test import SimpleTestCase
 
 from . import FormFieldAssertionsMixin
 

@@ -1,4 +1,4 @@
-from ginger import forms
+from gingerdj import forms
 
 from .models import Event
 

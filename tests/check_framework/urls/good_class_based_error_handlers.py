@@ -1,4 +1,4 @@
-from ginger.views.generic import View
+from gingerdj.views.generic import View
 
 urlpatterns = []
 

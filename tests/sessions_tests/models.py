@@ -4,9 +4,9 @@ real-world applications, it gives you the option of querying the database for
 all active sessions for a particular account.
 """
 
-from ginger.contrib.sessions.backends.db import SessionStore as DBStore
-from ginger.contrib.sessions.base_session import AbstractBaseSession
-from ginger.db import models
+from gingerdj.contrib.sessions.backends.db import SessionStore as DBStore
+from gingerdj.contrib.sessions.base_session import AbstractBaseSession
+from gingerdj.db import models
 
 
 class CustomSession(AbstractBaseSession):

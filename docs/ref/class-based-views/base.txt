@@ -3,12 +3,12 @@ Base views
 ==========
 
 The following three classes provide much of the functionality needed to create
-Ginger views. You may think of them as *parent* views, which can be used by
+GingerDJ views. You may think of them as *parent* views, which can be used by
 themselves or inherited from. They may not provide all the capabilities
 required for projects, in which case there are Mixins and Generic class-based
 views.
 
-Many of Ginger's built-in class-based views inherit from other class-based
+Many of GingerDJ's built-in class-based views inherit from other class-based
 views or various mixins. Because this inheritance chain is very important, the
 ancestor classes are  documented under the section title of **Ancestors (MRO)**.
 MRO is an acronym for Method Resolution Order.
@@ -16,11 +16,11 @@ MRO is an acronym for Method Resolution Order.
 ``View``
 ========
 
-.. class:: ginger.views.generic.base.View
+.. class:: gingerdj.views.generic.base.View
 
     The base view class. All other class-based views inherit from this base
     class. It isn't strictly a generic view and thus can also be imported from
-    ``ginger.views``.
+    ``gingerdj.views``.
 
     **Method Flowchart**
 
@@ -31,8 +31,8 @@ MRO is an acronym for Method Resolution Order.
 
     **Example views.py**::
 
-        from ginger.http import HttpResponse
-        from ginger.views import View
+        from gingerdj.http import HttpResponse
+        from gingerdj.views import View
 
 
         class MyView(View):
@@ -41,7 +41,7 @@ MRO is an acronym for Method Resolution Order.
 
     **Example urls.py**::
 
-        from ginger.urls import path
+        from gingerdj.urls import path
 
         from myapp.views import MyView
 
@@ -71,10 +71,10 @@ MRO is an acronym for Method Resolution Order.
         attributes.
 
         When the view is called during the request/response cycle, the
-        :meth:`setup` method assigns the :class:`~ginger.http.HttpRequest` to
+        :meth:`setup` method assigns the :class:`~gingerdj.http.HttpRequest` to
         the view's ``request`` attribute, and any positional and/or keyword
         arguments :ref:`captured from the URL pattern
-        <how-ginger-processes-a-request>` to the ``args`` and ``kwargs``
+        <how-gingerdj-processes-a-request>` to the ``args`` and ``kwargs``
         attributes, respectively. Then :meth:`dispatch` is called.
 
         If a ``View`` subclass defines asynchronous (``async def``) method
@@ -124,7 +124,7 @@ MRO is an acronym for Method Resolution Order.
 ``TemplateView``
 ================
 
-.. class:: ginger.views.generic.base.TemplateView
+.. class:: gingerdj.views.generic.base.TemplateView
 
     Renders a given template, with the context containing parameters captured
     in the URL.
@@ -133,20 +133,20 @@ MRO is an acronym for Method Resolution Order.
 
     This view inherits methods and attributes from the following views:
 
-    * :class:`ginger.views.generic.base.TemplateResponseMixin`
-    * :class:`ginger.views.generic.base.ContextMixin`
-    * :class:`ginger.views.generic.base.View`
+    * :class:`gingerdj.views.generic.base.TemplateResponseMixin`
+    * :class:`gingerdj.views.generic.base.ContextMixin`
+    * :class:`gingerdj.views.generic.base.View`
 
     **Method Flowchart**
 
-    #. :meth:`~ginger.views.generic.base.View.setup()`
-    #. :meth:`~ginger.views.generic.base.View.dispatch()`
-    #. :meth:`~ginger.views.generic.base.View.http_method_not_allowed()`
-    #. :meth:`~ginger.views.generic.base.ContextMixin.get_context_data()`
+    #. :meth:`~gingerdj.views.generic.base.View.setup()`
+    #. :meth:`~gingerdj.views.generic.base.View.dispatch()`
+    #. :meth:`~gingerdj.views.generic.base.View.http_method_not_allowed()`
+    #. :meth:`~gingerdj.views.generic.base.ContextMixin.get_context_data()`
 
     **Example views.py**::
 
-        from ginger.views.generic.base import TemplateView
+        from gingerdj.views.generic.base import TemplateView
 
         from articles.models import Article
 
@@ -161,7 +161,7 @@ MRO is an acronym for Method Resolution Order.
 
     **Example urls.py**::
 
-        from ginger.urls import path
+        from gingerdj.urls import path
 
         from myapp.views import HomePageView
 
@@ -171,16 +171,16 @@ MRO is an acronym for Method Resolution Order.
 
     **Context**
 
-    * Populated (through :class:`~ginger.views.generic.base.ContextMixin`) with
+    * Populated (through :class:`~gingerdj.views.generic.base.ContextMixin`) with
       the keyword arguments captured from the URL pattern that served the view.
     * You can also add context using the
-      :attr:`~ginger.views.generic.base.ContextMixin.extra_context` keyword
-      argument for :meth:`~ginger.views.generic.base.View.as_view`.
+      :attr:`~gingerdj.views.generic.base.ContextMixin.extra_context` keyword
+      argument for :meth:`~gingerdj.views.generic.base.View.as_view`.
 
 ``RedirectView``
 ================
 
-.. class:: ginger.views.generic.base.RedirectView
+.. class:: gingerdj.views.generic.base.RedirectView
 
     Redirects to a given URL.
 
@@ -190,26 +190,26 @@ MRO is an acronym for Method Resolution Order.
     ``"%"`` characters in the URL must be written as ``"%%"`` so that Python
     will convert them to a single percent sign on output.
 
-    If the given URL is ``None``, Ginger will return an ``HttpResponseGone``
+    If the given URL is ``None``, GingerDJ will return an ``HttpResponseGone``
     (410).
 
     **Ancestors (MRO)**
 
     This view inherits methods and attributes from the following view:
 
-    * :class:`ginger.views.generic.base.View`
+    * :class:`gingerdj.views.generic.base.View`
 
     **Method Flowchart**
 
-    #. :meth:`~ginger.views.generic.base.View.setup()`
-    #. :meth:`~ginger.views.generic.base.View.dispatch()`
-    #. :meth:`~ginger.views.generic.base.View.http_method_not_allowed()`
+    #. :meth:`~gingerdj.views.generic.base.View.setup()`
+    #. :meth:`~gingerdj.views.generic.base.View.dispatch()`
+    #. :meth:`~gingerdj.views.generic.base.View.http_method_not_allowed()`
     #. :meth:`get_redirect_url()`
 
     **Example views.py**::
 
-        from ginger.shortcuts import get_object_or_404
-        from ginger.views.generic.base import RedirectView
+        from gingerdj.shortcuts import get_object_or_404
+        from gingerdj.views.generic.base import RedirectView
 
         from articles.models import Article
 
@@ -226,8 +226,8 @@ MRO is an acronym for Method Resolution Order.
 
     **Example urls.py**::
 
-        from ginger.urls import path
-        from ginger.views.generic.base import RedirectView
+        from gingerdj.urls import path
+        from gingerdj.views.generic.base import RedirectView
 
         from article.views import ArticleCounterRedirectView, ArticleDetailView
 
@@ -239,9 +239,9 @@ MRO is an acronym for Method Resolution Order.
             ),
             path("details/<int:pk>/", ArticleDetailView.as_view(), name="article-detail"),
             path(
-                "go-to-ginger/",
-                RedirectView.as_view(url="https://www.ginger.gloportal.dev/"),
-                name="go-to-ginger",
+                "go-to-gingerdj/",
+                RedirectView.as_view(url="https://www.gingerdj.gloportal.dev/"),
+                name="go-to-gingerdj",
             ),
         ]
 
@@ -279,7 +279,7 @@ MRO is an acronym for Method Resolution Order.
 
         The ``args`` and ``kwargs`` arguments are positional and/or keyword
         arguments :ref:`captured from the URL pattern
-        <how-ginger-processes-a-request>`, respectively.
+        <how-gingerdj-processes-a-request>`, respectively.
 
         The default implementation uses :attr:`url` as a starting
         string and performs expansion of ``%`` named parameters in that string

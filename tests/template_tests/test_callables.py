@@ -1,7 +1,7 @@
 from unittest import TestCase
 
-from ginger.db.models.utils import AltersData
-from ginger.template import Context, Engine
+from gingerdj.db.models.utils import AltersData
+from gingerdj.template import Context, Engine
 
 
 class CallableVariablesTests(TestCase):

@@ -1,8 +1,8 @@
 import datetime
 
-from ginger.core.exceptions import ValidationError
-from ginger.forms import TimeField
-from ginger.test import SimpleTestCase
+from gingerdj.core.exceptions import ValidationError
+from gingerdj.forms import TimeField
+from gingerdj.test import SimpleTestCase
 
 from . import FormFieldAssertionsMixin
 

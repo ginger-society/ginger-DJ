@@ -1,7 +1,7 @@
-from ginger.core.paginator import Paginator
-from ginger.urls import reverse, reverse_lazy
-from ginger.utils.decorators import method_decorator
-from ginger.views import generic
+from gingerdj.core.paginator import Paginator
+from gingerdj.urls import reverse, reverse_lazy
+from gingerdj.utils.decorators import method_decorator
+from gingerdj.views import generic
 
 from .forms import AuthorForm, ConfirmDeleteForm, ContactForm
 from .models import Artist, Author, Book, BookSigning, Page

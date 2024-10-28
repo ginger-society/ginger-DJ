@@ -1,15 +1,11 @@
-from ginger import test
-from ginger.db import models
+from gingerdj import test
+from gingerdj.db import models
 
 from .models import AllFieldsModel
 
-NON_CONCRETE_FIELDS = (
-    models.ForeignObject,
-)
+NON_CONCRETE_FIELDS = (models.ForeignObject,)
 
-NON_EDITABLE_FIELDS = (
-    models.BinaryField,
-)
+NON_EDITABLE_FIELDS = (models.BinaryField,)
 
 RELATION_FIELDS = (
     models.ForeignKey,

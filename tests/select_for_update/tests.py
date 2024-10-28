@@ -4,8 +4,8 @@ from unittest import mock
 
 from multiple_database.routers import TestRouter
 
-from ginger.core.exceptions import FieldError
-from ginger.db import (
+from gingerdj.core.exceptions import FieldError
+from gingerdj.db import (
     DatabaseError,
     NotSupportedError,
     connection,
@@ -13,13 +13,13 @@ from ginger.db import (
     router,
     transaction,
 )
-from ginger.test import (
+from gingerdj.test import (
     TransactionTestCase,
     override_settings,
     skipIfDBFeature,
     skipUnlessDBFeature,
 )
-from ginger.test.utils import CaptureQueriesContext
+from gingerdj.test.utils import CaptureQueriesContext
 
 from .models import (
     City,

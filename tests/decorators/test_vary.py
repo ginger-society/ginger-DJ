@@ -1,8 +1,8 @@
 from asgiref.sync import iscoroutinefunction
 
-from ginger.http import HttpRequest, HttpResponse
-from ginger.test import SimpleTestCase
-from ginger.views.decorators.vary import vary_on_cookie, vary_on_headers
+from gingerdj.http import HttpRequest, HttpResponse
+from gingerdj.test import SimpleTestCase
+from gingerdj.views.decorators.vary import vary_on_cookie, vary_on_headers
 
 
 class VaryOnHeadersTests(SimpleTestCase):

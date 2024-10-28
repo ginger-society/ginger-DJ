@@ -1,10 +1,10 @@
 import unittest
 
-from ginger.db import NotSupportedError, connection
-from ginger.db.models import CharField
-from ginger.db.models.functions import SHA224
-from ginger.test import TestCase
-from ginger.test.utils import register_lookup
+from gingerdj.db import NotSupportedError, connection
+from gingerdj.db.models import CharField
+from gingerdj.db.models.functions import SHA224
+from gingerdj.test import TestCase
+from gingerdj.test.utils import register_lookup
 
 from ..models import Author
 

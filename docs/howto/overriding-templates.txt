@@ -2,13 +2,13 @@
 How to override templates
 =========================
 
-In your project, you might want to override a template in another Ginger
+In your project, you might want to override a template in another GingerDJ
 application, whether it be a third-party application or a contrib application
-such as ``ginger.contrib.admin``. You can either put template overrides in your
+such as ``gingerdj.contrib.admin``. You can either put template overrides in your
 project's templates directory or in an application's templates directory.
 
 If you have app and project templates directories that both contain overrides,
-the default Ginger template loader will try to load the template from the
+the default GingerDJ template loader will try to load the template from the
 project-level directory first. In other words, :setting:`DIRS <TEMPLATES-DIRS>`
 is searched before :setting:`APP_DIRS <TEMPLATES-APP_DIRS>`.
 
@@ -39,7 +39,7 @@ called ``blog``, which provides the templates ``blog/post.html`` and
 
     TEMPLATES = [
         {
-            "BACKEND": "ginger.template.backends.ginger.GingerTemplates",
+            "BACKEND": "gingerdj.template.backends.gingerdj.GingerTemplates",
             "DIRS": [BASE_DIR / "templates"],
             "APP_DIRS": True,
             # ...

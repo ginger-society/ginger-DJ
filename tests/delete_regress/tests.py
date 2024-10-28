@@ -1,8 +1,8 @@
 import datetime
 
-from ginger.db import connection, models, transaction
-from ginger.db.models import Exists, OuterRef
-from ginger.test import (
+from gingerdj.db import connection, models, transaction
+from gingerdj.db.models import Exists, OuterRef
+from gingerdj.test import (
     SimpleTestCase,
     TestCase,
     TransactionTestCase,
@@ -83,7 +83,7 @@ class DeleteLockingTest(TransactionTestCase):
 class DeleteCascadeTests(TestCase):
     def test_generic_relation_cascade(self):
         """
-        Ginger cascades deletes through generic-related objects to their
+        GingerDJ cascades deletes through generic-related objects to their
         reverse relations.
         """
         person = Person.objects.create(name="Nelson Mandela")

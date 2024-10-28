@@ -1,8 +1,8 @@
 import math
 from decimal import Decimal
 
-from ginger.db.models.functions import ATan2
-from ginger.test import TestCase
+from gingerdj.db.models.functions import ATan2
+from gingerdj.test import TestCase
 
 from ..models import DecimalModel, FloatModel, IntegerModel
 

@@ -7,22 +7,22 @@ Logging
 .. seealso::
 
     * :ref:`logging-how-to`
-    * :ref:`Ginger logging overview <logging-explanation>`
+    * :ref:`GingerDJ logging overview <logging-explanation>`
 
-.. module:: ginger.utils.log
-   :synopsis: Logging tools for Ginger applications
+.. module:: gingerdj.utils.log
+   :synopsis: Logging tools for GingerDJ applications
 
-Ginger's logging module extends Python's builtin :mod:`logging`.
+GingerDJ's logging module extends Python's builtin :mod:`logging`.
 
-Logging is configured as part of the general Ginger :func:`ginger.setup`
+Logging is configured as part of the general GingerDJ :func:`gingerdj.setup`
 function, so it's always available unless explicitly disabled.
 
 .. _default-logging-configuration:
 
-Ginger's default logging configuration
+GingerDJ's default logging configuration
 ======================================
 
-By default, Ginger uses Python's :ref:`logging.config.dictConfig format
+By default, GingerDJ uses Python's :ref:`logging.config.dictConfig format
 <logging-config-dictschema>`.
 
 Default logging conditions
@@ -32,22 +32,22 @@ The full set of default logging conditions are:
 
 When :setting:`DEBUG` is ``True``:
 
-* The ``ginger`` logger sends messages in the ``ginger`` hierarchy (except
-  ``ginger.server``) at the ``INFO`` level or higher to the console.
+* The ``gingerdj`` logger sends messages in the ``gingerdj`` hierarchy (except
+  ``gingerdj.server``) at the ``INFO`` level or higher to the console.
 
 When :setting:`DEBUG` is ``False``:
 
-* The ``ginger`` logger sends messages in the ``ginger`` hierarchy (except
-  ``ginger.server``)  with ``ERROR`` or ``CRITICAL`` level to
+* The ``gingerdj`` logger sends messages in the ``gingerdj`` hierarchy (except
+  ``gingerdj.server``)  with ``ERROR`` or ``CRITICAL`` level to
   :class:`AdminEmailHandler`.
 
 Independently of the value of :setting:`DEBUG`:
 
-* The :ref:`ginger-server-logger` logger sends messages at the ``INFO`` level
+* The :ref:`gingerdj-server-logger` logger sends messages at the ``INFO`` level
   or higher to the console.
 
-All loggers except :ref:`ginger-server-logger` propagate logging to their
-parents, up to the root ``ginger`` logger. The ``console`` and ``mail_admins``
+All loggers except :ref:`gingerdj-server-logger` propagate logging to their
+parents, up to the root ``gingerdj`` logger. The ``console`` and ``mail_admins``
 handlers are attached to the root logger to provide the behavior described
 above.
 
@@ -59,24 +59,24 @@ to the console.
 Default logging definition
 --------------------------
 
-Ginger's default logging configuration inherits Python's defaults. It's
-available as ``ginger.utils.log.DEFAULT_LOGGING`` and defined in
-:source:`ginger/utils/log.py`::
+GingerDJ's default logging configuration inherits Python's defaults. It's
+available as ``gingerdj.utils.log.DEFAULT_LOGGING`` and defined in
+:source:`gingerdj/utils/log.py`::
 
     {
         "version": 1,
         "disable_existing_loggers": False,
         "filters": {
             "require_debug_false": {
-                "()": "ginger.utils.log.RequireDebugFalse",
+                "()": "gingerdj.utils.log.RequireDebugFalse",
             },
             "require_debug_true": {
-                "()": "ginger.utils.log.RequireDebugTrue",
+                "()": "gingerdj.utils.log.RequireDebugTrue",
             },
         },
         "formatters": {
-            "ginger.server": {
-                "()": "ginger.utils.log.ServerFormatter",
+            "gingerdj.server": {
+                "()": "gingerdj.utils.log.ServerFormatter",
                 "format": "[{server_time}] {message}",
                 "style": "{",
             }
@@ -87,24 +87,24 @@ available as ``ginger.utils.log.DEFAULT_LOGGING`` and defined in
                 "filters": ["require_debug_true"],
                 "class": "logging.StreamHandler",
             },
-            "ginger.server": {
+            "gingerdj.server": {
                 "level": "INFO",
                 "class": "logging.StreamHandler",
-                "formatter": "ginger.server",
+                "formatter": "gingerdj.server",
             },
             "mail_admins": {
                 "level": "ERROR",
                 "filters": ["require_debug_false"],
-                "class": "ginger.utils.log.AdminEmailHandler",
+                "class": "gingerdj.utils.log.AdminEmailHandler",
             },
         },
         "loggers": {
-            "ginger": {
+            "gingerdj": {
                 "handlers": ["console", "mail_admins"],
                 "level": "INFO",
             },
-            "ginger.server": {
-                "handlers": ["ginger.server"],
+            "gingerdj.server": {
+                "handlers": ["gingerdj.server"],
                 "level": "INFO",
                 "propagate": False,
             },
@@ -114,35 +114,35 @@ available as ``ginger.utils.log.DEFAULT_LOGGING`` and defined in
 See :ref:`configuring-logging` on how to complement or replace this default
 logging configuration.
 
-Ginger logging extensions
+GingerDJ logging extensions
 =========================
 
-Ginger provides a number of utilities to handle the particular requirements of
+GingerDJ provides a number of utilities to handle the particular requirements of
 logging in a web server environment.
 
 Loggers
 -------
 
-Ginger provides several built-in loggers.
+GingerDJ provides several built-in loggers.
 
 .. _ginger-logger:
 
-``ginger``
+``gingerdj``
 ~~~~~~~~~~
 
-The parent logger for messages in the ``ginger`` :ref:`named logger hierarchy
-<naming-loggers-hierarchy>`. Ginger does not post messages using this name.
+The parent logger for messages in the ``gingerdj`` :ref:`named logger hierarchy
+<naming-loggers-hierarchy>`. GingerDJ does not post messages using this name.
 Instead, it uses one of the loggers below.
 
 .. _ginger-request-logger:
 
-``ginger.request``
+``gingerdj.request``
 ~~~~~~~~~~~~~~~~~~
 
 Log messages related to the handling of requests. 5XX responses are
 raised as ``ERROR`` messages; 4XX responses are raised as ``WARNING``
-messages. Requests that are logged to the ``ginger.security`` logger aren't
-logged to ``ginger.request``.
+messages. Requests that are logged to the ``gingerdj.security`` logger aren't
+logged to ``gingerdj.request``.
 
 Messages to this logger have the following extra context:
 
@@ -152,7 +152,7 @@ Messages to this logger have the following extra context:
 
 .. _ginger-server-logger:
 
-``ginger.server``
+``gingerdj.server``
 ~~~~~~~~~~~~~~~~~
 
 Log messages related to the handling of requests received by the server invoked
@@ -168,7 +168,7 @@ Messages to this logger have the following extra context:
 
 .. _ginger-template-logger:
 
-``ginger.template``
+``gingerdj.template``
 ~~~~~~~~~~~~~~~~~~~
 
 Log messages related to the rendering of templates.
@@ -177,7 +177,7 @@ Log messages related to the rendering of templates.
 
 .. _ginger-db-logger:
 
-``ginger.db.backends``
+``gingerdj.db.backends``
 ~~~~~~~~~~~~~~~~~~~~~~
 
 Messages relating to the interaction of code with the database. For example,
@@ -201,17 +201,17 @@ all database queries.
 
 .. _ginger-utils-autoreloader-logger:
 
-``ginger.utils.autoreload``
+``gingerdj.utils.autoreload``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Log messages related to automatic code reloading during the execution of the
-Ginger development server. This logger generates an ``INFO`` message upon
+GingerDJ development server. This logger generates an ``INFO`` message upon
 detecting a modification in a source code file and may produce ``WARNING``
 messages during filesystem inspection and event subscription processes.
 
 .. _ginger-contrib-gis-logger:
 
-``ginger.contrib.gis``
+``gingerdj.contrib.gis``
 ~~~~~~~~~~~~~~~~~~~~~~
 
 Log messages related to :doc:`contrib/gis/index` at various points: during the
@@ -221,11 +221,11 @@ contextual data.
 
 .. _ginger-dispatch-logger:
 
-``ginger.dispatch``
+``gingerdj.dispatch``
 ~~~~~~~~~~~~~~~~~~~
 
 This logger is used in :doc:`signals`, specifically within the
-:mod:`~ginger.dispatch.Signal` class, to report issues when dispatching a
+:mod:`~gingerdj.dispatch.Signal` class, to report issues when dispatching a
 signal to a connected receiver. The ``ERROR`` log record includes the caught
 exception as ``exc_info`` and adds the following extra context:
 
@@ -234,24 +234,24 @@ exception as ``exc_info`` and adds the following extra context:
 
 .. _ginger-security-logger:
 
-``ginger.security.*``
+``gingerdj.security.*``
 ~~~~~~~~~~~~~~~~~~~~~
 
 The security loggers will receive messages on any occurrence of
-:exc:`~ginger.core.exceptions.SuspiciousOperation` and other security-related
+:exc:`~gingerdj.core.exceptions.SuspiciousOperation` and other security-related
 errors. There is a sub-logger for each subtype of security error, including all
 ``SuspiciousOperation``\s. The level of the log event depends on where the
 exception is handled.  Most occurrences are logged as a warning, while
 any ``SuspiciousOperation`` that reaches the WSGI handler will be logged as an
 error. For example, when an HTTP ``Host`` header is included in a request from
-a client that does not match :setting:`ALLOWED_HOSTS`, Ginger will return a 400
+a client that does not match :setting:`ALLOWED_HOSTS`, GingerDJ will return a 400
 response, and an error message will be logged to the
-``ginger.security.DisallowedHost`` logger.
+``gingerdj.security.DisallowedHost`` logger.
 
-These log events will reach the ``ginger`` logger by default, which mails error
+These log events will reach the ``gingerdj`` logger by default, which mails error
 events to admins when ``DEBUG=False``. Requests resulting in a 400 response due
-to a ``SuspiciousOperation`` will not be logged to the ``ginger.request``
-logger, but only to the ``ginger.security`` logger.
+to a ``SuspiciousOperation`` will not be logged to the ``gingerdj.request``
+logger, but only to the ``gingerdj.security`` logger.
 
 To silence a particular type of ``SuspiciousOperation``, you can override that
 specific logger following this example::
@@ -264,7 +264,7 @@ specific logger following this example::
             },
         },
         "loggers": {
-            "ginger.security.DisallowedHost": {
+            "gingerdj.security.DisallowedHost": {
                 "handlers": ["null"],
                 "propagate": False,
             },
@@ -272,35 +272,35 @@ specific logger following this example::
         # ...
     }
 
-Other ``ginger.security`` loggers not based on ``SuspiciousOperation`` are:
+Other ``gingerdj.security`` loggers not based on ``SuspiciousOperation`` are:
 
-* ``ginger.security.csrf``: For :ref:`CSRF failures <csrf-rejected-requests>`.
+* ``gingerdj.security.csrf``: For :ref:`CSRF failures <csrf-rejected-requests>`.
 
-``ginger.db.backends.schema``
+``gingerdj.db.backends.schema``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Logs the SQL queries that are executed during schema changes to the database by
 the :doc:`migrations framework </topics/migrations>`. Note that it won't log the
-queries executed by :class:`~ginger.db.migrations.operations.RunPython`.
+queries executed by :class:`~gingerdj.db.migrations.operations.RunPython`.
 Messages to this logger have ``params`` and ``sql`` in their extra context (but
-unlike ``ginger.db.backends``, not duration). The values have the same meaning
-as explained in :ref:`ginger-db-logger`.
+unlike ``gingerdj.db.backends``, not duration). The values have the same meaning
+as explained in :ref:`gingerdj-db-logger`.
 
 .. _ginger-contrib-sessions-logger:
 
-``ginger.contrib.sessions``
+``gingerdj.contrib.sessions``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Log messages related to the :doc:`session framework</topics/http/sessions>`.
 
 * Non-fatal errors occurring when using the
-  :class:`ginger.contrib.sessions.backends.cached_db.SessionStore` engine are
+  :class:`gingerdj.contrib.sessions.backends.cached_db.SessionStore` engine are
   logged as ``ERROR`` messages with the corresponding traceback.
 
 Handlers
 --------
 
-Ginger provides one log handler in addition to :mod:`those provided by the
+GingerDJ provides one log handler in addition to :mod:`those provided by the
 Python logging module <python:logging.handlers>`.
 
 .. class:: AdminEmailHandler(include_html=False, email_backend=None, reporter_class=None)
@@ -321,12 +321,12 @@ Python logging module <python:logging.handlers>`.
     containing the full content of the debug web page that would have been
     produced if :setting:`DEBUG` were ``True``. To set this value in your
     configuration, include it in the handler definition for
-    ``ginger.utils.log.AdminEmailHandler``, like this::
+    ``gingerdj.utils.log.AdminEmailHandler``, like this::
 
         "handlers": {
             "mail_admins": {
                 "level": "ERROR",
-                "class": "ginger.utils.log.AdminEmailHandler",
+                "class": "gingerdj.utils.log.AdminEmailHandler",
                 "include_html": True,
             },
         }
@@ -341,8 +341,8 @@ Python logging module <python:logging.handlers>`.
         "handlers": {
             "mail_admins": {
                 "level": "ERROR",
-                "class": "ginger.utils.log.AdminEmailHandler",
-                "email_backend": "ginger.core.mail.backends.filebased.EmailBackend",
+                "class": "gingerdj.utils.log.AdminEmailHandler",
+                "email_backend": "gingerdj.core.mail.backends.filebased.EmailBackend",
             },
         }
 
@@ -350,14 +350,14 @@ Python logging module <python:logging.handlers>`.
     :setting:`EMAIL_BACKEND` will be used.
 
     The ``reporter_class`` argument of ``AdminEmailHandler`` allows providing
-    an ``ginger.views.debug.ExceptionReporter`` subclass to customize the
+    an ``gingerdj.views.debug.ExceptionReporter`` subclass to customize the
     traceback text sent in the email body. You provide a string import path to
     the class you wish to use, like this::
 
         "handlers": {
             "mail_admins": {
                 "level": "ERROR",
-                "class": "ginger.utils.log.AdminEmailHandler",
+                "class": "gingerdj.utils.log.AdminEmailHandler",
                 "include_html": True,
                 "reporter_class": "somepackage.error_reporter.CustomErrorReporter",
             },
@@ -366,13 +366,13 @@ Python logging module <python:logging.handlers>`.
     .. method:: send_mail(subject, message, *args, **kwargs)
 
         Sends emails to admin users. To customize this behavior, you can
-        subclass the :class:`~ginger.utils.log.AdminEmailHandler` class and
+        subclass the :class:`~gingerdj.utils.log.AdminEmailHandler` class and
         override this method.
 
 Filters
 -------
 
-Ginger provides some log filters in addition to those provided by the Python
+GingerDJ provides some log filters in addition to those provided by the Python
 logging module.
 
 .. class:: CallbackFilter(callback)
@@ -382,11 +382,11 @@ logging module.
     passes through the filter. Handling of that record will not proceed if the
     callback returns False.
 
-    For instance, to filter out :exc:`~ginger.http.UnreadablePostError`
+    For instance, to filter out :exc:`~gingerdj.http.UnreadablePostError`
     (raised when a user cancels an upload) from the admin emails, you would
     create a filter function::
 
-        from ginger.http import UnreadablePostError
+        from gingerdj.http import UnreadablePostError
 
 
         def skip_unreadable_post(record):
@@ -402,7 +402,7 @@ logging module.
             # ...
             "filters": {
                 "skip_unreadable_posts": {
-                    "()": "ginger.utils.log.CallbackFilter",
+                    "()": "gingerdj.utils.log.CallbackFilter",
                     "callback": skip_unreadable_post,
                 },
             },
@@ -410,7 +410,7 @@ logging module.
                 "mail_admins": {
                     "level": "ERROR",
                     "filters": ["skip_unreadable_posts"],
-                    "class": "ginger.utils.log.AdminEmailHandler",
+                    "class": "gingerdj.utils.log.AdminEmailHandler",
                 },
             },
             # ...
@@ -428,14 +428,14 @@ logging module.
             # ...
             "filters": {
                 "require_debug_false": {
-                    "()": "ginger.utils.log.RequireDebugFalse",
+                    "()": "gingerdj.utils.log.RequireDebugFalse",
                 },
             },
             "handlers": {
                 "mail_admins": {
                     "level": "ERROR",
                     "filters": ["require_debug_false"],
-                    "class": "ginger.utils.log.AdminEmailHandler",
+                    "class": "gingerdj.utils.log.AdminEmailHandler",
                 },
             },
             # ...

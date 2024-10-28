@@ -1,6 +1,6 @@
-from ginger.db import DEFAULT_DB_ALIAS, connection
-from ginger.db.models.sql import Query
-from ginger.test import SimpleTestCase
+from gingerdj.db import DEFAULT_DB_ALIAS, connection
+from gingerdj.db.models.sql import Query
+from gingerdj.test import SimpleTestCase
 
 from .models import Item
 

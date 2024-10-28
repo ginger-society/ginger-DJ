@@ -1,8 +1,8 @@
-from ginger.contrib.gis.db import models
-from ginger.db import connection
-from ginger.db.models import Index
-from ginger.test import TransactionTestCase
-from ginger.test.utils import isolate_apps
+from gingerdj.contrib.gis.db import models
+from gingerdj.db import connection
+from gingerdj.db.models import Index
+from gingerdj.test import TransactionTestCase
+from gingerdj.test.utils import isolate_apps
 
 from .models import City
 

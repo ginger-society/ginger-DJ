@@ -1,8 +1,8 @@
 import datetime
 
-from ginger.forms import ChoiceField, Form, MultiWidget, RadioSelect, TextInput
-from ginger.test import override_settings
-from ginger.utils.safestring import mark_safe
+from gingerdj.forms import ChoiceField, Form, MultiWidget, RadioSelect, TextInput
+from gingerdj.test import override_settings
+from gingerdj.utils.safestring import mark_safe
 
 from .test_choicewidget import ChoiceWidgetTest
 

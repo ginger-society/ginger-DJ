@@ -4,14 +4,14 @@ Tests for geography support in PostGIS
 
 import os
 
-from ginger.contrib.gis.db import models
-from ginger.contrib.gis.db.models.functions import Area, Distance
-from ginger.contrib.gis.measure import D
-from ginger.core.exceptions import ValidationError
-from ginger.db import NotSupportedError, connection
-from ginger.db.models.functions import Cast
-from ginger.test import TestCase, skipIfDBFeature, skipUnlessDBFeature
-from ginger.test.utils import CaptureQueriesContext
+from gingerdj.contrib.gis.db import models
+from gingerdj.contrib.gis.db.models.functions import Area, Distance
+from gingerdj.contrib.gis.measure import D
+from gingerdj.core.exceptions import ValidationError
+from gingerdj.db import NotSupportedError, connection
+from gingerdj.db.models.functions import Cast
+from gingerdj.test import TestCase, skipIfDBFeature, skipUnlessDBFeature
+from gingerdj.test.utils import CaptureQueriesContext
 
 from ..utils import FuncTestMixin
 from .models import City, CityUnique, County, Zipcode
@@ -86,7 +86,7 @@ class GeographyTest(TestCase):
         "Testing LayerMapping support on models with geography fields."
         # There is a similar test in `layermap` that uses the same data set,
         # but the County model here is a bit different.
-        from ginger.contrib.gis.utils import LayerMapping
+        from gingerdj.contrib.gis.utils import LayerMapping
 
         # Getting the shapefile and mapping dictionary.
         shp_path = os.path.realpath(

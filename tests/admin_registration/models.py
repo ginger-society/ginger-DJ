@@ -2,7 +2,7 @@
 Tests for various ways of registering models with the admin site.
 """
 
-from ginger.db import models
+from gingerdj.db import models
 
 
 class Person(models.Model):

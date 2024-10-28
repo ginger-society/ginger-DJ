@@ -1,8 +1,8 @@
 import json
 
-from ginger.contrib.gis.geos import LinearRing, Point, Polygon
-from ginger.core import serializers
-from ginger.test import TestCase
+from gingerdj.contrib.gis.geos import LinearRing, Point, Polygon
+from gingerdj.core import serializers
+from gingerdj.test import TestCase
 
 from .models import City, MultiFields, PennsylvaniaCity
 
@@ -64,7 +64,7 @@ class GeoJSONSerializerTests(TestCase):
 
     def test_id_field_option(self):
         """
-        By default Ginger uses the pk of the object as the id for a feature.
+        By default GingerDJ uses the pk of the object as the id for a feature.
         The 'id_field' option can be used to specify a different field to use
         as the id.
         """

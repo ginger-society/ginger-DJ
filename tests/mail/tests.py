@@ -14,8 +14,8 @@ from smtplib import SMTP, SMTPException
 from ssl import SSLError
 from unittest import mock, skipUnless
 
-from ginger.core import mail
-from ginger.core.mail import (
+from gingerdj.core import mail
+from gingerdj.core.mail import (
     DNS_NAME,
     EmailMessage,
     EmailMultiAlternatives,
@@ -24,12 +24,12 @@ from ginger.core.mail import (
     send_mail,
     send_mass_mail,
 )
-from ginger.core.mail.backends import console, dummy, filebased, locmem, smtp
-from ginger.core.mail.message import BadHeaderError, sanitize_address
-from ginger.test import SimpleTestCase, override_settings
-from ginger.test.utils import requires_tz_support
-from ginger.utils.translation import gettext_lazy
-from ginger.utils.version import PY311
+from gingerdj.core.mail.backends import console, dummy, filebased, locmem, smtp
+from gingerdj.core.mail.message import BadHeaderError, sanitize_address
+from gingerdj.test import SimpleTestCase, override_settings
+from gingerdj.test.utils import requires_tz_support
+from gingerdj.utils.translation import gettext_lazy
+from gingerdj.utils.version import PY311
 
 try:
     from aiosmtpd.controller import Controller
@@ -65,7 +65,7 @@ class MailTests(HeadersCheckMixin, SimpleTestCase):
 
     def get_decoded_attachments(self, ginger_message):
         """
-        Encode the specified ginger.core.mail.message.EmailMessage, then decode
+        Encode the specified gingerdj.core.mail.message.EmailMessage, then decode
         it using Python's email.parser module and, for each attachment of the
         message, return a list of tuples with (filename, content, mimetype).
         """
@@ -92,7 +92,7 @@ class MailTests(HeadersCheckMixin, SimpleTestCase):
         self.assertEqual(message["From"], "from@example.com")
         self.assertEqual(message["To"], "to@example.com")
 
-    @mock.patch("ginger.core.mail.message.MIMEText.set_payload")
+    @mock.patch("gingerdj.core.mail.message.MIMEText.set_payload")
     def test_nonascii_as_string_with_ascii_charset(self, mock_set_payload):
         """Line length check should encode the payload supporting `surrogateescape`.
 
@@ -798,25 +798,25 @@ class MailTests(HeadersCheckMixin, SimpleTestCase):
     def test_backend_arg(self):
         """Test backend argument of mail.get_connection()"""
         self.assertIsInstance(
-            mail.get_connection("ginger.core.mail.backends.smtp.EmailBackend"),
+            mail.get_connection("gingerdj.core.mail.backends.smtp.EmailBackend"),
             smtp.EmailBackend,
         )
         self.assertIsInstance(
-            mail.get_connection("ginger.core.mail.backends.locmem.EmailBackend"),
+            mail.get_connection("gingerdj.core.mail.backends.locmem.EmailBackend"),
             locmem.EmailBackend,
         )
         self.assertIsInstance(
-            mail.get_connection("ginger.core.mail.backends.dummy.EmailBackend"),
+            mail.get_connection("gingerdj.core.mail.backends.dummy.EmailBackend"),
             dummy.EmailBackend,
         )
         self.assertIsInstance(
-            mail.get_connection("ginger.core.mail.backends.console.EmailBackend"),
+            mail.get_connection("gingerdj.core.mail.backends.console.EmailBackend"),
             console.EmailBackend,
         )
         with tempfile.TemporaryDirectory() as tmp_dir:
             self.assertIsInstance(
                 mail.get_connection(
-                    "ginger.core.mail.backends.filebased.EmailBackend",
+                    "gingerdj.core.mail.backends.filebased.EmailBackend",
                     file_path=tmp_dir,
                 ),
                 filebased.EmailBackend,
@@ -831,12 +831,12 @@ class MailTests(HeadersCheckMixin, SimpleTestCase):
             msg = "expected str, bytes or os.PathLike object, not object"
         with self.assertRaisesMessage(TypeError, msg):
             mail.get_connection(
-                "ginger.core.mail.backends.filebased.EmailBackend", file_path=object()
+                "gingerdj.core.mail.backends.filebased.EmailBackend", file_path=object()
             )
         self.assertIsInstance(mail.get_connection(), locmem.EmailBackend)
 
     @override_settings(
-        EMAIL_BACKEND="ginger.core.mail.backends.locmem.EmailBackend",
+        EMAIL_BACKEND="gingerdj.core.mail.backends.locmem.EmailBackend",
         ADMINS=[("nobody", "nobody@example.com")],
         MANAGERS=[("nobody", "nobody@example.com")],
     )
@@ -874,13 +874,15 @@ class MailTests(HeadersCheckMixin, SimpleTestCase):
         mail_admins("Admin message", "Content", connection=connection)
         self.assertEqual(mail.outbox, [])
         self.assertEqual(len(connection.test_outbox), 1)
-        self.assertEqual(connection.test_outbox[0].subject, "[Ginger] Admin message")
+        self.assertEqual(connection.test_outbox[0].subject, "[GingerDJ] Admin message")
 
         connection = mail.get_connection("mail.custombackend.EmailBackend")
         mail_managers("Manager message", "Content", connection=connection)
         self.assertEqual(mail.outbox, [])
         self.assertEqual(len(connection.test_outbox), 1)
-        self.assertEqual(connection.test_outbox[0].subject, "[Ginger] Manager message")
+        self.assertEqual(
+            connection.test_outbox[0].subject, "[GingerDJ] Manager message"
+        )
 
     def test_dont_mangle_from_in_body(self):
         # Regression for #13433 - Make sure that EmailMessage doesn't mangle
@@ -988,7 +990,7 @@ class MailTests(HeadersCheckMixin, SimpleTestCase):
         # The child message header is not base64 encoded
         self.assertIn("Child Subject", parent_s)
 
-        # Feature test: try attaching Ginger's EmailMessage object directly to the mail.
+        # Feature test: try attaching GingerDJ's EmailMessage object directly to the mail.
         parent_msg = EmailMessage(
             "Parent Subject",
             "Some parent body",
@@ -1174,9 +1176,9 @@ class MailTimeZoneTests(SimpleTestCase):
 
 class PythonGlobalState(SimpleTestCase):
     """
-    Tests for #12422 -- Ginger smarts (#2472/#11212) with charset of utf-8 text
+    Tests for #12422 -- GingerDJ smarts (#2472/#11212) with charset of utf-8 text
     parts shouldn't pollute global email Python package charset registry when
-    ginger.mail.message is imported.
+    gingerdj.mail.message is imported.
     """
 
     def test_utf8(self):
@@ -1357,7 +1359,7 @@ class BaseEmailBackendTests(HeadersCheckMixin):
         mail_managers("Subject", "Content", html_message="HTML Content")
         message = self.get_the_message()
 
-        self.assertEqual(message.get("subject"), "[Ginger] Subject")
+        self.assertEqual(message.get("subject"), "[GingerDJ] Subject")
         self.assertEqual(message.get_all("to"), ["nobody@example.com"])
         self.assertTrue(message.is_multipart())
         self.assertEqual(len(message.get_payload()), 2)
@@ -1372,7 +1374,7 @@ class BaseEmailBackendTests(HeadersCheckMixin):
         mail_admins("Subject", "Content", html_message="HTML Content")
         message = self.get_the_message()
 
-        self.assertEqual(message.get("subject"), "[Ginger] Subject")
+        self.assertEqual(message.get("subject"), "[GingerDJ] Subject")
         self.assertEqual(message.get_all("to"), ["nobody@example.com"])
         self.assertTrue(message.is_multipart())
         self.assertEqual(len(message.get_payload()), 2)
@@ -1392,12 +1394,12 @@ class BaseEmailBackendTests(HeadersCheckMixin):
         """
         mail_managers(gettext_lazy("Subject"), "Content")
         message = self.get_the_message()
-        self.assertEqual(message.get("subject"), "[Ginger] Subject")
+        self.assertEqual(message.get("subject"), "[GingerDJ] Subject")
 
         self.flush_mailbox()
         mail_admins(gettext_lazy("Subject"), "Content")
         message = self.get_the_message()
-        self.assertEqual(message.get("subject"), "[Ginger] Subject")
+        self.assertEqual(message.get("subject"), "[GingerDJ] Subject")
 
     @override_settings(ADMINS=[], MANAGERS=[])
     def test_empty_admins(self):
@@ -1482,21 +1484,21 @@ class BaseEmailBackendTests(HeadersCheckMixin):
         """
         Regression test for #15042
         """
-        self.assertTrue(send_mail("Subject", "Content", "tester", ["ginger"]))
+        self.assertTrue(send_mail("Subject", "Content", "tester", ["gingerdj"]))
         message = self.get_the_message()
         self.assertEqual(message.get("subject"), "Subject")
         self.assertEqual(message.get("from"), "tester")
-        self.assertEqual(message.get("to"), "ginger")
+        self.assertEqual(message.get("to"), "gingerdj")
 
     def test_lazy_addresses(self):
         """
         Email sending should support lazy email addresses (#24416).
         """
         _ = gettext_lazy
-        self.assertTrue(send_mail("Subject", "Content", _("tester"), [_("ginger")]))
+        self.assertTrue(send_mail("Subject", "Content", _("tester"), [_("gingerdj")]))
         message = self.get_the_message()
         self.assertEqual(message.get("from"), "tester")
-        self.assertEqual(message.get("to"), "ginger")
+        self.assertEqual(message.get("to"), "gingerdj")
 
         self.flush_mailbox()
         m = EmailMessage(
@@ -1548,7 +1550,7 @@ class BaseEmailBackendTests(HeadersCheckMixin):
 
 
 class LocmemBackendTests(BaseEmailBackendTests, SimpleTestCase):
-    email_backend = "ginger.core.mail.backends.locmem.EmailBackend"
+    email_backend = "gingerdj.core.mail.backends.locmem.EmailBackend"
 
     def get_mailbox_content(self):
         return [m.message() for m in mail.outbox]
@@ -1599,7 +1601,7 @@ class LocmemBackendTests(BaseEmailBackendTests, SimpleTestCase):
 
 
 class FileBackendTests(BaseEmailBackendTests, SimpleTestCase):
-    email_backend = "ginger.core.mail.backends.filebased.EmailBackend"
+    email_backend = "gingerdj.core.mail.backends.filebased.EmailBackend"
 
     def setUp(self):
         super().setUp()
@@ -1668,7 +1670,7 @@ class FileBackendPathLibTests(FileBackendTests):
 
 
 class ConsoleBackendTests(BaseEmailBackendTests, SimpleTestCase):
-    email_backend = "ginger.core.mail.backends.console.EmailBackend"
+    email_backend = "gingerdj.core.mail.backends.console.EmailBackend"
 
     def setUp(self):
         super().setUp()
@@ -1694,7 +1696,7 @@ class ConsoleBackendTests(BaseEmailBackendTests, SimpleTestCase):
         """
         s = StringIO()
         connection = mail.get_connection(
-            "ginger.core.mail.backends.console.EmailBackend", stream=s
+            "gingerdj.core.mail.backends.console.EmailBackend", stream=s
         )
         send_mail(
             "Subject",
@@ -1776,7 +1778,7 @@ class SMTPBackendTestsBase(SimpleTestCase):
 
 @skipUnless(HAS_AIOSMTPD, "No aiosmtpd library detected.")
 class SMTPBackendTests(BaseEmailBackendTests, SMTPBackendTestsBase):
-    email_backend = "ginger.core.mail.backends.smtp.EmailBackend"
+    email_backend = "gingerdj.core.mail.backends.smtp.EmailBackend"
 
     def setUp(self):
         super().setUp()
@@ -1930,7 +1932,9 @@ class SMTPBackendTests(BaseEmailBackendTests, SMTPBackendTestsBase):
 
     def test_connection_timeout_default(self):
         """The connection's timeout value is None by default."""
-        connection = mail.get_connection("ginger.core.mail.backends.smtp.EmailBackend")
+        connection = mail.get_connection(
+            "gingerdj.core.mail.backends.smtp.EmailBackend"
+        )
         self.assertIsNone(connection.timeout)
 
     def test_connection_timeout_custom(self):

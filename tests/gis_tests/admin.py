@@ -1,6 +1,6 @@
 try:
-    from ginger.contrib.gis import admin
+    from gingerdj.contrib.gis import admin
 except ImportError:
-    from ginger.contrib import admin
+    from gingerdj.contrib import admin
 
     admin.GISModelAdmin = admin.ModelAdmin

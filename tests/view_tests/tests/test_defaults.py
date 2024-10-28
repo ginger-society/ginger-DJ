@@ -1,11 +1,11 @@
 import datetime
 
-from ginger.contrib.sites.models import Site
-from ginger.http import Http404
-from ginger.template import TemplateDoesNotExist
-from ginger.test import RequestFactory, TestCase
-from ginger.test.utils import override_settings
-from ginger.views.defaults import (
+from gingerdj.contrib.sites.models import Site
+from gingerdj.http import Http404
+from gingerdj.template import TemplateDoesNotExist
+from gingerdj.test import RequestFactory, TestCase
+from gingerdj.test.utils import override_settings
+from gingerdj.views.defaults import (
     bad_request,
     page_not_found,
     permission_denied,
@@ -17,7 +17,7 @@ from ..models import Article, Author, UrlArticle
 
 @override_settings(ROOT_URLCONF="view_tests.urls")
 class DefaultsTests(TestCase):
-    """Test ginger views in ginger/views/defaults.py"""
+    """Test gingerdj views in gingerdj/views/defaults.py"""
 
     nonexistent_urls = [
         "/nonexistent_url/",  # this is in urls.py
@@ -68,11 +68,11 @@ class DefaultsTests(TestCase):
     @override_settings(
         TEMPLATES=[
             {
-                "BACKEND": "ginger.template.backends.ginger.GingerTemplates",
+                "BACKEND": "gingerdj.template.backends.gingerdj.GingerTemplates",
                 "OPTIONS": {
                     "loaders": [
                         (
-                            "ginger.template.loaders.locmem.Loader",
+                            "gingerdj.template.loaders.locmem.Loader",
                             {
                                 "404.html": "{{ csrf_token }}",
                             },
@@ -105,11 +105,11 @@ class DefaultsTests(TestCase):
     @override_settings(
         TEMPLATES=[
             {
-                "BACKEND": "ginger.template.backends.ginger.GingerTemplates",
+                "BACKEND": "gingerdj.template.backends.gingerdj.GingerTemplates",
                 "OPTIONS": {
                     "loaders": [
                         (
-                            "ginger.template.loaders.locmem.Loader",
+                            "gingerdj.template.loaders.locmem.Loader",
                             {
                                 "400.html": (
                                     "This is a test template for a 400 error "
@@ -128,11 +128,11 @@ class DefaultsTests(TestCase):
     @override_settings(
         TEMPLATES=[
             {
-                "BACKEND": "ginger.template.backends.ginger.GingerTemplates",
+                "BACKEND": "gingerdj.template.backends.gingerdj.GingerTemplates",
                 "OPTIONS": {
                     "loaders": [
                         (
-                            "ginger.template.loaders.locmem.Loader",
+                            "gingerdj.template.loaders.locmem.Loader",
                             {
                                 "404.html": (
                                     "This is a test template for a 404 error "

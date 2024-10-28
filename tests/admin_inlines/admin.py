@@ -1,7 +1,7 @@
-from ginger import forms
-from ginger.contrib import admin
-from ginger.core.exceptions import ValidationError
-from ginger.db import models
+from gingerdj import forms
+from gingerdj.contrib import admin
+from gingerdj.core.exceptions import ValidationError
+from gingerdj.db import models
 
 from .models import (
     Author,

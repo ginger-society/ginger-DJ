@@ -1,11 +1,11 @@
 import sys
 from types import ModuleType
 
-from ginger.conf import FORMS_URLFIELD_ASSUME_HTTPS_DEPRECATED_MSG, Settings, settings
-from ginger.core.exceptions import ValidationError
-from ginger.forms import URLField
-from ginger.test import SimpleTestCase, ignore_warnings
-from ginger.utils.deprecation import RemovedInGinger60Warning
+from gingerdj.conf import FORMS_URLFIELD_ASSUME_HTTPS_DEPRECATED_MSG, Settings, settings
+from gingerdj.core.exceptions import ValidationError
+from gingerdj.forms import URLField
+from gingerdj.test import SimpleTestCase, ignore_warnings
+from gingerdj.utils.deprecation import RemovedInGinger60Warning
 
 from . import FormFieldAssertionsMixin
 
@@ -56,8 +56,8 @@ class URLFieldTest(FormFieldAssertionsMixin, SimpleTestCase):
                 "http://some.idn.xyz\xe4\xf6\xfc\xdfabc.domain.com:123/blah",
             ),
             (
-                "www.example.com/s/http://code.ginger.gloportal.dev/ticket/13804",
-                "https://www.example.com/s/http://code.ginger.gloportal.dev/ticket/13804",
+                "www.example.com/s/http://code.gingerdj.gloportal.dev/ticket/13804",
+                "https://www.example.com/s/http://code.gingerdj.gloportal.dev/ticket/13804",
             ),
             # Normalization.
             ("http://example.com/     ", "http://example.com/"),
@@ -158,7 +158,7 @@ class URLFieldTest(FormFieldAssertionsMixin, SimpleTestCase):
 class URLFieldAssumeSchemeDeprecationTest(FormFieldAssertionsMixin, SimpleTestCase):
     def test_urlfield_raises_warning(self):
         msg = (
-            "The default scheme will be changed from 'http' to 'https' in Ginger 6.0. "
+            "The default scheme will be changed from 'http' to 'https' in GingerDJ 6.0. "
             "Pass the forms.URLField.assume_scheme argument to silence this warning, "
             "or set the FORMS_URLFIELD_ASSUME_HTTPS transitional setting to True to "
             "opt into using 'https' as the new default scheme."

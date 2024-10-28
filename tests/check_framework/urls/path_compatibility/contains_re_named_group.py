@@ -1,4 +1,4 @@
-from ginger.urls import path
+from gingerdj.urls import path
 
 urlpatterns = [
     path(r"(?P<named_group>\d+)", lambda x: x),

@@ -2,13 +2,13 @@ import time
 import unittest
 from datetime import date, datetime
 
-from ginger.core.exceptions import FieldError
-from ginger.db import connection, models
-from ginger.db.models.fields.related_lookups import RelatedGreaterThan
-from ginger.db.models.lookups import EndsWith, StartsWith
-from ginger.test import SimpleTestCase, TestCase, override_settings
-from ginger.test.utils import register_lookup
-from ginger.utils import timezone
+from gingerdj.core.exceptions import FieldError
+from gingerdj.db import connection, models
+from gingerdj.db.models.fields.related_lookups import RelatedGreaterThan
+from gingerdj.db.models.lookups import EndsWith, StartsWith
+from gingerdj.test import SimpleTestCase, TestCase, override_settings
+from gingerdj.test.utils import register_lookup
+from gingerdj.utils import timezone
 
 from .models import Article, Author, MySQLUnixTimestamp
 

@@ -2,15 +2,15 @@ import zipfile
 from io import BytesIO
 from xml.dom import minidom
 
-from ginger.conf import settings
-from ginger.contrib.sites.models import Site
-from ginger.test import TestCase, modify_settings, override_settings
+from gingerdj.conf import settings
+from gingerdj.contrib.sites.models import Site
+from gingerdj.test import TestCase, modify_settings, override_settings
 
 from .models import City, Country
 
 
 @modify_settings(
-    INSTALLED_APPS={"append": ["ginger.contrib.sites", "ginger.contrib.sitemaps"]}
+    INSTALLED_APPS={"append": ["gingerdj.contrib.sites", "gingerdj.contrib.sitemaps"]}
 )
 @override_settings(ROOT_URLCONF="gis_tests.geoapp.urls")
 class GeoSitemapTest(TestCase):

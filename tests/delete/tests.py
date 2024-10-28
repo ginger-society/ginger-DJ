@@ -1,10 +1,10 @@
 from math import ceil
 
-from ginger.db import connection, models
-from ginger.db.models import ProtectedError, Q, RestrictedError
-from ginger.db.models.deletion import Collector
-from ginger.db.models.sql.constants import GET_ITERATOR_CHUNK_SIZE
-from ginger.test import TestCase, skipIfDBFeature, skipUnlessDBFeature
+from gingerdj.db import connection, models
+from gingerdj.db.models import ProtectedError, Q, RestrictedError
+from gingerdj.db.models.deletion import Collector
+from gingerdj.db.models.sql.constants import GET_ITERATOR_CHUNK_SIZE
+from gingerdj.test import TestCase, skipIfDBFeature, skipUnlessDBFeature
 
 from .models import (
     B1,

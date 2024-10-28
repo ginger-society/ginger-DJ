@@ -10,7 +10,7 @@ field, which specifies the ``Reporter``'s position for the given article
 (e.g. "Staff writer").
 """
 
-from ginger.db import models
+from gingerdj.db import models
 
 
 class Reporter(models.Model):

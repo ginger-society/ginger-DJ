@@ -2,11 +2,11 @@ import operator
 import uuid
 from unittest import mock
 
-from ginger import forms
-from ginger.core import serializers
-from ginger.core.exceptions import ValidationError
-from ginger.core.serializers.json import GingerJSONEncoder
-from ginger.db import (
+from gingerdj import forms
+from gingerdj.core import serializers
+from gingerdj.core.exceptions import ValidationError
+from gingerdj.core.serializers.json import GingerJSONEncoder
+from gingerdj.db import (
     DataError,
     IntegrityError,
     NotSupportedError,
@@ -14,7 +14,7 @@ from ginger.db import (
     connection,
     models,
 )
-from ginger.db.models import (
+from gingerdj.db.models import (
     Count,
     ExpressionWrapper,
     F,
@@ -26,17 +26,17 @@ from ginger.db.models import (
     Transform,
     Value,
 )
-from ginger.db.models.expressions import RawSQL
-from ginger.db.models.fields.json import (
+from gingerdj.db.models.expressions import RawSQL
+from gingerdj.db.models.fields.json import (
     KT,
     KeyTextTransform,
     KeyTransform,
     KeyTransformFactory,
     KeyTransformTextLookupMixin,
 )
-from ginger.db.models.functions import Cast
-from ginger.test import SimpleTestCase, TestCase, skipIfDBFeature, skipUnlessDBFeature
-from ginger.test.utils import CaptureQueriesContext
+from gingerdj.db.models.functions import Cast
+from gingerdj.test import SimpleTestCase, TestCase, skipIfDBFeature, skipUnlessDBFeature
+from gingerdj.test.utils import CaptureQueriesContext
 
 from .models import CustomJSONDecoder, JSONModel, NullableJSONModel, RelatedJSONModel
 
@@ -71,7 +71,7 @@ class TestMethods(SimpleTestCase):
     def test_deconstruct(self):
         field = models.JSONField()
         name, path, args, kwargs = field.deconstruct()
-        self.assertEqual(path, "ginger.db.models.JSONField")
+        self.assertEqual(path, "gingerdj.db.models.JSONField")
         self.assertEqual(args, [])
         self.assertEqual(kwargs, {})
 
@@ -193,10 +193,10 @@ class TestSerialization(SimpleTestCase):
 
     def test_xml_serialization(self):
         test_xml_data = (
-            '<ginger-objects version="1.0">'
+            '<gingerdj-objects version="1.0">'
             '<object model="model_fields.nullablejsonmodel">'
             '<field name="value" type="JSONField">%s'
-            "</field></object></ginger-objects>"
+            "</field></object></gingerdj-objects>"
         )
         for value, serialized in self.test_values:
             with self.subTest(value=value):

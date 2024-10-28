@@ -2,9 +2,9 @@ import pickle
 import sys
 import unittest
 
-from ginger.test import SimpleTestCase
-from ginger.test.runner import RemoteTestResult
-from ginger.utils.version import PY311, PY312
+from gingerdj.test import SimpleTestCase
+from gingerdj.test.runner import RemoteTestResult
+from gingerdj.utils.version import PY311, PY312
 
 try:
     import tblib.pickling_support

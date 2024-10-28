@@ -1,16 +1,16 @@
 import re
 
-from ginger.forms import CharField, Form, Media
-from ginger.http import HttpRequest, HttpResponse
-from ginger.middleware.csrf import (
+from gingerdj.forms import CharField, Form, Media
+from gingerdj.http import HttpRequest, HttpResponse
+from gingerdj.middleware.csrf import (
     CSRF_TOKEN_LENGTH,
     CsrfViewMiddleware,
     _unmask_cipher_token,
     get_token,
 )
-from ginger.template import TemplateDoesNotExist, TemplateSyntaxError
-from ginger.template.backends.dummy import TemplateStrings
-from ginger.test import SimpleTestCase
+from gingerdj.template import TemplateDoesNotExist, TemplateSyntaxError
+from gingerdj.template.backends.dummy import TemplateStrings
+from gingerdj.test import SimpleTestCase
 
 
 class TemplateStringsTests(SimpleTestCase):

@@ -1,21 +1,21 @@
-from ginger.contrib.flatpages.models import FlatPage
-from ginger.contrib.sites.models import Site
-from ginger.test import Client, TestCase, modify_settings, override_settings
+from gingerdj.contrib.flatpages.models import FlatPage
+from gingerdj.contrib.sites.models import Site
+from gingerdj.test import Client, TestCase, modify_settings, override_settings
 
 from .settings import FLATPAGES_TEMPLATES
 
 
-@modify_settings(INSTALLED_APPS={"append": "ginger.contrib.flatpages"})
+@modify_settings(INSTALLED_APPS={"append": "gingerdj.contrib.flatpages"})
 @override_settings(
     LOGIN_URL="/accounts/login/",
     MIDDLEWARE=[
-        "ginger.middleware.common.CommonMiddleware",
-        "ginger.middleware.csrf.CsrfViewMiddleware",
-        "ginger.contrib.messages.middleware.MessageMiddleware",
-        "ginger.contrib.flatpages.middleware.FlatpageFallbackMiddleware",
+        "gingerdj.middleware.common.CommonMiddleware",
+        "gingerdj.middleware.csrf.CsrfViewMiddleware",
+        "gingerdj.contrib.messages.middleware.MessageMiddleware",
+        "gingerdj.contrib.flatpages.middleware.FlatpageFallbackMiddleware",
     ],
     ROOT_URLCONF="flatpages_tests.urls",
-    CSRF_FAILURE_VIEW="ginger.views.csrf.csrf_failure",
+    CSRF_FAILURE_VIEW="gingerdj.views.csrf.csrf_failure",
     TEMPLATES=FLATPAGES_TEMPLATES,
     SITE_ID=1,
 )

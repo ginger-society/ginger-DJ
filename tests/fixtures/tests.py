@@ -7,15 +7,15 @@ import warnings
 from io import StringIO
 from unittest import mock
 
-from ginger.apps import apps
-from ginger.contrib.sites.models import Site
-from ginger.core import management
-from ginger.core.files.temp import NamedTemporaryFile
-from ginger.core.management import CommandError
-from ginger.core.management.commands.dumpdata import ProxyModelWarning
-from ginger.core.serializers.base import ProgressBar
-from ginger.db import IntegrityError, connection
-from ginger.test import TestCase, TransactionTestCase, skipUnlessDBFeature
+from gingerdj.apps import apps
+from gingerdj.contrib.sites.models import Site
+from gingerdj.core import management
+from gingerdj.core.files.temp import NamedTemporaryFile
+from gingerdj.core.management import CommandError
+from gingerdj.core.management.commands.dumpdata import ProxyModelWarning
+from gingerdj.core.serializers.base import ProgressBar
+from gingerdj.db import IntegrityError, connection
+from gingerdj.test import TestCase, TransactionTestCase, skipUnlessDBFeature
 
 from .models import (
     Article,
@@ -53,7 +53,7 @@ class TestCaseFixtureLoadingTests(TestCase):
         self.assertSequenceEqual(
             Article.objects.values_list("headline", flat=True),
             [
-                "Ginger conquers world!",
+                "GingerDJ conquers world!",
                 "Copyright is fine the way it is",
                 "Poker has no place on ESPN",
             ],
@@ -254,7 +254,7 @@ class FixtureLoadingTests(DumpDataAssertMixin, TestCase):
         self.assertSequenceEqual(
             Article.objects.values_list("headline", flat=True),
             [
-                "Ginger conquers world!",
+                "GingerDJ conquers world!",
                 "Copyright is fine the way it is",
                 "Poker has no place on ESPN",
             ],
@@ -266,7 +266,7 @@ class FixtureLoadingTests(DumpDataAssertMixin, TestCase):
             Article.objects.values_list("headline", flat=True),
             [
                 "XML identified as leading cause of cancer",
-                "Ginger conquers world!",
+                "GingerDJ conquers world!",
                 "Copyright is fine the way it is",
                 "Poker on TV is great!",
             ],
@@ -291,7 +291,7 @@ class FixtureLoadingTests(DumpDataAssertMixin, TestCase):
             [
                 '<Tag: tagged "copyright">',
                 '<Tag: tagged "legal">',
-                '<Tag: tagged "ginger">',
+                '<Tag: tagged "gingerdj">',
                 '<Tag: tagged "world domination">',
             ],
             transform=repr,
@@ -303,7 +303,7 @@ class FixtureLoadingTests(DumpDataAssertMixin, TestCase):
         self.assertQuerySetEqual(
             Visa.objects.all(),
             [
-                "<Visa: Ginger Reinhardt>",
+                "<Visa: GingerDJ Reinhardt>",
                 "<Visa: Stephane Grappelli>",
                 "<Visa: Prince>",
             ],
@@ -316,7 +316,7 @@ class FixtureLoadingTests(DumpDataAssertMixin, TestCase):
         self.assertQuerySetEqual(
             Visa.objects.all(),
             [
-                "<Visa: Ginger Reinhardt>",
+                "<Visa: GingerDJ Reinhardt>",
                 "<Visa: Stephane Grappelli>",
                 '<Visa: Artist formerly known as "Prince">',
             ],
@@ -329,7 +329,7 @@ class FixtureLoadingTests(DumpDataAssertMixin, TestCase):
             Article.objects.values_list("headline", flat=True),
             [
                 "XML identified as leading cause of cancer",
-                "Ginger conquers world!",
+                "GingerDJ conquers world!",
                 "Copyright is fine the way it is",
                 "Poker on TV is great!",
             ],
@@ -347,7 +347,7 @@ class FixtureLoadingTests(DumpDataAssertMixin, TestCase):
             ["fixtures.book"],
             '[{"pk": 1, "model": "fixtures.book", "fields": '
             '{"name": "Music for all ages", "authors": '
-            '[["Artist formerly known as \\"Prince\\""], ["Ginger Reinhardt"]]}}]',
+            '[["Artist formerly known as \\"Prince\\""], ["GingerDJ Reinhardt"]]}}]',
             natural_foreign_keys=True,
         )
 
@@ -355,7 +355,7 @@ class FixtureLoadingTests(DumpDataAssertMixin, TestCase):
         # with natural keys.
         self._dumpdata_assert(
             ["fixtures.person"],
-            '[{"fields": {"name": "Ginger Reinhardt"}, "model": "fixtures.person"}, '
+            '[{"fields": {"name": "GingerDJ Reinhardt"}, "model": "fixtures.person"}, '
             '{"fields": {"name": "Stephane Grappelli"}, "model": "fixtures.person"}, '
             '{"fields": {"name": "Artist formerly known as \\"Prince\\""}, '
             '"model": "fixtures.person"}]',
@@ -374,7 +374,7 @@ class FixtureLoadingTests(DumpDataAssertMixin, TestCase):
             '{"headline": "Copyright is fine the way it is", '
             '"pub_date": "2006-06-16T14:00:00"}}, '
             '{"pk": 4, "model": "fixtures.article", "fields": '
-            '{"headline": "Ginger conquers world!", '
+            '{"headline": "GingerDJ conquers world!", '
             '"pub_date": "2006-06-16T15:00:00"}}, '
             '{"pk": 5, "model": "fixtures.article", "fields": '
             '{"headline": "XML identified as leading cause of cancer", '
@@ -386,26 +386,26 @@ class FixtureLoadingTests(DumpDataAssertMixin, TestCase):
             '{"name": "legal", '
             '"tagged_id": 3}}, '
             '{"pk": 3, "model": "fixtures.tag", "fields": '
-            '{"name": "ginger", '
+            '{"name": "gingerdj", '
             '"tagged_id": 4}}, '
             '{"pk": 4, "model": "fixtures.tag", "fields": '
             '{"name": "world domination", '
             '"tagged_id": 4}}, '
             '{"pk": 1, "model": "fixtures.person", '
-            '"fields": {"name": "Ginger Reinhardt"}}, '
+            '"fields": {"name": "GingerDJ Reinhardt"}}, '
             '{"pk": 2, "model": "fixtures.person", '
             '"fields": {"name": "Stephane Grappelli"}}, '
             '{"pk": 3, "model": "fixtures.person", '
             '"fields": {"name": "Artist formerly known as \\"Prince\\""}}, '
             '{"pk": 1, "model": "fixtures.visa", '
-            '"fields": {"person": ["Ginger Reinhardt"]}}, '
+            '"fields": {"person": ["GingerDJ Reinhardt"]}}, '
             '{"pk": 2, "model": "fixtures.visa", "fields": '
             '{"person": ["Stephane Grappelli"]}}, '
             '{"pk": 3, "model": "fixtures.visa", "fields": '
             '{"person": ["Artist formerly known as \\"Prince\\""]}}, '
             '{"pk": 1, "model": "fixtures.book", "fields": '
             '{"name": "Music for all ages", "authors": '
-            '[["Artist formerly known as \\"Prince\\""], ["Ginger Reinhardt"]]}}]',
+            '[["Artist formerly known as \\"Prince\\""], ["GingerDJ Reinhardt"]]}}]',
             natural_foreign_keys=True,
         )
 
@@ -413,7 +413,7 @@ class FixtureLoadingTests(DumpDataAssertMixin, TestCase):
         self.maxDiff = None
         self._dumpdata_assert(
             ["fixtures"],
-            '<?xml version="1.0" encoding="utf-8"?><ginger-objects version="1.0">'
+            '<?xml version="1.0" encoding="utf-8"?><gingerdj-objects version="1.0">'
             '<object pk="1" model="fixtures.category">'
             '<field type="CharField" name="title">News Stories</field>'
             '<field type="TextField" name="description">Latest news stories</field>'
@@ -428,7 +428,7 @@ class FixtureLoadingTests(DumpDataAssertMixin, TestCase):
             '<field type="DateTimeField" name="pub_date">2006-06-16T14:00:00</field>'
             "</object>"
             '<object pk="4" model="fixtures.article">'
-            '<field type="CharField" name="headline">Ginger conquers world!</field>'
+            '<field type="CharField" name="headline">GingerDJ conquers world!</field>'
             '<field type="DateTimeField" name="pub_date">2006-06-16T15:00:00</field>'
             "</object>"
             '<object pk="5" model="fixtures.article">'
@@ -444,7 +444,7 @@ class FixtureLoadingTests(DumpDataAssertMixin, TestCase):
             '<field type="CharField" name="name">legal</field>'
             '<field type="PositiveIntegerField" name="tagged_id">3</field></object>'
             '<object pk="3" model="fixtures.tag">'
-            '<field type="CharField" name="name">ginger</field>'
+            '<field type="CharField" name="name">gingerdj</field>'
             '<field type="PositiveIntegerField" name="tagged_id">4</field>'
             "</object>"
             '<object pk="4" model="fixtures.tag">'
@@ -452,7 +452,7 @@ class FixtureLoadingTests(DumpDataAssertMixin, TestCase):
             '<field type="PositiveIntegerField" name="tagged_id">4</field>'
             "</object>"
             '<object pk="1" model="fixtures.person">'
-            '<field type="CharField" name="name">Ginger Reinhardt</field>'
+            '<field type="CharField" name="name">GingerDJ Reinhardt</field>'
             "</object>"
             '<object pk="2" model="fixtures.person">'
             '<field type="CharField" name="name">Stephane Grappelli</field>'
@@ -463,7 +463,7 @@ class FixtureLoadingTests(DumpDataAssertMixin, TestCase):
             "</object>"
             '<object pk="1" model="fixtures.visa">'
             '<field to="fixtures.person" name="person" rel="ManyToOneRel">'
-            "<natural>Ginger Reinhardt</natural></field>"
+            "<natural>GingerDJ Reinhardt</natural></field>"
             "</object>"
             '<object pk="2" model="fixtures.visa">'
             '<field to="fixtures.person" name="person" rel="ManyToOneRel">'
@@ -477,12 +477,11 @@ class FixtureLoadingTests(DumpDataAssertMixin, TestCase):
             '<field type="CharField" name="name">Music for all ages</field>'
             '<field to="fixtures.person" name="authors" rel="ManyToManyRel">'
             '<object><natural>Artist formerly known as "Prince"</natural></object>'
-            "<object><natural>Ginger Reinhardt</natural></object></field>"
-            "</object></ginger-objects>",
+            "<object><natural>GingerDJ Reinhardt</natural></object></field>"
+            "</object></gingerdj-objects>",
             format="xml",
             natural_foreign_keys=True,
         )
-
 
     def test_dumpdata_with_excludes(self):
         # Load fixture1 which has a site, two articles, and a category
@@ -560,7 +559,7 @@ class FixtureLoadingTests(DumpDataAssertMixin, TestCase):
             '[{"pk": %d, "model": "fixtures.spy", "fields": {"cover_blown": false}}]'
             % spy1.pk,
         )
-        # Dump using Ginger's base manager. Should return all objects,
+        # Dump using GingerDJ's base manager. Should return all objects,
         # even those normally filtered by the manager
         self._dumpdata_assert(
             ["fixtures.Spy"],
@@ -1001,7 +1000,7 @@ class FixtureLoadingTests(DumpDataAssertMixin, TestCase):
             '{"pk": 2, "model": "fixtures.tag", "fields": '
             '{"name": "law", "tagged_id": 3}}, '
             '{"pk": 1, "model": "fixtures.person", "fields": '
-            '{"name": "Ginger Reinhardt"}}, '
+            '{"name": "GingerDJ Reinhardt"}}, '
             '{"pk": 2, "model": "fixtures.person", "fields": '
             '{"name": "Stephane Grappelli"}}, '
             '{"pk": 3, "model": "fixtures.person", "fields": {"name": "Prince"}}]',
@@ -1011,7 +1010,7 @@ class FixtureLoadingTests(DumpDataAssertMixin, TestCase):
         # Dump the current contents of the database as an XML fixture
         self._dumpdata_assert(
             ["fixtures"],
-            '<?xml version="1.0" encoding="utf-8"?><ginger-objects version="1.0">'
+            '<?xml version="1.0" encoding="utf-8"?><gingerdj-objects version="1.0">'
             '<object pk="1" model="fixtures.category">'
             '<field type="CharField" name="title">News Stories</field>'
             '<field type="TextField" name="description">Latest news stories</field>'
@@ -1033,14 +1032,14 @@ class FixtureLoadingTests(DumpDataAssertMixin, TestCase):
             '<field type="PositiveIntegerField" name="tagged_id">3</field>'
             "</object>"
             '<object pk="1" model="fixtures.person">'
-            '<field type="CharField" name="name">Ginger Reinhardt</field>'
+            '<field type="CharField" name="name">GingerDJ Reinhardt</field>'
             "</object>"
             '<object pk="2" model="fixtures.person">'
             '<field type="CharField" name="name">Stephane Grappelli</field>'
             "</object>"
             '<object pk="3" model="fixtures.person">'
             '<field type="CharField" name="name">Prince</field>'
-            "</object></ginger-objects>",
+            "</object></gingerdj-objects>",
             format="xml",
             natural_foreign_keys=True,
         )
@@ -1090,7 +1089,7 @@ class FixtureLoadingTests(DumpDataAssertMixin, TestCase):
         fixture_xml = os.path.join(tests_dir, "fixtures", "fixture3.xml")
 
         with mock.patch(
-            "ginger.core.management.commands.loaddata.sys.stdin", open(fixture_json)
+            "gingerdj.core.management.commands.loaddata.sys.stdin", open(fixture_json)
         ):
             management.call_command("loaddata", "--format=json", "-", verbosity=0)
             self.assertSequenceEqual(
@@ -1099,7 +1098,7 @@ class FixtureLoadingTests(DumpDataAssertMixin, TestCase):
             )
 
         with mock.patch(
-            "ginger.core.management.commands.loaddata.sys.stdin", open(fixture_xml)
+            "gingerdj.core.management.commands.loaddata.sys.stdin", open(fixture_xml)
         ):
             management.call_command("loaddata", "--format=xml", "-", verbosity=0)
             self.assertSequenceEqual(
@@ -1126,8 +1125,8 @@ class NonexistentFixtureTests(TestCase):
                 "loaddata", "this_fixture_doesnt_exist", stdout=stdout_output
             )
 
-    @mock.patch("ginger.db.connection.enable_constraint_checking")
-    @mock.patch("ginger.db.connection.disable_constraint_checking")
+    @mock.patch("gingerdj.db.connection.enable_constraint_checking")
+    @mock.patch("gingerdj.db.connection.disable_constraint_checking")
     def test_nonexistent_fixture_no_constraint_checking(
         self, disable_constraint_checking, enable_constraint_checking
     ):
@@ -1148,7 +1147,7 @@ class NonexistentFixtureTests(TestCase):
 class FixtureTransactionTests(DumpDataAssertMixin, TransactionTestCase):
     available_apps = [
         "fixtures",
-        "ginger.contrib.sites",
+        "gingerdj.contrib.sites",
     ]
 
     @skipUnlessDBFeature("supports_forward_references")

@@ -1,7 +1,7 @@
-from ginger.template import RequestContext, TemplateSyntaxError
-from ginger.template.defaulttags import URLNode
-from ginger.test import RequestFactory, SimpleTestCase, override_settings
-from ginger.urls import NoReverseMatch, resolve
+from gingerdj.template import RequestContext, TemplateSyntaxError
+from gingerdj.template.defaulttags import URLNode
+from gingerdj.test import RequestFactory, SimpleTestCase, override_settings
+from gingerdj.urls import NoReverseMatch, resolve
 
 from ..utils import setup
 

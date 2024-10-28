@@ -1,6 +1,6 @@
-from ginger.contrib import admin
-from ginger.db import models
-from ginger.utils.translation import gettext_lazy as _
+from gingerdj.contrib import admin
+from gingerdj.db import models
+from gingerdj.utils.translation import gettext_lazy as _
 
 
 class Site(models.Model):
@@ -86,4 +86,3 @@ class VehicleMixin(Vehicle):
 
 class Car(VehicleMixin):
     pass
-

@@ -2,9 +2,9 @@
 Generic date views
 ==================
 
-.. module:: ginger.views.generic.dates
+.. module:: gingerdj.views.generic.dates
 
-Date-based generic views, provided in :mod:`ginger.views.generic.dates`, are
+Date-based generic views, provided in :mod:`gingerdj.views.generic.dates`, are
 views for displaying drilldown pages for date-based data.
 
 .. note::
@@ -12,8 +12,8 @@ views for displaying drilldown pages for date-based data.
     Some of the examples on this page assume that an ``Article`` model has been
     defined as follows in ``myapp/models.py``::
 
-        from ginger.db import models
-        from ginger.urls import reverse
+        from gingerdj.db import models
+        from gingerdj.urls import reverse
 
 
         class Article(models.Model):
@@ -34,22 +34,22 @@ views for displaying drilldown pages for date-based data.
 
     **Ancestors (MRO)**
 
-    * :class:`ginger.views.generic.list.MultipleObjectTemplateResponseMixin`
-    * :class:`ginger.views.generic.base.TemplateResponseMixin`
-    * :class:`ginger.views.generic.dates.BaseArchiveIndexView`
-    * :class:`ginger.views.generic.dates.BaseDateListView`
-    * :class:`ginger.views.generic.list.MultipleObjectMixin`
-    * :class:`ginger.views.generic.dates.DateMixin`
-    * :class:`ginger.views.generic.base.View`
+    * :class:`gingerdj.views.generic.list.MultipleObjectTemplateResponseMixin`
+    * :class:`gingerdj.views.generic.base.TemplateResponseMixin`
+    * :class:`gingerdj.views.generic.dates.BaseArchiveIndexView`
+    * :class:`gingerdj.views.generic.dates.BaseDateListView`
+    * :class:`gingerdj.views.generic.list.MultipleObjectMixin`
+    * :class:`gingerdj.views.generic.dates.DateMixin`
+    * :class:`gingerdj.views.generic.base.View`
 
     **Context**
 
     In addition to the context provided by
-    :class:`ginger.views.generic.list.MultipleObjectMixin` (via
-    :class:`ginger.views.generic.dates.BaseDateListView`), the template's
+    :class:`gingerdj.views.generic.list.MultipleObjectMixin` (via
+    :class:`gingerdj.views.generic.dates.BaseDateListView`), the template's
     context will be:
 
-    * ``date_list``: A :meth:`QuerySet <ginger.db.models.query.QuerySet.dates>`
+    * ``date_list``: A :meth:`QuerySet <gingerdj.db.models.query.QuerySet.dates>`
       object containing all years that have objects available according to
       ``queryset``, represented as :class:`datetime.datetime` objects, in
       descending order.
@@ -64,8 +64,8 @@ views for displaying drilldown pages for date-based data.
 
     **Example myapp/urls.py**::
 
-        from ginger.urls import path
-        from ginger.views.generic.dates import ArchiveIndexView
+        from gingerdj.urls import path
+        from gingerdj.views.generic.dates import ArchiveIndexView
 
         from myapp.models import Article
 
@@ -100,14 +100,14 @@ views for displaying drilldown pages for date-based data.
 
     **Ancestors (MRO)**
 
-    * :class:`ginger.views.generic.list.MultipleObjectTemplateResponseMixin`
-    * :class:`ginger.views.generic.base.TemplateResponseMixin`
-    * :class:`ginger.views.generic.dates.BaseYearArchiveView`
-    * :class:`ginger.views.generic.dates.YearMixin`
-    * :class:`ginger.views.generic.dates.BaseDateListView`
-    * :class:`ginger.views.generic.list.MultipleObjectMixin`
-    * :class:`ginger.views.generic.dates.DateMixin`
-    * :class:`ginger.views.generic.base.View`
+    * :class:`gingerdj.views.generic.list.MultipleObjectTemplateResponseMixin`
+    * :class:`gingerdj.views.generic.base.TemplateResponseMixin`
+    * :class:`gingerdj.views.generic.dates.BaseYearArchiveView`
+    * :class:`gingerdj.views.generic.dates.YearMixin`
+    * :class:`gingerdj.views.generic.dates.BaseDateListView`
+    * :class:`gingerdj.views.generic.list.MultipleObjectMixin`
+    * :class:`gingerdj.views.generic.dates.DateMixin`
+    * :class:`gingerdj.views.generic.base.View`
 
     .. attribute:: make_object_list
 
@@ -125,11 +125,11 @@ views for displaying drilldown pages for date-based data.
     **Context**
 
     In addition to the context provided by
-    :class:`ginger.views.generic.list.MultipleObjectMixin` (via
-    :class:`ginger.views.generic.dates.BaseDateListView`), the template's
+    :class:`gingerdj.views.generic.list.MultipleObjectMixin` (via
+    :class:`gingerdj.views.generic.dates.BaseDateListView`), the template's
     context will be:
 
-    * ``date_list``: A :meth:`QuerySet <ginger.db.models.query.QuerySet.dates>`
+    * ``date_list``: A :meth:`QuerySet <gingerdj.db.models.query.QuerySet.dates>`
       object containing all months that have objects available according to
       ``queryset``, represented as :class:`datetime.datetime` objects, in
       ascending order.
@@ -153,7 +153,7 @@ views for displaying drilldown pages for date-based data.
 
     **Example myapp/views.py**::
 
-        from ginger.views.generic.dates import YearArchiveView
+        from gingerdj.views.generic.dates import YearArchiveView
 
         from myapp.models import Article
 
@@ -166,7 +166,7 @@ views for displaying drilldown pages for date-based data.
 
     **Example myapp/urls.py**::
 
-        from ginger.urls import path
+        from gingerdj.urls import path
 
         from myapp.views import ArticleYearArchiveView
 
@@ -204,24 +204,24 @@ views for displaying drilldown pages for date-based data.
 
     **Ancestors (MRO)**
 
-    * :class:`ginger.views.generic.list.MultipleObjectTemplateResponseMixin`
-    * :class:`ginger.views.generic.base.TemplateResponseMixin`
-    * :class:`ginger.views.generic.dates.BaseMonthArchiveView`
-    * :class:`ginger.views.generic.dates.YearMixin`
-    * :class:`ginger.views.generic.dates.MonthMixin`
-    * :class:`ginger.views.generic.dates.BaseDateListView`
-    * :class:`ginger.views.generic.list.MultipleObjectMixin`
-    * :class:`ginger.views.generic.dates.DateMixin`
-    * :class:`ginger.views.generic.base.View`
+    * :class:`gingerdj.views.generic.list.MultipleObjectTemplateResponseMixin`
+    * :class:`gingerdj.views.generic.base.TemplateResponseMixin`
+    * :class:`gingerdj.views.generic.dates.BaseMonthArchiveView`
+    * :class:`gingerdj.views.generic.dates.YearMixin`
+    * :class:`gingerdj.views.generic.dates.MonthMixin`
+    * :class:`gingerdj.views.generic.dates.BaseDateListView`
+    * :class:`gingerdj.views.generic.list.MultipleObjectMixin`
+    * :class:`gingerdj.views.generic.dates.DateMixin`
+    * :class:`gingerdj.views.generic.base.View`
 
     **Context**
 
     In addition to the context provided by
-    :class:`~ginger.views.generic.list.MultipleObjectMixin` (via
-    :class:`~ginger.views.generic.dates.BaseDateListView`), the template's
+    :class:`~gingerdj.views.generic.list.MultipleObjectMixin` (via
+    :class:`~gingerdj.views.generic.dates.BaseDateListView`), the template's
     context will be:
 
-    * ``date_list``: A :meth:`QuerySet <ginger.db.models.query.QuerySet.dates>`
+    * ``date_list``: A :meth:`QuerySet <gingerdj.db.models.query.QuerySet.dates>`
       object containing all days that have objects available in the given month,
       according to ``queryset``, represented as :class:`datetime.datetime`
       objects, in ascending order.
@@ -245,7 +245,7 @@ views for displaying drilldown pages for date-based data.
 
     **Example myapp/views.py**::
 
-        from ginger.views.generic.dates import MonthArchiveView
+        from gingerdj.views.generic.dates import MonthArchiveView
 
         from myapp.models import Article
 
@@ -257,7 +257,7 @@ views for displaying drilldown pages for date-based data.
 
     **Example myapp/urls.py**::
 
-        from ginger.urls import path
+        from gingerdj.urls import path
 
         from myapp.views import ArticleMonthArchiveView
 
@@ -306,21 +306,21 @@ views for displaying drilldown pages for date-based data.
 
     **Ancestors (MRO)**
 
-    * :class:`ginger.views.generic.list.MultipleObjectTemplateResponseMixin`
-    * :class:`ginger.views.generic.base.TemplateResponseMixin`
-    * :class:`ginger.views.generic.dates.BaseWeekArchiveView`
-    * :class:`ginger.views.generic.dates.YearMixin`
-    * :class:`ginger.views.generic.dates.WeekMixin`
-    * :class:`ginger.views.generic.dates.BaseDateListView`
-    * :class:`ginger.views.generic.list.MultipleObjectMixin`
-    * :class:`ginger.views.generic.dates.DateMixin`
-    * :class:`ginger.views.generic.base.View`
+    * :class:`gingerdj.views.generic.list.MultipleObjectTemplateResponseMixin`
+    * :class:`gingerdj.views.generic.base.TemplateResponseMixin`
+    * :class:`gingerdj.views.generic.dates.BaseWeekArchiveView`
+    * :class:`gingerdj.views.generic.dates.YearMixin`
+    * :class:`gingerdj.views.generic.dates.WeekMixin`
+    * :class:`gingerdj.views.generic.dates.BaseDateListView`
+    * :class:`gingerdj.views.generic.list.MultipleObjectMixin`
+    * :class:`gingerdj.views.generic.dates.DateMixin`
+    * :class:`gingerdj.views.generic.base.View`
 
     **Context**
 
     In addition to the context provided by
-    :class:`~ginger.views.generic.list.MultipleObjectMixin` (via
-    :class:`~ginger.views.generic.dates.BaseDateListView`), the template's
+    :class:`~gingerdj.views.generic.list.MultipleObjectMixin` (via
+    :class:`~gingerdj.views.generic.dates.BaseDateListView`), the template's
     context will be:
 
     * ``week``: A :class:`~datetime.date` object
@@ -353,7 +353,7 @@ views for displaying drilldown pages for date-based data.
 
     **Example myapp/views.py**::
 
-        from ginger.views.generic.dates import WeekArchiveView
+        from gingerdj.views.generic.dates import WeekArchiveView
 
         from myapp.models import Article
 
@@ -366,7 +366,7 @@ views for displaying drilldown pages for date-based data.
 
     **Example myapp/urls.py**::
 
-        from ginger.urls import path
+        from gingerdj.urls import path
 
         from myapp.views import ArticleWeekArchiveView
 
@@ -422,22 +422,22 @@ views for displaying drilldown pages for date-based data.
 
     **Ancestors (MRO)**
 
-    * :class:`ginger.views.generic.list.MultipleObjectTemplateResponseMixin`
-    * :class:`ginger.views.generic.base.TemplateResponseMixin`
-    * :class:`ginger.views.generic.dates.BaseDayArchiveView`
-    * :class:`ginger.views.generic.dates.YearMixin`
-    * :class:`ginger.views.generic.dates.MonthMixin`
-    * :class:`ginger.views.generic.dates.DayMixin`
-    * :class:`ginger.views.generic.dates.BaseDateListView`
-    * :class:`ginger.views.generic.list.MultipleObjectMixin`
-    * :class:`ginger.views.generic.dates.DateMixin`
-    * :class:`ginger.views.generic.base.View`
+    * :class:`gingerdj.views.generic.list.MultipleObjectTemplateResponseMixin`
+    * :class:`gingerdj.views.generic.base.TemplateResponseMixin`
+    * :class:`gingerdj.views.generic.dates.BaseDayArchiveView`
+    * :class:`gingerdj.views.generic.dates.YearMixin`
+    * :class:`gingerdj.views.generic.dates.MonthMixin`
+    * :class:`gingerdj.views.generic.dates.DayMixin`
+    * :class:`gingerdj.views.generic.dates.BaseDateListView`
+    * :class:`gingerdj.views.generic.list.MultipleObjectMixin`
+    * :class:`gingerdj.views.generic.dates.DateMixin`
+    * :class:`gingerdj.views.generic.base.View`
 
     **Context**
 
     In addition to the context provided by
-    :class:`~ginger.views.generic.list.MultipleObjectMixin` (via
-    :class:`~ginger.views.generic.dates.BaseDateListView`), the template's
+    :class:`~gingerdj.views.generic.list.MultipleObjectMixin` (via
+    :class:`~gingerdj.views.generic.dates.BaseDateListView`), the template's
     context will be:
 
     * ``day``: A :class:`~datetime.date` object
@@ -469,7 +469,7 @@ views for displaying drilldown pages for date-based data.
 
     **Example myapp/views.py**::
 
-        from ginger.views.generic.dates import DayArchiveView
+        from gingerdj.views.generic.dates import DayArchiveView
 
         from myapp.models import Article
 
@@ -481,7 +481,7 @@ views for displaying drilldown pages for date-based data.
 
     **Example myapp/urls.py**::
 
-        from ginger.urls import path
+        from gingerdj.urls import path
 
         from myapp.views import ArticleDayArchiveView
 
@@ -522,22 +522,22 @@ views for displaying drilldown pages for date-based data.
 .. class:: TodayArchiveView
 
     A day archive page showing all objects for *today*. This is exactly the
-    same as :class:`ginger.views.generic.dates.DayArchiveView`, except today's
+    same as :class:`gingerdj.views.generic.dates.DayArchiveView`, except today's
     date is used instead of the ``year``/``month``/``day`` arguments.
 
     **Ancestors (MRO)**
 
-    * :class:`ginger.views.generic.list.MultipleObjectTemplateResponseMixin`
-    * :class:`ginger.views.generic.base.TemplateResponseMixin`
-    * :class:`ginger.views.generic.dates.BaseTodayArchiveView`
-    * :class:`ginger.views.generic.dates.BaseDayArchiveView`
-    * :class:`ginger.views.generic.dates.YearMixin`
-    * :class:`ginger.views.generic.dates.MonthMixin`
-    * :class:`ginger.views.generic.dates.DayMixin`
-    * :class:`ginger.views.generic.dates.BaseDateListView`
-    * :class:`ginger.views.generic.list.MultipleObjectMixin`
-    * :class:`ginger.views.generic.dates.DateMixin`
-    * :class:`ginger.views.generic.base.View`
+    * :class:`gingerdj.views.generic.list.MultipleObjectTemplateResponseMixin`
+    * :class:`gingerdj.views.generic.base.TemplateResponseMixin`
+    * :class:`gingerdj.views.generic.dates.BaseTodayArchiveView`
+    * :class:`gingerdj.views.generic.dates.BaseDayArchiveView`
+    * :class:`gingerdj.views.generic.dates.YearMixin`
+    * :class:`gingerdj.views.generic.dates.MonthMixin`
+    * :class:`gingerdj.views.generic.dates.DayMixin`
+    * :class:`gingerdj.views.generic.dates.BaseDateListView`
+    * :class:`gingerdj.views.generic.list.MultipleObjectMixin`
+    * :class:`gingerdj.views.generic.dates.DateMixin`
+    * :class:`gingerdj.views.generic.base.View`
 
     **Notes**
 
@@ -545,7 +545,7 @@ views for displaying drilldown pages for date-based data.
 
     **Example myapp/views.py**::
 
-        from ginger.views.generic.dates import TodayArchiveView
+        from gingerdj.views.generic.dates import TodayArchiveView
 
         from myapp.models import Article
 
@@ -557,7 +557,7 @@ views for displaying drilldown pages for date-based data.
 
     **Example myapp/urls.py**::
 
-        from ginger.urls import path
+        from gingerdj.urls import path
 
         from myapp.views import ArticleTodayArchiveView
 
@@ -583,16 +583,16 @@ views for displaying drilldown pages for date-based data.
 
     **Ancestors (MRO)**
 
-    * :class:`ginger.views.generic.detail.SingleObjectTemplateResponseMixin`
-    * :class:`ginger.views.generic.base.TemplateResponseMixin`
-    * :class:`ginger.views.generic.dates.BaseDateDetailView`
-    * :class:`ginger.views.generic.dates.YearMixin`
-    * :class:`ginger.views.generic.dates.MonthMixin`
-    * :class:`ginger.views.generic.dates.DayMixin`
-    * :class:`ginger.views.generic.dates.DateMixin`
-    * :class:`ginger.views.generic.detail.BaseDetailView`
-    * :class:`ginger.views.generic.detail.SingleObjectMixin`
-    * :class:`ginger.views.generic.base.View`
+    * :class:`gingerdj.views.generic.detail.SingleObjectTemplateResponseMixin`
+    * :class:`gingerdj.views.generic.base.TemplateResponseMixin`
+    * :class:`gingerdj.views.generic.dates.BaseDateDetailView`
+    * :class:`gingerdj.views.generic.dates.YearMixin`
+    * :class:`gingerdj.views.generic.dates.MonthMixin`
+    * :class:`gingerdj.views.generic.dates.DayMixin`
+    * :class:`gingerdj.views.generic.dates.DateMixin`
+    * :class:`gingerdj.views.generic.detail.BaseDetailView`
+    * :class:`gingerdj.views.generic.detail.SingleObjectMixin`
+    * :class:`gingerdj.views.generic.base.View`
 
     **Context**
 
@@ -605,8 +605,8 @@ views for displaying drilldown pages for date-based data.
 
     **Example myapp/urls.py**::
 
-        from ginger.urls import path
-        from ginger.views.generic.dates import DateDetailView
+        from gingerdj.urls import path
+        from gingerdj.views.generic.dates import DateDetailView
 
         urlpatterns = [
             path(
@@ -626,9 +626,9 @@ views for displaying drilldown pages for date-based data.
 
     All of the generic views listed above have matching ``Base`` views that
     only differ in that they do not include the
-    :class:`~ginger.views.generic.list.MultipleObjectTemplateResponseMixin`
+    :class:`~gingerdj.views.generic.list.MultipleObjectTemplateResponseMixin`
     (for the archive views) or
-    :class:`~ginger.views.generic.detail.SingleObjectTemplateResponseMixin`
+    :class:`~gingerdj.views.generic.detail.SingleObjectTemplateResponseMixin`
     (for the :class:`DateDetailView`):
 
     .. class:: BaseArchiveIndexView

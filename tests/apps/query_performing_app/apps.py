@@ -1,5 +1,5 @@
-from ginger.apps import AppConfig
-from ginger.db import connections
+from gingerdj.apps import AppConfig
+from gingerdj.db import connections
 
 
 class BaseAppConfig(AppConfig):

@@ -1,8 +1,8 @@
 import unittest
 
-from ginger.core.management.color import no_style
-from ginger.db import connection
-from ginger.test import SimpleTestCase
+from gingerdj.core.management.color import no_style
+from gingerdj.db import connection
+from gingerdj.test import SimpleTestCase
 
 from ..models import Person, Tag
 

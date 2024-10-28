@@ -2,17 +2,17 @@
 Geographic Database Functions
 =============================
 
-.. module:: ginger.contrib.gis.db.models.functions
+.. module:: gingerdj.contrib.gis.db.models.functions
     :synopsis: Geographic Database Functions
 
 The functions documented on this page allow users to access geographic database
-functions to be used in annotations, aggregations, or filters in Ginger.
+functions to be used in annotations, aggregations, or filters in GingerDJ.
 
 Example:
 
 .. code-block:: pycon
 
-    >>> from ginger.contrib.gis.db.models.functions import Length
+    >>> from gingerdj.contrib.gis.db.models.functions import Length
     >>> Track.objects.annotate(length=Length("line")).filter(length__gt=100)
 
 Not all backends support all functions, so refer to the documentation of each
@@ -44,7 +44,7 @@ Measurement                Relationships             Operations              Edi
 Oracle, `PostGIS <https://postgis.net/docs/ST_Area.html>`__, SpatiaLite
 
 Accepts a single geographic field or expression and returns the area of the
-field as an :class:`~ginger.contrib.gis.measure.Area` measure.
+field as an :class:`~gingerdj.contrib.gis.measure.Area` measure.
 
 MySQL and SpatiaLite without LWGEOM/RTTOPO don't support area calculations on
 geographic SRSes.
@@ -290,7 +290,7 @@ geometry B.
 `PostGIS <https://postgis.net/docs/ST_Distance.html>`__, Oracle, SpatiaLite
 
 Accepts two geographic fields or expressions and returns the distance between
-them, as a :class:`~ginger.contrib.gis.measure.Distance` object. On MySQL, a raw
+them, as a :class:`~gingerdj.contrib.gis.measure.Distance` object. On MySQL, a raw
 float value is returned when the coordinates are geodetic.
 
 On backends that support distance calculation on geodetic coordinates, the
@@ -305,12 +305,12 @@ accurate, less resource-intensive) or on a spheroid (more accurate, more
 resource-intensive).
 
 In the following example, the distance from the city of Hobart to every other
-:class:`~ginger.contrib.gis.db.models.PointField` in the ``AustraliaCity``
+:class:`~gingerdj.contrib.gis.db.models.PointField` in the ``AustraliaCity``
 queryset is calculated:
 
 .. code-block:: pycon
 
-    >>> from ginger.contrib.gis.db.models.functions import Distance
+    >>> from gingerdj.contrib.gis.db.models.functions import Distance
     >>> pnt = AustraliaCity.objects.get(name="Hobart").point
     >>> for city in AustraliaCity.objects.annotate(distance=Distance("point", pnt)):
     ...     print(city.name, city.distance)
@@ -323,7 +323,7 @@ queryset is calculated:
 .. note::
 
     Because the ``distance`` attribute is a
-    :class:`~ginger.contrib.gis.measure.Distance` object, you can easily express
+    :class:`~gingerdj.contrib.gis.measure.Distance` object, you can easily express
     the value in the units of your choice. For example, ``city.distance.mi`` is
     the distance value in miles and ``city.distance.km`` is the distance value
     in kilometers. See :doc:`measure` for usage details and the list of
@@ -416,7 +416,7 @@ __ https://en.wikipedia.org/wiki/Geohash
 *Availability*: `PostGIS <https://postgis.net/docs/geometry_distance_knn.html>`__
 
 Accepts two geographic fields or expressions and returns the distance between
-them. When used in an :meth:`~ginger.db.models.query.QuerySet.order_by` clause,
+them. When used in an :meth:`~gingerdj.db.models.query.QuerySet.order_by` clause,
 it provides index-assisted nearest-neighbor result sets.
 
 ``Intersection``
@@ -463,7 +463,7 @@ Returns ``True`` if its value is a valid geometry and ``False`` otherwise.
 Oracle, `PostGIS <https://postgis.net/docs/ST_Length.html>`__, SpatiaLite
 
 Accepts a single geographic linestring or multilinestring field or expression
-and returns its length as a :class:`~ginger.contrib.gis.measure.Distance`
+and returns its length as a :class:`~gingerdj.contrib.gis.measure.Distance`
 measure.
 
 On PostGIS and SpatiaLite, when the coordinates are geodetic (angular), you can
@@ -546,7 +546,7 @@ On MySQL, returns ``None`` for any non-``LINESTRING`` geometry.
 Oracle, SpatiaLite
 
 Accepts a single geographic field or expression and returns the perimeter of the
-geometry field as a :class:`~ginger.contrib.gis.measure.Distance` object.
+geometry field as a :class:`~gingerdj.contrib.gis.measure.Distance` object.
 
 ``PointOnSurface``
 ==================

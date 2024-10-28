@@ -4,8 +4,8 @@ Testing of admin inline formsets.
 
 import random
 
-from ginger.core.exceptions import ValidationError
-from ginger.db import models
+from gingerdj.core.exceptions import ValidationError
+from gingerdj.db import models
 
 
 class Parent(models.Model):

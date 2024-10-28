@@ -1,10 +1,10 @@
 import math
 from decimal import Decimal
 
-from ginger.db.models import DecimalField
-from ginger.db.models.functions import Ceil
-from ginger.test import TestCase
-from ginger.test.utils import register_lookup
+from gingerdj.db.models import DecimalField
+from gingerdj.db.models.functions import Ceil
+from gingerdj.test import TestCase
+from gingerdj.test.utils import register_lookup
 
 from ..models import DecimalModel, FloatModel, IntegerModel
 

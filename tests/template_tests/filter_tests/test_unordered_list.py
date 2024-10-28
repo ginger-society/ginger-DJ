@@ -1,7 +1,7 @@
-from ginger.template.defaultfilters import unordered_list
-from ginger.test import SimpleTestCase
-from ginger.utils.safestring import mark_safe
-from ginger.utils.translation import gettext_lazy
+from gingerdj.template.defaultfilters import unordered_list
+from gingerdj.test import SimpleTestCase
+from gingerdj.utils.safestring import mark_safe
+from gingerdj.utils.translation import gettext_lazy
 
 from ..utils import setup
 

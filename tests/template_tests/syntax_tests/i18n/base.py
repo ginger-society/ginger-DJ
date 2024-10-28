@@ -1,8 +1,8 @@
 import os
 
-from ginger.conf import settings
-from ginger.test import SimpleTestCase
-from ginger.utils.translation import activate, get_language
+from gingerdj.conf import settings
+from gingerdj.test import SimpleTestCase
+from gingerdj.utils.translation import activate, get_language
 
 here = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 pdir = os.path.split(os.path.split(os.path.abspath(here))[0])[0]

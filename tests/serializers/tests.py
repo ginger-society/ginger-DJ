@@ -3,13 +3,13 @@ from functools import partialmethod
 from io import StringIO
 from unittest import mock, skipIf
 
-from ginger.core import serializers
-from ginger.core.serializers import SerializerDoesNotExist
-from ginger.core.serializers.base import ProgressBar
-from ginger.db import connection, transaction
-from ginger.http import HttpResponse
-from ginger.test import SimpleTestCase, override_settings, skipUnlessDBFeature
-from ginger.test.utils import Approximate
+from gingerdj.core import serializers
+from gingerdj.core.serializers import SerializerDoesNotExist
+from gingerdj.core.serializers.base import ProgressBar
+from gingerdj.db import connection, transaction
+from gingerdj.http import HttpResponse
+from gingerdj.test import SimpleTestCase, override_settings, skipUnlessDBFeature
+from gingerdj.test.utils import Approximate
 
 from .models import (
     Actor,
@@ -31,7 +31,7 @@ from .models import (
 
 @override_settings(
     SERIALIZATION_MODULES={
-        "json2": "ginger.core.serializers.json",
+        "json2": "gingerdj.core.serializers.json",
     }
 )
 class SerializerRegistrationTests(SimpleTestCase):
@@ -44,7 +44,7 @@ class SerializerRegistrationTests(SimpleTestCase):
 
     def test_register(self):
         "Registering a new serializer populates the full registry. Refs #14823"
-        serializers.register_serializer("json3", "ginger.core.serializers.json")
+        serializers.register_serializer("json3", "gingerdj.core.serializers.json")
 
         public_formats = serializers.get_public_serializer_formats()
         self.assertIn("json3", public_formats)
@@ -57,7 +57,7 @@ class SerializerRegistrationTests(SimpleTestCase):
         repopulated.
         """
         serializers.unregister_serializer("xml")
-        serializers.register_serializer("json3", "ginger.core.serializers.json")
+        serializers.register_serializer("json3", "gingerdj.core.serializers.json")
 
         public_formats = serializers.get_public_serializer_formats()
 
@@ -382,7 +382,7 @@ class SerializersTestBase:
         deserial_obj = list(serializers.deserialize(self.serializer_name, serial_str))[
             0
         ]
-        with mock.patch("ginger.db.models.Model") as mock_model:
+        with mock.patch("gingerdj.db.models.Model") as mock_model:
             deserial_obj.save(force_insert=False)
             mock_model.save_base.assert_called_with(
                 deserial_obj.object, raw=True, using=None, force_insert=False

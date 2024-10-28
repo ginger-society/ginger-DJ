@@ -5,7 +5,7 @@ Single object mixins
 ``SingleObjectMixin``
 =====================
 
-.. class:: ginger.views.generic.detail.SingleObjectMixin
+.. class:: gingerdj.views.generic.detail.SingleObjectMixin
 
     Provides a mechanism for looking up an object associated with the
     current HTTP request.
@@ -28,7 +28,7 @@ Single object mixins
 
             ``queryset`` is a class attribute with a *mutable* value so care
             must be taken when using it directly. Before using it, either call
-            its :meth:`~ginger.db.models.query.QuerySet.all` method or
+            its :meth:`~gingerdj.db.models.query.QuerySet.all` method or
             retrieve it with :meth:`get_queryset` which takes care of the
             cloning behind the scenes.
 
@@ -87,7 +87,7 @@ Single object mixins
         Returns the queryset that will be used to retrieve the object that
         this view will display. By default, :meth:`get_queryset` returns the
         value of the :attr:`queryset` attribute if it is set, otherwise
-        it constructs a :class:`~ginger.db.models.query.QuerySet` by calling
+        it constructs a :class:`~gingerdj.db.models.query.QuerySet` by calling
         the ``all()`` method on the :attr:`model` attribute's default manager.
 
     .. method:: get_context_object_name(obj)
@@ -130,18 +130,18 @@ Single object mixins
 ``SingleObjectTemplateResponseMixin``
 =====================================
 
-.. class:: ginger.views.generic.detail.SingleObjectTemplateResponseMixin
+.. class:: gingerdj.views.generic.detail.SingleObjectTemplateResponseMixin
 
     A mixin class that performs template-based response rendering for views
     that operate upon a single object instance. Requires that the view it is
     mixed with provides ``self.object``, the object instance that the view is
     operating on. ``self.object`` will usually be, but is not required to be,
-    an instance of a Ginger model. It may be ``None`` if the view is in the
+    an instance of a GingerDJ model. It may be ``None`` if the view is in the
     process of constructing a new instance.
 
     **Extends**
 
-    * :class:`~ginger.views.generic.base.TemplateResponseMixin`
+    * :class:`~gingerdj.views.generic.base.TemplateResponseMixin`
 
     **Methods and Attributes**
 

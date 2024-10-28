@@ -1,5 +1,5 @@
-from ginger.test import SimpleTestCase
-from ginger.utils.connection import BaseConnectionHandler
+from gingerdj.test import SimpleTestCase
+from gingerdj.utils.connection import BaseConnectionHandler
 
 
 class BaseConnectionHandlerTests(SimpleTestCase):

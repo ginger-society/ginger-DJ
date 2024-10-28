@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 #
-# This Python file contains utility scripts to manage Ginger translations.
-# It has to be run inside the ginger git root directory.
+# This Python file contains utility scripts to manage GingerDJ translations.
+# It has to be run inside the gingerdj git root directory.
 #
 # The following commands are available:
 #
@@ -22,9 +22,9 @@ import os
 from argparse import ArgumentParser
 from subprocess import run
 
-import ginger
-from ginger.conf import settings
-from ginger.core.management import call_command
+import gingerdj
+from gingerdj.conf import settings
+from gingerdj.core.management import call_command
 
 HAVE_JS = ["admin"]
 
@@ -32,10 +32,10 @@ HAVE_JS = ["admin"]
 def _get_locale_dirs(resources, include_core=True):
     """
     Return a tuple (contrib name, absolute path) for all locale directories,
-    optionally including the ginger core catalog.
+    optionally including the gingerdj core catalog.
     If resources list is not None, filter directories matching resources content.
     """
-    contrib_dir = os.path.join(os.getcwd(), "ginger", "contrib")
+    contrib_dir = os.path.join(os.getcwd(), "gingerdj", "contrib")
     dirs = []
 
     # Collect all locale directories
@@ -46,7 +46,9 @@ def _get_locale_dirs(resources, include_core=True):
             if contrib_name in HAVE_JS:
                 dirs.append(("%s-js" % contrib_name, path))
     if include_core:
-        dirs.insert(0, ("core", os.path.join(os.getcwd(), "ginger", "conf", "locale")))
+        dirs.insert(
+            0, ("core", os.path.join(os.getcwd(), "gingerdj", "conf", "locale"))
+        )
 
     # Filter by resources, if any
     if resources is not None:
@@ -64,16 +66,16 @@ def _get_locale_dirs(resources, include_core=True):
 def _tx_resource_for_name(name):
     """Return the Transifex resource name"""
     if name == "core":
-        return "ginger.core"
+        return "gingerdj.core"
     else:
-        return "ginger.contrib-%s" % name
+        return "gingerdj.contrib-%s" % name
 
 
 def _check_diff(cat_name, base_path):
     """
     Output the approximate number of changed/added strings in the en catalog.
     """
-    po_path = "%(path)s/en/LC_MESSAGES/ginger%(ext)s.po" % {
+    po_path = "%(path)s/en/LC_MESSAGES/gingerdj%(ext)s.po" % {
         "path": base_path,
         "ext": "js" if cat_name.endswith("-js") else "",
     }
@@ -88,19 +90,19 @@ def _check_diff(cat_name, base_path):
 
 def update_catalogs(resources=None, languages=None):
     """
-    Update the en/LC_MESSAGES/ginger.po (main and contrib) files with
+    Update the en/LC_MESSAGES/gingerdj.po (main and contrib) files with
     new/updated translatable strings.
     """
     settings.configure()
-    ginger.setup()
+    gingerdj.setup()
     if resources is not None:
         print("`update_catalogs` will always process all resources.")
     contrib_dirs = _get_locale_dirs(None, include_core=False)
 
-    os.chdir(os.path.join(os.getcwd(), "ginger"))
-    print("Updating en catalogs for Ginger and contrib apps...")
+    os.chdir(os.path.join(os.getcwd(), "gingerdj"))
+    print("Updating en catalogs for GingerDJ and contrib apps...")
     call_command("makemessages", locale=["en"])
-    print("Updating en JS catalogs for Ginger and contrib apps...")
+    print("Updating en JS catalogs for GingerDJ and contrib apps...")
     call_command("makemessages", locale=["en"], domain="gingerjs")
 
     # Output changed stats
@@ -112,7 +114,7 @@ def update_catalogs(resources=None, languages=None):
 def lang_stats(resources=None, languages=None):
     """
     Output language statistics of committed translation files for each
-    Ginger catalog.
+    GingerDJ catalog.
     If resources is provided, it should be a list of translation resource to
     limit the output (e.g. ['core', 'gis']).
     """
@@ -125,7 +127,7 @@ def lang_stats(resources=None, languages=None):
             if languages and lang not in languages:
                 continue
             # TODO: merge first with the latest en catalog
-            po_path = "{path}/{lang}/LC_MESSAGES/ginger{ext}.po".format(
+            po_path = "{path}/{lang}/LC_MESSAGES/gingerdj{ext}.po".format(
                 path=dir_, lang=lang, ext="js" if name.endswith("-js") else ""
             )
             p = run(
@@ -175,7 +177,7 @@ def fetch(resources=None, languages=None):
 
         # msgcat to wrap lines and msgfmt for compilation of .mo file
         for lang in target_langs:
-            po_path = "%(path)s/%(lang)s/LC_MESSAGES/ginger%(ext)s.po" % {
+            po_path = "%(path)s/%(lang)s/LC_MESSAGES/gingerdj%(ext)s.po" % {
                 "path": dir_,
                 "lang": lang,
                 "ext": "js" if name.endswith("-js") else "",

@@ -1,7 +1,7 @@
-from ginger.db.models import CharField
-from ginger.db.models.functions import LTrim, RTrim, Trim
-from ginger.test import TestCase
-from ginger.test.utils import register_lookup
+from gingerdj.db.models import CharField
+from gingerdj.db.models.functions import LTrim, RTrim, Trim
+from gingerdj.test import TestCase
+from gingerdj.test.utils import register_lookup
 
 from ..models import Author
 

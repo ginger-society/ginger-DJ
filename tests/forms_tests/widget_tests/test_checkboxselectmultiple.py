@@ -1,8 +1,8 @@
 import datetime
 
-from ginger import forms
-from ginger.forms import CheckboxSelectMultiple, ChoiceField, Form
-from ginger.test import override_settings
+from gingerdj import forms
+from gingerdj.forms import CheckboxSelectMultiple, ChoiceField, Form
+from gingerdj.test import override_settings
 
 from .base import WidgetTest
 

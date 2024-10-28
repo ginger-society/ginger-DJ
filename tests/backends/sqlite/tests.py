@@ -7,18 +7,23 @@ from contextlib import contextmanager
 from pathlib import Path
 from unittest import mock
 
-from ginger.core.exceptions import ImproperlyConfigured
-from ginger.db import (
+from gingerdj.core.exceptions import ImproperlyConfigured
+from gingerdj.db import (
     DEFAULT_DB_ALIAS,
     NotSupportedError,
     connection,
     connections,
     transaction,
 )
-from ginger.db.models import Aggregate, Avg, StdDev, Sum, Variance
-from ginger.db.utils import ConnectionHandler
-from ginger.test import SimpleTestCase, TestCase, TransactionTestCase, override_settings
-from ginger.test.utils import CaptureQueriesContext, isolate_apps
+from gingerdj.db.models import Aggregate, Avg, StdDev, Sum, Variance
+from gingerdj.db.utils import ConnectionHandler
+from gingerdj.test import (
+    SimpleTestCase,
+    TestCase,
+    TransactionTestCase,
+    override_settings,
+)
+from gingerdj.test.utils import CaptureQueriesContext, isolate_apps
 
 from ..models import Item, Object, Square
 
@@ -67,7 +72,7 @@ class Tests(TestCase):
 
     def test_memory_db_test_name(self):
         """A named in-memory db should be allowed where supported."""
-        from ginger.db.backends.sqlite3.base import DatabaseWrapper
+        from gingerdj.db.backends.sqlite3.base import DatabaseWrapper
 
         settings_dict = {
             "TEST": {
@@ -100,7 +105,7 @@ class Tests(TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             settings_dict = {
                 "default": {
-                    "ENGINE": "ginger.db.backends.sqlite3",
+                    "ENGINE": "gingerdj.db.backends.sqlite3",
                     "NAME": Path(tmp) / "test.db",
                 },
             }
@@ -119,7 +124,7 @@ class Tests(TestCase):
     def test_init_command(self):
         settings_dict = {
             "default": {
-                "ENGINE": "ginger.db.backends.sqlite3",
+                "ENGINE": "gingerdj.db.backends.sqlite3",
                 "NAME": ":memory:",
                 "OPTIONS": {
                     "init_command": "PRAGMA synchronous=3; PRAGMA cache_size=2000;",

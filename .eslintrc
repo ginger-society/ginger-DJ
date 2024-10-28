@@ -129,7 +129,7 @@
         "es6": true
     },
     "globals": {
-        "ginger": false
+        "gingerdj": false
     },
     "ignorePatterns": [
         "*/rest_framework/*",

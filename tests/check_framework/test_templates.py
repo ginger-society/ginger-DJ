@@ -1,12 +1,12 @@
 from copy import deepcopy
 from itertools import chain
 
-from ginger.core.checks import Error, Warning
-from ginger.core.checks.templates import check_templates
-from ginger.template import engines
-from ginger.template.backends.base import BaseEngine
-from ginger.test import SimpleTestCase
-from ginger.test.utils import override_settings
+from gingerdj.core.checks import Error, Warning
+from gingerdj.core.checks.templates import check_templates
+from gingerdj.template import engines
+from gingerdj.template.backends.base import BaseEngine
+from gingerdj.test import SimpleTestCase
+from gingerdj.test.utils import override_settings
 
 
 class ErrorEngine(BaseEngine):
@@ -33,14 +33,14 @@ class CheckTemplatesTests(SimpleTestCase):
 class CheckTemplateStringIfInvalidTest(SimpleTestCase):
     TEMPLATES_STRING_IF_INVALID = [
         {
-            "BACKEND": "ginger.template.backends.ginger.GingerTemplates",
+            "BACKEND": "gingerdj.template.backends.gingerdj.GingerTemplates",
             "NAME": "backend_1",
             "OPTIONS": {
                 "string_if_invalid": False,
             },
         },
         {
-            "BACKEND": "ginger.template.backends.ginger.GingerTemplates",
+            "BACKEND": "gingerdj.template.backends.gingerdj.GingerTemplates",
             "NAME": "backend_2",
             "OPTIONS": {
                 "string_if_invalid": 42,
@@ -96,9 +96,9 @@ class CheckTemplateStringIfInvalidTest(SimpleTestCase):
 
 
 class CheckTemplateTagLibrariesWithSameName(SimpleTestCase):
-    def get_settings(self, module_name, module_path, name="ginger"):
+    def get_settings(self, module_name, module_path, name="gingerdj"):
         return {
-            "BACKEND": "ginger.template.backends.ginger.GingerTemplates",
+            "BACKEND": "gingerdj.template.backends.gingerdj.GingerTemplates",
             "NAME": name,
             "OPTIONS": {
                 "libraries": {

@@ -1,5 +1,5 @@
-from ginger.db.models.utils import create_namedtuple_class
-from ginger.test import SimpleTestCase
+from gingerdj.db.models.utils import create_namedtuple_class
+from gingerdj.test import SimpleTestCase
 
 
 class NamedTupleClassTests(SimpleTestCase):

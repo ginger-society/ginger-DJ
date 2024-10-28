@@ -9,33 +9,33 @@ from http import cookies
 from pathlib import Path
 from unittest import mock
 
-from ginger.conf import settings
-from ginger.contrib.sessions.backends.base import SessionBase, UpdateError
-from ginger.contrib.sessions.backends.cache import SessionStore as CacheSession
-from ginger.contrib.sessions.backends.cached_db import SessionStore as CacheDBSession
-from ginger.contrib.sessions.backends.db import SessionStore as DatabaseSession
-from ginger.contrib.sessions.backends.file import SessionStore as FileSession
-from ginger.contrib.sessions.backends.signed_cookies import (
+from gingerdj.conf import settings
+from gingerdj.contrib.sessions.backends.base import SessionBase, UpdateError
+from gingerdj.contrib.sessions.backends.cache import SessionStore as CacheSession
+from gingerdj.contrib.sessions.backends.cached_db import SessionStore as CacheDBSession
+from gingerdj.contrib.sessions.backends.db import SessionStore as DatabaseSession
+from gingerdj.contrib.sessions.backends.file import SessionStore as FileSession
+from gingerdj.contrib.sessions.backends.signed_cookies import (
     SessionStore as CookieSession,
 )
-from ginger.contrib.sessions.exceptions import InvalidSessionKey, SessionInterrupted
-from ginger.contrib.sessions.middleware import SessionMiddleware
-from ginger.contrib.sessions.models import Session
-from ginger.contrib.sessions.serializers import JSONSerializer
-from ginger.core import management
-from ginger.core.cache import caches
-from ginger.core.cache.backends.base import InvalidCacheBackendError
-from ginger.core.exceptions import ImproperlyConfigured
-from ginger.core.signing import TimestampSigner
-from ginger.http import HttpResponse
-from ginger.test import (
+from gingerdj.contrib.sessions.exceptions import InvalidSessionKey, SessionInterrupted
+from gingerdj.contrib.sessions.middleware import SessionMiddleware
+from gingerdj.contrib.sessions.models import Session
+from gingerdj.contrib.sessions.serializers import JSONSerializer
+from gingerdj.core import management
+from gingerdj.core.cache import caches
+from gingerdj.core.cache.backends.base import InvalidCacheBackendError
+from gingerdj.core.exceptions import ImproperlyConfigured
+from gingerdj.core.signing import TimestampSigner
+from gingerdj.http import HttpResponse
+from gingerdj.test import (
     RequestFactory,
     SimpleTestCase,
     TestCase,
     ignore_warnings,
     override_settings,
 )
-from ginger.utils import timezone
+from gingerdj.utils import timezone
 
 from .models import SessionStore as CustomDatabaseSession
 
@@ -549,7 +549,7 @@ class SessionTestsMixin:
         for encoded in tests:
             with self.subTest(encoded=encoded):
                 with self.assertLogs(
-                    "ginger.security.SuspiciousSession", "WARNING"
+                    "gingerdj.security.SuspiciousSession", "WARNING"
                 ) as cm:
                     self.assertEqual(self.session.decode(encoded), {})
                 # The failed decode is logged.
@@ -662,7 +662,7 @@ class SessionTestsMixin:
 
 class DatabaseSessionTests(SessionTestsMixin, TestCase):
     backend = DatabaseSession
-    session_engine = "ginger.contrib.sessions.backends.db"
+    session_engine = "gingerdj.contrib.sessions.backends.db"
 
     @property
     def model(self):
@@ -815,7 +815,7 @@ class CacheDBSessionTests(SessionTestsMixin, TestCase):
             self.assertIs(self.session.exists(self.session.session_key), True)
 
     # Some backends might issue a warning
-    @ignore_warnings(module="ginger.core.cache.backends.base")
+    @ignore_warnings(module="gingerdj.core.cache.backends.base")
     def test_load_overlong_key(self):
         self.session._session_key = (string.ascii_letters + string.digits) * 20
         self.assertEqual(self.session.load(), {})
@@ -834,7 +834,7 @@ class CacheDBSessionTests(SessionTestsMixin, TestCase):
         session = self.backend()
         session["key"] = "val"
 
-        with self.assertLogs("ginger.contrib.sessions", "ERROR") as cm:
+        with self.assertLogs("gingerdj.contrib.sessions", "ERROR") as cm:
             session.save()
 
         # A proper ERROR log message was recorded.
@@ -850,7 +850,7 @@ class CacheDBSessionTests(SessionTestsMixin, TestCase):
         session = self.backend()
         await session.aset("key", "val")
 
-        with self.assertLogs("ginger.contrib.sessions", "ERROR") as cm:
+        with self.assertLogs("gingerdj.contrib.sessions", "ERROR") as cm:
             await session.asave()
 
         # A proper ERROR log message was recorded.
@@ -907,7 +907,7 @@ class FileSessionTests(SessionTestsMixin, SimpleTestCase):
             self.backend()._key_to_file("a/b/c")
 
     @override_settings(
-        SESSION_ENGINE="ginger.contrib.sessions.backends.file",
+        SESSION_ENGINE="gingerdj.contrib.sessions.backends.file",
         SESSION_COOKIE_AGE=0,
     )
     def test_clearsessions_command(self):
@@ -963,7 +963,7 @@ class CacheSessionTests(SessionTestsMixin, SimpleTestCase):
     backend = CacheSession
 
     # Some backends might issue a warning
-    @ignore_warnings(module="ginger.core.cache.backends.base")
+    @ignore_warnings(module="gingerdj.core.cache.backends.base")
     def test_load_overlong_key(self):
         self.session._session_key = (string.ascii_letters + string.digits) * 20
         self.assertEqual(self.session.load(), {})
@@ -975,10 +975,10 @@ class CacheSessionTests(SessionTestsMixin, SimpleTestCase):
     @override_settings(
         CACHES={
             "default": {
-                "BACKEND": "ginger.core.cache.backends.dummy.DummyCache",
+                "BACKEND": "gingerdj.core.cache.backends.dummy.DummyCache",
             },
             "sessions": {
-                "BACKEND": "ginger.core.cache.backends.locmem.LocMemCache",
+                "BACKEND": "gingerdj.core.cache.backends.locmem.LocMemCache",
                 "LOCATION": "session",
             },
         },
@@ -1258,7 +1258,7 @@ class CookieSessionTests(SessionTestsMixin, SimpleTestCase):
         # by creating a new session
         self.assertEqual(self.session.serializer, JSONSerializer)
         self.session.save()
-        with mock.patch("ginger.core.signing.loads", side_effect=ValueError):
+        with mock.patch("gingerdj.core.signing.loads", side_effect=ValueError):
             self.session.load()
 
     @unittest.skip(

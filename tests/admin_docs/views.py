@@ -1,7 +1,7 @@
-from ginger.contrib.admindocs.middleware import XViewMiddleware
-from ginger.http import HttpResponse
-from ginger.utils.decorators import decorator_from_middleware
-from ginger.views.generic import View
+from gingerdj.contrib.admindocs.middleware import XViewMiddleware
+from gingerdj.http import HttpResponse
+from gingerdj.utils.decorators import decorator_from_middleware
+from gingerdj.views.generic import View
 
 xview_dec = decorator_from_middleware(XViewMiddleware)
 

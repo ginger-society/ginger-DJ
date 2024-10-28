@@ -1,5 +1,5 @@
-from ginger.template import Context, Engine
-from ginger.test import SimpleTestCase
+from gingerdj.template import Context, Engine
+from gingerdj.test import SimpleTestCase
 
 from ..utils import setup
 
@@ -333,7 +333,7 @@ class IfChangedTests(SimpleTestCase):
         engine = Engine(
             loaders=[
                 (
-                    "ginger.template.loaders.locmem.Loader",
+                    "gingerdj.template.loaders.locmem.Loader",
                     {
                         "template": (
                             '{% for x in vars %}{% include "include" %}{% endfor %}'
@@ -351,7 +351,7 @@ class IfChangedTests(SimpleTestCase):
         engine = Engine(
             loaders=[
                 (
-                    "ginger.template.loaders.locmem.Loader",
+                    "gingerdj.template.loaders.locmem.Loader",
                     {
                         "template": (
                             '{% for x in vars %}{% include "include" %}'

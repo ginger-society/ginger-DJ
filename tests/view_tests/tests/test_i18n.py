@@ -3,25 +3,25 @@ import json
 from os import path
 from unittest import mock
 
-from ginger.conf import settings
-from ginger.test import (
+from gingerdj.conf import settings
+from gingerdj.test import (
     RequestFactory,
     SimpleTestCase,
     TestCase,
     modify_settings,
     override_settings,
 )
-from ginger.test.selenium import SeleniumTestCase
-from ginger.urls import reverse
-from ginger.utils.translation import get_language, override
-from ginger.views.i18n import JavaScriptCatalog, get_formats
+from gingerdj.test.selenium import SeleniumTestCase
+from gingerdj.urls import reverse
+from gingerdj.utils.translation import get_language, override
+from gingerdj.views.i18n import JavaScriptCatalog, get_formats
 
 from ..urls import locale_dir
 
 
 @override_settings(ROOT_URLCONF="view_tests.urls")
 class SetLanguageTests(TestCase):
-    """Test the ginger.views.i18n.set_language view."""
+    """Test the gingerdj.views.i18n.set_language view."""
 
     def _get_inactive_language_code(self):
         """Return language code for a language which is not activated."""
@@ -182,7 +182,7 @@ class SetLanguageTests(TestCase):
         # we force saving language to a cookie rather than a session
         # by excluding session middleware and those which do require it
         test_settings = {
-            "MIDDLEWARE": ["ginger.middleware.common.CommonMiddleware"],
+            "MIDDLEWARE": ["gingerdj.middleware.common.CommonMiddleware"],
             "LANGUAGE_COOKIE_NAME": "mylanguage",
             "LANGUAGE_COOKIE_AGE": 3600 * 7 * 2,
             "LANGUAGE_COOKIE_DOMAIN": ".example.com",
@@ -225,7 +225,7 @@ class SetLanguageTests(TestCase):
 
     @modify_settings(
         MIDDLEWARE={
-            "append": "ginger.middleware.locale.LocaleMiddleware",
+            "append": "gingerdj.middleware.locale.LocaleMiddleware",
         }
     )
     def test_lang_from_translated_i18n_pattern(self):
@@ -249,7 +249,7 @@ class SetLanguageTests(TestCase):
 
 @override_settings(ROOT_URLCONF="view_tests.urls")
 class I18NViewTests(SimpleTestCase):
-    """Test ginger.views.i18n views other than set_language."""
+    """Test gingerdj.views.i18n views other than set_language."""
 
     @override_settings(LANGUAGE_CODE="de")
     def test_get_formats(self):
@@ -285,7 +285,7 @@ class I18NViewTests(SimpleTestCase):
         # default plural function
         self.assertContains(
             response,
-            "ginger.pluralidx = function(count) { return (count == 1) ? 0 : 1; };",
+            "gingerdj.pluralidx = function(count) { return (count == 1) ? 0 : 1; };",
         )
         self.assertNotContains(response, "var newcatalog =")
 
@@ -514,7 +514,7 @@ class I18NViewTests(SimpleTestCase):
         be opened as utf-8 charset as is the default specified on template
         engines.
         """
-        from ginger.views.i18n import Path
+        from gingerdj.views.i18n import Path
 
         view = JavaScriptCatalog.as_view()
         request = RequestFactory().get("/")
@@ -527,7 +527,7 @@ class I18NViewTests(SimpleTestCase):
 class I18nSeleniumTests(SeleniumTestCase):
     # The test cases use fixtures & translations from these apps.
     available_apps = [
-        "ginger.contrib.admin",
+        "gingerdj.contrib.admin",
         "view_tests",
     ]
 

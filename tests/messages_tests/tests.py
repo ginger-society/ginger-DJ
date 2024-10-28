@@ -2,11 +2,11 @@ import importlib
 import sys
 from unittest import mock
 
-from ginger.conf import settings
-from ginger.contrib.messages import Message, add_message, constants
-from ginger.contrib.messages.storage import base
-from ginger.contrib.messages.test import MessagesTestMixin
-from ginger.test import RequestFactory, SimpleTestCase, override_settings
+from gingerdj.conf import settings
+from gingerdj.contrib.messages import Message, add_message, constants
+from gingerdj.contrib.messages.storage import base
+from gingerdj.contrib.messages.test import MessagesTestMixin
+from gingerdj.test import RequestFactory, SimpleTestCase, override_settings
 
 from .utils import DummyStorage
 
@@ -67,7 +67,7 @@ class TestLevelTags(SimpleTestCase):
         self.assertEqual(base.LEVEL_TAGS, self.message_tags)
 
     def test_lazy(self):
-        storage_base_import_path = "ginger.contrib.messages.storage.base"
+        storage_base_import_path = "gingerdj.contrib.messages.storage.base"
         in_use_base = sys.modules.pop(storage_base_import_path)
         self.addCleanup(sys.modules.__setitem__, storage_base_import_path, in_use_base)
         # Don't use @override_settings to avoid calling the setting_changed

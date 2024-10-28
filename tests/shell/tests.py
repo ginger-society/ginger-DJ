@@ -2,16 +2,16 @@ import sys
 import unittest
 from unittest import mock
 
-from ginger import __version__
-from ginger.core.management import CommandError, call_command
-from ginger.test import SimpleTestCase
-from ginger.test.utils import captured_stdin, captured_stdout
+from gingerdj import __version__
+from gingerdj.core.management import CommandError, call_command
+from gingerdj.test import SimpleTestCase
+from gingerdj.test.utils import captured_stdin, captured_stdout
 
 
 class ShellCommandTestCase(SimpleTestCase):
     script_globals = 'print("__name__" in globals())'
     script_with_inline_function = (
-        "import ginger\ndef f():\n    print(ginger.__version__)\nf()"
+        "import gingerdj\ndef f():\n    print(gingerdj.__version__)\nf()"
     )
 
     def test_command_option(self):
@@ -19,8 +19,8 @@ class ShellCommandTestCase(SimpleTestCase):
             call_command(
                 "shell",
                 command=(
-                    "import ginger; from logging import getLogger; "
-                    'getLogger("test").info(ginger.__version__)'
+                    "import gingerdj; from logging import getLogger; "
+                    'getLogger("test").info(gingerdj.__version__)'
                 ),
             )
         self.assertEqual(cm.records[0].getMessage(), __version__)
@@ -38,7 +38,7 @@ class ShellCommandTestCase(SimpleTestCase):
     @unittest.skipIf(
         sys.platform == "win32", "Windows select() doesn't support file descriptors."
     )
-    @mock.patch("ginger.core.management.commands.shell.select")
+    @mock.patch("gingerdj.core.management.commands.shell.select")
     def test_stdin_read(self, select):
         with captured_stdin() as stdin, captured_stdout() as stdout:
             stdin.write("print(100)\n")
@@ -50,7 +50,7 @@ class ShellCommandTestCase(SimpleTestCase):
         sys.platform == "win32",
         "Windows select() doesn't support file descriptors.",
     )
-    @mock.patch("ginger.core.management.commands.shell.select")  # [1]
+    @mock.patch("gingerdj.core.management.commands.shell.select")  # [1]
     def test_stdin_read_globals(self, select):
         with captured_stdin() as stdin, captured_stdout() as stdout:
             stdin.write(self.script_globals)
@@ -62,7 +62,7 @@ class ShellCommandTestCase(SimpleTestCase):
         sys.platform == "win32",
         "Windows select() doesn't support file descriptors.",
     )
-    @mock.patch("ginger.core.management.commands.shell.select")  # [1]
+    @mock.patch("gingerdj.core.management.commands.shell.select")  # [1]
     def test_stdin_read_inline_function_call(self, select):
         with captured_stdin() as stdin, captured_stdout() as stdout:
             stdin.write(self.script_with_inline_function)
@@ -70,7 +70,7 @@ class ShellCommandTestCase(SimpleTestCase):
             call_command("shell")
         self.assertEqual(stdout.getvalue().strip(), __version__)
 
-    @mock.patch("ginger.core.management.commands.shell.select.select")  # [1]
+    @mock.patch("gingerdj.core.management.commands.shell.select.select")  # [1]
     @mock.patch.dict("sys.modules", {"IPython": None})
     def test_shell_with_ipython_not_installed(self, select):
         select.return_value = ([], [], [])
@@ -79,7 +79,7 @@ class ShellCommandTestCase(SimpleTestCase):
         ):
             call_command("shell", interface="ipython")
 
-    @mock.patch("ginger.core.management.commands.shell.select.select")  # [1]
+    @mock.patch("gingerdj.core.management.commands.shell.select.select")  # [1]
     @mock.patch.dict("sys.modules", {"bpython": None})
     def test_shell_with_bpython_not_installed(self, select):
         select.return_value = ([], [], [])

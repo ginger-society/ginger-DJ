@@ -2,11 +2,11 @@ from datetime import datetime, timedelta
 from decimal import Decimal
 from unittest import skipUnless
 
-from ginger.db import connection
-from ginger.db.models.expressions import RawSQL
-from ginger.db.models.functions import Coalesce, Greatest
-from ginger.test import TestCase, skipIfDBFeature, skipUnlessDBFeature
-from ginger.utils import timezone
+from gingerdj.db import connection
+from gingerdj.db.models.expressions import RawSQL
+from gingerdj.db.models.functions import Coalesce, Greatest
+from gingerdj.test import TestCase, skipIfDBFeature, skipUnlessDBFeature
+from gingerdj.utils import timezone
 
 from ..models import Article, Author, DecimalModel, Fan
 
@@ -16,7 +16,7 @@ class GreatestTests(TestCase):
         now = timezone.now()
         before = now - timedelta(hours=1)
         Article.objects.create(
-            title="Testing with Ginger", written=before, published=now
+            title="Testing with GingerDJ", written=before, published=now
         )
         articles = Article.objects.annotate(
             last_updated=Greatest("written", "published")
@@ -26,7 +26,7 @@ class GreatestTests(TestCase):
     @skipUnlessDBFeature("greatest_least_ignores_nulls")
     def test_ignores_null(self):
         now = timezone.now()
-        Article.objects.create(title="Testing with Ginger", written=now)
+        Article.objects.create(title="Testing with GingerDJ", written=now)
         articles = Article.objects.annotate(
             last_updated=Greatest("written", "published")
         )
@@ -34,7 +34,7 @@ class GreatestTests(TestCase):
 
     @skipIfDBFeature("greatest_least_ignores_nulls")
     def test_propagates_null(self):
-        Article.objects.create(title="Testing with Ginger", written=timezone.now())
+        Article.objects.create(title="Testing with GingerDJ", written=timezone.now())
         articles = Article.objects.annotate(
             last_updated=Greatest("written", "published")
         )
@@ -43,7 +43,7 @@ class GreatestTests(TestCase):
     def test_coalesce_workaround(self):
         past = datetime(1900, 1, 1)
         now = timezone.now()
-        Article.objects.create(title="Testing with Ginger", written=now)
+        Article.objects.create(title="Testing with GingerDJ", written=now)
         articles = Article.objects.annotate(
             last_updated=Greatest(
                 Coalesce("written", past),
@@ -56,7 +56,7 @@ class GreatestTests(TestCase):
     def test_coalesce_workaround_mysql(self):
         past = datetime(1900, 1, 1)
         now = timezone.now()
-        Article.objects.create(title="Testing with Ginger", written=now)
+        Article.objects.create(title="Testing with GingerDJ", written=now)
         past_sql = RawSQL("cast(%s as datetime)", (past,))
         articles = Article.objects.annotate(
             last_updated=Greatest(
@@ -67,7 +67,7 @@ class GreatestTests(TestCase):
         self.assertEqual(articles.first().last_updated, now)
 
     def test_all_null(self):
-        Article.objects.create(title="Testing with Ginger", written=timezone.now())
+        Article.objects.create(title="Testing with GingerDJ", written=timezone.now())
         articles = Article.objects.annotate(
             last_updated=Greatest("published", "updated")
         )

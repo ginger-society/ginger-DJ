@@ -1,8 +1,8 @@
 import os
 from unittest import mock
 
-from ginger.core.checks.async_checks import E001, check_async_unsafe
-from ginger.test import SimpleTestCase
+from gingerdj.core.checks.async_checks import E001, check_async_unsafe
+from gingerdj.test import SimpleTestCase
 
 
 class AsyncCheckTests(SimpleTestCase):

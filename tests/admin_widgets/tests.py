@@ -6,14 +6,14 @@ from datetime import datetime, timedelta
 from importlib import import_module
 from unittest import skipUnless
 
-from ginger import forms
-from ginger.conf import settings
-from ginger.contrib import admin
-from ginger.contrib.admin import widgets
-from ginger.contrib.admin.tests import AdminSeleniumTestCase
-from ginger.core.files.storage import default_storage
-from ginger.core.files.uploadedfile import SimpleUploadedFile
-from ginger.db.models import (
+from gingerdj import forms
+from gingerdj.conf import settings
+from gingerdj.contrib import admin
+from gingerdj.contrib.admin import widgets
+from gingerdj.contrib.admin.tests import AdminSeleniumTestCase
+from gingerdj.core.files.storage import default_storage
+from gingerdj.core.files.uploadedfile import SimpleUploadedFile
+from gingerdj.db.models import (
     CharField,
     DateField,
     DateTimeField,
@@ -21,11 +21,11 @@ from ginger.db.models import (
     ManyToManyField,
     UUIDField,
 )
-from ginger.test import SimpleTestCase, TestCase, ignore_warnings, override_settings
-from ginger.test.utils import requires_tz_support
-from ginger.urls import reverse
-from ginger.utils import translation
-from ginger.utils.deprecation import RemovedInGinger60Warning
+from gingerdj.test import SimpleTestCase, TestCase, ignore_warnings, override_settings
+from gingerdj.test.utils import requires_tz_support
+from gingerdj.urls import reverse
+from gingerdj.utils import translation
+from gingerdj.utils.deprecation import RemovedInGinger60Warning
 
 from .models import (
     Advisor,
@@ -54,7 +54,7 @@ from .widgetadmin import site as widget_admin_site
 class TestDataMixin:
     @classmethod
     def setUpTestData(cls):
-        
+
         Car.objects.create(owner=cls.superuser, make="Volkswagen", model="Passat")
         Car.objects.create(owner=cls.u2, make="BMW", model="M3")
 
@@ -1124,7 +1124,7 @@ class DateTimePickerSeleniumTests(AdminWidgetSeleniumTestCase):
     def test_calendar_show_date_from_input(self):
         """
         The calendar shows the date from the input field for every locale
-        supported by Ginger.
+        supported by GingerDJ.
         """
         from selenium.webdriver.common.by import By
 
@@ -1138,7 +1138,7 @@ class DateTimePickerSeleniumTests(AdminWidgetSeleniumTestCase):
         # Get month name translations for every locale
         month_string = "May"
         path = os.path.join(
-            os.path.dirname(import_module("ginger.contrib.admin").__file__), "locale"
+            os.path.dirname(import_module("gingerdj.contrib.admin").__file__), "locale"
         )
         url = reverse("admin:admin_widgets_member_change", args=(member.pk,))
         with self.small_screen_size():

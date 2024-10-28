@@ -1,5 +1,5 @@
 """
-Tests for ginger.core.servers.
+Tests for gingerdj.core.servers.
 """
 
 import errno
@@ -12,11 +12,11 @@ from urllib.error import HTTPError
 from urllib.parse import urlencode
 from urllib.request import urlopen
 
-from ginger.conf import settings
-from ginger.core.servers.basehttp import ThreadedWSGIServer, WSGIServer
-from ginger.db import DEFAULT_DB_ALIAS, connection, connections
-from ginger.test import LiveServerTestCase, override_settings
-from ginger.test.testcases import LiveServerThread, QuietWSGIRequestHandler
+from gingerdj.conf import settings
+from gingerdj.core.servers.basehttp import ThreadedWSGIServer, WSGIServer
+from gingerdj.db import DEFAULT_DB_ALIAS, connection, connections
+from gingerdj.test import LiveServerTestCase, override_settings
+from gingerdj.test.testcases import LiveServerThread, QuietWSGIRequestHandler
 
 from .models import Person
 
@@ -33,7 +33,7 @@ TEST_SETTINGS = {
 class LiveServerBase(LiveServerTestCase):
     available_apps = [
         "servers",
-        "ginger.contrib.sessions",
+        "gingerdj.contrib.sessions",
     ]
     fixtures = ["testdata.json"]
 
@@ -70,7 +70,7 @@ class LiveServerTestCloseConnectionTest(LiveServerBase):
         cls.old_conn_max_age = conn.settings_dict["CONN_MAX_AGE"]
         # Set the connection's CONN_MAX_AGE to None to simulate the
         # CONN_MAX_AGE setting being set to None on the server. This prevents
-        # Ginger from closing the connection and allows testing that
+        # GingerDJ from closing the connection and allows testing that
         # ThreadedWSGIServer closes connections.
         conn.settings_dict["CONN_MAX_AGE"] = None
         # Pass a database connection through to the server to check it is being

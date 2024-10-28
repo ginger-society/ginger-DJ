@@ -1,23 +1,23 @@
 [
-    {
-    	"pk": "1",
-    	"model": "fixtures.visa",
-    	"fields": {
-    	    "person": ["Ginger Reinhardt"]
-    	}
-    },
-    {
-    	"pk": "2",
-    	"model": "fixtures.visa",
-    	"fields": {
-    	    "person": ["Stephane Grappelli"]
-    	}
-    },
-        {
-    	"pk": "3",
-    	"model": "fixtures.visa",
-    	"fields": {
-    	    "person": ["Prince"]
-    	}
+  {
+    "pk": "1",
+    "model": "fixtures.visa",
+    "fields": {
+      "person": ["GingerDJ Reinhardt"]
     }
+  },
+  {
+    "pk": "2",
+    "model": "fixtures.visa",
+    "fields": {
+      "person": ["Stephane Grappelli"]
+    }
+  },
+  {
+    "pk": "3",
+    "model": "fixtures.visa",
+    "fields": {
+      "person": ["Prince"]
+    }
+  }
 ]
