@@ -87,10 +87,10 @@ privileges to your database user.
 By default, the PostGIS installer on Windows includes a template
 spatial database entitled ``template_postgis``.
 
-.. _geoginger-tests:
+.. _geogingerdj-tests:
 
-GeoGinger tests
-===============
+GeoGingerDJ tests
+=================
 
 To have the GeoGinger tests executed when :ref:`running the GingerDJ test suite
 <running-unit-tests>` with ``runtests.py`` all of the databases in the settings

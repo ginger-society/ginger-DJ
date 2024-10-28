@@ -383,7 +383,7 @@ instances are correctly marked as coroutine functions::
 .. _upgrading-middleware:
 
 Upgrading pre-GingerDJ 1.10-style middleware
-==========================================
+============================================
 
 .. class:: gingerdj.utils.deprecation.MiddlewareMixin
     :module:

@@ -1,6 +1,6 @@
-============================
+==============================
 How to use GingerDJ with uWSGI
-============================
+==============================
 
 uWSGI_ is a fast, self-healing and developer/sysadmin-friendly application
 container server coded in pure C.
@@ -39,7 +39,7 @@ uWSGI operates on a client-server model. Your web server (e.g., nginx, Apache)
 communicates with a ``gingerdj-uwsgi`` "worker" process to serve dynamic content.
 
 Configuring and starting the uWSGI server for GingerDJ
-----------------------------------------------------
+------------------------------------------------------
 
 uWSGI supports multiple ways to configure the process. See uWSGI's
 `configuration documentation`_.

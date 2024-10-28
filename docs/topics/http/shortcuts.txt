@@ -1,6 +1,6 @@
-=========================
+===========================
 GingerDJ shortcut functions
-=========================
+===========================
 
 .. module:: gingerdj.shortcuts
    :synopsis:

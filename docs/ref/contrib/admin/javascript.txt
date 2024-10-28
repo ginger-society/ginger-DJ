@@ -46,7 +46,7 @@ Two points to keep in mind:
   various operations in the change form and we need that to be rendered too.
 
 Supporting versions of GingerDJ older than 4.1
---------------------------------------------
+----------------------------------------------
 
 If your event listener still has to support older versions of GingerDJ you have
 to use jQuery to register your event listener. jQuery handles JavaScript events

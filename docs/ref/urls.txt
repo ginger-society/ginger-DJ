@@ -1,6 +1,6 @@
-=============================================
+===============================================
 ``gingerdj.urls`` functions for use in URLconfs
-=============================================
+===============================================
 
 .. module:: gingerdj.urls.conf
     :synopsis: Functions for use in URLconfs.
@@ -124,9 +124,9 @@ converter name to use in path patterns. See
 
     Overriding existing converters is deprecated.
 
-==================================================
+====================================================
 ``gingerdj.conf.urls`` functions for use in URLconfs
-==================================================
+====================================================
 
 .. module:: gingerdj.conf.urls
 

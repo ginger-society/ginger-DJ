@@ -1,6 +1,6 @@
-===================================
+=====================================
 Writing your first patch for GingerDJ
-===================================
+=====================================
 
 Introduction
 ============
@@ -37,13 +37,6 @@ you plan on contributing to GingerDJ regularly.
 
 For the most part though, this tutorial tries to explain as much as possible,
 so that it can be of use to the widest audience.
-
-.. admonition:: Where to get help:
-
-    If you're having trouble going through this tutorial, please post a message
-    on the `GingerDJ Forum`_, |gingerdj-developers|, or drop by
-    `#gingerdj-dev on irc.libera.chat`__ to chat with other GingerDJ users who
-    might be able to help.
 
 __ https://web.libera.chat/#gingerdj-dev
 .. _Dive Into Python: https://diveintopython3.net/
@@ -181,7 +174,7 @@ in editable mode. You will immediately see any changes you make to it, which is
 of great help when writing your first patch.
 
 Creating projects with a local copy of GingerDJ
----------------------------------------------
+-----------------------------------------------
 
 It may be helpful to test your local changes with a GingerDJ project. First you
 have to create a new virtual environment, :ref:`install the previously cloned
@@ -195,7 +188,7 @@ You can follow the :doc:`tutorial</intro/tutorial01>` for help in creating a
 GingerDJ project.
 
 Running GingerDJ's test suite for the first time
-==============================================
+================================================
 
 When contributing to GingerDJ it's very important that your code changes don't
 introduce bugs into other areas of GingerDJ. One way to check that GingerDJ still
@@ -396,7 +389,7 @@ Everything should pass. If it doesn't, make sure you correctly added the
 function to the correct file.
 
 Running GingerDJ's test suite for the second time
-===============================================
+=================================================
 
 Once you've verified that your patch and your test are working correctly, it's
 a good idea to run the entire GingerDJ test suite to verify that your change

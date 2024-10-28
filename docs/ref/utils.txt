@@ -1,6 +1,6 @@
-============
+==============
 GingerDJ Utils
-============
+==============
 
 .. module:: gingerdj.utils
    :synopsis: GingerDJ's built-in utilities.
@@ -11,7 +11,7 @@ following parts can be considered stable and thus backwards compatible as per
 the :ref:`internal release deprecation policy <internal-release-deprecation-policy>`.
 
 ``gingerdj.utils.cache``
-======================
+========================
 
 .. module:: gingerdj.utils.cache
    :synopsis: Helper functions for controlling caching.
@@ -103,7 +103,7 @@ need to distinguish caches by the ``Accept-language`` header.
     Vary header and so at the list of headers to use for the cache key.
 
 ``gingerdj.utils.dateparse``
-==========================
+============================
 
 .. module:: gingerdj.utils.dateparse
    :synopsis: Functions to parse strings to datetime objects.
@@ -147,7 +147,7 @@ The functions defined in this module share the following properties:
     day-time interval format (e.g. ``3 days 04:05:06``).
 
 ``gingerdj.utils.decorators``
-===========================
+=============================
 
 .. module:: gingerdj.utils.decorators
     :synopsis: Functions that help with creating decorators for views.
@@ -209,7 +209,7 @@ The functions defined in this module share the following properties:
     middleware documentation <async-middleware>` for details.
 
 ``gingerdj.utils.encoding``
-=========================
+===========================
 
 .. module:: gingerdj.utils.encoding
    :synopsis: A series of helper functions to manage character encoding.
@@ -294,7 +294,7 @@ The functions defined in this module share the following properties:
     Identifier (URI).
 
 ``gingerdj.utils.feedgenerator``
-==============================
+================================
 
 .. module:: gingerdj.utils.feedgenerator
    :synopsis: Syndication feed generation library -- used for generating RSS, etc.
@@ -426,7 +426,7 @@ https://web.archive.org/web/20110718035220/http://diveintomark.org/archives/2004
     Spec: :rfc:`4287`
 
 ``gingerdj.utils.functional``
-===========================
+=============================
 
 .. module:: gingerdj.utils.functional
     :synopsis: Functional programming tools.
@@ -584,7 +584,7 @@ https://web.archive.org/web/20110718035220/http://diveintomark.org/archives/2004
         def fancy_utility_function(s, *args, **kwargs): ...
 
 ``gingerdj.utils.html``
-=====================
+=======================
 
 .. module:: gingerdj.utils.html
    :synopsis: HTML helper functions
@@ -711,7 +711,7 @@ escaping HTML.
     require HTML escaping.
 
 ``gingerdj.utils.http``
-=====================
+=======================
 
 .. module:: gingerdj.utils.http
    :synopsis: HTTP helper functions. (URL encoding, cookie handling, ...)
@@ -758,7 +758,7 @@ escaping HTML.
     might have been stripped.
 
 ``gingerdj.utils.module_loading``
-===============================
+=================================
 
 .. module:: gingerdj.utils.module_loading
    :synopsis: Functions for working with Python modules.
@@ -780,7 +780,7 @@ Functions for working with Python modules.
         from gingerdj.core.exceptions import ValidationError
 
 ``gingerdj.utils.safestring``
-===========================
+=============================
 
 .. module:: gingerdj.utils.safestring
    :synopsis: Functions and classes for working with strings that can be displayed safely without further escaping in HTML.
@@ -822,7 +822,7 @@ appropriate entities.
         <type 'str'>
 
 ``gingerdj.utils.text``
-=====================
+=======================
 
 .. module:: gingerdj.utils.text
     :synopsis: Text manipulation.
@@ -876,7 +876,7 @@ appropriate entities.
 .. _time-zone-selection-functions:
 
 ``gingerdj.utils.timezone``
-=========================
+===========================
 
 .. module:: gingerdj.utils.timezone
     :synopsis: Timezone support.
@@ -992,7 +992,7 @@ appropriate entities.
     defaults to the :ref:`current time zone <default-current-time-zone>`.
 
 ``gingerdj.utils.translation``
-============================
+==============================
 
 .. module:: gingerdj.utils.translation
    :synopsis: Internationalization support.

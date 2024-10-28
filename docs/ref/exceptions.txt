@@ -1,11 +1,11 @@
-=================
+===================
 GingerDJ Exceptions
-=================
+===================
 
 GingerDJ raises some of its own exceptions as well as standard Python exceptions.
 
 GingerDJ Core Exceptions
-======================
+========================
 
 .. module:: gingerdj.core.exceptions
     :synopsis: GingerDJ core exceptions

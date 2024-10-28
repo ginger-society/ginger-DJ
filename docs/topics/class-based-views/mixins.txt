@@ -66,7 +66,7 @@ interface to working with templates in class-based views.
     :attr:`~gingerdj.views.generic.base.ContextMixin.extra_context` attribute.
 
 Building up GingerDJ's generic class-based views
-==============================================
+================================================
 
 Let's look at how two of GingerDJ's generic class-based views are built
 out of mixins providing discrete functionality. We'll consider
@@ -88,7 +88,7 @@ covered in the :doc:`mixin reference
 documentation</ref/class-based-views/mixins>`.
 
 ``DetailView``: working with a single GingerDJ object
----------------------------------------------------
+-----------------------------------------------------
 
 To show the detail of an object, we basically need to do two things:
 we need to look up the object and then we need to make a
@@ -126,7 +126,7 @@ views<generic-editing>` use ``_form`` for create and update views, and
 ``_confirm_delete`` for delete views.)
 
 ``ListView``: working with many GingerDJ objects
-----------------------------------------------
+------------------------------------------------
 
 Lists of objects follow roughly the same pattern: we need a (possibly
 paginated) list of objects, typically a
@@ -172,7 +172,7 @@ attribute. (The date based generic views use suffixes such as ``_archive``,
 specialized date-based list views.)
 
 Using GingerDJ's class-based view mixins
-======================================
+========================================
 
 Now we've seen how GingerDJ's generic class-based views use the provided mixins,
 let's look at other ways we can combine them. We're still going to be combining

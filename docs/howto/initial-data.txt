@@ -82,7 +82,7 @@ change one of the rows created by a fixture and then run :djadmin:`loaddata`
 again, you'll wipe out any changes you've made.
 
 Tell GingerDJ where to look for fixture files
--------------------------------------------
+---------------------------------------------
 
 By default, GingerDJ looks for fixtures in the ``fixtures`` directory inside each
 app for, so the command ``loaddata sample`` will find the file

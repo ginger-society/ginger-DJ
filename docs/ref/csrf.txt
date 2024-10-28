@@ -239,7 +239,7 @@ attacker cannot steal a user's browser's CSRF cookie. "Stealing" or modifying
 *your own* token using Firebug, Chrome dev tools, etc. isn't a vulnerability.
 
 Is it a problem that GingerDJ's CSRF protection isn't linked to a session by default?
------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------
 
 No, this is by design. Not linking CSRF protection to a session allows using
 the protection on sites such as a *pastebin* that allow submissions from

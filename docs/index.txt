@@ -1,6 +1,6 @@
-====================
+======================
 GingerDJ documentation
-====================
+======================
 
 .. rubric:: Everything you need to know about GingerDJ.
 
@@ -28,23 +28,6 @@ Are you new to GingerDJ or to programming? This is the place to start!
 * **Advanced Tutorials:**
   :doc:`How to write reusable apps <intro/reusable-apps>` |
   :doc:`Writing your first patch for GingerDJ <intro/contributing>`
-
-Getting help
-============
-
-Having trouble? We'd like to help!
-
-* Try the :doc:`FAQ <faq/index>` -- it's got answers to many common questions.
-
-* Looking for specific information? Try the :ref:`genindex`, :ref:`modindex` or
-  the :doc:`detailed table of contents <contents>`.
-
-* Not found anything? See :doc:`faq/help` for information on getting support
-  and asking questions to the community.
-
-* Report bugs with GingerDJ in our `ticket tracker`_.
-
-.. _ticket tracker: https://code.gingerdj.gloportal.dev/
 
 How the documentation is organized
 ==================================
@@ -314,22 +297,10 @@ Learn about some other core functionalities of the GingerDJ framework:
 The GingerDJ open-source project
 ==============================
 
-Learn about the development process for the GingerDJ project itself and about how
-you can contribute:
-
-* **Community:**
-  :doc:`Contributing to GingerDJ <internals/contributing/index>` |
-  :doc:`The release process <internals/release-process>` |
-  :doc:`Team organization <internals/organization>` |
-  :doc:`The GingerDJ source code repository <internals/git>` |
-  :doc:`Security policies <internals/security>` |
-  :doc:`Mailing lists and Forum<internals/mailing-lists>`
+Learn about the development process for the GingerDJ project itself.
 
 * **Design philosophies:**
   :doc:`Overview <misc/design-philosophies>`
-
-* **Documentation:**
-  :doc:`About this documentation <internals/contributing/writing-documentation>`
 
 * **Third-party distributions:**
   :doc:`Overview <misc/distributions>`

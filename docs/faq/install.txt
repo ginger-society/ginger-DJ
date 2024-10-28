@@ -15,7 +15,7 @@ How do I get started?
 .. _ask questions: https://www.gingerdj.gloportal.dev/community/
 
 What are GingerDJ's prerequisites?
-================================
+==================================
 
 GingerDJ requires Python. See the table in the next question for the versions of
 Python that work with each version of GingerDJ. Other Python libraries may be
@@ -45,18 +45,13 @@ support MariaDB_, MySQL_, `SQLite`_, and Oracle_. See :doc:`Supported Databases
 .. _faq-python-version-support:
 
 What Python version can I use with GingerDJ?
-==========================================
+============================================
 
-============== ===============
+================ ===============
 GingerDJ version Python versions
-============== ===============
-3.2            3.6, 3.7, 3.8, 3.9, 3.10 (added in 3.2.9)
-4.0            3.8, 3.9, 3.10
-4.1            3.8, 3.9, 3.10, 3.11 (added in 4.1.3)
-4.2            3.8, 3.9, 3.10, 3.11, 3.12 (added in 4.2.8)
-5.0            3.10, 3.11, 3.12
-5.1            3.10, 3.11, 3.12
-============== ===============
+================ ===============
+5.1              3.10, 3.11, 3.12
+================ ===============
 
 For each version of Python, only the latest micro release (A.B.C) is officially
 supported. You can find the latest micro version for each series on the `Python
@@ -69,7 +64,7 @@ October 2025 and GingerDJ 4.2 LTS security support ends in April 2026. Therefore
 GingerDJ 4.2 is the last version to support Python 3.9.
 
 What Python version should I use with GingerDJ?
-=============================================
+===============================================
 
 Since newer versions of Python are often faster, have more features, and are
 better supported, the latest version of Python 3 is recommended.

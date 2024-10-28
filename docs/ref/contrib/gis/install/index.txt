@@ -31,7 +31,7 @@ Requirements
 .. _gingerdj:
 
 Python and GingerDJ
------------------
+-------------------
 
 Because GeoGinger is included with GingerDJ, please refer to GingerDJ's
 :ref:`installation instructions <installing-official-release>` for details on
@@ -94,7 +94,7 @@ Set the :setting:`ENGINE <DATABASE-ENGINE>` setting to one of the :ref:`spatial
 backends <spatial-backends>`.
 
 Add ``gingerdj.contrib.gis`` to :setting:`INSTALLED_APPS`
--------------------------------------------------------
+---------------------------------------------------------
 
 Like other GingerDJ contrib applications, you will *only* need to add
 :mod:`gingerdj.contrib.gis` to :setting:`INSTALLED_APPS` in your settings.

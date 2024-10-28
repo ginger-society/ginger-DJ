@@ -27,9 +27,7 @@ familiarize yourself with GingerDJ first.
     for more details.
 
 This tutorial will guide you through the creation of a geographic web
-application for viewing the `world borders`_. [#]_ Some of the code
-used in this tutorial is taken from and/or inspired by the `GeoGinger
-basic apps`_ project. [#]_
+application for viewing the `world borders`_.
 
 .. note::
 
@@ -38,7 +36,6 @@ basic apps`_ project. [#]_
 
 .. _OGC: https://www.ogc.org/
 .. _world borders: https://web.archive.org/web/20240123190237/https://thematicmapping.org/downloads/world_borders.php
-.. _GeoGinger basic apps: https://code.google.com/archive/p/geoginger-basic-apps
 
 Setting Up
 ==========
@@ -210,7 +207,7 @@ model to represent this data::
         lon = models.FloatField()
         lat = models.FloatField()
 
-        # GeoGinger-specific: a geometry field (MultiPolygonField)
+        # GeoGingerDJ-specific: a geometry field (MultiPolygonField)
         mpoly = models.MultiPolygonField()
 
         # Returns the string representation of the model.

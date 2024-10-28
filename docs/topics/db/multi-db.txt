@@ -608,7 +608,7 @@ the ``get_queryset`` method, you could do this::
             return qs
 
 Exposing multiple databases in GingerDJ's admin interface
-=======================================================
+=========================================================
 
 GingerDJ's admin doesn't have any explicit support for multiple
 databases. If you want to provide an admin interface for a model on a

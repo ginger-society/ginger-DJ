@@ -1,6 +1,6 @@
-===============================
+=================================
 How to use GingerDJ with Gunicorn
-===============================
+=================================
 
 Gunicorn_ ('Green Unicorn') is a pure-Python WSGI server for UNIX. It has no
 dependencies and can be installed using ``pip``.

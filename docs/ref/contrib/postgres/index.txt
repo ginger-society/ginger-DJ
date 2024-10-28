@@ -1,6 +1,6 @@
-===========================
+=============================
 ``gingerdj.contrib.postgres``
-===========================
+=============================
 
 .. module:: gingerdj.contrib.postgres
     :synopsis: PostgreSQL-specific fields and features

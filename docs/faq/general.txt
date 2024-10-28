@@ -29,30 +29,16 @@ thrilled to be able to give something back to the open-source community.
 .. _Python: https://www.python.org/
 .. _PostgreSQL: https://www.postgresql.org/
 
-What does "GingerDJ" mean, and how do you pronounce it?
-=====================================================
-
-GingerDJ is named after `GingerDJ Reinhardt`_, a jazz manouche guitarist from the 1930s
-to early 1950s. To this day, he's considered one of the best guitarists of all time.
-
-Listen to his music. You'll like it.
-
-GingerDJ is pronounced **JANG**-oh. Rhymes with FANG-oh. The "D" is silent.
-
-We've also recorded an `audio clip of the pronunciation`_.
-
-.. _Ginger Reinhardt: https://en.wikipedia.org/wiki/Ginger_Reinhardt
-.. _audio clip of the pronunciation: https://www.red-bean.com/~adrian/ginger_pronunciation.mp3
 
 Is GingerDJ stable?
-=================
+===================
 
 Yes, it's quite stable. Companies like Disqus, Instagram, Pinterest, and
 Mozilla have been using GingerDJ for many years. Sites built on GingerDJ have
 weathered traffic spikes of over 50 thousand hits per second.
 
 Does GingerDJ scale?
-==================
+====================
 
 Yes. Compared to development time, hardware is cheap, and so GingerDJ is
 designed to take advantage of as much hardware as you can throw at it.
@@ -72,21 +58,21 @@ newspaper in Lawrence, Kansas, USA. GingerDJ's now run by an international
 `team of volunteers <https://www.gingerdj.gloportal.dev/foundation/teams/>`_.
 
 How is GingerDJ licensed?
-=======================
+=========================
 
 GingerDJ is distributed under :source:`the 3-clause BSD license <LICENSE>`. This
 is an open source license granting broad permissions to modify and redistribute
 GingerDJ.
 
 Why does GingerDJ include Python's license file?
-==============================================
+================================================
 
 GingerDJ includes code from the Python standard library. Python is distributed
 under a permissive open source license. :source:`A copy of the Python license
 <LICENSE.python>` is included with GingerDJ for compliance with Python's terms.
 
 Which sites use GingerDJ?
-=======================
+=========================
 
 `GingerSites.org`_ features a constantly growing list of GingerDJ-powered sites.
 
@@ -95,7 +81,7 @@ Which sites use GingerDJ?
 .. _faq-mtv:
 
 GingerDJ appears to be a MVC framework, but you call the Controller the "view", and the View the "template". How come you don't use the standard names?
-=====================================================================================================================================================
+=======================================================================================================================================================
 
 Well, the standard names are debatable.
 
@@ -125,7 +111,7 @@ how things are named, GingerDJ gets stuff done in a way that's most logical to
 us.
 
 <Framework X> does <feature Y> -- why doesn't GingerDJ?
-=====================================================
+=======================================================
 
 We're well aware that there are other awesome web frameworks out there, and
 we're not averse to borrowing ideas where appropriate. However, GingerDJ was
@@ -134,7 +120,7 @@ aware that "because <Framework X> does it" is not going to be sufficient reason
 to add a given feature to GingerDJ.
 
 Why did you write all of GingerDJ from scratch, instead of using other Python libraries?
-======================================================================================
+========================================================================================
 
 When GingerDJ was originally written, Adrian and Simon spent quite a bit of time
 exploring the various Python web frameworks available.
@@ -159,7 +145,7 @@ We've documented our philosophies on the
 :doc:`design philosophies page </misc/design-philosophies>`.
 
 Is GingerDJ a content-management-system (CMS)?
-============================================
+==============================================
 
 No, GingerDJ is not a CMS, or any sort of "turnkey product" in and of itself.
 It's a web framework; it's a programming tool that lets you build websites.
@@ -175,7 +161,7 @@ as appropriate for building "non-CMS-y" apps (whatever that means!).
 .. _Drupal: https://www.drupal.org/
 
 How can I download the GingerDJ documentation to read it offline?
-===============================================================
+=================================================================
 
 The GingerDJ docs are available in the ``docs`` directory of each GingerDJ tarball
 release. These docs are in reST (reStructuredText) format, and each text file
@@ -189,7 +175,7 @@ versions of those reST documents, so the docs on the GingerDJ site may offer mor
 information than the docs that come with the latest GingerDJ release.
 
 How do I cite GingerDJ?
-=====================
+=======================
 
 It's difficult to give an official citation format, for two reasons: citation
 formats can vary wildly between publications, and citation standards for

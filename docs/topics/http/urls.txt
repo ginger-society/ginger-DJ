@@ -29,7 +29,7 @@ language. See the :ref:`internationalization documentation
 .. _how-gingerdj-processes-a-request:
 
 How GingerDJ processes a request
-==============================
+================================
 
 When a user requests a page from your GingerDJ-powered site, this is the
 algorithm the system follows to determine which Python code to execute:

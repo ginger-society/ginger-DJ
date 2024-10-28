@@ -1,6 +1,6 @@
-============================
+==============================
 The GingerDJ template language
-============================
+==============================
 
 This document explains the language syntax of the GingerDJ template system. If
 you're looking for a more technical perspective on how it works and how to

@@ -1,6 +1,6 @@
-========================
+==========================
 GingerDJ's cache framework
-========================
+==========================
 
 A fundamental trade-off in dynamic websites is, well, they're dynamic. Each
 time a user requests a page, the web server makes all sorts of calculations --

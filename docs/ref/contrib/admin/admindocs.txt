@@ -37,15 +37,15 @@ Documentation helpers
 The following special markup can be used in your docstrings to easily create
 hyperlinks to other components:
 
-=================   =======================
+===================   =======================
 GingerDJ Component    reStructuredText roles
-=================   =======================
-Models              ``:model:`app_label.ModelName```
-Views               ``:view:`app_label.view_name```
-Template tags       ``:tag:`tagname```
-Template filters    ``:filter:`filtername```
-Templates           ``:template:`path/to/template.html```
-=================   =======================
+===================   =======================
+Models                ``:model:`app_label.ModelName```
+Views                 ``:view:`app_label.view_name```
+Template tags         ``:tag:`tagname```
+Template filters      ``:filter:`filtername```
+Templates             ``:template:`path/to/template.html```
+===================   =======================
 
 Model reference
 ===============

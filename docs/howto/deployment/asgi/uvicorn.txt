@@ -1,6 +1,6 @@
-==============================
+================================
 How to use GingerDJ with Uvicorn
-==============================
+================================
 
 Uvicorn_ is an ASGI server based on ``uvloop`` and ``httptools``, with an
 emphasis on speed.
@@ -38,7 +38,7 @@ time a file is changed on disk.
 For more advanced usage, please read the `Uvicorn documentation <Uvicorn_>`_.
 
 Deploying GingerDJ using Uvicorn and Gunicorn
-===========================================
+=============================================
 
 Gunicorn_ is a robust web server that implements process monitoring and automatic
 restarts. This can be useful when running Uvicorn in a production environment.

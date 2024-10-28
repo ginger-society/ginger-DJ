@@ -1,6 +1,6 @@
-================================
+==================================
 How to install GingerDJ on Windows
-================================
+==================================
 
 This document will guide you through installing Python 3.12 and GingerDJ on
 Windows. It also provides instructions for setting up a virtual environment,

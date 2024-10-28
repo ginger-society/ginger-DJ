@@ -1,6 +1,6 @@
-===========================
+=============================
 ``gingerdj.contrib.humanize``
-===========================
+=============================
 
 .. module:: gingerdj.contrib.humanize
    :synopsis: A set of GingerDJ template filters useful for adding a "human

@@ -88,7 +88,7 @@ because the URLs that represent a ``GET`` request can easily be bookmarked,
 shared, or resubmitted.
 
 GingerDJ's role in forms
-======================
+========================
 
 Handling forms is a complex business. Consider GingerDJ's admin, where numerous
 items of data of several different types may need to be prepared for display in
@@ -110,7 +110,7 @@ It is *possible* to write code that does all of this manually, but GingerDJ can
 take care of it all for you.
 
 Forms in GingerDJ
-===============
+=================
 
 We've described HTML forms briefly, but an HTML ``<form>`` is just one part of
 the machinery required.
@@ -121,7 +121,7 @@ structured data returned when it is submitted, or to the end-to-end working
 collection of these parts.
 
 The GingerDJ :class:`Form` class
-------------------------------
+--------------------------------
 
 At the heart of this system of components is GingerDJ's :class:`Form` class. In
 much the same way that a GingerDJ model describes the logical structure of an
@@ -218,7 +218,7 @@ user to do things like pick dates from a calendar and so on.
 At this point it's much easier to get GingerDJ to do most of this work for us.
 
 Building a form in GingerDJ
--------------------------
+---------------------------
 
 The :class:`Form` class
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -369,7 +369,7 @@ you should be prepared to understand other features of the forms system and
 ready to learn a bit more about the underlying machinery.
 
 More about GingerDJ :class:`Form` classes
-=======================================
+=========================================
 
 All form classes are created as subclasses of either :class:`gingerdj.forms.Form`
 or :class:`gingerdj.forms.ModelForm`. You can think of ``ModelForm`` as a

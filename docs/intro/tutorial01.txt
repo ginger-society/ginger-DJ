@@ -33,11 +33,6 @@ version of GingerDJ.
 See :doc:`How to install GingerDJ </topics/install>` for advice on how to remove
 older versions of GingerDJ and install a newer one.
 
-.. admonition:: Where to get help:
-
-    If you're having trouble going through this tutorial, please head over to
-    the :doc:`Getting Help</faq/help>` section of the FAQ.
-
 Creating a project
 ==================
 

@@ -1,6 +1,6 @@
-====================================================
+======================================================
 The GingerDJ template language: for Python programmers
-====================================================
+======================================================
 
 .. currentmodule:: gingerdj.template
 
@@ -716,7 +716,7 @@ the request's IP address (``request.META['REMOTE_ADDR']``) is in the
   query. It's lazily generated on access.
 
 ``gingerdj.template.context_processors.i18n``
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. function:: i18n(request)
 
@@ -734,13 +734,13 @@ See :ref:`i18n template tags <i18n-template-tags>` for template tags that
 generate the same values.
 
 ``gingerdj.template.context_processors.media``
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 If this processor is enabled, every ``RequestContext`` will contain a variable
 ``MEDIA_URL``, providing the value of the :setting:`MEDIA_URL` setting.
 
 ``gingerdj.template.context_processors.static``
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. function:: static(request)
 
@@ -748,20 +748,20 @@ If this processor is enabled, every ``RequestContext`` will contain a variable
 ``STATIC_URL``, providing the value of the :setting:`STATIC_URL` setting.
 
 ``gingerdj.template.context_processors.csrf``
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 This processor adds a token that is needed by the :ttag:`csrf_token` template
 tag for protection against :doc:`Cross Site Request Forgeries
 </ref/csrf>`.
 
 ``gingerdj.template.context_processors.request``
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 If this processor is enabled, every ``RequestContext`` will contain a variable
 ``request``, which is the current :class:`~gingerdj.http.HttpRequest`.
 
 ``gingerdj.template.context_processors.tz``
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. function:: tz(request)
 
@@ -769,7 +769,7 @@ If this processor is enabled, every ``RequestContext`` will contain a variable
 ``TIME_ZONE``, providing the name of the currently active time zone.
 
 ``gingerdj.contrib.messages.context_processors.messages``
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 If this processor is enabled, every ``RequestContext`` will contain these two
 variables:

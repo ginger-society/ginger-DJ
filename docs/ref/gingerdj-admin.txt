@@ -1,6 +1,6 @@
-==================================
+====================================
 ``gingerdj-admin`` and ``manage.py``
-==================================
+====================================
 
 ``gingerdj-admin`` is GingerDJ's command-line utility for administrative tasks.
 This document outlines all it can do.
@@ -1679,7 +1679,7 @@ Deletes stale content types including ones from previously installed apps that
 have been removed from :setting:`INSTALLED_APPS`. Defaults to ``False``.
 
 ``gingerdj.contrib.gis``
-----------------------
+------------------------
 
 ``ogrinspect``
 ~~~~~~~~~~~~~~
@@ -1691,7 +1691,7 @@ Please refer to its :djadmin:`description <ogrinspect>` in the GeoGinger
 documentation.
 
 ``gingerdj.contrib.sessions``
----------------------------
+-----------------------------
 
 ``clearsessions``
 ~~~~~~~~~~~~~~~~~
@@ -1701,7 +1701,7 @@ documentation.
 Can be run as a cron job or directly to clean out expired sessions.
 
 ``gingerdj.contrib.staticfiles``
-------------------------------
+--------------------------------
 
 ``collectstatic``
 ~~~~~~~~~~~~~~~~~

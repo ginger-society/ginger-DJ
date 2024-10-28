@@ -13,11 +13,6 @@ This tutorial will show how to add `GingerDJ Debug Toolbar
 package. The GingerDJ Debug Toolbar has ranked in the top three most used
 third-party packages in the GingerDJ Developers Survey in recent years.
 
-.. admonition:: Where to get help:
-
-    If you're having trouble going through this tutorial, please head over to
-    the :doc:`Getting Help</faq/help>` section of the FAQ.
-
 Installing GingerDJ Debug Toolbar
 ===============================
 

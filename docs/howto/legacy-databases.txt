@@ -1,6 +1,6 @@
-==============================================
+================================================
 How to integrate GingerDJ with a legacy database
-==============================================
+================================================
 
 While GingerDJ is best suited for developing new applications, it's quite
 possible to integrate it into legacy databases. GingerDJ includes a couple of
@@ -13,7 +13,7 @@ Once you've got GingerDJ set up, you'll follow this general process to integrate
 with an existing database.
 
 Give GingerDJ your database parameters
-====================================
+======================================
 
 You'll need to tell GingerDJ what your database connection parameters are, and
 what the name of the database is. Do that by editing the :setting:`DATABASES`
@@ -68,7 +68,7 @@ change the :attr:`~gingerdj.db.models.Options.managed` option above to ``True``
 (or remove it because ``True`` is its default value).
 
 Install the core GingerDJ tables
-==============================
+================================
 
 Next, run the :djadmin:`migrate` command to install any extra needed database
 records such as admin permissions and content types:

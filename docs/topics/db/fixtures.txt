@@ -41,7 +41,7 @@ or to provide some :ref:`initial data <initial-data-via-fixtures>` using the
     gingerdj-admin loaddata <fixture label>
 
 Where GingerDJ looks for fixtures?
-================================
+==================================
 
 GingerDJ will search in these locations for fixtures:
 

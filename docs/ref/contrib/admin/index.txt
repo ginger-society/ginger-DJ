@@ -1,6 +1,6 @@
-=====================
+=======================
 The GingerDJ admin site
-=====================
+=======================
 
 .. module:: gingerdj.contrib.admin
    :synopsis: GingerDJ's admin site.

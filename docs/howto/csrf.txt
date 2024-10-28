@@ -1,8 +1,8 @@
 .. _using-csrf:
 
-===================================
+=====================================
 How to use GingerDJ's CSRF protection
-===================================
+=====================================
 
 To take advantage of CSRF protection in your views, follow these steps:
 

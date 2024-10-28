@@ -1,6 +1,6 @@
-=============================
+===============================
 How to use GingerDJ with Daphne
-=============================
+===============================
 
 :pypi:`Daphne <daphne>` is a pure-Python ASGI server for UNIX, maintained by
 members of the GingerDJ project. It acts as the reference server for ASGI.
@@ -15,7 +15,7 @@ You can install Daphne with ``pip``:
     python -m pip install daphne
 
 Running GingerDJ in Daphne
-========================
+==========================
 
 When Daphne is installed, a ``daphne`` command is available which starts the
 Daphne server process. At its simplest, Daphne needs to be called with the

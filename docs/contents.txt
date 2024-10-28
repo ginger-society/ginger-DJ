@@ -1,6 +1,6 @@
-=============================
+===============================
 GingerDJ documentation contents
-=============================
+===============================
 
 .. toctree::
     :hidden:
@@ -17,7 +17,6 @@ GingerDJ documentation contents
     ref/index
     misc/index
     glossary
-    internals/index
 
 Indices, glossary and tables
 ============================

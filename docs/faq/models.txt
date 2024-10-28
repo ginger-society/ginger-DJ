@@ -5,7 +5,7 @@ FAQ: Databases and models
 .. _faq-see-raw-sql-queries:
 
 How can I see the raw SQL queries GingerDJ is running?
-====================================================
+======================================================
 
 Make sure your GingerDJ :setting:`DEBUG` setting is set to ``True``.
 Then do this:
@@ -43,7 +43,7 @@ call ``reset_queries()``, like this::
     reset_queries()
 
 Can I use GingerDJ with a preexisting database?
-=============================================
+===============================================
 
 Yes. See :doc:`Integrating with a legacy database </howto/legacy-databases>`.
 
@@ -58,7 +58,7 @@ If you don't mind clearing data, your project's ``manage.py`` utility has a
 immediately after :djadmin:`migrate` was executed.
 
 Do GingerDJ models support multiple-column primary keys?
-======================================================
+========================================================
 
 No. Only single-column primary keys are supported.
 
@@ -70,7 +70,7 @@ as the admin interface to work; e.g., you need a single value to specify
 an object to edit or delete.
 
 Does GingerDJ support NoSQL databases?
-====================================
+======================================
 
 NoSQL databases are not officially supported by GingerDJ itself. There are,
 however, a number of side projects and forks which allow NoSQL functionality in

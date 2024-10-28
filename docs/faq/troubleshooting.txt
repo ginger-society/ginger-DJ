@@ -8,10 +8,10 @@ during the development of GingerDJ applications.
 .. _troubleshooting-gingerdj-admin:
 
 Problems running ``gingerdj-admin``
-=================================
+===================================
 
 ``command not found: gingerdj-admin``
------------------------------------
+-------------------------------------
 
 :doc:`gingerdj-admin </ref/gingerdj-admin>` should be on your system path if you
 installed GingerDJ via ``pip``. If it's not in your path, ensure you have your

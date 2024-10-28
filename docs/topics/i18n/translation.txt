@@ -1999,7 +1999,7 @@ Implementation notes
 .. _specialties-of-gingerdj-i18n:
 
 Specialties of GingerDJ translation
----------------------------------
+-----------------------------------
 
 GingerDJ's translation machinery uses the standard ``gettext`` module that comes
 with Python. If you know ``gettext``, you might note these specialties in the
@@ -2018,7 +2018,7 @@ way GingerDJ does translation:
 .. _how-gingerdj-discovers-language-preference:
 
 How GingerDJ discovers language preference
-----------------------------------------
+------------------------------------------
 
 Once you've prepared your translations -- or, if you want to use the
 translations that come with GingerDJ -- you'll need to activate translation for
@@ -2150,7 +2150,7 @@ in ``request.LANGUAGE_CODE``.
 .. _how-gingerdj-discovers-translations:
 
 How GingerDJ discovers translations
----------------------------------
+-----------------------------------
 
 At runtime, GingerDJ builds an in-memory unified catalog of literals-translations.
 To achieve this it looks for translations by following this algorithm regarding

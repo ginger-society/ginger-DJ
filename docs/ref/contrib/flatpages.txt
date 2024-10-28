@@ -271,7 +271,7 @@ requiring :ref:`automatic HTML escaping <automatic-html-escaping>` in the
 template.
 
 Getting a list of :class:`~gingerdj.contrib.flatpages.models.FlatPage` objects in your templates
-==============================================================================================
+================================================================================================
 
 The flatpages app provides a template tag that allows you to iterate
 over all of the available flatpages on the :ref:`current site
@@ -329,7 +329,7 @@ For example:
     {% get_flatpages '/about/' for someuser as about_pages %}
 
 Integrating with :mod:`gingerdj.contrib.sitemaps`
-===============================================
+=================================================
 
 .. currentmodule:: gingerdj.contrib.flatpages.sitemaps
 

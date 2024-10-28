@@ -10,7 +10,7 @@ Managing database transactions
 ==============================
 
 GingerDJ's default transaction behavior
--------------------------------------
+---------------------------------------
 
 GingerDJ's default behavior is to run in autocommit mode. Each query is
 immediately committed to the database, unless a transaction is active.
@@ -256,7 +256,7 @@ Autocommit
 .. _autocommit-details:
 
 Why GingerDJ uses autocommit
---------------------------
+----------------------------
 
 In the SQL standards, each SQL query starts a transaction, unless one is
 already active. Such transactions must then be explicitly committed or rolled

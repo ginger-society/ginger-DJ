@@ -416,7 +416,7 @@ To avoid repetitions, add
 request object, so you can use ``request.site`` to get the current site.
 
 How GingerDJ uses the sites framework
-===================================
+=====================================
 
 Although it's not required that you use the sites framework, it's strongly
 encouraged, because GingerDJ takes advantage of it in a few places. Even if your

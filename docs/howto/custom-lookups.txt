@@ -309,7 +309,7 @@ methods, and then falls back to ``as_sql``. The vendor names for the in-built
 backends are ``sqlite``, ``postgresql``, ``oracle`` and ``mysql``.
 
 How GingerDJ determines the lookups and transforms which are used
-===============================================================
+=================================================================
 
 In some cases you may wish to dynamically change which ``Transform`` or
 ``Lookup`` is returned based on the name passed in, rather than fixing it. As

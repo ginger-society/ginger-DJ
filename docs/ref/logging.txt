@@ -20,7 +20,7 @@ function, so it's always available unless explicitly disabled.
 .. _default-logging-configuration:
 
 GingerDJ's default logging configuration
-======================================
+========================================
 
 By default, GingerDJ uses Python's :ref:`logging.config.dictConfig format
 <logging-config-dictschema>`.
@@ -115,7 +115,7 @@ See :ref:`configuring-logging` on how to complement or replace this default
 logging configuration.
 
 GingerDJ logging extensions
-=========================
+===========================
 
 GingerDJ provides a number of utilities to handle the particular requirements of
 logging in a web server environment.
@@ -128,7 +128,7 @@ GingerDJ provides several built-in loggers.
 .. _gingerdj-logger:
 
 ``gingerdj``
-~~~~~~~~~~
+~~~~~~~~~~~~
 
 The parent logger for messages in the ``gingerdj`` :ref:`named logger hierarchy
 <naming-loggers-hierarchy>`. GingerDJ does not post messages using this name.
@@ -137,7 +137,7 @@ Instead, it uses one of the loggers below.
 .. _gingerdj-request-logger:
 
 ``gingerdj.request``
-~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~
 
 Log messages related to the handling of requests. 5XX responses are
 raised as ``ERROR`` messages; 4XX responses are raised as ``WARNING``
@@ -153,7 +153,7 @@ Messages to this logger have the following extra context:
 .. _gingerdj-server-logger:
 
 ``gingerdj.server``
-~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~
 
 Log messages related to the handling of requests received by the server invoked
 by the :djadmin:`runserver` command. HTTP 5XX responses are logged as ``ERROR``
@@ -169,7 +169,7 @@ Messages to this logger have the following extra context:
 .. _gingerdj-template-logger:
 
 ``gingerdj.template``
-~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~
 
 Log messages related to the rendering of templates.
 
@@ -178,7 +178,7 @@ Log messages related to the rendering of templates.
 .. _gingerdj-db-logger:
 
 ``gingerdj.db.backends``
-~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~
 
 Messages relating to the interaction of code with the database. For example,
 every application-level SQL statement executed by a request is logged at the
@@ -202,7 +202,7 @@ all database queries.
 .. _gingerdj-utils-autoreloader-logger:
 
 ``gingerdj.utils.autoreload``
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Log messages related to automatic code reloading during the execution of the
 GingerDJ development server. This logger generates an ``INFO`` message upon
@@ -212,7 +212,7 @@ messages during filesystem inspection and event subscription processes.
 .. _gingerdj-contrib-gis-logger:
 
 ``gingerdj.contrib.gis``
-~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~
 
 Log messages related to :doc:`contrib/gis/index` at various points: during the
 loading of external GeoSpatial libraries (GEOS, GDAL, etc.) and when reporting
@@ -222,7 +222,7 @@ contextual data.
 .. _gingerdj-dispatch-logger:
 
 ``gingerdj.dispatch``
-~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~
 
 This logger is used in :doc:`signals`, specifically within the
 :mod:`~gingerdj.dispatch.Signal` class, to report issues when dispatching a
@@ -235,7 +235,7 @@ exception as ``exc_info`` and adds the following extra context:
 .. _gingerdj-security-logger:
 
 ``gingerdj.security.*``
-~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~
 
 The security loggers will receive messages on any occurrence of
 :exc:`~gingerdj.core.exceptions.SuspiciousOperation` and other security-related
@@ -277,7 +277,7 @@ Other ``gingerdj.security`` loggers not based on ``SuspiciousOperation`` are:
 * ``gingerdj.security.csrf``: For :ref:`CSRF failures <csrf-rejected-requests>`.
 
 ``gingerdj.db.backends.schema``
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Logs the SQL queries that are executed during schema changes to the database by
 the :doc:`migrations framework </topics/migrations>`. Note that it won't log the
@@ -289,7 +289,7 @@ as explained in :ref:`gingerdj-db-logger`.
 .. _gingerdj-contrib-sessions-logger:
 
 ``gingerdj.contrib.sessions``
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Log messages related to the :doc:`session framework</topics/http/sessions>`.
 

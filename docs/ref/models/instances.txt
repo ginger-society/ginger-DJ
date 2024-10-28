@@ -543,7 +543,7 @@ When you save an object, GingerDJ performs the following steps:
    something.
 
 How GingerDJ knows to UPDATE vs. INSERT
--------------------------------------
+---------------------------------------
 
 You may have noticed GingerDJ database objects use the same ``save()`` method
 for creating and changing objects. GingerDJ abstracts the need to use ``INSERT``
