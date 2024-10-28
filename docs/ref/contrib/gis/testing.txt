@@ -89,15 +89,6 @@ spatial database entitled ``template_postgis``.
 
 .. _geogingerdj-tests:
 
-GeoGingerDJ tests
-=================
-
-To have the GeoGinger tests executed when :ref:`running the GingerDJ test suite
-<running-unit-tests>` with ``runtests.py`` all of the databases in the settings
-file must be using one of the :ref:`spatial database backends
-<spatial-backends>`.
-
-
 Example
 -------
 

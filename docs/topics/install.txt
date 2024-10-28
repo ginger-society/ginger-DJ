@@ -142,33 +142,17 @@ This is the recommended way to install GingerDJ.
 #. Take a look at :doc:`venv <python:tutorial/venv>`. This tool provides
    isolated Python environments, which are more practical than installing
    packages systemwide. It also allows installing packages without
-   administrator privileges. The :doc:`contributing tutorial
-   </intro/contributing>` walks through how to create a virtual environment.
+   administrator privileges.
 
 #. After you've created and activated a virtual environment, enter the command:
 
    .. console::
 
-        $ python -m pip install GingerDJ
+        $ python -m pip install ginger-dj
 
 .. _pip: https://pip.pypa.io/
 .. _standalone pip installer: https://pip.pypa.io/en/latest/installation/
 
-.. _installing-distribution-package:
-
-Installing a distribution-specific package
-------------------------------------------
-
-Check the :doc:`distribution specific notes </misc/distributions>` to see if
-your platform/distribution provides official GingerDJ packages/installers.
-Distribution-provided packages will typically allow for automatic installation
-of dependencies and supported upgrade paths; however, these packages will rarely
-contain the latest release of GingerDJ.
-
-.. _installing-development-version:
-
-If you'd like to be able to update your GingerDJ code occasionally with the
-latest bug fixes and improvements, follow these instructions:
 
 #. Make sure that you have Git_ installed and that you can run its commands
    from a shell. (Enter ``git help`` at a shell prompt to test this.)
