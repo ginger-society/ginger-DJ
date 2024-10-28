@@ -44,17 +44,6 @@ You've got three options to install GingerDJ:
 * :ref:`Install an official release <installing-official-release>`. This
   is the best approach for most users.
 
-* Install a version of GingerDJ :ref:`provided by your operating system
-  distribution <installing-distribution-package>`.
-
-* :ref:`Install the latest development version
-  <installing-development-version>`. This option is for enthusiasts who want
-  the latest-and-greatest features and aren't afraid of running brand new code.
-  You might encounter new bugs in the development version, but reporting them
-  helps the development of GingerDJ. Also, releases of third-party packages are
-  less likely to be compatible with the development version than with the
-  latest stable release.
-
 .. admonition:: Always refer to the documentation that corresponds to the
     version of GingerDJ you're using!
 
