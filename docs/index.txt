@@ -27,7 +27,6 @@ Are you new to GingerDJ or to programming? This is the place to start!
 
 * **Advanced Tutorials:**
   :doc:`How to write reusable apps <intro/reusable-apps>` |
-  :doc:`Writing your first patch for GingerDJ <intro/contributing>`
 
 How the documentation is organized
 ==================================
@@ -295,15 +294,12 @@ Learn about some other core functionalities of the GingerDJ framework:
 * :doc:`Unicode in GingerDJ <ref/unicode>`
 
 The GingerDJ open-source project
-==============================
+================================
 
 Learn about the development process for the GingerDJ project itself.
 
 * **Design philosophies:**
   :doc:`Overview <misc/design-philosophies>`
-
-* **Third-party distributions:**
-  :doc:`Overview <misc/distributions>`
 
 * **GingerDJ over time:**
   :doc:`API stability <misc/api-stability>` |

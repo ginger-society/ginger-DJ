@@ -22,9 +22,7 @@ __ `executing custom SQL directly`_
       </ref/models/database-functions>`. Beyond those, you can create
       :doc:`custom query expressions </ref/models/expressions/>`.
 
-    Before using raw SQL, explore :doc:`the ORM </topics/db/index>`. Ask on
-    one of :doc:`the support channels </faq/help>` to see if the ORM supports
-    your use case.
+    Before using raw SQL, explore :doc:`the ORM </topics/db/index>`.
 
 .. warning::
 

@@ -20,7 +20,6 @@ place: read this material to quickly get up and running.
    tutorial08
    reusable-apps
    whatsnext
-   contributing
 
 .. seealso::
 

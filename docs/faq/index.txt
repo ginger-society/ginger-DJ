@@ -8,8 +8,6 @@ GingerDJ FAQ
    general
    install
    usage
-   help
    models
    admin
-   contributing
    troubleshooting

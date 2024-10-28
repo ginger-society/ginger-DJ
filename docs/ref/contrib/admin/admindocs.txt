@@ -1,6 +1,6 @@
-========================================
+==========================================
 The GingerDJ admin documentation generator
-========================================
+==========================================
 
 .. module:: gingerdj.contrib.admindocs
     :synopsis: GingerDJ's admin documentation generator.

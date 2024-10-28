@@ -1,6 +1,6 @@
-=====================================
+=======================================
 Writing your first GingerDJ app, part 3
-=====================================
+=======================================
 
 This tutorial begins where :doc:`Tutorial 2 </intro/tutorial02>` left off. We're
 continuing the web-poll application and will focus on creating the public
@@ -243,7 +243,7 @@ bulleted-list containing the "What's up" question from :doc:`Tutorial 2
 </intro/tutorial02>`. The link points to the question's detail page.
 
 A shortcut: :func:`~gingerdj.shortcuts.render`
---------------------------------------------
+----------------------------------------------
 
 It's a very common idiom to load a template, fill a context and return an
 :class:`~gingerdj.http.HttpResponse` object with the result of the rendered
@@ -311,7 +311,7 @@ containing just:
 will get you started for now.
 
 A shortcut: :func:`~gingerdj.shortcuts.get_object_or_404`
--------------------------------------------------------
+---------------------------------------------------------
 
 It's a very common idiom to use :meth:`~gingerdj.db.models.query.QuerySet.get`
 and raise :exc:`~gingerdj.http.Http404` if the object doesn't exist. GingerDJ

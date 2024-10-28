@@ -71,11 +71,6 @@ different needs:
   setups as well as a :doc:`deployment checklist</howto/deployment/checklist>`
   for some things you'll need to think about.
 
-* Finally, there's some "specialized" documentation not usually relevant to
-  most developers. This includes the :doc:`internals documentation </internals/index>` for those who want to add
-  code to GingerDJ itself, and a :doc:`few other things that don't fit elsewhere
-  </misc/index>`.
-
 
 How documentation is updated
 ============================
@@ -109,24 +104,8 @@ On the web
 ----------
 
 The most recent version of the GingerDJ documentation lives at
-https://docs.gingerdj.gloportal.dev/en/dev/. These HTML pages are generated
-automatically from the text files in source control. That means they reflect the
-"latest and greatest" in GingerDJ -- they include the very latest corrections and
-additions, and they discuss the latest GingerDJ features, which may only be
-available to users of the GingerDJ development version. (See
-:ref:`differences-between-doc-versions` below.)
+https://www.gingersociety.org/products/ginger-dj/docs/
 
-We encourage you to help improve the docs by submitting changes, corrections and
-suggestions in the `ticket system`_. The GingerDJ developers actively monitor the
-ticket system and use your feedback to improve the documentation for everybody.
-
-Note, however, that tickets should explicitly relate to the documentation,
-rather than asking broad tech-support questions. If you need help with your
-particular GingerDJ setup, try the |gingerdj-users| mailing list or the `#gingerdj
-IRC channel`_ instead.
-
-.. _ticket system: https://code.gingerdj.gloportal.dev/
-.. _#gingerdj IRC channel: https://web.libera.chat/#gingerdj
 
 In plain text
 -------------
@@ -185,37 +164,3 @@ You can get a local copy of the HTML documentation following a few steps:
 __ https://www.sphinx-doc.org/
 __ https://www.gnu.org/software/make/
 
-.. _differences-between-doc-versions:
-
-Differences between versions
-============================
-
-The text documentation in the main branch of the Git repository contains the
-"latest and greatest" changes and additions. These changes include
-documentation of new features targeted for GingerDJ's next :term:`feature
-release <Feature release>`. For that reason, it's worth pointing out our policy
-to highlight recent changes and additions to GingerDJ.
-
-We follow this policy:
-
-* The development documentation at https://docs.gingerdj.gloportal.dev/en/dev/ is
-  from the main branch. These docs correspond to the latest feature release,
-  plus whatever features have been added/changed in the framework since then.
-
-* As we add features to GingerDJ's development version, we update the
-  documentation in the same Git commit transaction.
-
-* To distinguish feature changes/additions in the docs, we use the phrase:
-  "New in GingerDJ Development version" for the version of GingerDJ that hasn't
-  been released yet, or "New in version X.Y" for released versions.
-
-* Documentation fixes and improvements may be backported to the last release
-  branch, at the discretion of the merger, however, once a version of GingerDJ is
-  :ref:`no longer supported<supported-versions-policy>`, that version of the
-  docs won't get any further updates.
-
-* The `main documentation web page`_ includes links to documentation for
-  previous versions. Be sure you are using the version of the docs
-  corresponding to the version of GingerDJ you are using!
-
-.. _main documentation web page: https://docs.gingerdj.gloportal.dev/en/dev/

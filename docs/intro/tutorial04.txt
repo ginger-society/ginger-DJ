@@ -1,6 +1,6 @@
-=====================================
+=======================================
 Writing your first GingerDJ app, part 4
-=====================================
+=======================================
 
 This tutorial begins where :doc:`Tutorial 3 </intro/tutorial03>` left off. We're
 continuing the web-poll application and will focus on form processing and

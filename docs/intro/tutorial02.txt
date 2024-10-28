@@ -1,6 +1,6 @@
-=====================================
+=======================================
 Writing your first GingerDJ app, part 2
-=====================================
+=======================================
 
 This tutorial begins where :doc:`Tutorial 1 </intro/tutorial01>` left off.
 We'll set up the database, create your first model, and get a quick
@@ -549,7 +549,7 @@ full details on the database API, see our :doc:`Database API reference
 </topics/db/queries>`.
 
 Introducing the GingerDJ Admin
-============================
+==============================
 
 .. admonition:: Philosophy
 

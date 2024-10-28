@@ -433,7 +433,7 @@ once this is complete for new environment variables to be recognized:
     to modify the ``OSGEO4W_ROOT`` variables accordingly.
 
 Install GingerDJ and set up database
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 :ref:`Install GingerDJ <installing-official-release>` on your system. It is
 recommended that you create a :doc:`virtual environment

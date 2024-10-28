@@ -1,6 +1,6 @@
-=====================================
+=======================================
 Writing your first GingerDJ app, part 1
-=====================================
+=======================================
 
 Let's learn by example.
 
@@ -336,7 +336,7 @@ The :func:`~gingerdj.urls.path` function is passed four arguments, two required:
 At this point, it's worth reviewing what these arguments are for.
 
 :func:`~gingerdj.urls.path` argument: ``route``
----------------------------------------------
+-----------------------------------------------
 
 ``route`` is a string that contains a URL pattern. When processing a request,
 GingerDJ starts at the first pattern in ``urlpatterns`` and makes its way down
@@ -349,7 +349,7 @@ in a request to ``https://www.example.com/myapp/``, the URLconf will look for
 URLconf will also look for ``myapp/``.
 
 :func:`~gingerdj.urls.path` argument: ``view``
---------------------------------------------
+----------------------------------------------
 
 When GingerDJ finds a matching pattern, it calls the specified view function with
 an :class:`~gingerdj.http.HttpRequest` object as the first argument and any
@@ -357,13 +357,13 @@ an :class:`~gingerdj.http.HttpRequest` object as the first argument and any
 of this in a bit.
 
 :func:`~gingerdj.urls.path` argument: ``kwargs``
-----------------------------------------------
+------------------------------------------------
 
 Arbitrary keyword arguments can be passed in a dictionary to the target view. We
 aren't going to use this feature of GingerDJ in the tutorial.
 
 :func:`~gingerdj.urls.path` argument: ``name``
---------------------------------------------
+----------------------------------------------
 
 Naming your URL lets you refer to it unambiguously from elsewhere in GingerDJ,
 especially from within templates. This powerful feature allows you to make

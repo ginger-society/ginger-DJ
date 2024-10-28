@@ -1,14 +1,12 @@
-========================================
+==========================================
 How to upgrade GingerDJ to a newer version
-========================================
+==========================================
 
 While it can be a complex process at times, upgrading to the latest GingerDJ
 version has several benefits:
 
 * New features and improvements are added.
 * Bugs are fixed.
-* Older version of GingerDJ will eventually no longer receive security updates.
-  (see :ref:`supported-versions-policy`).
 * Upgrading as each new GingerDJ release is available makes future upgrades less
   painful by keeping your code base up to date.
 

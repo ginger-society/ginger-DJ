@@ -154,7 +154,7 @@ Origin API and 3rd-party integration
 GingerDJ templates have an :class:`~gingerdj.template.base.Origin` object available
 through the ``template.origin`` attribute. This enables debug information to be
 displayed in the :ref:`template postmortem <template-postmortem>`, as well as
-in 3rd-party libraries, like the `GingerDJ Debug Toolbar`_.
+in 3rd-party libraries.
 
 Custom engines can provide their own ``template.origin`` information by
 creating an object that specifies the following attributes:

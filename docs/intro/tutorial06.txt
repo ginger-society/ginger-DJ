@@ -1,6 +1,6 @@
-=====================================
+=======================================
 Writing your first GingerDJ app, part 6
-=====================================
+=======================================
 
 This tutorial begins where :doc:`Tutorial 5 </intro/tutorial05>` left off.
 We've built a tested web-poll application, and we'll now add a stylesheet and

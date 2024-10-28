@@ -10,4 +10,3 @@ your kitchen with the scissors, batteries, duct tape, and other junk.
 
    api-stability
    design-philosophies
-   distributions

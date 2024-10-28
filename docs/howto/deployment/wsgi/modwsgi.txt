@@ -1,6 +1,6 @@
-==============================================
+================================================
 How to use GingerDJ with Apache and ``mod_wsgi``
-==============================================
+================================================
 
 Deploying GingerDJ with Apache_ and `mod_wsgi`_ is a tried and tested way to get
 GingerDJ into production.

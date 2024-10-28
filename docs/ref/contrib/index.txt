@@ -116,8 +116,3 @@ A framework for generating syndication feeds, in RSS and Atom, quite easily.
 
 See the :doc:`syndication documentation </ref/contrib/syndication>`.
 
-Other add-ons
-=============
-
-If you have an idea for functionality to include in ``contrib``, let us know!
-Code it up, and post it to the |gingerdj-users| mailing list.

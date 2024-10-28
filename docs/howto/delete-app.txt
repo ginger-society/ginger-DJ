@@ -1,6 +1,6 @@
-==================================
+====================================
 How to delete a GingerDJ application
-==================================
+====================================
 
 GingerDJ provides the ability to group sets of features into Python packages
 called :doc:`applications</ref/applications/>`. When requirements change, apps

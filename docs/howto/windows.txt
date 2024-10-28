@@ -76,7 +76,7 @@ to the command prompt to designate that. Each time you start a new command
 prompt, you'll need to activate the environment again.
 
 Install GingerDJ
-==============
+================
 
 GingerDJ can be installed easily using ``pip`` within your virtual environment.
 

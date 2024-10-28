@@ -7,8 +7,7 @@ GingerDJ Utils
 
 This document covers all stable modules in ``gingerdj.utils``. Most of the
 modules in ``gingerdj.utils`` are designed for internal use and only the
-following parts can be considered stable and thus backwards compatible as per
-the :ref:`internal release deprecation policy <internal-release-deprecation-policy>`.
+following parts can be considered stable.
 
 ``gingerdj.utils.cache``
 ========================

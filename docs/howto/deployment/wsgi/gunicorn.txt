@@ -16,7 +16,7 @@ details, see the `gunicorn documentation`_.
 .. _gunicorn documentation: https://docs.gunicorn.org/en/latest/install.html
 
 Running GingerDJ in Gunicorn as a generic WSGI application
-========================================================
+==========================================================
 
 When Gunicorn is installed, a ``gunicorn`` command is available which starts
 the Gunicorn server process. The simplest invocation of gunicorn is to pass the

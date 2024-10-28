@@ -15,7 +15,7 @@ You can install Uvicorn with ``pip``:
     python -m pip install uvicorn
 
 Running GingerDJ in Uvicorn
-=========================
+===========================
 
 When Uvicorn is installed, a ``uvicorn`` command is available which runs ASGI
 applications. Uvicorn needs to be called with the location of a module

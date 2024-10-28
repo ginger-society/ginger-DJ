@@ -37,7 +37,7 @@ like PostgreSQL, MariaDB, MySQL, or Oracle. To install such a database, consult
 the :ref:`database installation information <database-installation>`.
 
 Install GingerDJ
-==============
+================
 
 You've got three options to install GingerDJ:
 
