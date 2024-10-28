@@ -20,6 +20,5 @@ tests/screenshots/
 htmlcov
 .coverage
 Ginger_DJ-*
-cache
 .DS_Store
 
