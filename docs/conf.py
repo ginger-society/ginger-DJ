@@ -264,16 +264,12 @@ html_additional_pages = {}
 # html_file_suffix = None
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = "Gingerdoc"
+htmlhelp_basename = "GingerDJdoc"
 
 modindex_common_prefix = ["gingerdj."]
 
 # Appended to every page
 rst_epilog = """
-.. |gingerdj-users| replace:: :ref:`gingerdj-users <gingerdj-users-mailing-list>`
-.. |gingerdj-developers| replace:: :ref:`gingerdj-developers <gingerdj-developers-mailing-list>`
-.. |gingerdj-announce| replace:: :ref:`gingerdj-announce <gingerdj-announce-mailing-list>`
-.. |gingerdj-updates| replace:: :ref:`gingerdj-updates <gingerdj-updates-mailing-list>`
 """  # NOQA
 
 # -- Options for LaTeX output --------------------------------------------------

@@ -769,7 +769,7 @@ Normal Python unit test classes extend a base class of
 
 .. _testcase_hierarchy_diagram:
 
-.. figure:: _images/ginger_unittest_classes_hierarchy.*
+.. figure:: _images/gingerdj_unittest_classes_hierarchy.*
    :alt: Hierarchy of GingerDJ unit testing classes (TestCase subclasses)
    :width: 508
    :height: 328
