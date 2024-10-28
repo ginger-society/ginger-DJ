@@ -759,7 +759,7 @@ The following is a unit test using the test client::
 
     :class:`gingerdj.test.RequestFactory`
 
-.. _ginger-testcase-subclasses:
+.. _gingerdj-testcase-subclasses:
 
 Provided test case classes
 ==========================

@@ -53,7 +53,7 @@ It's no good just guessing or assuming where the inefficiencies lie in your
 code.
 
 GingerDJ tools
-~~~~~~~~~~~~
+~~~~~~~~~~~~~~
 
 `gingerdj-debug-toolbar
 <https://github.com/jazzband/gingerdj-debug-toolbar/>`_ is a very handy tool that
@@ -173,7 +173,7 @@ that's performing poorly because it has been written badly. It's one of the
 final steps toward producing well-performing code, not a shortcut.
 
 :class:`~gingerdj.utils.functional.cached_property`
--------------------------------------------------
+---------------------------------------------------
 
 It's common to have to call a class instance's method more than once. If
 that function is expensive, then doing so can be wasteful.
@@ -263,14 +263,14 @@ GingerDJ comes with a few helpful pieces of :doc:`middleware </ref/middleware>`
 that can help optimize your site's performance. They include:
 
 :class:`~gingerdj.middleware.http.ConditionalGetMiddleware`
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Adds support for modern browsers to conditionally GET responses based on the
 ``ETag`` and ``Last-Modified`` headers. It also calculates and sets an ETag if
 needed.
 
 :class:`~gingerdj.middleware.gzip.GZipMiddleware`
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Compresses responses for all modern browsers, saving bandwidth and transfer
 time. Note that GZipMiddleware is currently considered a security risk, and is
@@ -295,7 +295,7 @@ Static files, which by definition are not dynamic, make an excellent target for
 optimization gains.
 
 :class:`~gingerdj.contrib.staticfiles.storage.ManifestStaticFilesStorage`
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 By taking advantage of web browsers' caching abilities, you can
 eliminate network hits entirely for a given file after the initial download.
@@ -375,7 +375,7 @@ better too - but measure, rather than assume.
     performance you might win or lose.
 
 Alternatives to GingerDJ's template language
-------------------------------------------
+--------------------------------------------
 
 For nearly all cases, GingerDJ's built-in template language is perfectly
 adequate. However, if the bottlenecks in your GingerDJ project seem to lie in the

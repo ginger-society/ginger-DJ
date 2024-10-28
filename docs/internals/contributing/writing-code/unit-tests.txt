@@ -146,7 +146,7 @@ Running tests using ``gingerdj-docker-box``
 supported databases and python versions. See the `gingerdj-docker-box`_ project
 page for installation and usage instructions.
 
-.. _ginger-docker-box: https://github.com/gingerdj/gingerdj-docker-box/
+.. _gingerdj-docker-box: https://github.com/gingerdj/gingerdj-docker-box/
 
 .. _running-unit-tests-settings:
 

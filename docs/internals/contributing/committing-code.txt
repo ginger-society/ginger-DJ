@@ -108,15 +108,6 @@ GingerDJ's Git repository:
   pushing. If you absolutely must (for security reasons for example), first
   discuss the situation with the team.
 
-* For any medium-to-big changes, where "medium-to-big" is according to
-  your judgment, please bring things up on the `GingerDJ Forum`_ or
-  |gingerdj-developers| mailing list before making the change.
-
-  If you bring something up and nobody responds, please don't take that
-  to mean your idea is great and should be implemented immediately because
-  nobody contested it. Everyone doesn't always have a lot of time to read
-  mailing list discussions immediately, so you may have to wait a couple of
-  days before getting a response.
 
 * Write detailed commit messages in the past tense, not present tense.
 

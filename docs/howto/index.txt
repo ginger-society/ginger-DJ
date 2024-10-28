@@ -38,4 +38,4 @@ you quickly accomplish common tasks.
     global GingerDJ community. Many writers in the aggregator write this sort of
     how-to material.
 
-    .. _ginger community aggregator: https://www.gingerdj.gloportal.dev/community/
+    .. _gingerdj community aggregator: https://www.gingerdj.gloportal.dev/community/

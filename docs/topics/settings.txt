@@ -1,6 +1,6 @@
-===============
+=================
 GingerDJ settings
-===============
+=================
 
 A GingerDJ settings file contains all the configuration of your GingerDJ
 installation. This document explains how settings work and which settings are
@@ -32,7 +32,7 @@ Because a settings file is a Python module, the following apply:
 
 * It can import values from other settings files.
 
-.. _ginger-settings-module:
+.. _gingerdj-settings-module:
 
 Designating the settings
 ========================
@@ -48,7 +48,7 @@ Python :py:data:`sys.path`.
 
 
 The ``gingerdj-admin`` utility
-----------------------------
+------------------------------
 
 When using :doc:`gingerdj-admin </ref/gingerdj-admin>`, you can either set the
 environment variable once, or explicitly pass in the settings module each time
@@ -74,7 +74,7 @@ Use the ``--settings`` command-line argument to specify the settings manually:
 
     gingerdj-admin runserver --settings=mysite.settings
 
-.. _ginger-admin: ../gingerdj-admin/
+.. _gingerdj-admin: ../gingerdj-admin/
 
 On the server (``mod_wsgi``)
 ----------------------------
@@ -272,7 +272,7 @@ It boils down to this: Use exactly one of either ``configure()`` or
 :envvar:`GINGER_SETTINGS_MODULE`. Not both, and not neither.
 
 Calling ``gingerdj.setup()`` is required for "standalone" GingerDJ usage
---------------------------------------------------------------------
+------------------------------------------------------------------------
 
 If you're using components of GingerDJ "standalone" -- for example, writing a
 Python script which loads some GingerDJ templates and renders them, or uses the

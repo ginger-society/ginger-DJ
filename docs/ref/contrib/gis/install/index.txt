@@ -28,7 +28,7 @@ instructions are available for:
 Requirements
 ============
 
-.. _ginger:
+.. _gingerdj:
 
 Python and GingerDJ
 -----------------

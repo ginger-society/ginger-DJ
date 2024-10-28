@@ -47,7 +47,7 @@ namespace.
 .. _template-language-intro:
 
 The GingerDJ template language
-============================
+==============================
 
 Syntax
 ------

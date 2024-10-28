@@ -125,7 +125,7 @@ Loggers
 
 GingerDJ provides several built-in loggers.
 
-.. _ginger-logger:
+.. _gingerdj-logger:
 
 ``gingerdj``
 ~~~~~~~~~~
@@ -134,7 +134,7 @@ The parent logger for messages in the ``gingerdj`` :ref:`named logger hierarchy
 <naming-loggers-hierarchy>`. GingerDJ does not post messages using this name.
 Instead, it uses one of the loggers below.
 
-.. _ginger-request-logger:
+.. _gingerdj-request-logger:
 
 ``gingerdj.request``
 ~~~~~~~~~~~~~~~~~~
@@ -150,7 +150,7 @@ Messages to this logger have the following extra context:
 
 * ``request``: The request object that generated the logging message.
 
-.. _ginger-server-logger:
+.. _gingerdj-server-logger:
 
 ``gingerdj.server``
 ~~~~~~~~~~~~~~~~~
@@ -166,7 +166,7 @@ Messages to this logger have the following extra context:
 
 * ``request``: The request object (a :py:class:`socket.socket`) that generated the logging message.
 
-.. _ginger-template-logger:
+.. _gingerdj-template-logger:
 
 ``gingerdj.template``
 ~~~~~~~~~~~~~~~~~~~
@@ -175,7 +175,7 @@ Log messages related to the rendering of templates.
 
 * Missing context variables are logged as ``DEBUG`` messages.
 
-.. _ginger-db-logger:
+.. _gingerdj-db-logger:
 
 ``gingerdj.db.backends``
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -199,7 +199,7 @@ This logging does not include framework-level initialization (e.g.
 ``SET TIMEZONE``). Turn on query logging in your database if you wish to view
 all database queries.
 
-.. _ginger-utils-autoreloader-logger:
+.. _gingerdj-utils-autoreloader-logger:
 
 ``gingerdj.utils.autoreload``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -209,7 +209,7 @@ GingerDJ development server. This logger generates an ``INFO`` message upon
 detecting a modification in a source code file and may produce ``WARNING``
 messages during filesystem inspection and event subscription processes.
 
-.. _ginger-contrib-gis-logger:
+.. _gingerdj-contrib-gis-logger:
 
 ``gingerdj.contrib.gis``
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -219,7 +219,7 @@ loading of external GeoSpatial libraries (GEOS, GDAL, etc.) and when reporting
 errors. Each ``ERROR`` log record includes the caught exception and relevant
 contextual data.
 
-.. _ginger-dispatch-logger:
+.. _gingerdj-dispatch-logger:
 
 ``gingerdj.dispatch``
 ~~~~~~~~~~~~~~~~~~~
@@ -232,7 +232,7 @@ exception as ``exc_info`` and adds the following extra context:
 * ``receiver``: The name of the receiver.
 * ``err``: The exception that occurred when calling the receiver.
 
-.. _ginger-security-logger:
+.. _gingerdj-security-logger:
 
 ``gingerdj.security.*``
 ~~~~~~~~~~~~~~~~~~~~~
@@ -286,7 +286,7 @@ Messages to this logger have ``params`` and ``sql`` in their extra context (but
 unlike ``gingerdj.db.backends``, not duration). The values have the same meaning
 as explained in :ref:`gingerdj-db-logger`.
 
-.. _ginger-contrib-sessions-logger:
+.. _gingerdj-contrib-sessions-logger:
 
 ``gingerdj.contrib.sessions``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~

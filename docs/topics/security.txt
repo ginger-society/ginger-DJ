@@ -1,6 +1,6 @@
-==================
+====================
 Security in GingerDJ
-==================
+====================
 
 This document is an overview of GingerDJ's security features. It includes advice
 on securing a GingerDJ-powered site.

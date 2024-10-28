@@ -1,6 +1,6 @@
-============
+==============
 Using GingerDJ
-============
+==============
 
 Introductions to all the key parts of GingerDJ you'll need to know:
 

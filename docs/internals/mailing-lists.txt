@@ -28,7 +28,7 @@ There are several categories of discussion including:
 In addition, GingerDJ has several official mailing lists on Google Groups that
 are open to anyone.
 
-.. _ginger-users-mailing-list:
+.. _gingerdj-users-mailing-list:
 
 ``gingerdj-users``
 ================
@@ -51,11 +51,11 @@ installation, usage, or debugging of GingerDJ.
 * `gingerdj-users subscription email address`_
 * `gingerdj-users posting email`_
 
-.. _ginger-users mailing archive: https://groups.google.com/g/gingerdj-users
-.. _ginger-users subscription email address: mailto:gingerdj-users+subscribe@googlegroups.com
-.. _ginger-users posting email: mailto:gingerdj-users@googlegroups.com
+.. _gingerdj-users mailing archive: https://groups.google.com/g/gingerdj-users
+.. _gingerdj-users subscription email address: mailto:gingerdj-users+subscribe@googlegroups.com
+.. _gingerdj-users posting email: mailto:gingerdj-users@googlegroups.com
 
-.. _ginger-developers-mailing-list:
+.. _gingerdj-developers-mailing-list:
 
 ``gingerdj-developers``
 =====================
@@ -81,11 +81,11 @@ answered there.
 * `gingerdj-developers subscription email address`_
 * `gingerdj-developers posting email`_
 
-.. _ginger-developers mailing archive: https://groups.google.com/g/gingerdj-developers
-.. _ginger-developers subscription email address: mailto:gingerdj-developers+subscribe@googlegroups.com
-.. _ginger-developers posting email: mailto:gingerdj-developers@googlegroups.com
+.. _gingerdj-developers mailing archive: https://groups.google.com/g/gingerdj-developers
+.. _gingerdj-developers subscription email address: mailto:gingerdj-developers+subscribe@googlegroups.com
+.. _gingerdj-developers posting email: mailto:gingerdj-developers@googlegroups.com
 
-.. _ginger-announce-mailing-list:
+.. _gingerdj-announce-mailing-list:
 
 ``gingerdj-announce``
 ===================
@@ -97,11 +97,11 @@ A (very) low-traffic list for announcing :ref:`upcoming security releases
 * `gingerdj-announce subscription email address`_
 * `gingerdj-announce posting email`_
 
-.. _ginger-announce mailing archive: https://groups.google.com/g/gingerdj-announce
-.. _ginger-announce subscription email address: mailto:gingerdj-announce+subscribe@googlegroups.com
-.. _ginger-announce posting email: mailto:gingerdj-announce@googlegroups.com
+.. _gingerdj-announce mailing archive: https://groups.google.com/g/gingerdj-announce
+.. _gingerdj-announce subscription email address: mailto:gingerdj-announce+subscribe@googlegroups.com
+.. _gingerdj-announce posting email: mailto:gingerdj-announce@googlegroups.com
 
-.. _ginger-updates-mailing-list:
+.. _gingerdj-updates-mailing-list:
 
 ``gingerdj-updates``
 ==================
@@ -113,6 +113,6 @@ by developers and interested community members.
 * `gingerdj-updates subscription email address`_
 * `gingerdj-updates posting email`_
 
-.. _ginger-updates mailing archive: https://groups.google.com/g/gingerdj-updates
-.. _ginger-updates subscription email address: mailto:gingerdj-updates+subscribe@googlegroups.com
-.. _ginger-updates posting email: mailto:gingerdj-updates@googlegroups.com
+.. _gingerdj-updates mailing archive: https://groups.google.com/g/gingerdj-updates
+.. _gingerdj-updates subscription email address: mailto:gingerdj-updates+subscribe@googlegroups.com
+.. _gingerdj-updates posting email: mailto:gingerdj-updates@googlegroups.com

@@ -410,7 +410,7 @@ same file that inherit from ``SerializeMixin`` will run sequentially::
 .. _testing-reusable-applications:
 
 Using the GingerDJ test runner to test reusable applications
-==========================================================
+============================================================
 
 If you are writing a :doc:`reusable application </intro/reusable-apps>`
 you may want to use the GingerDJ test runner to run your own test suite
@@ -755,7 +755,7 @@ Testing utilities
 -----------------
 
 ``gingerdj.test.utils``
-~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~
 
 .. module:: gingerdj.test.utils
    :synopsis: Helpers to write custom test runners.
@@ -802,7 +802,7 @@ utility methods in the ``gingerdj.test.utils`` module.
     :meth:`setup_databases` method.
 
 ``gingerdj.db.connection.creation``
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. currentmodule:: gingerdj.db.connection.creation
 

@@ -578,7 +578,7 @@ Translating documentation
 See :ref:`Localizing the GingerDJ documentation <translating-documentation>` if
 you'd like to help translate the documentation into another language.
 
-.. _ginger-admin-manpage:
+.. _gingerdj-admin-manpage:
 
 ``gingerdj-admin`` man page
 =========================

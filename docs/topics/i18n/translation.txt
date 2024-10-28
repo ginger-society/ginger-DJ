@@ -1333,7 +1333,7 @@ You can even pre-generate the JavaScript catalog as part of your deployment
 procedure and serve it as a static file. This radical technique is implemented
 in gingerdj-statici18n_.
 
-.. _ginger-statici18n: https://gingerdj-statici18n.readthedocs.io/
+.. _gingerdj-statici18n: https://gingerdj-statici18n.readthedocs.io/
 
 .. _url-internationalization:
 

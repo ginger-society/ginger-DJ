@@ -149,7 +149,7 @@ Otherwise, a Releaser may be removed by:
   of the GingerDJ Society.
 - A vote of the steering council.
 
-.. _ginger.gloportal.dev: https://www.gingerdj.gloportal.dev/download/
+.. _gingerdj.gloportal.dev: https://www.gingerdj.gloportal.dev/download/
 
 .. _steering-council:
 

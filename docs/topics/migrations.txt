@@ -889,7 +889,7 @@ way into your constructor, and then returns those arguments exactly when
 deconstruct() is called.
 
 Supporting multiple GingerDJ versions
-===================================
+=====================================
 
 If you are the maintainer of a third-party app with models, you may need to
 ship migrations that support multiple GingerDJ versions. In this case, you should

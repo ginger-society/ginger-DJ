@@ -1,6 +1,6 @@
-=================
+===================
 Testing in GingerDJ
-=================
+===================
 
 Automated testing is an extremely useful bug-killing tool for the modern
 web developer. You can use a collection of tests -- a **test suite** -- to

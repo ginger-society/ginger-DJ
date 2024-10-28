@@ -1,6 +1,6 @@
-=====================
+=======================
 How to install GingerDJ
-=====================
+=======================
 
 This document will get you up and running with GingerDJ.
 
@@ -121,7 +121,7 @@ database queries, GingerDJ will need permission to create a test database.
 .. _install-gingerdj-code:
 
 Install the GingerDJ code
-=======================
+=========================
 
 Installation instructions are slightly different depending on whether you're
 installing a distribution-specific package, downloading the latest official

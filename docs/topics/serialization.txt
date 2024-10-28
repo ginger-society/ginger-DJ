@@ -1,6 +1,6 @@
-==========================
+============================
 Serializing GingerDJ objects
-==========================
+============================
 
 GingerDJ's serialization framework provides a mechanism for "translating" GingerDJ
 models into other formats. Usually these other formats will be text-based and
