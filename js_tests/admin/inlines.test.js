@@ -2,7 +2,7 @@
 "use strict";
 
 QUnit.module("admin.inlines: tabular formsets", {
-    beforeEach: function () {
+    beforeEach: function() {
         const $ = gingerdj.jQuery;
         const that = this;
         this.addText = "Add another";
@@ -18,26 +18,26 @@ QUnit.module("admin.inlines: tabular formsets", {
     },
 });
 
-QUnit.test("no forms", function (assert) {
+QUnit.test("no forms", function(assert) {
     assert.ok(this.inlineRow.hasClass("dynamic-first"));
     assert.equal(this.table.find(".add-row a").text(), this.addText);
 });
 
-QUnit.test("add form", function (assert) {
+QUnit.test("add form", function(assert) {
     const addButton = this.table.find(".add-row a");
     assert.equal(addButton.text(), this.addText);
     addButton.click();
     assert.ok(this.table.find("#first-1"));
 });
 
-QUnit.test("added form has remove button", function (assert) {
+QUnit.test("added form has remove button", function(assert) {
     const addButton = this.table.find(".add-row a");
     assert.equal(addButton.text(), this.addText);
     addButton.click();
     assert.equal(this.table.find("#first-1 .inline-deletelink").length, 1);
 });
 
-QUnit.test("add/remove form events", function (assert) {
+QUnit.test("add/remove form events", function(assert) {
     assert.expect(5);
     const addButton = this.table.find(".add-row a");
     document.addEventListener(
@@ -62,7 +62,7 @@ QUnit.test("add/remove form events", function (assert) {
     deleteLink.click();
 });
 
-QUnit.test("existing add button", function (assert) {
+QUnit.test("existing add button", function(assert) {
     const $ = gingerdj.jQuery;
     $("#qunit-fixture").empty(); // Clear the table added in beforeEach
     $("#qunit-fixture").append($("#tabular-formset").text());
@@ -81,7 +81,7 @@ QUnit.test("existing add button", function (assert) {
 });
 
 QUnit.module("admin.inlines: tabular formsets with validation errors", {
-    beforeEach: function () {
+    beforeEach: function() {
         const $ = gingerdj.jQuery;
 
         $("#qunit-fixture").append(
@@ -95,7 +95,7 @@ QUnit.module("admin.inlines: tabular formsets with validation errors", {
     },
 });
 
-QUnit.test("first form has delete checkbox and no button", function (assert) {
+QUnit.test("first form has delete checkbox and no button", function(assert) {
     const tr = this.inlineRows.slice(0, 1);
     assert.ok(tr.hasClass("dynamic-second"));
     assert.ok(tr.hasClass("has_original"));
@@ -103,14 +103,14 @@ QUnit.test("first form has delete checkbox and no button", function (assert) {
     assert.equal(tr.find("td.delete .inline-deletelink").length, 0);
 });
 
-QUnit.test("dynamic form has remove button", function (assert) {
+QUnit.test("dynamic form has remove button", function(assert) {
     const tr = this.inlineRows.slice(1, 2);
     assert.ok(tr.hasClass("dynamic-second"));
     assert.notOk(tr.hasClass("has_original"));
     assert.equal(tr.find(".inline-deletelink").length, 1);
 });
 
-QUnit.test("dynamic template has nothing", function (assert) {
+QUnit.test("dynamic template has nothing", function(assert) {
     const tr = this.inlineRows.slice(2, 3);
     assert.ok(tr.hasClass("empty-form"));
     assert.notOk(tr.hasClass("dynamic-second"));
@@ -120,7 +120,7 @@ QUnit.test("dynamic template has nothing", function (assert) {
 
 QUnit.test(
     "removing a form-row also removed related row with non-field errors",
-    function (assert) {
+    function(assert) {
         const $ = gingerdj.jQuery;
         assert.ok(this.table.find(".row-form-errors").length);
         const tr = this.inlineRows.slice(1, 2);
@@ -133,7 +133,7 @@ QUnit.test(
 );
 
 QUnit.module("admin.inlines: tabular formsets with max_num", {
-    beforeEach: function () {
+    beforeEach: function() {
         const $ = gingerdj.jQuery;
         $("#qunit-fixture").append(
             $("#tabular-formset-with-validation-error").text()
@@ -150,13 +150,13 @@ QUnit.module("admin.inlines: tabular formsets with max_num", {
 
 QUnit.test(
     "does not show the add button if already at max_num",
-    function (assert) {
+    function(assert) {
         const addButton = this.table.find("tr.add_row > td > a");
         assert.notOk(addButton.is(":visible"));
     }
 );
 
-QUnit.test("make addButton visible again", function (assert) {
+QUnit.test("make addButton visible again", function(assert) {
     const $ = gingerdj.jQuery;
     const addButton = this.table.find("tr.add_row > td > a");
     const removeButton = this.table
@@ -167,7 +167,7 @@ QUnit.test("make addButton visible again", function (assert) {
 });
 
 QUnit.module("admin.inlines: tabular formsets with min_num", {
-    beforeEach: function () {
+    beforeEach: function() {
         const $ = gingerdj.jQuery;
         $("#qunit-fixture").append(
             $("#tabular-formset-with-validation-error").text()
@@ -184,12 +184,12 @@ QUnit.module("admin.inlines: tabular formsets with min_num", {
 
 QUnit.test(
     "does not show the remove buttons if already at min_num",
-    function (assert) {
+    function(assert) {
         assert.notOk(this.table.find(".inline-deletelink:visible").length);
     }
 );
 
-QUnit.test("make removeButtons visible again", function (assert) {
+QUnit.test("make removeButtons visible again", function(assert) {
     const $ = gingerdj.jQuery;
     const addButton = this.table.find("tr.add-row > td > a");
     addButton.trigger($.Event("click", { target: addButton }));

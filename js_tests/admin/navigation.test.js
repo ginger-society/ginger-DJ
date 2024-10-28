@@ -2,7 +2,7 @@
 "use strict";
 
 QUnit.module("admin.sidebar: filter", {
-    beforeEach: function () {
+    beforeEach: function() {
         const $ = gingerdj.jQuery;
         $("#qunit-fixture").append($("#nav-sidebar-filter").text());
         this.navSidebar = $("#nav-sidebar");
@@ -11,7 +11,7 @@ QUnit.module("admin.sidebar: filter", {
     },
 });
 
-QUnit.test("filter by a model name", function (assert) {
+QUnit.test("filter by a model name", function(assert) {
     assert.equal(this.navSidebar.find("th[scope=row] a").length, 2);
 
     this.navFilter.val("us"); // Matches 'users'.

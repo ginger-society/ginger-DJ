@@ -8,7 +8,7 @@
     const relatedWindows = [];
 
     function dismissChildPopups() {
-        relatedWindows.forEach(function (win) {
+        relatedWindows.forEach(function(win) {
             if (!win.closed) {
                 win.dismissChildPopups();
                 win.close();
@@ -85,7 +85,7 @@
         }
         const value = $this.val();
         if (value) {
-            siblings.each(function () {
+            siblings.each(function() {
                 const elm = $(this);
                 elm.attr(
                     "href",
@@ -120,7 +120,7 @@
             `[data-model-ref="${modelName}"] select:not(.admin-autocomplete)`
         );
 
-        selectsRelated.forEach(function (select) {
+        selectsRelated.forEach(function(select) {
             if (currentSelect === select) {
                 return;
             }
@@ -186,7 +186,7 @@
         const selects = $(selectsSelector);
         selects
             .find("option")
-            .each(function () {
+            .each(function() {
                 if (this.value === objId) {
                     this.textContent = newRepr;
                     this.value = newId;
@@ -197,7 +197,7 @@
         selects
             .next()
             .find(".select2-selection__rendered")
-            .each(function () {
+            .each(function() {
                 // The element can have a clear button as a child.
                 // Use the lastChild to modify only the displayed value.
                 this.lastChild.textContent = newRepr;
@@ -220,7 +220,7 @@
         const selects = $(selectsSelector);
         selects
             .find("option")
-            .each(function () {
+            .each(function() {
                 if (this.value === objId) {
                     $(this).remove();
                 }
@@ -246,13 +246,13 @@
     window.showAddAnotherPopup = showRelatedObjectPopup;
     window.dismissAddAnotherPopup = dismissAddRelatedObjectPopup;
 
-    window.addEventListener("unload", function (evt) {
+    window.addEventListener("unload", function(evt) {
         window.dismissChildPopups();
     });
 
-    $(document).ready(function () {
+    $(document).ready(function() {
         setPopupIndex();
-        $("a[data-popup-opener]").on("click", function (event) {
+        $("a[data-popup-opener]").on("click", function(event) {
             event.preventDefault();
             opener.dismissRelatedLookupPopup(
                 window,
@@ -262,7 +262,7 @@
         $("body").on(
             "click",
             '.related-widget-wrapper-link[data-popup="yes"]',
-            function (e) {
+            function(e) {
                 e.preventDefault();
                 if (this.href) {
                     const event = $.Event("gingerdj:show-related", {
@@ -275,7 +275,7 @@
                 }
             }
         );
-        $("body").on("change", ".related-widget-wrapper select", function (e) {
+        $("body").on("change", ".related-widget-wrapper select", function(e) {
             const event = $.Event("gingerdj:update-related");
             $(this).trigger(event);
             if (!event.isDefaultPrevented()) {
@@ -283,7 +283,7 @@
             }
         });
         $(".related-widget-wrapper select").trigger("change");
-        $("body").on("click", ".related-lookup", function (e) {
+        $("body").on("click", ".related-lookup", function(e) {
             e.preventDefault();
             const event = $.Event("gingerdj:lookup-related");
             $(this).trigger(event);

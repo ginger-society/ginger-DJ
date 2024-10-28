@@ -3,35 +3,35 @@
     const globals = this;
     const gingerdj = globals.gingerdj;
 
-    gingerdj.pluralidx = function (count) {
+    gingerdj.pluralidx = function(count) {
         return count === 1 ? 0 : 1;
     };
 
     /* gettext identity library */
 
-    gingerdj.gettext = function (msgid) {
+    gingerdj.gettext = function(msgid) {
         return msgid;
     };
-    gingerdj.ngettext = function (singular, plural, count) {
+    gingerdj.ngettext = function(singular, plural, count) {
         return count === 1 ? singular : plural;
     };
-    gingerdj.gettext_noop = function (msgid) {
+    gingerdj.gettext_noop = function(msgid) {
         return msgid;
     };
-    gingerdj.pgettext = function (context, msgid) {
+    gingerdj.pgettext = function(context, msgid) {
         return msgid;
     };
-    gingerdj.npgettext = function (context, singular, plural, count) {
+    gingerdj.npgettext = function(context, singular, plural, count) {
         return count === 1 ? singular : plural;
     };
 
-    gingerdj.interpolate = function (fmt, obj, named) {
+    gingerdj.interpolate = function(fmt, obj, named) {
         if (named) {
-            return fmt.replace(/%\(\w+\)s/g, function (match) {
+            return fmt.replace(/%\(\w+\)s/g, function(match) {
                 return String(obj[match.slice(2, -2)]);
             });
         } else {
-            return fmt.replace(/%s/g, function (match) {
+            return fmt.replace(/%s/g, function(match) {
                 return String(obj.shift());
             });
         }
@@ -69,7 +69,7 @@
         YEAR_MONTH_FORMAT: "F Y",
     };
 
-    gingerdj.get_format = function (format_type) {
+    gingerdj.get_format = function(format_type) {
         const value = gingerdj.formats[format_type];
         if (typeof value === "undefined") {
             return format_type;

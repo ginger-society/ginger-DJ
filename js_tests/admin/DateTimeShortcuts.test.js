@@ -3,7 +3,7 @@
 
 QUnit.module("admin.DateTimeShortcuts");
 
-QUnit.test("init", function (assert) {
+QUnit.test("init", function(assert) {
     const $ = gingerdj.jQuery;
 
     const dateField = $(
@@ -23,7 +23,7 @@ QUnit.test("init", function (assert) {
     assert.equal(DateTimeShortcuts.timezoneOffset, 0);
 });
 
-QUnit.test("custom time shortcuts", function (assert) {
+QUnit.test("custom time shortcuts", function(assert) {
     const $ = gingerdj.jQuery;
     const timeField = $(
         '<input type="text" name="time_test" class="vTimeField">'
@@ -34,7 +34,7 @@ QUnit.test("custom time shortcuts", function (assert) {
     assert.equal($(".clockbox").find("a").first().text(), "3 a.m.");
 });
 
-QUnit.test("time zone offset warning", function (assert) {
+QUnit.test("time zone offset warning", function(assert) {
     const $ = gingerdj.jQuery;
     const savedOffset = $("body").attr("data-admin-utc-offset");
     const timeField = $(

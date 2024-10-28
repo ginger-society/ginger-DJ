@@ -2,7 +2,7 @@
 "use strict";
 
 QUnit.module("admin.actions", {
-    beforeEach: function () {
+    beforeEach: function() {
         // Number of results shown on page
         /* eslint-disable */
         window._actions_icnt = "100";
@@ -15,7 +15,7 @@ QUnit.module("admin.actions", {
     },
 });
 
-QUnit.test("check", function (assert) {
+QUnit.test("check", function(assert) {
     const $ = gingerdj.jQuery;
     assert.notOk($(".action-select").is(":checked"));
     $("#action-toggle").click();

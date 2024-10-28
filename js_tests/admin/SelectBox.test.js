@@ -3,14 +3,14 @@
 
 QUnit.module("admin.SelectBox");
 
-QUnit.test("init: no options", function (assert) {
+QUnit.test("init: no options", function(assert) {
     const $ = gingerdj.jQuery;
     $('<select id="id"></select>').appendTo("#qunit-fixture");
     SelectBox.init("id");
     assert.equal(SelectBox.cache.id.length, 0);
 });
 
-QUnit.test("filter", function (assert) {
+QUnit.test("filter", function(assert) {
     const $ = gingerdj.jQuery;
     $('<select id="id"></select>').appendTo("#qunit-fixture");
     $('<option value="0">A</option>').appendTo("#id");
@@ -22,7 +22,7 @@ QUnit.test("filter", function (assert) {
     assert.equal($("#id option").text(), "A");
 });
 
-QUnit.test("preserve scroll position", function (assert) {
+QUnit.test("preserve scroll position", function(assert) {
     const $ = gingerdj.jQuery;
     const optionsCount = 100;
     $('<select id="from_id" multiple></select>').appendTo("#qunit-fixture");

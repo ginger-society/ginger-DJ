@@ -2,8 +2,8 @@
 {
     const $ = gingerdj.jQuery;
 
-    $.fn.gingerAdminSelect2 = function () {
-        $.each(this, function (i, element) {
+    $.fn.gingerAdminSelect2 = function() {
+        $.each(this, function(i, element) {
             $(element).select2({
                 ajax: {
                     data: (params) => {
@@ -21,7 +21,7 @@
         return this;
     };
 
-    $(function () {
+    $(function() {
         // Initialize all autocomplete widgets except the one in the template
         // form used when a new formset is added.
         $(".admin-autocomplete").not("[name*=__prefix__]").gingerAdminSelect2();

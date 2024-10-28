@@ -3,23 +3,23 @@
 
 QUnit.module("admin.core");
 
-QUnit.test("Date.getTwelveHours", function (assert) {
+QUnit.test("Date.getTwelveHours", function(assert) {
     assert.equal(new Date(2011, 0, 1, 0, 0).getTwelveHours(), 12, "0:00");
     assert.equal(new Date(2011, 0, 1, 11, 0).getTwelveHours(), 11, "11:00");
     assert.equal(new Date(2011, 0, 1, 16, 0).getTwelveHours(), 4, "16:00");
 });
 
-QUnit.test("Date.getTwoDigitMonth", function (assert) {
+QUnit.test("Date.getTwoDigitMonth", function(assert) {
     assert.equal(new Date(2011, 0, 1).getTwoDigitMonth(), "01", "jan 1");
     assert.equal(new Date(2011, 9, 1).getTwoDigitMonth(), "10", "oct 1");
 });
 
-QUnit.test("Date.getTwoDigitDate", function (assert) {
+QUnit.test("Date.getTwoDigitDate", function(assert) {
     assert.equal(new Date(2011, 0, 1).getTwoDigitDate(), "01", "jan 1");
     assert.equal(new Date(2011, 0, 15).getTwoDigitDate(), "15", "jan 15");
 });
 
-QUnit.test("Date.getTwoDigitTwelveHour", function (assert) {
+QUnit.test("Date.getTwoDigitTwelveHour", function(assert) {
     assert.equal(
         new Date(2011, 0, 1, 0, 0).getTwoDigitTwelveHour(),
         "12",
@@ -37,7 +37,7 @@ QUnit.test("Date.getTwoDigitTwelveHour", function (assert) {
     );
 });
 
-QUnit.test("Date.getTwoDigitHour", function (assert) {
+QUnit.test("Date.getTwoDigitHour", function(assert) {
     assert.equal(
         new Date(2014, 6, 1, 9, 0).getTwoDigitHour(),
         "09",
@@ -50,7 +50,7 @@ QUnit.test("Date.getTwoDigitHour", function (assert) {
     );
 });
 
-QUnit.test("Date.getTwoDigitMinute", function (assert) {
+QUnit.test("Date.getTwoDigitMinute", function(assert) {
     assert.equal(
         new Date(2014, 6, 1, 0, 5).getTwoDigitMinute(),
         "05",
@@ -63,7 +63,7 @@ QUnit.test("Date.getTwoDigitMinute", function (assert) {
     );
 });
 
-QUnit.test("Date.getTwoDigitSecond", function (assert) {
+QUnit.test("Date.getTwoDigitSecond", function(assert) {
     assert.equal(
         new Date(2014, 6, 1, 0, 0, 2).getTwoDigitSecond(),
         "02",
@@ -76,17 +76,17 @@ QUnit.test("Date.getTwoDigitSecond", function (assert) {
     );
 });
 
-QUnit.test("Date.getAbbrevMonthName", function (assert) {
+QUnit.test("Date.getAbbrevMonthName", function(assert) {
     assert.equal(new Date(2020, 0, 26).getAbbrevMonthName(), "Jan", "jan 26");
     assert.equal(new Date(2020, 9, 26).getAbbrevMonthName(), "Oct", "oct 26");
 });
 
-QUnit.test("Date.getFullMonthName", function (assert) {
+QUnit.test("Date.getFullMonthName", function(assert) {
     assert.equal(new Date(2020, 0, 26).getFullMonthName(), "January", "jan 26");
     assert.equal(new Date(2020, 9, 26).getFullMonthName(), "October", "oct 26");
 });
 
-QUnit.test("Date.getAbbrevDayName", function (assert) {
+QUnit.test("Date.getAbbrevDayName", function(assert) {
     assert.equal(
         new Date(2020, 0, 26).getAbbrevDayName(),
         "Sun",
@@ -99,7 +99,7 @@ QUnit.test("Date.getAbbrevDayName", function (assert) {
     );
 });
 
-QUnit.test("Date.getFullDayName", function (assert) {
+QUnit.test("Date.getFullDayName", function(assert) {
     assert.equal(
         new Date(2020, 0, 26).getFullDayName(),
         "Sunday",
@@ -112,7 +112,7 @@ QUnit.test("Date.getFullDayName", function (assert) {
     );
 });
 
-QUnit.test("Date.strftime", function (assert) {
+QUnit.test("Date.strftime", function(assert) {
     const date = new Date(2014, 6, 1, 11, 0, 5);
     assert.equal(date.strftime("%Y-%m-%d %H:%M:%S"), "2014-07-01 11:00:05");
     assert.equal(date.strftime("%B %d, %Y"), "July 01, 2014");
@@ -124,7 +124,7 @@ QUnit.test("Date.strftime", function (assert) {
     );
 });
 
-QUnit.test("String.strptime", function (assert) {
+QUnit.test("String.strptime", function(assert) {
     // Use UTC functions for extracting dates since the calendar uses them as
     // well. Month numbering starts with 0 (January).
     const firstParsedDate = "1988-02-26".strptime("%Y-%m-%d");

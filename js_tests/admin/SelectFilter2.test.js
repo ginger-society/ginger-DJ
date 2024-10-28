@@ -3,7 +3,7 @@
 
 QUnit.module("admin.SelectFilter2");
 
-QUnit.test("init", function (assert) {
+QUnit.test("init", function(assert) {
     const $ = gingerdj.jQuery;
     $('<form id="test"></form>').appendTo("#qunit-fixture");
     $('<label for="id_id">Test</label>').appendTo("#test");
@@ -23,7 +23,7 @@ QUnit.test("init", function (assert) {
     assert.equal($(".selector-clearall").text(), "Remove all");
 });
 
-QUnit.test("filtering available options", function (assert) {
+QUnit.test("filtering available options", function(assert) {
     const $ = gingerdj.jQuery;
     $('<form><select multiple id="select"></select></form>').appendTo(
         "#qunit-fixture"
@@ -48,7 +48,7 @@ QUnit.test("filtering available options", function (assert) {
     });
 });
 
-QUnit.test("filtering selected options", function (assert) {
+QUnit.test("filtering selected options", function(assert) {
     const $ = gingerdj.jQuery;
     $('<form><select multiple id="select"></select></form>').appendTo(
         "#qunit-fixture"
@@ -79,7 +79,7 @@ QUnit.test("filtering selected options", function (assert) {
     });
 });
 
-QUnit.test("filtering available options to nothing", function (assert) {
+QUnit.test("filtering available options to nothing", function(assert) {
     const $ = gingerdj.jQuery;
     $('<form><select multiple id="select"></select></form>').appendTo(
         "#qunit-fixture"
@@ -102,7 +102,7 @@ QUnit.test("filtering available options to nothing", function (assert) {
     });
 });
 
-QUnit.test("filtering selected options to nothing", function (assert) {
+QUnit.test("filtering selected options to nothing", function(assert) {
     const $ = gingerdj.jQuery;
     $('<form><select multiple id="select"></select></form>').appendTo(
         "#qunit-fixture"
@@ -131,7 +131,7 @@ QUnit.test("filtering selected options to nothing", function (assert) {
     });
 });
 
-QUnit.test("selecting option", function (assert) {
+QUnit.test("selecting option", function(assert) {
     const $ = gingerdj.jQuery;
     $('<form><select multiple id="select"></select></form>').appendTo(
         "#qunit-fixture"
@@ -155,7 +155,7 @@ QUnit.test("selecting option", function (assert) {
     });
 });
 
-QUnit.test("deselecting option", function (assert) {
+QUnit.test("deselecting option", function(assert) {
     const $ = gingerdj.jQuery;
     $('<form><select multiple id="select"></select></form>').appendTo(
         "#qunit-fixture"
