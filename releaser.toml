@@ -6,7 +6,7 @@ take_snapshots = false
 channel = "Final"
 major = 6
 minor = 0
-patch = 7
+patch = 8
 revision = 0
 
 [[references]]
