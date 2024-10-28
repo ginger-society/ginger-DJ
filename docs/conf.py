@@ -37,7 +37,7 @@ needs_sphinx = "4.5.0"
 # Add any Sphinx extension module names here, as strings. They can be extensions
 # coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
 extensions = [
-    "gingerdocs",
+    "gingerdjdocs",
     "sphinx.ext.extlinks",
     "sphinx.ext.intersphinx",
     "sphinx.ext.viewcode",
@@ -379,7 +379,7 @@ epub_copyright = copyright
 # for small screen space, using the same theme for HTML and epub output is
 # usually not wise. This defaults to 'epub', a theme designed to save visual
 # space.
-epub_theme = "gingerdocs-epub"
+epub_theme = "gingerdjdocs-epub"
 
 # The language of the text. It defaults to the language option
 # or en if the language is not set.
