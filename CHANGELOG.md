@@ -1,3 +1,7 @@
+## 6.0.9 - 2024-10-29
+chore:
+ - [0bd3e55e5c](https://github.com/ginger-society/ginger-DJ0bd3e55e5c46129854a60acec4e11c52cc867a9f) (Ginger Society Admin) chore: version bump to 6.0.9
+	
 ## 6.0.8 - 2024-10-28
 fix:
  - [5526c150f4](https://github.com/ginger-society/ginger-DJ5526c150f404d7bcfd727c1c906fd57d39b43577) (Ginger Society Admin) fix: removing header from admin base page
@@ -28,13 +32,16 @@ chore:
  - [d542bf8669](https://github.com/ginger-society/ginger-DJd542bf86695620bf9be0c615b3b95c956e2a7b1f) (Ginger Society Admin) chore: version bump to 6.0.4
 	
 ## 6.0.3 - 2024-10-28
-chore:
- - [4b5db89691](https://github.com/ginger-society/ginger-DJ4b5db89691155855e8d34e5195479f8028910ab9) (Ginger Society Admin) chore: version bump to 6.0.3
-	
 fix:
  - [682eb73c10](https://github.com/ginger-society/ginger-DJ682eb73c100b66931e122b7d7065643f7708fb76) (Ginger Society Admin) fix: change form
 	
+chore:
+ - [4b5db89691](https://github.com/ginger-society/ginger-DJ4b5db89691155855e8d34e5195479f8028910ab9) (Ginger Society Admin) chore: version bump to 6.0.3
+	
 ## 6.0.2 - 2024-10-28
+feat:
+ - [fc4f319760](https://github.com/ginger-society/ginger-DJfc4f319760bbf954bb8dac68d1d266b8e3088dc4) (Ginger Society Admin) feat: added cache which was missed in gitignore
+	
 fix:
  - [9917e5cff0](https://github.com/ginger-society/ginger-DJ9917e5cff09dcece7b0bc3e60dcb96c1cd1a3653) (Ginger Society Admin) fix: test files lints
 	
@@ -54,9 +61,6 @@ fix:
 	
 chore:
  - [f7c59fc6b1](https://github.com/ginger-society/ginger-DJf7c59fc6b1ae05f20be10474d58262c462d38cd8) (Ginger Society Admin) chore: version bump to 6.0.2
-	
-feat:
- - [fc4f319760](https://github.com/ginger-society/ginger-DJfc4f319760bbf954bb8dac68d1d266b8e3088dc4) (Ginger Society Admin) feat: added cache which was missed in gitignore
 	
 ## 6.0.1 - 2024-10-28
 chore:
@@ -128,18 +132,18 @@ feat:
  - [d0c77ad42a](https://github.com/ginger-society/ginger-DJd0c77ad42a21fa1a24e8392911a2ec79d7ce0060) (Ginger Society Admin) feat: renamed publish to CI
 	
 ## 5.5.0 - 2024-10-04
-chore:
- - [f1061e4dad](https://github.com/ginger-society/ginger-DJf1061e4dad2edf75fa74667226d210f585dfb7a8) (Ginger Society Admin) chore: version bump to 5.5.0
-	
 feat:
  - [a922a5d844](https://github.com/ginger-society/ginger-DJa922a5d8446725b80547e26e5a3883820ffb5aff) (Ginger Society Admin) feat: updated metadata and disabled all pipeline script except the publish one
 	
-## 5.4.0 - 2024-10-04
-feat:
- - [56d0efdaaa](https://github.com/ginger-society/ginger-DJ56d0efdaaa8e454e996a414bdf643fa066a7ef2b) (Ginger Society Admin) feat: added metadata and updated pipeline to trigger dependent packages
+chore:
+ - [f1061e4dad](https://github.com/ginger-society/ginger-DJf1061e4dad2edf75fa74667226d210f585dfb7a8) (Ginger Society Admin) chore: version bump to 5.5.0
 	
+## 5.4.0 - 2024-10-04
 chore:
  - [7fd5b29830](https://github.com/ginger-society/ginger-DJ7fd5b2983073930bc3f2bbdf9bd291d8744f8369) (Ginger Society Admin) chore: version bump to 5.4.0
+	
+feat:
+ - [56d0efdaaa](https://github.com/ginger-society/ginger-DJ56d0efdaaa8e454e996a414bdf643fa066a7ef2b) (Ginger Society Admin) feat: added metadata and updated pipeline to trigger dependent packages
 	
 ## 5.3.13 - 2024-08-21
 chore:
@@ -166,13 +170,44 @@ chore:
  - [5545fd436f](https://github.com/ginger-society/ginger-DJ5545fd436f94b129a0ff9bdfbfa6f3c8011b0f43) (Ginger Society Admin) chore: version bump to 5.3.8
 	
 ## 5.3.7 - 2024-08-21
-chore:
- - [2d69d0821d](https://github.com/ginger-society/ginger-DJ2d69d0821d54c931c64af0c6963e993599dcb1d8) (Ginger Society Admin) chore: version bump to 5.3.7
-	
 feat:
  - [ffbc397e9b](https://github.com/ginger-society/ginger-DJffbc397e9b5f48753cbfadbfb367e2de9d1e5c5b) (Ginger Society Admin) feat: added releaser
 	
+chore:
+ - [2d69d0821d](https://github.com/ginger-society/ginger-DJ2d69d0821d54c931c64af0c6963e993599dcb1d8) (Ginger Society Admin) chore: version bump to 5.3.7
+	
 ## 5.3.5 - 2024-08-21
+chore:
+ - [1b420fa189](https://github.com/ginger-society/ginger-DJ1b420fa1892090e66d55e4bd26f786e7f12a2c65) (Ginger Society Admin) chore: version bump to 5.3.5
+	
+ - [394143bae7](https://github.com/ginger-society/ginger-DJ394143bae705c7575bc65096f63b677724f36c3c) (Ginger Society Admin) chore: cleanup
+	
+ - [02b77bf648](https://github.com/ginger-society/ginger-DJ02b77bf64854dec468da114431d5f298c6fa9406) (Ginger Society Admin) chore: version bump
+	
+ - [2346bb32ca](https://github.com/ginger-society/ginger-DJ2346bb32ca6c21b335a3347d906f5e498a7ac71c) (Ginger Society Admin) chore: test fixes
+	
+ - [7e43b462ba](https://github.com/ginger-society/ginger-DJ7e43b462bac077880e19d3a16aa6ce8489b85919) (Ginger Society Admin) chore: fixed tests cases for utils
+	
+ - [47ef664fc9](https://github.com/ginger-society/ginger-DJ47ef664fc9c6c7078aa0685e87c30b4ab855aa87) (Ginger Society Admin) chore: cleanup
+	
+ - [c6837f3658](https://github.com/ginger-society/ginger-DJc6837f36582f03f86343d1a86f5ddb5309555a72) (Ginger Society Admin) chore: publish test
+	
+ - [17bf1299de](https://github.com/ginger-society/ginger-DJ17bf1299de7ed2cfa2653563958b7ac9b667bce0) (Ginger Society Admin) chore: cleanup
+	
+ - [2ef95fe57d](https://github.com/ginger-society/ginger-DJ2ef95fe57dc17276abc0f18c40cc33d4de3736be) (Ginger Society Admin) chore: removed docs from the project.
+	
+ - [c7a8d70531](https://github.com/ginger-society/ginger-DJc7a8d705316cf1ae2ddf9dffd0049a02910236f8) (Ginger Society Admin) chore: added build and publish command for reference
+	
+ - [4e5bf6de11](https://github.com/ginger-society/ginger-DJ4e5bf6de114c9167257991d19026ea835753a2a8) (Ginger Society Admin) chore: renamed package to Ginger-dj
+	
+ - [583717dc9d](https://github.com/ginger-society/ginger-DJ583717dc9d3c75a67ca054805c1110b5504c1125) (Ginger Society Admin) chore: cleaned up test app
+	
+ - [80d746dff5](https://github.com/ginger-society/ginger-DJ80d746dff5b02ba01b0314194f72b046690650f5) (Ginger Society Admin) chore: removed reference to AUTH_USER for rest_framework
+	
+ - [6b5f1d81bf](https://github.com/ginger-society/ginger-DJ6b5f1d81bf6fcc1c9a526213271a4f86811aa814) (Ginger Society Admin) chore: minor docs update
+	
+ - [006f5413aa](https://github.com/ginger-society/ginger-DJ006f5413aa7d5bf116eede99b20c90689fe5a25d) (Ginger Society Admin) chore: first commit
+	
 feat:
  - [b9a9d58447](https://github.com/ginger-society/ginger-DJb9a9d58447b11e73aaa81ca9b1319bc138a85f7d) (Ginger Society Admin) feat: updated project meta data
 	
@@ -210,35 +245,4 @@ fix:
  - [1e51c92ac1](https://github.com/ginger-society/ginger-DJ1e51c92ac19896be5e490b4a0d3cccdb98e883b9) (Ginger Society Admin) fix: devcontainer dependencies update
 	
  - [0b56519d0e](https://github.com/ginger-society/ginger-DJ0b56519d0ee64cd61683f8779c5aa6dfe74a26f8) (Ginger Society Admin) fix: docs warning fixes
-	
-chore:
- - [1b420fa189](https://github.com/ginger-society/ginger-DJ1b420fa1892090e66d55e4bd26f786e7f12a2c65) (Ginger Society Admin) chore: version bump to 5.3.5
-	
- - [394143bae7](https://github.com/ginger-society/ginger-DJ394143bae705c7575bc65096f63b677724f36c3c) (Ginger Society Admin) chore: cleanup
-	
- - [02b77bf648](https://github.com/ginger-society/ginger-DJ02b77bf64854dec468da114431d5f298c6fa9406) (Ginger Society Admin) chore: version bump
-	
- - [2346bb32ca](https://github.com/ginger-society/ginger-DJ2346bb32ca6c21b335a3347d906f5e498a7ac71c) (Ginger Society Admin) chore: test fixes
-	
- - [7e43b462ba](https://github.com/ginger-society/ginger-DJ7e43b462bac077880e19d3a16aa6ce8489b85919) (Ginger Society Admin) chore: fixed tests cases for utils
-	
- - [47ef664fc9](https://github.com/ginger-society/ginger-DJ47ef664fc9c6c7078aa0685e87c30b4ab855aa87) (Ginger Society Admin) chore: cleanup
-	
- - [c6837f3658](https://github.com/ginger-society/ginger-DJc6837f36582f03f86343d1a86f5ddb5309555a72) (Ginger Society Admin) chore: publish test
-	
- - [17bf1299de](https://github.com/ginger-society/ginger-DJ17bf1299de7ed2cfa2653563958b7ac9b667bce0) (Ginger Society Admin) chore: cleanup
-	
- - [2ef95fe57d](https://github.com/ginger-society/ginger-DJ2ef95fe57dc17276abc0f18c40cc33d4de3736be) (Ginger Society Admin) chore: removed docs from the project.
-	
- - [c7a8d70531](https://github.com/ginger-society/ginger-DJc7a8d705316cf1ae2ddf9dffd0049a02910236f8) (Ginger Society Admin) chore: added build and publish command for reference
-	
- - [4e5bf6de11](https://github.com/ginger-society/ginger-DJ4e5bf6de114c9167257991d19026ea835753a2a8) (Ginger Society Admin) chore: renamed package to Ginger-dj
-	
- - [583717dc9d](https://github.com/ginger-society/ginger-DJ583717dc9d3c75a67ca054805c1110b5504c1125) (Ginger Society Admin) chore: cleaned up test app
-	
- - [80d746dff5](https://github.com/ginger-society/ginger-DJ80d746dff5b02ba01b0314194f72b046690650f5) (Ginger Society Admin) chore: removed reference to AUTH_USER for rest_framework
-	
- - [6b5f1d81bf](https://github.com/ginger-society/ginger-DJ6b5f1d81bf6fcc1c9a526213271a4f86811aa814) (Ginger Society Admin) chore: minor docs update
-	
- - [006f5413aa](https://github.com/ginger-society/ginger-DJ006f5413aa7d5bf116eede99b20c90689fe5a25d) (Ginger Society Admin) chore: first commit
 	
