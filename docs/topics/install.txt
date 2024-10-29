@@ -161,23 +161,23 @@ This is the recommended way to install GingerDJ.
 
    .. console::
 
-        $ git clone https://github.com/gingerdj/gingerdj.git
+        $ git clone git@github.com:ginger-society/ginger-DJ.git
 
-   This will create a directory ``gingerdj`` in your current directory.
+   This will create a directory ``ginger-DJ`` in your current directory.
 
 #. After setting up and activating the virtual environment, run the following
    command:
 
    .. console::
 
-        $ python -m pip install -e gingerdj/
+        $ python -m pip install -e ginger-DJ/
 
    This will make GingerDJ's code importable, and will also make the
    ``gingerdj-admin`` utility command available. In other words, you're all
    set!
 
 When you want to update your copy of the GingerDJ source code, run the command
-``git pull`` from within the ``gingerdj`` directory. When you do this, Git will
+``git pull`` from within the ``ginger-DJ`` directory. When you do this, Git will
 download any changes.
 
 .. _Git: https://git-scm.com/
