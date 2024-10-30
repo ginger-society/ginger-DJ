@@ -17,13 +17,22 @@ jobs:
     steps:
       - name: Check out code
         uses: actions/checkout@v3
+      - name: Report failure if code checkout fails
+        if: failure()
+        run: ginger-connector update-pipeline stage failed
 
       - name: Install ginger-apps
         run: bash -c "$(curl -fsSL https://raw.githubusercontent.com/ginger-society/infra-as-code-repo/main/rust-helpers/install-pipeline-clis.sh)"
+      - name: Report failure if ginger-apps installation fails
+        if: failure()
+        run: ginger-connector update-pipeline stage failed
 
       - name: Authenticate with ginger-auth
         id: ginger-auth
         run: ginger-auth token-login ${{ secrets.GINGER_TOKEN }}
+      - name: Report failure if authentication fails
+        if: failure()
+        run: ginger-connector update-pipeline stage failed
 
       - name: Update pipeline to running
         run: ginger-connector update-pipeline stage running
@@ -32,15 +41,24 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: '3.12' # Adjust the Python version as needed
+      - name: Report failure if Python setup fails
+        if: failure()
+        run: ginger-connector update-pipeline stage failed
 
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install setuptools wheel twine sphinx furo
+      - name: Report failure if dependency installation fails
+        if: failure()
+        run: ginger-connector update-pipeline stage failed
 
       - name: Build Sphinx documentation
         run: make html
         working-directory: docs  # Set the working directory to 'docs'
+      - name: Report failure if documentation build fails
+        if: failure()
+        run: ginger-connector update-pipeline stage failed
 
       - name: Upload documentation to S3
         run: |
@@ -49,14 +67,23 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
+      - name: Report failure if S3 upload fails
+        if: failure()
+        run: ginger-connector update-pipeline stage failed
 
       - name: Build package
         run: |
           python setup.py sdist bdist_wheel
+      - name: Report failure if package build fails
+        if: failure()
+        run: ginger-connector update-pipeline stage failed
 
       - name: Get PyPI token
         id: get-pypi-token
         run: echo "token=${{ secrets.PYPI }}" | tee -a $GITHUB_ENV
+      - name: Report failure if token retrieval fails
+        if: failure()
+        run: ginger-connector update-pipeline stage failed
 
       - name: Publish package to PyPI
         env:
@@ -64,13 +91,21 @@ jobs:
           TWINE_PASSWORD: ${{ secrets.PYPI }}
         run: |
           python -m twine upload dist/*
+      - name: Report failure if package publish fails
+        if: failure()
+        run: ginger-connector update-pipeline stage failed
 
       - name: Clean up build artifacts
         run: |
           rm -rf dist build *.egg-info
+      - name: Report failure if cleanup fails
+        if: failure()
+        run: ginger-connector update-pipeline stage failed
 
       - name: Update pipeline to passing
+        if: success()
         run: ginger-connector update-pipeline stage passing
 
       - name: Trigger dependent pipelines
+        if: success()
         run: ginger-connector trigger-dependent-pipelines ${{ secrets.GH_TOKEN }}
