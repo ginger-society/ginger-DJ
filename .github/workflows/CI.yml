@@ -80,12 +80,14 @@ jobs:
 
       - name: Get PyPI token
         id: get-pypi-token
+        if: github.event_name == 'push'
         run: echo "token=${{ secrets.PYPI }}" | tee -a $GITHUB_ENV
       - name: Report failure if token retrieval fails
         if: failure()
         run: ginger-connector update-pipeline stage failed
 
       - name: Publish package to PyPI
+        if: github.event_name == 'push'
         env:
           TWINE_USERNAME: __token__
           TWINE_PASSWORD: ${{ secrets.PYPI }}
