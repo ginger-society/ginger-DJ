@@ -1,6 +1,6 @@
 from gingerdj.utils.version import get_version
 
-VERSION = (6, 0, 12, "final", 0)
+VERSION = (6, 0, 13, "final", 0)
 
 __version__ = get_version(VERSION)
 
