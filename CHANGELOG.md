@@ -1,17 +1,26 @@
+## 6.1.0 - 2024-11-21
+feat:
+ - [51b8936fe2](https://github.com/ginger-society/ginger-DJ51b8936fe240b414190ea7b18461fa7cced6ad86) (Ginger Society Admin) feat: added sphinx-sitemap in pipeline
+	
+ - [28ce681abe](https://github.com/ginger-society/ginger-DJ28ce681abe0e4aa4ed3f376815305568b54d2aad) (Ginger Society Admin) feat: added sitemap generator plugin
+	
 ## 6.0.13 - 2024-10-31
 feat:
  - [a4d2af90d1](https://github.com/ginger-society/ginger-DJa4d2af90d1af9564d8a02226bfa803cb39fe5aff) (Ginger Society Admin) feat: publishing only when a push is made instad of workflow dispatch
+	
+chore:
+ - [25e412eb45](https://github.com/ginger-society/ginger-DJ25e412eb459e8bffaa23e5e455937a3cdbad3e66) (Ginger Society Admin) chore: version bump to 6.0.13
 	
 ## 6.0.12 - 2024-10-30
 chore:
  - [335cf5da5b](https://github.com/ginger-society/ginger-DJ335cf5da5b7c9a2b56aac9959064732771d3a1df) (Ginger Society Admin) chore: version bump to 6.0.12
 	
 ## 6.0.11 - 2024-10-30
-chore:
- - [8cf99624e4](https://github.com/ginger-society/ginger-DJ8cf99624e41527e081521fba4672ef9d1d2c67ad) (Ginger Society Admin) chore: version bump to 6.0.11
-	
 feat:
  - [94af7cc878](https://github.com/ginger-society/ginger-DJ94af7cc8785727af0eb33ee580c6490fd86ad74a) (Ginger Society Admin) feat: updated script to report build failures
+	
+chore:
+ - [8cf99624e4](https://github.com/ginger-society/ginger-DJ8cf99624e41527e081521fba4672ef9d1d2c67ad) (Ginger Society Admin) chore: version bump to 6.0.11
 	
 ## 6.0.10 - 2024-10-29
 chore:
@@ -22,11 +31,11 @@ chore:
  - [0bd3e55e5c](https://github.com/ginger-society/ginger-DJ0bd3e55e5c46129854a60acec4e11c52cc867a9f) (Ginger Society Admin) chore: version bump to 6.0.9
 	
 ## 6.0.8 - 2024-10-28
-fix:
- - [5526c150f4](https://github.com/ginger-society/ginger-DJ5526c150f404d7bcfd727c1c906fd57d39b43577) (Ginger Society Admin) fix: removing header from admin base page
-	
 chore:
  - [a8bc653fbc](https://github.com/ginger-society/ginger-DJa8bc653fbc6dfe1a22900c1cc28692273d4d8ca0) (Ginger Society Admin) chore: version bump to 6.0.8
+	
+fix:
+ - [5526c150f4](https://github.com/ginger-society/ginger-DJ5526c150f404d7bcfd727c1c906fd57d39b43577) (Ginger Society Admin) fix: removing header from admin base page
 	
 ## 6.0.7 - 2024-10-28
 chore:
@@ -75,11 +84,11 @@ fix:
 	
  - [cd4c071758](https://github.com/ginger-society/ginger-DJcd4c071758c5f57e631e172256d4e19e0075197a) (Ginger Society Admin) fix: renamed ginger to gingerdj
 	
-chore:
- - [f7c59fc6b1](https://github.com/ginger-society/ginger-DJf7c59fc6b1ae05f20be10474d58262c462d38cd8) (Ginger Society Admin) chore: version bump to 6.0.2
-	
 feat:
  - [fc4f319760](https://github.com/ginger-society/ginger-DJfc4f319760bbf954bb8dac68d1d266b8e3088dc4) (Ginger Society Admin) feat: added cache which was missed in gitignore
+	
+chore:
+ - [f7c59fc6b1](https://github.com/ginger-society/ginger-DJf7c59fc6b1ae05f20be10474d58262c462d38cd8) (Ginger Society Admin) chore: version bump to 6.0.2
 	
 ## 6.0.1 - 2024-10-28
 chore:
@@ -137,11 +146,11 @@ Revert
 	
 	This reverts commit 2ef95fe57dc17276abc0f18c40cc33d4de3736be.
 	
-feat:
- - [4f0a34669e](https://github.com/ginger-society/ginger-DJ4f0a34669e3a6757cca031b874a575a0f49a2dc9) (Ginger Society Admin) feat: fixed documentations
-	
 chore:
  - [48dc85004e](https://github.com/ginger-society/ginger-DJ48dc85004ed3b0a39baf5a7882e1207127914c69) (Ginger Society Admin) chore: version bump to 5.5.2
+	
+feat:
+ - [4f0a34669e](https://github.com/ginger-society/ginger-DJ4f0a34669e3a6757cca031b874a575a0f49a2dc9) (Ginger Society Admin) feat: fixed documentations
 	
 ## 5.5.1 - 2024-10-07
 chore:
@@ -151,11 +160,11 @@ feat:
  - [d0c77ad42a](https://github.com/ginger-society/ginger-DJd0c77ad42a21fa1a24e8392911a2ec79d7ce0060) (Ginger Society Admin) feat: renamed publish to CI
 	
 ## 5.5.0 - 2024-10-04
-feat:
- - [a922a5d844](https://github.com/ginger-society/ginger-DJa922a5d8446725b80547e26e5a3883820ffb5aff) (Ginger Society Admin) feat: updated metadata and disabled all pipeline script except the publish one
-	
 chore:
  - [f1061e4dad](https://github.com/ginger-society/ginger-DJf1061e4dad2edf75fa74667226d210f585dfb7a8) (Ginger Society Admin) chore: version bump to 5.5.0
+	
+feat:
+ - [a922a5d844](https://github.com/ginger-society/ginger-DJa922a5d8446725b80547e26e5a3883820ffb5aff) (Ginger Society Admin) feat: updated metadata and disabled all pipeline script except the publish one
 	
 ## 5.4.0 - 2024-10-04
 chore:
@@ -189,11 +198,11 @@ chore:
  - [5545fd436f](https://github.com/ginger-society/ginger-DJ5545fd436f94b129a0ff9bdfbfa6f3c8011b0f43) (Ginger Society Admin) chore: version bump to 5.3.8
 	
 ## 5.3.7 - 2024-08-21
-feat:
- - [ffbc397e9b](https://github.com/ginger-society/ginger-DJffbc397e9b5f48753cbfadbfb367e2de9d1e5c5b) (Ginger Society Admin) feat: added releaser
-	
 chore:
  - [2d69d0821d](https://github.com/ginger-society/ginger-DJ2d69d0821d54c931c64af0c6963e993599dcb1d8) (Ginger Society Admin) chore: version bump to 5.3.7
+	
+feat:
+ - [ffbc397e9b](https://github.com/ginger-society/ginger-DJffbc397e9b5f48753cbfadbfb367e2de9d1e5c5b) (Ginger Society Admin) feat: added releaser
 	
 ## 5.3.5 - 2024-08-21
 chore:

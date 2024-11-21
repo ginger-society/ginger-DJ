@@ -111,3 +111,7 @@ jobs:
       - name: Trigger dependent pipelines
         if: success()
         run: ginger-connector trigger-dependent-pipelines ${{ secrets.GH_TOKEN }}
+
+      - name: Trigger Homepage pipeline
+        if: success()
+        run: ginger-connector trigger-pipeline homepage ${{ secrets.GH_TOKEN }}
