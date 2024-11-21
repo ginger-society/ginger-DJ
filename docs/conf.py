@@ -42,7 +42,11 @@ extensions = [
     "sphinx.ext.intersphinx",
     "sphinx.ext.viewcode",
     "sphinx.ext.autosectionlabel",
+    "sphinx_sitemap",
 ]
+
+html_baseurl = "https://www.gingersociety.org/products/ginger-dj/docs/"
+sitemap_url_scheme = "{link}"
 
 # AutosectionLabel settings.
 # Uses a <page>:<label> schema which doesn't work for duplicate sub-section
