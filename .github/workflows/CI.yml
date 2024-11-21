@@ -48,7 +48,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install setuptools wheel twine sphinx furo
+          pip install setuptools wheel twine sphinx furo sphinx-sitemap
       - name: Report failure if dependency installation fails
         if: failure()
         run: ginger-connector update-pipeline stage failed
