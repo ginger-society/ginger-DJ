@@ -8,14 +8,14 @@ from posixpath import normpath
 from wsgiref.headers import Headers
 from wsgiref.util import FileWrapper
 
-from whitenoise.media_types import MediaTypes
-from whitenoise.responders import (
+from gingerdj.whitenoise.media_types import MediaTypes
+from gingerdj.whitenoise.responders import (
     IsDirectoryError,
     MissingFileError,
     Redirect,
     StaticFile,
 )
-from whitenoise.string_utils import decode_path_info, ensure_leading_trailing_slash
+from gingerdj.whitenoise.string_utils import decode_path_info, ensure_leading_trailing_slash
 
 
 class WhiteNoise:

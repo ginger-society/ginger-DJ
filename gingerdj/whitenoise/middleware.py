@@ -9,8 +9,8 @@ from gingerdj.contrib.staticfiles import finders
 from gingerdj.contrib.staticfiles.storage import staticfiles_storage
 from gingerdj.http import FileResponse
 
-from whitenoise.base import WhiteNoise
-from whitenoise.string_utils import ensure_leading_trailing_slash
+from gingerdj.whitenoise.base import WhiteNoise
+from gingerdj.whitenoise.string_utils import ensure_leading_trailing_slash
 
 __all__ = ["WhiteNoiseMiddleware"]
 

@@ -14,7 +14,7 @@ from gingerdj.contrib.staticfiles.storage import (
     StaticFilesStorage,
 )
 
-from whitenoise.compress import Compressor
+from gingerdj.whitenoise.compress import Compressor
 
 _PostProcessT = Iterator[tuple[str, str, bool] | tuple[str, None, RuntimeError]]
 
