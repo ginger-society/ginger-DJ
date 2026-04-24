@@ -1,12 +1,8 @@
-[settings]
-git_url_prefix = "https://github.com/ginger-society/ginger-DJ"
-take_snapshots = false
-
 [version]
 channel = "Final"
 major = 6
-minor = 1
-patch = 1
+minor = 2
+patch = 0
 revision = 0
 
 [[references]]
@@ -18,3 +14,6 @@ variable = "VERSION"
 file_name = "pyproject.toml"
 output_type = "String"
 variable = "version"
+
+[settings]
+git_url_prefix = "https://github.com/ginger-society/ginger-DJ"
