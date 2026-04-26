@@ -1,6 +1,6 @@
 
-description = "easy to use microservices framework based on django"
-name = "ginger-dj"
+description = "easy to use microservices framework , forked from django"
+name = "ginger-dj-framework"
 organization = "ginger-society"
 version = "6.4.0"
 
