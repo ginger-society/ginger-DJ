@@ -2,7 +2,7 @@
 description = "easy to use microservices framework , forked from django"
 name = "ginger-dj-framework"
 organization = "ginger-society"
-version = "6.4.0"
+version = "6.4.1"
 
 [build-system]
 build-backend = 'setuptools.build_meta'
